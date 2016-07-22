@@ -40,6 +40,7 @@ What's different from AddressBook-Level1:
 # Testing
 
 # Design
+<img src="doc/images/mainClassDiagram.png"/>
 
 # Exercises
 
