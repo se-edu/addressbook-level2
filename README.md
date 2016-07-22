@@ -32,8 +32,8 @@ c:> clear
 
 # Exercises
 
-### AB-L1E1: Use `Collections` classes
+### ABL1-E1: Use `Collections` classes
 
-### AB-L1E2: Refactor the code to make it better/worse
+### ABL1-E2: Refactor the code to make it better/worse
 
-### AB-L1E3: Fix coding standard violations
+### ABL1-E3: Fix coding standard violations
