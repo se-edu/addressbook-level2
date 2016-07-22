@@ -1,4 +1,4 @@
-# AddressBook (Level 2)
+# AddressBook (Level 2) - Rough Draft
 A Java sample application for students. An AddressBook application that uses OOP basics.
 
 Learning objectives:
@@ -11,12 +11,12 @@ Learning objectives:
 ```sh
 c:> java AddressBook addressbook.txt
 
-c:> add John Doe p/3232232 e/johnd@gmail.com a/311, Clementi Ave 2, #25-177 t/friends
+c:> add John Doe p/3232232 e/johnd@gmail.com a/311, Clementi Ave 2, 25-177 t/friends
 
 c:> add Tim Hank pp/3434567 pe/timh@gmail.com t/friends t/colleagues
 
 c:> list
-1. John Doe 3232232 johnd@gmail.com 311, Clementi Ave 2, #25-177 [friends]
+1. John Doe 3232232 johnd@gmail.com 311, Clementi Ave 2, 25-177 [friends]
 2. Tim Hank [friends][colleagues]
 
 c:> delete 1
@@ -48,15 +48,18 @@ What's different from AddressBook-Level1:
              
 #### ABL2-E2: Improve exception handling
 
-#### ABL2-E3: Add an interface 
-(e.g. ReadOnlyPerson, add ReadOnlyTag)
+#### ABL2-E3: Add an `Interface` 
+Example of an Interface `ReadOnlyPerson`
+Add another Interface `ReadOnlyTag` as follows.
+{diagram}
 
-#### ABL2-E4:  Add abstract class 
-(e.g. Contact::getDisplayString())
+#### ABL2-E4:  Add `abstract` method 
+Example `Contact::getDisplayString()`
 
-#### ABL2-E4:  Encapsulate a variable 
-(apply to Contact::isPrivate)
 
-#### ABL2-E4:  Add some unit tests
+#### ABL2-E5:  Encapsulate a variable 
+Apply to `Contact::isPrivate`
 
-#### ABL2-E4:  Add some unit tests using TDD
+#### ABL2-E6:  Add some unit tests
+
+#### ABL2-E7:  Add some unit tests using TDD
