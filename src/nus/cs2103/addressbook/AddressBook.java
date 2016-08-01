@@ -28,9 +28,19 @@ public class AddressBook {
     private static final String DEFAULT_STORAGE_FILEPATH = "addressbook.txt";
 
     /**
+     * Version info of the program.
+     */
+    private static final String VERSION = "AddessBook Level 1 - Version 1.0";
+
+    /**
+     * A decorative prefix added to the beginning of lines printed by AddressBook
+     */
+    public static final String LINE_PREFIX = "|| ";
+
+    /**
      * A platform independent line separator.
      */
-    private static final String LS = System.lineSeparator();
+    private static final String LS = System.lineSeparator() + LINE_PREFIX;
 
     /*
      * ==============NOTE TO STUDENTS======================================
@@ -109,6 +119,8 @@ public class AddressBook {
     private static final String COMMAND_EXIT_DESC = "Exits the program.";
     private static final String COMMAND_EXIT_EXAMPLE = COMMAND_WORD_EXIT;
 
+    private static final String DIVIDER = "===================================================";
+
 
     /* We use a String array to store details of a single person.
      * The constants given below are the indexes for the different data elements of a person
@@ -182,9 +194,10 @@ public class AddressBook {
             userCommand = getUserInput();
             echoUserCommand(userCommand);
             String feedback = executeCommand(userCommand);
-            showToUser(feedback);
+            showResultToUser(feedback);
         }
     }
+
 
     /*
      * ==============NOTE TO STUDENTS======================================
@@ -194,7 +207,12 @@ public class AddressBook {
      * ====================================================================
      */
     private static void showWelcomeMessage() {
-        showToUser(MESSAGE_WELCOME);
+        showToUser(DIVIDER, DIVIDER, VERSION, MESSAGE_WELCOME, DIVIDER);
+    }
+
+
+    private static void showResultToUser(String result) {
+        showToUser(result, DIVIDER);
     }
 
     /*
@@ -262,7 +280,7 @@ public class AddressBook {
      * Displays the goodbye message and exits the runtime.
      */
     private static void exitProgram() {
-        showToUser(MESSAGE_GOODBYE);
+        showToUser(MESSAGE_GOODBYE, DIVIDER, DIVIDER);
         System.exit(0);
     }
 
@@ -544,7 +562,7 @@ public class AddressBook {
      * @return full line entered by the user
      */
     private static String getUserInput() {
-        System.out.print(LS +"Enter command: ");
+        System.out.print(LINE_PREFIX + "Enter command: ");
         String inputLine = SCANNER.nextLine();
         // silently consume all blank and comment lines
         while (inputLine.trim().isEmpty() || inputLine.trim().charAt(0) == INPUT_COMMENT_MARKER) {
@@ -553,11 +571,18 @@ public class AddressBook {
         return inputLine;
     }
 
+   /* ==============NOTE TO STUDENTS======================================
+    * Note how the method below uses Java 'Varargs' feature so that the
+    * method can accept a varying number of message parameters.
+    * ====================================================================
+    */
     /**
      * Shows a message to the user
      */
-    private static void showToUser(String message) {
-        System.out.println(message);
+    private static void showToUser(String... message) {
+        for (String m : message) {
+            System.out.println(LINE_PREFIX + m);
+        }
     }
 
     /**
@@ -695,7 +720,7 @@ public class AddressBook {
             showToUser(String.format(MESSAGE_ERROR_READING_FROM_FILE, filePath));
             exitProgram();
         }
-        return lines; 
+        return lines;
     }
 
     /**
