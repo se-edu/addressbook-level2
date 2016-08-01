@@ -25,7 +25,7 @@ public class AddressBook {
     /**
      * Default file path used if the user doesn't provide the file name.
      */
-    private static final String DEFAULT_STORAGE_FILEPATH = "storage.txt";
+    private static final String DEFAULT_STORAGE_FILEPATH = "addressbook.txt";
 
     /**
      * A platform independent line separator.

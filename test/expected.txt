@@ -1,5 +1,5 @@
 Welcome to your Address Book!
-Using default storage file : storage.txt
+Using default storage file : addressbook.txt
 
 Enter command: [Command entered:  sfdfd]
 Invalid command format:   sfdfd 
