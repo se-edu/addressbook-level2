@@ -21,7 +21,7 @@ delete: Deletes a person identified by the index number used in the last find/li
 clear: Clears address book permanently.
 	Example: clear
 
-exit: Exit the program.	Example: exit
+exit: Exits the program.	Example: exit
 help: Shows program usage instructions.	Example: help
 
 Enter command: [Command entered:  clear]

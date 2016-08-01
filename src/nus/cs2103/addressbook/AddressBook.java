@@ -106,7 +106,7 @@ public class AddressBook {
     private static final String COMMAND_HELP_EXAMPLE = COMMAND_WORD_HELP;
 
     private static final String COMMAND_WORD_EXIT = "exit";
-    private static final String COMMAND_EXIT_DESC = "Exit the program.";
+    private static final String COMMAND_EXIT_DESC = "Exits the program.";
     private static final String COMMAND_EXIT_EXAMPLE = COMMAND_WORD_EXIT;
 
 
