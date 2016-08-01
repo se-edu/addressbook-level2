@@ -9,7 +9,7 @@
 
 # Learning outcomes
 
-### `[LO-IdeSetup]` Set up a project in an IDE
+### Set up a project in an IDE `[LO-IdeSetup]`
 
 ##### Exercise : Setup project in Eclipse 
 * Download the source code for this project, using one of the following options:
@@ -19,7 +19,7 @@
 * [Run the program](#Running-the-program) from within Eclipse, and try the features described in 
   the [Usage](#Usage) section 
 
-### `[LO-CodeNavigation]` Navigate code efficiently
+### Navigate code efficiently `[LO-CodeNavigation]`
 The `AddressBook.java` code is too big to navigate by scrolling. 
 Navigating code using shortcuts is a more efficient option. 
 For example, <kbd>F3</kbd> will navigate to the definition of the method/variable at the cursor.
@@ -34,7 +34,7 @@ For example, how to,
     without navigating to the method itself
   * find where a method/field is being used
 
-### `[LO-Debugging]` Use a debugger
+### Use a debugger `[LO-Debugging]`
 
 ##### Ex : Learn to step through code using the debugger
 Learn Eclipse debugging features. 
@@ -47,7 +47,7 @@ Here are some things you can do in your demonstration.
 4. Step into, and out of, methods as you step through the code
 5. ...
 
-### `[LO-AutomatedCliTesting]`Automate CLI testing 
+### Automate CLI testing `[LO-AutomatedCliTesting]`
 
 ##### Ex : Practice automated CLI testing
 
@@ -56,7 +56,7 @@ Here are some things you can do in your demonstration.
   Modify `expected.txt` to make the tests pass again.
 * Edit the `AddressBook.java` to modify the behavior slightly and modify tests to match.
 
-### `[LO-EnumsEtc]` Use Java Enums, Collections, Var args
+### Use Java Enums, Collections, Var args `[LO-EnumsEtc]`
 
 ##### Ex 1: Use Enums
 
@@ -65,13 +65,13 @@ Here are some things you can do in your demonstration.
 ##### Ex 3: Use Varargs
 
 
-### `[LO-MethodAbstraction]` Abstract methods well
+### Abstract methods well `[LO-MethodAbstraction]`
 Code has small methods. Each one is doing a single task. SLAP applied.
 e.g. main method
 
 ##### Ex : Reduce SLAP of method
 
-### Follow a coding standard
+### Follow a coding standard `[LO-FollowStandard]`
 
 ### Apply coding best practices
 
@@ -155,13 +155,12 @@ open a DOS window in the `test` folder,
 and run the `call test.bat` command.
 
 
-
 # Contributors
-* Jeffry Hartanto : Created a ToDo app that was used as the basis for this code. 
-* [Leow Yijin](@yijinl) : Main developer for the first version of the AddressBook-level1
-* [Damith C. Rajapakse](@damithc) : Project Advisor
+* [Jeffry Hartanto](http://github.com/jeffryhartanto) : Created a ToDo app that was used as the basis for this code.
+* [Leow Yijin](http://github.com/yijinl) : Main developer for the first version of the AddressBook-level1
+* [Damith C. Rajapakse](http://www.comp.nus.edu.sg/~damithch) : Project Advisor
 
 # Contact us
-* Reporting bugs
-* Suggesting features
-* Contributing as developers
+* **Bug reports, Suggestions** : Post in our [issue tracker](https://github.com/se-edu/addressbook-level1/issues)
+  if you noticed bugs or have suggestions on how to improve.
+* **Contributing** : We welcome pull requests.
