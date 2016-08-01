@@ -1,0 +1,108 @@
+##########################################################
+# invalid command
+##########################################################
+
+  # should recognise invalid command
+  sfdfd
+
+##########################################################
+# clean and check state
+##########################################################
+
+  # address book should be emptied
+  clear
+  list
+
+##########################################################
+# test add person command, setup state for futuer tests
+##########################################################
+
+  # should catch invalid args format
+  add wrong args wrong args
+  add Valid Name p/12345 valid@email.butNoPrefix
+  add Valid Name 12345 e/valid@email.butPhonePrefixMissing
+  
+  # should catch invalid person data
+  add []\[;] p/12345 e/valid@e.mail
+  add Valid Name p/not_numbers e/valid@e.mail
+  add Valid Name p/12345 e/notAnEmail
+
+  # should add correctly
+  add Adam Brown p/111111 e/adam@gmail.com
+  list
+  add Betsy Choo p/222222 e/benchoo@nus.edu.sg
+  list
+
+  # order of phone and email should not matter
+  add Charlie Dickson e/charlie.d@nus.edu.sg p/333333
+  list
+  add Dickson Ee e/dickson@nus.edu.sg p/444444
+  list
+  add Esther Potato p/555555 e/esther@notreal.potato
+  list
+
+##########################################################
+# test find persons command
+##########################################################
+
+  # should match none with no keywords
+  find
+  # should only match full words in person names
+  find bet
+  # does not match if none have keyword
+  find 23912039120
+  # matching should be case-sensitive
+  find betsy
+
+  # find unique keyword
+  find Betsy
+  # find multiple with same keyword
+  find Dickson
+  # find multiple with some keywords
+  find Charlie Betsy
+
+##########################################################
+# test delete person command
+##########################################################
+
+# last active view: [1] betsy [2] charlie
+
+  # should catch invalid args format
+  delete
+  delete should be only one number
+
+  # should catch invalid index
+  delete -1
+  delete 0
+  delete 3
+
+  # should catch attempt to delete something already deleted
+  delete 2
+  delete 2
+
+  # should have deleted based on last active view's index
+  list
+
+  # deletes correct person
+  delete 4
+  list
+
+  # listing indexes get updated on next request
+  delete 1
+  list
+
+##########################################################
+# test clear command
+##########################################################
+
+  # clears all
+  clear
+  list
+
+##########################################################
+# test exit command
+##########################################################
+
+  # exits properly
+  exit
+  list
