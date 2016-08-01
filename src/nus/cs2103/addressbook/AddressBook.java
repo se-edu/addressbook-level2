@@ -198,7 +198,6 @@ public class AddressBook {
         }
     }
 
-
     /*
      * ==============NOTE TO STUDENTS======================================
      * The method header comment can be omitted if the method is trivial
@@ -209,7 +208,6 @@ public class AddressBook {
     private static void showWelcomeMessage() {
         showToUser(DIVIDER, DIVIDER, VERSION, MESSAGE_WELCOME, DIVIDER);
     }
-
 
     private static void showResultToUser(String result) {
         showToUser(result, DIVIDER);
@@ -257,7 +255,6 @@ public class AddressBook {
         if(args.length == 0) {
             setupDefaultFileForStorage();
         }
-
     }
 
     /**

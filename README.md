@@ -8,6 +8,8 @@
   of OOP or GUI programmings.
 
 # Learning outcomes
+Here are the things a student should be able to do after studying this code and completing the
+corresponding exercises.
 
 ### Set up a project in an IDE `[LO-IdeSetup]`
 
@@ -56,27 +58,76 @@ Here are some things you can do in your demonstration.
   Modify `expected.txt` to make the tests pass again.
 * Edit the `AddressBook.java` to modify the behavior slightly and modify tests to match.
 
-### Use Java Enums, Collections, Var args `[LO-EnumsEtc]`
+### Use Java Enums, Collections, Var args `[LO-Collections]`
 
-##### Ex 1: Use Enums
+Note how the `AddressBook` class uses `ArrayList<>` class (from the Java `Collections` library)
+to store a list of `String` or `String[]` objects.
 
-##### Ex 2: Use Collections
+##### Ex: Use Collections
 
-##### Ex 3: Use Varargs
+### Use Java Enums, Collections, Var args `[LO-Varargs]`
 
+Note how the `showToUser` method uses
+[Java Varargs feature](http://docs.oracle.com/javase/1.5.0/docs/guide/language/varargs.html) .
+
+##### Ex: Use Varargs
+Modify the code to remove the use of the Varargs feature.
+Compare the code with and without the varargs feature.
+
+### Use Java Enums `[LO-Enums]`
+[To be done]
 
 ### Abstract methods well `[LO-MethodAbstraction]`
-Code has small methods. Each one is doing a single task. SLAP applied.
-e.g. main method
+
+Notice how most of the methods in `AddressBook` are short, focused, and written at a single
+level of abstraction (cf [SLAP](http://programmers.stackexchange.com/questions/110933/how-to-determine-the-levels-of-abstraction))
+
+Here is an example.
+```java
+    public static void main(String[] args) {
+        showWelcomeMessage();
+        processProgramArgs(args);
+        loadDataFromStorage();
+        while (true) {
+            userCommand = getUserInput();
+            echoUserCommand(userCommand);
+            String feedback = executeCommand(userCommand);
+            showResultToUser(feedback);
+        }
+    }
+```
 
 ##### Ex : Reduce SLAP of method
+In the `main` method, replace the `processProgramArgs(args)` call with the actual code of that method.
+The `main` method is no longer has SLAP. Notice how mixing low level code with high level code reduces
+readability.
 
 ### Follow a coding standard `[LO-FollowStandard]`
 
-### Apply coding best practices
+The given code follows the coding standard for the most part.
 
-### Refactor code
+#### Ex : Fix coding standard violations
 
+Find and fix coding standard violations in the code, if any.
+
+### Apply coding best practices `[LO-FollowStandard]`
+
+#### Ex : Find violation of coding best practices
+See if you can find where the code contradicts best practices mentioned
+[in this document](http://www.comp.nus.edu.sg/~cs2103/AY1415S1/files/%255bHandout%2520for%2520L2P1%255d%2520%2520Good%2520Code,%2520Bad%2520Code%2520-%2520Toward%2520Production%2520Quality%2520Code.pdf)
+
+
+### Refactor code `[LO-Refactor]`
+
+#### Ex 1: Refactor the code to make it better
+* Refactor the code, applying one refactoring at a time.
+* If you are using Git, commit code after each refactoring.
+  In the commit message, mention which refactoring you applied.
+  Example commit messages: `Extracted variable isValidPerson`, `Inlined method isValidPerson()`
+* As far as possible, use automated refactoring features in Eclipse.
+
+#### Ex 2: Refactor the code to make it worse!
+* Similar to the previous exercise, but this time try to make the code as worse as possible.
 
 # Setting up
 ### Prerequisites
