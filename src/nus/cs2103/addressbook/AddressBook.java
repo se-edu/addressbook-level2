@@ -685,8 +685,9 @@ public class AddressBook {
      * Shows error messages and exits program if unable to read from file.
      */
     private static List<String> getLinesInFile(String filePath) {
+        List<String> lines = null;
         try {
-            return Files.readAllLines(Paths.get(filePath));
+            lines = Files.readAllLines(Paths.get(filePath));
         } catch (FileNotFoundException fnfe) {
             showToUser(String.format(MESSAGE_ERROR_MISSING_STORAGE_FILE, filePath));
             exitProgram();
@@ -694,7 +695,7 @@ public class AddressBook {
             showToUser(String.format(MESSAGE_ERROR_READING_FROM_FILE, filePath));
             exitProgram();
         }
-        return Collections.emptyList(); // the program should have exited before this
+        return lines; 
     }
 
     /**
