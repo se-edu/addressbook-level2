@@ -43,6 +43,7 @@ Learn Eclipse debugging features.
 Demonstrate your debugging skills using the AddressBook code. 
 
 Here are some things you can do in your demonstration.
+
 1. Set a break point
 2. Run the program in debug mode
 3. Step through a few lines of code while examining variable values
