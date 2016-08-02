@@ -67,17 +67,35 @@ to store a list of `String` or `String[]` objects.
 
 Resources: [ArrayList class tutorial (from javaTpoint.com)](http://www.javatpoint.com/ArrayList-in-collection-framework)
 
-##### Ex: Use HashMap
+##### Ex: Use `HashMap`
 
 Currently, a person's details are stored as a `String[]`. Modify the code to use a `HashMap<String, String>` instead.
 ```java
-HashMap<String,String> john = new HashMap<>(3);
-john.put(NAME, "John Doe");
-john.put(EMAIL, "john.doe@email.com");
+private static final PERSON_PROPERTY_NAME = "name";
+private static final PERSON_PROPERTY_EMAIL = "email";
+...
+HashMap<String,String> john = new HashMap<>();
+john.put(PERSON_PROPERTY_NAME, "John Doe");
+john.put(PERSON_PROPERTY_EMAIL, "john.doe@email.com");
 //etc.
 ```
 Resources: [HashMap tutorial (from beginnersbook.com)](http://beginnersbook.com/2013/12/hashmap-in-java-with-example/)
-### Use Java Enums, Collections, Var args `[LO-Varargs]`
+
+### Use Enums `[LO-Enums]`
+
+##### Ex: Use `HashMap` + `Enum`
+
+Similar the exercise in the `LO-Collections` section, but also bring in Java `enum` feature.
+```java
+private enum PersonProperty  {NAME, EMAIL, PHONE};
+...
+HashMap<PersonProperty,String> john = new HashMap<>();
+john.put(PersonProperty.NAME, "John Doe");
+john.put(PersonProperty.EMAIL, "john.doe@email.com");
+//etc.
+```
+
+### Use Varargs `[LO-Varargs]`
 
 Note how the `showToUser` method uses
 [Java Varargs feature](http://docs.oracle.com/javase/1.5.0/docs/guide/language/varargs.html) .
@@ -86,8 +104,6 @@ Note how the `showToUser` method uses
 Modify the code to remove the use of the Varargs feature.
 Compare the code with and without the varargs feature.
 
-### Use Java Enums `[LO-Enums]`
-[To be done]
 
 ### Abstract methods well `[LO-MethodAbstraction]`
 
@@ -111,12 +127,13 @@ Here is an example.
 
 ##### Ex : Reduce SLAP of method
 In the `main` method, replace the `processProgramArgs(args)` call with the actual code of that method.
-The `main` method is no longer has SLAP. Notice how mixing low level code with high level code reduces
+The `main` method no longer has SLAP. Notice how mixing low level code with high level code reduces
 readability.
 
 ### Follow a coding standard `[LO-FollowStandard]`
 
-The given code follows the coding standard for the most part.
+The given code follows the [coding standard](http://www.comp.nus.edu.sg/~cs2103/AY1617S1/contents/coding-standards-java.html) 
+for the most part.
 
 #### Ex : Fix coding standard violations
 
@@ -133,17 +150,21 @@ See if you can find where the code contradicts best practices mentioned
 
 #### Ex 1: Refactor the code to make it better
 * Refactor the code, applying one refactoring at a time.
-* If you are using Git, commit code after each refactoring.
-  In the commit message, mention which refactoring you applied.
+* If you are using Git, commit code after each refactoring.<br>
+  In the commit message, mention which refactoring you applied.<br>
   Example commit messages: `Extracted variable isValidPerson`, `Inlined method isValidPerson()`
 * As far as possible, use automated refactoring features in Eclipse.
+* Remember to run the test script after each refactoring to prevent [regressions](https://en.wikipedia.org/wiki/Software_regression).
 
 #### Ex 2: Refactor the code to make it worse!
-* Similar to the previous exercise, but this time try to make the code as worse as possible.
+* Similar to the previous exercise, but this time try to make the code as bad as possible.<br>
+  How bad can you make it without breaking the functionality while still making it look like it was written by a 
+  programmer (but a very bad programmer :-).
+* In particular, inlining methods can worsen the code quality fast.
 
 # Setting up
 ### Prerequisites
-* JDK 8
+* JDK 8 or later 
 * Eclipse IDE
 
 ### Importing the project into Eclipse
@@ -162,8 +183,8 @@ See if you can find where the code contradicts best practices mentioned
 5. Now you can interact with the program through the `Console`
 
 ### Using Command Line Interface
-1. Open `Terminal` for Unix or `Command Prompt` for Windows
-2. Move to the project's bin directory, using `cd <project_path>/bin` for Unix and `dir <project_path>/bin` for Windows
+1. Open the `Terminal`/`Command Prompt` 
+2. `cd` into the project's `bin` directory
 3. Type `java nus.cs2103.addressbook.AddressBook [storage_file_name.txt]`, then <kbd>Enter</kbd> to execute
 4. Command above enables you to interact with the program through the CLI and data will be saved in the file you specified
 
