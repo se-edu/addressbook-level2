@@ -32,10 +32,11 @@ Please refer to the [Setting up](#setting-up) section to learn how to set up the
 
 **Using Command Line**
 
-1. Open the `Terminal`/`Command Prompt` 
-2. `cd` into the project's `bin` directory
-3. Type `java seedu.addressbook.AddressBook`, then <kbd>Enter</kbd> to execute
-4. Command above enables you to interact with the program through the CLI 
+1. 'Build' the project using Eclipse
+2. Open the `Terminal`/`Command Prompt`
+3. `cd` into the project's `bin` directory
+4. Type `java seedu.addressbook.AddressBook`, then <kbd>Enter</kbd> to execute
+5. Now you can interact with the program through the CLI
 
 #### Viewing help : `help`
 Format: `help` 
@@ -45,7 +46,7 @@ Format: `help`
 > Adds a person to the address book
 
 Format: `add NAME p/PHONE_NUMBER e/EMAIL`  
->Words in `UPPER_CASE` are the parameters<br>
+> Words in `UPPER_CASE` are the parameters<br>
   Phone number and email can be in any order but the name must come first.
 
 Examples: 
@@ -95,7 +96,6 @@ Format: `clear`
 #### Exiting the program : `exit`
 Format: `exit`  
 
-
 #### Saving the data 
 Address book data are saved in the hard disk automatically after any command that changes the data. 
 There is no need to save manually.
@@ -144,9 +144,14 @@ You can use the `diff` command in place of the `FC` command.
 
 **Troubleshooting tests**
 
-* Differences between line endings
-* Diffing the two files
-* Failure during first run
+* Problem: How do I examine the exact differences between `actual.txt` and `expected.txt`?<br>
+  Solution: You can use a diff/merge tool with a GUI e.g. WinMerge (on Windows)
+* Problem: The two files look exactly the same, but the test script reports errors.<br>
+  Solution: This can happen because the line endings used by Windows is different from Unix-based
+  OSes. Convert the actual.txt to the format used by your OS using some [utility](https://kb.iu.edu/d/acux).
+* Problem: Test fails during the very first time.<br>
+  Solution: The output of the very first test run could be slightly different because the program
+  creates a new storage file. Tests should pass from the 2nd run onwards.
 
 -----------------------------------------------------------------------------------------------------
 # Learning outcomes
@@ -160,8 +165,8 @@ corresponding exercises.
    1. Go to the 'Releases' tab, download the `src.zip` from the latest release, and unzip content.
    2. Clone this repo (if you know how to use Git) to your Computer.
 * [Set up](#setting-up) the project in Eclipse.
-* [Run the program](#running-the-program) from within Eclipse, and try the features described in 
-  the [Usage](#usage) section 
+* [Run the program](#starting-the-program) from within Eclipse, and try the features described in
+  the [User guide](#user-guide) section
 
 ### Navigate code efficiently `[LO-CodeNavigation]`
 The `AddressBook.java` code is too big to navigate by scrolling. 
@@ -182,7 +187,7 @@ For example, learn the shortcuts to,
 ### Use a debugger `[LO-Debugging]`
 
 ##### Ex : Learn to step through code using the debugger
-Learn Eclipse debugging features. 
+Learn Eclipse debugging features from online resources.
 Demonstrate your debugging skills using the AddressBook code. 
 
 Here are some things you can do in your demonstration.
@@ -198,6 +203,7 @@ Here are some things you can do in your demonstration.
 ##### Ex : Practice automated CLI testing
 
 * Run the tests as explained in the [Testing](#testing) section.
+* Examine the test script to understand how the script works.
 * Add a few more tests to the `input.txt`. Run the tests. It should fail.<br> 
   Modify `expected.txt` to make the tests pass again.
 * Edit the `AddressBook.java` to modify the behavior slightly and modify tests to match.
@@ -212,6 +218,7 @@ Resources: [ArrayList class tutorial (from javaTpoint.com)](http://www.javatpoin
 ##### Ex: Use `HashMap`
 
 Currently, a person's details are stored as a `String[]`. Modify the code to use a `HashMap<String, String>` instead.
+Some sample code snippet given below.
 ```java
 private static final PERSON_PROPERTY_NAME = "name";
 private static final PERSON_PROPERTY_EMAIL = "email";
@@ -250,7 +257,7 @@ Compare the code with and without the varargs feature.
 ### Abstract methods well `[LO-MethodAbstraction]`
 
 Notice how most of the methods in `AddressBook` are short, focused, and written at a single
-level of abstraction (cf [SLAP](http://programmers.stackexchange.com/questions/110933/how-to-determine-the-levels-of-abstraction))
+level of abstraction (_cf_ [SLAP](http://programmers.stackexchange.com/questions/110933/how-to-determine-the-levels-of-abstraction))
 
 Here is an example.
 ```java
@@ -303,15 +310,27 @@ See if you can find where the code contradicts best practices mentioned
   programmer (but a very bad programmer :-).
 * In particular, inlining methods can worsen the code quality fast.
 
+### Work in a 1kLoc code base`[LO-1KLoC]`
+
+#### Ex : Enhance the code
+Enhance the Addressbook to prove that you can successfully work in a codebase of 1KLoC.
+
+Some suggested enhancements:
+
+* Make the `find` command case insensitive e.g. `find john` should match `John`
+* Add a `sort` command that can list the persons in alphabetical order
+* Add an `edit` command that can edit properties of a specific person
 
 -----------------------------------------------------------------------------------------------------
 # Contributors
+
 * [Jeffry Hartanto](http://github.com/jeffryhartanto) : Created a ToDo app that was used as the basis for this code.
 * [Leow Yijin](http://github.com/yijinl) : Main developer for the first version of the AddressBook-level1
 * [Damith C. Rajapakse](http://www.comp.nus.edu.sg/~damithch) : Project Advisor
 
 -----------------------------------------------------------------------------------------------------
 # Contact us
+
 * **Bug reports, Suggestions** : Post in our [issue tracker](https://github.com/se-edu/addressbook-level1/issues)
   if you noticed bugs or have suggestions on how to improve.
 * **Contributing** : We welcome pull requests.
