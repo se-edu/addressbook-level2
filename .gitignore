@@ -18,5 +18,4 @@ hs_err_pid*
 
 # Temp files used for testing
 test/actual.txt
-test/*.bat
-test/*.sh
+test/localrun.bat
