@@ -1,4 +1,4 @@
-package nus.cs2103.addressbook;
+package seedu.addressbook;
 /* ==============NOTE TO STUDENTS======================================
  * This class is written in a procedural fashion (i.e. not Object-Oriented)
  * Yes, it is possible to write non-OO code using an OO language.

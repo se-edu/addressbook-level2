@@ -184,7 +184,7 @@ See if you can find where the code contradicts best practices mentioned
 ### Using Command Line
 1. Open the `Terminal`/`Command Prompt` 
 2. `cd` into the project's `bin` directory
-3. Type `java nus.cs2103.addressbook.AddressBook`, then <kbd>Enter</kbd> to execute
+3. Type `java seedu.addressbook.AddressBook`, then <kbd>Enter</kbd> to execute
 4. Command above enables you to interact with the program through the CLI and data will be saved in the file you specified
 
 ### Usage
@@ -232,7 +232,7 @@ then run the command provided from `../testing/input.txt`. Finally, it will writ
 Sample Windows batch file to automate testing:
 ```sh
 javac  ..\src\nus\cs2103\addressbook\Addressbook.java -d ..\bin
-java -classpath ..\bin nus.cs2103.addressbook.AddressBook < input.txt > actual.txt
+java -classpath ..\bin seedu.addressbook.AddressBook < input.txt > actual.txt
 FC actual.txt expected.txt
 ```
 Put the code above into a file `test\test.bat`,
