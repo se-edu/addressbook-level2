@@ -86,15 +86,15 @@ public class AddressBook {
                                                             + PERSON_DATA_PREFIX_EMAIL + "%3$s"; // email
     private static final String COMMAND_WORD_ADD = "add";
     private static final String COMMAND_ADD_DESC = "Adds a person to the address book.";
-    private static final String COMMAND_ADD_PARAMETERS = "[name] "
-                                                      + PERSON_DATA_PREFIX_PHONE + "[phone number] "
-                                                      + PERSON_DATA_PREFIX_EMAIL + "[email]";
+    private static final String COMMAND_ADD_PARAMETERS = "NAME "
+                                                      + PERSON_DATA_PREFIX_PHONE + "PHONE_NUMBER "
+                                                      + PERSON_DATA_PREFIX_EMAIL + "EMAIL";
     private static final String COMMAND_ADD_EXAMPLE = COMMAND_WORD_ADD + " John Doe p/98765432 e/johnd@gmail.com";
 
     private static final String COMMAND_WORD_FIND = "find";
     private static final String COMMAND_FIND_DESC = "Finds all persons whose names contain any of the specified "
                                         + "keywords (case-sensitive) and displays them as a list with index numbers.";
-    private static final String COMMAND_FIND_PARAMETERS = "[keyword 1] [keyword 2] ...";
+    private static final String COMMAND_FIND_PARAMETERS = "KEYWORD [MORE_KEYWORDS]";
     private static final String COMMAND_FIND_EXAMPLE = COMMAND_WORD_FIND + " alice bob charlie";
 
     private static final String COMMAND_WORD_LIST = "list";
@@ -104,7 +104,7 @@ public class AddressBook {
     private static final String COMMAND_WORD_DELETE = "delete";
     private static final String COMMAND_DELETE_DESC = "Deletes a person identified by the index number used in "
                                                     + "the last find/list call.";
-    private static final String COMMAND_DELETE_PARAMETER = "[target's index number]";
+    private static final String COMMAND_DELETE_PARAMETER = "INDEX";
     private static final String COMMAND_DELETE_EXAMPLE = COMMAND_WORD_DELETE + " 1";
 
     private static final String COMMAND_WORD_CLEAR = "clear";

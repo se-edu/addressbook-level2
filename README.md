@@ -185,39 +185,84 @@ See if you can find where the code contradicts best practices mentioned
 1. Open the `Terminal`/`Command Prompt` 
 2. `cd` into the project's `bin` directory
 3. Type `java seedu.addressbook.AddressBook`, then <kbd>Enter</kbd> to execute
-4. Command above enables you to interact with the program through the CLI and data will be saved in the file you specified
+4. Command above enables you to interact with the program through the CLI 
 
 ### Usage
-```sh
-Welcome to ToDoBuddy!
-Enter command: help 
 
-add      : Adds a person to the addressbook. 
-		Parameters: [name] p/[phone number] e/[email]
-	 	Example: add John Doe p/98765432 e/johnd@gmail.com
+##### Viewing help : `help`
+Format: `help` 
+ > Help is also shown if you enter an incorrect command e.g. `abcd`
+ 
+##### Adding a person: `add`
+> Adds a person to the address book
 
-find     : Finds all persons whose names contain any of the specified keywords (case-sensitive) and displays them as a list with index numbers. 
-	 	Parameters: [keyword 1] [keyword 2] ...
-	 	Example: find alice bob charlie
+Format: `add NAME p/PHONE_NUMBER e/EMAIL`  
+>Words in `UPPER_CASE` are the parameters<br>
+  Phone number and email can be in any order but the name must come first.
 
-list     : Displays all persons as a list with index numbers. 
-	 	Example: view 
+Examples: 
+* `add John Doe p/98765432 e/johnd@gmail.com`
+* `add Betsy Crowe e/bencrowe@gmail.com p/1234567 `
 
-delete   : Deletes a person identified by the index number used in the last find/list call. 
-	 	Parameters: [target's index number] 
-	 	Example: delete 1 
+##### Listing all persons : `list`
 
-clear    : Clears address book permanently.
-	 	Example: clear 
+> Shows a list of persons, as an indexed list, in the order they were added to the address book, 
+oldest first.
 
-exit     : Exit the program.
-	 	Example: exit 
+Format: `list`  
 
-help     : Shows program usage instructions. 
-	 	Example: help
-```
+##### Finding a person by keyword `find`
+> Finds persons that match given keywords
 
-Setting storage location
+Format: `find KEYWORD [MORE_KEYWORDS]`  
+> The search is case sensitive, the order of the keywords does not matter, only the name is searched, 
+and persons matching at least one keyword will be returned (i.e. `OR` search).
+
+Examples: 
+* `find John`
+  > Returns `John Doe` but not `john`
+   
+* `find Betsy Tim John`
+  > Returns Any person having names `Betsy`, `Tim`, or `John`
+
+##### Deleting a person : `delete`
+
+Format: `delete INDEX`  
+> Deletes the person at the specified `INDEX`. 
+  The index refers to the index numbers shown in the most recent listing.
+
+Examples: 
+* `list`<br>
+  `delete 2`
+  > Deletes the 2nd person in the address book.
+  
+* `find Betsy` <br> 
+  `delete 1`
+  > Deletes the 1st person in the results of the `find` command.
+
+##### Clearing all entries : `clear`
+> Clears all entries from the address book.  
+Format: `clear`  
+
+##### Exiting the program : `exit`
+Format: `exit`  
+
+
+##### Saving the data in the hard disk
+Address book data are saved in the hard disk automatically after any command that changes the data. 
+There is no need to save manually.
+
+##### Changing the save location
+Address book data are saved in a file called `addressbook.txt` in the project root folder.
+You can change the location by specifying the file path as a program argument.
+
+Examples: 
+* `java seedu.addressbook.AddressBook mydata.txt`
+
+> The file name must end in `.txt` for it to be acceptable to the program.
+
+> When running the program inside Eclipse, there is a way to set command line parameters 
+  before running the program.
 
 # Testing
 Make sure the file `storage.txt` exists in the working directory.

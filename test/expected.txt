@@ -7,18 +7,18 @@
 || Enter command: || [Command entered:  sfdfd]
 || Invalid command format:   sfdfd 
 || add: Adds a person to the address book.
-|| 	Parameters: [name] p/[phone number] e/[email]
+|| 	Parameters: NAME p/PHONE_NUMBER e/EMAIL
 || 	Example: add John Doe p/98765432 e/johnd@gmail.com
 || 
 || find: Finds all persons whose names contain any of the specified keywords (case-sensitive) and displays them as a list with index numbers.
-|| 	Parameters: [keyword 1] [keyword 2] ...
+|| 	Parameters: KEYWORD [MORE_KEYWORDS]
 || 	Example: find alice bob charlie
 || 
 || list: Displays all persons as a list with index numbers.
 || 	Example: list
 || 
 || delete: Deletes a person identified by the index number used in the last find/list call.
-|| 	Parameters: [target's index number]
+|| 	Parameters: INDEX
 || 	Example: delete 1
 || 
 || clear: Clears address book permanently.
@@ -37,42 +37,42 @@
 || Enter command: || [Command entered:  add wrong args wrong args]
 || Invalid command format:   add wrong args wrong args 
 || add: Adds a person to the address book.
-|| 	Parameters: [name] p/[phone number] e/[email]
+|| 	Parameters: NAME p/PHONE_NUMBER e/EMAIL
 || 	Example: add John Doe p/98765432 e/johnd@gmail.com
 || 
 || ===================================================
 || Enter command: || [Command entered:  add Valid Name p/12345 valid@email.butNoPrefix]
 || Invalid command format:   add Valid Name p/12345 valid@email.butNoPrefix 
 || add: Adds a person to the address book.
-|| 	Parameters: [name] p/[phone number] e/[email]
+|| 	Parameters: NAME p/PHONE_NUMBER e/EMAIL
 || 	Example: add John Doe p/98765432 e/johnd@gmail.com
 || 
 || ===================================================
 || Enter command: || [Command entered:  add Valid Name 12345 e/valid@email.butPhonePrefixMissing]
 || Invalid command format:   add Valid Name 12345 e/valid@email.butPhonePrefixMissing 
 || add: Adds a person to the address book.
-|| 	Parameters: [name] p/[phone number] e/[email]
+|| 	Parameters: NAME p/PHONE_NUMBER e/EMAIL
 || 	Example: add John Doe p/98765432 e/johnd@gmail.com
 || 
 || ===================================================
 || Enter command: || [Command entered:  add []\[;] p/12345 e/valid@e.mail]
 || Invalid command format:   add []\[;] p/12345 e/valid@e.mail 
 || add: Adds a person to the address book.
-|| 	Parameters: [name] p/[phone number] e/[email]
+|| 	Parameters: NAME p/PHONE_NUMBER e/EMAIL
 || 	Example: add John Doe p/98765432 e/johnd@gmail.com
 || 
 || ===================================================
 || Enter command: || [Command entered:  add Valid Name p/not_numbers e/valid@e.mail]
 || Invalid command format:   add Valid Name p/not_numbers e/valid@e.mail 
 || add: Adds a person to the address book.
-|| 	Parameters: [name] p/[phone number] e/[email]
+|| 	Parameters: NAME p/PHONE_NUMBER e/EMAIL
 || 	Example: add John Doe p/98765432 e/johnd@gmail.com
 || 
 || ===================================================
 || Enter command: || [Command entered:  add Valid Name p/12345 e/notAnEmail]
 || Invalid command format:   add Valid Name p/12345 e/notAnEmail 
 || add: Adds a person to the address book.
-|| 	Parameters: [name] p/[phone number] e/[email]
+|| 	Parameters: NAME p/PHONE_NUMBER e/EMAIL
 || 	Example: add John Doe p/98765432 e/johnd@gmail.com
 || 
 || ===================================================
@@ -162,28 +162,28 @@
 || Enter command: || [Command entered:  delete]
 || Invalid command format:   delete 
 || delete: Deletes a person identified by the index number used in the last find/list call.
-|| 	Parameters: [target's index number]
+|| 	Parameters: INDEX
 || 	Example: delete 1
 || 
 || ===================================================
 || Enter command: || [Command entered:  delete should be only one number]
 || Invalid command format:   delete should be only one number 
 || delete: Deletes a person identified by the index number used in the last find/list call.
-|| 	Parameters: [target's index number]
+|| 	Parameters: INDEX
 || 	Example: delete 1
 || 
 || ===================================================
 || Enter command: || [Command entered:  delete -1]
 || Invalid command format:   delete -1 
 || delete: Deletes a person identified by the index number used in the last find/list call.
-|| 	Parameters: [target's index number]
+|| 	Parameters: INDEX
 || 	Example: delete 1
 || 
 || ===================================================
 || Enter command: || [Command entered:  delete 0]
 || Invalid command format:   delete 0 
 || delete: Deletes a person identified by the index number used in the last find/list call.
-|| 	Parameters: [target's index number]
+|| 	Parameters: INDEX
 || 	Example: delete 1
 || 
 || ===================================================
