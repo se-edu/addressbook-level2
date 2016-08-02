@@ -130,7 +130,7 @@ In the `main` method, replace the `processProgramArgs(args)` call with the actua
 The `main` method no longer has SLAP. Notice how mixing low level code with high level code reduces
 readability.
 
-### Follow a coding standard `[LO-FollowStandard]`
+### Follow a coding standard `[LO-CodingStandard]`
 
 The given code follows the [coding standard](http://www.comp.nus.edu.sg/~cs2103/AY1617S1/contents/coding-standards-java.html) 
 for the most part.
@@ -139,12 +139,11 @@ for the most part.
 
 Find and fix coding standard violations in the code, if any.
 
-### Apply coding best practices `[LO-FollowStandard]`
+### Apply coding best practices `[LO-CodingBestPractices]`
 
 #### Ex : Find violation of coding best practices
 See if you can find where the code contradicts best practices mentioned
 [in this document](http://www.comp.nus.edu.sg/~cs2103/AY1415S1/files/%255bHandout%2520for%2520L2P1%255d%2520%2520Good%2520Code,%2520Bad%2520Code%2520-%2520Toward%2520Production%2520Quality%2520Code.pdf)
-
 
 ### Refactor code `[LO-Refactor]`
 
@@ -182,10 +181,10 @@ See if you can find where the code contradicts best practices mentioned
 4. The program now should run on the `Console` (usually located at the bottom side)
 5. Now you can interact with the program through the `Console`
 
-### Using Command Line Interface
+### Using Command Line
 1. Open the `Terminal`/`Command Prompt` 
 2. `cd` into the project's `bin` directory
-3. Type `java nus.cs2103.addressbook.AddressBook [storage_file_name.txt]`, then <kbd>Enter</kbd> to execute
+3. Type `java nus.cs2103.addressbook.AddressBook`, then <kbd>Enter</kbd> to execute
 4. Command above enables you to interact with the program through the CLI and data will be saved in the file you specified
 
 ### Usage
@@ -217,6 +216,8 @@ exit     : Exit the program.
 help     : Shows program usage instructions. 
 	 	Example: help
 ```
+
+Setting storage location
 
 # Testing
 Make sure the file `storage.txt` exists in the working directory.
