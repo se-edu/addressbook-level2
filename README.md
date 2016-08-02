@@ -15,11 +15,11 @@ corresponding exercises.
 
 ##### Exercise : Setup project in Eclipse 
 * Download the source code for this project, using one of the following options:
-   1. Go to the [Releases](releases) tab and download the src.zip from the latest release.
-   2. Clone this repo (if you know how to use Git)
-* [Set up](#Setting-up) the project in Eclipse.
-* [Run the program](#Running-the-program) from within Eclipse, and try the features described in 
-  the [Usage](#Usage) section 
+   1. Go to the 'Releases' tab, download the `src.zip` from the latest release, and unzip content.
+   2. Clone this repo (if you know how to use Git) to your Computer.
+* [Set up](#setting-up) the project in Eclipse.
+* [Run the program](#running-the-program) from within Eclipse, and try the features described in 
+  the [Usage](#usage) section 
 
 ### Navigate code efficiently `[LO-CodeNavigation]`
 The `AddressBook.java` code is too big to navigate by scrolling. 
