@@ -155,11 +155,19 @@ public class AddressBook {
      * text file will be processed.
      */
     private static final Scanner SCANNER = new Scanner(System.in);
-
+    /*
+     * ==============NOTE TO STUDENTS======================================================================
+     * Note that the type of the variable below can also be declared as List<String[]>, as follows:
+     *    private static final List<String[]> ALL_PERSONS = new ArrayList<>()
+     * That is because List is an interface implemented by the ArrayList class.
+     * In this code we use ArrayList instead because we wanted to to stay away from advanced concepts
+     * such as interface inheritance.
+     * ====================================================================================================
+     */
     /**
      * List of all persons in the address book.
      */
-    private static final List<String[]> ALL_PERSONS = new ArrayList<>();
+    private static final ArrayList<String[]> ALL_PERSONS = new ArrayList<>();
 
 
     /**
@@ -167,7 +175,7 @@ public class AddressBook {
      * This is a subset of the full list. Deleting persons in the pull list does not delete
      * those persons from this list.
      */
-    private static List<String[]> latestPersonListingView = getAllPersonsInAddressBook(); // initial view is of all
+    private static ArrayList<String[]> latestPersonListingView = getAllPersonsInAddressBook(); // initial view is of all
 
     /**
      * Latest command entered by the user.
@@ -409,7 +417,7 @@ public class AddressBook {
      */
     private static String executeFindPersons(String commandArgs) {
         final Set<String> keywords = extractKeywordsFromFindPersonArgs(commandArgs);
-        final List<String[]> personsFound = getPersonsWithNameContainingAnyKeyword(keywords);
+        final ArrayList<String[]> personsFound = getPersonsWithNameContainingAnyKeyword(keywords);
         showToUser(personsFound);
         return getMessageForPersonsDisplayedSummary(personsFound);
     }
@@ -420,7 +428,7 @@ public class AddressBook {
      * @param personsDisplayed used to generate summary
      * @return summary message for persons displayed
      */
-    private static String getMessageForPersonsDisplayedSummary(List<String[]> personsDisplayed) {
+    private static String getMessageForPersonsDisplayedSummary(ArrayList<String[]> personsDisplayed) {
         return String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, personsDisplayed.size());
     }
 
@@ -440,8 +448,8 @@ public class AddressBook {
      * @param keywords for searching
      * @return list of persons in full model with name containing some of the keywords
      */
-    private static List<String[]> getPersonsWithNameContainingAnyKeyword(Collection<String> keywords) {
-        final List<String[]> matchedPersons = new ArrayList<>();
+    private static ArrayList<String[]> getPersonsWithNameContainingAnyKeyword(Collection<String> keywords) {
+        final ArrayList<String[]> matchedPersons = new ArrayList<>();
         for (String[] person : getAllPersonsInAddressBook()) {
             final Set<String> wordsInName = new HashSet<>(splitByWhitespace(getNameFromPerson(person)));
             if (!Collections.disjoint(wordsInName, keywords)) {
@@ -532,7 +540,7 @@ public class AddressBook {
      * @return feedback display message for the operation result
      */
     private static String executeListAllPersonsInAddressBook() {
-        List<String[]> toBeDisplayed = getAllPersonsInAddressBook();
+        ArrayList<String[]> toBeDisplayed = getAllPersonsInAddressBook();
         showToUser(toBeDisplayed);
         return getMessageForPersonsDisplayedSummary(toBeDisplayed);
     }
@@ -587,7 +595,7 @@ public class AddressBook {
      * The list will be indexed, starting from 1.
      *
      */
-    private static void showToUser(List<String[]> persons) {
+    private static void showToUser(ArrayList<String[]> persons) {
         String listAsString = getDisplayString(persons);
         showToUser(listAsString);
         updateLatestViewedPersonListing(persons);
@@ -596,7 +604,7 @@ public class AddressBook {
     /**
      * Returns the display string representation of the list of persons.
      */
-    private static String getDisplayString(List<String[]> persons) {
+    private static String getDisplayString(ArrayList<String[]> persons) {
         final StringBuilder messageAccumulator = new StringBuilder();
         for (int i = 0; i < persons.size(); i++) {
             final String[] person = persons.get(i);
@@ -635,7 +643,7 @@ public class AddressBook {
      *
      * @param newListing the new listing of persons
      */
-    private static void updateLatestViewedPersonListing(List<String[]> newListing) {
+    private static void updateLatestViewedPersonListing(ArrayList<String[]> newListing) {
         // clone to insulate from future changes to arg list
         latestPersonListingView = new ArrayList<>(newListing);
     }
@@ -653,8 +661,8 @@ public class AddressBook {
     /**
      * @return unmodifiable list view of the last person listing view
      */
-    private static List<String[]> getLatestPersonListingView() {
-        return Collections.unmodifiableList(latestPersonListingView);
+    private static ArrayList<String[]> getLatestPersonListingView() {
+        return latestPersonListingView;
     }
 
 
@@ -693,8 +701,8 @@ public class AddressBook {
      * @param filePath file to load from
      * @return the list of decoded persons
      */
-    private static List<String[]> loadPersonsFromFile(String filePath) {
-        final Optional<List<String[]>> successfullyDecoded = decodePersonsFromStrings(getLinesInFile(filePath));
+    private static ArrayList<String[]> loadPersonsFromFile(String filePath) {
+        final Optional<ArrayList<String[]>> successfullyDecoded = decodePersonsFromStrings(getLinesInFile(filePath));
         if (!successfullyDecoded.isPresent()) {
             showToUser(MESSAGE_INVALID_STORAGE_FILE_CONTENT);
             exitProgram();
@@ -706,10 +714,10 @@ public class AddressBook {
      * Gets all lines in the specified file as a list of strings. Line separators are removed.
      * Shows error messages and exits program if unable to read from file.
      */
-    private static List<String> getLinesInFile(String filePath) {
-        List<String> lines = null;
+    private static ArrayList<String> getLinesInFile(String filePath) {
+        ArrayList<String> lines = null;
         try {
-            lines = Files.readAllLines(Paths.get(filePath));
+            lines = new ArrayList(Files.readAllLines(Paths.get(filePath)));
         } catch (FileNotFoundException fnfe) {
             showToUser(String.format(MESSAGE_ERROR_MISSING_STORAGE_FILE, filePath));
             exitProgram();
@@ -726,8 +734,8 @@ public class AddressBook {
      *
      * @param filePath file for saving
      */
-    private static void savePersonsToFile(List<String[]> persons, String filePath) {
-        final List<String> linesToWrite = encodePersonsToStrings(persons);
+    private static void savePersonsToFile(ArrayList<String[]> persons, String filePath) {
+        final ArrayList<String> linesToWrite = encodePersonsToStrings(persons);
         try {
             Files.write(Paths.get(storageFilePath), linesToWrite);
         } catch (IOException ioe) {
@@ -781,8 +789,8 @@ public class AddressBook {
     /**
      * @return unmodifiable list view of all persons in the address book
      */
-    private static List<String[]> getAllPersonsInAddressBook() {
-        return Collections.unmodifiableList(ALL_PERSONS);
+    private static ArrayList<String[]> getAllPersonsInAddressBook() {
+        return ALL_PERSONS;
     }
 
     /**
@@ -798,7 +806,7 @@ public class AddressBook {
      *
      * @param persons list of persons to initialise the model with
      */
-    private static void initialiseAddressBookModel(List<String[]> persons) {
+    private static void initialiseAddressBookModel(ArrayList<String[]> persons) {
         ALL_PERSONS.clear();
         ALL_PERSONS.addAll(persons);
     }
@@ -867,8 +875,8 @@ public class AddressBook {
      * @param persons to be encoded
      * @return encoded strings
      */
-    private static List<String> encodePersonsToStrings(List<String[]> persons) {
-        final List<String> encoded = new ArrayList<>();
+    private static ArrayList<String> encodePersonsToStrings(ArrayList<String[]> persons) {
+        final ArrayList<String> encoded = new ArrayList<>();
         for (String[] person : persons) {
             encoded.add(encodePersonToString(person));
         }
@@ -909,8 +917,8 @@ public class AddressBook {
      * @return if cannot decode any: empty Optional
      *         else: Optional containing decoded persons
      */
-    private static Optional<List<String[]>> decodePersonsFromStrings(List<String> encodedPersons) {
-        final List<String[]> decodedPersons = new ArrayList<>();
+    private static Optional<ArrayList<String[]>> decodePersonsFromStrings(ArrayList<String> encodedPersons) {
+        final ArrayList<String[]> decodedPersons = new ArrayList<>();
         for (String encodedPerson : encodedPersons) {
             final Optional<String[]> decodedPerson = decodePersonFromString(encodedPerson);
             if (!decodedPerson.isPresent()) {
@@ -1167,8 +1175,8 @@ public class AddressBook {
      * @param toSplit source string
      * @return split by whitespace
      */
-    private static List<String> splitByWhitespace(String toSplit) {
-        return Arrays.asList(toSplit.trim().split("\\s+"));
+    private static ArrayList<String> splitByWhitespace(String toSplit) {
+        return new ArrayList(Arrays.asList(toSplit.trim().split("\\s+")));
     }
 
 }

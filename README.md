@@ -23,18 +23,19 @@ corresponding exercises.
 
 ### Navigate code efficiently `[LO-CodeNavigation]`
 The `AddressBook.java` code is too big to navigate by scrolling. 
-Navigating code using shortcuts is a more efficient option. 
-For example, <kbd>F3</kbd> will navigate to the definition of the method/variable at the cursor.
+Navigating code using IDE shortcuts is a more efficient option. 
+For example, <kbd>F3</kbd> will navigate to the definition of the method/field at the cursor.
  
 ##### Ex : Learn to navigate code using shortcuts
 Learn some Eclipse code navigation shortcuts 
-(you can use Web resources like [this one](https://www.shortcutworld.com/en/win/Eclipse.html)this one). 
-For example, how to,
+(you can use Web resources like [this one](https://www.shortcutworld.com/en/win/Eclipse.html)). 
+For example, learn the shortcuts to,
   * go to the definition of a method
   * go back to the previous location
   * view the documentation of a method from where the method is being used, 
     without navigating to the method itself
   * find where a method/field is being used
+  * ...
 
 ### Use a debugger `[LO-Debugging]`
 
@@ -44,28 +45,38 @@ Demonstrate your debugging skills using the AddressBook code.
 
 Here are some things you can do in your demonstration.
 
-1. Set a break point
+1. Set a 'break point'
 2. Run the program in debug mode
-3. Step through a few lines of code while examining variable values
-4. Step into, and out of, methods as you step through the code
+3. 'Step through' a few lines of code while examining variable values
+4. 'Step into', and 'step out of', methods as you step through the code
 5. ...
 
 ### Automate CLI testing `[LO-AutomatedCliTesting]`
 
 ##### Ex : Practice automated CLI testing
 
-* Run the tests as explained in the [Testing](#Testing) section.
-* Add few more tests to the `input.txt`. Run the tests. It should fail. 
+* Run the tests as explained in the [Testing](#testing) section.
+* Add a few more tests to the `input.txt`. Run the tests. It should fail.<br> 
   Modify `expected.txt` to make the tests pass again.
 * Edit the `AddressBook.java` to modify the behavior slightly and modify tests to match.
 
-### Use Java Enums, Collections, Var args `[LO-Collections]`
+### Use Collections `[LO-Collections]`
 
 Note how the `AddressBook` class uses `ArrayList<>` class (from the Java `Collections` library)
 to store a list of `String` or `String[]` objects.
 
-##### Ex: Use Collections
+Resources: [ArrayList class tutorial (from javaTpoint.com)](http://www.javatpoint.com/ArrayList-in-collection-framework)
 
+##### Ex: Use HashMap
+
+Currently, a person's details are stored as a `String[]`. Modify the code to use a `HashMap<String, String>` instead.
+```java
+HashMap<String,String> john = new HashMap<>(3);
+john.put(NAME, "John Doe");
+john.put(EMAIL, "john.doe@email.com");
+//etc.
+```
+Resources: [HashMap tutorial (from beginnersbook.com)](http://beginnersbook.com/2013/12/hashmap-in-java-with-example/)
 ### Use Java Enums, Collections, Var args `[LO-Varargs]`
 
 Note how the `showToUser` method uses
@@ -206,6 +217,10 @@ Put the code above into a file `test\test.bat`,
 open a DOS window in the `test` folder,
 and run the `call test.bat` command.
 
+Troubleshooting test results:
+* differences between line endings
+* diffing the two files
+* failure during first run
 
 # Contributors
 * [Jeffry Hartanto](http://github.com/jeffryhartanto) : Created a ToDo app that was used as the basis for this code.
