@@ -161,6 +161,8 @@ corresponding exercises.
 ### Set up a project in an IDE `[LO-IdeSetup]`
 
 ##### Exercise : Setup project in Eclipse 
+* Learn [how to set up a new project in Eclipse](/doc/Getting started with Eclipse.pptx). <br>
+  Create a new project in Eclipse and write a small HelloWorld program.
 * Download the source code for this project, using one of the following options:
    1. Go to the 'Releases' tab, download the `src.zip` from the latest release, and unzip content.
    2. Clone this repo (if you know how to use Git) to your Computer.
@@ -187,7 +189,7 @@ For example, learn the shortcuts to,
 ### Use a debugger `[LO-Debugging]`
 
 ##### Ex : Learn to step through code using the debugger
-Learn Eclipse debugging features from online resources.
+Learn Eclipse debugging features from [these slide](/doc/Debugging with Eclipse.pptx) or other online resources.
 Demonstrate your debugging skills using the AddressBook code. 
 
 Here are some things you can do in your demonstration.
