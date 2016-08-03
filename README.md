@@ -190,7 +190,7 @@ For example, learn the shortcuts to,
 ### Use a debugger `[LO-Debugging]`
 
 ##### Ex : Learn to step through code using the debugger
-Learn Eclipse debugging features from [these slide](https://se-edu.github.io/addressbook-level1/doc/Debugging with Eclipse.pptx)
+Learn Eclipse debugging features from [these slides](https://se-edu.github.io/addressbook-level1/doc/Debugging with Eclipse.pptx)
 or other online resources.<br>
 Demonstrate your debugging skills using the AddressBook code. 
 
