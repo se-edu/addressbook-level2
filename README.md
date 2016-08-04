@@ -190,6 +190,8 @@ For example, learn the shortcuts to,
 ### Use a debugger `[LO-Debugging]`
 
 ##### Ex : Learn to step through code using the debugger
+Prerequisite: `[LO-IdeSetup]`
+
 Learn Eclipse debugging features from [these slides](https://se-edu.github.io/addressbook-level1/doc/Debugging with Eclipse.pptx)
 or other online resources.<br>
 Demonstrate your debugging skills using the AddressBook code. 
@@ -238,7 +240,7 @@ Resources: [HashMap tutorial (from beginnersbook.com)](http://beginnersbook.com/
 
 ##### Ex: Use `HashMap` + `Enum`
 
-Similar the exercise in the `LO-Collections` section, but also bring in Java `enum` feature.
+Similar to the exercise in the `LO-Collections` section, but also bring in Java `enum` feature.
 ```java
 private enum PersonProperty  {NAME, EMAIL, PHONE};
 ...
