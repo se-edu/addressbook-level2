@@ -1,0 +1,118 @@
+package seedu.addressbook.model;
+
+import seedu.addressbook.Utils;
+
+import java.util.*;
+
+/**
+ * A list of tags that enforces no nulls and uniqueness between its elements.
+ *
+ * Supports minimal set of list operations for the app's features.
+ *
+ * @see Tag#equals(Object)
+ * @see Utils#elementsAreUnique(Collection)
+ */
+public class UniqueTagList {
+
+    /**
+     * Signals that an operation would have violated the 'no duplicates' property of the list.
+     */
+    public static class DuplicateTagException extends DuplicateDataException {}
+
+    /**
+     * Signals that an operation targeting a specified Tag in the list would fail because
+     * there is no such matching Tag in the list.
+     */
+    public static class TagNotFoundException extends Exception {}
+
+    private final List<Tag> internalList = new ArrayList<>();
+
+    /**
+     * Constructs empty TagList.
+     */
+    public UniqueTagList() {}
+
+    /**
+     * Varargs/array constructor, enforces no nulls or duplicates.
+     */
+    public UniqueTagList(Tag... Tags) throws DuplicateTagException {
+        Utils.assertNotNull(Tags);
+        final List<Tag> initialTags = Arrays.asList(Tags);
+        if (!Utils.elementsAreUnique(initialTags)) {
+            throw new DuplicateTagException();
+        }
+        internalList.addAll(initialTags);
+    }
+
+    /**
+     * java collections constructor, enforces no null or duplicate elements.
+     */
+    public UniqueTagList(Collection<Tag> Tags) throws DuplicateTagException {
+        Utils.assertNoNullElements(Tags);
+        if (!Utils.elementsAreUnique(Tags)) {
+            throw new DuplicateTagException();
+        }
+        internalList.addAll(Tags);
+    }
+
+    /**
+     * Copy constructor, insulates from changes in source.
+     */
+    public UniqueTagList(UniqueTagList source) {
+        internalList.addAll(source.internalList); // insulate internal list from changes in argument
+    }
+
+    /**
+     * Unmodifiable java List view. For use with other methods/libraries.
+     * Any changes to the internal list/elements are immediately visible in the returned list.
+     */
+    public List<Tag> immutableListView() {
+        return Collections.unmodifiableList(internalList);
+    }
+
+    /**
+     * Checks if the list contains an equivalent Tag as the given argument.
+     */
+    public boolean contains(Tag toCheck) {
+        Utils.assertNotNull(toCheck);
+        return internalList.contains(toCheck);
+    }
+
+    /**
+     * Adds a Tag to the list.
+     *
+     * @throws DuplicateTagException if the Tag to add is a duplicate of an existing Tag in the list.
+     */
+    public void add(Tag toAdd) throws DuplicateTagException {
+        Utils.assertNotNull(toAdd);
+        if (contains(toAdd)) {
+            throw new DuplicateTagException();
+        }
+        internalList.add(toAdd);
+    }
+
+    /**
+     * Removes the equivalent Tag from the list.
+     *
+     * @throws TagNotFoundException if no such Tag could be found in the list.
+     */
+    public void remove(Tag toRemove) throws TagNotFoundException {
+        Utils.assertNotNull(toRemove);
+        final boolean TagFoundAndDeleted = internalList.remove(toRemove);
+        if (!TagFoundAndDeleted) {
+            throw new TagNotFoundException();
+        }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof UniqueTagList // instanceof handles nulls
+                && this.internalList.equals(((UniqueTagList) other).internalList)); // state check
+    }
+
+    @Override
+    public int hashCode() {
+        return internalList.hashCode();
+    }
+}
