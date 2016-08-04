@@ -292,7 +292,8 @@ for the most part.
 
 #### Ex : Fix coding standard violations
 
-Find and fix coding standard violations in the code, if any.
+Find and fix coding standard violations in the code, if any.<br>
+If you know how to use Git, commit after each change.
 
 ### Apply coding best practices `[LO-CodingBestPractices]`
 
@@ -300,11 +301,13 @@ Find and fix coding standard violations in the code, if any.
 See if you can find where the code contradicts best practices mentioned
 [in this document](http://www.comp.nus.edu.sg/~cs2103/AY1415S1/files/%255bHandout%2520for%2520L2P1%255d%2520%2520Good%2520Code,%2520Bad%2520Code%2520-%2520Toward%2520Production%2520Quality%2520Code.pdf)
 
+Fix any violations found. If you know how to use Git, commit after each change.
+
 ### Refactor code `[LO-Refactor]`
 
 #### Ex 1: Refactor the code to make it better
 * Refactor the code, applying one refactoring at a time.
-* If you are using Git, commit code after each refactoring.<br>
+* If you know how to use Git, commit code after each refactoring.<br>
   In the commit message, mention which refactoring you applied.<br>
   Example commit messages: `Extracted variable isValidPerson`, `Inlined method isValidPerson()`
 * As far as possible, use automated refactoring features in Eclipse.
@@ -319,7 +322,8 @@ See if you can find where the code contradicts best practices mentioned
 ### Work in a 1kLoc code base`[LO-1KLoC]`
 
 #### Ex : Enhance the code
-Enhance the Addressbook to prove that you can successfully work in a codebase of 1KLoC.
+Enhance the AddressBook to prove that you can successfully work in a codebase of 1KLoC. <br>
+Remember to change code in small steps and commit after each significant change.
 
 Some suggested enhancements:
 
