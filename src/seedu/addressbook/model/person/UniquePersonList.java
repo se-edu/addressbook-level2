@@ -13,7 +13,7 @@ import java.util.*;
  * @see Person#equals(Object)
  * @see Utils#elementsAreUnique(Collection)
  */
-public class UniquePersonList {
+public class UniquePersonList implements Iterable<Person> {
 
     /**
      * Signals that an operation would have violated the 'no duplicates' property of the list.
@@ -104,6 +104,11 @@ public class UniquePersonList {
         if (!personFoundAndDeleted) {
             throw new PersonNotFoundException();
         }
+    }
+
+    @Override
+    public Iterator<Person> iterator() {
+        return internalList.iterator();
     }
 
     @Override

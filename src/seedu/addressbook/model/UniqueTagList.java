@@ -12,7 +12,7 @@ import java.util.*;
  * @see Tag#equals(Object)
  * @see Utils#elementsAreUnique(Collection)
  */
-public class UniqueTagList {
+public class UniqueTagList implements Iterable<Tag> {
 
     /**
      * Signals that an operation would have violated the 'no duplicates' property of the list.
@@ -105,6 +105,11 @@ public class UniqueTagList {
     }
 
     @Override
+    public Iterator<Tag> iterator() {
+        return internalList.iterator();
+    }
+
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof UniqueTagList // instanceof handles nulls
@@ -115,4 +120,5 @@ public class UniqueTagList {
     public int hashCode() {
         return internalList.hashCode();
     }
+
 }
