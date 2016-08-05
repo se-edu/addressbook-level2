@@ -280,6 +280,7 @@ This learning outcome is covered by the exercise in `[LO-Refactor]`
 * [Screencast] [A short refactoring demo using Eclipse](http://www.youtube.com/watch?v=7KDruqCzdpc)
 
 #### Ex: Refactor the code to make it better
+Note: this exercise covers two other Learning Outcomes: `[LO-CodingBestPractices]`, `[LO-CodingBestPractices]`
 * Improve the code in the following ways,
   * Fix [coding standard](http://www.comp.nus.edu.sg/~cs2103/AY1617S1/contents/coding-standards-java.html) 
     violations.
