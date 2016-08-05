@@ -305,6 +305,9 @@ Fix any violations found. If you know how to use Git, commit after each change.
 
 ### Refactor code `[LO-Refactor]`
 
+* [A catalog of common refactorings](http://refactoring.com/catalog/) - from http://refactoring.com/catalog
+* [Screencast] [A short refactoring demo using Eclipse](http://www.youtube.com/watch?v=7KDruqCzdpc)
+
 #### Ex 1: Refactor the code to make it better
 * Refactor the code, applying one refactoring at a time.
 * If you know how to use Git, commit code after each refactoring.<br>
