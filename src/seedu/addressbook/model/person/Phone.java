@@ -22,6 +22,7 @@ public class Phone extends ContactDetail {
     public Phone(String phone, boolean isPrivate) throws InvalidDataException {
         super(isPrivate);
         Utils.assertNotNull(phone);
+        phone = phone.trim();
         if (!isValidPhone(phone)) {
             throw new InvalidDataException(MESSAGE_PHONE_CONSTRAINTS);
         }

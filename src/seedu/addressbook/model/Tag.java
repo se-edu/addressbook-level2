@@ -8,8 +8,8 @@ import seedu.addressbook.Utils;
  */
 public class Tag {
 
-    public static final String MESSAGE_TAG_CONSTRAINTS = "Tags names should not contain whitespace";
-    public static final String TAG_VALIDATION_REGEX = "\\S+";
+    public static final String MESSAGE_TAG_CONSTRAINTS = "Tags names should be alphanumeric";
+    public static final String TAG_VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String tagName;
 
@@ -20,6 +20,7 @@ public class Tag {
      */
     public Tag(String name) throws InvalidDataException {
         Utils.assertNotNull(name);
+        name = name.trim();
         if (!isValidTagName(name)) {
             throw new InvalidDataException(MESSAGE_TAG_CONSTRAINTS);
         }

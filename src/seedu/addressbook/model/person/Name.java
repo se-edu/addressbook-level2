@@ -21,6 +21,7 @@ public class Name {
      */
     public Name(String name) throws InvalidDataException {
         Utils.assertNotNull(name);
+        name = name.trim();
         if (!isValidName(name)) {
             throw new InvalidDataException(MESSAGE_NAME_CONSTRAINTS);
         }
