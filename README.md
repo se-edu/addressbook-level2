@@ -260,30 +260,6 @@ Modify the code to remove the use of the Varargs feature.
 Compare the code with and without the varargs feature.
 
 
-### Abstract methods well `[LO-MethodAbstraction]`
-
-Notice how most of the methods in `AddressBook` are short, focused, and written at a single
-level of abstraction (_cf_ [SLAP](http://programmers.stackexchange.com/questions/110933/how-to-determine-the-levels-of-abstraction))
-
-Here is an example.
-```java
-    public static void main(String[] args) {
-        showWelcomeMessage();
-        processProgramArgs(args);
-        loadDataFromStorage();
-        while (true) {
-            userCommand = getUserInput();
-            echoUserCommand(userCommand);
-            String feedback = executeCommand(userCommand);
-            showResultToUser(feedback);
-        }
-    }
-```
-
-##### Ex : Reduce SLAP of method
-In the `main` method, replace the `processProgramArgs(args)` call with the actual code of that method.
-The `main` method no longer has SLAP. Notice how mixing low level code with high level code reduces
-readability.
 
 ### Follow a coding standard `[LO-CodingStandard]`
 
@@ -308,7 +284,7 @@ Fix any violations found. If you know how to use Git, commit after each change.
 * [A catalog of common refactorings](http://refactoring.com/catalog/) - from http://refactoring.com/catalog
 * [Screencast] [A short refactoring demo using Eclipse](http://www.youtube.com/watch?v=7KDruqCzdpc)
 
-#### Ex 1: Refactor the code to make it better
+#### Ex: Refactor the code to make it better
 * Refactor the code, applying one refactoring at a time.
 * If you know how to use Git, commit code after each refactoring.<br>
   In the commit message, mention which refactoring you applied.<br>
@@ -316,9 +292,34 @@ Fix any violations found. If you know how to use Git, commit after each change.
 * As far as possible, use automated refactoring features in Eclipse.
 * Remember to run the test script after each refactoring to prevent [regressions](https://en.wikipedia.org/wiki/Software_regression).
 
+### Abstract methods well `[LO-MethodAbstraction]`
+
+Notice how most of the methods in `AddressBook` are short, focused, and written at a single
+level of abstraction (_cf_ [SLAP](http://programmers.stackexchange.com/questions/110933/how-to-determine-the-levels-of-abstraction))
+
+Here is an example.
+```java
+    public static void main(String[] args) {
+        showWelcomeMessage();
+        processProgramArgs(args);
+        loadDataFromStorage();
+        while (true) {
+            userCommand = getUserInput();
+            echoUserCommand(userCommand);
+            String feedback = executeCommand(userCommand);
+            showResultToUser(feedback);
+        }
+    }
+```
+
+##### Ex 1: Reduce SLAP of method
+In the `main` method, replace the `processProgramArgs(args)` call with the actual code of that method.
+The `main` method no longer has SLAP. Notice how mixing low level code with high level code reduces
+readability.
+
 #### Ex 2: Refactor the code to make it worse!
-* Similar to the previous exercise, but this time try to make the code as bad as possible.<br>
-  How bad can you make it without breaking the functionality while still making it look like it was written by a 
+* Refactor the code to make the code as worse as possible.<br>
+  i.e. How bad can you make it without breaking the functionality while still making it look like it was written by a 
   programmer (but a very bad programmer :-).
 * In particular, inlining methods can worsen the code quality fast.
 
