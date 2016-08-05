@@ -320,6 +320,8 @@ The `main` method no longer has SLAP. Notice how mixing low level code with high
 readability.
 
 ##### Ex 2: Refactor the code to make it worse!
+Sometimes, going in the wrong direction can be a good learning experience too. 
+In this exercise, we explore how low code code quality can go.
 * Refactor the code to make the code as worse as possible.<br>
   i.e. How bad can you make it without breaking the functionality while still making it look like it was written by a 
   programmer (but a very bad programmer :-).
