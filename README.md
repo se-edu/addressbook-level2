@@ -266,18 +266,13 @@ Compare the code with and without the varargs feature.
 The given code follows the [coding standard](http://www.comp.nus.edu.sg/~cs2103/AY1617S1/contents/coding-standards-java.html) 
 for the most part.
 
-#### Ex : Fix coding standard violations
-
-Find and fix coding standard violations in the code, if any.<br>
-If you know how to use Git, commit after each change.
+This learning outcome is covered by the exercise in `[LO-Refactor]`.
 
 ### Apply coding best practices `[LO-CodingBestPractices]`
+Most of the given code follows the best practices mentioned
+[in this document](http://www.comp.nus.edu.sg/~cs2103/AY1415S1/files/%255bHandout%2520for%2520L2P1%255d%2520%2520Good%2520Code,%2520Bad%2520Code%2520-%2520Toward%2520Production%2520Quality%2520Code.pdf).
 
-#### Ex : Find violation of coding best practices
-See if you can find where the code contradicts best practices mentioned
-[in this document](http://www.comp.nus.edu.sg/~cs2103/AY1415S1/files/%255bHandout%2520for%2520L2P1%255d%2520%2520Good%2520Code,%2520Bad%2520Code%2520-%2520Toward%2520Production%2520Quality%2520Code.pdf)
-
-Fix any violations found. If you know how to use Git, commit after each change.
+This learning outcome is covered by the exercise in `[LO-Refactor]`
 
 ### Refactor code `[LO-Refactor]`
 
@@ -285,11 +280,17 @@ Fix any violations found. If you know how to use Git, commit after each change.
 * [Screencast] [A short refactoring demo using Eclipse](http://www.youtube.com/watch?v=7KDruqCzdpc)
 
 #### Ex: Refactor the code to make it better
-* Refactor the code, applying one refactoring at a time.
+* Improve the code in the following ways,
+  * Fix [coding standard](http://www.comp.nus.edu.sg/~cs2103/AY1617S1/contents/coding-standards-java.html) 
+    violations.
+  * Fix violations of the best practices given in [in this document](http://www.comp.nus.edu.sg/~cs2103/AY1415S1/files/%255bHandout%2520for%2520L2P1%255d%2520%2520Good%2520Code,%2520Bad%2520Code%2520-%2520Toward%2520Production%2520Quality%2520Code.pdf)
+  * Any other change that you think will improve the quality of the code.
+* Try to do the modification as a combination of standard refactorings given in this
+  [catalog](http://refactoring.com/catalog/)
+* As far as possible, use automated refactoring features in Eclipse.
 * If you know how to use Git, commit code after each refactoring.<br>
   In the commit message, mention which refactoring you applied.<br>
   Example commit messages: `Extracted variable isValidPerson`, `Inlined method isValidPerson()`
-* As far as possible, use automated refactoring features in Eclipse.
 * Remember to run the test script after each refactoring to prevent [regressions](https://en.wikipedia.org/wiki/Software_regression).
 
 ### Abstract methods well `[LO-MethodAbstraction]`
@@ -317,7 +318,7 @@ In the `main` method, replace the `processProgramArgs(args)` call with the actua
 The `main` method no longer has SLAP. Notice how mixing low level code with high level code reduces
 readability.
 
-#### Ex 2: Refactor the code to make it worse!
+##### Ex 2: Refactor the code to make it worse!
 * Refactor the code to make the code as worse as possible.<br>
   i.e. How bad can you make it without breaking the functionality while still making it look like it was written by a 
   programmer (but a very bad programmer :-).
