@@ -18,16 +18,6 @@ public class StorageFile {
     }
 
     /**
-     * Creates this storage file if it is missing on the filesystem.
-     *
-     * @return true if the file was missing and successfully created
-     * @throws IOException if unable to create the file.
-     */
-    public boolean createFileIfMissing() throws IOException {
-        return path.toFile().createNewFile();
-    }
-
-    /**
      * Saves all data to this storage file.
      *
      * @throws IOException of there is an error saving to file.
