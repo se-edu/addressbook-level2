@@ -1,21 +1,21 @@
 # AddressBook (Level 1)
-* This is a CLI (Command Line Interface) AddressBook application written in procedural fashion. 
+* This is a CLI (Command Line Interface) Address Book application **written in procedural fashion**. 
 * It is a Java sample application intended for students learning Software Engineering while using Java as 
   the main programming language. 
-* It provides a reasonably well-written code example that is significantly bigger than what students 
+* It provides a **reasonably well-written** code example that is **significantly bigger** than what students 
   usually write in data structure modules. 
 * It can be used to achieve a number of beginner-level [learning outcomes](#learning-outcomes) without 
   running into the complications of OOP or GUI programmings.
 
 **Table of Contents**
-* [User guide](#user-guide)
-* [Developer guide](#developer-guide)
-* [Learning outcomes](#learning-outcomes)
+* [User Guide](#user-guide)
+* [Developer Guide](#developer-guide)
+* [Learning Outcomes](#learning-outcomes)
 * [Contributors](#contributors)
-* [Contact us](#contact-us)
+* [Contact Us](#contact-us)
 
 -----------------------------------------------------------------------------------------------------
-# User guide
+# User Guide
 
 This product is not meant for end-users and therefore there is no user-friendly installer. 
 Please refer to the [Setting up](#setting-up) section to learn how to set up the project.
@@ -113,7 +113,7 @@ Examples:
   before running the program.
 
 -----------------------------------------------------------------------------------------------------
-# Developer guide
+# Developer Guide
 
 ## Setting up
 
@@ -154,7 +154,7 @@ You can use the `diff` command in place of the `FC` command.
   creates a new storage file. Tests should pass from the 2nd run onwards.
 
 -----------------------------------------------------------------------------------------------------
-# Learning outcomes
+# Learning Outcomes
 Here are the things a student should be able to do after studying this code and completing the
 corresponding exercises.
 
@@ -347,7 +347,7 @@ Some suggested enhancements:
 * [Damith C. Rajapakse](http://www.comp.nus.edu.sg/~damithch) : Project Advisor
 
 -----------------------------------------------------------------------------------------------------
-# Contact us
+# Contact Us
 
 * **Bug reports, Suggestions** : Post in our [issue tracker](https://github.com/se-edu/addressbook-level1/issues)
   if you noticed bugs or have suggestions on how to improve.
