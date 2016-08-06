@@ -133,20 +133,22 @@ Examples:
 ## Testing
 
 **Windows**
+
 1. Open a DOS window in the `test` folder
 2. Run the `runtests.bat` script
 3. If the script reports that there is no difference between `actual.txt` and `expected.txt`, 
    the test has passed.
 
 **Mac/Unix/Linux**
+
 Create a script similar to the windows version.
 You can use the `diff` command in place of the `FC` command.
 
-**Troubleshooting tests**
+**Troubleshooting test failures**
 
 * Problem: How do I examine the exact differences between `actual.txt` and `expected.txt`?<br>
   Solution: You can use a diff/merge tool with a GUI e.g. WinMerge (on Windows)
-* Problem: The two files look exactly the same, but the test script reports errors.<br>
+* Problem: The two files look exactly the same, but the test script reports they are different.<br>
   Solution: This can happen because the line endings used by Windows is different from Unix-based
   OSes. Convert the actual.txt to the format used by your OS using some [utility](https://kb.iu.edu/d/acux).
 * Problem: Test fails during the very first time.<br>
@@ -155,7 +157,7 @@ You can use the `diff` command in place of the `FC` command.
 
 -----------------------------------------------------------------------------------------------------
 # Learning Outcomes
-Here are the things a student should be able to do after studying this code and completing the
+Here are the things you should be able to do after studying this code and completing the
 corresponding exercises.
 
 ### Set up a project in an IDE `[LO-IdeSetup]`
@@ -172,7 +174,7 @@ corresponding exercises.
   the [User guide](#user-guide) section
 
 ### Navigate code efficiently `[LO-CodeNavigation]`
-The `AddressBook.java` code is too big to navigate by scrolling. 
+The `AddressBook.java` code is rather, which makes it cumbersome to navigate by scrolling alone. 
 Navigating code using IDE shortcuts is a more efficient option. 
 For example, <kbd>F3</kbd> will navigate to the definition of the method/field at the cursor.
  
@@ -224,7 +226,7 @@ Resources: [ArrayList class tutorial (from javaTpoint.com)](http://www.javatpoin
 ##### Ex: Use `HashMap`
 
 Currently, a person's details are stored as a `String[]`. Modify the code to use a `HashMap<String, String>` instead.
-Some sample code snippet given below.
+A sample code snippet is given below.
 ```java
 private static final PERSON_PROPERTY_NAME = "name";
 private static final PERSON_PROPERTY_EMAIL = "email";
@@ -327,7 +329,7 @@ In this exercise, we explore how low code code quality can go.
   programmer (but a very bad programmer :-).
 * In particular, inlining methods can worsen the code quality fast.
 
-### Work in a 1kLoc code base`[LO-1KLoC]`
+### Work in a 1kLoC code base`[LO-1KLoC]`
 
 #### Ex : Enhance the code
 Enhance the AddressBook to prove that you can successfully work in a codebase of 1KLoC. <br>
