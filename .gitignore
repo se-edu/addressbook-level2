@@ -2,6 +2,7 @@
 storage.txt
 
 # Compiled classfiles
+bin/
 *.class
 
 # Mobile Tools for Java (J2ME)
