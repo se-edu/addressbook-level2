@@ -22,7 +22,7 @@ import java.util.*;
  * Entry point of the address book application.
  * Contains command execution logic; initialises and uses the different components.
  */
-public class Main implements Runnable {
+public class Main {
 
     /**
      * Default file path used if the user doesn't provide the file name.
@@ -88,7 +88,7 @@ public class Main implements Runnable {
         System.out.println(MESSAGE_PROGRAM_LAUNCH_ARGS_USAGE);
         try {
             final Main main = new Main(getStorageFilePathFromLaunchArgs(launchArgs), System.in, System.out);
-            main.run();
+            main.start();
         } catch (MainInitialisationException mie) {
             System.out.println(MESSAGE_INIT_FAILED);
         }
@@ -123,8 +123,7 @@ public class Main implements Runnable {
     /**
      * Starts program execution after all dependencies and components successfully initialised.
      */
-    @Override
-    public void run() {
+    public void start() {
         ui.showWelcomeMessage(VERSION);
         ui.showToUser(String.format(MESSAGE_USING_STORAGE_FILE, storageFile.toString()));
         // [read input, execute, response] loop
