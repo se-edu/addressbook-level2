@@ -37,8 +37,6 @@ public class Parser {
 
     public Parser() {}
 
-    public static final String COMMENT_LINE_FORMAT_REGEX = "#.*";
-
     public static final Pattern BASIC_COMMAND_FORMAT =
             Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
@@ -63,27 +61,6 @@ public class Parser {
      *         PRE-PROCESSING AND CHECKS
      * ===========================================
      */
-
-    /**
-     * Checks if the user input line should be ignored.
-     * Input should be ignored if it is parsed as a comment, is only whitespace, or is empty.
-     *
-     * @param rawInputLine full raw user input line.
-     * @return true if the entire user input line should be ignored.
-     */
-    public boolean shouldIgnore(String rawInputLine) {
-        return rawInputLine.trim().isEmpty() || isCommentLine(rawInputLine);
-    }
-
-    /**
-     * Checks if the user input line is a comment line.
-     *
-     * @param rawInputLine full raw user input line.
-     * @return true if input line is a comment.
-     */
-    public boolean isCommentLine(String rawInputLine) {
-        return rawInputLine.trim().matches(COMMENT_LINE_FORMAT_REGEX);
-    }
 
     /**
      * Identifies the intended command type of the user input string. Case-sensitive.

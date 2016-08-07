@@ -102,6 +102,11 @@ public class TextUi {
      */
     public static final int DISPLAYED_INDEX_OFFSET = 1;
 
+    /**
+     * Format of a comment input line. Comment lines are silently consumed when reading user input.
+     */
+    public static final String COMMENT_LINE_FORMAT_REGEX = "#.*";
+
     private final Scanner in;
     private final PrintStream out;
     private final Parser parser;
@@ -124,17 +129,38 @@ public class TextUi {
     }
 
     /**
+     * Checks if the user input line should be ignored.
+     * Input should be ignored if it is parsed as a comment, is only whitespace, or is empty.
+     *
+     * @param rawInputLine full raw user input line.
+     * @return true if the entire user input line should be ignored.
+     */
+    public boolean shouldIgnore(String rawInputLine) {
+        return rawInputLine.trim().isEmpty() || isCommentLine(rawInputLine);
+    }
+
+    /**
+     * Checks if the user input line is a comment line.
+     *
+     * @param rawInputLine full raw user input line.
+     * @return true if input line is a comment.
+     */
+    public boolean isCommentLine(String rawInputLine) {
+        return rawInputLine.trim().matches(COMMENT_LINE_FORMAT_REGEX);
+    }
+
+    /**
      * Prompts for the command and reads the text entered by the user.
      * Ignores empty, pure whitespace, and comment lines.
      *
-     * @see Parser#shouldIgnore(String)
+     * @see #shouldIgnore(String)
      * @return full line entered by the user
      */
     public String getUserCommand() {
         out.print(LINE_PREFIX + "Enter command: ");
         String fullInputLine = in.nextLine();
         // silently consume all ignored lines
-        while (parser.shouldIgnore(fullInputLine)) {
+        while (shouldIgnore(fullInputLine)) {
             fullInputLine = in.nextLine();
         }
         lastEnteredCommand = fullInputLine;
