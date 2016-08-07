@@ -3,14 +3,17 @@ package seedu.addressbook.model.person;
 import seedu.addressbook.Utils;
 import seedu.addressbook.model.InvalidDataException;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Represents a Person's name in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
 public class Name {
 
-    public static final String MESSAGE_NAME_CONSTRAINTS = "Person names should only contain alphabetic characters";
-    public static final String NAME_VALIDATION_REGEX = "\\p{Alpha}+";
+    public static final String MESSAGE_NAME_CONSTRAINTS = "Person names should be spaces or alphabetic characters";
+    public static final String NAME_VALIDATION_REGEX = "[\\p{Alpha} ]+";
 
     public final String fullName;
 
@@ -35,9 +38,28 @@ public class Name {
         return test.matches(NAME_VALIDATION_REGEX);
     }
 
+    /**
+     * Retrieves a listing of every word in the name, in order.
+     */
+    public List<String> getWordsInName() {
+        return Arrays.asList(fullName.split("\\s+"));
+    }
+
     @Override
     public String toString() {
         return fullName;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof Name // instanceof handles nulls
+                && this.fullName.equals(((Name) other).fullName)); // state check
+    }
+
+    @Override
+    public int hashCode() {
+        return fullName.hashCode();
     }
 
 }

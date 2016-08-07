@@ -1,8 +1,6 @@
 package seedu.addressbook;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -250,6 +248,9 @@ public class Parser {
         }
         // pull out tag arguments string for parsing
         final String tagArguments = matcher.group("tagArguments");
+        if (tagArguments.isEmpty()) {
+            return Collections.emptyList();
+        }
         // replace first delimiter prefix, then split
         return Arrays.asList(tagArguments.replaceFirst(" t/", "").split(" t/"));
     }
@@ -314,12 +315,13 @@ public class Parser {
      * @return list of all search keywords specified in the arguments
      * @throws InvalidCommandFormatException if the arguments string is invalid
      */
-    public List<String> extractKeywordsFromFindCommandArgs(String findArgs) throws InvalidCommandFormatException {
+    public Set<String> extractKeywordsFromFindCommandArgs(String findArgs) throws InvalidCommandFormatException {
         final Matcher matcher = FIND_COMMAND_ARGS_FORMAT.matcher(findArgs.trim());
         if (!matcher.matches()) {
             throw new InvalidCommandFormatException();
         }
-        return Arrays.asList(matcher.group("keywords").split("\\s+"));
+        final Collection<String> keywords = Arrays.asList(matcher.group("keywords").split("\\s+"));
+        return new HashSet<>(keywords);
     }
 
 }

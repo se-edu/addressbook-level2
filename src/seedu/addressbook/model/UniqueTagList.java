@@ -35,9 +35,9 @@ public class UniqueTagList implements Iterable<Tag> {
     /**
      * Varargs/array constructor, enforces no nulls or duplicates.
      */
-    public UniqueTagList(Tag... Tags) throws DuplicateTagException {
-        Utils.assertNotNull(Tags);
-        final List<Tag> initialTags = Arrays.asList(Tags);
+    public UniqueTagList(Tag... tags) throws DuplicateTagException {
+        Utils.assertNotNull(tags);
+        final List<Tag> initialTags = Arrays.asList(tags);
         if (!Utils.elementsAreUnique(initialTags)) {
             throw new DuplicateTagException();
         }
@@ -47,12 +47,20 @@ public class UniqueTagList implements Iterable<Tag> {
     /**
      * java collections constructor, enforces no null or duplicate elements.
      */
-    public UniqueTagList(Collection<Tag> Tags) throws DuplicateTagException {
-        Utils.assertNoNullElements(Tags);
-        if (!Utils.elementsAreUnique(Tags)) {
+    public UniqueTagList(Collection<Tag> tags) throws DuplicateTagException {
+        Utils.assertNoNullElements(tags);
+        if (!Utils.elementsAreUnique(tags)) {
             throw new DuplicateTagException();
         }
-        internalList.addAll(Tags);
+        internalList.addAll(tags);
+    }
+
+    /**
+     * java set constructor, enforces no nulls.
+     */
+    public UniqueTagList(Set<Tag> tags) {
+        Utils.assertNoNullElements(tags);
+        internalList.addAll(tags);
     }
 
     /**
@@ -102,6 +110,13 @@ public class UniqueTagList implements Iterable<Tag> {
         if (!TagFoundAndDeleted) {
             throw new TagNotFoundException();
         }
+    }
+
+    /**
+     * Clears all tags in list.
+     */
+    public void clear() {
+        internalList.clear();
     }
 
     @Override

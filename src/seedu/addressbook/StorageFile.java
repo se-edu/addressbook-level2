@@ -11,10 +11,22 @@ import java.nio.file.Paths;
  */
 public class StorageFile {
 
-    private final Path path;
+    public static class InvalidStorageFilePathException extends Exception {}
 
-    public StorageFile(String filePath) {
+    public final Path path;
+
+    public StorageFile(String filePath) throws InvalidStorageFilePathException {
         path = Paths.get(filePath);
+        if (!isValidPath(path)) {
+            throw new InvalidStorageFilePathException();
+        }
+    }
+
+    /**
+     * Tests if a string file path is acceptable as a storage file
+     */
+    public static boolean isValidPath(Path testPath) {
+        return testPath.toString().endsWith(".txt");
     }
 
     /**
@@ -33,5 +45,10 @@ public class StorageFile {
      */
     public AddressBook loadAddressBookFromFile() throws IOException {
         return new AddressBook(); // TODO
+    }
+
+    @Override
+    public String toString() {
+        return path.toString();
     }
 }

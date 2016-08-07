@@ -41,4 +41,16 @@ public class Phone extends ContactDetail {
         return phoneNumber;
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof Phone // instanceof handles nulls
+                && this.phoneNumber.equals(((Phone) other).phoneNumber)); // state check
+    }
+
+    @Override
+    public int hashCode() {
+        return phoneNumber.hashCode();
+    }
+
 }

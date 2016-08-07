@@ -57,6 +57,14 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * java set constructor, enforces no nulls.
+     */
+    public UniquePersonList(Set<Person> persons) {
+        Utils.assertNoNullElements(persons);
+        internalList.addAll(persons);
+    }
+
+    /**
      * Copy constructor, insulates from changes in source.
      */
     public UniquePersonList(UniquePersonList source) {
@@ -104,6 +112,13 @@ public class UniquePersonList implements Iterable<Person> {
         if (!personFoundAndDeleted) {
             throw new PersonNotFoundException();
         }
+    }
+
+    /**
+     * Clears all persons in list.
+     */
+    public void clear() {
+        internalList.clear();
     }
 
     @Override

@@ -42,4 +42,17 @@ public class Email extends ContactDetail {
         return emailAddress;
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof Email // instanceof handles nulls
+                && this.emailAddress.equals(((Email) other).emailAddress)); // state check
+    }
+
+    @Override
+    public int hashCode() {
+        return emailAddress.hashCode();
+    }
+
+
 }

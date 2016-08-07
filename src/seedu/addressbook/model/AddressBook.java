@@ -6,6 +6,8 @@ import seedu.addressbook.model.person.UniquePersonList;
 import seedu.addressbook.model.person.UniquePersonList.*;
 import seedu.addressbook.model.UniqueTagList.*;
 
+import java.util.List;
+
 /**
  * Represents the entire address book, and maintains the master list of persons and tags.
  *
@@ -82,4 +84,19 @@ public class AddressBook {
         allTags.remove(toRemove);
     }
 
+    /**
+     * Clears all persons and tags from the address book.
+     */
+    public void clear() {
+        allPersons.clear();
+        allTags.clear();
+    }
+    /**
+     * Unmodifiable java List view of the persons in this address book cast as immutable {@link ReadOnlyPerson}s.
+     * For use with other methods/libraries.
+     * Any changes to the address book are immediately visible in the returned list.
+     */
+    public List<ReadOnlyPerson> getAllPersonsImmutableView() {
+        return allPersons.immutableListView();
+    }
 }
