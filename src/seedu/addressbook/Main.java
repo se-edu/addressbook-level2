@@ -2,15 +2,13 @@ package seedu.addressbook;
 
 import static seedu.addressbook.TextUi.*;
 import static seedu.addressbook.StorageFile.InvalidStorageFilePathException;
+
+import seedu.addressbook.commands.*;
 import seedu.addressbook.model.AddressBook;
-import seedu.addressbook.Parser.Command;
-import seedu.addressbook.model.InvalidDataException;
-import seedu.addressbook.model.Tag;
-import seedu.addressbook.model.UniqueTagList;
-import seedu.addressbook.model.person.*;
 
 import java.io.*;
-import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /* ==============NOTE TO STUDENTS======================================
  * This class header comment below is brief because details of how to
@@ -42,11 +40,15 @@ public class Main {
     public static final String VERSION = "AddessBook Level 1 - Version 1.0";
 
     /**
+     * Used for initial separation of command word and args.
+     */
+    public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+
+    /**
      * Signals that the main application had a problem while initialising.
      */
     public static class MainInitialisationException extends Exception {}
 
-    private final Parser parser;
     private final TextUi ui;
     private final StorageFile storageFile;
     private final AddressBook addressBook;
@@ -62,8 +64,7 @@ public class Main {
      */
     public Main(String storageFilePath, InputStream inputStream, PrintStream outputStream)
             throws MainInitialisationException {
-        this.parser = new Parser();
-        this.ui = new TextUi(inputStream, outputStream, parser);
+        this.ui = new TextUi(inputStream, outputStream);
 
         try {
             this.storageFile = new StorageFile(storageFilePath);
@@ -108,8 +109,7 @@ public class Main {
      * Displays the goodbye message and exits the runtime.
      */
     private void exitProgram() {
-        ui.showToUser(MESSAGE_GOODBYE, DIVIDER, DIVIDER);
-        System.exit(0);
+        new ExitCommand(ui).execute();
     }
 
     /*
@@ -135,70 +135,70 @@ public class Main {
         }
     }
 
-    /*
-     * ===========================================
-     *           COMMAND LOGIC
-     * ===========================================
-     */
-
     /**
-     * Checks which command the user want to trigger, then run the corresponding function
+     * Processes user input into desired command, then executes and returns feedback.
      * 
-     * @param userInputString  raw input from user
-     * @return  feedback about how the command was executed
+     * @param userInputString raw input from user
+     * @return feedback about how the command was executed
      */
     private String executeCommand(String userInputString) {
-        try {
-            final Command commandType = parser.identifyCommand(userInputString);
-            final String commandArgs = parser.extractArguments(userInputString);
-            switch (commandType) {
-            case ADD:
-                return executeAddPerson(commandArgs);
-            case DELETE:
-                return executeDeletePerson(commandArgs);
-            case CLEAR:
-                return executeClearAddressBook();
-            case FIND:
-                return executeFindPersons(commandArgs);
-            case LIST:
-                return executeListAllPersonsInAddressBook();
-            case VIEW:
-                return executeViewPerson(commandArgs);
-            case VIEW_ALL:
-                return executeViewAllDetailsOfPerson(commandArgs);
-            case HELP:
-                return getUsageInfoForAllCommands();
-            case EXIT: // fallthrough
-                executeExitProgramRequest();
-            default:
-                throw new IllegalStateException(); // should never reach this line.
-            }
-        } catch (Parser.InvalidCommandFormatException icfe) {
-            return getMessageForInvalidCommandInput(userInputString, getUsageInfoForAllCommands());
+        if (!isInputCommandValid(userInputString)) {
+            return String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE);
         }
+        final Command command = identifyAndPrepareCommand(userInputString);
+        final String result = command.execute();
+        saveChangesToStorageFile();
+        return result;
     }
 
     /**
-     * Adds a person (specified by the command args) to the address book.
-     * The entire command arguments string is treated as a string representation of the person to add.
-     *
-     * @param addArgs full command args string from the user
-     * @return feedback display message for the operation result
-     * @see #getPersonFromAddCommandArgs(String)
+     * Checks if a user input command line fulfills the most basic format separating the
+     * command word and the command arguments.
      */
-    private String executeAddPerson(String addArgs) {
-        try {
-            final Person personToAdd = getPersonFromAddCommandArgs(addArgs);
-            addressBook.addPerson(personToAdd);
-            saveChangesToStorageFile();
-            return String.format(MESSAGE_ADD_PERSON_SUCCESS, personToAdd);
+    public static boolean isInputCommandValid(String userInputString) {
+        return userInputString.trim().matches(BASIC_COMMAND_FORMAT.pattern());
+    }
 
-        } catch (Parser.InvalidCommandFormatException icfe) {
-            return getMessageForInvalidCommandInput(ui.getLastEnteredCommand(), getUsageInfoForAddCommand());
-        } catch (InvalidDataException ide) {
-            return ide.getMessage();
-        } catch (UniquePersonList.DuplicatePersonException dpe) {
-            return MESSAGE_DUPLICATE_PERSON;
+    /**
+     * Parses raw user input and prepares a new instance of the correct command object type.
+     *
+     * @param userInputString raw input from user
+     * @return the corresponding command object for execution
+     */
+    private Command identifyAndPrepareCommand(String userInputString) {
+        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInputString);
+        matcher.matches();
+        final String commandWord = matcher.group("commandWord");
+        final String arguments = matcher.group("arguments");
+        switch (commandWord) {
+
+            case AddPersonCommand.COMMAND_WORD:
+                return new AddPersonCommand(arguments, addressBook);
+
+            case DeletePersonCommand.COMMAND_WORD:
+                return new DeletePersonCommand(arguments, addressBook, ui);
+
+            case ClearAddressBookCommand.COMMAND_WORD:
+                return new ClearAddressBookCommand(addressBook);
+
+            case FindPersonsByWordsInNameCommand.COMMAND_WORD:
+                return new FindPersonsByWordsInNameCommand(arguments, addressBook, ui);
+
+            case ListAllPersonsCommand.COMMAND_WORD:
+                return new ListAllPersonsCommand(addressBook, ui);
+
+            case ViewPersonDetailsCommand.COMMAND_WORD:
+                return new ViewPersonDetailsCommand(arguments, addressBook, ui);
+
+            case ViewAllPersonDetailsCommand.COMMAND_WORD:
+                return new ViewAllPersonDetailsCommand(arguments, addressBook, ui);
+
+            case ExitCommand.COMMAND_WORD:
+                return new ExitCommand(ui);
+
+            case HelpCommand.COMMAND_WORD: // Fallthrough
+            default:
+                return new HelpCommand();
         }
     }
 
@@ -216,178 +216,6 @@ public class Main {
             ui.showToUser(String.format(MESSAGE_ERROR_WRITING_TO_FILE, storageFile));
             exitProgram();
         }
-    }
-
-    /**
-     * Extracts the specified person to add from the add command's arguments.
-     *
-     * @param addArgs full add command args string form user
-     * @return successfully constructed person from the arguments
-     * @throws Parser.InvalidCommandFormatException if the arguments format is invalid
-     * @throws InvalidDataException if any person data field constraint is not fulfilled
-     */
-    private Person getPersonFromAddCommandArgs(String addArgs) throws
-            Parser.InvalidCommandFormatException, InvalidDataException {
-        final Name name = new Name(parser.extractNameFromAddCommandArgs(addArgs));
-        final Phone phone = new Phone(parser.extractPhoneFromAddCommandArgs(addArgs),
-                parser.isPhonePrivateFromAddCommandArgs(addArgs));
-        final Email email = new Email(parser.extractEmailFromAddCommandArgs(addArgs),
-                parser.isEmailPrivateFromAddCommandArgs(addArgs));
-        final Address address = new Address(parser.extractAddressFromAddCommandArgs(addArgs),
-                parser.isAddressPrivateFromAddCommandArgs(addArgs));
-
-        final List<String> tagStrings = parser.extractTagsFromAddCommandArgs(addArgs);
-        // merge duplicate tags
-        final Set<Tag> tags = new HashSet<>();
-        for (String tagString : tagStrings) {
-            tags.add(new Tag(tagString));
-        }
-        // tag list prepared
-        final UniqueTagList tagList = new UniqueTagList(tags);
-
-        return new Person(name, phone, email, address, tagList);
-    }
-
-    /**
-     * Deletes person identified using last displayed index.
-     *
-     * @param deleteArgs full command args string from the user
-     * @return feedback display message for the operation result
-     */
-    private String executeDeletePerson(String deleteArgs) {
-        try {
-            final int targetDisplayedIndex = parser.extractIndexFromDeleteCommandArgs(deleteArgs);
-            final ReadOnlyPerson target = ui.getPersonFromLastShownListing(targetDisplayedIndex);
-            addressBook.removePerson(target);
-            saveChangesToStorageFile();
-            return String.format(MESSAGE_DELETE_PERSON_SUCCESS, target);
-
-        } catch (Parser.InvalidCommandFormatException icfe) {
-            return getMessageForInvalidCommandInput(ui.getLastEnteredCommand(), getUsageInfoForDeleteCommand());
-        } catch (IndexOutOfBoundsException ioobe) {
-            return MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
-        } catch (UniquePersonList.PersonNotFoundException pnfe) {
-            return MESSAGE_PERSON_NOT_IN_ADDRESSBOOK;
-        }
-    }
-
-    /**
-     * Clears all persons in the address book.
-     *
-     * @return feedback display message for the operation result
-     */
-    private String executeClearAddressBook() {
-        addressBook.clear();
-        saveChangesToStorageFile();
-        return MESSAGE_ADDRESSBOOK_CLEARED;
-    }
-
-    /**
-     * Finds and lists all persons in address book whose name contains any of the argument keywords.
-     * Keyword matching is case sensitive.
-     * 
-     * @param commandArgs full command args string from the user
-     * @return feedback display message for the operation result
-     */
-    private String executeFindPersons(String commandArgs) {
-        try {
-            final Set<String> keywords = parser.extractKeywordsFromFindCommandArgs(commandArgs);
-            final List<ReadOnlyPerson> personsFound = getPersonsWithNameContainingAnyKeyword(keywords);
-            ui.showPersonListView(personsFound);
-            return getMessageForPersonListShownSummary(personsFound);
-        } catch (Parser.InvalidCommandFormatException icfe) {
-            return getMessageForInvalidCommandInput(ui.getLastEnteredCommand(), getUsageInfoForDeleteCommand());
-        }
-    }
-
-    /**
-     * Retrieve all persons in the full model whose names contain some of the specified keywords.
-     *
-     * @param keywords for searching
-     * @return list of persons in full model with name containing some of the keywords
-     */
-    private List<ReadOnlyPerson> getPersonsWithNameContainingAnyKeyword(Collection<String> keywords) {
-        final List<ReadOnlyPerson> matchedPersons = new ArrayList<>();
-        for (ReadOnlyPerson person : addressBook.getAllPersonsImmutableView()) {
-            final Set<String> wordsInName = new HashSet<>(person.getName().getWordsInName());
-            if (!Collections.disjoint(wordsInName, keywords)) {
-                matchedPersons.add(person);
-            }
-        }
-        return matchedPersons;
-    }
-
-    /**
-     * Constructs a feedback message to summarise an operation that displayed a listing of persons.
-     *
-     * @param personsDisplayed used to generate summary
-     * @return summary message for persons displayed
-     */
-    private static String getMessageForPersonListShownSummary(List<? extends ReadOnlyPerson> personsDisplayed) {
-        return String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, personsDisplayed.size());
-    }
-
-    /**
-     * Displays all persons in the address book to the user; in added order.
-     *
-     * @return feedback display message for the operation result
-     */
-    private String executeListAllPersonsInAddressBook() {
-        List<ReadOnlyPerson> allPersons = addressBook.getAllPersonsImmutableView();
-        ui.showPersonListView(allPersons);
-        return getMessageForPersonListShownSummary(allPersons);
-    }
-
-    /**
-     * Shows details of the person identified using the last displayed index.
-     * Private contact details are not shown.
-     *
-     * @param viewArgs full command args string from the user
-     * @return feedback display message for the operation result
-     */
-    private String executeViewPerson(String viewArgs) {
-        try {
-            final int targetDisplayedIndex = parser.extractIndexFromViewCommandArgs(viewArgs);
-            final ReadOnlyPerson target = ui.getPersonFromLastShownListing(targetDisplayedIndex);
-            if (!addressBook.containsPerson(target)) {
-                return MESSAGE_PERSON_NOT_IN_ADDRESSBOOK;
-            }
-            return String.format(MESSAGE_VIEW_PERSON_DETAILS, target.getAsTextHidePrivate());
-        } catch (Parser.InvalidCommandFormatException icfe) {
-            return getMessageForInvalidCommandInput(ui.getLastEnteredCommand(), getUsageInfoForViewCommand());
-        } catch (IndexOutOfBoundsException ioobe) {
-            return MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
-        }
-    }
-
-    /**
-     * Shows all details of the person identified using the last displayed index.
-     *
-     * @param viewAllArgs full command args string from the user
-     * @return feedback display message for the operation result
-     */
-    private String executeViewAllDetailsOfPerson(String viewAllArgs) {
-        try {
-            final int targetDisplayedIndex = parser.extractIndexFromViewAllCommandArgs(viewAllArgs);
-            final ReadOnlyPerson target = ui.getPersonFromLastShownListing(targetDisplayedIndex);
-            if (!addressBook.containsPerson(target)) {
-                return MESSAGE_PERSON_NOT_IN_ADDRESSBOOK;
-            }
-            return String.format(MESSAGE_VIEW_PERSON_DETAILS, target.getAsTextShowAll());
-        } catch (Parser.InvalidCommandFormatException icfe) {
-            return getMessageForInvalidCommandInput(ui.getLastEnteredCommand(), getUsageInfoForViewAllCommand());
-        } catch (IndexOutOfBoundsException ioobe) {
-            return MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
-        }
-    }
-
-    /**
-     * Request to terminate the program.
-     *
-     * @return feedback display message for the operation result
-     */
-    private void executeExitProgramRequest() {
-        exitProgram();
     }
 
 }
