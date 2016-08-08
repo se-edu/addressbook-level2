@@ -1,7 +1,6 @@
 package seedu.addressbook.commands;
 
 import seedu.addressbook.TextUi;
-import seedu.addressbook.model.AddressBook;
 import seedu.addressbook.model.person.ReadOnlyPerson;
 
 import java.util.regex.Matcher;
@@ -27,8 +26,8 @@ public abstract class TargetLastListedPersonCommand implements Command {
         this.args = args;
     }
 
-    public static boolean isValidArgs(String findArgs) {
-        return findArgs.matches(ARGS_FORMAT.pattern());
+    public static boolean isValidArgs(String args) {
+        return args.trim().matches(ARGS_FORMAT.pattern());
     }
 
     /**

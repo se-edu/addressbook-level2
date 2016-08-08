@@ -62,8 +62,8 @@ public class AddPersonCommand implements Command {
         }
     }
 
-    public static boolean isValidArgs(String findArgs) {
-        return findArgs.matches(ARGS_FORMAT.pattern());
+    public static boolean isValidArgs(String args) {
+        return args.trim().matches(ARGS_FORMAT.pattern());
     }
 
     /**
@@ -79,7 +79,7 @@ public class AddPersonCommand implements Command {
         final Phone phone = new Phone(matcher.group("phone"), isPrivatePrefixPresent(matcher.group("isPhonePrivate")));
         final Email email = new Email(matcher.group("email"), isPrivatePrefixPresent(matcher.group("isEmailPrivate")));
         final Address address = new Address(matcher.group("address"),
-                isPrivatePrefixPresent(matcher.group("isPhoneAddressPrivate")));
+                isPrivatePrefixPresent(matcher.group("isAddressPrivate")));
 
         return new Person(name, phone, email, address, getTagsFromArgs());
     }
