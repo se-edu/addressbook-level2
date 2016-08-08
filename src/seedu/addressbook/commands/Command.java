@@ -1,9 +1,8 @@
 package seedu.addressbook.commands;
 
 /**
- *
+ * Represents a command with hidden internal logic and the ability to be executed.
  */
-@FunctionalInterface
 public interface Command {
 
     /**
