@@ -166,7 +166,7 @@ public class Main {
      * @return the corresponding command object for execution
      */
     private Command identifyAndPrepareCommand(String userInputString) {
-        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInputString);
+        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInputString.trim());
         matcher.matches();
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
@@ -208,7 +208,6 @@ public class Main {
     private void saveChangesToStorageFile() {
         try {
             storageFile.saveAddressBookToFile(addressBook);
-            ui.showToUser(MESSAGE_CHANGES_SAVED_TO_STORAGE_FILE);
         } catch (FileNotFoundException fnfe) {
             ui.showToUser(String.format(MESSAGE_ERROR_MISSING_STORAGE_FILE, storageFile));
             exitProgram();

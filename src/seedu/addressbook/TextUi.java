@@ -36,7 +36,6 @@ public class TextUi {
      * ====================================================================
      */
 
-    public static final String MESSAGE_CHANGES_SAVED_TO_STORAGE_FILE = "Changes saved to storage file.";
     public static final String MESSAGE_ERROR_MISSING_STORAGE_FILE = "Storage file missing: %1$s";
     public static final String MESSAGE_ERROR_READING_FROM_FILE = "Unexpected error: unable to read from file: %1$s";
     public static final String MESSAGE_ERROR_WRITING_TO_FILE = "Unexpected error: unable to write to file: %1$s";

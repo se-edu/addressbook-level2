@@ -53,7 +53,7 @@ public class FindPersonsByWordsInNameCommand implements Command {
     }
 
     public static boolean isValidArgs(String findArgs) {
-        return findArgs.matches(ARGS_FORMAT.pattern());
+        return findArgs.trim().matches(ARGS_FORMAT.pattern());
     }
 
     /**
