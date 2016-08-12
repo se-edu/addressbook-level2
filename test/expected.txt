@@ -126,6 +126,9 @@ Launch arguments format: [STORAGE_FILE_PATH]
 || 
 || 5 persons listed!
 || ===================================================
+|| Enter command: || [Command entered:  add Esther Potato p/555555 e/esther@not.a.real.potato pa/555, epsilon street t/tubers t/starchy]
+|| This person already exists in the address book
+|| ===================================================
 || Enter command: || [Command entered:  view]
 || Invalid command format! 
 || view: Views the non-private details of the person identified by the index number in the last shown person listing.
