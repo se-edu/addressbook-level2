@@ -92,8 +92,14 @@ public class StorageFile {
             final Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
             final AdaptedAddressBook loaded = (AdaptedAddressBook) unmarshaller.unmarshal(fileReader);
             return loaded.toModelType();
+
+        // create empty file if not found
         } catch (FileNotFoundException fnfe) {
-            throw new StorageOperationException("Cannot load from missing file: " + path);
+            final AddressBook empty = new AddressBook();
+            saveAddressBookToFile(empty);
+            return empty;
+
+        // other errors
         } catch (IOException ioe) {
             throw new StorageOperationException("Error writing to file: " + path);
         } catch (JAXBException jaxbe) {
