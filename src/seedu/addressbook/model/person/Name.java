@@ -1,7 +1,7 @@
 package seedu.addressbook.model.person;
 
 import seedu.addressbook.Utils;
-import seedu.addressbook.model.InvalidDataException;
+import seedu.addressbook.model.IllegalValueException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,13 +20,13 @@ public class Name {
     /**
      * Validates given name.
      *
-     * @throws InvalidDataException if given name string is invalid.
+     * @throws IllegalValueException if given name string is invalid.
      */
-    public Name(String name) throws InvalidDataException {
+    public Name(String name) throws IllegalValueException {
         Utils.assertNotNull(name);
         name = name.trim();
         if (!isValidName(name)) {
-            throw new InvalidDataException(MESSAGE_NAME_CONSTRAINTS);
+            throw new IllegalValueException(MESSAGE_NAME_CONSTRAINTS);
         }
         this.fullName = name;
     }

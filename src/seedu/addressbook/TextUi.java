@@ -36,15 +36,10 @@ public class TextUi {
      * ====================================================================
      */
 
-    public static final String MESSAGE_ERROR_MISSING_STORAGE_FILE = "Storage file missing: %1$s";
-    public static final String MESSAGE_ERROR_READING_FROM_FILE = "Unexpected error: unable to read from file: %1$s";
-    public static final String MESSAGE_ERROR_WRITING_TO_FILE = "Unexpected error: unable to write to file: %1$s";
     public static final String MESSAGE_INDEXED_LIST_ITEM = "\t%1$d. %2$s";
     public static final String MESSAGE_GOODBYE = "Exiting Address Book... Good bye!";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! " + LS + "%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
-    public static final String MESSAGE_INVALID_STORAGE_FILE_CONTENT = "Storage file has invalid content";;
-    public static final String MESSAGE_INVALID_STORAGE_FILE_PATH = "Storage file should be valid and end with \".txt\"";
     public static final String MESSAGE_PERSON_NOT_IN_ADDRESSBOOK = "Person could not be found in address book";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_WELCOME = "Welcome to your Address Book!";

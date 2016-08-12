@@ -74,7 +74,7 @@ public class FindPersonsByWordsInNameCommand implements Command {
      */
     private List<ReadOnlyPerson> getPersonsWithNameContainingAnyKeyword(Set<String> keywords) {
         final List<ReadOnlyPerson> matchedPersons = new ArrayList<>();
-        for (ReadOnlyPerson person : addressBook.getAllPersonsImmutableView()) {
+        for (ReadOnlyPerson person : addressBook.getAllPersons()) {
             final Set<String> wordsInName = new HashSet<>(person.getName().getWordsInName());
             if (!Collections.disjoint(wordsInName, keywords)) {
                 matchedPersons.add(person);

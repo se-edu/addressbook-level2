@@ -1,10 +1,11 @@
 package seedu.addressbook;
 
 import static seedu.addressbook.TextUi.*;
-import static seedu.addressbook.StorageFile.InvalidStorageFilePathException;
+import static seedu.addressbook.storage.StorageFile.*;
 
 import seedu.addressbook.commands.*;
 import seedu.addressbook.model.AddressBook;
+import seedu.addressbook.storage.StorageFile;
 
 import java.io.*;
 import java.util.regex.Matcher;
@@ -69,15 +70,8 @@ public class Main {
         try {
             this.storageFile = new StorageFile(storageFilePath);
             this.addressBook = storageFile.loadAddressBookFromFile();
-
-        } catch (InvalidStorageFilePathException isfpe) {
-            ui.showToUser(MESSAGE_INVALID_STORAGE_FILE_PATH);
-            throw new MainInitialisationException();
-        } catch (FileNotFoundException fnfe) {
-            ui.showToUser(String.format(MESSAGE_ERROR_MISSING_STORAGE_FILE, storageFilePath));
-            throw new MainInitialisationException();
-        } catch (IOException ioe) {
-            ui.showToUser(String.format(MESSAGE_ERROR_READING_FROM_FILE, storageFilePath));
+        } catch (InvalidStorageFilePathException | StorageOperationException e) {
+            ui.showToUser(e.getMessage());
             throw new MainInitialisationException();
         }
     }
@@ -208,13 +202,11 @@ public class Main {
     private void saveChangesToStorageFile() {
         try {
             storageFile.saveAddressBookToFile(addressBook);
-        } catch (FileNotFoundException fnfe) {
-            ui.showToUser(String.format(MESSAGE_ERROR_MISSING_STORAGE_FILE, storageFile));
-            exitProgram();
-        } catch (IOException ioe) {
-            ui.showToUser(String.format(MESSAGE_ERROR_WRITING_TO_FILE, storageFile));
+        } catch (StorageOperationException soe) {
+            ui.showToUser(soe.getMessage());
             exitProgram();
         }
     }
+
 
 }

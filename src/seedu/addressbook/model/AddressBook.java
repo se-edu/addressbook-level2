@@ -7,20 +7,43 @@ import seedu.addressbook.model.person.UniquePersonList.*;
 import seedu.addressbook.model.UniqueTagList.*;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Represents the entire address book, and maintains the master list of persons and tags.
  *
- * Guarantees: Every tag found in every person will also be in the tag list.
+ * Guarantees: Every tag found in every person will also be found in the tag list.
  */
 public class AddressBook {
 
     private final UniquePersonList allPersons;
     private final UniqueTagList allTags; // can contain tags not attached to any person
 
+    /**
+     * Empty constructor.
+     */
     public AddressBook() {
         allPersons = new UniquePersonList();
         allTags = new UniqueTagList();
+    }
+
+    /**
+     * Populating constructor.
+     * Will update the tag list with any missing tags found in any person.
+     *
+     * @param persons external changes to this will not affect the address book
+     * @param tags external changes to this will not affect the address book
+     */
+    public AddressBook(UniquePersonList persons, UniqueTagList tags) {
+        final Set<Tag> givenTags = tags.toSet();
+        this.allPersons = new UniquePersonList(persons);
+        // ensure tag list contains every tag in each person
+        for (ReadOnlyPerson p : getAllPersons()) {
+            for (Tag t : p.getTags()) {
+                givenTags.add(t);
+            }
+        }
+        this.allTags = new UniqueTagList(givenTags);
     }
 
     /**
@@ -91,12 +114,18 @@ public class AddressBook {
         allPersons.clear();
         allTags.clear();
     }
+
     /**
-     * Unmodifiable java List view of the persons in this address book cast as immutable {@link ReadOnlyPerson}s.
-     * For use with other methods/libraries.
-     * Any changes to the address book are immediately visible in the returned list.
+     * Defensively copied UniquePersonList of all persons in the address book at the time of the call.
      */
-    public List<ReadOnlyPerson> getAllPersonsImmutableView() {
-        return allPersons.immutableListView();
+    public UniquePersonList getAllPersons() {
+        return new UniquePersonList(allPersons);
+    }
+
+    /**
+     * Defensively copied UniqueTagList of all tags in the address book at the time of the call.
+     */
+    public UniqueTagList getAllTags() {
+        return new UniqueTagList(allTags);
     }
 }

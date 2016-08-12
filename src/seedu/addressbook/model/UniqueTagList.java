@@ -17,7 +17,11 @@ public class UniqueTagList implements Iterable<Tag> {
     /**
      * Signals that an operation would have violated the 'no duplicates' property of the list.
      */
-    public static class DuplicateTagException extends DuplicateDataException {}
+    public static class DuplicateTagException extends DuplicateDataException {
+        protected DuplicateTagException() {
+            super("Operation would result in duplicate tags");
+        }
+    }
 
     /**
      * Signals that an operation targeting a specified Tag in the list would fail because
@@ -76,6 +80,13 @@ public class UniqueTagList implements Iterable<Tag> {
      */
     public List<Tag> immutableListView() {
         return Collections.unmodifiableList(internalList);
+    }
+
+    /**
+     * All tags in this list as a Set. This set is mutable and change-insulated against the internal list.
+     */
+    public Set<Tag> toSet() {
+        return new HashSet<>(internalList);
     }
 
     /**
