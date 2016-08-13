@@ -1,6 +1,7 @@
 package seedu.addressbook.commands;
 
 import seedu.addressbook.TextUi;
+import seedu.addressbook.Utils;
 import seedu.addressbook.model.AddressBook;
 
 import static seedu.addressbook.TextUi.LS;
@@ -31,6 +32,7 @@ public class ExitCommand implements Command {
 
     @Override
     public String execute() {
+        Utils.assertNotNull(ui);
         ui.showGoodbyeMessage();
         System.exit(0);
         throw new InternalError(); // should never reach this line.

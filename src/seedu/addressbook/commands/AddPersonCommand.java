@@ -1,6 +1,7 @@
 package seedu.addressbook.commands;
 
 import seedu.addressbook.TextUi;
+import seedu.addressbook.Utils;
 import seedu.addressbook.model.*;
 import seedu.addressbook.model.person.*;
 
@@ -53,6 +54,7 @@ public class AddPersonCommand implements Command {
 
     @Override
     public String execute() {
+        Utils.assertNotNull(addressBook);
         if (!isValidArgs(args)) {
             return String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE);
         }
