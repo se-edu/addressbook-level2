@@ -1,6 +1,7 @@
 package seedu.addressbook.commands;
 
 import seedu.addressbook.TextUi;
+import seedu.addressbook.model.AddressBook;
 import seedu.addressbook.model.person.ReadOnlyPerson;
 
 import java.util.regex.Matcher;
@@ -14,33 +15,26 @@ public abstract class TargetLastListedPersonCommand implements Command {
 
     public static final Pattern ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
 
-    protected final TextUi view;
-    protected final String args;
+    protected TextUi view;
+    protected final int targetIndex;
 
     /**
-     * @param args full command args string from the user
-     * @param view ui holding the previous viewed person listing
+     * @param targetIndex last visible listing index of the target person
      */
-    protected TargetLastListedPersonCommand(String args, TextUi view) {
-        this.view = view;
-        this.args = args;
+    protected TargetLastListedPersonCommand(int targetIndex) {
+        this.targetIndex = targetIndex;
     }
 
-    public static boolean isValidArgs(String args) {
-        return args.trim().matches(ARGS_FORMAT.pattern());
-    }
+    @Override
+    public abstract void injectDependencies(TextUi ui, AddressBook addressBook);
 
     /**
      * Extracts the the target person in the last shown list from the given arguments.
      *
-     * @throws NumberFormatException if the target index cannot be parsed into an integer
      * @throws IndexOutOfBoundsException if the target index is out of bounds of the last viewed listing
      */
-    protected ReadOnlyPerson extractTargetFromArgs() throws NumberFormatException, IndexOutOfBoundsException {
-        final Matcher matcher = ARGS_FORMAT.matcher(args.trim());
-        matcher.matches();
-        final int targetDisplayedIndex = Integer.parseInt(matcher.group("targetIndex"));
-        return view.getPersonFromLastShownListing(targetDisplayedIndex);
+    protected ReadOnlyPerson getTargetFromView() throws IndexOutOfBoundsException {
+        return view.getPersonFromLastShownListing(targetIndex);
     }
 
 }

@@ -1,6 +1,7 @@
 package seedu.addressbook.commands;
 
 import seedu.addressbook.TextUi;
+import seedu.addressbook.Utils;
 import seedu.addressbook.model.AddressBook;
 import seedu.addressbook.model.person.ReadOnlyPerson;
 
@@ -26,44 +27,26 @@ public class FindPersonsByWordsInNameCommand implements Command {
     public static final Pattern ARGS_FORMAT =
             Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one or more keywords separated by whitespace
 
-    private final AddressBook addressBook;
-    private final TextUi ui;
-    private final String args;
+    private AddressBook addressBook;
+    private TextUi ui;
+    private final Set<String> keywords;
 
-    /**
-     * @param args full command args string from the user
-     * @param addressBook to search in
-     * @param ui for displaying the list of found persons
-     */
-    public FindPersonsByWordsInNameCommand(String args, AddressBook addressBook, TextUi ui) {
+    public FindPersonsByWordsInNameCommand(Set<String> keywords) {
+        this.keywords = keywords;
+    }
+
+    @Override
+    public void injectDependencies(TextUi ui, AddressBook addressBook) {
         this.addressBook = addressBook;
-        this.args = args;
         this.ui = ui;
     }
 
     @Override
     public String execute() {
-        if (!isValidArgs(args)) {
-            return String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE);
-        }
-        final Set<String> keywords = extractKeywordsFromArgs();
+        Utils.assertNotNull(addressBook, ui);
         final List<ReadOnlyPerson> personsFound = getPersonsWithNameContainingAnyKeyword(keywords);
         ui.showPersonListView(personsFound);
         return getMessageForPersonListShownSummary(personsFound);
-    }
-
-    public static boolean isValidArgs(String findArgs) {
-        return findArgs.trim().matches(ARGS_FORMAT.pattern());
-    }
-
-    /**
-     * Extracts all keywords for the find command from the given arguments.
-     */
-    private Set<String> extractKeywordsFromArgs() {
-        final Matcher matcher = ARGS_FORMAT.matcher(args.trim());
-        matcher.matches();
-        final Collection<String> keywords = Arrays.asList(matcher.group("keywords").split("\\s+"));
-        return new HashSet<>(keywords);
     }
 
     /**

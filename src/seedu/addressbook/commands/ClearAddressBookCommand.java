@@ -1,5 +1,7 @@
 package seedu.addressbook.commands;
 
+import seedu.addressbook.TextUi;
+import seedu.addressbook.Utils;
 import seedu.addressbook.model.AddressBook;
 
 import static seedu.addressbook.TextUi.*;
@@ -15,17 +17,18 @@ public class ClearAddressBookCommand implements Command {
 
     public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
 
-    private final AddressBook addressBook;
+    private AddressBook addressBook;
 
-    /**
-     * @param addressBook to be cleared
-     */
-    public ClearAddressBookCommand(AddressBook addressBook) {
+    public ClearAddressBookCommand() {}
+
+    @Override
+    public void injectDependencies(TextUi ui, AddressBook addressBook) {
         this.addressBook = addressBook;
     }
 
     @Override
     public String execute() {
+        Utils.assertNotNull(addressBook);
         addressBook.clear();
         return MESSAGE_SUCCESS;
     }

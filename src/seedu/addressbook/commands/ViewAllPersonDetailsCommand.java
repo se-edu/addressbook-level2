@@ -1,6 +1,7 @@
 package seedu.addressbook.commands;
 
 import seedu.addressbook.TextUi;
+import seedu.addressbook.Utils;
 import seedu.addressbook.model.AddressBook;
 import seedu.addressbook.model.person.ReadOnlyPerson;
 
@@ -21,30 +22,28 @@ public class ViewAllPersonDetailsCommand extends TargetLastListedPersonCommand {
 
     public static final String MESSAGE_VIEW_PERSON_DETAILS = "Viewing person: %1$s";
 
-    private final AddressBook addressBook;
+    private AddressBook addressBook;
 
-    /**
-     * @param args full command args string from the user
-     * @param addressBook address book containing person to view
-     * @param view ui holding the previous viewed person listing
-     */
-    public ViewAllPersonDetailsCommand(String args, AddressBook addressBook, TextUi view) {
-        super(args, view);
+    public ViewAllPersonDetailsCommand(int targetVisibleIndex) {
+        super(targetVisibleIndex);
+    }
+
+    @Override
+    public void injectDependencies(TextUi ui, AddressBook addressBook) {
         this.addressBook = addressBook;
+        this.view = ui;
     }
 
     @Override
     public String execute() {
-        if (!isValidArgs(args)) {
-            return String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE);
-        }
+        Utils.assertNotNull(addressBook, view);
         try {
-            final ReadOnlyPerson target = extractTargetFromArgs();
+            final ReadOnlyPerson target = getTargetFromView();
             if (!addressBook.containsPerson(target)) {
                 return MESSAGE_PERSON_NOT_IN_ADDRESSBOOK;
             }
             return String.format(MESSAGE_VIEW_PERSON_DETAILS, target.getAsTextShowAll());
-        } catch (NumberFormatException | IndexOutOfBoundsException ie) {
+        } catch (IndexOutOfBoundsException ie) {
             return MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
         }
     }
