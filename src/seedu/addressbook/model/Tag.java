@@ -16,13 +16,13 @@ public class Tag {
     /**
      * Validates given tag name.
      *
-     * @throws InvalidDataException if the given tag name string is invalid.
+     * @throws IllegalValueException if the given tag name string is invalid.
      */
-    public Tag(String name) throws InvalidDataException {
+    public Tag(String name) throws IllegalValueException {
         Utils.assertNotNull(name);
         name = name.trim();
         if (!isValidTagName(name)) {
-            throw new InvalidDataException(MESSAGE_TAG_CONSTRAINTS);
+            throw new IllegalValueException(MESSAGE_TAG_CONSTRAINTS);
         }
         this.tagName = name;
     }

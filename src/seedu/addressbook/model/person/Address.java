@@ -1,7 +1,7 @@
 package seedu.addressbook.model.person;
 
 import seedu.addressbook.Utils;
-import seedu.addressbook.model.InvalidDataException;
+import seedu.addressbook.model.IllegalValueException;
 
 /**
  * Represents a Person's address in the address book.
@@ -12,20 +12,20 @@ public class Address extends ContactDetail {
     public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addressescan be in any format";
     public static final String ADDRESS_VALIDATION_REGEX = ".+";
 
-    public final String address;
+    public final String value;
 
     /**
      * Validates given address.
      *
-     * @throws InvalidDataException if given address string is invalid.
+     * @throws IllegalValueException if given address string is invalid.
      */
-    public Address(String address, boolean isPrivate) throws InvalidDataException {
+    public Address(String address, boolean isPrivate) throws IllegalValueException {
         super(isPrivate);
         Utils.assertNotNull(address);
         if (!isValidAddress(address)) {
-            throw new InvalidDataException(MESSAGE_ADDRESS_CONSTRAINTS);
+            throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
         }
-        this.address = address;
+        this.value = address;
     }
 
     /**
@@ -37,19 +37,19 @@ public class Address extends ContactDetail {
 
     @Override
     public String toString() {
-        return address;
+        return value;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Address // instanceof handles nulls
-                && this.address.equals(((Address) other).address)); // state check
+                && this.value.equals(((Address) other).value)); // state check
     }
 
     @Override
     public int hashCode() {
-        return address.hashCode();
+        return value.hashCode();
     }
 
 }

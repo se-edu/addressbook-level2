@@ -1,7 +1,7 @@
 package seedu.addressbook.model.person;
 
 import seedu.addressbook.Utils;
-import seedu.addressbook.model.InvalidDataException;
+import seedu.addressbook.model.IllegalValueException;
 
 /**
  * Represents a Person's phone number in the address book.
@@ -12,21 +12,21 @@ public class Phone extends ContactDetail {
     public static final String MESSAGE_PHONE_CONSTRAINTS = "Person phone numbers should only contain numbers";
     public static final String PHONE_VALIDATION_REGEX = "\\d+";
 
-    public final String phoneNumber;
+    public final String value;
 
     /**
      * Validates given phone number.
      *
-     * @throws InvalidDataException if given phone string is invalid.
+     * @throws IllegalValueException if given phone string is invalid.
      */
-    public Phone(String phone, boolean isPrivate) throws InvalidDataException {
+    public Phone(String phone, boolean isPrivate) throws IllegalValueException {
         super(isPrivate);
         Utils.assertNotNull(phone);
         phone = phone.trim();
         if (!isValidPhone(phone)) {
-            throw new InvalidDataException(MESSAGE_PHONE_CONSTRAINTS);
+            throw new IllegalValueException(MESSAGE_PHONE_CONSTRAINTS);
         }
-        this.phoneNumber = phone;
+        this.value = phone;
     }
 
     /**
@@ -38,19 +38,19 @@ public class Phone extends ContactDetail {
 
     @Override
     public String toString() {
-        return phoneNumber;
+        return value;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Phone // instanceof handles nulls
-                && this.phoneNumber.equals(((Phone) other).phoneNumber)); // state check
+                && this.value.equals(((Phone) other).value)); // state check
     }
 
     @Override
     public int hashCode() {
-        return phoneNumber.hashCode();
+        return value.hashCode();
     }
 
 }

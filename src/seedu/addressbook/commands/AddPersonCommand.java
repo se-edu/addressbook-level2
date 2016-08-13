@@ -55,10 +55,10 @@ public class AddPersonCommand implements Command {
             addressBook.addPerson(personToAdd);
             return String.format(MESSAGE_SUCCESS, personToAdd);
 
-        } catch (InvalidDataException ide) {
-            return ide.getMessage();
         } catch (UniquePersonList.DuplicatePersonException dpe) {
             return MESSAGE_DUPLICATE_PERSON;
+        } catch (IllegalValueException ive) {
+            return ive.getMessage();
         }
     }
 
@@ -69,9 +69,9 @@ public class AddPersonCommand implements Command {
     /**
      * Extracts the specified person to add from the given arguments.
      * 
-     * @throws InvalidDataException if any person data field constraint is not fulfilled
+     * @throws IllegalValueException if any person data field constraint is not fulfilled
      */
-    private Person getPersonFromArgs() throws InvalidDataException {
+    private Person getPersonFromArgs() throws IllegalValueException {
         final Matcher matcher = ARGS_FORMAT.matcher(args.trim());
         matcher.matches();
 
@@ -91,7 +91,7 @@ public class AddPersonCommand implements Command {
     /**
      * Extracts the new person's tags from the arguments.
      */
-    public UniqueTagList getTagsFromArgs() throws InvalidDataException {
+    public UniqueTagList getTagsFromArgs() throws IllegalValueException {
         final Matcher matcher = ARGS_FORMAT.matcher(args.trim());
         matcher.matches();
 

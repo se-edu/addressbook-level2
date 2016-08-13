@@ -1,7 +1,7 @@
 package seedu.addressbook.model.person;
 
 import seedu.addressbook.Utils;
-import seedu.addressbook.model.InvalidDataException;
+import seedu.addressbook.model.IllegalValueException;
 
 /**
  * Represents a Person's phone number in the address book.
@@ -13,21 +13,21 @@ public class Email extends ContactDetail {
             "Person emails should be 2 alphanumeric/period strings separated by '@'";
     public static final String EMAIL_VALIDATION_REGEX = "[\\w\\.]+@[\\w\\.]+";
 
-    public final String emailAddress;
+    public final String value;
 
     /**
      * Validates given email.
      *
-     * @throws InvalidDataException if given email address string is invalid.
+     * @throws IllegalValueException if given email address string is invalid.
      */
-    public Email(String email, boolean isPrivate) throws InvalidDataException {
+    public Email(String email, boolean isPrivate) throws IllegalValueException {
         super(isPrivate);
         Utils.assertNotNull(email);
         email = email.trim();
         if (!isValidEmail(email)) {
-            throw new InvalidDataException(MESSAGE_EMAIL_CONSTRAINTS);
+            throw new IllegalValueException(MESSAGE_EMAIL_CONSTRAINTS);
         }
-        this.emailAddress = email;
+        this.value = email;
     }
 
     /**
@@ -39,19 +39,19 @@ public class Email extends ContactDetail {
 
     @Override
     public String toString() {
-        return emailAddress;
+        return value;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Email // instanceof handles nulls
-                && this.emailAddress.equals(((Email) other).emailAddress)); // state check
+                && this.value.equals(((Email) other).value)); // state check
     }
 
     @Override
     public int hashCode() {
-        return emailAddress.hashCode();
+        return value.hashCode();
     }
 
 

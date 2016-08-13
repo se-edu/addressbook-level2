@@ -34,7 +34,7 @@ public class ListAllPersonsCommand implements Command {
 
     @Override
     public String execute() {
-        List<ReadOnlyPerson> allPersons = addressBook.getAllPersonsImmutableView();
+        List<ReadOnlyPerson> allPersons = addressBook.getAllPersons().immutableListView();
         ui.showPersonListView(allPersons);
         return getMessageForPersonListShownSummary(allPersons);
     }

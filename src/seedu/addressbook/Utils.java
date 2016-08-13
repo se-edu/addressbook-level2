@@ -11,6 +11,18 @@ import java.util.Set;
 public class Utils {
 
     /**
+     * Checks whether any of the given items are null.
+     */
+    public static boolean isAnyNull(Object... items) {
+        for (Object item : items) {
+            if (item == null) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Throws an assertion error if any of the given arguments is null.
      */
     public static void assertNotNull(Object... items) {
@@ -41,7 +53,7 @@ public class Utils {
     public static boolean elementsAreUnique(Collection<?> items) {
         final Set<Object> testSet = new HashSet<>();
         for (Object item : items) {
-            final boolean itemAlreadyExists = testSet.add(item); // see Set documentation
+            final boolean itemAlreadyExists = !testSet.add(item); // see Set documentation
             if (itemAlreadyExists) {
                 return false;
             }

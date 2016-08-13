@@ -18,7 +18,11 @@ public class UniquePersonList implements Iterable<Person> {
     /**
      * Signals that an operation would have violated the 'no duplicates' property of the list.
      */
-    public static class DuplicatePersonException extends DuplicateDataException {}
+    public static class DuplicatePersonException extends DuplicateDataException {
+        protected DuplicatePersonException() {
+            super("Operation would result in duplicate persons");
+        }
+    }
 
     /**
      * Signals that an operation targeting a specified person in the list would fail because
@@ -78,6 +82,13 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public List<ReadOnlyPerson> immutableListView() {
         return Collections.unmodifiableList(internalList);
+    }
+
+    /**
+     * All persons in this list as a Set. This set is mutable and change-insulated against the internal list.
+     */
+    public Set<Person> toSet() {
+        return new HashSet<>(internalList);
     }
 
     /**
