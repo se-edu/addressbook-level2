@@ -91,6 +91,10 @@ public class StorageFile {
                      new BufferedReader(new FileReader(path.toFile()))) {
             final Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
             final AdaptedAddressBook loaded = (AdaptedAddressBook) unmarshaller.unmarshal(fileReader);
+            // manual check for missing elements
+            if (loaded.isAnyRequiredFieldMissing()) {
+                throw new StorageOperationException("File data missing some elements");
+            }
             return loaded.toModelType();
 
         // create empty file if not found

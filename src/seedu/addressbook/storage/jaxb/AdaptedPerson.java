@@ -1,5 +1,6 @@
 package seedu.addressbook.storage.jaxb;
 
+import seedu.addressbook.Utils;
 import seedu.addressbook.model.IllegalValueException;
 import seedu.addressbook.model.Tag;
 import seedu.addressbook.model.UniqueTagList;
@@ -16,7 +17,7 @@ import java.util.List;
  */
 public class AdaptedPerson {
 
-    public static class AdaptedContactDetail {
+    private static class AdaptedContactDetail {
         @XmlValue
         public String value;
         @XmlAttribute(required = true)
@@ -24,16 +25,16 @@ public class AdaptedPerson {
     }
 
     @XmlElement(required = true)
-    public String name;
+    private String name;
     @XmlElement(required = true)
-    public AdaptedContactDetail phone;
+    private AdaptedContactDetail phone;
     @XmlElement(required = true)
-    public AdaptedContactDetail email;
+    private AdaptedContactDetail email;
     @XmlElement(required = true)
-    public AdaptedContactDetail address;
+    private AdaptedContactDetail address;
 
-    @XmlElement(required = true)
-    public List<AdaptedTag> tagged;
+    @XmlElement
+    private List<AdaptedTag> tagged = new ArrayList<>();
 
     /**
      * No-arg constructor for JAXB use.
@@ -65,6 +66,25 @@ public class AdaptedPerson {
         for (Tag tag : source.getTags()) {
             tagged.add(new AdaptedTag(tag));
         }
+    }
+
+    /**
+     * Checks whether any required element is missing.
+     *
+     * JAXB does not enforce (required = true) without a given XML schema.
+     * Since we do most of our validation using the model class constructors, the only extra logic we need
+     * is to ensure that every xml element in the document is present. JAXB sets missing elements as null,
+     * so we check for that.
+     */
+    public boolean isAnyRequiredFieldMissing() {
+        for (AdaptedTag tag : tagged) {
+            if (tag.isAnyRequiredFieldMissing()) {
+                return true;
+            }
+        }
+        // second call only happens if phone/email/address are all not null
+        return Utils.isAnyNull(name, phone, email, address)
+                || Utils.isAnyNull(phone.value, email.value, address.value);
     }
 
     /**

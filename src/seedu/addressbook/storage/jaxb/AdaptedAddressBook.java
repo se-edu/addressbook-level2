@@ -1,5 +1,6 @@
 package seedu.addressbook.storage.jaxb;
 
+import seedu.addressbook.Utils;
 import seedu.addressbook.model.AddressBook;
 import seedu.addressbook.model.IllegalValueException;
 import seedu.addressbook.model.Tag;
@@ -19,10 +20,10 @@ import java.util.List;
 @XmlRootElement(name = "AddressBook")
 public class AdaptedAddressBook {
 
-    @XmlElement(required = true)
-    public List<AdaptedPerson> persons;
-    @XmlElement(required = true)
-    public List<AdaptedTag> tags;
+    @XmlElement
+    private List<AdaptedPerson> persons = new ArrayList<>();
+    @XmlElement
+    private List<AdaptedTag> tags = new ArrayList<>();
 
     /**
      * No-arg constructor for JAXB use.
@@ -44,6 +45,30 @@ public class AdaptedAddressBook {
             tags.add(new AdaptedTag(tag));
         }
     }
+
+
+    /**
+     * Checks whether any required element is missing.
+     *
+     * JAXB does not enforce (required = true) without a given XML schema.
+     * Since we do most of our validation using the model class constructors, the only extra logic we need
+     * is to ensure that every xml element in the document is present. JAXB sets missing elements as null,
+     * so we check for that.
+     */
+    public boolean isAnyRequiredFieldMissing() {
+        for (AdaptedTag tag : tags) {
+            if (tag.isAnyRequiredFieldMissing()) {
+                return true;
+            }
+        }
+        for (AdaptedPerson person : persons) {
+            if (person.isAnyRequiredFieldMissing()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     /**
      * Converts this jaxb-friendly adapted address book object into the model's AddressBook object.

@@ -1,5 +1,6 @@
 package seedu.addressbook.storage.jaxb;
 
+import seedu.addressbook.Utils;
 import seedu.addressbook.model.IllegalValueException;
 import seedu.addressbook.model.Tag;
 
@@ -25,6 +26,18 @@ public class AdaptedTag {
      */
     public AdaptedTag(Tag source) {
         tagName = source.tagName;
+    }
+
+    /**
+     * Checks whether any required element is missing.
+     *
+     * JAXB does not enforce (required = true) without a given XML schema.
+     * Since we do most of our validation using the model class constructors, the only extra logic we need
+     * is to ensure that every xml element in the document is present. JAXB sets missing elements as null,
+     * so we check for that.
+     */
+    public boolean isAnyRequiredFieldMissing() {
+        return Utils.isAnyNull(tagName);
     }
 
     /**
