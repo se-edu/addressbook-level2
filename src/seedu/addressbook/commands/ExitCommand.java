@@ -18,12 +18,7 @@ public class ExitCommand implements Command {
 
     private TextUi ui;
 
-    /**
-     * @param ui to show feedback before exiting.
-     */
-    public ExitCommand(TextUi ui) {
-        this.ui = ui;
-    }
+    public ExitCommand() {}
 
     @Override
     public void injectDependencies(TextUi ui, AddressBook addressBook) {

@@ -36,15 +36,10 @@ public class AddPersonCommand implements Command {
                             + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
 
     private AddressBook addressBook;
-    private final String args;
+    private final Person toAdd;
 
-    /**
-     * @param args full command args string from the user
-     * @param addressBook address book person will be added to
-     */
-    public AddPersonCommand(String args, AddressBook addressBook) {
-        this.addressBook = addressBook;
-        this.args = args;
+    public AddPersonCommand(Person toAdd) {
+        this.toAdd = toAdd;
     }
 
     @Override
@@ -55,69 +50,12 @@ public class AddPersonCommand implements Command {
     @Override
     public String execute() {
         Utils.assertNotNull(addressBook);
-        if (!isValidArgs(args)) {
-            return String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE);
-        }
         try {
-            final Person personToAdd = getPersonFromArgs();
-            addressBook.addPerson(personToAdd);
-            return String.format(MESSAGE_SUCCESS, personToAdd);
-
+            addressBook.addPerson(toAdd);
+            return String.format(MESSAGE_SUCCESS, toAdd);
         } catch (UniquePersonList.DuplicatePersonException dpe) {
             return MESSAGE_DUPLICATE_PERSON;
-        } catch (IllegalValueException ive) {
-            return ive.getMessage();
         }
-    }
-
-    public static boolean isValidArgs(String args) {
-        return args.trim().matches(ARGS_FORMAT.pattern());
-    }
-
-    /**
-     * Extracts the specified person to add from the given arguments.
-     * 
-     * @throws IllegalValueException if any person data field constraint is not fulfilled
-     */
-    private Person getPersonFromArgs() throws IllegalValueException {
-        final Matcher matcher = ARGS_FORMAT.matcher(args.trim());
-        matcher.matches();
-
-        final Name name = new Name(matcher.group("name"));
-        final Phone phone = new Phone(matcher.group("phone"), isPrivatePrefixPresent(matcher.group("isPhonePrivate")));
-        final Email email = new Email(matcher.group("email"), isPrivatePrefixPresent(matcher.group("isEmailPrivate")));
-        final Address address = new Address(matcher.group("address"),
-                isPrivatePrefixPresent(matcher.group("isAddressPrivate")));
-
-        return new Person(name, phone, email, address, getTagsFromArgs());
-    }
-
-    private static boolean isPrivatePrefixPresent(String matchedPrefix) {
-        return matchedPrefix.equals("p");
-    }
-
-    /**
-     * Extracts the new person's tags from the arguments.
-     */
-    public UniqueTagList getTagsFromArgs() throws IllegalValueException {
-        final Matcher matcher = ARGS_FORMAT.matcher(args.trim());
-        matcher.matches();
-
-        // pull out tag arguments string for parsing
-        final String tagArguments = matcher.group("tagArguments");
-        if (tagArguments.isEmpty()) {
-            return new UniqueTagList();
-        }
-        // replace first delimiter prefix, then split
-        final Collection<String> tagStrings = Arrays.asList(tagArguments.replaceFirst(" t/", "").split(" t/"));
-
-        // merge duplicate tags
-        final Set<Tag> tags = new HashSet<>();
-        for (String tagString : tagStrings) {
-            tags.add(new Tag(tagString));
-        }
-        // tag list prepared
-        return new UniqueTagList(tags);
     }
 
 }

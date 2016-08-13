@@ -23,15 +23,7 @@ public class ListAllPersonsCommand implements Command {
     private AddressBook addressBook;
     private TextUi ui;
 
-    /**
-     *
-     * @param addressBook containing persons to list
-     * @param ui for displaying the list of found persons
-     */
-    public ListAllPersonsCommand(AddressBook addressBook, TextUi ui) {
-        this.addressBook = addressBook;
-        this.ui = ui;
-    }
+    public ListAllPersonsCommand() {}
 
     @Override
     public void injectDependencies(TextUi ui, AddressBook addressBook) {

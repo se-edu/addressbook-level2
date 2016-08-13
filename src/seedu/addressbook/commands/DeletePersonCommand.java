@@ -24,14 +24,8 @@ public class DeletePersonCommand extends TargetLastListedPersonCommand {
 
     private AddressBook addressBook;
 
-    /**
-     * @param args full command args string from the user
-     * @param addressBook address book person will be deleted from
-     * @param view ui holding the previous viewed person listing
-     */
-    public DeletePersonCommand(String args, AddressBook addressBook, TextUi view) {
-        super(args, view);
-        this.addressBook = addressBook;
+    public DeletePersonCommand(int targetVisibleIndex) {
+        super(targetVisibleIndex);
     }
 
     @Override
@@ -43,15 +37,12 @@ public class DeletePersonCommand extends TargetLastListedPersonCommand {
     @Override
     public String execute() {
         Utils.assertNotNull(addressBook, view);
-        if (!isValidArgs(args)) {
-            return String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE);
-        }
         try {
-            final ReadOnlyPerson target = extractTargetFromArgs();
+            final ReadOnlyPerson target = getTargetFromView();
             addressBook.removePerson(target);
             return String.format(MESSAGE_DELETE_PERSON_SUCCESS, target);
 
-        } catch (NumberFormatException | IndexOutOfBoundsException ie) {
+        } catch (IndexOutOfBoundsException ie) {
             return MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
         } catch (PersonNotFoundException pnfe) {
             return MESSAGE_PERSON_NOT_IN_ADDRESSBOOK;

@@ -19,12 +19,7 @@ public class ClearAddressBookCommand implements Command {
 
     private AddressBook addressBook;
 
-    /**
-     * @param addressBook to be cleared
-     */
-    public ClearAddressBookCommand(AddressBook addressBook) {
-        this.addressBook = addressBook;
-    }
+    public ClearAddressBookCommand() {}
 
     @Override
     public void injectDependencies(TextUi ui, AddressBook addressBook) {

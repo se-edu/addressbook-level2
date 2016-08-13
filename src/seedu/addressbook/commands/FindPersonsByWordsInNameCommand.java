@@ -29,17 +29,10 @@ public class FindPersonsByWordsInNameCommand implements Command {
 
     private AddressBook addressBook;
     private TextUi ui;
-    private final String args;
+    private final Set<String> keywords;
 
-    /**
-     * @param args full command args string from the user
-     * @param addressBook to search in
-     * @param ui for displaying the list of found persons
-     */
-    public FindPersonsByWordsInNameCommand(String args, AddressBook addressBook, TextUi ui) {
-        this.addressBook = addressBook;
-        this.args = args;
-        this.ui = ui;
+    public FindPersonsByWordsInNameCommand(Set<String> keywords) {
+        this.keywords = keywords;
     }
 
     @Override
@@ -51,27 +44,9 @@ public class FindPersonsByWordsInNameCommand implements Command {
     @Override
     public String execute() {
         Utils.assertNotNull(addressBook, ui);
-        if (!isValidArgs(args)) {
-            return String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE);
-        }
-        final Set<String> keywords = extractKeywordsFromArgs();
         final List<ReadOnlyPerson> personsFound = getPersonsWithNameContainingAnyKeyword(keywords);
         ui.showPersonListView(personsFound);
         return getMessageForPersonListShownSummary(personsFound);
-    }
-
-    public static boolean isValidArgs(String findArgs) {
-        return findArgs.trim().matches(ARGS_FORMAT.pattern());
-    }
-
-    /**
-     * Extracts all keywords for the find command from the given arguments.
-     */
-    private Set<String> extractKeywordsFromArgs() {
-        final Matcher matcher = ARGS_FORMAT.matcher(args.trim());
-        matcher.matches();
-        final Collection<String> keywords = Arrays.asList(matcher.group("keywords").split("\\s+"));
-        return new HashSet<>(keywords);
     }
 
     /**

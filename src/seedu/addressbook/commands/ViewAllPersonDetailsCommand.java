@@ -24,14 +24,8 @@ public class ViewAllPersonDetailsCommand extends TargetLastListedPersonCommand {
 
     private AddressBook addressBook;
 
-    /**
-     * @param args full command args string from the user
-     * @param addressBook address book containing person to view
-     * @param view ui holding the previous viewed person listing
-     */
-    public ViewAllPersonDetailsCommand(String args, AddressBook addressBook, TextUi view) {
-        super(args, view);
-        this.addressBook = addressBook;
+    public ViewAllPersonDetailsCommand(int targetVisibleIndex) {
+        super(targetVisibleIndex);
     }
 
     @Override
@@ -43,16 +37,13 @@ public class ViewAllPersonDetailsCommand extends TargetLastListedPersonCommand {
     @Override
     public String execute() {
         Utils.assertNotNull(addressBook, view);
-        if (!isValidArgs(args)) {
-            return String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE);
-        }
         try {
-            final ReadOnlyPerson target = extractTargetFromArgs();
+            final ReadOnlyPerson target = getTargetFromView();
             if (!addressBook.containsPerson(target)) {
                 return MESSAGE_PERSON_NOT_IN_ADDRESSBOOK;
             }
             return String.format(MESSAGE_VIEW_PERSON_DETAILS, target.getAsTextShowAll());
-        } catch (NumberFormatException | IndexOutOfBoundsException ie) {
+        } catch (IndexOutOfBoundsException ie) {
             return MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
         }
     }
