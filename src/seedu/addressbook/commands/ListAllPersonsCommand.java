@@ -19,8 +19,8 @@ public class ListAllPersonsCommand implements Command {
             + ": Displays all persons in the address book as a list with index numbers."
             + LS + "Example: " + COMMAND_WORD;
 
-    private final AddressBook addressBook;
-    private final TextUi ui;
+    private AddressBook addressBook;
+    private TextUi ui;
 
     /**
      *
@@ -28,6 +28,12 @@ public class ListAllPersonsCommand implements Command {
      * @param ui for displaying the list of found persons
      */
     public ListAllPersonsCommand(AddressBook addressBook, TextUi ui) {
+        this.addressBook = addressBook;
+        this.ui = ui;
+    }
+
+    @Override
+    public void injectDependencies(TextUi ui, AddressBook addressBook) {
         this.addressBook = addressBook;
         this.ui = ui;
     }

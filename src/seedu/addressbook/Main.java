@@ -140,6 +140,7 @@ public class Main {
             return String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE);
         }
         final Command command = identifyAndPrepareCommand(userInputString);
+        command.injectDependencies(ui, addressBook);
         final String result = command.execute();
         saveChangesToStorageFile();
         return result;

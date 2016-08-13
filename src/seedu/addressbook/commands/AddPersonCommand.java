@@ -1,5 +1,6 @@
 package seedu.addressbook.commands;
 
+import seedu.addressbook.TextUi;
 import seedu.addressbook.model.*;
 import seedu.addressbook.model.person.*;
 
@@ -33,7 +34,7 @@ public class AddPersonCommand implements Command {
                             + " (?<isAddressPrivate>p?)a/(?<address>[^/]+)"
                             + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
 
-    private final AddressBook addressBook;
+    private AddressBook addressBook;
     private final String args;
 
     /**
@@ -43,6 +44,11 @@ public class AddPersonCommand implements Command {
     public AddPersonCommand(String args, AddressBook addressBook) {
         this.addressBook = addressBook;
         this.args = args;
+    }
+
+    @Override
+    public void injectDependencies(TextUi ui, AddressBook addressBook) {
+        this.addressBook = addressBook;
     }
 
     @Override

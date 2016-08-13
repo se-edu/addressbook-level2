@@ -26,8 +26,8 @@ public class FindPersonsByWordsInNameCommand implements Command {
     public static final Pattern ARGS_FORMAT =
             Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one or more keywords separated by whitespace
 
-    private final AddressBook addressBook;
-    private final TextUi ui;
+    private AddressBook addressBook;
+    private TextUi ui;
     private final String args;
 
     /**
@@ -38,6 +38,12 @@ public class FindPersonsByWordsInNameCommand implements Command {
     public FindPersonsByWordsInNameCommand(String args, AddressBook addressBook, TextUi ui) {
         this.addressBook = addressBook;
         this.args = args;
+        this.ui = ui;
+    }
+
+    @Override
+    public void injectDependencies(TextUi ui, AddressBook addressBook) {
+        this.addressBook = addressBook;
         this.ui = ui;
     }
 

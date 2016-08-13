@@ -21,7 +21,7 @@ public class ViewAllPersonDetailsCommand extends TargetLastListedPersonCommand {
 
     public static final String MESSAGE_VIEW_PERSON_DETAILS = "Viewing person: %1$s";
 
-    private final AddressBook addressBook;
+    private AddressBook addressBook;
 
     /**
      * @param args full command args string from the user
@@ -31,6 +31,12 @@ public class ViewAllPersonDetailsCommand extends TargetLastListedPersonCommand {
     public ViewAllPersonDetailsCommand(String args, AddressBook addressBook, TextUi view) {
         super(args, view);
         this.addressBook = addressBook;
+    }
+
+    @Override
+    public void injectDependencies(TextUi ui, AddressBook addressBook) {
+        this.addressBook = addressBook;
+        this.view = ui;
     }
 
     @Override
