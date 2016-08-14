@@ -18,11 +18,6 @@ import java.io.*;
 public class Main {
 
     /**
-     * Default file path used if the user doesn't provide the file name.
-     */
-    public static final String DEFAULT_STORAGE_FILEPATH = "addressbook.txt";
-
-    /**
      * These message is not in the TextUi class because program launch and initialisation messages may be shown
      * outside the given UI (should be logged at launch console), and needs to be shown before the UI is ready.
      */
@@ -42,16 +37,16 @@ public class Main {
     /**
      * Sets up the different components and loads up the model from the storage file.
      *
-     * @param storageFilePath file path of the desired storage file
+     * @param launchArgs arguments supplied by the user at program launch
      * @param inputStream user text input source
      * @param outputStream user text output acceptor
      *
      */
-    public Main(String storageFilePath, InputStream inputStream, PrintStream outputStream){
+    public Main(String[] launchArgs, InputStream inputStream, PrintStream outputStream){
         this.ui = new TextUi(inputStream, outputStream);
         this.parser = new Parser();
         try {
-            this.storageFile = new StorageFile(storageFilePath);
+            this.storageFile = createStorageFile(launchArgs);
             this.addressBook = storageFile.loadAddressBookFromFile();
         } catch (InvalidStorageFilePathException | StorageOperationException e) {
             ui.showToUser(e.getMessage());
@@ -70,8 +65,18 @@ public class Main {
 
     public static void main(String... launchArgs) {
         System.out.println(MESSAGE_PROGRAM_LAUNCH_ARGS_USAGE);
-        final Main main = new Main(getStorageFilePathFromLaunchArgs(launchArgs), System.in, System.out);
+        final Main main = new Main(launchArgs, System.in, System.out);
         main.start();
+    }
+
+    /**
+     * Creates the StorageFile object based on the user specified path (if any) or the default storage path.
+     * @param launchArgs arguments supplied by the user at program launch
+     * @throws InvalidStorageFilePathException if the target file path is incorrect.
+     */
+    private StorageFile createStorageFile(String[] launchArgs) throws InvalidStorageFilePathException {
+        boolean isStorageFileSpecifiedByUser = launchArgs.length > 0;
+        return isStorageFileSpecifiedByUser ? new StorageFile(launchArgs[0]) : new StorageFile();
     }
 
     /**
@@ -90,16 +95,6 @@ public class Main {
     }
 
     /**
-     * Retrieves the string representing the intended storage file path as specified in the launch args.
-     * Defaults to {@link #DEFAULT_STORAGE_FILEPATH} if no storage file argument is found.
-     * 
-     * @param launchArgs full program launch arguments passed to application main method
-     */
-    private static String getStorageFilePathFromLaunchArgs(String... launchArgs) {
-        return launchArgs.length > 0 ? launchArgs[0] : DEFAULT_STORAGE_FILEPATH;
-    }
-
-    /**
      * Displays the goodbye message and exits the runtime.
      */
     private void exitProgram() {
@@ -107,8 +102,6 @@ public class Main {
         exit.injectDependencies(ui, addressBook);
         exit.execute();
     }
-
-
 
     /**
      * Processes user input into desired command, then executes and returns feedback.

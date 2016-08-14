@@ -18,6 +18,11 @@ import java.nio.file.Paths;
 public class StorageFile {
 
     /**
+     * Default file path used if the user doesn't provide the file name.
+     */
+    public static final String DEFAULT_STORAGE_FILEPATH = "addressbook.txt";
+
+    /**
      * Signals that the given file path does not fulfill the storage filepath constraints.
      */
     public static class InvalidStorageFilePathException extends IllegalValueException {
@@ -43,6 +48,13 @@ public class StorageFile {
     /**
      * @throws InvalidStorageFilePathException if the
      */
+    public StorageFile() throws InvalidStorageFilePathException {
+        this(DEFAULT_STORAGE_FILEPATH);
+    }
+
+    /**
+     * @throws InvalidStorageFilePathException if the
+     */
     public StorageFile(String filePath) throws InvalidStorageFilePathException {
         try {
             jaxbContext = JAXBContext.newInstance(AdaptedAddressBook.class);
@@ -53,6 +65,16 @@ public class StorageFile {
         if (!isValidPath(path)) {
             throw new InvalidStorageFilePathException("Storage file should end with '.txt'");
         }
+    }
+
+    /**
+     * Retrieves the string representing the intended storage file path as specified in the launch args.
+     * Defaults to {@link StorageFile#DEFAULT_STORAGE_FILEPATH} if no storage file argument is found.
+     *
+     * @param launchArgs full program launch arguments passed to application main method
+     */
+    private static String getStorageFilePathFromLaunchArgs(String... launchArgs) {
+        return launchArgs.length > 0 ? launchArgs[0] : DEFAULT_STORAGE_FILEPATH;
     }
 
     /**
