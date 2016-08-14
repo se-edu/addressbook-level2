@@ -1,5 +1,6 @@
 package seedu.addressbook;
 
+import seedu.addressbook.commands.CommandResult;
 import seedu.addressbook.model.person.ReadOnlyPerson;
 
 import java.io.InputStream;
@@ -142,8 +143,9 @@ public class TextUi {
      * Shows the result of a command execution to the user. Includes additional formatting to demarcate different
      * command execution segments.
      */
-    public void showResultToUser(String result) {
-        showToUser(result, DIVIDER);
+    public void showResultToUser(CommandResult result) {
+        if(result.getRelevantPersons() != null) {showPersonListView(result.getRelevantPersons());}
+        showToUser(result.getFeedbackToUser(), DIVIDER);
     }
 
     /**

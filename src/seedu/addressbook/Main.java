@@ -23,23 +23,44 @@ public class Main {
      */
     public static final String VERSION = "AddessBook Level 2 - Version 1.0";
 
-    private final TextUi ui;
-    private final StorageFile storage;
-    private final AddressBook addressBook;
+    private TextUi ui;
+    private StorageFile storage;
+    private AddressBook addressBook;
 
     /**
-     * Sets up the different components and loads up the model from the storage file.
+     * The list of person shown to the user most recently.
+     */
+    private List<? extends ReadOnlyPerson> lastShownList = null;
+
+
+    public static void main(String... launchArgs) {
+        new Main().run(launchArgs, System.in, System.out);
+    }
+
+    /**
+     * Runs the program until termination.
+     */
+    public void run(String[] launchArgs, InputStream inputStream, PrintStream outputStream) {
+        start(launchArgs, inputStream, outputStream);
+        runCommandLoopUntilExitCommand();
+        exit();
+    }
+
+    /**
+     * Sets up the different components, loads up the data from the storage file, and prints the welcome message.
      *
      * @param launchArgs arguments supplied by the user at program launch
      * @param inputStream user text input source
      * @param outputStream user text output acceptor
      *
      */
-    public Main(String[] launchArgs, InputStream inputStream, PrintStream outputStream){
-        this.ui = new TextUi(inputStream, outputStream);
+    private void start(String[] launchArgs, InputStream inputStream, PrintStream outputStream) {
         try {
+            this.ui = new TextUi(inputStream, outputStream);
             this.storage = createStorageFile(launchArgs);
             this.addressBook = storage.load();
+            ui.showWelcomeMessage(VERSION, storage.getPath());
+
         } catch (InvalidStorageFilePathException | StorageOperationException e) {
             ui.showInitFailedMessage();
             /*
@@ -55,8 +76,54 @@ public class Main {
         }
     }
 
-    public static void main(String... launchArgs) {
-        new Main(launchArgs, System.in, System.out).run();
+    /**
+     * Prints the Goodbye message and exits.
+     */
+    private void exit() {
+        ui.showGoodbyeMessage();
+        System.exit(0);
+    }
+
+    /**
+     * Reads the user command and executes it, until the user issues the exit command.
+     */
+    private void runCommandLoopUntilExitCommand() {
+        Command command;
+        do {
+            String userCommand = ui.getUserCommand();
+            command = new Parser().parseCommand(userCommand);
+            CommandResult result = executeCommand(command);
+            updateLastShownList(result);
+            ui.showResultToUser(result);
+
+        } while(!ExitCommand.isExit(command));
+    }
+
+    /**
+     * Updates the {@link #lastShownList} if the result contains a list of Persons
+     */
+    private void updateLastShownList(CommandResult result) {
+        if(result.getRelevantPersons() != null) {
+            lastShownList = result.getRelevantPersons();
+        }
+    }
+
+    /**
+     * Processes user input into desired command, then executes and returns feedback.
+     * 
+     * @param command user command
+     * @return feedback about how the command was executed
+     */
+    private CommandResult executeCommand(Command command)  {
+        try {
+            command.setData(addressBook, lastShownList);
+            CommandResult result = command.execute();
+            storage.save(addressBook);
+            return result;
+        } catch (Exception e) {
+            ui.showToUser(e.getMessage());
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -69,51 +136,6 @@ public class Main {
         return isStorageFileSpecifiedByUser ? new StorageFile(launchArgs[0]) : new StorageFile();
     }
 
-    /**
-     * Starts program execution.
-     * Assumption: All required objects have been initialised.
-     * TODO: Eliminate above assumption (move initialization logic to start method?)
-     */
-    public void run() {
-        ui.showWelcomeMessage(VERSION, storage.getPath());
-
-        List<? extends ReadOnlyPerson> lastShownList = null;
-        Command command;
-
-        do {
-            String userCommand = ui.getUserCommand();
-            command = new Parser().parseCommand(userCommand);
-            CommandResult result = executeCommand(command, lastShownList);
-
-            if(result.getRelevantPersons() != null) {
-                ui.showPersonListView(result.getRelevantPersons());
-                lastShownList = result.getRelevantPersons();
-            }
-            ui.showResultToUser(result.getFeedbackToUser());
-
-        } while(!ExitCommand.isExit(command));
-
-        ui.showGoodbyeMessage();
-        System.exit(0);
-    }
-
-    /**
-     * Processes user input into desired command, then executes and returns feedback.
-     * 
-     * @param command user command
-     * @return feedback about how the command was executed
-     */
-    private CommandResult executeCommand(Command command, List<? extends ReadOnlyPerson> lastShownList)  {
-        try {
-            command.setData(addressBook, lastShownList);
-            CommandResult result = command.execute();
-            storage.save(addressBook);
-            return result;
-        } catch (Exception e) {
-            ui.showToUser(e.getMessage());
-            throw new RuntimeException(e);
-        }
-    }
 
 
 }
