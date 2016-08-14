@@ -101,15 +101,17 @@ public class Main {
      * @return feedback about how the command was executed
      */
     private String executeCommand(String userInputString) {
+        Command command;
         try {
-            final Command command = parser.parseCommand(userInputString);
-            command.injectDependencies(ui, addressBook);
-            final String result = command.execute();
-            saveChangesToStorageFile();
-            return result;
+            command = parser.parseCommand(userInputString);
         } catch (Parser.ParseException pe) {
             return pe.getMessage();
         }
+
+        command.injectDependencies(ui, addressBook);
+        String result = command.execute();
+        saveChangesToStorageFile();
+        return result;
     }
 
     /**
