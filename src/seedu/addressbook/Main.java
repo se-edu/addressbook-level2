@@ -96,9 +96,9 @@ public class Main {
         }
 
         command.injectDependencies(ui, addressBook);
-        String result = command.execute();
+        CommandResult result = command.execute();
         saveChangesToStorageFile();
-        return result;
+        return result.getFeedbackToUser();
     }
 
     /**

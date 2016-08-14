@@ -15,8 +15,9 @@ public class HelpCommand implements Command {
     public HelpCommand() {}
 
     @Override
-    public String execute() {
-        return AddPersonCommand.MESSAGE_USAGE
+    public CommandResult execute() {
+        return new CommandResult(
+                AddPersonCommand.MESSAGE_USAGE
                 + LS + DeletePersonCommand.MESSAGE_USAGE
                 + LS + ClearAddressBookCommand.MESSAGE_USAGE
                 + LS + FindPersonsByWordsInNameCommand.MESSAGE_USAGE
@@ -24,6 +25,7 @@ public class HelpCommand implements Command {
                 + LS + ViewPersonDetailsCommand.MESSAGE_USAGE
                 + LS + ViewAllPersonDetailsCommand.MESSAGE_USAGE
                 + LS + HelpCommand.MESSAGE_USAGE
-                + LS + ExitCommand.MESSAGE_USAGE;
+                + LS + ExitCommand.MESSAGE_USAGE
+        );
     }
 }

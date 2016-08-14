@@ -35,17 +35,17 @@ public class DeletePersonCommand extends TargetLastListedPersonCommand {
     }
 
     @Override
-    public String execute() {
+    public CommandResult execute() {
         Utils.assertNotNull(addressBook, view);
         try {
             final ReadOnlyPerson target = getTargetFromView();
             addressBook.removePerson(target);
-            return String.format(MESSAGE_DELETE_PERSON_SUCCESS, target);
+            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, target));
 
         } catch (IndexOutOfBoundsException ie) {
-            return MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+            return new CommandResult(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         } catch (PersonNotFoundException pnfe) {
-            return MESSAGE_PERSON_NOT_IN_ADDRESSBOOK;
+            return new CommandResult(MESSAGE_PERSON_NOT_IN_ADDRESSBOOK);
         }
     }
 

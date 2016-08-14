@@ -5,12 +5,9 @@ import seedu.addressbook.Utils;
 import seedu.addressbook.model.*;
 import seedu.addressbook.model.person.*;
 
-import java.util.*;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static seedu.addressbook.TextUi.LS;
-import static seedu.addressbook.TextUi.MESSAGE_INVALID_COMMAND_FORMAT;
 
 /**
  * Adds a person to the address book.
@@ -48,13 +45,13 @@ public class AddPersonCommand implements Command {
     }
 
     @Override
-    public String execute() {
+    public CommandResult execute() {
         Utils.assertNotNull(addressBook);
         try {
             addressBook.addPerson(toAdd);
-            return String.format(MESSAGE_SUCCESS, toAdd);
+            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniquePersonList.DuplicatePersonException dpe) {
-            return MESSAGE_DUPLICATE_PERSON;
+            return new CommandResult(MESSAGE_DUPLICATE_PERSON);
         }
     }
 

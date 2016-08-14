@@ -32,10 +32,10 @@ public class ListAllPersonsCommand implements Command {
     }
 
     @Override
-    public String execute() {
+    public CommandResult execute() {
         Utils.assertNotNull(ui, addressBook);
         List<ReadOnlyPerson> allPersons = addressBook.getAllPersons().immutableListView();
         ui.showPersonListView(allPersons);
-        return getMessageForPersonListShownSummary(allPersons);
+        return new CommandResult(getMessageForPersonListShownSummary(allPersons));
     }
 }

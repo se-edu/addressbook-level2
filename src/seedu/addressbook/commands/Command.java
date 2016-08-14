@@ -13,7 +13,7 @@ public interface Command {
      *
      * @return feedback message of the operation result for display
      */
-    String execute();
+    CommandResult execute();
 
     /**
      * Provides any needed dependencies to the command.

@@ -6,7 +6,6 @@ import seedu.addressbook.model.AddressBook;
 import seedu.addressbook.model.person.ReadOnlyPerson;
 
 import java.util.*;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static seedu.addressbook.TextUi.*;
@@ -42,11 +41,11 @@ public class FindPersonsByWordsInNameCommand implements Command {
     }
 
     @Override
-    public String execute() {
+    public CommandResult execute() {
         Utils.assertNotNull(addressBook, ui);
         final List<ReadOnlyPerson> personsFound = getPersonsWithNameContainingAnyKeyword(keywords);
         ui.showPersonListView(personsFound);
-        return getMessageForPersonListShownSummary(personsFound);
+        return new CommandResult(getMessageForPersonListShownSummary(personsFound));
     }
 
     /**

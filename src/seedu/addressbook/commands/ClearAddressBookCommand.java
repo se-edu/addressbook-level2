@@ -27,9 +27,9 @@ public class ClearAddressBookCommand implements Command {
     }
 
     @Override
-    public String execute() {
+    public CommandResult execute() {
         Utils.assertNotNull(addressBook);
         addressBook.clear();
-        return MESSAGE_SUCCESS;
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 }

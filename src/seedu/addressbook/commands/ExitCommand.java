@@ -26,7 +26,7 @@ public class ExitCommand implements Command {
     }
 
     @Override
-    public String execute() {
+    public CommandResult execute() {
         Utils.assertNotNull(ui);
         ui.showGoodbyeMessage();
         System.exit(0);
