@@ -22,7 +22,6 @@ public class Main {
     public static final String VERSION = "AddessBook Level 2 - Version 1.0";
 
     private final TextUi ui;
-    private final Parser parser;
     private final StorageFile storage;
     private final AddressBook addressBook;
 
@@ -36,7 +35,6 @@ public class Main {
      */
     public Main(String[] launchArgs, InputStream inputStream, PrintStream outputStream){
         this.ui = new TextUi(inputStream, outputStream);
-        this.parser = new Parser();
         try {
             this.storage = createStorageFile(launchArgs);
             this.addressBook = storage.load();
@@ -92,7 +90,7 @@ public class Main {
     private String executeCommand(String userInputString)  {
         Command command;
         try {
-            command = parser.parseCommand(userInputString);
+            command = new Parser().parseCommand(userInputString);
         } catch (Parser.ParseException pe) {
             return pe.getMessage();
         }
