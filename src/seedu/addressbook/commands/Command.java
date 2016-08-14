@@ -23,5 +23,5 @@ public interface Command {
      * Commands making use of any of these should override this method to gain
      * access to the dependencies.
      */
-    default void injectDependencies(AddressBook addressBook, List<? extends ReadOnlyPerson> relevantPersons) {}
+    default void setData(AddressBook addressBook, List<? extends ReadOnlyPerson> relevantPersons) {}
 }

@@ -31,7 +31,7 @@ public class ViewAllPersonDetailsCommand extends TargetLastListedPersonCommand {
     }
 
     @Override
-    public void injectDependencies(AddressBook addressBook, List<? extends ReadOnlyPerson> relevantPersons) {
+    public void setData(AddressBook addressBook, List<? extends ReadOnlyPerson> relevantPersons) {
         this.addressBook = addressBook;
         this.relevantPersons = relevantPersons;
     }

@@ -34,7 +34,7 @@ public class FindPersonsByWordsInNameCommand implements Command {
     }
 
     @Override
-    public void injectDependencies(AddressBook addressBook, List<? extends ReadOnlyPerson> relevantPersons) {
+    public void setData(AddressBook addressBook, List<? extends ReadOnlyPerson> relevantPersons) {
         this.addressBook = addressBook;
     }
 

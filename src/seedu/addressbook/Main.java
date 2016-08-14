@@ -79,12 +79,11 @@ public class Main {
 
         List<? extends ReadOnlyPerson> lastShownList = null;
         Command command;
-        CommandResult result;
 
         do {
             String userCommand = ui.getUserCommand();
             command = new Parser().parseCommand(userCommand);
-            result = executeCommand(command, lastShownList);
+            CommandResult result = executeCommand(command, lastShownList);
 
             if(result.getRelevantPersons() != null) {
                 ui.showPersonListView(result.getRelevantPersons());
@@ -105,7 +104,7 @@ public class Main {
      * @return feedback about how the command was executed
      */
     private CommandResult executeCommand(Command command, List<? extends ReadOnlyPerson> lastShownList)  {
-        command.injectDependencies(addressBook, lastShownList);
+        command.setData(addressBook, lastShownList);
         CommandResult result = command.execute();
         saveChangesToStorageFile();
         return result;

@@ -29,7 +29,7 @@ public abstract class TargetLastListedPersonCommand implements Command {
     }
 
     @Override
-    public abstract void injectDependencies(AddressBook addressBook, List<? extends ReadOnlyPerson> relevantPersons);
+    public abstract void setData(AddressBook addressBook, List<? extends ReadOnlyPerson> relevantPersons);
 
     /**
      * Extracts the the target person in the last shown list from the given arguments.
