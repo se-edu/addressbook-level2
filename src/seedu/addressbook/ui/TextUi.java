@@ -12,8 +12,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Encapsulates the textual user interface (both input and output).
- * Should not be too tightly couple
+ * Text UI of the application.
  */
 public class TextUi {
 
