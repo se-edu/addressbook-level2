@@ -10,15 +10,10 @@ import seedu.addressbook.storage.StorageFile;
 
 import java.io.*;
 
-/* ==============NOTE TO STUDENTS======================================
- * This class header comment below is brief because details of how to
- * use this class are documented elsewhere.
- * ====================================================================
- */
 
 /**
  * Entry point of the address book application.
- * Contains command execution logic; initialises and uses the different components.
+ * Initializes the application and starts the interaction with the user.
  */
 public class Main {
 
