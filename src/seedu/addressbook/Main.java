@@ -84,21 +84,12 @@ public class Main {
     }
 
     /**
-     * Displays the goodbye message and exits the runtime.
-     */
-    private void exitProgram() {
-        Command exit = new ExitCommand();
-        exit.injectDependencies(ui, addressBook);
-        exit.execute();
-    }
-
-    /**
      * Processes user input into desired command, then executes and returns feedback.
      * 
      * @param userInputString raw input from user
      * @return feedback about how the command was executed
      */
-    private String executeCommand(String userInputString) {
+    private String executeCommand(String userInputString)  {
         Command command;
         try {
             command = parser.parseCommand(userInputString);
@@ -118,9 +109,9 @@ public class Main {
     private void saveChangesToStorageFile() {
         try {
             storage.save(addressBook);
-        } catch (StorageOperationException soe) {
-            ui.showToUser(soe.getMessage());
-            exitProgram();
+        } catch (StorageOperationException e) {
+            ui.showToUser(e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 
