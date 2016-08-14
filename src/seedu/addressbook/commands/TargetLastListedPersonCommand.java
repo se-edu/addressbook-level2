@@ -4,7 +4,7 @@ import seedu.addressbook.model.person.ReadOnlyPerson;
 
 import java.util.regex.Pattern;
 
-import static seedu.addressbook.TextUi.DISPLAYED_INDEX_OFFSET;
+import static seedu.addressbook.ui.TextUi.DISPLAYED_INDEX_OFFSET;
 
 /**
  * Superclass for commands targeting a person last listed in the ui.

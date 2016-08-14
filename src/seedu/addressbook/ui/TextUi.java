@@ -1,4 +1,4 @@
-package seedu.addressbook;
+package seedu.addressbook.ui;
 
 import static seedu.addressbook.common.Messages.*;
 
