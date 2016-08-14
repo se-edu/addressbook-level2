@@ -1,6 +1,5 @@
 package seedu.addressbook.commands;
 
-import seedu.addressbook.TextUi;
 import seedu.addressbook.Utils;
 import seedu.addressbook.model.*;
 import seedu.addressbook.model.person.*;

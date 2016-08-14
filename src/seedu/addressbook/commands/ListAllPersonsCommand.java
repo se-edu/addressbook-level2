@@ -1,7 +1,5 @@
 package seedu.addressbook.commands;
 
-import seedu.addressbook.TextUi;
-import seedu.addressbook.Utils;
 import seedu.addressbook.model.AddressBook;
 import seedu.addressbook.model.person.ReadOnlyPerson;
 
@@ -21,7 +19,6 @@ public class ListAllPersonsCommand implements Command {
             + LS + "Example: " + COMMAND_WORD;
 
     private AddressBook addressBook;
-    private TextUi ui;
 
     public ListAllPersonsCommand() {}
 

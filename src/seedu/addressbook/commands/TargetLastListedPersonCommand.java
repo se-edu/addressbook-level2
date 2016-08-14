@@ -1,11 +1,9 @@
 package seedu.addressbook.commands;
 
-import seedu.addressbook.TextUi;
 import seedu.addressbook.model.AddressBook;
 import seedu.addressbook.model.person.ReadOnlyPerson;
 
 import java.util.List;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static seedu.addressbook.TextUi.DISPLAYED_INDEX_OFFSET;
