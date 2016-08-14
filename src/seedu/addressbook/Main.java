@@ -32,7 +32,7 @@ public class Main {
     /**
      * Version info of the program.
      */
-    public static final String VERSION = "AddessBook Level 1 - Version 1.0";
+    public static final String VERSION = "AddessBook Level 2 - Version 1.0";
 
 
     /**
