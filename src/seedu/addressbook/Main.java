@@ -18,13 +18,6 @@ import java.io.*;
 public class Main {
 
     /**
-     * These message is not in the TextUi class because program launch and initialisation messages may be shown
-     * outside the given UI (should be logged at launch console), and needs to be shown before the UI is ready.
-     */
-    public static final String MESSAGE_PROGRAM_LAUNCH_ARGS_USAGE = "Launch arguments format: [STORAGE_FILE_PATH]";
-    public static final String MESSAGE_INIT_FAILED = "Failed to initialise address book application. Exiting...";
-
-    /**
      * Version info of the program.
      */
     public static final String VERSION = "AddessBook Level 2 - Version 1.0";
@@ -49,7 +42,7 @@ public class Main {
             this.storage = createStorageFile(launchArgs);
             this.addressBook = storage.load();
         } catch (InvalidStorageFilePathException | StorageOperationException e) {
-            ui.showToUser(e.getMessage());
+            ui.showInitFailedMessage();
             /*
              * ==============NOTE TO STUDENTS=========================================================================
              * We are throwing a RuntimeException which is an 'unchecked' exception. Unchecked exceptions do not need
@@ -59,14 +52,12 @@ public class Main {
              * Cf https://docs.oracle.com/javase/tutorial/essential/exceptions/runtime.html
              * =======================================================================================================
              */
-            throw new RuntimeException(MESSAGE_INIT_FAILED);
+            throw new RuntimeException(e);
         }
     }
 
     public static void main(String... launchArgs) {
-        System.out.println(MESSAGE_PROGRAM_LAUNCH_ARGS_USAGE);
-        final Main main = new Main(launchArgs, System.in, System.out);
-        main.start();
+        new Main(launchArgs, System.in, System.out).start();
     }
 
     /**

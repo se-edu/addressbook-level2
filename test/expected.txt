@@ -1,8 +1,8 @@
-Launch arguments format: [STORAGE_FILE_PATH]
 || ===================================================
 || ===================================================
 || AddessBook Level 2 - Version 1.0
 || Welcome to your Address Book!
+|| Launch command format: java seedu.addressbook.Main [STORAGE_FILE_PATH]
 || ===================================================
 || Using storage file : addressbook.txt
 || Enter command: || [Command entered:  sfdfd]
