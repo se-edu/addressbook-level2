@@ -56,7 +56,7 @@ public class Main {
     }
 
     public static void main(String... launchArgs) {
-        new Main(launchArgs, System.in, System.out).start();
+        new Main(launchArgs, System.in, System.out).run();
     }
 
     /**
@@ -74,7 +74,7 @@ public class Main {
      * Assumption: All required objects have been initialised.
      * TODO: Eliminate above assumption (move initialization logic to start method?)
      */
-    public void start() {
+    public void run() {
         ui.showWelcomeMessage(VERSION, storage.getPath());
         List<? extends ReadOnlyPerson> lastShownList = null;
         Command command;
