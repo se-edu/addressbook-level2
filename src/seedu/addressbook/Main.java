@@ -34,12 +34,6 @@ public class Main {
      */
     public static final String VERSION = "AddessBook Level 2 - Version 1.0";
 
-
-    /**
-     * Signals that the main application had a problem while initialising.
-     */
-    public static class MainInitialisationException extends Exception {}
-
     private final TextUi ui;
     private final Parser parser;
     private final StorageFile storageFile;
@@ -52,10 +46,8 @@ public class Main {
      * @param inputStream user text input source
      * @param outputStream user text output acceptor
      *
-     * @throws MainInitialisationException if there were problems
      */
-    public Main(String storageFilePath, InputStream inputStream, PrintStream outputStream)
-            throws MainInitialisationException {
+    public Main(String storageFilePath, InputStream inputStream, PrintStream outputStream){
         this.ui = new TextUi(inputStream, outputStream);
         this.parser = new Parser();
         try {
@@ -63,21 +55,23 @@ public class Main {
             this.addressBook = storageFile.loadAddressBookFromFile();
         } catch (InvalidStorageFilePathException | StorageOperationException e) {
             ui.showToUser(e.getMessage());
-            throw new MainInitialisationException();
+            /*
+             * ==============NOTE TO STUDENTS=========================================================================
+             * We are throwing a RuntimeException which is an 'unchecked' exception. Unchecked exceptions do not need
+             * to be declared in the method signature.
+             * The reason we are using an unchecked exception here is because the caller cannot reasonably be expected
+             * to recover from an exception.
+             * Cf https://docs.oracle.com/javase/tutorial/essential/exceptions/runtime.html
+             * =======================================================================================================
+             */
+            throw new RuntimeException(MESSAGE_INIT_FAILED);
         }
     }
 
-    /**
-     * Entry point.
-     */
     public static void main(String... launchArgs) {
         System.out.println(MESSAGE_PROGRAM_LAUNCH_ARGS_USAGE);
-        try {
-            final Main main = new Main(getStorageFilePathFromLaunchArgs(launchArgs), System.in, System.out);
-            main.start();
-        } catch (MainInitialisationException mie) {
-            System.out.println(MESSAGE_INIT_FAILED);
-        }
+        final Main main = new Main(getStorageFilePathFromLaunchArgs(launchArgs), System.in, System.out);
+        main.start();
     }
 
     /**
