@@ -1,4 +1,4 @@
-package seedu.addressbook.util;
+package seedu.addressbook.common;
 
 import java.util.Collection;
 import java.util.HashSet;

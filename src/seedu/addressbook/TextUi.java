@@ -1,5 +1,7 @@
 package seedu.addressbook;
 
+import static seedu.addressbook.common.Messages.*;
+
 import seedu.addressbook.commands.CommandResult;
 import seedu.addressbook.model.person.ReadOnlyPerson;
 
@@ -23,31 +25,11 @@ public class TextUi {
     /**
      * A platform independent line separator.
      */
-    public static final String LS = System.lineSeparator() + LINE_PREFIX;
+    public static final String LS = System.lineSeparator();
 
     public static final String DIVIDER = "===================================================";
 
-    /*
-     * ==============NOTE TO STUDENTS======================================
-     * These messages shown to the user are defined in one place for convenient
-     * editing and proof reading. Such messages are considered part of the UI
-     * and may be subjected to review by UI experts or technical writers. Note
-     * that Some of the strings below include '%1$s' etc to mark the locations
-     * at which java String.format(...) method can insert values.
-     * ====================================================================
-     */
 
-    public static final String MESSAGE_INDEXED_LIST_ITEM = "\t%1$d. %2$s";
-    public static final String MESSAGE_GOODBYE = "Good bye!";
-    public static final String MESSAGE_INIT_FAILED = "Failed to initialise address book application. Exiting...";
-    public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! " + LS + "%1$s";
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
-    public static final String MESSAGE_PERSON_NOT_IN_ADDRESSBOOK = "Person could not be found in address book";
-    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
-    public static final String MESSAGE_PROGRAM_LAUNCH_ARGS_USAGE = "Launch command format: " +
-                                                                   "java seedu.addressbook.Main [STORAGE_FILE_PATH]";
-    public static final String MESSAGE_WELCOME = "Welcome to your Address Book!";
-    public static final String MESSAGE_USING_STORAGE_FILE = "Using storage file : %1$s";
 
     /**
      * Offset required to convert between 1-indexing and 0-indexing.COMMAND_
@@ -135,7 +117,7 @@ public class TextUi {
      */
     public void showToUser(String... message) {
         for (String m : message) {
-            out.println(LINE_PREFIX + m);
+            out.println(LINE_PREFIX + m.replace("\n", LS + LINE_PREFIX));
         }
     }
 
@@ -174,7 +156,7 @@ public class TextUi {
         final StringBuilder formatted = new StringBuilder();
         int displayIndex = 0 + DISPLAYED_INDEX_OFFSET;
         for (String listItem : listItems) {
-            formatted.append(getIndexedListItem(displayIndex, listItem)).append(LS);
+            formatted.append(getIndexedListItem(displayIndex, listItem)).append("\n");
             displayIndex++;
         }
         return formatted.toString();
@@ -187,16 +169,6 @@ public class TextUi {
      */
     public static String getIndexedListItem(int visibleIndex, String listItem) {
         return String.format(MESSAGE_INDEXED_LIST_ITEM, visibleIndex, listItem);
-    }
-
-    /**
-     * Constructs a feedback message to summarise an operation that displayed a listing of persons.
-     *
-     * @param personsDisplayed used to generate summary
-     * @return summary message for persons displayed
-     */
-    public static String getMessageForPersonListShownSummary(List<? extends ReadOnlyPerson> personsDisplayed) {
-        return String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, personsDisplayed.size());
     }
 
 }

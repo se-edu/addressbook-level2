@@ -1,9 +1,9 @@
 package seedu.addressbook.commands;
 
+import seedu.addressbook.common.Messages;
 import seedu.addressbook.model.person.ReadOnlyPerson;
 import seedu.addressbook.model.person.UniquePersonList.PersonNotFoundException;
 
-import static seedu.addressbook.TextUi.*;
 
 /**
  * Deletes a person identified using it's last displayed index from the address book.
@@ -13,9 +13,9 @@ public class DeletePersonCommand extends TargetLastListedPersonCommand {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the last person listing."
-            + LS + "Parameters: INDEX"
-            + LS + "Example: " + COMMAND_WORD + " 1";
+            + ": Deletes the person identified by the index number used in the last person listing.\n"
+            + "Parameters: INDEX\n"
+            + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
@@ -33,9 +33,9 @@ public class DeletePersonCommand extends TargetLastListedPersonCommand {
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, target));
 
         } catch (IndexOutOfBoundsException ie) {
-            return new CommandResult(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            return new CommandResult(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         } catch (PersonNotFoundException pnfe) {
-            return new CommandResult(MESSAGE_PERSON_NOT_IN_ADDRESSBOOK);
+            return new CommandResult(Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK);
         }
     }
 
