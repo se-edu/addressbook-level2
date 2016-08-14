@@ -89,7 +89,7 @@ public class StorageFile {
      *
      * @throws StorageOperationException if there were errors converting and/or storing data to file.
      */
-    public void saveAddressBookToFile(AddressBook addressBook) throws StorageOperationException {
+    public void save(AddressBook addressBook) throws StorageOperationException {
         try (final Writer fileWriter =
                      new BufferedWriter(new FileWriter(path.toFile()))) {
             final AdaptedAddressBook toSave = new AdaptedAddressBook(addressBook);
@@ -108,7 +108,7 @@ public class StorageFile {
      *
      * @throws StorageOperationException if there were errors reading and/or converting data from file.
      */
-    public AddressBook loadAddressBookFromFile() throws StorageOperationException {
+    public AddressBook load() throws StorageOperationException {
         try (final Reader fileReader =
                      new BufferedReader(new FileReader(path.toFile()))) {
             final Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
@@ -122,7 +122,7 @@ public class StorageFile {
         // create empty file if not found
         } catch (FileNotFoundException fnfe) {
             final AddressBook empty = new AddressBook();
-            saveAddressBookToFile(empty);
+            save(empty);
             return empty;
 
         // other errors

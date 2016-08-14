@@ -31,7 +31,7 @@ public class Main {
 
     private final TextUi ui;
     private final Parser parser;
-    private final StorageFile storageFile;
+    private final StorageFile storage;
     private final AddressBook addressBook;
 
     /**
@@ -46,8 +46,8 @@ public class Main {
         this.ui = new TextUi(inputStream, outputStream);
         this.parser = new Parser();
         try {
-            this.storageFile = createStorageFile(launchArgs);
-            this.addressBook = storageFile.loadAddressBookFromFile();
+            this.storage = createStorageFile(launchArgs);
+            this.addressBook = storage.load();
         } catch (InvalidStorageFilePathException | StorageOperationException e) {
             ui.showToUser(e.getMessage());
             /*
@@ -86,7 +86,7 @@ public class Main {
      */
     public void start() {
         ui.showWelcomeMessage(VERSION);
-        ui.showToUser(String.format(MESSAGE_USING_STORAGE_FILE, storageFile.toString()));
+        ui.showToUser(String.format(MESSAGE_USING_STORAGE_FILE, storage.toString()));
         while (true) {
             String userCommand = ui.getUserCommand();
             String feedback = executeCommand(userCommand);
@@ -126,7 +126,7 @@ public class Main {
      */
     private void saveChangesToStorageFile() {
         try {
-            storageFile.saveAddressBookToFile(addressBook);
+            storage.save(addressBook);
         } catch (StorageOperationException soe) {
             ui.showToUser(soe.getMessage());
             exitProgram();
