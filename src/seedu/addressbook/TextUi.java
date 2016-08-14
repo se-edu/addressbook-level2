@@ -61,11 +61,6 @@ public class TextUi {
     private final Scanner in;
     private final PrintStream out;
     
-    /**
-     * preserves the last showed listing of persons for understanding user person references
-     * based on the the last listing they saw
-     */
-    private List<? extends ReadOnlyPerson> lastShownPersonListing = new ArrayList<>();
 
     public TextUi(InputStream in, PrintStream out) {
         this.in = new Scanner(in);
@@ -152,16 +147,6 @@ public class TextUi {
     }
 
     /**
-     * Retrieves the person from the last person listing view specified by the displayed list index.
-     * 
-     * @param displayedIndex the index of the target person as shown to user
-     * @return the person in the last viewed listing
-     */
-    public ReadOnlyPerson getPersonFromLastShownListing(int displayedIndex) throws IndexOutOfBoundsException {
-        return lastShownPersonListing.get(displayedIndex - DISPLAYED_INDEX_OFFSET);
-    }
-    
-    /**
      * Shows a list of persons to the user, formatted as an indexed list.
      * Private contact details are hidden.
      */
@@ -171,16 +156,8 @@ public class TextUi {
             formattedPersons.add(person.getAsTextHidePrivate());
         }
         showToUserAsIndexedList(formattedPersons);
-        updateLastShownPersonListing(persons);
     }
 
-    /**
-     * Updates and tracks the last viewed person listing to the user.
-     */
-    private void updateLastShownPersonListing(List<? extends ReadOnlyPerson> persons) {
-        lastShownPersonListing = new ArrayList<>(persons); // copy to insulate from changes in original list
-    }
-    
     /**
      * Shows a list of strings to the user, formatted as an indexed list.
      */

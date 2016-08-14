@@ -5,6 +5,8 @@ import seedu.addressbook.Utils;
 import seedu.addressbook.model.AddressBook;
 import seedu.addressbook.model.person.ReadOnlyPerson;
 
+import java.util.List;
+
 import static seedu.addressbook.TextUi.*;
 
 /**
@@ -29,9 +31,10 @@ public class ViewAllPersonDetailsCommand extends TargetLastListedPersonCommand {
     }
 
     @Override
-    public void injectDependencies(TextUi ui, AddressBook addressBook) {
+    public void injectDependencies(TextUi ui, AddressBook addressBook, List<? extends ReadOnlyPerson> relevantPersons) {
         this.addressBook = addressBook;
         this.view = ui;
+        this.relevantPersons = relevantPersons;
     }
 
     @Override

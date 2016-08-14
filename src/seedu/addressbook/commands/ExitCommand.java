@@ -3,6 +3,9 @@ package seedu.addressbook.commands;
 import seedu.addressbook.TextUi;
 import seedu.addressbook.Utils;
 import seedu.addressbook.model.AddressBook;
+import seedu.addressbook.model.person.ReadOnlyPerson;
+
+import java.util.List;
 
 import static seedu.addressbook.TextUi.LS;
 
@@ -21,7 +24,7 @@ public class ExitCommand implements Command {
     public ExitCommand() {}
 
     @Override
-    public void injectDependencies(TextUi ui, AddressBook addressBook) {
+    public void injectDependencies(TextUi ui, AddressBook addressBook, List<? extends ReadOnlyPerson> relevantPersons) {
         this.ui = ui;
     }
 

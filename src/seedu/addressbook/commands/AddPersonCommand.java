@@ -5,6 +5,7 @@ import seedu.addressbook.Utils;
 import seedu.addressbook.model.*;
 import seedu.addressbook.model.person.*;
 
+import java.util.List;
 import java.util.regex.Pattern;
 
 import static seedu.addressbook.TextUi.LS;
@@ -40,7 +41,7 @@ public class AddPersonCommand implements Command {
     }
 
     @Override
-    public void injectDependencies(TextUi ui, AddressBook addressBook) {
+    public void injectDependencies(TextUi ui, AddressBook addressBook, List<? extends ReadOnlyPerson> relevantPersons) {
         this.addressBook = addressBook;
     }
 

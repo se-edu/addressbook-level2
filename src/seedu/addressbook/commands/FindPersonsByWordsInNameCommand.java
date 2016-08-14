@@ -35,7 +35,7 @@ public class FindPersonsByWordsInNameCommand implements Command {
     }
 
     @Override
-    public void injectDependencies(TextUi ui, AddressBook addressBook) {
+    public void injectDependencies(TextUi ui, AddressBook addressBook, List<? extends ReadOnlyPerson> relevantPersons) {
         this.addressBook = addressBook;
         this.ui = ui;
     }
@@ -45,7 +45,7 @@ public class FindPersonsByWordsInNameCommand implements Command {
         Utils.assertNotNull(addressBook, ui);
         final List<ReadOnlyPerson> personsFound = getPersonsWithNameContainingAnyKeyword(keywords);
         ui.showPersonListView(personsFound);
-        return new CommandResult(getMessageForPersonListShownSummary(personsFound));
+        return new CommandResult(getMessageForPersonListShownSummary(personsFound), personsFound);
     }
 
     /**

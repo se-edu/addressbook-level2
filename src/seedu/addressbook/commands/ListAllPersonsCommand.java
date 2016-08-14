@@ -26,7 +26,7 @@ public class ListAllPersonsCommand implements Command {
     public ListAllPersonsCommand() {}
 
     @Override
-    public void injectDependencies(TextUi ui, AddressBook addressBook) {
+    public void injectDependencies(TextUi ui, AddressBook addressBook, List<? extends ReadOnlyPerson> relevantPersons) {
         this.addressBook = addressBook;
         this.ui = ui;
     }
@@ -36,6 +36,6 @@ public class ListAllPersonsCommand implements Command {
         Utils.assertNotNull(ui, addressBook);
         List<ReadOnlyPerson> allPersons = addressBook.getAllPersons().immutableListView();
         ui.showPersonListView(allPersons);
-        return new CommandResult(getMessageForPersonListShownSummary(allPersons));
+        return new CommandResult(getMessageForPersonListShownSummary(allPersons), allPersons);
     }
 }

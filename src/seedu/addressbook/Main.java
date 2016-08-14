@@ -1,5 +1,6 @@
 package seedu.addressbook;
 
+import seedu.addressbook.model.person.ReadOnlyPerson;
 import seedu.addressbook.storage.StorageFile.*;
 
 import seedu.addressbook.commands.*;
@@ -8,6 +9,7 @@ import seedu.addressbook.parser.Parser;
 import seedu.addressbook.storage.StorageFile;
 
 import java.io.*;
+import java.util.List;
 
 
 /**
@@ -74,10 +76,14 @@ public class Main {
      */
     public void start() {
         ui.showWelcomeMessage(VERSION, storage.getPath());
+        List<? extends ReadOnlyPerson> lastShownList = null;
         while (true) {
             String userCommand = ui.getUserCommand();
-            String feedback = executeCommand(userCommand);
-            ui.showResultToUser(feedback);
+            CommandResult result = executeCommand(userCommand, lastShownList);
+            ui.showResultToUser(result.getFeedbackToUser());
+            if(result.getRelevantPersons() != null) {
+                lastShownList = result.getRelevantPersons();
+            }
         }
     }
 
@@ -87,18 +93,18 @@ public class Main {
      * @param userInputString raw input from user
      * @return feedback about how the command was executed
      */
-    private String executeCommand(String userInputString)  {
+    private CommandResult executeCommand(String userInputString, List<? extends ReadOnlyPerson> lastShownList)  {
         Command command;
         try {
             command = new Parser().parseCommand(userInputString);
         } catch (Parser.ParseException pe) {
-            return pe.getMessage();
+            return new CommandResult(pe.getMessage());
         }
 
-        command.injectDependencies(ui, addressBook);
+        command.injectDependencies(ui, addressBook, lastShownList);
         CommandResult result = command.execute();
         saveChangesToStorageFile();
-        return result.getFeedbackToUser();
+        return result;
     }
 
     /**
