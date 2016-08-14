@@ -6,7 +6,7 @@ import static seedu.addressbook.TextUi.LS;
 /**
  * Terminates the program.
  */
-public class ExitCommand implements Command {
+public class ExitCommand extends Command {
 
     public static final String COMMAND_WORD = "exit";
 

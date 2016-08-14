@@ -1,10 +1,7 @@
 package seedu.addressbook.commands;
 
-import seedu.addressbook.model.AddressBook;
 import seedu.addressbook.model.person.ReadOnlyPerson;
 import seedu.addressbook.model.person.UniquePersonList.PersonNotFoundException;
-
-import java.util.List;
 
 import static seedu.addressbook.TextUi.*;
 
@@ -22,17 +19,11 @@ public class DeletePersonCommand extends TargetLastListedPersonCommand {
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
-    private AddressBook addressBook;
 
     public DeletePersonCommand(int targetVisibleIndex) {
         super(targetVisibleIndex);
     }
 
-    @Override
-    public void setData(AddressBook addressBook, List<? extends ReadOnlyPerson> relevantPersons) {
-        this.addressBook = addressBook;
-        this.relevantPersons = relevantPersons;
-    }
 
     @Override
     public CommandResult execute() {

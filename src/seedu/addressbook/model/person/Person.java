@@ -1,11 +1,9 @@
 package seedu.addressbook.model.person;
 
-import seedu.addressbook.Utils;
-import seedu.addressbook.model.Tag;
+import seedu.addressbook.util.Utils;
 import seedu.addressbook.model.UniqueTagList;
 
 import java.util.Objects;
-import java.util.Set;
 
 /**
  * Represents a Person in the address book.

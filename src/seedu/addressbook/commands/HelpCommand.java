@@ -5,7 +5,7 @@ import static seedu.addressbook.TextUi.LS;
 /**
  * Format full help instructions for every command for display.
  */
-public class HelpCommand implements Command {
+public class HelpCommand extends Command {
 
     public static final String COMMAND_WORD = "help";
 

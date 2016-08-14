@@ -4,7 +4,7 @@ package seedu.addressbook.commands;
 /**
  * Represents an incorrect command. Upon execution, produces some feedback to the user.
  */
-public class IncorrectCommand implements Command{
+public class IncorrectCommand extends Command{
 
     String feedbackToUser;
 

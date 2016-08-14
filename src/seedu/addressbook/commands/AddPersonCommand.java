@@ -1,10 +1,8 @@
 package seedu.addressbook.commands;
 
-import seedu.addressbook.Utils;
-import seedu.addressbook.model.*;
+import seedu.addressbook.util.Utils;
 import seedu.addressbook.model.person.*;
 
-import java.util.List;
 import java.util.regex.Pattern;
 
 import static seedu.addressbook.TextUi.LS;
@@ -12,7 +10,7 @@ import static seedu.addressbook.TextUi.LS;
 /**
  * Adds a person to the address book.
  */
-public class AddPersonCommand implements Command {
+public class AddPersonCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
@@ -32,17 +30,12 @@ public class AddPersonCommand implements Command {
                             + " (?<isAddressPrivate>p?)a/(?<address>[^/]+)"
                             + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
 
-    private AddressBook addressBook;
     private final Person toAdd;
 
     public AddPersonCommand(Person toAdd) {
         this.toAdd = toAdd;
     }
 
-    @Override
-    public void setData(AddressBook addressBook, List<? extends ReadOnlyPerson> relevantPersons) {
-        this.addressBook = addressBook;
-    }
 
     @Override
     public CommandResult execute() {

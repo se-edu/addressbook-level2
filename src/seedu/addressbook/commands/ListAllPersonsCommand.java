@@ -1,16 +1,16 @@
 package seedu.addressbook.commands;
 
-import seedu.addressbook.model.AddressBook;
 import seedu.addressbook.model.person.ReadOnlyPerson;
 
 import java.util.List;
 
-import static seedu.addressbook.TextUi.*;
+import static seedu.addressbook.TextUi.LS;
+import static seedu.addressbook.TextUi.getMessageForPersonListShownSummary;
 
 /**
  * Lists all persons in the address book to the user.
  */
-public class ListAllPersonsCommand implements Command {
+public class ListAllPersonsCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
@@ -18,14 +18,9 @@ public class ListAllPersonsCommand implements Command {
             + ": Displays all persons in the address book as a list with index numbers."
             + LS + "Example: " + COMMAND_WORD;
 
-    private AddressBook addressBook;
 
     public ListAllPersonsCommand() {}
 
-    @Override
-    public void setData(AddressBook addressBook, List<? extends ReadOnlyPerson> relevantPersons) {
-        this.addressBook = addressBook;
-    }
 
     @Override
     public CommandResult execute() {

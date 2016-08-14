@@ -8,19 +8,24 @@ import java.util.List;
 /**
  * Represents a command with hidden internal logic and the ability to be executed.
  */
-public interface Command {
+public abstract class Command {
+    protected AddressBook addressBook;
+    protected List<? extends ReadOnlyPerson> relevantPersons;
 
     /**
      * Executes the command and returns the result message.
      *
      * @return feedback message of the operation result for display
      */
-    CommandResult execute();
+    public abstract CommandResult execute();
 
     /**
      * Provides any needed dependencies to the command.
      * Commands making use of any of these should override this method to gain
      * access to the dependencies.
      */
-    default void setData(AddressBook addressBook, List<? extends ReadOnlyPerson> relevantPersons) {}
+    public void setData(AddressBook addressBook, List<? extends ReadOnlyPerson> relevantPersons) {
+        this.addressBook = addressBook;
+        this.relevantPersons = relevantPersons;
+    }
 }
