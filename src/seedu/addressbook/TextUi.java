@@ -64,11 +64,6 @@ public class TextUi {
      */
     private List<? extends ReadOnlyPerson> lastShownPersonListing = new ArrayList<>();
 
-    /**
-     * latest input line retrieved from {@link #getUserCommand()}
-     */
-    private String lastEnteredCommand = "";
-    
     public TextUi(InputStream in, PrintStream out) {
         this.in = new Scanner(in);
         this.out = out;
@@ -98,27 +93,22 @@ public class TextUi {
     /**
      * Prompts for the command and reads the text entered by the user.
      * Ignores empty, pure whitespace, and comment lines.
-     *
-     * @see #shouldIgnore(String)
+     * Echos the command back to the user.
      * @return full line entered by the user
      */
     public String getUserCommand() {
         out.print(LINE_PREFIX + "Enter command: ");
         String fullInputLine = in.nextLine();
+
         // silently consume all ignored lines
         while (shouldIgnore(fullInputLine)) {
             fullInputLine = in.nextLine();
         }
-        lastEnteredCommand = fullInputLine;
+
+        showToUser("[Command entered:" + fullInputLine + "]");
         return fullInputLine;
     }
 
-    /**
-     * Retrieves the latest entered non-ignored input line read from the user by {@link #getUserCommand()}
-     */
-    public String getLastEnteredCommand() {
-        return lastEnteredCommand;
-    }
 
     public void showWelcomeMessage(String version) {
         showToUser(DIVIDER, DIVIDER, version, MESSAGE_WELCOME, DIVIDER);
@@ -126,13 +116,6 @@ public class TextUi {
 
     public void showGoodbyeMessage() {
         showToUser(MESSAGE_GOODBYE, DIVIDER, DIVIDER);
-    }
-
-    /**
-     * Echoes the user input back to the user.
-     */
-    public void echoLastEnteredUserCommand() {
-        showToUser("[Command entered:" + lastEnteredCommand + "]");
     }
 
     /**

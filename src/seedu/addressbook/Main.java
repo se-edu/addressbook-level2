@@ -74,7 +74,6 @@ public class Main {
         main.start();
     }
 
-
     /**
      * Starts program execution.
      * Assumption: All required objects have been initialised.
@@ -85,7 +84,6 @@ public class Main {
         ui.showToUser(String.format(MESSAGE_USING_STORAGE_FILE, storageFile.toString()));
         while (true) {
             String userCommand = ui.getUserCommand();
-            ui.echoLastEnteredUserCommand();
             String feedback = executeCommand(userCommand);
             ui.showResultToUser(feedback);
         }
