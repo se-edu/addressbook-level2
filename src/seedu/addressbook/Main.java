@@ -104,19 +104,12 @@ public class Main {
      * @return feedback about how the command was executed
      */
     private CommandResult executeCommand(Command command, List<? extends ReadOnlyPerson> lastShownList)  {
-        command.setData(addressBook, lastShownList);
-        CommandResult result = command.execute();
-        saveChangesToStorageFile();
-        return result;
-    }
-
-    /**
-     * Saves any changes to the storage file. Exits program if an error is encountered.
-     */
-    private void saveChangesToStorageFile() {
         try {
+            command.setData(addressBook, lastShownList);
+            CommandResult result = command.execute();
             storage.save(addressBook);
-        } catch (StorageOperationException e) {
+            return result;
+        } catch (Exception e) {
             ui.showToUser(e.getMessage());
             throw new RuntimeException(e);
         }
