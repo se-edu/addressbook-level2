@@ -76,23 +76,22 @@ public class Main {
      */
     public void run() {
         ui.showWelcomeMessage(VERSION, storage.getPath());
+
         List<? extends ReadOnlyPerson> lastShownList = null;
         Command command;
         CommandResult result;
+
         do {
             String userCommand = ui.getUserCommand();
-            try {
-                command = new Parser().parseCommand(userCommand);
-                result = executeCommand(userCommand, lastShownList);
-            } catch (Parser.ParseException pe) {
-                command = null;
-                result = new CommandResult(pe.getMessage());
-            }
+            command = new Parser().parseCommand(userCommand);
+            result = executeCommand(command, lastShownList);
+
             if(result.getRelevantPersons() != null) {
                 ui.showPersonListView(result.getRelevantPersons());
                 lastShownList = result.getRelevantPersons();
             }
             ui.showResultToUser(result.getFeedbackToUser());
+
         } while(!ExitCommand.isExit(command));
 
         ui.showGoodbyeMessage();
@@ -102,17 +101,10 @@ public class Main {
     /**
      * Processes user input into desired command, then executes and returns feedback.
      * 
-     * @param userInputString raw input from user
+     * @param command user command
      * @return feedback about how the command was executed
      */
-    private CommandResult executeCommand(String userInputString, List<? extends ReadOnlyPerson> lastShownList)  {
-        Command command;
-        try {
-            command = new Parser().parseCommand(userInputString);
-        } catch (Parser.ParseException pe) {
-            return new CommandResult(pe.getMessage());
-        }
-
+    private CommandResult executeCommand(Command command, List<? extends ReadOnlyPerson> lastShownList)  {
         command.injectDependencies(addressBook, lastShownList);
         CommandResult result = command.execute();
         saveChangesToStorageFile();
