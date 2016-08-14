@@ -74,6 +74,23 @@ public class Main {
         main.start();
     }
 
+
+    /**
+     * Starts program execution.
+     * Assumption: All required objects have been initialised.
+     * TODO: Eliminate above assumption (move initialization logic to start method?)
+     */
+    public void start() {
+        ui.showWelcomeMessage(VERSION);
+        ui.showToUser(String.format(MESSAGE_USING_STORAGE_FILE, storageFile.toString()));
+        while (true) {
+            String userCommand = ui.getUserCommand();
+            ui.echoLastEnteredUserCommand();
+            String feedback = executeCommand(userCommand);
+            ui.showResultToUser(feedback);
+        }
+    }
+
     /**
      * Retrieves the string representing the intended storage file path as specified in the launch args.
      * Defaults to {@link #DEFAULT_STORAGE_FILEPATH} if no storage file argument is found.
@@ -93,28 +110,7 @@ public class Main {
         exit.execute();
     }
 
-    /*
-     * ==============NOTE TO STUDENTS======================================
-     * Notice how this method solves the whole problem at a very high level.
-     * We can understand the high-level logic of the program by reading this
-     * method alone.
-     * ====================================================================
-     */
 
-    /**
-     * Starts program execution after all dependencies and components successfully initialised.
-     */
-    public void start() {
-        ui.showWelcomeMessage(VERSION);
-        ui.showToUser(String.format(MESSAGE_USING_STORAGE_FILE, storageFile.toString()));
-        // [read input, execute, response] loop
-        while (true) {
-            String userCommand = ui.getUserCommand();
-            ui.echoLastEnteredUserCommand();
-            String feedback = executeCommand(userCommand);
-            ui.showResultToUser(feedback);
-        }
-    }
 
     /**
      * Processes user input into desired command, then executes and returns feedback.
