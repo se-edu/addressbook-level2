@@ -31,15 +31,13 @@ public class ViewAllPersonDetailsCommand extends TargetLastListedPersonCommand {
     }
 
     @Override
-    public void injectDependencies(TextUi ui, AddressBook addressBook, List<? extends ReadOnlyPerson> relevantPersons) {
+    public void injectDependencies(AddressBook addressBook, List<? extends ReadOnlyPerson> relevantPersons) {
         this.addressBook = addressBook;
-        this.view = ui;
         this.relevantPersons = relevantPersons;
     }
 
     @Override
     public CommandResult execute() {
-        Utils.assertNotNull(addressBook, view);
         try {
             final ReadOnlyPerson target = getTargetFromView();
             if (!addressBook.containsPerson(target)) {

@@ -18,21 +18,18 @@ public class ExitCommand implements Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exits the program."
             + LS + "Example: " + COMMAND_WORD;
+    public static final String MESSAGE_EXIT_ACKNOWEDGEMENT = "Exiting Addressbook as requested ...";
 
     private TextUi ui;
 
     public ExitCommand() {}
 
     @Override
-    public void injectDependencies(TextUi ui, AddressBook addressBook, List<? extends ReadOnlyPerson> relevantPersons) {
-        this.ui = ui;
+    public CommandResult execute() {
+        return new CommandResult(MESSAGE_EXIT_ACKNOWEDGEMENT);
     }
 
-    @Override
-    public CommandResult execute() {
-        Utils.assertNotNull(ui);
-        ui.showGoodbyeMessage();
-        System.exit(0);
-        throw new InternalError(); // should never reach this line.
+    public static boolean isExit(Command command) {
+        return command != null && command instanceof ExitCommand;
     }
 }

@@ -41,7 +41,7 @@ public class AddPersonCommand implements Command {
     }
 
     @Override
-    public void injectDependencies(TextUi ui, AddressBook addressBook, List<? extends ReadOnlyPerson> relevantPersons) {
+    public void injectDependencies(AddressBook addressBook, List<? extends ReadOnlyPerson> relevantPersons) {
         this.addressBook = addressBook;
     }
 

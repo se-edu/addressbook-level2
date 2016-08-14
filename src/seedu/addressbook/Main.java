@@ -77,14 +77,26 @@ public class Main {
     public void start() {
         ui.showWelcomeMessage(VERSION, storage.getPath());
         List<? extends ReadOnlyPerson> lastShownList = null;
-        while (true) {
+        Command command;
+        CommandResult result;
+        do {
             String userCommand = ui.getUserCommand();
-            CommandResult result = executeCommand(userCommand, lastShownList);
-            ui.showResultToUser(result.getFeedbackToUser());
+            try {
+                command = new Parser().parseCommand(userCommand);
+                result = executeCommand(userCommand, lastShownList);
+            } catch (Parser.ParseException pe) {
+                command = null;
+                result = new CommandResult(pe.getMessage());
+            }
             if(result.getRelevantPersons() != null) {
+                ui.showPersonListView(result.getRelevantPersons());
                 lastShownList = result.getRelevantPersons();
             }
-        }
+            ui.showResultToUser(result.getFeedbackToUser());
+        } while(!ExitCommand.isExit(command));
+
+        ui.showGoodbyeMessage();
+        System.exit(0);
     }
 
     /**
@@ -101,7 +113,7 @@ public class Main {
             return new CommandResult(pe.getMessage());
         }
 
-        command.injectDependencies(ui, addressBook, lastShownList);
+        command.injectDependencies(addressBook, lastShownList);
         CommandResult result = command.execute();
         saveChangesToStorageFile();
         return result;

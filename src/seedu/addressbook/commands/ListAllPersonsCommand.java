@@ -26,16 +26,13 @@ public class ListAllPersonsCommand implements Command {
     public ListAllPersonsCommand() {}
 
     @Override
-    public void injectDependencies(TextUi ui, AddressBook addressBook, List<? extends ReadOnlyPerson> relevantPersons) {
+    public void injectDependencies(AddressBook addressBook, List<? extends ReadOnlyPerson> relevantPersons) {
         this.addressBook = addressBook;
-        this.ui = ui;
     }
 
     @Override
     public CommandResult execute() {
-        Utils.assertNotNull(ui, addressBook);
         List<ReadOnlyPerson> allPersons = addressBook.getAllPersons().immutableListView();
-        ui.showPersonListView(allPersons);
         return new CommandResult(getMessageForPersonListShownSummary(allPersons), allPersons);
     }
 }

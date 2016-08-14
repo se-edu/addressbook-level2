@@ -27,7 +27,6 @@ public class FindPersonsByWordsInNameCommand implements Command {
             Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one or more keywords separated by whitespace
 
     private AddressBook addressBook;
-    private TextUi ui;
     private final Set<String> keywords;
 
     public FindPersonsByWordsInNameCommand(Set<String> keywords) {
@@ -35,16 +34,13 @@ public class FindPersonsByWordsInNameCommand implements Command {
     }
 
     @Override
-    public void injectDependencies(TextUi ui, AddressBook addressBook, List<? extends ReadOnlyPerson> relevantPersons) {
+    public void injectDependencies(AddressBook addressBook, List<? extends ReadOnlyPerson> relevantPersons) {
         this.addressBook = addressBook;
-        this.ui = ui;
     }
 
     @Override
     public CommandResult execute() {
-        Utils.assertNotNull(addressBook, ui);
         final List<ReadOnlyPerson> personsFound = getPersonsWithNameContainingAnyKeyword(keywords);
-        ui.showPersonListView(personsFound);
         return new CommandResult(getMessageForPersonListShownSummary(personsFound), personsFound);
     }
 

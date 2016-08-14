@@ -18,7 +18,6 @@ public abstract class TargetLastListedPersonCommand implements Command {
 
     public static final Pattern ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
 
-    protected TextUi view;
     protected final int targetIndex;
     protected List<? extends ReadOnlyPerson> relevantPersons;
 
@@ -30,7 +29,7 @@ public abstract class TargetLastListedPersonCommand implements Command {
     }
 
     @Override
-    public abstract void injectDependencies(TextUi ui, AddressBook addressBook, List<? extends ReadOnlyPerson> relevantPersons);
+    public abstract void injectDependencies(AddressBook addressBook, List<? extends ReadOnlyPerson> relevantPersons);
 
     /**
      * Extracts the the target person in the last shown list from the given arguments.
