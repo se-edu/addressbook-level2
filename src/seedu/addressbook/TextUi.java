@@ -113,8 +113,16 @@ public class TextUi {
     }
 
 
-    public void showWelcomeMessage(String version) {
-        showToUser(DIVIDER, DIVIDER, version, MESSAGE_WELCOME, MESSAGE_PROGRAM_LAUNCH_ARGS_USAGE, DIVIDER);
+    public void showWelcomeMessage(String version, String storageFilePath) {
+        String storageFileInfo = String.format(MESSAGE_USING_STORAGE_FILE, storageFilePath);
+        showToUser(
+                DIVIDER,
+                DIVIDER,
+                MESSAGE_WELCOME,
+                version,
+                MESSAGE_PROGRAM_LAUNCH_ARGS_USAGE,
+                storageFileInfo,
+                DIVIDER);
     }
 
     public void showGoodbyeMessage() {

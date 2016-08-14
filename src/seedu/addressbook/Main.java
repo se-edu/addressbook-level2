@@ -1,7 +1,6 @@
 package seedu.addressbook;
 
-import static seedu.addressbook.TextUi.*;
-import static seedu.addressbook.storage.StorageFile.*;
+import seedu.addressbook.storage.StorageFile.*;
 
 import seedu.addressbook.commands.*;
 import seedu.addressbook.model.AddressBook;
@@ -76,8 +75,7 @@ public class Main {
      * TODO: Eliminate above assumption (move initialization logic to start method?)
      */
     public void start() {
-        ui.showWelcomeMessage(VERSION);
-        ui.showToUser(String.format(MESSAGE_USING_STORAGE_FILE, storage.toString()));
+        ui.showWelcomeMessage(VERSION, storage.getPath());
         while (true) {
             String userCommand = ui.getUserCommand();
             String feedback = executeCommand(userCommand);

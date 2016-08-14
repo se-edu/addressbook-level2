@@ -135,8 +135,8 @@ public class StorageFile {
         }
     }
 
-    @Override
-    public String toString() {
+
+    public String getPath() {
         return path.toString();
     }
 }
