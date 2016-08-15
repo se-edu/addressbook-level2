@@ -116,7 +116,7 @@ public class TextUi {
      */
     public void showToUser(String... message) {
         for (String m : message) {
-            out.println(LINE_PREFIX + m.replace("\n", LS + LINE_PREFIX));
+            out.println(LINE_PREFIX + m.replace("\\R", LS + LINE_PREFIX));
         }
     }
 
