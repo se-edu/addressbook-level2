@@ -1,10 +1,10 @@
-Launch arguments format: [STORAGE_FILE_PATH]
 || ===================================================
 || ===================================================
-|| AddessBook Level 1 - Version 1.0
 || Welcome to your Address Book!
-|| ===================================================
+|| AddessBook Level 2 - Version 1.0
+|| Launch command format: java seedu.addressbook.Main [STORAGE_FILE_PATH]
 || Using storage file : addressbook.txt
+|| ===================================================
 || Enter command: || [Command entered:  sfdfd]
 || add: Adds a person to the address book. Contact details can be marked private by prepending 'p' to the prefix.
 || Parameters: NAME [p]p/PHONE [p]e/EMAIL [p]a/ADDRESS  [t/TAG]...
@@ -289,6 +289,8 @@ Launch arguments format: [STORAGE_FILE_PATH]
 || 0 persons listed!
 || ===================================================
 || Enter command: || [Command entered:  exit]
-|| Exiting Address Book... Good bye!
+|| Exiting Address Book as requested ...
+|| ===================================================
+|| Good bye!
 || ===================================================
 || ===================================================

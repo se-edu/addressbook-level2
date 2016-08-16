@@ -1,6 +1,6 @@
 package seedu.addressbook.model;
 
-import seedu.addressbook.Utils;
+import seedu.addressbook.common.Utils;
 
 import java.util.*;
 

@@ -1,160 +1,140 @@
 package seedu.addressbook;
 
-import static seedu.addressbook.TextUi.*;
-import static seedu.addressbook.storage.StorageFile.*;
+import seedu.addressbook.model.person.ReadOnlyPerson;
+import seedu.addressbook.storage.StorageFile.*;
 
 import seedu.addressbook.commands.*;
 import seedu.addressbook.model.AddressBook;
 import seedu.addressbook.parser.Parser;
 import seedu.addressbook.storage.StorageFile;
+import seedu.addressbook.ui.TextUi;
 
 import java.io.*;
+import java.util.List;
 
-/* ==============NOTE TO STUDENTS======================================
- * This class header comment below is brief because details of how to
- * use this class are documented elsewhere.
- * ====================================================================
- */
 
 /**
  * Entry point of the address book application.
- * Contains command execution logic; initialises and uses the different components.
+ * Initializes the application and starts the interaction with the user.
  */
 public class Main {
 
     /**
-     * Default file path used if the user doesn't provide the file name.
-     */
-    public static final String DEFAULT_STORAGE_FILEPATH = "addressbook.txt";
-
-    /**
-     * These message is not in the TextUi class because program launch and initialisation messages may be shown
-     * outside the given UI (should be logged at launch console), and needs to be shown before the UI is ready.
-     */
-    public static final String MESSAGE_PROGRAM_LAUNCH_ARGS_USAGE = "Launch arguments format: [STORAGE_FILE_PATH]";
-    public static final String MESSAGE_INIT_FAILED = "Failed to initialise address book application. Exiting...";
-
-    /**
      * Version info of the program.
      */
-    public static final String VERSION = "AddessBook Level 1 - Version 1.0";
+    public static final String VERSION = "AddessBook Level 2 - Version 1.0";
 
+    private TextUi ui;
+    private StorageFile storage;
+    private AddressBook addressBook;
 
     /**
-     * Signals that the main application had a problem while initialising.
+     * The list of person shown to the user most recently.
      */
-    public static class MainInitialisationException extends Exception {}
+    private List<? extends ReadOnlyPerson> lastShownList = null;
 
-    private final TextUi ui;
-    private final Parser parser;
-    private final StorageFile storageFile;
-    private final AddressBook addressBook;
+
+    public static void main(String... launchArgs) {
+        new Main().run(launchArgs, System.in, System.out);
+    }
 
     /**
-     * Sets up the different components and loads up the model from the storage file.
+     * Runs the program until termination.
+     */
+    public void run(String[] launchArgs, InputStream inputStream, PrintStream outputStream) {
+        start(launchArgs, inputStream, outputStream);
+        runCommandLoopUntilExitCommand();
+        exit();
+    }
+
+    /**
+     * Sets up the different components, loads up the data from the storage file, and prints the welcome message.
      *
-     * @param storageFilePath file path of the desired storage file
+     * @param launchArgs arguments supplied by the user at program launch
      * @param inputStream user text input source
      * @param outputStream user text output acceptor
      *
-     * @throws MainInitialisationException if there were problems
      */
-    public Main(String storageFilePath, InputStream inputStream, PrintStream outputStream)
-            throws MainInitialisationException {
-        this.ui = new TextUi(inputStream, outputStream);
-        this.parser = new Parser();
+    private void start(String[] launchArgs, InputStream inputStream, PrintStream outputStream) {
         try {
-            this.storageFile = new StorageFile(storageFilePath);
-            this.addressBook = storageFile.loadAddressBookFromFile();
+            this.ui = new TextUi(inputStream, outputStream);
+            this.storage = createStorageFile(launchArgs);
+            this.addressBook = storage.load();
+            ui.showWelcomeMessage(VERSION, storage.getPath());
+
         } catch (InvalidStorageFilePathException | StorageOperationException e) {
-            ui.showToUser(e.getMessage());
-            throw new MainInitialisationException();
+            ui.showInitFailedMessage();
+            /*
+             * ==============NOTE TO STUDENTS=========================================================================
+             * We are throwing a RuntimeException which is an 'unchecked' exception. Unchecked exceptions do not need
+             * to be declared in the method signature.
+             * The reason we are using an unchecked exception here is because the caller cannot reasonably be expected
+             * to recover from an exception.
+             * Cf https://docs.oracle.com/javase/tutorial/essential/exceptions/runtime.html
+             * =======================================================================================================
+             */
+            throw new RuntimeException(e);
         }
     }
 
     /**
-     * Entry point.
+     * Prints the Goodbye message and exits.
      */
-    public static void main(String... launchArgs) {
-        System.out.println(MESSAGE_PROGRAM_LAUNCH_ARGS_USAGE);
-        try {
-            final Main main = new Main(getStorageFilePathFromLaunchArgs(launchArgs), System.in, System.out);
-            main.start();
-        } catch (MainInitialisationException mie) {
-            System.out.println(MESSAGE_INIT_FAILED);
-        }
+    private void exit() {
+        ui.showGoodbyeMessage();
+        System.exit(0);
     }
 
     /**
-     * Retrieves the string representing the intended storage file path as specified in the launch args.
-     * Defaults to {@link #DEFAULT_STORAGE_FILEPATH} if no storage file argument is found.
-     * 
-     * @param launchArgs full program launch arguments passed to application main method
+     * Reads the user command and executes it, until the user issues the exit command.
      */
-    private static String getStorageFilePathFromLaunchArgs(String... launchArgs) {
-        return launchArgs.length > 0 ? launchArgs[0] : DEFAULT_STORAGE_FILEPATH;
-    }
-
-    /**
-     * Displays the goodbye message and exits the runtime.
-     */
-    private void exitProgram() {
-        Command exit = new ExitCommand();
-        exit.injectDependencies(ui, addressBook);
-        exit.execute();
-    }
-
-    /*
-     * ==============NOTE TO STUDENTS======================================
-     * Notice how this method solves the whole problem at a very high level.
-     * We can understand the high-level logic of the program by reading this
-     * method alone.
-     * ====================================================================
-     */
-
-    /**
-     * Starts program execution after all dependencies and components successfully initialised.
-     */
-    public void start() {
-        ui.showWelcomeMessage(VERSION);
-        ui.showToUser(String.format(MESSAGE_USING_STORAGE_FILE, storageFile.toString()));
-        // [read input, execute, response] loop
-        while (true) {
+    private void runCommandLoopUntilExitCommand() {
+        Command command;
+        do {
             String userCommand = ui.getUserCommand();
-            ui.echoLastEnteredUserCommand();
-            String feedback = executeCommand(userCommand);
-            ui.showResultToUser(feedback);
+            command = new Parser().parseCommand(userCommand);
+            CommandResult result = executeCommand(command);
+            updateLastShownList(result);
+            ui.showResultToUser(result);
+
+        } while(!ExitCommand.isExit(command));
+    }
+
+    /**
+     * Updates the {@link #lastShownList} if the result contains a list of Persons
+     */
+    private void updateLastShownList(CommandResult result) {
+        if(result.getRelevantPersons() != null) {
+            lastShownList = result.getRelevantPersons();
         }
     }
 
     /**
      * Processes user input into desired command, then executes and returns feedback.
      * 
-     * @param userInputString raw input from user
+     * @param command user command
      * @return feedback about how the command was executed
      */
-    private String executeCommand(String userInputString) {
+    private CommandResult executeCommand(Command command)  {
         try {
-            final Command command = parser.parseCommand(userInputString);
-            command.injectDependencies(ui, addressBook);
-            final String result = command.execute();
-            saveChangesToStorageFile();
+            command.setData(addressBook, lastShownList);
+            CommandResult result = command.execute();
+            storage.save(addressBook);
             return result;
-        } catch (Parser.ParseException pe) {
-            return pe.getMessage();
+        } catch (Exception e) {
+            ui.showToUser(e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 
     /**
-     * Saves any changes to the storage file. Exits program if an error is encountered.
+     * Creates the StorageFile object based on the user specified path (if any) or the default storage path.
+     * @param launchArgs arguments supplied by the user at program launch
+     * @throws InvalidStorageFilePathException if the target file path is incorrect.
      */
-    private void saveChangesToStorageFile() {
-        try {
-            storageFile.saveAddressBookToFile(addressBook);
-        } catch (StorageOperationException soe) {
-            ui.showToUser(soe.getMessage());
-            exitProgram();
-        }
+    private StorageFile createStorageFile(String[] launchArgs) throws InvalidStorageFilePathException {
+        boolean isStorageFileSpecifiedByUser = launchArgs.length > 0;
+        return isStorageFileSpecifiedByUser ? new StorageFile(launchArgs[0]) : new StorageFile();
     }
 
 

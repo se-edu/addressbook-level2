@@ -1,35 +1,26 @@
 package seedu.addressbook.commands;
 
-import seedu.addressbook.TextUi;
-import seedu.addressbook.Utils;
-import seedu.addressbook.model.AddressBook;
 
-import static seedu.addressbook.TextUi.LS;
 
 /**
  * Terminates the program.
  */
-public class ExitCommand implements Command {
+public class ExitCommand extends Command {
 
     public static final String COMMAND_WORD = "exit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exits the program."
-            + LS + "Example: " + COMMAND_WORD;
-
-    private TextUi ui;
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exits the program.\n"
+            + "Example: " + COMMAND_WORD;
+    public static final String MESSAGE_EXIT_ACKNOWEDGEMENT = "Exiting Address Book as requested ...";
 
     public ExitCommand() {}
 
     @Override
-    public void injectDependencies(TextUi ui, AddressBook addressBook) {
-        this.ui = ui;
+    public CommandResult execute() {
+        return new CommandResult(MESSAGE_EXIT_ACKNOWEDGEMENT);
     }
 
-    @Override
-    public String execute() {
-        Utils.assertNotNull(ui);
-        ui.showGoodbyeMessage();
-        System.exit(0);
-        throw new InternalError(); // should never reach this line.
+    public static boolean isExit(Command command) {
+        return command != null && command instanceof ExitCommand;
     }
 }

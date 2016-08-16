@@ -1,5 +1,8 @@
-package seedu.addressbook;
+package seedu.addressbook.ui;
 
+import static seedu.addressbook.common.Messages.*;
+
+import seedu.addressbook.commands.CommandResult;
 import seedu.addressbook.model.person.ReadOnlyPerson;
 
 import java.io.InputStream;
@@ -9,8 +12,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Encapsulates the textual user interface (both input and output).
- * Should not be too tightly couple
+ * Text UI of the application.
  */
 public class TextUi {
 
@@ -22,28 +24,11 @@ public class TextUi {
     /**
      * A platform independent line separator.
      */
-    public static final String LS = System.lineSeparator() + LINE_PREFIX;
+    public static final String LS = System.lineSeparator();
 
     public static final String DIVIDER = "===================================================";
 
-    /*
-     * ==============NOTE TO STUDENTS======================================
-     * These messages shown to the user are defined in one place for convenient
-     * editing and proof reading. Such messages are considered part of the UI
-     * and may be subjected to review by UI experts or technical writers. Note
-     * that Some of the strings below include '%1$s' etc to mark the locations
-     * at which java String.format(...) method can insert values.
-     * ====================================================================
-     */
 
-    public static final String MESSAGE_INDEXED_LIST_ITEM = "\t%1$d. %2$s";
-    public static final String MESSAGE_GOODBYE = "Exiting Address Book... Good bye!";
-    public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! " + LS + "%1$s";
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
-    public static final String MESSAGE_PERSON_NOT_IN_ADDRESSBOOK = "Person could not be found in address book";
-    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
-    public static final String MESSAGE_WELCOME = "Welcome to your Address Book!";
-    public static final String MESSAGE_USING_STORAGE_FILE = "Using storage file : %1$s";
 
     /**
      * Offset required to convert between 1-indexing and 0-indexing.COMMAND_
@@ -58,17 +43,7 @@ public class TextUi {
     private final Scanner in;
     private final PrintStream out;
     
-    /**
-     * preserves the last showed listing of persons for understanding user person references
-     * based on the the last listing they saw
-     */
-    private List<? extends ReadOnlyPerson> lastShownPersonListing = new ArrayList<>();
 
-    /**
-     * latest input line retrieved from {@link #getUserCommand()}
-     */
-    private String lastEnteredCommand = "";
-    
     public TextUi(InputStream in, PrintStream out) {
         this.in = new Scanner(in);
         this.out = out;
@@ -98,41 +73,42 @@ public class TextUi {
     /**
      * Prompts for the command and reads the text entered by the user.
      * Ignores empty, pure whitespace, and comment lines.
-     *
-     * @see #shouldIgnore(String)
+     * Echos the command back to the user.
      * @return full line entered by the user
      */
     public String getUserCommand() {
         out.print(LINE_PREFIX + "Enter command: ");
         String fullInputLine = in.nextLine();
+
         // silently consume all ignored lines
         while (shouldIgnore(fullInputLine)) {
             fullInputLine = in.nextLine();
         }
-        lastEnteredCommand = fullInputLine;
+
+        showToUser("[Command entered:" + fullInputLine + "]");
         return fullInputLine;
     }
 
-    /**
-     * Retrieves the latest entered non-ignored input line read from the user by {@link #getUserCommand()}
-     */
-    public String getLastEnteredCommand() {
-        return lastEnteredCommand;
-    }
 
-    public void showWelcomeMessage(String version) {
-        showToUser(DIVIDER, DIVIDER, version, MESSAGE_WELCOME, DIVIDER);
+    public void showWelcomeMessage(String version, String storageFilePath) {
+        String storageFileInfo = String.format(MESSAGE_USING_STORAGE_FILE, storageFilePath);
+        showToUser(
+                DIVIDER,
+                DIVIDER,
+                MESSAGE_WELCOME,
+                version,
+                MESSAGE_PROGRAM_LAUNCH_ARGS_USAGE,
+                storageFileInfo,
+                DIVIDER);
     }
 
     public void showGoodbyeMessage() {
         showToUser(MESSAGE_GOODBYE, DIVIDER, DIVIDER);
     }
 
-    /**
-     * Echoes the user input back to the user.
-     */
-    public void echoLastEnteredUserCommand() {
-        showToUser("[Command entered:" + lastEnteredCommand + "]");
+
+    public void showInitFailedMessage() {
+        showToUser(MESSAGE_INIT_FAILED, DIVIDER, DIVIDER);
     }
 
     /**
@@ -140,7 +116,7 @@ public class TextUi {
      */
     public void showToUser(String... message) {
         for (String m : message) {
-            out.println(LINE_PREFIX + m);
+            out.println(LINE_PREFIX + m.replace("\n", LS + LINE_PREFIX));
         }
     }
 
@@ -148,20 +124,11 @@ public class TextUi {
      * Shows the result of a command execution to the user. Includes additional formatting to demarcate different
      * command execution segments.
      */
-    public void showResultToUser(String result) {
-        showToUser(result, DIVIDER);
+    public void showResultToUser(CommandResult result) {
+        if(result.getRelevantPersons() != null) {showPersonListView(result.getRelevantPersons());}
+        showToUser(result.getFeedbackToUser(), DIVIDER);
     }
 
-    /**
-     * Retrieves the person from the last person listing view specified by the displayed list index.
-     * 
-     * @param displayedIndex the index of the target person as shown to user
-     * @return the person in the last viewed listing
-     */
-    public ReadOnlyPerson getPersonFromLastShownListing(int displayedIndex) throws IndexOutOfBoundsException {
-        return lastShownPersonListing.get(displayedIndex - DISPLAYED_INDEX_OFFSET);
-    }
-    
     /**
      * Shows a list of persons to the user, formatted as an indexed list.
      * Private contact details are hidden.
@@ -172,16 +139,8 @@ public class TextUi {
             formattedPersons.add(person.getAsTextHidePrivate());
         }
         showToUserAsIndexedList(formattedPersons);
-        updateLastShownPersonListing(persons);
     }
 
-    /**
-     * Updates and tracks the last viewed person listing to the user.
-     */
-    private void updateLastShownPersonListing(List<? extends ReadOnlyPerson> persons) {
-        lastShownPersonListing = new ArrayList<>(persons); // copy to insulate from changes in original list
-    }
-    
     /**
      * Shows a list of strings to the user, formatted as an indexed list.
      */
@@ -196,7 +155,7 @@ public class TextUi {
         final StringBuilder formatted = new StringBuilder();
         int displayIndex = 0 + DISPLAYED_INDEX_OFFSET;
         for (String listItem : listItems) {
-            formatted.append(getIndexedListItem(displayIndex, listItem)).append(LS);
+            formatted.append(getIndexedListItem(displayIndex, listItem)).append("\n");
             displayIndex++;
         }
         return formatted.toString();
@@ -209,16 +168,6 @@ public class TextUi {
      */
     public static String getIndexedListItem(int visibleIndex, String listItem) {
         return String.format(MESSAGE_INDEXED_LIST_ITEM, visibleIndex, listItem);
-    }
-
-    /**
-     * Constructs a feedback message to summarise an operation that displayed a listing of persons.
-     *
-     * @param personsDisplayed used to generate summary
-     * @return summary message for persons displayed
-     */
-    public static String getMessageForPersonListShownSummary(List<? extends ReadOnlyPerson> personsDisplayed) {
-        return String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, personsDisplayed.size());
     }
 
 }

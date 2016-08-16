@@ -1,6 +1,6 @@
 package seedu.addressbook.model.person;
 
-import seedu.addressbook.Utils;
+import seedu.addressbook.common.Utils;
 import seedu.addressbook.model.IllegalValueException;
 
 /**

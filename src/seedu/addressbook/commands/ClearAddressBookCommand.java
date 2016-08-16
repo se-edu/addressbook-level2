@@ -1,35 +1,26 @@
 package seedu.addressbook.commands;
 
-import seedu.addressbook.TextUi;
-import seedu.addressbook.Utils;
-import seedu.addressbook.model.AddressBook;
+import seedu.addressbook.common.Utils;
 
-import static seedu.addressbook.TextUi.*;
 
 /**
  * Clears the address book.
  */
-public class ClearAddressBookCommand implements Command {
+public class ClearAddressBookCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_USAGE = "Clears address book permanently."
-            + LS + "Example: " + COMMAND_WORD;
+    public static final String MESSAGE_USAGE = "Clears address book permanently.\n"
+            + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
 
-    private AddressBook addressBook;
-
     public ClearAddressBookCommand() {}
 
-    @Override
-    public void injectDependencies(TextUi ui, AddressBook addressBook) {
-        this.addressBook = addressBook;
-    }
 
     @Override
-    public String execute() {
+    public CommandResult execute() {
         Utils.assertNotNull(addressBook);
         addressBook.clear();
-        return MESSAGE_SUCCESS;
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 }

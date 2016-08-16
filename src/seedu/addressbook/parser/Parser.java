@@ -13,8 +13,8 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static seedu.addressbook.TextUi.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.addressbook.TextUi.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.addressbook.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.addressbook.common.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 
 /**
  * Parses user input.
@@ -41,15 +41,12 @@ public class Parser {
      * Parses user input into command for execution.
      *
      * @param userInput full user input string
-     * @return the prepared command based on the user input
-     * @throws ParseException containing error message if the user input could not be parsed into a command
+     * @return the command based on the user input
      */
-    public Command parseCommand(String userInput) throws ParseException {
+    public Command parseCommand(String userInput) {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
-
-        // check if we can extract command word and arguments
         if (!matcher.matches()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
         final String commandWord = matcher.group("commandWord");
@@ -93,11 +90,11 @@ public class Parser {
      * @return the prepared command
      * @throws ParseException containing a message with relevant info if the args could no be parsed
      */
-    private AddPersonCommand prepareAdd(String args) throws ParseException {
+    private Command prepareAdd(String args){
         final Matcher matcher = AddPersonCommand.ARGS_FORMAT.matcher(args.trim());
         // Validate arg string format
         if (!matcher.matches()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPersonCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPersonCommand.MESSAGE_USAGE));
         }
         try {
             final Name name = new Name(matcher.group("name"));
@@ -111,7 +108,7 @@ public class Parser {
             return new AddPersonCommand(new Person(name, phone, email, address,
                     getTagsFromArgs(matcher.group("tagArguments"))));
         } catch (IllegalValueException ive) {
-            throw new ParseException(ive.getMessage());
+            return new IncorrectCommand(ive.getMessage());
         }
     }
 
@@ -150,14 +147,14 @@ public class Parser {
      * @return the prepared command
      * @throws ParseException containing a message with relevant info if the args could no be parsed
      */
-    private DeletePersonCommand prepareDelete(String args) throws ParseException {
+    private Command prepareDelete(String args) {
         try {
             final int targetIndex = parseArgsAsDisplayedIndex(args);
             return new DeletePersonCommand(targetIndex);
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE));
         } catch (NumberFormatException nfe) {
-            throw new ParseException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            return new IncorrectCommand(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
     }
 
@@ -168,16 +165,16 @@ public class Parser {
      * @return the prepared command
      * @throws ParseException containing a message with relevant info if the args could no be parsed
      */
-    private ViewPersonDetailsCommand prepareView(String args) throws ParseException {
+    private Command prepareView(String args) {
 
         try {
             final int targetIndex = parseArgsAsDisplayedIndex(args);
             return new ViewPersonDetailsCommand(targetIndex);
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     ViewPersonDetailsCommand.MESSAGE_USAGE));
         } catch (NumberFormatException nfe) {
-            throw new ParseException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            return new IncorrectCommand(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
     }
 
@@ -188,16 +185,16 @@ public class Parser {
      * @return the prepared command
      * @throws ParseException containing a message with relevant info if the args could no be parsed
      */
-    private ViewAllPersonDetailsCommand prepareViewAll(String args) throws ParseException {
+    private Command prepareViewAll(String args) {
 
         try {
             final int targetIndex = parseArgsAsDisplayedIndex(args);
             return new ViewAllPersonDetailsCommand(targetIndex);
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     ViewAllPersonDetailsCommand.MESSAGE_USAGE));
         } catch (NumberFormatException nfe) {
-            throw new ParseException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            return new IncorrectCommand(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
     }
 
@@ -225,10 +222,10 @@ public class Parser {
      * @return the prepared command
      * @throws ParseException containing a message with relevant info if the args could no be parsed
      */
-    private FindPersonsByWordsInNameCommand prepareFind(String args) throws ParseException {
+    private Command prepareFind(String args) {
         final Matcher matcher = FindPersonsByWordsInNameCommand.ARGS_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     FindPersonsByWordsInNameCommand.MESSAGE_USAGE));
         }
 
