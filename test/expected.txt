@@ -289,7 +289,7 @@
 || 0 persons listed!
 || ===================================================
 || Enter command: || [Command entered:  exit]
-|| Exiting Addressbook as requested ...
+|| Exiting Address Book as requested ...
 || ===================================================
 || Good bye!
 || ===================================================

@@ -11,7 +11,7 @@ public class ExitCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exits the program.\n"
             + "Example: " + COMMAND_WORD;
-    public static final String MESSAGE_EXIT_ACKNOWEDGEMENT = "Exiting Addressbook as requested ...";
+    public static final String MESSAGE_EXIT_ACKNOWEDGEMENT = "Exiting Address Book as requested ...";
 
     public ExitCommand() {}
 
