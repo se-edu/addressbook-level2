@@ -11,6 +11,7 @@ import seedu.addressbook.ui.TextUi;
 
 import java.io.*;
 import java.util.List;
+import java.util.Optional;
 
 
 /**
@@ -104,8 +105,9 @@ public class Main {
      * Updates the {@link #lastShownList} if the result contains a list of Persons
      */
     private void updateLastShownList(CommandResult result) {
-        if(result.getRelevantPersons() != null) {
-            lastShownList = result.getRelevantPersons();
+        final Optional<List<? extends ReadOnlyPerson>> personList = result.getRelevantPersons();
+        if (personList.isPresent()) {
+            lastShownList = personList.get();
         }
     }
 

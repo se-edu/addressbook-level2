@@ -3,12 +3,14 @@ package seedu.addressbook.ui;
 import static seedu.addressbook.common.Messages.*;
 
 import seedu.addressbook.commands.CommandResult;
+import seedu.addressbook.common.Utils;
 import seedu.addressbook.model.person.ReadOnlyPerson;
 
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 /**
@@ -125,8 +127,11 @@ public class TextUi {
      * command execution segments.
      */
     public void showResultToUser(CommandResult result) {
-        if(result.getRelevantPersons() != null) {showPersonListView(result.getRelevantPersons());}
-        showToUser(result.getFeedbackToUser(), DIVIDER);
+        final Optional<List<? extends ReadOnlyPerson>> resultPersons = result.getRelevantPersons();
+        if(resultPersons.isPresent()) {
+            showPersonListView(resultPersons.get());
+        }
+        showToUser(result.feedbackToUser, DIVIDER);
     }
 
     /**
@@ -134,6 +139,7 @@ public class TextUi {
      * Private contact details are hidden.
      */
     public void showPersonListView(List<? extends ReadOnlyPerson> persons) {
+        Utils.assertNoNullElements(persons);
         final List<String> formattedPersons = new ArrayList<>();
         for (ReadOnlyPerson person : persons) {
             formattedPersons.add(person.getAsTextHidePrivate());

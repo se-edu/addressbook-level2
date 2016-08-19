@@ -1,7 +1,5 @@
 package seedu.addressbook.commands;
 
-
-
 /**
  * Terminates the program.
  */
@@ -21,6 +19,6 @@ public class ExitCommand extends Command {
     }
 
     public static boolean isExit(Command command) {
-        return command != null && command instanceof ExitCommand;
+        return command instanceof ExitCommand; // instanceof returns false if it is null
     }
 }
