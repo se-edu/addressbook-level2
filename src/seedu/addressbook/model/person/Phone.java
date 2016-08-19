@@ -9,6 +9,7 @@ import seedu.addressbook.model.IllegalValueException;
  */
 public class Phone extends ContactDetail {
 
+    public static final String EXAMPLE = "123456789";
     public static final String MESSAGE_PHONE_CONSTRAINTS = "Person phone numbers should only contain numbers";
     public static final String PHONE_VALIDATION_REGEX = "\\d+";
 

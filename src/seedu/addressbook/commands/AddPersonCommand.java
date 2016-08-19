@@ -35,6 +35,9 @@ public class AddPersonCommand extends Command {
         this.toAdd = toAdd;
     }
 
+    public ReadOnlyPerson getPerson() {
+        return toAdd;
+    }
 
     @Override
     public CommandResult execute() {
