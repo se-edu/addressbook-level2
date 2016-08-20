@@ -1,6 +1,6 @@
-package seedu.addressbook.model.tag;
+package seedu.addressbook.data.tag;
 
-import seedu.addressbook.model.exception.IllegalValueException;
+import seedu.addressbook.data.exception.IllegalValueException;
 
 /**
  * Represents a Tag in the address book.

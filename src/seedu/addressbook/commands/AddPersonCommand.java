@@ -1,7 +1,6 @@
 package seedu.addressbook.commands;
 
-import seedu.addressbook.common.Utils;
-import seedu.addressbook.model.person.*;
+import seedu.addressbook.data.person.*;
 
 import java.util.regex.Pattern;
 

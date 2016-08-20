@@ -1,10 +1,10 @@
 package seedu.addressbook.storage.jaxb;
 
 import seedu.addressbook.common.Utils;
-import seedu.addressbook.model.exception.IllegalValueException;
-import seedu.addressbook.model.tag.Tag;
-import seedu.addressbook.model.tag.UniqueTagList;
-import seedu.addressbook.model.person.*;
+import seedu.addressbook.data.exception.IllegalValueException;
+import seedu.addressbook.data.tag.Tag;
+import seedu.addressbook.data.tag.UniqueTagList;
+import seedu.addressbook.data.person.*;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
@@ -72,7 +72,7 @@ public class AdaptedPerson {
      * Checks whether any required element is missing.
      *
      * JAXB does not enforce (required = true) without a given XML schema.
-     * Since we do most of our validation using the model class constructors, the only extra logic we need
+     * Since we do most of our validation using the data class constructors, the only extra logic we need
      * is to ensure that every xml element in the document is present. JAXB sets missing elements as null,
      * so we check for that.
      */
@@ -88,7 +88,7 @@ public class AdaptedPerson {
     }
 
     /**
-     * Converts this jaxb-friendly adapted person object into the model's Person object.
+     * Converts this jaxb-friendly adapted person object into the Person object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person
      */

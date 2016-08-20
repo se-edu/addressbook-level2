@@ -1,7 +1,7 @@
-package seedu.addressbook.model.tag;
+package seedu.addressbook.data.tag;
 
 import seedu.addressbook.common.Utils;
-import seedu.addressbook.model.exception.DuplicateDataException;
+import seedu.addressbook.data.exception.DuplicateDataException;
 
 import java.util.*;
 

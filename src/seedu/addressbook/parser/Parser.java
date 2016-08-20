@@ -1,10 +1,10 @@
 package seedu.addressbook.parser;
 
 import seedu.addressbook.commands.*;
-import seedu.addressbook.model.exception.IllegalValueException;
-import seedu.addressbook.model.tag.Tag;
-import seedu.addressbook.model.tag.UniqueTagList;
-import seedu.addressbook.model.person.*;
+import seedu.addressbook.data.exception.IllegalValueException;
+import seedu.addressbook.data.tag.Tag;
+import seedu.addressbook.data.tag.UniqueTagList;
+import seedu.addressbook.data.person.*;
 
 import java.util.Arrays;
 import java.util.Collection;

@@ -1,8 +1,8 @@
 package seedu.addressbook.commands;
 
 import seedu.addressbook.common.Messages;
-import seedu.addressbook.model.AddressBook;
-import seedu.addressbook.model.person.ReadOnlyPerson;
+import seedu.addressbook.data.AddressBook;
+import seedu.addressbook.data.person.ReadOnlyPerson;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package seedu.addressbook.commands;
 
 import seedu.addressbook.common.Messages;
-import seedu.addressbook.model.person.ReadOnlyPerson;
+import seedu.addressbook.data.person.ReadOnlyPerson;
 
 
 /**

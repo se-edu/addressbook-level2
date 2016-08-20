@@ -1,12 +1,12 @@
-package seedu.addressbook.model;
+package seedu.addressbook.data;
 
-import seedu.addressbook.model.person.Person;
-import seedu.addressbook.model.person.ReadOnlyPerson;
-import seedu.addressbook.model.person.UniquePersonList;
-import seedu.addressbook.model.person.UniquePersonList.*;
-import seedu.addressbook.model.tag.UniqueTagList;
-import seedu.addressbook.model.tag.UniqueTagList.*;
-import seedu.addressbook.model.tag.Tag;
+import seedu.addressbook.data.person.Person;
+import seedu.addressbook.data.person.ReadOnlyPerson;
+import seedu.addressbook.data.person.UniquePersonList;
+import seedu.addressbook.data.person.UniquePersonList.*;
+import seedu.addressbook.data.tag.UniqueTagList;
+import seedu.addressbook.data.tag.UniqueTagList.*;
+import seedu.addressbook.data.tag.Tag;
 
 import java.util.Set;
 
