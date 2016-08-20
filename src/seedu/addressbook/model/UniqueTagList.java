@@ -5,9 +5,7 @@ import seedu.addressbook.common.Utils;
 import java.util.*;
 
 /**
- * A list of tags that enforces no nulls and uniqueness between its elements.
- *
- * Supports minimal set of list operations for the app's features.
+ * A list of tags. Does not allow nulls or duplicates.
  *
  * @see Tag#equals(Object)
  * @see Utils#elementsAreUnique(Collection)
@@ -32,12 +30,12 @@ public class UniqueTagList implements Iterable<Tag> {
     private final List<Tag> internalList = new ArrayList<>();
 
     /**
-     * Constructs empty TagList.
+     * Constructs an empty TagList.
      */
     public UniqueTagList() {}
 
     /**
-     * Varargs/array constructor, enforces no nulls or duplicates.
+     * Constructs a tag list with the given tags.
      */
     public UniqueTagList(Tag... tags) throws DuplicateTagException {
         final List<Tag> initialTags = Arrays.asList(tags);
@@ -48,7 +46,7 @@ public class UniqueTagList implements Iterable<Tag> {
     }
 
     /**
-     * java collections constructor, enforces no null or duplicate elements.
+     * Constructs a tag list with the given tags.
      */
     public UniqueTagList(Collection<Tag> tags) throws DuplicateTagException {
         if (!Utils.elementsAreUnique(tags)) {
@@ -58,25 +56,17 @@ public class UniqueTagList implements Iterable<Tag> {
     }
 
     /**
-     * java set constructor, enforces no nulls.
+     * Constructs a tag list with the given tags.
      */
     public UniqueTagList(Set<Tag> tags) {
         internalList.addAll(tags);
     }
 
     /**
-     * Copy constructor, insulates from changes in source.
+     * Constructs a shallow copy of the given tag list.
      */
     public UniqueTagList(UniqueTagList source) {
-        internalList.addAll(source.internalList); // insulate internal list from changes in argument
-    }
-
-    /**
-     * Unmodifiable java List view. For use with other methods/libraries.
-     * Any changes to the internal list/elements are immediately visible in the returned list.
-     */
-    public List<Tag> immutableListView() {
-        return Collections.unmodifiableList(internalList);
+        internalList.addAll(source.internalList);
     }
 
     /**

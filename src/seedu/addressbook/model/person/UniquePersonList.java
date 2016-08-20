@@ -6,7 +6,7 @@ import seedu.addressbook.model.DuplicateDataException;
 import java.util.*;
 
 /**
- * A list of persons. Does not allow null elements or duplicates. 
+ * A list of persons. Does not allow null elements or duplicates.
  *
  * @see Person#equals(Object)
  * @see Utils#elementsAreUnique(Collection)
