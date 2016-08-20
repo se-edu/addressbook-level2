@@ -6,9 +6,7 @@ import seedu.addressbook.model.DuplicateDataException;
 import java.util.*;
 
 /**
- * A list of persons that enforces no nulls and uniqueness between its elements.
- *
- * Supports minimal set of list operations needed for the app's features.
+ * A list of persons. Does not allow null elements or duplicates. 
  *
  * @see Person#equals(Object)
  * @see Utils#elementsAreUnique(Collection)
@@ -33,23 +31,14 @@ public class UniquePersonList implements Iterable<Person> {
     private final List<Person> internalList = new ArrayList<>();
 
     /**
-     * Constructs empty PersonList.
+     * Constructs empty person list.
      */
     public UniquePersonList() {}
 
     /**
-     * Varargs/array constructor, enforces no nulls or duplicates.
-     */
-    public UniquePersonList(Person... persons) throws DuplicatePersonException {
-        final List<Person> initialPersons = Arrays.asList(persons);
-        if (!Utils.elementsAreUnique(initialPersons)) {
-            throw new DuplicatePersonException();
-        }
-        internalList.addAll(initialPersons);
-    }
-
-    /**
-     * java collections constructor, enforces no null or duplicate elements.
+     * Constructs a list from the items in the given collection.
+     * @param persons a collection of persons
+     * @throws DuplicatePersonException if the {@code persons} contains duplicate persons
      */
     public UniquePersonList(Collection<Person> persons) throws DuplicatePersonException {
         if (!Utils.elementsAreUnique(persons)) {
@@ -59,17 +48,10 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * java set constructor, enforces no nulls.
-     */
-    public UniquePersonList(Set<Person> persons) {
-        internalList.addAll(persons);
-    }
-
-    /**
-     * Copy constructor, insulates from changes in source.
+     * Constructs a shallow copy of the list.
      */
     public UniquePersonList(UniquePersonList source) {
-        internalList.addAll(source.internalList); // insulate internal list from changes in argument
+        internalList.addAll(source.internalList);
     }
 
     /**
@@ -81,12 +63,6 @@ public class UniquePersonList implements Iterable<Person> {
         return Collections.unmodifiableList(internalList);
     }
 
-    /**
-     * All persons in this list as a Set. This set is mutable and change-insulated against the internal list.
-     */
-    public Set<Person> toSet() {
-        return new HashSet<>(internalList);
-    }
 
     /**
      * Checks if the list contains an equivalent person as the given argument.
