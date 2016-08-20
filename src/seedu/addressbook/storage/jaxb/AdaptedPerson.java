@@ -69,7 +69,7 @@ public class AdaptedPerson {
     }
 
     /**
-     * Checks whether any required element is missing.
+     * Returns true if any required field is missing.
      *
      * JAXB does not enforce (required = true) without a given XML schema.
      * Since we do most of our validation using the data class constructors, the only extra logic we need
