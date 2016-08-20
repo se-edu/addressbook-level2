@@ -5,12 +5,12 @@ import seedu.addressbook.data.person.ReadOnlyPerson;
 
 
 /**
- * Shows all details of the person identified using the last displayed index.
- * Private contact details are shown.
+ * Shows details of the person identified using the last displayed index.
+ * Private contact details are not shown.
  */
-public class ViewAllPersonDetailsCommand extends TargetLastListedPersonCommand {
+public class ViewCommand extends TargetLastListedPersonCommand {
 
-    public static final String COMMAND_WORD = "viewall";
+    public static final String COMMAND_WORD = "view";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views the non-private details of the person "
             + "identified by the index number in the last shown person listing.\n"
@@ -20,7 +20,7 @@ public class ViewAllPersonDetailsCommand extends TargetLastListedPersonCommand {
     public static final String MESSAGE_VIEW_PERSON_DETAILS = "Viewing person: %1$s";
 
 
-    public ViewAllPersonDetailsCommand(int targetVisibleIndex) {
+    public ViewCommand(int targetVisibleIndex) {
         super(targetVisibleIndex);
     }
 
@@ -32,9 +32,10 @@ public class ViewAllPersonDetailsCommand extends TargetLastListedPersonCommand {
             if (!addressBook.containsPerson(target)) {
                 return new CommandResult(Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK);
             }
-            return new CommandResult(String.format(MESSAGE_VIEW_PERSON_DETAILS, target.getAsTextShowAll()));
+            return new CommandResult(String.format(MESSAGE_VIEW_PERSON_DETAILS, target.getAsTextHidePrivate()));
         } catch (IndexOutOfBoundsException ie) {
             return new CommandResult(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
     }
+
 }

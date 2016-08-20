@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 /**
  * Adds a person to the address book.
  */
-public class AddPersonCommand extends Command {
+public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
@@ -30,7 +30,7 @@ public class AddPersonCommand extends Command {
 
     private final Person toAdd;
 
-    public AddPersonCommand(Person toAdd) {
+    public AddCommand(Person toAdd) {
         this.toAdd = toAdd;
     }
 
