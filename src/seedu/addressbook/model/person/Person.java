@@ -18,10 +18,9 @@ public class Person implements ReadOnlyPerson {
 
     private final UniqueTagList tags;
     /**
-     * Every field must be present and not null.
+     * Assumption: Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, UniqueTagList tags) {
-        Utils.assertNotNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
