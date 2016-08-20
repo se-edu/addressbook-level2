@@ -17,9 +17,6 @@ public class ListAllPersonsCommand extends Command {
             + "Example: " + COMMAND_WORD;
 
 
-    public ListAllPersonsCommand() {}
-
-
     @Override
     public CommandResult execute() {
         List<ReadOnlyPerson> allPersons = addressBook.getAllPersons().immutableListView();

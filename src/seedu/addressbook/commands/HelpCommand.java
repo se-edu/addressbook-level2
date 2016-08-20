@@ -2,7 +2,7 @@ package seedu.addressbook.commands;
 
 
 /**
- * Format full help instructions for every command for display.
+ * Shows help instructions.
  */
 public class HelpCommand extends Command {
 
