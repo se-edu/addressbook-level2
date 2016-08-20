@@ -5,7 +5,6 @@ package seedu.addressbook.common;
  */
 public class Messages {
 
-    public static final String MESSAGE_INDEXED_LIST_ITEM = "\t%1$d. %2$s";
     public static final String MESSAGE_GOODBYE = "Good bye!";
     public static final String MESSAGE_INIT_FAILED = "Failed to initialise address book application. Exiting...";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
