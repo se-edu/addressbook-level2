@@ -2,14 +2,8 @@ package seedu.addressbook.parser;
 
 import seedu.addressbook.commands.*;
 import seedu.addressbook.data.exception.IllegalValueException;
-import seedu.addressbook.data.tag.Tag;
-import seedu.addressbook.data.tag.UniqueTagList;
-import seedu.addressbook.data.person.*;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,7 +19,7 @@ public class Parser {
      * Signals that the user input could not be parsed.
      */
     public static class ParseException extends Exception {
-        public ParseException(String message) {
+        ParseException(String message) {
             super(message);
         }
     }
@@ -88,7 +82,6 @@ public class Parser {
      *
      * @param args full command args string
      * @return the prepared command
-     * @throws ParseException containing a message with relevant info if the args could no be parsed
      */
     private Command prepareAdd(String args){
         final Matcher matcher = AddCommand.ARGS_FORMAT.matcher(args.trim());
@@ -97,16 +90,20 @@ public class Parser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
         try {
-            final Name name = new Name(matcher.group("name"));
-            final Phone phone = new Phone(matcher.group("phone"),
-                    isPrivatePrefixPresent(matcher.group("isPhonePrivate")));
-            final Email email = new Email(matcher.group("email"),
-                    isPrivatePrefixPresent(matcher.group("isEmailPrivate")));
-            final Address address = new Address(matcher.group("address"),
-                    isPrivatePrefixPresent(matcher.group("isAddressPrivate")));
+            return new AddCommand(
+                    matcher.group("name"),
 
-            return new AddCommand(new Person(name, phone, email, address,
-                    getTagsFromArgs(matcher.group("tagArguments"))));
+                    matcher.group("phone"),
+                    isPrivatePrefixPresent(matcher.group("isPhonePrivate")),
+
+                    matcher.group("email"),
+                    isPrivatePrefixPresent(matcher.group("isEmailPrivate")),
+
+                    matcher.group("address"),
+                    isPrivatePrefixPresent(matcher.group("isAddressPrivate")),
+
+                    getTagsFromArgs(matcher.group("tagArguments"))
+            );
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
@@ -121,22 +118,16 @@ public class Parser {
 
     /**
      * Extracts the new person's tags from the add command's tag arguments string.
+     * Merges duplicate tag strings.
      */
-    private static UniqueTagList getTagsFromArgs(String tagArguments) throws IllegalValueException {
+    private static Set<String> getTagsFromArgs(String tagArguments) throws IllegalValueException {
         // no tags
         if (tagArguments.isEmpty()) {
-            return new UniqueTagList();
+            return Collections.emptySet();
         }
         // replace first delimiter prefix, then split
         final Collection<String> tagStrings = Arrays.asList(tagArguments.replaceFirst(" t/", "").split(" t/"));
-
-        // merge duplicate tags
-        final Set<Tag> tags = new HashSet<>();
-        for (String tagString : tagStrings) {
-            tags.add(new Tag(tagString));
-        }
-        // tag list prepared
-        return new UniqueTagList(tags);
+        return new HashSet<>(tagStrings);
     }
 
 
@@ -145,7 +136,6 @@ public class Parser {
      *
      * @param args full command args string
      * @return the prepared command
-     * @throws ParseException containing a message with relevant info if the args could no be parsed
      */
     private Command prepareDelete(String args) {
         try {
@@ -163,7 +153,6 @@ public class Parser {
      *
      * @param args full command args string
      * @return the prepared command
-     * @throws ParseException containing a message with relevant info if the args could no be parsed
      */
     private Command prepareView(String args) {
 
@@ -183,7 +172,6 @@ public class Parser {
      *
      * @param args full command args string
      * @return the prepared command
-     * @throws ParseException containing a message with relevant info if the args could no be parsed
      */
     private Command prepareViewAll(String args) {
 
@@ -220,7 +208,6 @@ public class Parser {
      *
      * @param args full command args string
      * @return the prepared command
-     * @throws ParseException containing a message with relevant info if the args could no be parsed
      */
     private Command prepareFind(String args) {
         final Matcher matcher = FindCommand.ARGS_FORMAT.matcher(args.trim());
