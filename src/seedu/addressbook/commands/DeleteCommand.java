@@ -28,7 +28,7 @@ public class DeleteCommand extends TargetLastListedPersonCommand {
     @Override
     public CommandResult execute() {
         try {
-            final ReadOnlyPerson target = getTargetFromView();
+            final ReadOnlyPerson target = getTargetPerson();
             addressBook.removePerson(target);
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, target));
 

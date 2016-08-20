@@ -28,7 +28,7 @@ public class ViewCommand extends TargetLastListedPersonCommand {
     @Override
     public CommandResult execute() {
         try {
-            final ReadOnlyPerson target = getTargetFromView();
+            final ReadOnlyPerson target = getTargetPerson();
             if (!addressBook.containsPerson(target)) {
                 return new CommandResult(Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK);
             }

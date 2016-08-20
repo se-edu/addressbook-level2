@@ -30,7 +30,7 @@ public abstract class TargetLastListedPersonCommand extends Command {
      *
      * @throws IndexOutOfBoundsException if the target index is out of bounds of the last viewed listing
      */
-    protected ReadOnlyPerson getTargetFromView() throws IndexOutOfBoundsException {
+    protected ReadOnlyPerson getTargetPerson() throws IndexOutOfBoundsException {
         return relevantPersons.get(targetIndex - DISPLAYED_INDEX_OFFSET);
     }
 
