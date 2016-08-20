@@ -14,7 +14,7 @@ public abstract class TargetLastListedPersonCommand extends Command {
 
     public static final Pattern ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
 
-    protected final int targetIndex;
+    public final int targetIndex;
 
 
     /**

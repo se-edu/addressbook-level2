@@ -9,6 +9,7 @@ import seedu.addressbook.model.IllegalValueException;
  */
 public class Address extends ContactDetail {
 
+    public static final String EXAMPLE = "123, some street";
     public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addressescan be in any format";
     public static final String ADDRESS_VALIDATION_REGEX = ".+";
 
