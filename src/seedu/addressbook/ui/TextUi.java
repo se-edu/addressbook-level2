@@ -134,7 +134,6 @@ public class TextUi {
      * Private contact details are hidden.
      */
     private void showPersonListView(List<? extends ReadOnlyPerson> persons) {
-        Utils.assertNoNullElements(persons);
         final List<String> formattedPersons = new ArrayList<>();
         for (ReadOnlyPerson person : persons) {
             formattedPersons.add(person.getAsTextHidePrivate());

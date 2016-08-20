@@ -19,7 +19,6 @@ public class Tag {
      * @throws IllegalValueException if the given tag name string is invalid.
      */
     public Tag(String name) throws IllegalValueException {
-        Utils.assertNotNull(name);
         name = name.trim();
         if (!isValidTagName(name)) {
             throw new IllegalValueException(MESSAGE_TAG_CONSTRAINTS);

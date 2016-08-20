@@ -40,7 +40,6 @@ public class UniqueTagList implements Iterable<Tag> {
      * Varargs/array constructor, enforces no nulls or duplicates.
      */
     public UniqueTagList(Tag... tags) throws DuplicateTagException {
-        Utils.assertNotNull(tags);
         final List<Tag> initialTags = Arrays.asList(tags);
         if (!Utils.elementsAreUnique(initialTags)) {
             throw new DuplicateTagException();
@@ -52,7 +51,6 @@ public class UniqueTagList implements Iterable<Tag> {
      * java collections constructor, enforces no null or duplicate elements.
      */
     public UniqueTagList(Collection<Tag> tags) throws DuplicateTagException {
-        Utils.assertNoNullElements(tags);
         if (!Utils.elementsAreUnique(tags)) {
             throw new DuplicateTagException();
         }
@@ -63,7 +61,6 @@ public class UniqueTagList implements Iterable<Tag> {
      * java set constructor, enforces no nulls.
      */
     public UniqueTagList(Set<Tag> tags) {
-        Utils.assertNoNullElements(tags);
         internalList.addAll(tags);
     }
 
@@ -93,7 +90,6 @@ public class UniqueTagList implements Iterable<Tag> {
      * Checks if the list contains an equivalent Tag as the given argument.
      */
     public boolean contains(Tag toCheck) {
-        Utils.assertNotNull(toCheck);
         return internalList.contains(toCheck);
     }
 
@@ -103,7 +99,6 @@ public class UniqueTagList implements Iterable<Tag> {
      * @throws DuplicateTagException if the Tag to add is a duplicate of an existing Tag in the list.
      */
     public void add(Tag toAdd) throws DuplicateTagException {
-        Utils.assertNotNull(toAdd);
         if (contains(toAdd)) {
             throw new DuplicateTagException();
         }
@@ -116,7 +111,6 @@ public class UniqueTagList implements Iterable<Tag> {
      * @throws TagNotFoundException if no such Tag could be found in the list.
      */
     public void remove(Tag toRemove) throws TagNotFoundException {
-        Utils.assertNotNull(toRemove);
         final boolean TagFoundAndDeleted = internalList.remove(toRemove);
         if (!TagFoundAndDeleted) {
             throw new TagNotFoundException();

@@ -14,13 +14,11 @@ public class CommandResult {
     private final List<? extends ReadOnlyPerson> relevantPersons;
 
     public CommandResult(String feedbackToUser) {
-        Utils.assertNotNull(feedbackToUser);
         this.feedbackToUser = feedbackToUser;
         relevantPersons = null;
     }
 
     public CommandResult(String feedbackToUser, List<? extends ReadOnlyPerson> relevantPersons) {
-        Utils.assertNotNull(feedbackToUser, relevantPersons);
         this.feedbackToUser = feedbackToUser;
         this.relevantPersons = relevantPersons;
     }

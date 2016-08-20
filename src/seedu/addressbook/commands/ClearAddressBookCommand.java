@@ -19,7 +19,6 @@ public class ClearAddressBookCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        Utils.assertNotNull(addressBook);
         addressBook.clear();
         return new CommandResult(MESSAGE_SUCCESS);
     }

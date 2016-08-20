@@ -23,7 +23,6 @@ public class Email extends ContactDetail {
      */
     public Email(String email, boolean isPrivate) throws IllegalValueException {
         super(isPrivate);
-        Utils.assertNotNull(email);
         email = email.trim();
         if (!isValidEmail(email)) {
             throw new IllegalValueException(MESSAGE_EMAIL_CONSTRAINTS);

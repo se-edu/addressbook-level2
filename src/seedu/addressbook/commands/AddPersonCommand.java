@@ -41,7 +41,6 @@ public class AddPersonCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        Utils.assertNotNull(addressBook);
         try {
             addressBook.addPerson(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));

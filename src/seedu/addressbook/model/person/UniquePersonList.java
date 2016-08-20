@@ -41,7 +41,6 @@ public class UniquePersonList implements Iterable<Person> {
      * Varargs/array constructor, enforces no nulls or duplicates.
      */
     public UniquePersonList(Person... persons) throws DuplicatePersonException {
-        Utils.assertNotNull(persons);
         final List<Person> initialPersons = Arrays.asList(persons);
         if (!Utils.elementsAreUnique(initialPersons)) {
             throw new DuplicatePersonException();
@@ -53,7 +52,6 @@ public class UniquePersonList implements Iterable<Person> {
      * java collections constructor, enforces no null or duplicate elements.
      */
     public UniquePersonList(Collection<Person> persons) throws DuplicatePersonException {
-        Utils.assertNoNullElements(persons);
         if (!Utils.elementsAreUnique(persons)) {
             throw new DuplicatePersonException();
         }
@@ -64,7 +62,6 @@ public class UniquePersonList implements Iterable<Person> {
      * java set constructor, enforces no nulls.
      */
     public UniquePersonList(Set<Person> persons) {
-        Utils.assertNoNullElements(persons);
         internalList.addAll(persons);
     }
 
@@ -95,7 +92,6 @@ public class UniquePersonList implements Iterable<Person> {
      * Checks if the list contains an equivalent person as the given argument.
      */
     public boolean contains(ReadOnlyPerson toCheck) {
-        Utils.assertNotNull(toCheck);
         return internalList.contains(toCheck);
     }
 
@@ -105,7 +101,6 @@ public class UniquePersonList implements Iterable<Person> {
      * @throws DuplicatePersonException if the person to add is a duplicate of an existing person in the list.
      */
     public void add(Person toAdd) throws DuplicatePersonException {
-        Utils.assertNotNull(toAdd);
         if (contains(toAdd)) {
             throw new DuplicatePersonException();
         }
@@ -118,7 +113,6 @@ public class UniquePersonList implements Iterable<Person> {
      * @throws PersonNotFoundException if no such person could be found in the list.
      */
     public void remove(ReadOnlyPerson toRemove) throws PersonNotFoundException {
-        Utils.assertNotNull(toRemove);
         final boolean personFoundAndDeleted = internalList.remove(toRemove);
         if (!personFoundAndDeleted) {
             throw new PersonNotFoundException();
