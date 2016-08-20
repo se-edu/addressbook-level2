@@ -4,9 +4,10 @@ import seedu.addressbook.model.person.Person;
 import seedu.addressbook.model.person.ReadOnlyPerson;
 import seedu.addressbook.model.person.UniquePersonList;
 import seedu.addressbook.model.person.UniquePersonList.*;
-import seedu.addressbook.model.UniqueTagList.*;
+import seedu.addressbook.model.tag.UniqueTagList;
+import seedu.addressbook.model.tag.UniqueTagList.*;
+import seedu.addressbook.model.tag.Tag;
 
-import java.util.List;
 import java.util.Set;
 
 /**
