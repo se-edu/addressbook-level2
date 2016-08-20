@@ -1,7 +1,12 @@
 package seedu.addressbook.commands;
 
+import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.data.person.*;
+import seedu.addressbook.data.tag.Tag;
+import seedu.addressbook.data.tag.UniqueTagList;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 
@@ -29,6 +34,29 @@ public class AddCommand extends Command {
                             + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
 
     private final Person toAdd;
+
+    /**
+     * Convenience constructor using raw values.
+     *
+     * @throws IllegalValueException if any of the raw values are invalid
+     */
+    public AddCommand(String name,
+                      String phone, boolean isPhonePrivate,
+                      String email, boolean isEmailPrivate,
+                      String address, boolean isAddressPrivate,
+                      Set<String> tags) throws IllegalValueException {
+        final Set<Tag> tagSet = new HashSet<>();
+        for (String tagName : tags) {
+            tagSet.add(new Tag(tagName));
+        }
+        this.toAdd = new Person(
+                new Name(name),
+                new Phone(phone, isPhonePrivate),
+                new Email(email, isEmailPrivate),
+                new Address(address, isAddressPrivate),
+                new UniqueTagList(tagSet)
+        );
+    }
 
     public AddCommand(Person toAdd) {
         this.toAdd = toAdd;
