@@ -1,7 +1,6 @@
 package seedu.addressbook.commands;
 
-import seedu.addressbook.common.Utils;
-import seedu.addressbook.model.person.*;
+import seedu.addressbook.data.person.*;
 
 import java.util.regex.Pattern;
 
@@ -9,7 +8,7 @@ import java.util.regex.Pattern;
 /**
  * Adds a person to the address book.
  */
-public class AddPersonCommand extends Command {
+public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
@@ -31,7 +30,7 @@ public class AddPersonCommand extends Command {
 
     private final Person toAdd;
 
-    public AddPersonCommand(Person toAdd) {
+    public AddCommand(Person toAdd) {
         this.toAdd = toAdd;
     }
 
@@ -41,7 +40,6 @@ public class AddPersonCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        Utils.assertNotNull(addressBook);
         try {
             addressBook.addPerson(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));

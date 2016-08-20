@@ -1,7 +1,6 @@
-package seedu.addressbook.model.person;
+package seedu.addressbook.data.person;
 
-import seedu.addressbook.common.Utils;
-import seedu.addressbook.model.UniqueTagList;
+import seedu.addressbook.data.tag.UniqueTagList;
 
 import java.util.Objects;
 
@@ -18,10 +17,9 @@ public class Person implements ReadOnlyPerson {
 
     private final UniqueTagList tags;
     /**
-     * Every field must be present and not null.
+     * Assumption: Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, UniqueTagList tags) {
-        Utils.assertNotNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;

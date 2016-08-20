@@ -1,65 +1,56 @@
 package seedu.addressbook;
 
-import seedu.addressbook.model.person.ReadOnlyPerson;
+import seedu.addressbook.data.person.ReadOnlyPerson;
 import seedu.addressbook.storage.StorageFile.*;
 
 import seedu.addressbook.commands.*;
-import seedu.addressbook.model.AddressBook;
+import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.parser.Parser;
 import seedu.addressbook.storage.StorageFile;
 import seedu.addressbook.ui.TextUi;
 
-import java.io.*;
 import java.util.List;
 import java.util.Optional;
 
 
 /**
- * Entry point of the address book application.
+ * Entry point of the Address Book application.
  * Initializes the application and starts the interaction with the user.
  */
 public class Main {
 
-    /**
-     * Version info of the program.
-     */
+    /** Version info of the program. */
     public static final String VERSION = "AddessBook Level 2 - Version 1.0";
 
     private TextUi ui;
     private StorageFile storage;
     private AddressBook addressBook;
 
-    /**
-     * The list of person shown to the user most recently.
-     */
+    /** The list of person shown to the user most recently.  */
     private List<? extends ReadOnlyPerson> lastShownList = null;
 
 
     public static void main(String... launchArgs) {
-        new Main().run(launchArgs, System.in, System.out);
+        new Main().run(launchArgs);
     }
 
-    /**
-     * Runs the program until termination.
-     */
-    public void run(String[] launchArgs, InputStream inputStream, PrintStream outputStream) {
-        start(launchArgs, inputStream, outputStream);
+    /** Runs the program until termination.  */
+    public void run(String[] launchArgs) {
+        start(launchArgs);
         runCommandLoopUntilExitCommand();
         exit();
     }
 
     /**
-     * Sets up the different components, loads up the data from the storage file, and prints the welcome message.
+     * Sets up the required objects, loads up the data from the storage file, and prints the welcome message.
      *
      * @param launchArgs arguments supplied by the user at program launch
-     * @param inputStream user text input source
-     * @param outputStream user text output acceptor
      *
      */
-    private void start(String[] launchArgs, InputStream inputStream, PrintStream outputStream) {
+    private void start(String[] launchArgs) {
         try {
-            this.ui = new TextUi(inputStream, outputStream);
-            this.storage = createStorageFile(launchArgs);
+            this.ui = new TextUi();
+            this.storage = initializeStorage(launchArgs);
             this.addressBook = storage.load();
             ui.showWelcomeMessage(VERSION, storage.getPath());
 
@@ -78,33 +69,27 @@ public class Main {
         }
     }
 
-    /**
-     * Prints the Goodbye message and exits.
-     */
+    /** Prints the Goodbye message and exits. */
     private void exit() {
         ui.showGoodbyeMessage();
         System.exit(0);
     }
 
-    /**
-     * Reads the user command and executes it, until the user issues the exit command.
-     */
+    /** Reads the user command and executes it, until the user issues the exit command.  */
     private void runCommandLoopUntilExitCommand() {
         Command command;
         do {
-            String userCommand = ui.getUserCommand();
-            command = new Parser().parseCommand(userCommand);
+            String userCommandText = ui.getUserCommand();
+            command = new Parser().parseCommand(userCommandText);
             CommandResult result = executeCommand(command);
-            updateLastShownList(result);
+            recordResult(result);
             ui.showResultToUser(result);
 
         } while(!ExitCommand.isExit(command));
     }
 
-    /**
-     * Updates the {@link #lastShownList} if the result contains a list of Persons
-     */
-    private void updateLastShownList(CommandResult result) {
+    /** Updates the {@link #lastShownList} if the result contains a list of Persons. */
+    private void recordResult(CommandResult result) {
         final Optional<List<? extends ReadOnlyPerson>> personList = result.getRelevantPersons();
         if (personList.isPresent()) {
             lastShownList = personList.get();
@@ -112,10 +97,10 @@ public class Main {
     }
 
     /**
-     * Processes user input into desired command, then executes and returns feedback.
+     * Executes the command and returns the result.
      * 
      * @param command user command
-     * @return feedback about how the command was executed
+     * @return result of the command
      */
     private CommandResult executeCommand(Command command)  {
         try {
@@ -134,7 +119,7 @@ public class Main {
      * @param launchArgs arguments supplied by the user at program launch
      * @throws InvalidStorageFilePathException if the target file path is incorrect.
      */
-    private StorageFile createStorageFile(String[] launchArgs) throws InvalidStorageFilePathException {
+    private StorageFile initializeStorage(String[] launchArgs) throws InvalidStorageFilePathException {
         boolean isStorageFileSpecifiedByUser = launchArgs.length > 0;
         return isStorageFileSpecifiedByUser ? new StorageFile(launchArgs[0]) : new StorageFile();
     }

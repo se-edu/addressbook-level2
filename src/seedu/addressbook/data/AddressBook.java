@@ -1,16 +1,17 @@
-package seedu.addressbook.model;
+package seedu.addressbook.data;
 
-import seedu.addressbook.model.person.Person;
-import seedu.addressbook.model.person.ReadOnlyPerson;
-import seedu.addressbook.model.person.UniquePersonList;
-import seedu.addressbook.model.person.UniquePersonList.*;
-import seedu.addressbook.model.UniqueTagList.*;
+import seedu.addressbook.data.person.Person;
+import seedu.addressbook.data.person.ReadOnlyPerson;
+import seedu.addressbook.data.person.UniquePersonList;
+import seedu.addressbook.data.person.UniquePersonList.*;
+import seedu.addressbook.data.tag.UniqueTagList;
+import seedu.addressbook.data.tag.UniqueTagList.*;
+import seedu.addressbook.data.tag.Tag;
 
-import java.util.List;
 import java.util.Set;
 
 /**
- * Represents the entire address book, and maintains the master list of persons and tags.
+ * Represents the entire address book. Contains the data of the address book.
  *
  * Guarantees: Every tag found in every person will also be found in the tag list.
  */
@@ -20,7 +21,7 @@ public class AddressBook {
     private final UniqueTagList allTags; // can contain tags not attached to any person
 
     /**
-     * Empty constructor.
+     * Creates an empty address book.
      */
     public AddressBook() {
         allPersons = new UniquePersonList();
@@ -28,8 +29,8 @@ public class AddressBook {
     }
 
     /**
-     * Populating constructor.
-     * Will update the tag list with any missing tags found in any person.
+     * Constructs an address book with the given data.
+     * Also updates the tag list with any missing tags found in any person.
      *
      * @param persons external changes to this will not affect the address book
      * @param tags external changes to this will not affect the address book

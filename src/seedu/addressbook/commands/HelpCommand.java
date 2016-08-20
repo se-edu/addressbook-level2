@@ -2,7 +2,7 @@ package seedu.addressbook.commands;
 
 
 /**
- * Format full help instructions for every command for display.
+ * Shows help instructions.
  */
 public class HelpCommand extends Command {
 
@@ -16,13 +16,13 @@ public class HelpCommand extends Command {
     @Override
     public CommandResult execute() {
         return new CommandResult(
-                AddPersonCommand.MESSAGE_USAGE
-                + "\n" + DeletePersonCommand.MESSAGE_USAGE
-                + "\n" + ClearAddressBookCommand.MESSAGE_USAGE
-                + "\n" + FindPersonsByWordsInNameCommand.MESSAGE_USAGE
-                + "\n" + ListAllPersonsCommand.MESSAGE_USAGE
-                + "\n" + ViewPersonDetailsCommand.MESSAGE_USAGE
-                + "\n" + ViewAllPersonDetailsCommand.MESSAGE_USAGE
+                AddCommand.MESSAGE_USAGE
+                + "\n" + DeleteCommand.MESSAGE_USAGE
+                + "\n" + ClearCommand.MESSAGE_USAGE
+                + "\n" + FindCommand.MESSAGE_USAGE
+                + "\n" + ListCommand.MESSAGE_USAGE
+                + "\n" + ViewCommand.MESSAGE_USAGE
+                + "\n" + ViewAllCommand.MESSAGE_USAGE
                 + "\n" + HelpCommand.MESSAGE_USAGE
                 + "\n" + ExitCommand.MESSAGE_USAGE
         );

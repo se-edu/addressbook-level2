@@ -1,4 +1,4 @@
-package seedu.addressbook.model.person;
+package seedu.addressbook.data.person;
 
 /**
  * Represents a person's contact detail. Can be marked private for hiding self from display.

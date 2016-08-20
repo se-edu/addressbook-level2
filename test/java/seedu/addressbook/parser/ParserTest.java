@@ -3,10 +3,10 @@ package seedu.addressbook.parser;
 import org.junit.Before;
 import org.junit.Test;
 import seedu.addressbook.commands.*;
-import seedu.addressbook.model.IllegalValueException;
-import seedu.addressbook.model.Tag;
-import seedu.addressbook.model.UniqueTagList;
-import seedu.addressbook.model.person.*;
+import seedu.addressbook.data.exception.IllegalValueException;
+import seedu.addressbook.data.tag.Tag;
+import seedu.addressbook.data.tag.UniqueTagList;
+import seedu.addressbook.data.person.*;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -51,13 +51,13 @@ public class ParserTest {
     @Test
     public void clearCommand_parsedCorrectly() {
         final String input = "clear";
-        parseAndAssertCommandType(input, ClearAddressBookCommand.class);
+        parseAndAssertCommandType(input, ClearCommand.class);
     }
 
     @Test
     public void listCommand_parsedCorrectly() {
         final String input = "list";
-        parseAndAssertCommandType(input, ListAllPersonsCommand.class);
+        parseAndAssertCommandType(input, ListCommand.class);
     }
 
     @Test
@@ -73,7 +73,7 @@ public class ParserTest {
     @Test
     public void deleteCommand_noArgs() {
         final String[] inputs = { "delete", "delete " };
-        final String resultMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE);
+        final String resultMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE);
         parseAndAssertIncorrectWithMessage(resultMessage, inputs);
     }
 
@@ -88,14 +88,14 @@ public class ParserTest {
     public void deleteCommand_numericArg_indexParsedCorrectly() {
         final int testIndex = 1;
         final String input = "delete " + testIndex;
-        final DeletePersonCommand result = parseAndAssertCommandType(input, DeletePersonCommand.class);
+        final DeleteCommand result = parseAndAssertCommandType(input, DeleteCommand.class);
         assertEquals(result.targetIndex, testIndex);
     }
 
     @Test
     public void viewCommand_noArgs() {
         final String[] inputs = { "view", "view " };
-        final String resultMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewPersonDetailsCommand.MESSAGE_USAGE);
+        final String resultMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE);
         parseAndAssertIncorrectWithMessage(resultMessage, inputs);
     }
 
@@ -110,7 +110,7 @@ public class ParserTest {
     public void viewCommand_numericArg_indexParsedCorrectly() {
         final int testIndex = 2;
         final String input = "view " + testIndex;
-        final ViewPersonDetailsCommand result = parseAndAssertCommandType(input, ViewPersonDetailsCommand.class);
+        final ViewCommand result = parseAndAssertCommandType(input, ViewCommand.class);
         assertEquals(result.targetIndex, testIndex);
     }
 
@@ -118,7 +118,7 @@ public class ParserTest {
     public void viewAllCommand_noArgs() {
         final String[] inputs = { "viewall", "viewall " };
         final String resultMessage =
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewAllPersonDetailsCommand.MESSAGE_USAGE);
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewAllCommand.MESSAGE_USAGE);
         parseAndAssertIncorrectWithMessage(resultMessage, inputs);
     }
 
@@ -133,7 +133,7 @@ public class ParserTest {
     public void viewAllCommand_numericArg_indexParsedCorrectly() {
         final int testIndex = 3;
         final String input = "viewall " + testIndex;
-        final ViewAllPersonDetailsCommand result = parseAndAssertCommandType(input, ViewAllPersonDetailsCommand.class);
+        final ViewAllCommand result = parseAndAssertCommandType(input, ViewAllCommand.class);
         assertEquals(result.targetIndex, testIndex);
     }
 
@@ -149,7 +149,7 @@ public class ParserTest {
                 "find "
         };
         final String resultMessage =
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindPersonsByWordsInNameCommand.MESSAGE_USAGE);
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
         parseAndAssertIncorrectWithMessage(resultMessage, inputs);
     }
 
@@ -159,8 +159,8 @@ public class ParserTest {
         final Set<String> keySet = new HashSet<>(Arrays.asList(keywords));
 
         final String input = "find " + String.join(" ", keySet);
-        final FindPersonsByWordsInNameCommand result =
-                parseAndAssertCommandType(input, FindPersonsByWordsInNameCommand.class);
+        final FindCommand result =
+                parseAndAssertCommandType(input, FindCommand.class);
         assertEquals(keySet, result.getKeywords());
     }
 
@@ -171,8 +171,8 @@ public class ParserTest {
 
         // duplicate every keyword
         final String input = "find " + String.join(" ", keySet) + " " + String.join(" ", keySet);
-        final FindPersonsByWordsInNameCommand result =
-                parseAndAssertCommandType(input, FindPersonsByWordsInNameCommand.class);
+        final FindCommand result =
+                parseAndAssertCommandType(input, FindCommand.class);
         assertEquals(keySet, result.getKeywords());
     }
 
@@ -193,7 +193,7 @@ public class ParserTest {
                 // no address prefix
                 String.format("add $s p/$s e/$s $s", Name.EXAMPLE, Phone.EXAMPLE, Email.EXAMPLE, Address.EXAMPLE)
         };
-        final String resultMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPersonCommand.MESSAGE_USAGE);
+        final String resultMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         parseAndAssertIncorrectWithMessage(resultMessage, inputs);
     }
 
@@ -230,7 +230,7 @@ public class ParserTest {
     public void addCommand_validPersonData_parsedCorrectly() {
         final Person testPerson = generateTestPerson();
         final String input = convertPersonToAddCommandString(testPerson);
-        final AddPersonCommand result = parseAndAssertCommandType(input, AddPersonCommand.class);
+        final AddCommand result = parseAndAssertCommandType(input, AddCommand.class);
         assertEquals(result.getPerson(), testPerson);
     }
 
@@ -243,7 +243,7 @@ public class ParserTest {
             input += " t/" + tag.tagName;
         }
 
-        final AddPersonCommand result = parseAndAssertCommandType(input, AddPersonCommand.class);
+        final AddCommand result = parseAndAssertCommandType(input, AddCommand.class);
         assertEquals(result.getPerson(), testPerson);
     }
 

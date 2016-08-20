@@ -1,7 +1,6 @@
-package seedu.addressbook.model.person;
+package seedu.addressbook.data.person;
 
-import seedu.addressbook.common.Utils;
-import seedu.addressbook.model.IllegalValueException;
+import seedu.addressbook.data.exception.IllegalValueException;
 
 /**
  * Represents a Person's phone number in the address book.
@@ -22,7 +21,6 @@ public class Phone extends ContactDetail {
      */
     public Phone(String phone, boolean isPrivate) throws IllegalValueException {
         super(isPrivate);
-        Utils.assertNotNull(phone);
         phone = phone.trim();
         if (!isValidPhone(phone)) {
             throw new IllegalValueException(MESSAGE_PHONE_CONSTRAINTS);

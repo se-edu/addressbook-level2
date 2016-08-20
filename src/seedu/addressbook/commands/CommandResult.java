@@ -1,7 +1,6 @@
 package seedu.addressbook.commands;
 
-import seedu.addressbook.common.Utils;
-import seedu.addressbook.model.person.ReadOnlyPerson;
+import seedu.addressbook.data.person.ReadOnlyPerson;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,26 +9,25 @@ import java.util.Optional;
  * Represents the result of a command execution.
  */
 public class CommandResult {
+
+    /** The feedback message to be shown to the user. Contains a description of the execution result */
     public final String feedbackToUser;
+
+    /** The list of persons that was produced by the command */
     private final List<? extends ReadOnlyPerson> relevantPersons;
 
     public CommandResult(String feedbackToUser) {
-        Utils.assertNotNull(feedbackToUser);
         this.feedbackToUser = feedbackToUser;
         relevantPersons = null;
     }
 
     public CommandResult(String feedbackToUser, List<? extends ReadOnlyPerson> relevantPersons) {
-        Utils.assertNotNull(feedbackToUser, relevantPersons);
         this.feedbackToUser = feedbackToUser;
         this.relevantPersons = relevantPersons;
     }
 
     /**
-     * Get any relevant persons identified by the command. Returns empty optional if the idea of
-     * relevant persons makes no sense in the command's context..
-     *
-     * @return empty optional if relevant persons is N/A, optional containing persons otherwise
+     * Returns list of persons relevant to the command command result, if any.
      */
     public Optional<List<? extends ReadOnlyPerson>> getRelevantPersons() {
         return Optional.ofNullable(relevantPersons);

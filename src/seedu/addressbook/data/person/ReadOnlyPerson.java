@@ -1,7 +1,7 @@
-package seedu.addressbook.model.person;
+package seedu.addressbook.data.person;
 
-import seedu.addressbook.model.Tag;
-import seedu.addressbook.model.UniqueTagList;
+import seedu.addressbook.data.tag.Tag;
+import seedu.addressbook.data.tag.UniqueTagList;
 
 /**
  * A read-only immutable interface for a Person in the addressbook.
@@ -21,7 +21,7 @@ public interface ReadOnlyPerson {
     UniqueTagList getTags();
 
     /**
-     * Convenience method for comparing equality via state. (interfaces cannot override .equals)
+     * Returns true if the values inside this object is same as those of the other (Note: interfaces cannot override .equals)
      */
     default boolean isSameStateAs(ReadOnlyPerson other) {
         return other == this // short circuit if same object

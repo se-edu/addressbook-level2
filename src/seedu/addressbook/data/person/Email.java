@@ -1,10 +1,9 @@
-package seedu.addressbook.model.person;
+package seedu.addressbook.data.person;
 
-import seedu.addressbook.common.Utils;
-import seedu.addressbook.model.IllegalValueException;
+import seedu.addressbook.data.exception.IllegalValueException;
 
 /**
- * Represents a Person's phone number in the address book.
+ * Represents a Person's email in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
  */
 public class Email extends ContactDetail {
@@ -23,7 +22,6 @@ public class Email extends ContactDetail {
      */
     public Email(String email, boolean isPrivate) throws IllegalValueException {
         super(isPrivate);
-        Utils.assertNotNull(email);
         email = email.trim();
         if (!isValidEmail(email)) {
             throw new IllegalValueException(MESSAGE_EMAIL_CONSTRAINTS);

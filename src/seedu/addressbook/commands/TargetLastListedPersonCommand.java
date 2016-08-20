@@ -1,6 +1,6 @@
 package seedu.addressbook.commands;
 
-import seedu.addressbook.model.person.ReadOnlyPerson;
+import seedu.addressbook.data.person.ReadOnlyPerson;
 
 import java.util.regex.Pattern;
 
@@ -30,7 +30,7 @@ public abstract class TargetLastListedPersonCommand extends Command {
      *
      * @throws IndexOutOfBoundsException if the target index is out of bounds of the last viewed listing
      */
-    protected ReadOnlyPerson getTargetFromView() throws IndexOutOfBoundsException {
+    protected ReadOnlyPerson getTargetPerson() throws IndexOutOfBoundsException {
         return relevantPersons.get(targetIndex - DISPLAYED_INDEX_OFFSET);
     }
 

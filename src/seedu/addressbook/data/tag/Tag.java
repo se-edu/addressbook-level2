@@ -1,6 +1,6 @@
-package seedu.addressbook.model;
+package seedu.addressbook.data.tag;
 
-import seedu.addressbook.common.Utils;
+import seedu.addressbook.data.exception.IllegalValueException;
 
 /**
  * Represents a Tag in the address book.
@@ -19,7 +19,6 @@ public class Tag {
      * @throws IllegalValueException if the given tag name string is invalid.
      */
     public Tag(String name) throws IllegalValueException {
-        Utils.assertNotNull(name);
         name = name.trim();
         if (!isValidTagName(name)) {
             throw new IllegalValueException(MESSAGE_TAG_CONSTRAINTS);
@@ -28,7 +27,7 @@ public class Tag {
     }
 
     /**
-     * Checks if a given string is a valid tag name.
+     * Returns true if a given string is a valid tag name.
      */
     public static boolean isValidTagName(String test) {
         return test.matches(TAG_VALIDATION_REGEX);
@@ -46,9 +45,7 @@ public class Tag {
         return tagName.hashCode();
     }
 
-    /**
-     * Format state as text for viewing.
-     */
+    @Override
     public String toString() {
         return '[' + tagName + ']';
     }

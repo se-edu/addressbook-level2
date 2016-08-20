@@ -3,8 +3,7 @@ package seedu.addressbook.ui;
 import static seedu.addressbook.common.Messages.*;
 
 import seedu.addressbook.commands.CommandResult;
-import seedu.addressbook.common.Utils;
-import seedu.addressbook.model.person.ReadOnlyPerson;
+import seedu.addressbook.data.person.ReadOnlyPerson;
 
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -18,33 +17,30 @@ import java.util.Scanner;
  */
 public class TextUi {
 
-    /**
-     * A decorative prefix added to the beginning of lines printed by AddressBook
-     */
-    public static final String LINE_PREFIX = "|| ";
+    /** A decorative prefix added to the beginning of lines printed by AddressBook */
+    private static final String LINE_PREFIX = "|| ";
 
-    /**
-     * A platform independent line separator.
-     */
-    public static final String LS = System.lineSeparator();
+    /** A platform independent line separator. */
+    private static final String LS = System.lineSeparator();
 
-    public static final String DIVIDER = "===================================================";
+    private static final String DIVIDER = "===================================================";
 
+    /** Format of indexed list item */
+    private static final String MESSAGE_INDEXED_LIST_ITEM = "\t%1$d. %2$s";
 
 
-    /**
-     * Offset required to convert between 1-indexing and 0-indexing.COMMAND_
-     */
+    /** Offset required to convert between 1-indexing and 0-indexing.  */
     public static final int DISPLAYED_INDEX_OFFSET = 1;
 
-    /**
-     * Format of a comment input line. Comment lines are silently consumed when reading user input.
-     */
-    public static final String COMMENT_LINE_FORMAT_REGEX = "#.*";
+    /** Format of a comment input line. Comment lines are silently consumed when reading user input. */
+    private static final String COMMENT_LINE_FORMAT_REGEX = "#.*";
 
     private final Scanner in;
     private final PrintStream out;
-    
+
+    public TextUi(){
+        this(System.in, System.out);
+    }
 
     public TextUi(InputStream in, PrintStream out) {
         this.in = new Scanner(in);
@@ -52,23 +48,23 @@ public class TextUi {
     }
 
     /**
-     * Checks if the user input line should be ignored.
+     * Returns true if the user input line should be ignored.
      * Input should be ignored if it is parsed as a comment, is only whitespace, or is empty.
      *
      * @param rawInputLine full raw user input line.
      * @return true if the entire user input line should be ignored.
      */
-    public boolean shouldIgnore(String rawInputLine) {
+    private boolean shouldIgnore(String rawInputLine) {
         return rawInputLine.trim().isEmpty() || isCommentLine(rawInputLine);
     }
 
     /**
-     * Checks if the user input line is a comment line.
+     * Returns true if the user input line is a comment line.
      *
      * @param rawInputLine full raw user input line.
      * @return true if input line is a comment.
      */
-    public boolean isCommentLine(String rawInputLine) {
+    private boolean isCommentLine(String rawInputLine) {
         return rawInputLine.trim().matches(COMMENT_LINE_FORMAT_REGEX);
     }
 
@@ -76,7 +72,7 @@ public class TextUi {
      * Prompts for the command and reads the text entered by the user.
      * Ignores empty, pure whitespace, and comment lines.
      * Echos the command back to the user.
-     * @return full line entered by the user
+     * @return command (full line) entered by the user
      */
     public String getUserCommand() {
         out.print(LINE_PREFIX + "Enter command: ");
@@ -113,9 +109,7 @@ public class TextUi {
         showToUser(MESSAGE_INIT_FAILED, DIVIDER, DIVIDER);
     }
 
-    /**
-     * Shows message(s) to the user
-     */
+    /** Shows message(s) to the user */
     public void showToUser(String... message) {
         for (String m : message) {
             out.println(LINE_PREFIX + m.replace("\n", LS + LINE_PREFIX));
@@ -138,8 +132,7 @@ public class TextUi {
      * Shows a list of persons to the user, formatted as an indexed list.
      * Private contact details are hidden.
      */
-    public void showPersonListView(List<? extends ReadOnlyPerson> persons) {
-        Utils.assertNoNullElements(persons);
+    private void showPersonListView(List<? extends ReadOnlyPerson> persons) {
         final List<String> formattedPersons = new ArrayList<>();
         for (ReadOnlyPerson person : persons) {
             formattedPersons.add(person.getAsTextHidePrivate());
@@ -147,17 +140,13 @@ public class TextUi {
         showToUserAsIndexedList(formattedPersons);
     }
 
-    /**
-     * Shows a list of strings to the user, formatted as an indexed list.
-     */
-    public void showToUserAsIndexedList(List<String> list) {
+    /** Shows a list of strings to the user, formatted as an indexed list. */
+    private void showToUserAsIndexedList(List<String> list) {
         showToUser(getIndexedListForViewing(list));
     }
 
-    /**
-     * Formats a list of strings as a viewable indexed list.
-     */
-    public static String getIndexedListForViewing(List<String> listItems) {
+    /** Formats a list of strings as a viewable indexed list. */
+    private static String getIndexedListForViewing(List<String> listItems) {
         final StringBuilder formatted = new StringBuilder();
         int displayIndex = 0 + DISPLAYED_INDEX_OFFSET;
         for (String listItem : listItems) {
@@ -172,7 +161,7 @@ public class TextUi {
      *
      * @param visibleIndex visible index for this listing
      */
-    public static String getIndexedListItem(int visibleIndex, String listItem) {
+    private static String getIndexedListItem(int visibleIndex, String listItem) {
         return String.format(MESSAGE_INDEXED_LIST_ITEM, visibleIndex, listItem);
     }
 

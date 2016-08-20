@@ -1,10 +1,10 @@
 package seedu.addressbook.parser;
 
 import seedu.addressbook.commands.*;
-import seedu.addressbook.model.IllegalValueException;
-import seedu.addressbook.model.Tag;
-import seedu.addressbook.model.UniqueTagList;
-import seedu.addressbook.model.person.*;
+import seedu.addressbook.data.exception.IllegalValueException;
+import seedu.addressbook.data.tag.Tag;
+import seedu.addressbook.data.tag.UniqueTagList;
+import seedu.addressbook.data.person.*;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -53,25 +53,25 @@ public class Parser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
-            case AddPersonCommand.COMMAND_WORD:
+            case AddCommand.COMMAND_WORD:
                 return prepareAdd(arguments);
 
-            case DeletePersonCommand.COMMAND_WORD:
+            case DeleteCommand.COMMAND_WORD:
                 return prepareDelete(arguments);
 
-            case ClearAddressBookCommand.COMMAND_WORD:
-                return new ClearAddressBookCommand();
+            case ClearCommand.COMMAND_WORD:
+                return new ClearCommand();
 
-            case FindPersonsByWordsInNameCommand.COMMAND_WORD:
+            case FindCommand.COMMAND_WORD:
                 return prepareFind(arguments);
 
-            case ListAllPersonsCommand.COMMAND_WORD:
-                return new ListAllPersonsCommand();
+            case ListCommand.COMMAND_WORD:
+                return new ListCommand();
 
-            case ViewPersonDetailsCommand.COMMAND_WORD:
+            case ViewCommand.COMMAND_WORD:
                 return prepareView(arguments);
 
-            case ViewAllPersonDetailsCommand.COMMAND_WORD:
+            case ViewAllCommand.COMMAND_WORD:
                 return prepareViewAll(arguments);
 
             case ExitCommand.COMMAND_WORD:
@@ -91,10 +91,10 @@ public class Parser {
      * @throws ParseException containing a message with relevant info if the args could no be parsed
      */
     private Command prepareAdd(String args){
-        final Matcher matcher = AddPersonCommand.ARGS_FORMAT.matcher(args.trim());
+        final Matcher matcher = AddCommand.ARGS_FORMAT.matcher(args.trim());
         // Validate arg string format
         if (!matcher.matches()) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPersonCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
         try {
             final Name name = new Name(matcher.group("name"));
@@ -105,7 +105,7 @@ public class Parser {
             final Address address = new Address(matcher.group("address"),
                     isPrivatePrefixPresent(matcher.group("isAddressPrivate")));
 
-            return new AddPersonCommand(new Person(name, phone, email, address,
+            return new AddCommand(new Person(name, phone, email, address,
                     getTagsFromArgs(matcher.group("tagArguments"))));
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
@@ -150,9 +150,9 @@ public class Parser {
     private Command prepareDelete(String args) {
         try {
             final int targetIndex = parseArgsAsDisplayedIndex(args);
-            return new DeletePersonCommand(targetIndex);
+            return new DeleteCommand(targetIndex);
         } catch (ParseException pe) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         } catch (NumberFormatException nfe) {
             return new IncorrectCommand(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
@@ -169,10 +169,10 @@ public class Parser {
 
         try {
             final int targetIndex = parseArgsAsDisplayedIndex(args);
-            return new ViewPersonDetailsCommand(targetIndex);
+            return new ViewCommand(targetIndex);
         } catch (ParseException pe) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    ViewPersonDetailsCommand.MESSAGE_USAGE));
+                    ViewCommand.MESSAGE_USAGE));
         } catch (NumberFormatException nfe) {
             return new IncorrectCommand(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
@@ -189,10 +189,10 @@ public class Parser {
 
         try {
             final int targetIndex = parseArgsAsDisplayedIndex(args);
-            return new ViewAllPersonDetailsCommand(targetIndex);
+            return new ViewAllCommand(targetIndex);
         } catch (ParseException pe) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    ViewAllPersonDetailsCommand.MESSAGE_USAGE));
+                    ViewAllCommand.MESSAGE_USAGE));
         } catch (NumberFormatException nfe) {
             return new IncorrectCommand(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
@@ -223,16 +223,16 @@ public class Parser {
      * @throws ParseException containing a message with relevant info if the args could no be parsed
      */
     private Command prepareFind(String args) {
-        final Matcher matcher = FindPersonsByWordsInNameCommand.ARGS_FORMAT.matcher(args.trim());
+        final Matcher matcher = FindCommand.ARGS_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    FindPersonsByWordsInNameCommand.MESSAGE_USAGE));
+                    FindCommand.MESSAGE_USAGE));
         }
 
         // keywords delimited by whitespace
         final String[] keywords = matcher.group("keywords").split("\\s+");
         final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
-        return new FindPersonsByWordsInNameCommand(keywordSet);
+        return new FindCommand(keywordSet);
     }
 
 

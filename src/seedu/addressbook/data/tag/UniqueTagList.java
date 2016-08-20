@@ -1,13 +1,12 @@
-package seedu.addressbook.model;
+package seedu.addressbook.data.tag;
 
 import seedu.addressbook.common.Utils;
+import seedu.addressbook.data.exception.DuplicateDataException;
 
 import java.util.*;
 
 /**
- * A list of tags that enforces no nulls and uniqueness between its elements.
- *
- * Supports minimal set of list operations for the app's features.
+ * A list of tags. Does not allow nulls or duplicates.
  *
  * @see Tag#equals(Object)
  * @see Utils#elementsAreUnique(Collection)
@@ -32,15 +31,14 @@ public class UniqueTagList implements Iterable<Tag> {
     private final List<Tag> internalList = new ArrayList<>();
 
     /**
-     * Constructs empty TagList.
+     * Constructs an empty TagList.
      */
     public UniqueTagList() {}
 
     /**
-     * Varargs/array constructor, enforces no nulls or duplicates.
+     * Constructs a tag list with the given tags.
      */
     public UniqueTagList(Tag... tags) throws DuplicateTagException {
-        Utils.assertNotNull(tags);
         final List<Tag> initialTags = Arrays.asList(tags);
         if (!Utils.elementsAreUnique(initialTags)) {
             throw new DuplicateTagException();
@@ -49,10 +47,9 @@ public class UniqueTagList implements Iterable<Tag> {
     }
 
     /**
-     * java collections constructor, enforces no null or duplicate elements.
+     * Constructs a tag list with the given tags.
      */
     public UniqueTagList(Collection<Tag> tags) throws DuplicateTagException {
-        Utils.assertNoNullElements(tags);
         if (!Utils.elementsAreUnique(tags)) {
             throw new DuplicateTagException();
         }
@@ -60,26 +57,17 @@ public class UniqueTagList implements Iterable<Tag> {
     }
 
     /**
-     * java set constructor, enforces no nulls.
+     * Constructs a tag list with the given tags.
      */
     public UniqueTagList(Set<Tag> tags) {
-        Utils.assertNoNullElements(tags);
         internalList.addAll(tags);
     }
 
     /**
-     * Copy constructor, insulates from changes in source.
+     * Constructs a shallow copy of the given tag list.
      */
     public UniqueTagList(UniqueTagList source) {
-        internalList.addAll(source.internalList); // insulate internal list from changes in argument
-    }
-
-    /**
-     * Unmodifiable java List view. For use with other methods/libraries.
-     * Any changes to the internal list/elements are immediately visible in the returned list.
-     */
-    public List<Tag> immutableListView() {
-        return Collections.unmodifiableList(internalList);
+        internalList.addAll(source.internalList);
     }
 
     /**
@@ -93,7 +81,6 @@ public class UniqueTagList implements Iterable<Tag> {
      * Checks if the list contains an equivalent Tag as the given argument.
      */
     public boolean contains(Tag toCheck) {
-        Utils.assertNotNull(toCheck);
         return internalList.contains(toCheck);
     }
 
@@ -103,7 +90,6 @@ public class UniqueTagList implements Iterable<Tag> {
      * @throws DuplicateTagException if the Tag to add is a duplicate of an existing Tag in the list.
      */
     public void add(Tag toAdd) throws DuplicateTagException {
-        Utils.assertNotNull(toAdd);
         if (contains(toAdd)) {
             throw new DuplicateTagException();
         }
@@ -116,7 +102,6 @@ public class UniqueTagList implements Iterable<Tag> {
      * @throws TagNotFoundException if no such Tag could be found in the list.
      */
     public void remove(Tag toRemove) throws TagNotFoundException {
-        Utils.assertNotNull(toRemove);
         final boolean TagFoundAndDeleted = internalList.remove(toRemove);
         if (!TagFoundAndDeleted) {
             throw new TagNotFoundException();

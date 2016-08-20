@@ -1,7 +1,6 @@
-package seedu.addressbook.model.person;
+package seedu.addressbook.data.person;
 
-import seedu.addressbook.common.Utils;
-import seedu.addressbook.model.IllegalValueException;
+import seedu.addressbook.data.exception.IllegalValueException;
 
 /**
  * Represents a Person's address in the address book.
@@ -10,7 +9,7 @@ import seedu.addressbook.model.IllegalValueException;
 public class Address extends ContactDetail {
 
     public static final String EXAMPLE = "123, some street";
-    public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addressescan be in any format";
+    public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses can be in any format";
     public static final String ADDRESS_VALIDATION_REGEX = ".+";
 
     public final String value;
@@ -22,7 +21,6 @@ public class Address extends ContactDetail {
      */
     public Address(String address, boolean isPrivate) throws IllegalValueException {
         super(isPrivate);
-        Utils.assertNotNull(address);
         if (!isValidAddress(address)) {
             throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
         }
@@ -30,7 +28,7 @@ public class Address extends ContactDetail {
     }
 
     /**
-     * Checks if a given string is a valid person email.
+     * Returns true if a given string is a valid person email.
      */
     public static boolean isValidAddress(String test) {
         return test.matches(ADDRESS_VALIDATION_REGEX);

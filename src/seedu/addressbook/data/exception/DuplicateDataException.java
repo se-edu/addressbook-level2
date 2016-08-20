@@ -1,4 +1,4 @@
-package seedu.addressbook.model;
+package seedu.addressbook.data.exception;
 
 /**
  * Signals an error caused by duplicate data where there should be none.
