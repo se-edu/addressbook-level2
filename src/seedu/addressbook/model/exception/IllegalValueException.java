@@ -1,4 +1,4 @@
-package seedu.addressbook.model;
+package seedu.addressbook.model.exception;
 
 /**
  * Signals that some given data does not fulfill some constraints.

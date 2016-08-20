@@ -1,7 +1,7 @@
 package seedu.addressbook.storage.jaxb;
 
 import seedu.addressbook.model.AddressBook;
-import seedu.addressbook.model.IllegalValueException;
+import seedu.addressbook.model.exception.IllegalValueException;
 import seedu.addressbook.model.tag.Tag;
 import seedu.addressbook.model.tag.UniqueTagList;
 import seedu.addressbook.model.person.Person;

@@ -1,7 +1,7 @@
 package seedu.addressbook.model.person;
 
 import seedu.addressbook.common.Utils;
-import seedu.addressbook.model.DuplicateDataException;
+import seedu.addressbook.model.exception.DuplicateDataException;
 
 import java.util.*;
 

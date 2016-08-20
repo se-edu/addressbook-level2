@@ -1,6 +1,6 @@
 package seedu.addressbook.model.person;
 
-import seedu.addressbook.model.IllegalValueException;
+import seedu.addressbook.model.exception.IllegalValueException;
 
 /**
  * Represents a Person's address in the address book.
