@@ -44,6 +44,10 @@ public class TextUi {
 
     private final Scanner in;
     private final PrintStream out;
+
+    public TextUi(){
+        this(System.in, System.out);
+    }
     
 
     public TextUi(InputStream in, PrintStream out) {

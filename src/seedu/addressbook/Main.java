@@ -32,12 +32,12 @@ public class Main {
 
 
     public static void main(String... launchArgs) {
-        new Main().run(launchArgs, System.in, System.out);
+        new Main().run(launchArgs);
     }
 
     /** Runs the program until termination.  */
-    public void run(String[] launchArgs, InputStream inputStream, PrintStream outputStream) {
-        start(launchArgs, inputStream, outputStream);
+    public void run(String[] launchArgs) {
+        start(launchArgs);
         runCommandLoopUntilExitCommand();
         exit();
     }
@@ -46,13 +46,11 @@ public class Main {
      * Sets up the required objects, loads up the data from the storage file, and prints the welcome message.
      *
      * @param launchArgs arguments supplied by the user at program launch
-     * @param inputStream user text input source
-     * @param outputStream user text output acceptor
      *
      */
-    private void start(String[] launchArgs, InputStream inputStream, PrintStream outputStream) {
+    private void start(String[] launchArgs) {
         try {
-            this.ui = new TextUi(inputStream, outputStream);
+            this.ui = new TextUi();
             this.storage = initializeStorage(launchArgs);
             this.addressBook = storage.load();
             ui.showWelcomeMessage(VERSION, storage.getPath());
