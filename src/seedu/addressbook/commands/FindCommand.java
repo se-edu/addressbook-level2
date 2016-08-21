@@ -3,8 +3,6 @@ package seedu.addressbook.commands;
 import seedu.addressbook.data.person.ReadOnlyPerson;
 
 import java.util.*;
-import java.util.regex.Pattern;
-
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -18,9 +16,6 @@ public class FindCommand extends Command {
             + "the specified keywords (case-sensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
-
-    public static final Pattern ARGS_FORMAT =
-            Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one or more keywords separated by whitespace
 
     private final Set<String> keywords;
 
