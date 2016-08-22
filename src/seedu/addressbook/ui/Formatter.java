@@ -4,32 +4,31 @@ package seedu.addressbook.ui;
 import java.util.List;
 import java.util.StringJoiner;
 
-import static seedu.addressbook.common.Messages.MESSAGE_GOODBYE;
-import static seedu.addressbook.common.Messages.MESSAGE_PROGRAM_LAUNCH_ARGS_USAGE;
-import static seedu.addressbook.common.Messages.MESSAGE_WELCOME;
+import static seedu.addressbook.common.Messages.MESSAGE_INIT_FAILED;
+
 
 public class Formatter {
     /** Offset required to convert between 1-indexing and 0-indexing.  */
     public static final int DISPLAYED_INDEX_OFFSET = 1;
 
     /** A decorative prefix added to the beginning of lines printed by AddressBook */
-    public static final String LINE_PREFIX = "|| ";
+    private static final String LINE_PREFIX = "|| ";
 
     /** A platform independent line separator. */
-    public static final String LS = System.lineSeparator();
+    private static final String LS = System.lineSeparator();
 
-    public static final String DIVIDER = "===================================================";
+    private static final String DIVIDER = "===================================================";
 
     /** Format of indexed list item */
-    public static final String MESSAGE_INDEXED_LIST_ITEM = "\t%1$d. %2$s";
+    private static final String MESSAGE_INDEXED_LIST_ITEM = "\t%1$d. %2$s";
 
-    public String getWelcomeMessage(String version, String storageFileInfo) {
+    public String formatWelcomeMessage(String welcome, String version, String usage, String storageFileInfo) {
         return format(
                 DIVIDER,
                 DIVIDER,
-                MESSAGE_WELCOME,
+                welcome,
                 version,
-                MESSAGE_PROGRAM_LAUNCH_ARGS_USAGE,
+                usage,
                 storageFileInfo,
                 DIVIDER);
     }
@@ -42,16 +41,16 @@ public class Formatter {
         return joiner.toString();
     }
 
-    String getPrompt() {
+    public String formatPrompt() {
         return LINE_PREFIX + "Enter command: ";
     }
 
-    String getEcho(String fullInputLine) {
+    public String formatEcho(String fullInputLine) {
         return "[Command entered:" + fullInputLine + "]";
     }
 
-    public String getGoodByeMessage() {
-        return format(MESSAGE_GOODBYE, DIVIDER, DIVIDER);
+    public String formatGoodByeMessage(String goodbyeMessage) {
+        return format(goodbyeMessage, DIVIDER, DIVIDER);
     }
 
     public String formatResult(String feedbackToUser) {
@@ -76,5 +75,9 @@ public class Formatter {
      */
     private String getIndexedListItem(int visibleIndex, String listItem) {
         return String.format(MESSAGE_INDEXED_LIST_ITEM, visibleIndex, listItem);
+    }
+
+    public String formatInitFailedMessage(String messageInitFailed) {
+        return format(messageInitFailed, DIVIDER, DIVIDER);
     }
 }

@@ -17,8 +17,6 @@ import java.util.Scanner;
  */
 public class TextUi {
 
-
-
     /** Format of a comment input line. Comment lines are silently consumed when reading user input. */
     private static final String COMMENT_LINE_FORMAT_REGEX = "#.*";
 
@@ -63,7 +61,7 @@ public class TextUi {
      * @return command (full line) entered by the user
      */
     public String getUserCommand() {
-        out.print(formatter.getPrompt());
+        out.print(formatter.formatPrompt());
         String fullInputLine = in.nextLine();
 
         // silently consume all ignored lines
@@ -71,31 +69,25 @@ public class TextUi {
             fullInputLine = in.nextLine();
         }
 
-        showToUser(formatter.getEcho(fullInputLine));
+        show(formatter.formatEcho(fullInputLine));
         return fullInputLine;
     }
 
 
     public void showWelcomeMessage(String version, String storageFilePath) {
         String storageFileInfo = String.format(MESSAGE_USING_STORAGE_FILE, storageFilePath);
-        show(formatter.getWelcomeMessage(version, storageFileInfo));
+        show(formatter.formatWelcomeMessage(MESSAGE_WELCOME, version, MESSAGE_PROGRAM_LAUNCH_ARGS_USAGE, storageFileInfo));
     }
 
     public void showGoodbyeMessage() {
-        show(formatter.getGoodByeMessage());
+        show(formatter.formatGoodByeMessage(MESSAGE_GOODBYE));
     }
 
 
     public void showInitFailedMessage() {
-        showToUser(MESSAGE_INIT_FAILED, Formatter.DIVIDER, Formatter.DIVIDER);
+        show(formatter.formatInitFailedMessage(MESSAGE_INIT_FAILED));
     }
 
-    /** Shows message(s) to the user */
-    public void showToUser(String... message) {
-        for (String m : message) {
-            out.println(Formatter.LINE_PREFIX + m.replace("\n", Formatter.LS + Formatter.LINE_PREFIX));
-        }
-    }
 
     public void show(String msg){
         out.println(msg);
@@ -122,14 +114,8 @@ public class TextUi {
         for (ReadOnlyPerson person : persons) {
             formattedPersons.add(person.getAsTextHidePrivate());
         }
-        showToUserAsIndexedList(formattedPersons);
+        show(formatter.formatListForViewing(formattedPersons));
     }
-
-    /** Shows a list of strings to the user, formatted as an indexed list. */
-    private void showToUserAsIndexedList(List<String> list) {
-        show(formatter.formatListForViewing(list));
-    }
-
 
 
 }
