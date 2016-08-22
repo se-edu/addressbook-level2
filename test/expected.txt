@@ -34,6 +34,7 @@
 || Address book has been cleared!
 || ===================================================
 || Enter command: || [Command entered:  list]
+
 || 
 || 0 persons listed!
 || ===================================================
@@ -196,14 +197,17 @@
 || Example: find alice bob charlie
 || ===================================================
 || Enter command: || [Command entered:  find bet]
+
 || 
 || 0 persons listed!
 || ===================================================
 || Enter command: || [Command entered:  find 23912039120]
+
 || 
 || 0 persons listed!
 || ===================================================
 || Enter command: || [Command entered:  find betsy]
+
 || 
 || 0 persons listed!
 || ===================================================
@@ -285,6 +289,7 @@
 || Address book has been cleared!
 || ===================================================
 || Enter command: || [Command entered:  list]
+
 || 
 || 0 persons listed!
 || ===================================================
