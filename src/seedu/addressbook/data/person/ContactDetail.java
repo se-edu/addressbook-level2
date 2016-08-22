@@ -15,15 +15,4 @@ public abstract class ContactDetail {
         return isPrivate;
     }
 
-    public boolean isVisible() {
-        return !isPrivate;
-    }
-
-    public void makePrivate() {
-        isPrivate = true;
-    }
-
-    public void makeVisible() {
-        isPrivate = false;
-    }
 }

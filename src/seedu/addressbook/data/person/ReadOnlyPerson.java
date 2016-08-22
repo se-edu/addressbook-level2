@@ -67,13 +67,13 @@ public interface ReadOnlyPerson {
     default String getAsTextHidePrivate() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName());
-        if (getPhone().isVisible()) {
+        if (!getPhone().isPrivate()) {
             builder.append(" Phone: ").append(getPhone());
         }
-        if (getEmail().isVisible()) {
+        if (!getEmail().isPrivate()) {
             builder.append(" Email: ").append(getEmail());
         }
-        if (getAddress().isVisible()) {
+        if (!getAddress().isPrivate()) {
             builder.append(" Address: ").append(getAddress());
         }
         builder.append(" Tags: ");
