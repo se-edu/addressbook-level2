@@ -51,4 +51,8 @@ public class Address extends ContactDetail {
         return value.hashCode();
     }
 
+    @Override
+    public String getFullPrintableString() {
+        return " Address: " + value;
+    }
 }

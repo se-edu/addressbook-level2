@@ -54,4 +54,8 @@ public class Email extends ContactDetail {
     }
 
 
+    @Override
+    public String getFullPrintableString() {
+        return " Email: " + value;
+    }
 }

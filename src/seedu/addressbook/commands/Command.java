@@ -35,4 +35,8 @@ public abstract class Command {
         this.addressBook = addressBook;
         this.relevantPersons = relevantPersons;
     }
+
+    public boolean isMutating(){
+        return true;
+    }
 }

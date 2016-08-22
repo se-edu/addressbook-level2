@@ -52,4 +52,8 @@ public class Phone extends ContactDetail {
         return value.hashCode();
     }
 
+    @Override
+    public String getFullPrintableString() {
+        return " Phone: " + value;
+    }
 }

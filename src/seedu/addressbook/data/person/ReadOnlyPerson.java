@@ -3,6 +3,8 @@ package seedu.addressbook.data.person;
 import seedu.addressbook.data.tag.Tag;
 import seedu.addressbook.data.tag.UniqueTagList;
 
+import java.util.StringJoiner;
+
 /**
  * A read-only immutable interface for a Person in the addressbook.
  * Implementations should guarantee: details are present and not null, field values are validated.
@@ -67,18 +69,20 @@ public interface ReadOnlyPerson {
     default String getAsTextHidePrivate() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName());
-        if (getPhone().isVisible()) {
-            builder.append(" Phone: ").append(getPhone());
-        }
-        if (getEmail().isVisible()) {
-            builder.append(" Email: ").append(getEmail());
-        }
-        if (getAddress().isVisible()) {
-            builder.append(" Address: ").append(getAddress());
-        }
+        builder.append(getPrintableString(getPhone(), getEmail(), getAddress()));
         builder.append(" Tags: ");
         for (Tag tag : getTags()) {
             builder.append(tag);
+        }
+        return builder.toString();
+    }
+
+    default String getPrintableString(ContactDetail... printables){
+        StringBuilder builder = new StringBuilder();
+        for(ContactDetail c : printables){
+            if (c.isVisible()){
+                builder.append(c.getPrintableString());
+            }
         }
         return builder.toString();
     }

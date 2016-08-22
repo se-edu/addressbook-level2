@@ -3,7 +3,7 @@ package seedu.addressbook.data.person;
 /**
  * Represents a person's contact detail. Can be marked private for hiding self from display.
  */
-public abstract class ContactDetail {
+public abstract class ContactDetail implements Printable{
 
     private boolean isPrivate;
 
@@ -19,11 +19,11 @@ public abstract class ContactDetail {
         return !isPrivate;
     }
 
-    public void makePrivate() {
-        isPrivate = true;
+    @Override
+    public String getPrintableString(){
+        return isPrivate ? "" : getFullPrintableString();
     }
 
-    public void makeVisible() {
-        isPrivate = false;
-    }
+    public abstract String getFullPrintableString();
+
 }
