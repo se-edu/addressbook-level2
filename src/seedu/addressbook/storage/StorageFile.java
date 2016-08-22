@@ -85,6 +85,10 @@ public class StorageFile {
      */
     public void save(AddressBook addressBook) throws StorageOperationException {
 
+        if(!path.toFile().exists()){
+            throw new StorageOperationException("file not found");
+        }
+
         /* Note: Note the 'try with resource' statement below.
          * More info: https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html
          */
