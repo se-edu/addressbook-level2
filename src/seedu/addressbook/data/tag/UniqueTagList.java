@@ -115,6 +115,14 @@ public class UniqueTagList implements Iterable<Tag> {
         internalList.clear();
     }
 
+    /**
+     * Replaces the Tags in this list with those in the argument tag list.
+     */
+    public void setTags(UniqueTagList replacement) {
+        this.internalList.clear();
+        this.internalList.addAll(replacement.internalList);
+    }
+
     @Override
     public Iterator<Tag> iterator() {
         return internalList.iterator();
