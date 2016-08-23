@@ -36,6 +36,17 @@ public class UniquePersonList implements Iterable<Person> {
     public UniquePersonList() {}
 
     /**
+     * Constructs a person list with the given persons.
+     */
+    public UniquePersonList(Person... persons) throws DuplicatePersonException {
+        final List<Person> initialTags = Arrays.asList(persons);
+        if (!Utils.elementsAreUnique(initialTags)) {
+            throw new DuplicatePersonException();
+        }
+        internalList.addAll(initialTags);
+    }
+
+    /**
      * Constructs a list from the items in the given collection.
      * @param persons a collection of persons
      * @throws DuplicatePersonException if the {@code persons} contains duplicate persons
