@@ -59,6 +59,13 @@ public class Person implements ReadOnlyPerson {
         return new UniqueTagList(tags);
     }
 
+    /**
+     * Replaces this person's tags with the tags in the argument tag list.
+     */
+    public void setTags(UniqueTagList replacement) {
+        tags.setTags(replacement);
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

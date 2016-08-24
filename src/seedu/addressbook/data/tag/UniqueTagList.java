@@ -97,6 +97,30 @@ public class UniqueTagList implements Iterable<Tag> {
     }
 
     /**
+     * Adds all the given tags to this list.
+     *
+     * @throws DuplicateTagException if the argument tag list contains tag(s) that already exist in this list.
+     */
+    public void addAll(UniqueTagList tags) throws DuplicateTagException {
+        if (!Collections.disjoint(this.internalList, tags.internalList)) {
+            throw new DuplicateTagException();
+        }
+        this.internalList.addAll(tags.internalList);
+    }
+
+    /**
+     * Adds every tag from the argument list that does not yet exist in this list.
+     */
+    public void mergeFrom(UniqueTagList tags) {
+        final Set<Tag> alreadyInside = this.toSet();
+        for (Tag tag : tags) {
+            if (!alreadyInside.contains(tag)) {
+                internalList.add(tag);
+            }
+        }
+    }
+
+    /**
      * Removes the equivalent Tag from the list.
      *
      * @throws TagNotFoundException if no such Tag could be found in the list.
@@ -113,6 +137,14 @@ public class UniqueTagList implements Iterable<Tag> {
      */
     public void clear() {
         internalList.clear();
+    }
+
+    /**
+     * Replaces the Tags in this list with those in the argument tag list.
+     */
+    public void setTags(UniqueTagList replacement) {
+        this.internalList.clear();
+        this.internalList.addAll(replacement.internalList);
     }
 
     @Override

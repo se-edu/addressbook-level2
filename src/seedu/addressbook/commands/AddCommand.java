@@ -7,8 +7,6 @@ import seedu.addressbook.data.tag.UniqueTagList;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.regex.Pattern;
-
 
 /**
  * Adds a person to the address book.
@@ -25,13 +23,6 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
-
-    public static final Pattern ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
-            Pattern.compile("(?<name>[^/]+)"
-                            + " (?<isPhonePrivate>p?)p/(?<phone>[^/]+)"
-                            + " (?<isEmailPrivate>p?)e/(?<email>[^/]+)"
-                            + " (?<isAddressPrivate>p?)a/(?<address>[^/]+)"
-                            + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
 
     private final Person toAdd;
 

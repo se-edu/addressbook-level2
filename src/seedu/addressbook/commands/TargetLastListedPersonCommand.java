@@ -2,8 +2,6 @@ package seedu.addressbook.commands;
 
 import seedu.addressbook.data.person.ReadOnlyPerson;
 
-import java.util.regex.Pattern;
-
 import static seedu.addressbook.ui.TextUi.DISPLAYED_INDEX_OFFSET;
 
 /**
@@ -12,10 +10,7 @@ import static seedu.addressbook.ui.TextUi.DISPLAYED_INDEX_OFFSET;
  */
 public abstract class TargetLastListedPersonCommand extends Command {
 
-    public static final Pattern ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
-
     public final int targetIndex;
-
 
     /**
      * @param targetIndex last visible listing index of the target person
