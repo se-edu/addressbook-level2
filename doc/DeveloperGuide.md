@@ -9,6 +9,7 @@
 
 **Importing the project into Eclipse**
 
+0. Fork this repo, and clone the fork to your computer
 1. Open Eclipse
 2. Click `File` > `Import`
 3. Click `General` > `Existing Projects into Workspace` > `Next`
