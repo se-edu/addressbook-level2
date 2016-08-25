@@ -7,7 +7,7 @@
   
 **Table of Contents**
 * [User Guide](#user-guide)
-* [Developer Guide](#developer-guide)
+* [Developer Guide](doc/DeveloperGuide.md) (separate page)
 * [Learning Outcomes](#learning-outcomes)
 * [Contributors](#contributors)
 * [Contact Us](#contact-us)
@@ -148,9 +148,6 @@ Example:
 >
 > When running the program inside Eclipse, you can set command line parameters 
   before running the program.
-
-# Design
-<img src="doc/images/mainClassDiagram.png"/>
 
 -----------------------------------------------------------------------------------------------------
 # Learning Outcomes
