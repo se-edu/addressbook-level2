@@ -6,12 +6,25 @@ import seedu.addressbook.data.person.ReadOnlyPerson;
 
 import java.util.List;
 
+import static seedu.addressbook.ui.TextUi.DISPLAYED_INDEX_OFFSET;
+
 /**
  * Represents an executable command.
  */
 public abstract class Command {
     protected AddressBook addressBook;
     protected List<? extends ReadOnlyPerson> relevantPersons;
+    private int targetIndex = -1;
+
+    /**
+     * @param targetIndex last visible listing index of the target person
+     */
+    public Command(int targetIndex) {
+        this.setTargetIndex(targetIndex);
+    }
+
+    protected Command() {
+    }
 
     /**
      * Constructs a feedback message to summarise an operation that displayed a listing of persons.
@@ -34,5 +47,23 @@ public abstract class Command {
     public void setData(AddressBook addressBook, List<? extends ReadOnlyPerson> relevantPersons) {
         this.addressBook = addressBook;
         this.relevantPersons = relevantPersons;
+    }
+
+
+    /**
+     * Extracts the the target person in the last shown list from the given arguments.
+     *
+     * @throws IndexOutOfBoundsException if the target index is out of bounds of the last viewed listing
+     */
+    protected ReadOnlyPerson getTargetPerson() throws IndexOutOfBoundsException {
+        return relevantPersons.get(getTargetIndex() - DISPLAYED_INDEX_OFFSET);
+    }
+
+    public int getTargetIndex() {
+        return targetIndex;
+    }
+
+    public void setTargetIndex(int targetIndex) {
+        this.targetIndex = targetIndex;
     }
 }

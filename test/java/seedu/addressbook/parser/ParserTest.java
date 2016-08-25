@@ -89,7 +89,7 @@ public class ParserTest {
         final int testIndex = 1;
         final String input = "delete " + testIndex;
         final DeleteCommand result = parseAndAssertCommandType(input, DeleteCommand.class);
-        assertEquals(result.targetIndex, testIndex);
+        assertEquals(result.getTargetIndex(), testIndex);
     }
 
     @Test
@@ -111,7 +111,7 @@ public class ParserTest {
         final int testIndex = 2;
         final String input = "view " + testIndex;
         final ViewCommand result = parseAndAssertCommandType(input, ViewCommand.class);
-        assertEquals(result.targetIndex, testIndex);
+        assertEquals(result.getTargetIndex(), testIndex);
     }
 
     @Test
@@ -134,7 +134,7 @@ public class ParserTest {
         final int testIndex = 3;
         final String input = "viewall " + testIndex;
         final ViewAllCommand result = parseAndAssertCommandType(input, ViewAllCommand.class);
-        assertEquals(result.targetIndex, testIndex);
+        assertEquals(result.getTargetIndex(), testIndex);
     }
 
     /**
