@@ -16,7 +16,7 @@
 5. Click `Finish`
 
 ## Design
-<img src="doc/images/mainClassDiagram.png"/>
+<img src="images/mainClassDiagram.png"/>
 
 ## Testing
 
