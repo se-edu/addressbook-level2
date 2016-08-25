@@ -1,7 +1,7 @@
 # User Guide
 
 This product is not meant for end-users and therefore there is no user-friendly installer. 
-Please refer to the [Setting up](doc/DeveloperGuide.md#setting-up) section to learn how to set up the project.
+Please refer to the [Setting up](DeveloperGuide.md#setting-up) section to learn how to set up the project.
 
 #### Starting the program
 
