@@ -8,5 +8,5 @@ corresponding exercises.
 * Assume the address is entered in the following format `a/BLOCK, STREET, UNIT, POSTAL_CODE` <br>
   e.g. `a/123, Clementi Ave 3, #12-34, 231534`
 * Split the `Address` class as follows.<br>
-  <img src="images/AddressClasses.png"/>
+  <img src="images/AddressClasses.png" width='200'/>
 * Update the user guide and tests to match.
