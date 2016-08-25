@@ -2,6 +2,17 @@
 Here are the things you should be able to do after studying this code and completing the
 corresponding exercises.
 
+------------------------------------------------------------------------------------------------------
+
+### Apply Encapsulation `[LO-Encapsulation]`
+  
+##### Exercise: Encapsulate `CommandResult` class members 
+
+* A member of the `CommandResult` class is not encapsulated. i.e. it is visible outside the object.
+  Hide it so that it can only be accessed using methods provided.
+
+------------------------------------------------------------------------------------------------------
+
 ### Implement a class `[LO-ImplementClass]`
 
 ##### Exercise: Split `Address` into more classes 
@@ -10,6 +21,8 @@ corresponding exercises.
 * Split the `Address` class as follows.<br>
   <img src="images/AddressClasses.png" width='250'/>
 * Update the user guide and tests to match.
+
+------------------------------------------------------------------------------------------------------
 
 ### Follow the Single Responsibility Principle `[LO-SRP]`
 
@@ -31,21 +44,16 @@ Here's a slightly more difficult exercise.
   by Patkos Csaba
 * [A book chapter on SRP](https://drive.google.com/file/d/0ByOwmqah_nuGNHEtcU5OekdDMkk/view) by Robert C. Martin
 
-### Apply Encapsulation `[LO-Encapsulation]`
+------------------------------------------------------------------------------------------------------
 
-  
-##### Exercise: Encapsulate `CommandResult` class members 
-
-* A member of the `CommandResult` class is not encapsulated. i.e. it is visible outside the object.
-  Hide it so that it can only be accessed using methods provided.
-  
 ### Handle Exceptions `[LO-Exceptions]`
-
 
 ##### Exercise: Handle 'file deleted' situation 
 
 * The current code does not handle the situation where the user deletes the storage file while the
   AddressBook program is running. Use exceptions to handle that situation.
+
+------------------------------------------------------------------------------------------------------
 
 ### More Learning Outcomes
 
