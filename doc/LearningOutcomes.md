@@ -8,5 +8,26 @@ corresponding exercises.
 * Assume the address is entered in the following format `a/BLOCK, STREET, UNIT, POSTAL_CODE` <br>
   e.g. `a/123, Clementi Ave 3, #12-34, 231534`
 * Split the `Address` class as follows.<br>
-  <img src="images/AddressClasses.png" width='200'/>
+  <img src="images/AddressClasses.png" width='250'/>
 * Update the user guide and tests to match.
+
+### Follow the Single Responsibility Principle `[LO-SRP]`
+
+Single Responsibility Principle (SRP) states that a class should have only one reason to change. 
+The code given follows SRP to a reasonable extent, but there are places where it can be applied further.
+  
+##### Exercise: Split `TextUi` class 
+
+The exercise in the `LO-ImplementClass` section is somewhat related to SRP as well. 
+Here's a slightly more difficult exercise.
+
+* `TextUi` class has more than one responsibility. 
+  Try to extract out the responsibility of Formatting text for display (e.g. adding decorations) in to a 
+  separate class named `Formatter`.
+
+##### Resources
+* [An explanation of the SRP](http://www.oodesign.com/single-responsibility-principle.html) from www.oodesign.com
+* [Another explanation (more detailed)](http://code.tutsplus.com/tutorials/solid-part-1-the-single-responsibility-principle--net-36074) 
+  by Patkos Csaba
+* [A book chapter on SRP](https://drive.google.com/file/d/0ByOwmqah_nuGNHEtcU5OekdDMkk/view) by Robert C. Martin
+
