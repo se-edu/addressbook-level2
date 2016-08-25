@@ -13,7 +13,7 @@ corresponding exercises.
 
 ### Follow the Single Responsibility Principle `[LO-SRP]`
 
-Single Responsibility Principle (SRP) states that a class should have only one reason to change. 
+The *Single Responsibility Principle (SRP)* states that a class should have only one reason to change. 
 The code given follows SRP to a reasonable extent, but there are places where it can be applied further.
   
 ##### Exercise: Split `TextUi` class 
@@ -30,4 +30,24 @@ Here's a slightly more difficult exercise.
 * [Another explanation (more detailed)](http://code.tutsplus.com/tutorials/solid-part-1-the-single-responsibility-principle--net-36074) 
   by Patkos Csaba
 * [A book chapter on SRP](https://drive.google.com/file/d/0ByOwmqah_nuGNHEtcU5OekdDMkk/view) by Robert C. Martin
+
+### Apply Encapsulation `[LO-Encapsulation]`
+
+  
+##### Exercise: Encapsulate `CommandResult` class members 
+
+* A member of the `CommandResult` class is not encapsulated. i.e. it is visible outside the object.
+  Hide it so that it can only be accessed using methods provided.
+  
+### Handle Exceptions `[LO-Exceptions]`
+
+
+##### Exercise: Handle 'file deleted' situation 
+
+* The current code does not handle the situation where the user deletes the storage file while the
+  AddressBook program is running. Use exceptions to handle that situation.
+
+### More Learning Outcomes
+
+Coming soon ...
 
