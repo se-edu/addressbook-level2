@@ -2,24 +2,11 @@
 Here are the things you should be able to do after studying this code and completing the
 corresponding exercises.
 
-#### ABL2-E1: Extract more classes 
-(extract Unit, Street, PostalCode)
-             
-#### ABL2-E2: Improve exception handling
+### Implement a class `[LO-ImplementClass]`
 
-#### ABL2-E3: Add an `Interface` 
-Example of an Interface `ReadOnlyPerson`
-Add another Interface `ReadOnlyTag` as follows.
-{diagram}
-
-#### ABL2-E4:  Add `abstract` method 
-Example `Contact::getDisplayString()`
-
-
-#### ABL2-E5:  Encapsulate a variable 
-Apply to `Contact::isPrivate`
-
-#### ABL2-E6:  Add some unit tests
-
-#### ABL2-E7:  Add some unit tests using TDD
-
+##### Exercise: Split `Address` into more classes 
+* Assume the address is entered in the following format `a/BLOCK, STREET, UNIT, POSTAL_CODE` <br>
+  e.g. `a/123, Clementi Ave 3, #12-34, 231534`
+* Split the `Address` class as follows.<br>
+  <img src="images/AddressClasses.png"/>
+* Update the user guide and tests to match.
