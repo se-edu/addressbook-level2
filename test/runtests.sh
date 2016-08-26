@@ -3,13 +3,15 @@
 
 # create bin directory if it doesn't exist
 if [ ! -d "../bin" ]
-then 
-	mkdir ../bin
+then
+    mkdir ../bin
 fi
 
-
 # delete output from previous run
-rm actual.txt
+if [ ! -d "../actual.txt"]
+then
+    rm actual.txt
+fi
 
 # compile the code into the bin folder
 javac -cp ../src -Xlint:none -d ../bin ../src/seedu/addressbook/Main.java
