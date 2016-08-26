@@ -1,5 +1,4 @@
-#!/bin/bash
-# runtests.sh
+#!/usr/bin/env bash
 
 # create bin directory if it doesn't exist
 if [ ! -d "../bin" ]
@@ -8,7 +7,7 @@ then
 fi
 
 # delete output from previous run
-if [ ! -d "../actual.txt"]
+if [ ! -d "../actual.txt" ]
 then
     rm actual.txt
 fi
