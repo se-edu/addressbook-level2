@@ -13,7 +13,7 @@ public class Address {
 
     public static final String EXAMPLE = "a/123, some street, unit 102, 123456";
     public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses must be in the format \"a\\BLOCK, STREET, UNIT, POSTAL_CODE\"";
-    public static final String ADDRESS_VALIDATION_REGEX = "a\\/(.*), (.*), (.*), (.*)";
+    public static final String ADDRESS_VALIDATION_REGEX = "a\\/ (.*), (.*), (.*), (.*)";
 
 	private final Block block;
     private final Street street;
@@ -34,10 +34,10 @@ public class Address {
         Pattern p = Pattern.compile(ADDRESS_VALIDATION_REGEX);
         Matcher m = p.matcher(address);
         if (m.find()) {
-        	this.block = new Block(m.group(0));
-        	this.street = new Street(m.group(0));
-        	this.unit = new Unit(m.group(0));
-        	this.postalCode  = new PostalCode(m.group(0));
+        	this.block = new Block(m.group(1));
+        	this.street = new Street(m.group(2));
+        	this.unit = new Unit(m.group(3));
+        	this.postalCode  = new PostalCode(m.group(4));
         } else {
         	throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
         }
