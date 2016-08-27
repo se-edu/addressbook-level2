@@ -6,6 +6,15 @@
   sfdfd
 
 ##########################################################
+# commands using list index before any listing created
+##########################################################
+
+  # should show appropriate message when no listing has happened yet
+  delete 1
+  view 1
+  viewall 1
+
+##########################################################
 # clean and check state
 ##########################################################
 
