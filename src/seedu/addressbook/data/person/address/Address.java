@@ -80,11 +80,10 @@ public class Address {
 
     @Override
     public String toString() {
-        return "a/" +
-        		block.getValue() + ", " +
-        		street.getValue() + ", " +
-        		unit.getValue() + ", " +
-        		postalCode.getValue();
+        return block.getValue() + ", " +
+        	   street.getValue() + ", " +
+        	   unit.getValue() + ", " +
+        	   postalCode.getValue();
     }
 
     @Override
