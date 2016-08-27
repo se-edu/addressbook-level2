@@ -29,7 +29,6 @@ public class Address {
     public Address(String address, boolean isPrivate) throws IllegalValueException {
         this.isPrivate = isPrivate;
         if (!isValidAddress(address)) {
-        	System.out.println("Bad address");
             throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
         }
         Pattern p = Pattern.compile(ADDRESS_VALIDATION_REGEX);
