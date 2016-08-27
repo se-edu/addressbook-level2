@@ -29,6 +29,7 @@ public class Address {
     public Address(String address, boolean isPrivate) throws IllegalValueException {
         this.isPrivate = isPrivate;
         if (!isValidAddress(address)) {
+        	System.out.println("Bad address");
             throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
         }
         Pattern p = Pattern.compile(ADDRESS_VALIDATION_REGEX);
@@ -59,7 +60,9 @@ public class Address {
      * Returns true if a given string is a valid person address.
      */
     public static boolean isValidAddress(String test) {
-        return test.matches(ADDRESS_VALIDATION_REGEX);
+    	Pattern p = Pattern.compile(ADDRESS_VALIDATION_REGEX);
+        Matcher m = p.matcher(test);
+        return m.find();
     }
     
     public Block getBlock() {
