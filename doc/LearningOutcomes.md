@@ -109,7 +109,7 @@ Note how some of the variables and methods are declared `static`. That means the
 rather than *instance-level* members.<br>
 e.g.<br> `Main.VERSION`, `Name.EXAMPLE`, `Utils.isAnyNull(...)`
 
-##### Exercise: Add a class-level members
+##### Exercise: Add class-level members
 
 * Convert the `parse(...)` method of the `Parser` class to a class-level method. Note how this method
   can be either class-level or instance-level.
@@ -121,6 +121,24 @@ e.g.<br> `Main.VERSION`, `Name.EXAMPLE`, `Utils.isAnyNull(...)`
   * `Ben` and `Charlie` are created next, and assigned 2 and 3 respectively.
   * `Ben` is deleted.
   * `Daisy` is added next and is given sequence number 4.
+
+------------------------------------------------------------------------------------------------------
+
+### Use Composition `[LO-Composition]`
+
+Note the following examples of *composition* (filled diamond):
+
+Whole         | Parts
+:------------ | :----------------------------------
+`AddressBook` | `UniquePersonList` `UniqueTagList`
+`Person`      | `Name` `Phone` `Email` `Address`
+
+Contrast with these examples of *aggregration* (empty diamond):
+
+Container           | Contained
+:------------------ | :-------------------
+`UniquePersonList`  | Person
+`UuniqueTagList`    | Tag
 
 ------------------------------------------------------------------------------------------------------
 
