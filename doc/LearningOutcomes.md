@@ -103,6 +103,27 @@ Note how the `Person` class implements the `ReadOnlyPerson` interface so that cl
 
 ------------------------------------------------------------------------------------------------------
 
+### Use class-level members `[LO-ClassLevel]`
+
+Note how some of the variables and methods are declared `static`. That means they are *class-level* members
+rather than *instance-level* members.<br>
+e.g.<br> `Main.VERSION`, `Name.EXAMPLE`, `Utils.isAnyNull(...)`
+
+##### Exercise: Add a class-level members
+
+* Convert the `parse(...)` method of the `Parser` class to a class-level method. Note how this method
+  can be either class-level or instance-level.
+* Note how the `setTags` method of the `Person` class cannot be converted to a class-level method.
+* Add an instance-level member `int sequenceNumber` and a class-level variable `int nextSequenceNumber`
+  to the `Person` class. Using these two variables, ensure that each `Person` object has a unique sequence number
+  that indicates the order in which `Person` objects were created. e.g.
+  * `Adam` is the first `Person` object to be created. It is assigned sequence number 1.
+  * `Ben` and `Charlie` are created next, and assigned 2 and 3 respectively.
+  * `Ben` is deleted.
+  * `Daisy` is added next and is given sequence number 4.
+
+------------------------------------------------------------------------------------------------------
+
 ### Use Association Classes `[LO-AssociationClass]`
 
 The current design does not have any association classes.
