@@ -123,3 +123,13 @@ The current design does not have any association classes.
   Each `Tagging` object will represent an adding or deleting of a tag for a specific person that happened
   during that session.<br>
   <img src="images/TaggingClass.png" width='400' />
+
+------------------------------------------------------------------------------------------------------
+
+### Use JUnit to implment unit tests `[LO-JUnit]`
+
+Note the `test/seedu/addressbook/parser/ParserTest.java` class that users Junit to implement automated unit tests.
+
+##### Exercise: Write unit tests for the `Utils` class
+
+* Add a `test/seedu/addressbook/common/UtilsTest.java` containing JUnit tests for the `Utils` class.
