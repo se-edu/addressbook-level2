@@ -55,7 +55,14 @@ Here's a slightly more difficult exercise.
 
 ------------------------------------------------------------------------------------------------------
 
-### More Learning Outcomes
+### Use Inheritance to achieve code reuse `[LO-Inheritance]`
 
-Coming soon ...
+Note how the `Command` class contains some code that is reused by some of its child classes. 
+By defining `*Command` classes as child classes of `Command`, we have avoided having to duplicate those methods
+in multiple `*Command` classes.
+
+##### Exercise: Extract a `Contact` class 
+
+* Extract commonalities from `Phone`, `Email` and `Address` classes into a parent class called `Contact`.<br>
+<img src="images/ContactClassHieararchy.png" width='250' />
 
