@@ -66,3 +66,39 @@ in multiple `*Command` classes.
 * Extract commonalities from `Phone`, `Email` and `Address` classes into a parent class called `Contact`.<br>
 <img src="images/ContactClassHierarchy.png" width='250' />
 
+------------------------------------------------------------------------------------------------------
+
+### Follow Interface Segregation Principle `[LO-ISP]`
+
+The *Interface-Segregation Principle (ISP)* states that no client should be forced to depend on methods it does not use.
+
+Note how the `Person` class implements the `ReadOnlyPerson` interface so that clients who don't need write access to
+`Person` objects can access `Person` objects through the `ReadOnlyPerson` interface instead.
+<img src="images/ReadOnlyPersonUsage.png" />
+
+##### Exercise: Add a `Printable` interface 
+
+* Add a `Printable` interface as follows.<br>
+  <img src="images/PrintableInterface.png" width='400' />
+* `Override` the `getPrintableString` in classes `Name`, `Phone`, `Email`, and `Address` so that each produces a printable
+  string representation of the object. e.g. `Name: John Smith`, `Phone: 12349862`
+* Add the following method in a suitable place of some other class. 
+  Note how the method depends on the Interface.
+  
+  
+  ```java
+  /**
+   * Returns a concatenated version of the printable strings of each object.
+   */
+  String getPrintableString(Printable... printables){
+  ```
+  
+  The above method can be used to get a printable string representing a bunch of person details. 
+  For example, you should be able to call that method like this:
+  
+  ```java
+  //p is a Person object
+  return getPrintableString(p.getPhone(), p.getEmail(), p.getAddress()); 
+  ```
+}
+
