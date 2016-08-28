@@ -1,6 +1,18 @@
 # Learning Outcomes
-Here are the things you should be able to do after studying this code and completing the
-corresponding exercises.
+After studying this code and completing the corresponding exercises, you should be able to,
+
+1. [Apply Encapsulation `[LO-Encapsulation]`](#apply-encapsulation-lo-encapsulation)
+1. [Implement a class `[LO-ImplementClass]`](https://github.com/se-edu/addressbook-level2/blob/master/doc/LearningOutcomes.md#implement-a-class-lo-implementclass)
+1. [Follow the Single Responsibility Principle `[LO-SRP]`](https://github.com/se-edu/addressbook-level2/blob/master/doc/LearningOutcomes.md#follow-the-single-responsibility-principle-lo-srp)
+1. [Handle Exceptions `[LO-Exceptions]`](#handle-exceptions-lo-exceptions)
+1. [Use Inheritance to achieve code reuse `[LO-Inheritance]`](#use-inheritance-to-achieve-code-reuse-lo-inheritance)
+1. [Follow Interface Segregation Principle `[LO-ISP]`](#follow-interface-segregation-principle-lo-isp)
+1. [Use class-level members `[LO-ClassLevel]`](#use-class-level-members-lo-classlevel)
+1. [Use Composition `[LO-Composition]`](#use-composition-lo-composition)
+1. [Use Association Classes `[LO-AssociationClass]`](#use-association-classes-lo-associationclass)
+1. [Use JUnit to implement unit tests `[LO-JUnit]`](#use-junit-to-implement-unit-tests-lo-junit)
+1. [Use TDD `[LO-TDD]`](#use-tdd-lo-tdd)
+1. [Work in a 2KLoC code base `[LO-2KLoC]`](#work-in-a-2kloc-code-base-lo-2kloc)
 
 ------------------------------------------------------------------------------------------------------
 
