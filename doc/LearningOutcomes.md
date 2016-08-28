@@ -126,10 +126,31 @@ The current design does not have any association classes.
 
 ------------------------------------------------------------------------------------------------------
 
-### Use JUnit to implment unit tests `[LO-JUnit]`
+### Use JUnit to implement unit tests `[LO-JUnit]`
 
 Note the `test/seedu/addressbook/parser/ParserTest.java` class that users Junit to implement automated unit tests.
 
 ##### Exercise: Write unit tests for the `Utils` class
 
 * Add a `test/seedu/addressbook/common/UtilsTest.java` containing JUnit tests for the `Utils` class.
+
+------------------------------------------------------------------------------------------------------
+
+### Use TDD `[LO-TDD]`
+
+##### Exercise: Add a method in TDD fashion
+
+* Add the following method to the `Name` class. Use the TDD technique to add the method. Commit after each step.
+
+    ```java
+    /**
+      * Returns true of the other name is very similar to this name.
+      * Two names are considered similar if ...
+      */
+      public boolean isSimilar(Name other) { ... }
+    ```
+
+* You may define 'similar' as you see fit.
+  Make sure the definition covers scenarios where other name is `null`, in a different case, in a different order,
+  is a subset/superset, etc. <br>
+  e.g. `John K Smith` `John K SMITh` `John Smith` `Smith, John K`
