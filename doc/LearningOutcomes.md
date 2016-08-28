@@ -101,4 +101,25 @@ Note how the `Person` class implements the `ReadOnlyPerson` interface so that cl
   return getPrintableString(p.getPhone(), p.getEmail(), p.getAddress()); 
   ```
 
+------------------------------------------------------------------------------------------------------
 
+### Use Association Classes `[LO-AssociationClass]`
+
+The current design does not have any association classes.
+
+##### Exercise: Add an Association Class `Tagging`
+
+* Assume the following:
+  1. There are commands to add and remove tags to a person in the address book.
+  2. When the AddressBook program exits, it should print out a list of all the tags added/deleted during that session.
+    e.g.
+
+    ```sh
+    + Jake Woo [friend]
+    - Jake Woo [colleague]
+    + Jean Wong [client]
+    ```
+* To support (ii) above, implement an Association Class called `Tagging` as given in the diagram below. <br>
+  Each `Tagging` object will represent an adding or deleting of a tag for a specific person that happened
+  during that session.<br>
+  <img src="images/TaggingClass.png" width='400' />
