@@ -74,7 +74,7 @@ The *Interface-Segregation Principle (ISP)* states that no client should be forc
 
 Note how the `Person` class implements the `ReadOnlyPerson` interface so that clients who don't need write access to
 `Person` objects can access `Person` objects through the `ReadOnlyPerson` interface instead.
-<img src="images/ReadOnlyPersonUsage.png" width='400' />
+<img src="images/ReadOnlyPersonUsage.png" width='600' />
 
 ##### Exercise: Add a `Printable` interface 
 
