@@ -74,7 +74,7 @@ The *Interface-Segregation Principle (ISP)* states that no client should be forc
 
 Note how the `Person` class implements the `ReadOnlyPerson` interface so that clients who don't need write access to
 `Person` objects can access `Person` objects through the `ReadOnlyPerson` interface instead.
-<img src="images/ReadOnlyPersonUsage.png" />
+<img src="images/ReadOnlyPersonUsage.png" width='400' />
 
 ##### Exercise: Add a `Printable` interface 
 
@@ -88,8 +88,8 @@ Note how the `Person` class implements the `ReadOnlyPerson` interface so that cl
   
   ```java
   /**
-   * Returns a concatenated version of the printable strings of each object.
-   */
+    * Returns a concatenated version of the printable strings of each object.
+    */
   String getPrintableString(Printable... printables){
   ```
   
@@ -100,5 +100,5 @@ Note how the `Person` class implements the `ReadOnlyPerson` interface so that cl
   //p is a Person object
   return getPrintableString(p.getPhone(), p.getEmail(), p.getAddress()); 
   ```
-}
+
 
