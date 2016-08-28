@@ -149,8 +149,8 @@ Contrast with these examples of *aggregration* (empty diamond):
 
 Container           | Contained
 :------------------ | :-------------------
-`UniquePersonList`  | Person
-`UuniqueTagList`    | Tag
+`UniquePersonList`  | `Person`
+`UuniqueTagList`    | `Tag`
 
 ------------------------------------------------------------------------------------------------------
 
