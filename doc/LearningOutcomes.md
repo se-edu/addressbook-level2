@@ -64,5 +64,5 @@ in multiple `*Command` classes.
 ##### Exercise: Extract a `Contact` class 
 
 * Extract commonalities from `Phone`, `Email` and `Address` classes into a parent class called `Contact`.<br>
-<img src="images/ContactClassHieararchy.png" width='250' />
+<img src="images/ContactClassHierarchy.png" width='250' />
 
