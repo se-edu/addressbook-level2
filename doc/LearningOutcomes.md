@@ -193,3 +193,15 @@ Note the `test/seedu/addressbook/parser/ParserTest.java` class that users Junit 
   Make sure the definition covers scenarios where other name is `null`, in a different case, in a different order,
   is a subset/superset, etc. <br>
   e.g. `John K Smith` `John K SMITh` `John Smith` `Smith, John K`
+
+------------------------------------------------------------------------------------------------------
+
+### Work in a 2KLoC code base `[LO-2KLoC]`
+
+##### Exercise: Enhance AddressBook
+
+Add a feature to AddressBook. Here are some suggestions.
+* An Edit command
+* A Sort command
+* List all persons automatically after an add or delete command
+* Any other enhancement that you might see fit
