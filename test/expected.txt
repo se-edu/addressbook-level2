@@ -297,6 +297,14 @@
 || 
 || 0 persons listed!
 || ===================================================
+|| Enter command: || [Command entered:  add Name with'arc p/99999999 e/name@arc.com a/1 long, #01-valid address, 890765]
+|| New person added: Name with'arc Phone: 99999999 Email: name@arc.com Address: 1 long, #01-valid address, 890765 Tags: 
+|| ===================================================
+|| Enter command: || [Command entered:  list]
+|| 	1. Name with'arc Phone: 99999999 Email: name@arc.com Address: 1 long, #01-valid address, 890765 Tags: 
+|| 
+|| 1 persons listed!
+|| ===================================================
 || Enter command: || [Command entered:  exit]
 || Exiting Address Book as requested ...
 || ===================================================
