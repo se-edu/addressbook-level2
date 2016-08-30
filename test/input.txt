@@ -147,6 +147,9 @@
   # clears all
   clear
   list
+  
+  add Name with'arc p/99999999 e/name@arc.com a/1 long, #01-valid address, 890765
+  list
 
 ##########################################################
 # test exit command
