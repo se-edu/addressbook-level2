@@ -9,6 +9,7 @@ import seedu.addressbook.parser.Parser;
 import seedu.addressbook.storage.StorageFile;
 import seedu.addressbook.ui.TextUi;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,7 +28,7 @@ public class Main {
     private AddressBook addressBook;
 
     /** The list of person shown to the user most recently.  */
-    private List<? extends ReadOnlyPerson> lastShownList = null;
+    private List<? extends ReadOnlyPerson> lastShownList = Collections.emptyList();
 
 
     public static void main(String... launchArgs) {
@@ -85,7 +86,7 @@ public class Main {
             recordResult(result);
             ui.showResultToUser(result);
 
-        } while(!ExitCommand.isExit(command));
+        } while (!ExitCommand.isExit(command));
     }
 
     /** Updates the {@link #lastShownList} if the result contains a list of Persons. */

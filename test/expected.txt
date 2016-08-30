@@ -30,6 +30,15 @@
 || exit: Exits the program.
 || Example: exit
 || ===================================================
+|| Enter command: || [Command entered:  delete 1]
+|| The person index provided is invalid
+|| ===================================================
+|| Enter command: || [Command entered:  view 1]
+|| The person index provided is invalid
+|| ===================================================
+|| Enter command: || [Command entered:  viewall 1]
+|| The person index provided is invalid
+|| ===================================================
 || Enter command: || [Command entered:  clear]
 || Address book has been cleared!
 || ===================================================

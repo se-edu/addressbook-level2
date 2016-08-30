@@ -32,7 +32,7 @@ public abstract class Command {
      * @param personsDisplayed used to generate summary
      * @return summary message for persons displayed
      */
-    public static String getMessageForPersonListShownSummary(List<? extends ReadOnlyPerson> personsDisplayed) {
+    protected String getMessageForPersonListShownSummary(List<? extends ReadOnlyPerson> personsDisplayed) {
         return String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, personsDisplayed.size());
     }
 
@@ -48,7 +48,6 @@ public abstract class Command {
         this.addressBook = addressBook;
         this.relevantPersons = relevantPersons;
     }
-
 
     /**
      * Extracts the the target person in the last shown list from the given arguments.
