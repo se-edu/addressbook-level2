@@ -14,3 +14,4 @@ java -classpath ..\bin seedu.addressbook.Main < input.txt > actual.txt
 
 REM compare the output to the expected output
 FC actual.txt expected.txt
+pause
