@@ -12,7 +12,15 @@ public class Address {
     public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses can be in any format";
     public static final String ADDRESS_VALIDATION_REGEX = ".+";
 
-    public final String value;
+    public static final int ADDRESS_BLOCK_INDEX = 0;
+    public static final int ADDRESS_STREET_INDEX = 1;
+    public static final int ADDRESS_UNIT_INDEX = 2;
+    public static final int ADDRESS_POSTAL_CODE_INDEX = 3;
+    
+    private Block block;
+    private Street street;
+    private Unit unit;
+    private PostalCode postalCode;
     private boolean isPrivate;
 
     /**
@@ -25,10 +33,20 @@ public class Address {
         if (!isValidAddress(address)) {
             throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
         }
-        this.value = address;
+        String[] addressParts = splitAdress(address);
+        System.out.println(addressParts.length);
+        this.block = new Block(addressParts[ADDRESS_BLOCK_INDEX]);
+        this.street = new Street(addressParts[ADDRESS_UNIT_INDEX]);
+        this.unit = new Unit(addressParts[ADDRESS_STREET_INDEX]);
+        this.postalCode = new PostalCode(addressParts[ADDRESS_POSTAL_CODE_INDEX]);
     }
 
-    /**
+    private String[] splitAdress(String address) {
+		String[] addressParts = address.split(",");
+		return addressParts;
+	}
+
+	/**
      * Returns true if a given string is a valid person email.
      */
     public static boolean isValidAddress(String test) {
@@ -37,19 +55,20 @@ public class Address {
 
     @Override
     public String toString() {
-        return value;
+        return this.block.toString() + this.street.toString() + this.unit.toString()
+        		+ this.postalCode.toString();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Address // instanceof handles nulls
-                && this.value.equals(((Address) other).value)); // state check
+                && this.toString().equals(((Address) other).toString())); // state check
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return this.toString().hashCode();
     }
 
     public boolean isPrivate() {
