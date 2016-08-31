@@ -8,8 +8,9 @@ import seedu.addressbook.data.exception.IllegalValueException;
  */
 public class Address {
 
-    public static final String EXAMPLE = "123, some street";
-    public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses can be in any format";
+    public static final String EXAMPLE = "123, some street, some unit, some postalcode";
+    public static final String MESSAGE_ADDRESS_CONSTRAINTS = 
+    		"Person addresses must be in the format: 'block, street, unit, postalcode'";
     public static final String ADDRESS_VALIDATION_REGEX = ".+";
 
     public static final int ADDRESS_BLOCK_INDEX = 0;
@@ -33,15 +34,14 @@ public class Address {
         if (!isValidAddress(address)) {
             throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
         }
-        String[] addressParts = splitAdress(address);
-        System.out.println(addressParts.length);
+        String[] addressParts = splitAddress(address);
         this.block = new Block(addressParts[ADDRESS_BLOCK_INDEX]);
-        this.street = new Street(addressParts[ADDRESS_UNIT_INDEX]);
-        this.unit = new Unit(addressParts[ADDRESS_STREET_INDEX]);
+        this.street = new Street(addressParts[ADDRESS_STREET_INDEX]);
+        this.unit = new Unit(addressParts[ADDRESS_UNIT_INDEX]);
         this.postalCode = new PostalCode(addressParts[ADDRESS_POSTAL_CODE_INDEX]);
     }
 
-    private String[] splitAdress(String address) {
+    private static String[] splitAddress(String address) {
 		String[] addressParts = address.split(",");
 		return addressParts;
 	}
@@ -50,13 +50,14 @@ public class Address {
      * Returns true if a given string is a valid person email.
      */
     public static boolean isValidAddress(String test) {
-        return test.matches(ADDRESS_VALIDATION_REGEX);
+        return test.matches(ADDRESS_VALIDATION_REGEX)
+        		&& (splitAddress(test).length == 4);
     }
 
     @Override
     public String toString() {
-        return this.block.toString() + this.street.toString() + this.unit.toString()
-        		+ this.postalCode.toString();
+        return this.block.toString() + "," + this.street.toString() + "," + this.unit.toString()
+        			+ "," + this.postalCode.toString();
     }
 
     @Override
