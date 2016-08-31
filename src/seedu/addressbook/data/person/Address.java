@@ -14,7 +14,10 @@ public class Address implements Printable{
 
     public final String value;
     private boolean isPrivate;
-
+    public Block block;
+    public Street street;
+    public Unit unit;
+    public PostalCode postalCode;
     /**
      * Validates given address.
      *
@@ -26,6 +29,11 @@ public class Address implements Printable{
             throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
         }
         this.value = address;
+        String[] addressList = address.split(",");
+        block = new Block(addressList[0]);
+        street = new Street(addressList[1]);
+        unit = new Unit(addressList[2]);
+        postalCode = new PostalCode(addressList[3]);
     }
 
     /**
@@ -42,7 +50,8 @@ public class Address implements Printable{
 
     @Override
     public String toString() {
-        return value;
+        String totalAddress = block.toString() + ", " + street.toString() + ", " + unit.toString() + ", " + postalCode.toString();
+        return totalAddress;
     }
 
     @Override
