@@ -87,7 +87,7 @@ public class TextUi {
         showToUser("[Command entered:" + fullInputLine + "]");
         return fullInputLine;
     }
-
+   
 
     public void showWelcomeMessage(String version, String storageFilePath) {
         String storageFileInfo = String.format(MESSAGE_USING_STORAGE_FILE, storageFilePath);
