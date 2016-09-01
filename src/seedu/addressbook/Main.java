@@ -6,6 +6,7 @@ import seedu.addressbook.storage.StorageFile.*;
 import seedu.addressbook.commands.*;
 import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.parser.Parser;
+import seedu.addressbook.storage.FileDeletedException;
 import seedu.addressbook.storage.StorageFile;
 import seedu.addressbook.ui.TextUi;
 
@@ -78,7 +79,8 @@ public class Main {
 
     /** Reads the user command and executes it, until the user issues the exit command.  */
     private void runCommandLoopUntilExitCommand() {
-        Command command;
+        try{ 
+        	Command command;
         do {
             String userCommandText = ui.getUserCommand();
             command = new Parser().parseCommand(userCommandText);
@@ -87,6 +89,11 @@ public class Main {
             ui.showResultToUser(result);
 
         } while (!ExitCommand.isExit(command));
+       
+    }catch (FileDeletedException e ){
+    	ui.showRunFailMessage();
+    	throw new RuntimeException(e);
+    }
     }
 
     /** Updates the {@link #lastShownList} if the result contains a list of Persons. */
@@ -107,7 +114,9 @@ public class Main {
         try {
             command.setData(addressBook, lastShownList);
             CommandResult result = command.execute();
-            storage.save(addressBook);
+            if (!storage.save(addressBook)){
+            	throw new FileDeletedException ("File deleted during runtime"); 
+            };
             return result;
         } catch (Exception e) {
             ui.showToUser(e.getMessage());

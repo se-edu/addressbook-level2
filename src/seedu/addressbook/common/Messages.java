@@ -7,6 +7,7 @@ public class Messages {
 
     public static final String MESSAGE_GOODBYE = "Good bye!";
     public static final String MESSAGE_INIT_FAILED = "Failed to initialise address book application. Exiting...";
+    public static final String MESSAGE_RUN_FAILED = "Failed to run address book application. Exiting...";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
     public static final String MESSAGE_PERSON_NOT_IN_ADDRESSBOOK = "Person could not be found in address book";
