@@ -181,13 +181,50 @@ The current design does not have any association classes.
 
 Note the `test/seedu/addressbook/parser/ParserTest.java` class that users Junit to implement automated unit tests.
 
-##### Exercise: Write unit tests for the `Utils` class
+**Resources**:
+* [JUnit cookbook](http://junit.sourceforge.net/doc/cookbook/cookbook.htm) - a short tutorial from JUnit creators
+* [JUnit tutorial](http://www.vogella.com/articles/JUnit/article.html) - a more detailed tutorial from a developer Lars Vogel
+* [How do I run all JUnit tests at once?](http://stackoverflow.com/questions/5759602/how-to-simultaneously-run-all-junit-tests-for-a-eclipse-java-project-without-mav)
+* How to test private methods in Java? 
+  [ [short answer](http://stackoverflow.com/questions/34571/whats-the-proper-way-to-test-a-class-with-private-methods-using-junit) ] 
+  [ [long answer](http://www.artima.com/suiterunner/private.html) ]
+                                
+**Side readings**:
+* [Quora post] [What is the best way to avoid bugs](href="http://www.quora.com/What-are-good-ways-to-avoid-bugs-while-programming/answer/Mattias-Petter-Johansson)
+* [Web article] [The Big Cost of Software Bugs](http://www.bloomberg.com/slideshow/2012-08-03/the-big-cost-of-software-bugs.html) - 
+  An interesting post on 10 bugs that cost millions.
+* [Web article] [The three pillars of unit testing](http://blog.goyello.com/2011/10/06/three-pillars-of-unit-tests) - 
+  A short article about what makes a good unit test.
+* [Quora post] [Is automated testing relevant to startups?](http://www.quora.com/What-kind-of-automated-testing-should-a-startup-have-from-the-beginning-through-the-first-six-months-of-live-operation/answer/Zach-Brock)
+* [Learning from Apple’s #gotofail Security Bug](http://avandeursen.com/2014/02/22/gotofail-security/) - 
+  How unit testing (and other good coding practices) could have prevented a major security bug.
 
+##### Exercise: Write unit tests for the `Utils` class 
+
+* First, make sure you know how to run JUnit tests by running the `ParserTest.java`. 
+  Instructions are in the [Developer Guide](DeveloperGuide.md#junit-tests).
 * Add a `test/seedu/addressbook/common/UtilsTest.java` containing JUnit tests for the `Utils` class.
 
 ------------------------------------------------------------------------------------------------------
 
 ### Use TDD `[LO-TDD]`
+
+It's recommended you do `[LO-JUnit]` before attempting TDD.
+
+**Resources**:
+
+* [Uncle Bob’s three rules of TDD](http://butunclebob.com/ArticleS.UncleBob.TheThreeRulesOfTdd) - 
+  (Uncle Bob = Robert C. Martin, the author of Clean Code)
+* Let’s play TDD screencasts by James Shore:
+  [ [episode 1](http://jamesshore.com/Blog/Lets-Play/Lets-Play-Test-Driven-Development.html) ]
+  [ [episode 2](http://jamesshore.com/Blog/Lets-Play/Episode-2.html) ]
+  [ [the rest](http://jamesshore.com/index.index) ]
+* [TDD: Is There Really Any Debate Any Longer?](http://www.drdobbs.com/testing/tdd-is-there-really-any-debate-any-longe/240007457)
+
+
+**Side readings**:
+* [Dev opinion][Programmers Without TDD Will be Unemployable by 2022](http://css.dzone.com/articles/programmers-without-tdd-will)
+
 
 ##### Exercise: Add a method in TDD fashion
 
