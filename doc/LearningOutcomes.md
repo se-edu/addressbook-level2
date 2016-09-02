@@ -60,6 +60,10 @@ Here's a slightly more difficult exercise.
 
 ### Handle Exceptions `[LO-Exceptions]`
 
+**Resources**:
+* [Best Practices for Exception Handling](http://www.onjava.com/pub/a/onjava/2003/11/19/exceptions.html)
+  by Gunjan Doshi 
+
 ##### Exercise: Handle 'file deleted' situation 
 
 * The current code does not handle the situation where the user deletes the storage file while the
