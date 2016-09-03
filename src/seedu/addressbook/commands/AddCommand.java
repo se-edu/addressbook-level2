@@ -45,7 +45,8 @@ public class AddCommand extends Command {
                 new Phone(phone, isPhonePrivate),
                 new Email(email, isEmailPrivate),
                 new Address(address, isAddressPrivate),
-                new UniqueTagList(tagSet)
+                new UniqueTagList(tagSet),
+                Person.nextSequenceNumber++
         );
     }
 
