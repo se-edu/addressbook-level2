@@ -195,9 +195,7 @@ Note the `test/seedu/addressbook/parser/ParserTest.java` class that users Junit 
                                 
 **Side readings**:
 * [Quora post] [What is the best way to avoid bugs](href="http://www.quora.com/What-are-good-ways-to-avoid-bugs-while-programming/answer/Mattias-Petter-Johansson)
-* [Web article] [The Big Cost of Software Bugs](http://www.bloomberg.com/slideshow/2012-08-03/the-big-cost-of-software-bugs.html) - 
-  An interesting post on 10 bugs that cost millions.
-* [Web article] [The three pillars of unit testing](http://blog.goyello.com/2011/10/06/three-pillars-of-unit-tests) - 
+* [Web article] [The three pillars of unit testing](http://blog.goyello.com/2011/10/06/three-pillars-of-unit-tests) -
   A short article about what makes a good unit test.
 * [Quora post] [Is automated testing relevant to startups?](http://www.quora.com/What-kind-of-automated-testing-should-a-startup-have-from-the-beginning-through-the-first-six-months-of-live-operation/answer/Zach-Brock)
 * [Learning from Apple’s #gotofail Security Bug](http://avandeursen.com/2014/02/22/gotofail-security/) - 
