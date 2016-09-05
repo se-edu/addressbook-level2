@@ -28,10 +28,12 @@ After studying this code and completing the corresponding exercises, you should 
 ### Implement a class `[LO-ImplementClass]`
 
 ##### Side readings
+
 * [Code smell: Primitive Obsession](https://sourcemaking.com/refactoring/smells/primitive-obsession) -
   Using primitives instead of small objects for simple tasks
 
 ##### Exercise: Split `Address` into more classes 
+
 * Assume the address is entered in the following format `a/BLOCK, STREET, UNIT, POSTAL_CODE` <br>
   e.g. `a/123, Clementi Ave 3, #12-34, 231534`
 * Split the `Address` class as follows.<br>
@@ -44,6 +46,13 @@ After studying this code and completing the corresponding exercises, you should 
 
 The *Single Responsibility Principle (SRP)* states that a class should have only one reason to change. 
 The code given follows SRP to a reasonable extent, but there are places where it can be applied further.
+
+##### Resources
+
+* [An explanation of the SRP](http://www.oodesign.com/single-responsibility-principle.html) from www.oodesign.com
+* [Another explanation (more detailed)](http://code.tutsplus.com/tutorials/solid-part-1-the-single-responsibility-principle--net-36074) 
+  by Patkos Csaba
+* [A book chapter on SRP](https://drive.google.com/file/d/0ByOwmqah_nuGNHEtcU5OekdDMkk/view) by Robert C. Martin
   
 ##### Exercise: Split `TextUi` class 
 
@@ -54,17 +63,12 @@ Here's a slightly more difficult exercise.
   Try to extract out the responsibility of Formatting text for display (e.g. adding decorations) in to a 
   separate class named `Formatter`.
 
-##### Resources
-* [An explanation of the SRP](http://www.oodesign.com/single-responsibility-principle.html) from www.oodesign.com
-* [Another explanation (more detailed)](http://code.tutsplus.com/tutorials/solid-part-1-the-single-responsibility-principle--net-36074) 
-  by Patkos Csaba
-* [A book chapter on SRP](https://drive.google.com/file/d/0ByOwmqah_nuGNHEtcU5OekdDMkk/view) by Robert C. Martin
-
 ------------------------------------------------------------------------------------------------------
 
 ### Handle Exceptions `[LO-Exceptions]`
 
-**Resources**:
+##### Resources
+
 * [Best Practices for Exception Handling](http://www.onjava.com/pub/a/onjava/2003/11/19/exceptions.html)
   by Gunjan Doshi 
 
@@ -189,7 +193,8 @@ The current design does not have any association classes.
 
 Note the `test/seedu/addressbook/parser/ParserTest.java` class that users Junit to implement automated unit tests.
 
-**Resources**:
+##### Resources
+
 * [JUnit cookbook](http://junit.sourceforge.net/doc/cookbook/cookbook.htm) - a short tutorial from JUnit creators
 * [JUnit tutorial](http://www.vogella.com/articles/JUnit/article.html) - a more detailed tutorial from a developer Lars Vogel
 * [How do I run all JUnit tests at once?](http://stackoverflow.com/questions/5759602/how-to-simultaneously-run-all-junit-tests-for-a-eclipse-java-project-without-mav)
@@ -197,7 +202,8 @@ Note the `test/seedu/addressbook/parser/ParserTest.java` class that users Junit 
   [ [short answer](http://stackoverflow.com/questions/34571/whats-the-proper-way-to-test-a-class-with-private-methods-using-junit) ] 
   [ [long answer](http://www.artima.com/suiterunner/private.html) ]
                                 
-**Side readings**:
+##### Side readings
+
 * [Quora post] [What is the best way to avoid bugs](href="http://www.quora.com/What-are-good-ways-to-avoid-bugs-while-programming/answer/Mattias-Petter-Johansson)
 * [Web article] [The three pillars of unit testing](http://blog.goyello.com/2011/10/06/three-pillars-of-unit-tests) -
   A short article about what makes a good unit test.
@@ -217,7 +223,7 @@ Note the `test/seedu/addressbook/parser/ParserTest.java` class that users Junit 
 
 It's recommended you do `[LO-JUnit]` before attempting TDD.
 
-**Resources**:
+##### Resources
 
 * [Uncle Bob’s three rules of TDD](http://butunclebob.com/ArticleS.UncleBob.TheThreeRulesOfTdd) - 
   (Uncle Bob = Robert C. Martin, the author of Clean Code)
@@ -228,7 +234,8 @@ It's recommended you do `[LO-JUnit]` before attempting TDD.
 * [TDD: Is There Really Any Debate Any Longer?](http://www.drdobbs.com/testing/tdd-is-there-really-any-debate-any-longe/240007457)
 
 
-**Side readings**:
+##### Side readings
+
 * [Dev opinion][Programmers Without TDD Will be Unemployable by 2022](http://css.dzone.com/articles/programmers-without-tdd-will)
 
 
