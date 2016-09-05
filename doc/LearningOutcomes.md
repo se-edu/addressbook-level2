@@ -27,6 +27,10 @@ After studying this code and completing the corresponding exercises, you should 
 
 ### Implement a class `[LO-ImplementClass]`
 
+##### Side readings
+* [Code smell: Primitive Obsession](https://sourcemaking.com/refactoring/smells/primitive-obsession) -
+  Using primitives instead of small objects for simple tasks
+
 ##### Exercise: Split `Address` into more classes 
 * Assume the address is entered in the following format `a/BLOCK, STREET, UNIT, POSTAL_CODE` <br>
   e.g. `a/123, Clementi Ave 3, #12-34, 231534`
