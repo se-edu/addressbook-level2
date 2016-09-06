@@ -187,6 +187,9 @@ The current design does not have any association classes.
   during that session.<br>
   <img src="images/TaggingClass.png" width='400' />
 
+  > Note that if the list of `Tagging`s is kept in the `Tagging` class, the diagram would be like this:
+  <img src="images/TaggingsInTagging.png" width='400' />
+
 ------------------------------------------------------------------------------------------------------
 
 ### Use JUnit to implement unit tests `[LO-JUnit]`
