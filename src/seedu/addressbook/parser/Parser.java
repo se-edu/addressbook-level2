@@ -15,12 +15,12 @@ import static seedu.addressbook.common.Messages.MESSAGE_INVALID_PERSON_DISPLAYED
  */
 public class Parser {
 
-    public final Pattern PERSON_INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
+    public static final Pattern PERSON_INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
 
-    public final Pattern KEYWORDS_ARGS_FORMAT =
+    public static final Pattern KEYWORDS_ARGS_FORMAT =
             Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one or more keywords separated by whitespace
 
-    public final Pattern PERSON_DATA_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
+    public static final Pattern PERSON_DATA_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
             Pattern.compile("(?<name>[^/]+)"
                     + " (?<isPhonePrivate>p?)p/(?<phone>[^/]+)"
                     + " (?<isEmailPrivate>p?)e/(?<email>[^/]+)"
@@ -31,7 +31,7 @@ public class Parser {
     /**
      * Signals that the user input could not be parsed.
      */
-    public class ParseException extends Exception {
+    public static class ParseException extends Exception {
         ParseException(String message) {
             super(message);
         }
@@ -40,7 +40,7 @@ public class Parser {
     /**
      * Used for initial separation of command word and args.
      */
-    public final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+    public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
     public Parser() {}
 
@@ -50,7 +50,7 @@ public class Parser {
      * @param userInput full user input string
      * @return the command based on the user input
      */
-    public Command parseCommand(String userInput) {
+    public static Command parseCommand(String userInput) {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -96,7 +96,7 @@ public class Parser {
      * @param args full command args string
      * @return the prepared command
      */
-    private Command prepareAdd(String args){
+    private static Command prepareAdd(String args){
         final Matcher matcher = PERSON_DATA_ARGS_FORMAT.matcher(args.trim());
         // Validate arg string format
         if (!matcher.matches()) {
@@ -125,7 +125,7 @@ public class Parser {
     /**
      * Checks whether the private prefix of a contact detail in the add command's arguments string is present.
      */
-    private boolean isPrivatePrefixPresent(String matchedPrefix) {
+    private static boolean isPrivatePrefixPresent(String matchedPrefix) {
         return matchedPrefix.equals("p");
     }
 
@@ -133,7 +133,7 @@ public class Parser {
      * Extracts the new person's tags from the add command's tag arguments string.
      * Merges duplicate tag strings.
      */
-    private Set<String> getTagsFromArgs(String tagArguments) throws IllegalValueException {
+    private static Set<String> getTagsFromArgs(String tagArguments) throws IllegalValueException {
         // no tags
         if (tagArguments.isEmpty()) {
             return Collections.emptySet();
@@ -150,7 +150,7 @@ public class Parser {
      * @param args full command args string
      * @return the prepared command
      */
-    private Command prepareDelete(String args) {
+    private static Command prepareDelete(String args) {
         try {
             final int targetIndex = parseArgsAsDisplayedIndex(args);
             return new DeleteCommand(targetIndex);
@@ -167,7 +167,7 @@ public class Parser {
      * @param args full command args string
      * @return the prepared command
      */
-    private Command prepareView(String args) {
+    private static Command prepareView(String args) {
 
         try {
             final int targetIndex = parseArgsAsDisplayedIndex(args);
@@ -186,7 +186,7 @@ public class Parser {
      * @param args full command args string
      * @return the prepared command
      */
-    private Command prepareViewAll(String args) {
+    private static Command prepareViewAll(String args) {
 
         try {
             final int targetIndex = parseArgsAsDisplayedIndex(args);
@@ -207,7 +207,7 @@ public class Parser {
      * @throws ParseException if no region of the args string could be found for the index
      * @throws NumberFormatException the args string region is not a valid number
      */
-    private int parseArgsAsDisplayedIndex(String args) throws ParseException, NumberFormatException {
+    private static int parseArgsAsDisplayedIndex(String args) throws ParseException, NumberFormatException {
         final Matcher matcher = PERSON_INDEX_ARGS_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
             throw new ParseException("Could not find index number to parse");
@@ -222,7 +222,7 @@ public class Parser {
      * @param args full command args string
      * @return the prepared command
      */
-    private Command prepareFind(String args) {
+    private static Command prepareFind(String args) {
         final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
