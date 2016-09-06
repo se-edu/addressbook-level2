@@ -9,7 +9,7 @@ import seedu.addressbook.data.exception.IllegalValueException;
  * Represents a Person's address in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
  */
-public class Address {
+public class Address extends Contact{
 
     public static final String EXAMPLE = "123, some street";
     public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses has to be in this"
@@ -17,7 +17,6 @@ public class Address {
     public static final String ADDRESS_VALIDATION_REGEX = "(.+),(.+),(.+),(.+)";
 
     public final String value;
-    private boolean isPrivate;
     
     private Block block;
     private Unit unit;
@@ -39,10 +38,10 @@ public class Address {
         Pattern pattern = Pattern.compile(ADDRESS_VALIDATION_REGEX);
         Matcher m = pattern.matcher(address);
         if (m.find()){
-            block = new Block(m.group(1));
-            street = new Street(m.group(2));
-            unit = new Unit(m.group(3));
-            postalCode = new PostalCode(m.group(4));
+            setBlock(new Block(m.group(1)));
+            setStreet(new Street(m.group(2)));
+            setUnit(new Unit(m.group(3)));
+            setPostalCode(new PostalCode(m.group(4)));
         } else {
             throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
         }
@@ -71,11 +70,39 @@ public class Address {
     public int hashCode() {
         return value.hashCode();
     }
-
-    public boolean isPrivate() {
-        return isPrivate;
-    }
     
+    public Block getBlock() {
+        return block;
+    }
+
+    public void setBlock(Block block) {
+        this.block = block;
+    }
+
+    public Unit getUnit() {
+        return unit;
+    }
+
+    public void setUnit(Unit unit) {
+        this.unit = unit;
+    }
+
+    public Street getStreet() {
+        return street;
+    }
+
+    public void setStreet(Street street) {
+        this.street = street;
+    }
+
+    public PostalCode getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(PostalCode postalCode) {
+        this.postalCode = postalCode;
+    }
+
     class Block{
         private String blockDetails;
         
