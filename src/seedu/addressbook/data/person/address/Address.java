@@ -4,12 +4,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.addressbook.data.exception.IllegalValueException;
+import seedu.addressbook.data.person.Contact;
 
 /**
  * Represents a Person's address in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
  */
-public class Address {
+public class Address extends Contact {
 
     public static final String EXAMPLE = "a/123, some street, unit 102, 123456";
     public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses must be in the format \"a/BLOCK, STREET, UNIT, POSTAL_CODE\"";
@@ -19,7 +20,6 @@ public class Address {
     private final Street street;
     private final Unit unit;
     private final PostalCode postalCode;
-    private boolean isPrivate;
 
     /**
      * Validates given address.
@@ -105,9 +105,5 @@ public class Address {
     @Override
     public int hashCode() {
         return toString().hashCode();
-    }
-
-    public boolean isPrivate() {
-        return isPrivate;
     }
 }
