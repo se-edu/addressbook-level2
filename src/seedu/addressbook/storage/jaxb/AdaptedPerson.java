@@ -5,6 +5,7 @@ import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.data.tag.Tag;
 import seedu.addressbook.data.tag.UniqueTagList;
 import seedu.addressbook.data.person.*;
+import seedu.addressbook.data.person.address.Address;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
@@ -31,7 +32,10 @@ public class AdaptedPerson {
     @XmlElement(required = true)
     private AdaptedContactDetail email;
     @XmlElement(required = true)
-    private AdaptedContactDetail address;
+    private AdaptedContactDetail addressBlock;
+    private AdaptedContactDetail addressStreet;
+    private AdaptedContactDetail addressUnit;
+    private AdaptedContactDetail addressPostalCode;
 
     @XmlElement
     private List<AdaptedTag> tagged = new ArrayList<>();
@@ -58,9 +62,21 @@ public class AdaptedPerson {
         email.isPrivate = source.getEmail().isPrivate();
         email.value = source.getEmail().value;
 
-        address = new AdaptedContactDetail();
-        address.isPrivate = source.getAddress().isPrivate();
-        address.value = source.getAddress().value;
+        addressBlock = new AdaptedContactDetail();
+        addressBlock.isPrivate = source.getAddress().isPrivate();
+        addressBlock.value = source.getAddress().getBlock().getValue();
+
+        addressStreet = new AdaptedContactDetail();
+        addressStreet.isPrivate = source.getAddress().isPrivate();
+        addressStreet.value = source.getAddress().getStreet().getValue();
+
+        addressUnit = new AdaptedContactDetail();
+        addressUnit.isPrivate = source.getAddress().isPrivate();
+        addressUnit.value = source.getAddress().getUnit().getValue();
+
+        addressPostalCode = new AdaptedContactDetail();
+        addressPostalCode.isPrivate = source.getAddress().isPrivate();
+        addressPostalCode.value = source.getAddress().getPostalCode().getValue();
 
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
@@ -83,8 +99,8 @@ public class AdaptedPerson {
             }
         }
         // second call only happens if phone/email/address are all not null
-        return Utils.isAnyNull(name, phone, email, address)
-                || Utils.isAnyNull(phone.value, email.value, address.value);
+        return Utils.isAnyNull(name, phone, email, addressBlock, addressStreet, addressUnit, addressPostalCode)
+                || Utils.isAnyNull(phone.value, email.value, addressBlock.value, addressStreet.value, addressUnit.value, addressPostalCode);
     }
 
     /**
@@ -100,7 +116,13 @@ public class AdaptedPerson {
         final Name name = new Name(this.name);
         final Phone phone = new Phone(this.phone.value, this.phone.isPrivate);
         final Email email = new Email(this.email.value, this.email.isPrivate);
-        final Address address = new Address(this.address.value, this.address.isPrivate);
+        final Address address = new Address(
+					        		this.addressBlock.value,
+					        		this.addressStreet.value,
+					        		this.addressUnit.value,
+					        		this.addressPostalCode.value,
+					        		this.addressBlock.isPrivate
+				        		);
         final UniqueTagList tags = new UniqueTagList(personTags);
         return new Person(name, phone, email, address, tags);
     }
