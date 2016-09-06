@@ -15,12 +15,12 @@ import static seedu.addressbook.common.Messages.MESSAGE_INVALID_PERSON_DISPLAYED
  */
 public class Parser {
 
-    public static final Pattern PERSON_INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
+    public final Pattern PERSON_INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
 
-    public static final Pattern KEYWORDS_ARGS_FORMAT =
+    public final Pattern KEYWORDS_ARGS_FORMAT =
             Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one or more keywords separated by whitespace
 
-    public static final Pattern PERSON_DATA_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
+    public final Pattern PERSON_DATA_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
             Pattern.compile("(?<name>[^/]+)"
                     + " (?<isPhonePrivate>p?)p/(?<phone>[^/]+)"
                     + " (?<isEmailPrivate>p?)e/(?<email>[^/]+)"
@@ -31,7 +31,7 @@ public class Parser {
     /**
      * Signals that the user input could not be parsed.
      */
-    public static class ParseException extends Exception {
+    public class ParseException extends Exception {
         ParseException(String message) {
             super(message);
         }
@@ -40,7 +40,7 @@ public class Parser {
     /**
      * Used for initial separation of command word and args.
      */
-    public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+    public final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
     public Parser() {}
 
@@ -125,7 +125,7 @@ public class Parser {
     /**
      * Checks whether the private prefix of a contact detail in the add command's arguments string is present.
      */
-    private static boolean isPrivatePrefixPresent(String matchedPrefix) {
+    private boolean isPrivatePrefixPresent(String matchedPrefix) {
         return matchedPrefix.equals("p");
     }
 
@@ -133,7 +133,7 @@ public class Parser {
      * Extracts the new person's tags from the add command's tag arguments string.
      * Merges duplicate tag strings.
      */
-    private static Set<String> getTagsFromArgs(String tagArguments) throws IllegalValueException {
+    private Set<String> getTagsFromArgs(String tagArguments) throws IllegalValueException {
         // no tags
         if (tagArguments.isEmpty()) {
             return Collections.emptySet();
