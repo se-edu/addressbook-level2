@@ -20,6 +20,10 @@ public class CommandResult {
         this.feedbackToUser = feedbackToUser;
         relevantPersons = null;
     }
+    
+    public String getFeedbackToUser(){
+    	return this.feedbackToUser;
+    }
 
     public CommandResult(String feedbackToUser, List<? extends ReadOnlyPerson> relevantPersons) {
         this.feedbackToUser = feedbackToUser;
