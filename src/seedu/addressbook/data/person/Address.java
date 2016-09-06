@@ -17,7 +17,7 @@ public class Address {
     private static final int POSTAL_CODE=4;
     
 
-    private String value;
+    public String value;
     private boolean isPrivate;
     
     private Block block;
