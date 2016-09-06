@@ -7,6 +7,7 @@ import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.data.tag.Tag;
 import seedu.addressbook.data.tag.UniqueTagList;
 import seedu.addressbook.data.person.*;
+import seedu.addressbook.data.person.address.Address;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -271,7 +272,7 @@ public class ParserTest {
                 + person.getName().fullName
                 + (person.getPhone().isPrivate() ? " pp/" : " p/") + person.getPhone().value
                 + (person.getEmail().isPrivate() ? " pe/" : " e/") + person.getEmail().value
-                + (person.getAddress().isPrivate() ? " pa/" : " a/") + person.getAddress().value;
+                + (person.getAddress().isPrivate() ? " pa/" : " a/") + person.getAddress().toString();
         for (Tag tag : person.getTags()) {
             addCommand += " t/" + tag.tagName;
         }
