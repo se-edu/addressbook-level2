@@ -1,7 +1,7 @@
 package seedu.addressbook.data.person;
 
 public abstract class Contact {
-    protected String value;
+    public String value;
     protected boolean isPrivate;
     
     protected Contact() { }
