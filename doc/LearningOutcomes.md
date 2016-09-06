@@ -255,7 +255,7 @@ It's recommended you do `[LO-JUnit]` before attempting TDD.
   Make sure the definition covers scenarios where other name is `null`, in a different case, in a different order,
   is a subset/superset, etc. <br>
   e.g. `John K Smith` `John K SMITh` `John Smith` `Smith, John K`
-
+* Don't forget to refactor the method to improve its code quality at the end. 
 ------------------------------------------------------------------------------------------------------
 
 ### Work in a 2KLoC code base `[LO-2KLoC]`
