@@ -17,7 +17,7 @@ public abstract class Contact {
      *
      * @throws IllegalValueException if given data string is invalid.
      */
-    public Contact(String dat, boolean isPrivate, boolean toTrim, int type, String regex, String constraints) throws IllegalValueException {
+    public Contact(String dat, boolean isPrivate, boolean toTrim, String regex, String constraints) throws IllegalValueException {
         this.isPrivate = isPrivate;
         if(toTrim) {
             dat = dat.trim();
