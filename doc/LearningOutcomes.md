@@ -187,7 +187,8 @@ The current design does not have any association classes.
   during that session.<br>
   <img src="images/TaggingClass.png" width='400' />
 
-  > Note that if the list of `Tagging`s is kept in the `Tagging` class, the diagram would be like this:
+  > Note that if the list of `Tagging`s is kept as a class-level variable the `Tagging` class, 
+    the diagram would be like this:<br>
   <img src="images/TaggingsInTagging.png" width='400' />
 
 ------------------------------------------------------------------------------------------------------
