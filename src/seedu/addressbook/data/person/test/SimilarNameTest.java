@@ -27,6 +27,13 @@ public class SimilarNameTest {
         Name p2 = new Name("IGOT");
         assertTrue(p1.isSimilar(p2));
     }
+    
+    @Test
+    public void isSimilar_spaces_true() throws IllegalValueException {
+        Name p1 = new Name("nolife");
+        Name p2 = new Name("nolife     ");
+        assertTrue(p1.isSimilar(p2));
+    }
 
 
 
