@@ -20,6 +20,13 @@ public class SimilarNameTest {
         Name p2 = new Name("Hurts");
         assertFalse(p1.isSimilar(p2));
     }
+    
+    @Test
+    public void isSimilar_caseInsensitive_true() throws IllegalValueException {
+        Name p1 = new Name("igot");
+        Name p2 = new Name("IGOT");
+        assertTrue(p1.isSimilar(p2));
+    }
 
 
 

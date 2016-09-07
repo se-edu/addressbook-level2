@@ -66,9 +66,8 @@ public class Name {
      */
     public boolean isSimilar(Name other) {
 
-        // TODO Auto-generated method stub
-        String name1 = this.toString();
-        String name2 = other.toString();
+        String name1 = this.toString().toLowerCase();
+        String name2 = other.toString().toLowerCase();
 
         List<String> wordsInName1 = Arrays.asList(name1.split(" "));
         List<String> wordsInName2 = Arrays.asList(name2.split(" "));
