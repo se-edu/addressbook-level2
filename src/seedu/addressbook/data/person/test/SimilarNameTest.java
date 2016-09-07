@@ -48,12 +48,5 @@ public class SimilarNameTest {
         Name p2 = null;
         assertFalse(p1.isSimilar(p2));
     }
-    
-    @Test
-    public void isSimilar_null_true() throws IllegalValueException {
-        Name p1 = new Name("hopeicansleep");
-        Name p2 = null;
-        assertTrue(p1.isSimilar(p2));
-    }
 
 }
