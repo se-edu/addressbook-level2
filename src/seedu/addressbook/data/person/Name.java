@@ -61,4 +61,19 @@ public class Name {
         return fullName.hashCode();
     }
 
+    /**
+     * Similar means all words in both name are the same
+     */
+    public boolean isSimilar(Name other) {
+
+        // TODO Auto-generated method stub
+        String name1 = this.toString();
+        String name2 = other.toString();
+
+        List<String> wordsInName1 = Arrays.asList(name1.split(" "));
+        List<String> wordsInName2 = Arrays.asList(name2.split(" "));
+
+        return wordsInName1.containsAll(wordsInName2) || wordsInName2.containsAll(wordsInName1);
+    }
+
 }
