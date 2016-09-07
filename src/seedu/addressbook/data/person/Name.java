@@ -65,7 +65,7 @@ public class Name {
      * Similar means all words in both name are the same
      */
     public boolean isSimilar(Name other) {
-        if (other == null) {
+        if (other == null || this == null) {
             return false;
         }
         
