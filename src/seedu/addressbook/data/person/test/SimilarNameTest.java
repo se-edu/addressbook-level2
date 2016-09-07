@@ -13,6 +13,14 @@ public class SimilarNameTest {
         Name n2 = new Name("ineedsleep");
         assertTrue(n1.isSimilar(n2));
     }
+    
+    @Test
+    public void isSimilar_differentNames_false() throws IllegalValueException {
+        Name p1 = new Name("Love");
+        Name p2 = new Name("Hurts");
+        assertFalse(p1.isSimilar(p2));
+    }
+
 
 
 }
