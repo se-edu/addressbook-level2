@@ -65,7 +65,7 @@ public class Name {
      * Similar means all words in both name are the same
      */
     public boolean isSimilar(Name other) {
-
+        
         String name1 = this.toString().toLowerCase();
         String name2 = other.toString().toLowerCase();
 
