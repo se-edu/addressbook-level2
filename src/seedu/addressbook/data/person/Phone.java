@@ -20,8 +20,7 @@ public class Phone extends Contact {
     public Phone(String phone, boolean isPrivate) throws IllegalValueException {
         super(phone, isPrivate);
     	
-    	phone = phone.trim();
-        if (!isValidPhone(phone)) {
+        if (!isValidPhone(phone.trim())) {
             throw new IllegalValueException(MESSAGE_PHONE_CONSTRAINTS);
         }
     }
