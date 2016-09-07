@@ -21,9 +21,7 @@ public class Address extends Contact implements Printable {
     private static final int POSTAL_CODE=4;
     
 
-<<<<<<< HEAD
 
-=======
     public String value;
     private boolean isPrivate;
     
@@ -32,7 +30,6 @@ public class Address extends Contact implements Printable {
     private Unit unit;
     private PostalCode postalCode;
     
->>>>>>> T3A3
     /**
      * Validates given address.
      *
@@ -43,8 +40,7 @@ public class Address extends Contact implements Printable {
         if (!isValidAddress(address.trim())) {
             throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
         }
-<<<<<<< HEAD
-=======
+
         this.value = address;
         block=new Block(this.segmentAddress(address, BLOCK));
         unit=new Unit(this.segmentAddress(address, UNIT));
@@ -95,7 +91,7 @@ public class Address extends Contact implements Printable {
     
     public PostalCode getPostalCode(){
     	return this.postalCode;
->>>>>>> T3A3
+
     }
 
     /**
