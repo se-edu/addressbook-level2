@@ -34,6 +34,14 @@ public class SimilarNameTest {
         Name p2 = new Name("nolife     ");
         assertTrue(p1.isSimilar(p2));
     }
+    
+    @Test
+    public void isSimilar_subset_false() throws IllegalValueException {
+        Name p1 = new Name("pleasegivemelife");
+        Name p2 = new Name("givemelife");
+        assertFalse(p1.isSimilar(p2));
+    }
+
 
 
 
