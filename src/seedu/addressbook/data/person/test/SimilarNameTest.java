@@ -49,11 +49,18 @@ public class SimilarNameTest {
         assertFalse(p1.isSimilar(p2));
     }
     
-    @Test
+   /* @Test
     public void isSimilar_nullreverse_true() throws IllegalValueException {
         Name p1 = new Name("hopeicansleep");
         Name p2 = null;
         assertFalse(p2.isSimilar(p1));
+    }*/
+    
+    @Test
+    public void isSimilar_differentOrder_true() throws IllegalValueException {
+        Name p1 = new Name("SLEEP NOW");
+        Name p2 = new Name("NOW SLEEP");
+        assertTrue(p1.isSimilar(p2));
     }
 
 }
