@@ -24,6 +24,7 @@ public class Tag {
             throw new IllegalValueException(MESSAGE_TAG_CONSTRAINTS);
         }
         this.tagName = name;
+        
     }
 
     /**
