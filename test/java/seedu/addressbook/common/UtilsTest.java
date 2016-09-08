@@ -20,13 +20,11 @@ import seedu.addressbook.data.person.ReadOnlyPerson;
 import seedu.addressbook.data.tag.Tag;
 import seedu.addressbook.data.tag.UniqueTagList;
 
-
 public class UtilsTest {
     private static Set<Tag> tagSet;
-    
-    
+
     @BeforeClass
-    public static void init(){
+    public static void init() {
         tagSet = new HashSet<>();
         try {
             tagSet.add(new Tag("tag1"));
@@ -36,95 +34,109 @@ public class UtilsTest {
             e.printStackTrace();
         }
     }
-    
-    
+
     @Test
-    public void checkNull_shouldReturnNull(){
-        assertEquals("Passing in Objects with null should return true" , true, Utils.isAnyNull(2, new String("hi"), null));
+    public void isAnyNull_singlePerson_shouldReturnNotFalse() {
+        try {
+            assertEquals("Passing in a person ", false,
+                    Utils.isAnyNull(new Person(new Name("person"), new Phone("12345", true),
+                            new Email("xuchen@u.nus.edu", false), new Address("311, Clementi Ave 2, #02-25", true),
+                            new UniqueTagList(tagSet))));
+        } catch (IllegalValueException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
-    
-    @Test 
-    public void checkNull_shouldReturnNotNull(){
-        assertEquals("Passing in Objects witout null should return false", false, Utils.isAnyNull(2,"Hillo", new Scanner(System.in)));
-    }
+
     @Test
-    public void checkUniqueElements_shouldReturnTrue(){
+    public void equals_twoPersons_shouldReturnTrue() {
+        try {
+            assertEquals(
+                    new Person(new Name("person"), new Phone("12345", true), new Email("xuchen@u.nus.edu", false),
+                            new Address("311, Clementi Ave 2, #02-25", true), new UniqueTagList(tagSet)),
+                    new Person(new Name("person"), new Phone("12345", true), new Email("xuchen@u.nus.edu", false),
+                            new Address("311, Clementi Ave 2, #02-25", true), new UniqueTagList(tagSet)));
+        } catch (IllegalValueException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void checkNull_shouldReturnNull() {
+        assertEquals("Passing in Objects with null should return true", true,
+                Utils.isAnyNull(2, new String("hi"), null));
+    }
+
+    @Test
+    public void checkNull_shouldReturnNotNull() {
+        assertEquals("Passing in Objects witout null should return false", false,
+                Utils.isAnyNull(2, "Hillo", new Scanner(System.in)));
+    }
+
+    @Test
+    public void checkUniqueElements_shouldReturnTrue() {
         ArrayList<Person> arrPerson = new ArrayList<>();
-        
 
         arrPerson = new ArrayList<>();
         try {
-            arrPerson.add(new Person(
-                    new Name("person"), 
-                    new Phone("12345", true), 
-                    new Email("xuchen@u.nus.edu", false), 
-                    new Address("311, Clementi Ave 2, #02-25", true),
+            arrPerson.add(new Person(new Name("person"), new Phone("12345", true), new Email("xuchen@u.nus.edu", false),
+                    new Address("311, Clementi Ave 2, #02-25", true), new UniqueTagList(tagSet)));
+
+            arrPerson.add(
+                    new Person(new Name("person"), new Phone("123451", true), new Email("xuchensad@u.nus.edu", true),
+                            new Address("311, Clasdementi Ave 2, #02-25", true), new UniqueTagList(tagSet)));
+
+            arrPerson.add(new Person(new Name("person"), new Phone("12345123", true),
+                    new Email("xuchen@uasda.nus.edu", true), new Address("311, Clemeasdasnti Ave 2, #02-25", true),
                     new UniqueTagList(tagSet)));
-            
-            arrPerson.add(new Person(
-                    new Name("person"), 
-                    new Phone("123451", true), 
-                    new Email("xuchensad@u.nus.edu", false), 
-                    new Address("311, Clasdementi Ave 2, #02-25", true),
-                    new UniqueTagList(tagSet)));
-            
-            arrPerson.add(new Person(
-                    new Name("person"), 
-                    new Phone("12345123", true), 
-                    new Email("xuchen@uasda.nus.edu", false), 
-                    new Address("311, Clemeasdasnti Ave 2, #02-25", true),
-                    new UniqueTagList(tagSet)));
-            
-            arrPerson.add(new Person(
-                    new Name("person"), 
-                    new Phone("12345", true), 
-                    new Email("xuchen@u.nus.edu", false), 
-                    new Address("31211, Clementi Ave 2, #02-25", true),
-                    new UniqueTagList(tagSet)));
-            
+
+            arrPerson.add(new Person(new Name("person"), new Phone("12345", true), new Email("xuchen@u.nus.edu", false),
+                    new Address("31211, Clementi Ave 2, #02-25", true), new UniqueTagList(tagSet)));
+
         } catch (IllegalValueException e) {
             e.printStackTrace();
         }
-   
+
         assertEquals("Passing in unique elements return true", true, Utils.elementsAreUnique(arrPerson));
     }
-    
-    @Test 
-    public void checkUniqueObject_shouldReturnFalse(){
-        // It seems the method fails to detect identical Persons object.
-//        ArrayList<ReadOnlyPerson> persons = new ArrayList<>();
-//        try {
-//            persons.add(new Person(
-//                    new Name("person"), 
-//                    new Phone("12345", true), 
-//                    new Email("xuchen@u.nus.edu", false), 
-//                    new Address("311, Clementi Ave 2, #02-25", true),
-//                    new UniqueTagList(tagSet)));
-//            
-//            persons.add(new Person(
-//                    new Name("person"), 
-//                    new Phone("12345", true), 
-//                    new Email("xuchen@u.nus.edu", false), 
-//                    new Address("311, Clementi Ave 2, #02-25", true),
-//                    new UniqueTagList(tagSet)));
-//            
-//        } catch (IllegalValueException e) {
-//            e.printStackTrace();
-//        }
-        
-        ArrayList<String> strArr = new ArrayList<>();
-        strArr.add("hi");
-        strArr.add("hiii");
-        strArr.add("hii");
-        strArr.add("hii");
-        
-        ArrayList<Integer> intArr = new ArrayList<>();
-        intArr.add(10000);
-        intArr.add(10000);
-        
-        assertEquals("Passing list of Integers", false, Utils.elementsAreUnique(intArr));
-        assertEquals("Passing list of strings", false, Utils.elementsAreUnique(strArr));
-//        assertEquals("Passing in repeating elements return false", false, Utils.elementsAreUnique(persons));
+
+    @Test
+    public void checkElementsAreUnique_IdenticalPersonsWithoutTag_shouldReturnFalse() {
+        // It seems the method fails to detect identical Persons object because uniquetag list will always return a unique tag. 
+        ArrayList<ReadOnlyPerson> persons = new ArrayList<>();
+
+        try {
+            persons.add(new Person(new Name("person"), new Phone("12345", true), new Email("xuchen@u.nus.edu", true),
+                    new Address("311, Clementi Ave 2, #02-25", true)));
+            persons.add(new Person(new Name("person"), new Phone("12345", true), new Email("xuchen@u.nus.edu", true),
+                    new Address("311, Clementi Ave 2, #02-25", true)));
+        } catch (IllegalValueException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        assertEquals("Passing in repeating elements return false", false, Utils.elementsAreUnique(persons));
     }
     
+    @Test
+    public void checkElementsAreUnique_identicalPersonsWithTags_shouldReturnFalse() {
+        ArrayList<ReadOnlyPerson> persons = new ArrayList<>();
+
+        try {
+            persons.add(new Person(new Name("person"), new Phone("12345", true), new Email("xuchen@u.nus.edu", true),
+                    new Address("311, Clementi Ave 2, #02-25", true),  new UniqueTagList(tagSet)));
+            persons.add(new Person(new Name("person"), new Phone("12345", true), new Email("xuchen@u.nus.edu", true),
+                    new Address("311, Clementi Ave 2, #02-25", true), new UniqueTagList(tagSet)));
+            
+        } catch (IllegalValueException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        assertEquals("Passing in repeating elements return false", false, Utils.elementsAreUnique(persons));
+        
+        
+    }
+
 }
