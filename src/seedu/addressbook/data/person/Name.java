@@ -41,7 +41,13 @@ public class Name {
      * Returns true of the other name is very similar to this name.
      * Two names are considered similar if ...
      */
-     public boolean isSimilar(Name other) { ... }
+     public boolean isSimilar(Name other) {
+    	 if (other != null){
+    		 return fullName.toUpperCase().equals(((Name) other).fullName.toUpperCase());
+    	 } else {
+    		 return false;
+    	 }
+     }
 
     /**
      * Retrieves a listing of every word in the name, in order.
