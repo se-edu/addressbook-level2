@@ -135,8 +135,8 @@ e.g.<br> `Main.VERSION`, `Name.EXAMPLE`, `Utils.isAnyNull(...)`
 
 ##### Exercise: Add class-level members
 
-* Convert the `parse(...)` method of the `Parser` class to a class-level method. Note how this method
-  can be either class-level or instance-level.
+* Convert the `Parser::parseCommand(...)` method (i.e. the `parseCommand()` method of the `Parser` class) to a 
+  class-level method. Note how this method can be either class-level or instance-level.
 * Note how the `setTags` method of the `Person` class cannot be converted to a class-level method.
 * Add an instance-level member `int sequenceNumber` and a class-level variable `int nextSequenceNumber`
   to the `Person` class. Using these two variables, ensure that each `Person` object has a unique sequence number
