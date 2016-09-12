@@ -67,7 +67,7 @@ public class ParserTest {
     }
 
     /**
-     * Test ingle index argument commands
+     * Test Single index argument commands
      */
     
     @Test
