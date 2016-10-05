@@ -305,6 +305,48 @@
 || 
 || 1 persons listed!
 || ===================================================
+|| Enter command: || [Command entered:  add John-Doe p/98765432 e/johnd@gmail.com a/311, Clementi Ave 2, #02-25]
+|| New person added: John-Doe Phone: 98765432 Email: johnd@gmail.com Address: 311, Clementi Ave 2, #02-25 Tags: 
+|| ===================================================
+|| Enter command: || [Command entered:  list]
+|| 	1. Name with'arc Phone: 99999999 Email: name@arc.com Address: 1 long, #01-valid address, 890765 Tags: 
+|| 	2. John-Doe Phone: 98765432 Email: johnd@gmail.com Address: 311, Clementi Ave 2, #02-25 Tags: 
+|| 
+|| 2 persons listed!
+|| ===================================================
+|| Enter command: || [Command entered:  add John-Doe jr. p/98765432 e/johnd@gmail.com a/311, Clementi Ave 2, #02-25]
+|| New person added: John-Doe jr. Phone: 98765432 Email: johnd@gmail.com Address: 311, Clementi Ave 2, #02-25 Tags: 
+|| ===================================================
+|| Enter command: || [Command entered:  list]
+|| 	1. Name with'arc Phone: 99999999 Email: name@arc.com Address: 1 long, #01-valid address, 890765 Tags: 
+|| 	2. John-Doe Phone: 98765432 Email: johnd@gmail.com Address: 311, Clementi Ave 2, #02-25 Tags: 
+|| 	3. John-Doe jr. Phone: 98765432 Email: johnd@gmail.com Address: 311, Clementi Ave 2, #02-25 Tags: 
+|| 
+|| 3 persons listed!
+|| ===================================================
+|| Enter command: || [Command entered:  add Björn Borg p/98765432 e/borg@gmail.com a/311, Clementi Ave 2, #02-25]
+|| New person added: Björn Borg Phone: 98765432 Email: borg@gmail.com Address: 311, Clementi Ave 2, #02-25 Tags: 
+|| ===================================================
+|| Enter command: || [Command entered:  list]
+|| 	1. Name with'arc Phone: 99999999 Email: name@arc.com Address: 1 long, #01-valid address, 890765 Tags: 
+|| 	2. John-Doe Phone: 98765432 Email: johnd@gmail.com Address: 311, Clementi Ave 2, #02-25 Tags: 
+|| 	3. John-Doe jr. Phone: 98765432 Email: johnd@gmail.com Address: 311, Clementi Ave 2, #02-25 Tags: 
+|| 	4. Björn Borg Phone: 98765432 Email: borg@gmail.com Address: 311, Clementi Ave 2, #02-25 Tags: 
+|| 
+|| 4 persons listed!
+|| ===================================================
+|| Enter command: || [Command entered:  add José Eduardo p/98765432 e/borg@gmail.com a/311, Clementi Ave 2, #02-25]
+|| New person added: José Eduardo Phone: 98765432 Email: borg@gmail.com Address: 311, Clementi Ave 2, #02-25 Tags: 
+|| ===================================================
+|| Enter command: || [Command entered:  list]
+|| 	1. Name with'arc Phone: 99999999 Email: name@arc.com Address: 1 long, #01-valid address, 890765 Tags: 
+|| 	2. John-Doe Phone: 98765432 Email: johnd@gmail.com Address: 311, Clementi Ave 2, #02-25 Tags: 
+|| 	3. John-Doe jr. Phone: 98765432 Email: johnd@gmail.com Address: 311, Clementi Ave 2, #02-25 Tags: 
+|| 	4. Björn Borg Phone: 98765432 Email: borg@gmail.com Address: 311, Clementi Ave 2, #02-25 Tags: 
+|| 	5. José Eduardo Phone: 98765432 Email: borg@gmail.com Address: 311, Clementi Ave 2, #02-25 Tags: 
+|| 
+|| 5 persons listed!
+|| ===================================================
 || Enter command: || [Command entered:  clear]
 || Address book has been cleared!
 || ===================================================
