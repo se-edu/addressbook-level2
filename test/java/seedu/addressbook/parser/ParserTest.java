@@ -25,67 +25,72 @@ public class ParserTest {
         parser = new Parser();
     }
 
+    /*
+     * Note how the names of the test methods does not follow the normal naming convention.
+     * That is because our coding standard allows a different naming convention for test methods.
+     */
+
     @Test
-    public void emptyInput_returnsIncorrect() {
+    public void parse_emptyInput_returnsIncorrect() {
         final String[] emptyInputs = { "", "  ", "\n  \n" };
         final String resultMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE);
         parseAndAssertIncorrectWithMessage(resultMessage, emptyInputs);
     }
 
     @Test
-    public void unknownCommandWord_returnsHelp() {
+    public void parse_unknownCommandWord_returnsHelp() {
         final String input = "unknowncommandword arguments arguments";
         parseAndAssertCommandType(input, HelpCommand.class);
     }
 
-    /**
-     * Test 0-argument commands
+    /*
+     * Tests for 0-argument commands =======================================================================
      */
     
     @Test
-    public void helpCommand_parsedCorrectly() {
+    public void parse_helpCommand_parsedCorrectly() {
         final String input = "help";
         parseAndAssertCommandType(input, HelpCommand.class);
     }
     
     @Test
-    public void clearCommand_parsedCorrectly() {
+    public void parse_clearCommand_parsedCorrectly() {
         final String input = "clear";
         parseAndAssertCommandType(input, ClearCommand.class);
     }
 
     @Test
-    public void listCommand_parsedCorrectly() {
+    public void parse_listCommand_parsedCorrectly() {
         final String input = "list";
         parseAndAssertCommandType(input, ListCommand.class);
     }
 
     @Test
-    public void exitCommand_parsedCorrectly() {
+    public void parse_exitCommand_parsedCorrectly() {
         final String input = "exit";
         parseAndAssertCommandType(input, ExitCommand.class);
     }
 
-    /**
-     * Test ingle index argument commands
+    /*
+     * Tests for ingle index argument commands ===============================================================
      */
     
     @Test
-    public void deleteCommand_noArgs() {
+    public void parse_deleteCommandNoArgs_errorMessage() {
         final String[] inputs = { "delete", "delete " };
         final String resultMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE);
         parseAndAssertIncorrectWithMessage(resultMessage, inputs);
     }
 
     @Test
-    public void deleteCommand_argsIsNotSingleNumber() {
+    public void parse_deleteCommandArgsIsNotSingleNumber_errorMessage() {
         final String[] inputs = { "delete notAnumber ", "delete 8*wh12", "delete 1 2 3 4 5" };
         final String resultMessage = MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
         parseAndAssertIncorrectWithMessage(resultMessage, inputs);
     }
     
     @Test
-    public void deleteCommand_numericArg_indexParsedCorrectly() {
+    public void parse_deleteCommandNumericArg_indexParsedCorrectly() {
         final int testIndex = 1;
         final String input = "delete " + testIndex;
         final DeleteCommand result = parseAndAssertCommandType(input, DeleteCommand.class);
@@ -93,21 +98,21 @@ public class ParserTest {
     }
 
     @Test
-    public void viewCommand_noArgs() {
+    public void viewCommandNoArgs_errorMessage() {
         final String[] inputs = { "view", "view " };
         final String resultMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE);
         parseAndAssertIncorrectWithMessage(resultMessage, inputs);
     }
 
     @Test
-    public void viewCommand_argsIsNotSingleNumber() {
+    public void parse_viewCommandArgsIsNotSingleNumber_errorMessage() {
         final String[] inputs = { "view notAnumber ", "view 8*wh12", "view 1 2 3 4 5" };
         final String resultMessage = MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
         parseAndAssertIncorrectWithMessage(resultMessage, inputs);
     }
     
     @Test
-    public void viewCommand_numericArg_indexParsedCorrectly() {
+    public void parse_viewCommandNumericArg_indexParsedCorrectly() {
         final int testIndex = 2;
         final String input = "view " + testIndex;
         final ViewCommand result = parseAndAssertCommandType(input, ViewCommand.class);
@@ -115,7 +120,7 @@ public class ParserTest {
     }
 
     @Test
-    public void viewAllCommand_noArgs() {
+    public void parse_viewAllCommandNoArgs_errorMessage() {
         final String[] inputs = { "viewall", "viewall " };
         final String resultMessage =
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewAllCommand.MESSAGE_USAGE);
@@ -123,26 +128,26 @@ public class ParserTest {
     }
 
     @Test
-    public void viewAllCommand_argsIsNotSingleNumber() {
+    public void parse_viewAllCommandArgsIsNotSingleNumber_errorMessage() {
         final String[] inputs = { "viewall notAnumber ", "viewall 8*wh12", "viewall 1 2 3 4 5" };
         final String resultMessage = MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
         parseAndAssertIncorrectWithMessage(resultMessage, inputs);
     }
 
     @Test
-    public void viewAllCommand_numericArg_indexParsedCorrectly() {
+    public void parse_viewAllCommandNumericArg_indexParsedCorrectly() {
         final int testIndex = 3;
         final String input = "viewall " + testIndex;
         final ViewAllCommand result = parseAndAssertCommandType(input, ViewAllCommand.class);
         assertEquals(result.getTargetIndex(), testIndex);
     }
 
-    /**
-     * Test find persons by keyword in name command
+    /*
+     * Tests for find persons by keyword in name command ===================================================
      */
 
     @Test
-    public void findCommand_invalidArgs() {
+    public void parse_findCommandInvalidArgs_errorMessage() {
         // no keywords
         final String[] inputs = {
                 "find",
@@ -154,7 +159,7 @@ public class ParserTest {
     }
 
     @Test
-    public void findCommand_validArgs_parsedCorrectly() {
+    public void parse_findCommandValidArgs_parsedCorrectly() {
         final String[] keywords = { "key1", "key2", "key3" };
         final Set<String> keySet = new HashSet<>(Arrays.asList(keywords));
 
@@ -165,7 +170,7 @@ public class ParserTest {
     }
 
     @Test
-    public void findCommand_duplicateKeys_parsedCorrectly() {
+    public void parse_findCommandDuplicateKeys_parsedCorrectly() {
         final String[] keywords = { "key1", "key2", "key3" };
         final Set<String> keySet = new HashSet<>(Arrays.asList(keywords));
 
@@ -176,12 +181,12 @@ public class ParserTest {
         assertEquals(keySet, result.getKeywords());
     }
 
-    /**
-     * Test add person command
+    /*
+     * Tests for add person command ==============================================================================
      */
     
     @Test
-    public void addCommand_invalidArgs() {
+    public void parse_addCommandInvalidArgs_errorMessage() {
         final String[] inputs = {
                 "add",
                 "add ",
@@ -198,7 +203,7 @@ public class ParserTest {
     }
 
     @Test
-    public void addCommand_invalidPersonDataInArgs() {
+    public void parse_addCommandInvalidPersonDataInArgs_errorMessge() {
         final String invalidName = "[]\\[;]";
         final String validName = Name.EXAMPLE;
         final String invalidPhoneArg = "p/not__numbers";
@@ -227,7 +232,7 @@ public class ParserTest {
     }
 
     @Test
-    public void addCommand_validPersonData_parsedCorrectly() {
+    public void parse_addCommandValidPersonData_parsedCorrectly() {
         final Person testPerson = generateTestPerson();
         final String input = convertPersonToAddCommandString(testPerson);
         final AddCommand result = parseAndAssertCommandType(input, AddCommand.class);
@@ -235,7 +240,7 @@ public class ParserTest {
     }
 
     @Test
-    public void addCommand_duplicateTags_merged() throws IllegalValueException {
+    public void parse_addCommandDuplicateTags_merged() throws IllegalValueException {
         final Person testPerson = generateTestPerson();
         String input = convertPersonToAddCommandString(testPerson);
         for (Tag tag : testPerson.getTags()) {
@@ -273,8 +278,8 @@ public class ParserTest {
         return addCommand;
     }
 
-    /**
-     * Utility methods
+    /*
+     * Utility methods ====================================================================================
      */
 
     /**
@@ -288,7 +293,7 @@ public class ParserTest {
     }
 
     /**
-     * Utility method for parsing input and asserting the class/type of the returned command object.
+     * Parses input and asserts the class/type of the returned command object.
      *
      * @param input to be parsed
      * @param expectedCommandClass expected class of returned command

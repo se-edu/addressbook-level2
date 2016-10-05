@@ -27,7 +27,13 @@ After studying this code and completing the corresponding exercises, you should 
 
 ### Implement a class `[LO-ImplementClass]`
 
+##### Side readings
+
+* [Code smell: Primitive Obsession](https://sourcemaking.com/refactoring/smells/primitive-obsession) -
+  Using primitives instead of small objects for simple tasks
+
 ##### Exercise: Split `Address` into more classes 
+
 * Assume the address is entered in the following format `a/BLOCK, STREET, UNIT, POSTAL_CODE` <br>
   e.g. `a/123, Clementi Ave 3, #12-34, 231534`
 * Split the `Address` class as follows.<br>
@@ -40,6 +46,13 @@ After studying this code and completing the corresponding exercises, you should 
 
 The *Single Responsibility Principle (SRP)* states that a class should have only one reason to change. 
 The code given follows SRP to a reasonable extent, but there are places where it can be applied further.
+
+##### Resources
+
+* [An explanation of the SRP](http://www.oodesign.com/single-responsibility-principle.html) from www.oodesign.com
+* [Another explanation (more detailed)](http://code.tutsplus.com/tutorials/solid-part-1-the-single-responsibility-principle--net-36074) 
+  by Patkos Csaba
+* [A book chapter on SRP](https://drive.google.com/file/d/0ByOwmqah_nuGNHEtcU5OekdDMkk/view) by Robert C. Martin
   
 ##### Exercise: Split `TextUi` class 
 
@@ -50,15 +63,14 @@ Here's a slightly more difficult exercise.
   Try to extract out the responsibility of Formatting text for display (e.g. adding decorations) in to a 
   separate class named `Formatter`.
 
-##### Resources
-* [An explanation of the SRP](http://www.oodesign.com/single-responsibility-principle.html) from www.oodesign.com
-* [Another explanation (more detailed)](http://code.tutsplus.com/tutorials/solid-part-1-the-single-responsibility-principle--net-36074) 
-  by Patkos Csaba
-* [A book chapter on SRP](https://drive.google.com/file/d/0ByOwmqah_nuGNHEtcU5OekdDMkk/view) by Robert C. Martin
-
 ------------------------------------------------------------------------------------------------------
 
 ### Handle Exceptions `[LO-Exceptions]`
+
+##### Resources
+
+* [Best Practices for Exception Handling](http://www.onjava.com/pub/a/onjava/2003/11/19/exceptions.html)
+  by Gunjan Doshi 
 
 ##### Exercise: Handle 'file deleted' situation 
 
@@ -123,8 +135,8 @@ e.g.<br> `Main.VERSION`, `Name.EXAMPLE`, `Utils.isAnyNull(...)`
 
 ##### Exercise: Add class-level members
 
-* Convert the `parse(...)` method of the `Parser` class to a class-level method. Note how this method
-  can be either class-level or instance-level.
+* Convert the `Parser::parseCommand(...)` method (i.e. the `parseCommand()` method of the `Parser` class) to a 
+  class-level method. Note how this method can be either class-level or instance-level.
 * Note how the `setTags` method of the `Person` class cannot be converted to a class-level method.
 * Add an instance-level member `int sequenceNumber` and a class-level variable `int nextSequenceNumber`
   to the `Person` class. Using these two variables, ensure that each `Person` object has a unique sequence number
@@ -175,19 +187,61 @@ The current design does not have any association classes.
   during that session.<br>
   <img src="images/TaggingClass.png" width='400' />
 
+  > Note that if the list of `Tagging`s is kept as a class-level variable the `Tagging` class, 
+    the diagram would be like this:<br>
+  <img src="images/TaggingsInTagging.png" width='400' />
+
 ------------------------------------------------------------------------------------------------------
 
 ### Use JUnit to implement unit tests `[LO-JUnit]`
 
 Note the `test/seedu/addressbook/parser/ParserTest.java` class that users Junit to implement automated unit tests.
 
-##### Exercise: Write unit tests for the `Utils` class
+##### Resources
 
+* [JUnit cookbook](http://junit.sourceforge.net/doc/cookbook/cookbook.htm) - a short tutorial from JUnit creators
+* [JUnit tutorial](http://www.vogella.com/articles/JUnit/article.html) - a more detailed tutorial from a developer Lars Vogel
+* [How do I run all JUnit tests at once?](http://stackoverflow.com/questions/5759602/how-to-simultaneously-run-all-junit-tests-for-a-eclipse-java-project-without-mav)
+* How to test private methods in Java? 
+  [ [short answer](http://stackoverflow.com/questions/34571/whats-the-proper-way-to-test-a-class-with-private-methods-using-junit) ] 
+  [ [long answer](http://www.artima.com/suiterunner/private.html) ]
+                                
+##### Side readings
+
+* [Quora post] [What is the best way to avoid bugs](href="http://www.quora.com/What-are-good-ways-to-avoid-bugs-while-programming/answer/Mattias-Petter-Johansson)
+* [Web article] [The three pillars of unit testing](http://blog.goyello.com/2011/10/06/three-pillars-of-unit-tests) -
+  A short article about what makes a good unit test.
+* [Quora post] [Is automated testing relevant to startups?](http://www.quora.com/What-kind-of-automated-testing-should-a-startup-have-from-the-beginning-through-the-first-six-months-of-live-operation/answer/Zach-Brock)
+* [Learning from Apple’s #gotofail Security Bug](http://avandeursen.com/2014/02/22/gotofail-security/) - 
+  How unit testing (and other good coding practices) could have prevented a major security bug.
+
+##### Exercise: Write unit tests for the `Utils` class 
+
+* First, make sure you know how to run JUnit tests by running the `ParserTest.java`. 
+  Instructions are in the [Developer Guide](DeveloperGuide.md#junit-tests).
 * Add a `test/seedu/addressbook/common/UtilsTest.java` containing JUnit tests for the `Utils` class.
 
 ------------------------------------------------------------------------------------------------------
 
 ### Use TDD `[LO-TDD]`
+
+It's recommended you do `[LO-JUnit]` before attempting TDD.
+
+##### Resources
+
+* [Uncle Bob’s three rules of TDD](http://butunclebob.com/ArticleS.UncleBob.TheThreeRulesOfTdd) - 
+  (Uncle Bob = Robert C. Martin, the author of Clean Code)
+* Let’s play TDD screencasts by James Shore:
+  [ [episode 1](http://jamesshore.com/Blog/Lets-Play/Lets-Play-Test-Driven-Development.html) ]
+  [ [episode 2](http://jamesshore.com/Blog/Lets-Play/Episode-2.html) ]
+  [ [the rest](http://jamesshore.com/index.index) ]
+* [TDD: Is There Really Any Debate Any Longer?](http://www.drdobbs.com/testing/tdd-is-there-really-any-debate-any-longe/240007457)
+
+
+##### Side readings
+
+* [Dev opinion][Programmers Without TDD Will be Unemployable by 2022](http://css.dzone.com/articles/programmers-without-tdd-will)
+
 
 ##### Exercise: Add a method in TDD fashion
 
@@ -205,6 +259,7 @@ Note the `test/seedu/addressbook/parser/ParserTest.java` class that users Junit 
   Make sure the definition covers scenarios where other name is `null`, in a different case, in a different order,
   is a subset/superset, etc. <br>
   e.g. `John K Smith` `John K SMITh` `John Smith` `Smith, John K`
+* Don't forget to refactor the method to improve its code quality at the end. 
 
 ------------------------------------------------------------------------------------------------------
 
