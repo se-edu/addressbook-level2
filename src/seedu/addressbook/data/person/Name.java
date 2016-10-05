@@ -13,7 +13,7 @@ public class Name {
 
     public static final String EXAMPLE = "John Doe";
     public static final String MESSAGE_NAME_CONSTRAINTS = "Person names should be spaces or alphabetic characters";
-    public static final String NAME_VALIDATION_REGEX = "^[\\p{L} .'-]+$"; 
+    public static final String NAME_VALIDATION_REGEX = "^[\\p{L}0-9 .'-]+$";  
     // In the above:
     // \\p{L} matches any unicode letter (like German name with accents)
     // . used to match dots in the name E.g., John Paul Jr.
