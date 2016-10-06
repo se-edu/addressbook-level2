@@ -1,4 +1,4 @@
-##########################################################
+ï»¿##########################################################
 # invalid command
 ##########################################################
 
@@ -164,11 +164,11 @@
   list
   
   # name with unicode character in it
-  add Björn Borg p/98765432 e/borg@gmail.com a/311, Clementi Ave 2, #02-25
+  add BjÃ¶rn Borg p/98765432 e/borg@gmail.com a/311, Clementi Ave 2, #02-25
   list
   
   # name with another unicode character
-  add José Eduardo p/98765432 e/borg@gmail.com a/311, Clementi Ave 2, #02-25
+  add JosÃ© Eduardo p/98765432 e/borg@gmail.com a/311, Clementi Ave 2, #02-25
   list
     
 ##########################################################
