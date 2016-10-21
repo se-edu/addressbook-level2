@@ -147,6 +147,50 @@
   # clears all
   clear
   list
+  
+##########################################################
+# test new regex for name
+##########################################################	 
+  # name with quote character
+  add Name with'arc p/99999999 e/name@arc.com a/1 long, #01-valid address, 890765
+  list
+  
+  # name with hyphen in between
+  add John-Doe p/98765432 e/johnd@gmail.com a/311, Clementi Ave 2, #02-25
+  list
+  
+  # name with dot in it
+  add John-Doe jr. p/98765432 e/johnd@gmail.com a/311, Clementi Ave 2, #02-25
+  list
+  
+  # name with unicode character in it
+  add Björn Borg p/98765432 e/borg@gmail.com a/311, Clementi Ave 2, #02-25
+  list
+  
+  # name with another unicode character
+  add José Eduardo p/98765432 e/borg@gmail.com a/311, Clementi Ave 2, #02-25
+  list
+    
+##########################################################
+# clear all test entries
+##########################################################
+
+  clear
+  list
+
+##########################################################
+# test new regex for name
+##########################################################	 
+  # name with number character
+  add George the 3rd p/99999999 e/name@arc.com a/1 long, #01-valid address, 890765
+  list
+  
+##########################################################
+# clear all test entries
+##########################################################
+
+  clear
+  list
 
 ##########################################################
 # test exit command
