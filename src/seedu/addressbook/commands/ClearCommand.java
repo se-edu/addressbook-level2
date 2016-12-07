@@ -1,8 +1,5 @@
 package seedu.addressbook.commands;
 
-import seedu.addressbook.common.Utils;
-
-
 /**
  * Clears the address book.
  */
