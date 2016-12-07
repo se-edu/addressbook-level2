@@ -45,7 +45,7 @@ public class StorageFile {
 
     private final JAXBContext jaxbContext;
 
-    public final Path filePath;
+    public final Path path;
 
     /**
      * @throws InvalidStorageFilePathException if the default path is invalid
@@ -64,8 +64,8 @@ public class StorageFile {
             throw new RuntimeException("jaxb initialisation error");
         }
 
-        this.filePath = Paths.get(filePath);
-        if (!isValidPath(this.filePath)) {
+        path = Paths.get(filePath);
+        if (!isValidPath(path)) {
             throw new InvalidStorageFilePathException("Storage file should end with '.txt'");
         }
     }
@@ -89,7 +89,7 @@ public class StorageFile {
          * More info: https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html
          */
         try (final Writer fileWriter =
-                     new BufferedWriter(new FileWriter(filePath.toFile()))) {
+                     new BufferedWriter(new FileWriter(path.toFile()))) {
 
             final AdaptedAddressBook toSave = new AdaptedAddressBook(addressBook);
             final Marshaller marshaller = jaxbContext.createMarshaller();
@@ -97,7 +97,7 @@ public class StorageFile {
             marshaller.marshal(toSave, fileWriter);
 
         } catch (IOException ioe) {
-            throw new StorageOperationException("Error writing to file: " + filePath);
+            throw new StorageOperationException("Error writing to file: " + path);
         } catch (JAXBException jaxbe) {
             throw new StorageOperationException("Error converting address book into storage format");
         }
@@ -110,7 +110,7 @@ public class StorageFile {
      */
     public AddressBook load() throws StorageOperationException {
         try (final Reader fileReader =
-                     new BufferedReader(new FileReader(filePath.toFile()))) {
+                     new BufferedReader(new FileReader(path.toFile()))) {
 
             final Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
             final AdaptedAddressBook loaded = (AdaptedAddressBook) unmarshaller.unmarshal(fileReader);
@@ -133,7 +133,7 @@ public class StorageFile {
 
         // other errors
         } catch (IOException ioe) {
-            throw new StorageOperationException("Error writing to file: " + filePath);
+            throw new StorageOperationException("Error writing to file: " + path);
         } catch (JAXBException jaxbe) {
             throw new StorageOperationException("Error parsing file data format");
         } catch (IllegalValueException ive) {
@@ -142,7 +142,7 @@ public class StorageFile {
     }
 
     public String getPath() {
-        return filePath.toString();
+        return path.toString();
     }
 
 }
