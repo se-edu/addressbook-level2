@@ -12,7 +12,9 @@ public class IncorrectCommand extends Command{
         this.feedbackToUser = feedbackToUser;
     }
 
-    @Override
+    /**
+     * Executes the command and returns the result.
+     */
     public CommandResult execute() {
         return new CommandResult(feedbackToUser);
     }

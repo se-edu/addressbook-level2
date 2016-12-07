@@ -13,8 +13,9 @@ public class ClearCommand extends Command {
 
     public ClearCommand() {}
 
-
-    @Override
+    /**
+     * Executes the command and returns the result.
+     */
     public CommandResult execute() {
         addressBook.clear();
         return new CommandResult(MESSAGE_SUCCESS);

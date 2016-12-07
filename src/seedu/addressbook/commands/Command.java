@@ -16,6 +16,8 @@ public abstract class Command {
     protected List<? extends ReadOnlyPerson> relevantPersons;
     private int targetIndex = -1;
 
+    public final static String NAME_METHOD_EXECUTE = "execute";
+
     /**
      * @param targetIndex last visible listing index of the target person
      */
@@ -35,11 +37,6 @@ public abstract class Command {
     protected String getMessageForPersonListShownSummary(List<? extends ReadOnlyPerson> personsDisplayed) {
         return String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, personsDisplayed.size());
     }
-
-    /**
-     * Executes the command and returns the result.
-     */
-    public abstract CommandResult execute();
 
     /**
      * Supplies the data the command will operate on.

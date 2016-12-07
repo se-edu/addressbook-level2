@@ -13,7 +13,9 @@ public class HelpCommand extends Command {
 
     public HelpCommand() {}
 
-    @Override
+    /**
+     * Executes the command and returns the result.
+     */
     public CommandResult execute() {
         return new CommandResult(
                 AddCommand.MESSAGE_USAGE

@@ -24,8 +24,9 @@ public class ViewCommand extends Command {
         super(targetVisibleIndex);
     }
 
-
-    @Override
+    /**
+     * Executes the command and returns the result.
+     */
     public CommandResult execute() {
         try {
             final ReadOnlyPerson target = getTargetPerson();

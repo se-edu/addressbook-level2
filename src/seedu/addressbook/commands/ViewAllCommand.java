@@ -25,7 +25,9 @@ public class ViewAllCommand extends Command {
     }
 
 
-    @Override
+    /**
+     * Executes the command and returns the result.
+     */
     public CommandResult execute() {
         try {
             final ReadOnlyPerson target = getTargetPerson();

@@ -34,7 +34,9 @@ public class FindCommand extends Command {
         return new HashSet<>(keywords);
     }
 
-    @Override
+    /**
+     * Executes the command and returns the result.
+     */
     public CommandResult execute() {
         final List<ReadOnlyPerson> personsFound = getPersonsWithNameContainingAnyKeyword(keywords);
         return new CommandResult(getMessageForPersonListShownSummary(personsFound), personsFound);

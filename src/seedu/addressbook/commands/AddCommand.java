@@ -57,7 +57,9 @@ public class AddCommand extends Command {
         return toAdd;
     }
 
-    @Override
+    /**
+     * Executes the command and returns the result.
+     */
     public CommandResult execute() {
         try {
             addressBook.addPerson(toAdd);
