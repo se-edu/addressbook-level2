@@ -18,12 +18,12 @@ public class Tag {
      *
      * @throws IllegalValueException if the given tag name string is invalid.
      */
-    public Tag(String name) throws IllegalValueException {
-        name = name.trim();
-        if (!isValidTagName(name)) {
+    public Tag(String tagValue) throws IllegalValueException {
+        tagValue = tagValue.trim();
+        if (!isValidTagName(tagValue)) {
             throw new IllegalValueException(MESSAGE_TAG_CONSTRAINTS);
         }
-        this.tagName = name;
+        this.tagName = tagValue;
     }
 
     /**

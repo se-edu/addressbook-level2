@@ -20,13 +20,13 @@ public class Phone {
      *
      * @throws IllegalValueException if given phone string is invalid.
      */
-    public Phone(String phone, boolean isPrivate) throws IllegalValueException {
+    public Phone(String phoneValue, boolean isPrivate) throws IllegalValueException {
         this.isPrivate = isPrivate;
-        phone = phone.trim();
-        if (!isValidPhone(phone)) {
+        phoneValue = phoneValue.trim();
+        if (!isValidPhone(phoneValue)) {
             throw new IllegalValueException(MESSAGE_PHONE_CONSTRAINTS);
         }
-        this.value = phone;
+        this.value = phoneValue;
     }
 
     /**

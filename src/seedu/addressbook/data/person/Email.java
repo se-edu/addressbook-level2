@@ -21,13 +21,13 @@ public class Email {
      *
      * @throws IllegalValueException if given email address string is invalid.
      */
-    public Email(String email, boolean isPrivate) throws IllegalValueException {
+    public Email(String emailValue, boolean isPrivate) throws IllegalValueException {
         this.isPrivate = isPrivate;
-        email = email.trim();
-        if (!isValidEmail(email)) {
+        emailValue = emailValue.trim();
+        if (!isValidEmail(emailValue)) {
             throw new IllegalValueException(MESSAGE_EMAIL_CONSTRAINTS);
         }
-        this.value = email;
+        this.value = emailValue;
     }
 
     /**

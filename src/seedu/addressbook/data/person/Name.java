@@ -27,12 +27,12 @@ public class Name {
      *
      * @throws IllegalValueException if given name string is invalid.
      */
-    public Name(String name) throws IllegalValueException {
-        name = name.trim();
-        if (!isValidName(name)) {
+    public Name(String nameValue) throws IllegalValueException {
+        nameValue = nameValue.trim();
+        if (!isValidName(nameValue)) {
             throw new IllegalValueException(MESSAGE_NAME_CONSTRAINTS);
         }
-        this.fullName = name;
+        this.fullName = nameValue;
     }
 
     /**
