@@ -106,8 +106,7 @@ public class Main {
     private CommandResult executeCommand(Command command)  {
         try {
             command.setData(addressBook, lastShownList);
-            CommandResult result = (CommandResult) command.getClass().getMethod(Command.NAME_METHOD_EXECUTE, null)
-                    .invoke(command);
+            CommandResult result = command.execute();
             storage.save(addressBook);
             return result;
         } catch (Exception e) {

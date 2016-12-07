@@ -6,13 +6,17 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import seedu.addressbook.common.Messages;
+import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.person.ReadOnlyPerson;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
  * Keyword matching is case sensitive.
  */
-public class FindCommand extends Command {
+public class FindCommand implements Command {
+    protected AddressBook addressBook;
+    protected List<? extends ReadOnlyPerson> relevantPersons;
 
     public static final String COMMAND_WORD = "find";
 
@@ -35,11 +39,29 @@ public class FindCommand extends Command {
     }
 
     /**
+     * Constructs a feedback message to summarise an operation that displayed a listing of persons.
+     *
+     * @param personsDisplayed used to generate summary
+     * @return summary message for persons displayed
+     */
+    protected String getMessageForPersonListShownSummary(List<? extends ReadOnlyPerson> personsDisplayed) {
+        return String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, personsDisplayed.size());
+    }
+
+    /**
      * Executes the command and returns the result.
      */
     public CommandResult execute() {
         final List<ReadOnlyPerson> personsFound = getPersonsWithNameContainingAnyKeyword(keywords);
         return new CommandResult(getMessageForPersonListShownSummary(personsFound), personsFound);
+    }
+
+    /**
+     * Supplies the data the command will operate on.
+     */
+    public void setData(AddressBook addressBook, List<? extends ReadOnlyPerson> relevantPersons) {
+        this.addressBook = addressBook;
+        this.relevantPersons = relevantPersons;
     }
 
     /**
