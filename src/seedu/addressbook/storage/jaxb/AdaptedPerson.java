@@ -102,6 +102,7 @@ public class AdaptedPerson {
         final Email email = new Email(this.email.value, this.email.isPrivate);
         final Address address = new Address(this.address.value, this.address.isPrivate);
         final UniqueTagList tags = new UniqueTagList(personTags);
-        return new Person(name, phone, email, address, tags);
+        final int seqNum = Person.nextSequenceNumber++;
+        return new Person(name, phone, email, address, tags, seqNum);
     }
 }
