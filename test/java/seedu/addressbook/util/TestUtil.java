@@ -1,12 +1,20 @@
 package seedu.addressbook.util;
 
+import static org.junit.Assert.fail;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import seedu.addressbook.data.AddressBook;
+import seedu.addressbook.data.exception.IllegalValueException;
+import seedu.addressbook.data.person.Address;
+import seedu.addressbook.data.person.Email;
+import seedu.addressbook.data.person.Name;
 import seedu.addressbook.data.person.Person;
+import seedu.addressbook.data.person.Phone;
 import seedu.addressbook.data.person.ReadOnlyPerson;
 import seedu.addressbook.data.person.UniquePersonList.DuplicatePersonException;
+import seedu.addressbook.data.tag.UniqueTagList;
 
 public class TestUtil {
     /**
@@ -42,5 +50,14 @@ public class TestUtil {
      */
     public static AddressBook clone(AddressBook addressBook) {
         return new AddressBook(addressBook.getAllPersons(), addressBook.getAllTags());
+    }
+    public static Person generateTestPerson() {
+        try {
+            return new Person(new Name(Name.EXAMPLE), new Phone(Phone.EXAMPLE, false),
+                    new Email(Email.EXAMPLE, true), new Address(Address.EXAMPLE, false), new UniqueTagList());
+        } catch (IllegalValueException e) {
+            fail("test person data should be valid by definition");
+            return null;
+        }
     }
 }
