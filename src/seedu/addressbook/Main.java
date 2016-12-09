@@ -5,13 +5,22 @@ import seedu.addressbook.storage.StorageFile.*;
 
 import seedu.addressbook.commands.*;
 import seedu.addressbook.data.AddressBook;
+import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.parser.Parser;
+import seedu.addressbook.parser.Parser.ParseException;
 import seedu.addressbook.storage.StorageFile;
 import seedu.addressbook.ui.TextUi;
 
+import static seedu.addressbook.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.addressbook.common.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.regex.Matcher;
 
 
 /**
@@ -78,15 +87,163 @@ public class Main {
 
     /** Reads the user command and executes it, until the user issues the exit command.  */
     private void runCommandLoopUntilExitCommand() {
-        Command command;
+        String userCommandText;
+        String[] parsedCommand;
+        String commandWord;
+        String arguments;
+        CommandResult result;
+        Parser parser = new Parser();
         do {
-            String userCommandText = ui.getUserCommand();
-            command = new Parser().parseCommand(userCommandText);
-            CommandResult result = executeCommand(command);
+            userCommandText = ui.getUserCommand();
+            parsedCommand = parser.parseCommand(userCommandText);
+            commandWord = parsedCommand[0];
+            arguments = parsedCommand[1];
+
+            switch(commandWord) {
+
+                case AddCommand.COMMAND_WORD:
+                    final Matcher addMatcher = Parser.PERSON_DATA_ARGS_FORMAT.matcher(arguments.trim());
+                    IncorrectCommand incorrectAddCommand;
+                    if (!addMatcher.matches()) {
+                        incorrectAddCommand = new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                                AddCommand.MESSAGE_USAGE));
+                        result = incorrectAddCommand.execute();
+                    } else {
+                        try {
+                            AddCommand addCommand = new AddCommand(
+                                    addMatcher.group("name"),
+
+                                    addMatcher.group("phone"),
+                                    Parser.isPrivatePrefixPresent(addMatcher.group("isPhonePrivate")),
+
+                                    addMatcher.group("email"),
+                                    Parser.isPrivatePrefixPresent(addMatcher.group("isEmailPrivate")),
+
+                                    addMatcher.group("address"),
+                                    Parser.isPrivatePrefixPresent(addMatcher.group("isAddressPrivate")),
+
+                                    Parser.getTagsFromArgs(addMatcher.group("tagArguments"))
+                            );
+                            addCommand.setData(addressBook, lastShownList);
+                            result = addCommand.execute();
+                        } catch (IllegalValueException ive) {
+                            incorrectAddCommand = new IncorrectCommand(ive.getMessage());
+                            result = incorrectAddCommand.execute();
+                        }
+                    }
+                    break;
+
+                case DeleteCommand.COMMAND_WORD:
+                    try {
+                        final int targetIndex = parser.parseArgsAsDisplayedIndex(arguments);
+                        DeleteCommand deleteCommand = new DeleteCommand(targetIndex);
+                        deleteCommand.setData(addressBook, lastShownList);
+                        result = deleteCommand.execute();
+                        storage.save(addressBook);
+                    } catch (ParseException pe) {
+                        result = new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE)).execute();
+                    } catch (NumberFormatException nfe) {
+                        result =  new IncorrectCommand(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX).execute();
+                    } catch (Exception e) {
+                        ui.showToUser(e.getMessage());
+                        throw new RuntimeException(e);
+                    }
+                    break;
+
+                case ClearCommand.COMMAND_WORD:
+                    try {
+                        ClearCommand clearCommand = new ClearCommand();
+                        clearCommand.setData(addressBook, lastShownList);
+                        result = clearCommand.execute();
+                        storage.save(addressBook);
+                    } catch (Exception e) {
+                        ui.showToUser(e.getMessage());
+                        throw new RuntimeException(e);
+                    }
+                    break;
+
+                /* case FindCommand.COMMAND_WORD:
+                    final Matcher findMatcher = Parser.KEYWORDS_ARGS_FORMAT.matcher(arguments.trim());
+                    if (!findMatcher.matches()) {
+                        result = new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                                FindCommand.MESSAGE_USAGE)).execute();
+                    } else {
+                        final String[] keywords = findMatcher.group("keywords").split("\\s+");
+                        final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
+                        FindCommand findCommand = new FindCommand(keywordSet);
+                        result = findCommand.execute();
+                    }
+                    break;
+                */
+
+                case ListCommand.COMMAND_WORD:
+                    ListCommand listCommand = new ListCommand();
+                    try {
+                        listCommand.setData(addressBook, lastShownList);
+                        result = listCommand.execute();
+                        storage.save(addressBook);
+                    } catch (Exception e) {
+                        ui.showToUser(e.getMessage());
+                        throw new RuntimeException(e);
+                    }
+                    break;
+
+                case ViewCommand.COMMAND_WORD:
+                    try {
+                        final int targetIndex = parser.parseArgsAsDisplayedIndex(arguments);
+                        result = new ViewCommand(targetIndex).execute();
+                    } catch (ParseException pe) {
+                        result = new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                                ViewCommand.MESSAGE_USAGE)).execute();
+                    } catch (NumberFormatException nfe) {
+                        result = new IncorrectCommand(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX).execute();
+                    }
+                    break;
+
+                case ViewAllCommand.COMMAND_WORD:
+                    try {
+                        final int targetIndex = parser.parseArgsAsDisplayedIndex(arguments);
+                        result = new ViewAllCommand(targetIndex).execute();
+                    } catch (ParseException pe) {
+                        result = new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                                ViewAllCommand.MESSAGE_USAGE)).execute();
+                    } catch (NumberFormatException nfe) {
+                        result = new IncorrectCommand(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX).execute();
+                    }
+                    break;
+
+                case ExitCommand.COMMAND_WORD:
+                    ExitCommand exitCommand = new ExitCommand();
+                    try {
+                        exitCommand.setData(addressBook, lastShownList);
+                        result = exitCommand.execute();
+                        storage.save(addressBook);
+                    } catch (Exception e) {
+                        ui.showToUser(e.getMessage());
+                        throw new RuntimeException(e);
+                    }
+                    break;
+
+                case HelpCommand.COMMAND_WORD:
+                    HelpCommand helpCommand = new HelpCommand();
+                    try {
+                        helpCommand.setData(addressBook, lastShownList);
+                        result = helpCommand.execute();
+                        storage.save(addressBook);
+                    } catch (Exception e) {
+                        ui.showToUser(e.getMessage());
+                        throw new RuntimeException(e);
+                    }
+                    break;
+
+                default:
+                    result = new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE)).execute();
+            }
+
             recordResult(result);
             ui.showResultToUser(result);
 
-        } while (!ExitCommand.isExit(command));
+        } while (!ExitCommand.isExit(commandWord));
     }
 
     /** Updates the {@link #lastShownList} if the result contains a list of Persons. */
@@ -94,24 +251,6 @@ public class Main {
         final Optional<List<? extends ReadOnlyPerson>> personList = result.getRelevantPersons();
         if (personList.isPresent()) {
             lastShownList = personList.get();
-        }
-    }
-
-    /**
-     * Executes the command and returns the result.
-     * 
-     * @param command user command
-     * @return result of the command
-     */
-    private CommandResult executeCommand(Command command)  {
-        try {
-            command.setData(addressBook, lastShownList);
-            CommandResult result = command.execute();
-            storage.save(addressBook);
-            return result;
-        } catch (Exception e) {
-            ui.showToUser(e.getMessage());
-            throw new RuntimeException(e);
         }
     }
 

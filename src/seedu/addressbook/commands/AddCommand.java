@@ -13,7 +13,7 @@ import java.util.Set;
 /**
  * Adds a person to the address book.
  */
-public class AddCommand implements Command {
+public class AddCommand {
     protected AddressBook addressBook;
     protected List<? extends ReadOnlyPerson> relevantPersons;
 

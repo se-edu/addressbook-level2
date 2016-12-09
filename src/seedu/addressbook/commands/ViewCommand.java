@@ -13,7 +13,7 @@ import seedu.addressbook.data.person.ReadOnlyPerson;
  * Shows details of the person identified using the last displayed index.
  * Private contact details are not shown.
  */
-public class ViewCommand implements Command {
+public class ViewCommand {
     protected AddressBook addressBook;
     protected List<? extends ReadOnlyPerson> relevantPersons;
     private int targetIndex = -1;

@@ -14,7 +14,7 @@ import seedu.addressbook.data.person.ReadOnlyPerson;
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
  * Keyword matching is case sensitive.
  */
-public class FindCommand implements Command {
+public class FindCommand {
     protected AddressBook addressBook;
     protected List<? extends ReadOnlyPerson> relevantPersons;
 

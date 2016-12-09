@@ -8,7 +8,7 @@ import seedu.addressbook.data.person.ReadOnlyPerson;
 /**
  * Terminates the program.
  */
-public class ExitCommand implements Command {
+public class ExitCommand {
     protected AddressBook addressBook;
     protected List<? extends ReadOnlyPerson> relevantPersons;
 
@@ -33,7 +33,7 @@ public class ExitCommand implements Command {
         this.relevantPersons = relevantPersons;
     }
 
-    public static boolean isExit(Command command) {
-        return command instanceof ExitCommand; // instanceof returns false if it is null
+    public static boolean isExit(String commandWord) {
+        return commandWord.equals(COMMAND_WORD);
     }
 }

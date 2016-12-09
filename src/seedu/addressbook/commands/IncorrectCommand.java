@@ -8,7 +8,7 @@ import seedu.addressbook.data.person.ReadOnlyPerson;
 /**
  * Represents an incorrect command. Upon execution, produces some feedback to the user.
  */
-public class IncorrectCommand implements Command{
+public class IncorrectCommand {
     protected AddressBook addressBook;
     protected List<? extends ReadOnlyPerson> relevantPersons;
 

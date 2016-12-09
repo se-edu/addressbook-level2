@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Lists all persons in the address book to the user.
  */
-public class ListCommand implements Command {
+public class ListCommand {
     protected AddressBook addressBook;
     protected List<? extends ReadOnlyPerson> relevantPersons;
 

@@ -12,7 +12,7 @@ import static seedu.addressbook.ui.TextUi.DISPLAYED_INDEX_OFFSET;
  * Shows all details of the person identified using the last displayed index.
  * Private contact details are shown.
  */
-public class ViewAllCommand implements Command {
+public class ViewAllCommand {
     protected AddressBook addressBook;
     protected List<? extends ReadOnlyPerson> relevantPersons;
     private int targetIndex = -1;

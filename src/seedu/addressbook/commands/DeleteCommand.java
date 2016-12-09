@@ -12,7 +12,7 @@ import static seedu.addressbook.ui.TextUi.DISPLAYED_INDEX_OFFSET;
 /**
  * Deletes a person identified using it's last displayed index from the address book.
  */
-public class DeleteCommand implements Command {
+public class DeleteCommand {
     protected AddressBook addressBook;
     protected List<? extends ReadOnlyPerson> relevantPersons;
     private int targetIndex = -1;
