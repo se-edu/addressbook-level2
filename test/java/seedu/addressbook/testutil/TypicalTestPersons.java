@@ -49,7 +49,6 @@ public class TypicalTestPersons {
         return new TestPerson[] { claude, gates, jobs, donald, hopper };
     }
 
-
     public AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
         loadAddressBookWithSampleData(ab);
