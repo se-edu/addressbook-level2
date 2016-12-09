@@ -14,9 +14,12 @@ import seedu.addressbook.ui.TextUi;
 import static seedu.addressbook.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.addressbook.common.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.regex.Matcher;
 
 
@@ -159,7 +162,7 @@ public class Main {
                     }
                     break;
 
-                /* case FindCommand.COMMAND_WORD:
+                case FindCommand.COMMAND_WORD:
                     final Matcher findMatcher = Parser.KEYWORDS_ARGS_FORMAT.matcher(arguments.trim());
                     if (!findMatcher.matches()) {
                         result = new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -168,10 +171,10 @@ public class Main {
                         final String[] keywords = findMatcher.group("keywords").split("\\s+");
                         final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
                         FindCommand findCommand = new FindCommand(keywordSet);
+                        findCommand.setData(addressBook, lastShownList);
                         result = findCommand.execute();
                     }
                     break;
-                */
 
                 case ListCommand.COMMAND_WORD:
                     ListCommand listCommand = new ListCommand();
