@@ -32,7 +32,7 @@ public abstract class Command {
      * @param personsDisplayed used to generate summary
      * @return summary message for persons displayed
      */
-    protected String getMessageForPersonListShownSummary(List<? extends ReadOnlyPerson> personsDisplayed) {
+    public static String getMessageForPersonListShownSummary(List<? extends ReadOnlyPerson> personsDisplayed) {
         return String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, personsDisplayed.size());
     }
 
