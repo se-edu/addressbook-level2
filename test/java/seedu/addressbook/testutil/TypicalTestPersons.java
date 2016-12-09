@@ -5,6 +5,9 @@ import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.data.person.Person;
 import seedu.addressbook.data.person.UniquePersonList;
 
+/**
+ * Class to generate typical test persons
+ */
 public class TypicalTestPersons {
 
     public static TestPerson claude, gates, jobs, donald, hopper;

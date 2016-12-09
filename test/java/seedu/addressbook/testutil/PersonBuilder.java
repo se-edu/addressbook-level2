@@ -6,6 +6,9 @@ import seedu.addressbook.data.person.Email;
 import seedu.addressbook.data.person.Name;
 import seedu.addressbook.data.person.Phone;
 
+/**
+ * Factory class for building TestPerson
+ */
 public class PersonBuilder {
 
 	private TestPerson person;
