@@ -11,33 +11,33 @@ import seedu.addressbook.data.person.Phone;
  */
 public class PersonBuilder {
 
-	private TestPerson person;
-	
-	public PersonBuilder() {
-		this.person = new TestPerson();
-	}
-	
-	public PersonBuilder withName(String name) throws IllegalValueException {
-		this.person.setName(new Name(name));
-		return this;
-	}
-	
-	public PersonBuilder withPhone(String phone, boolean isPrivate) throws IllegalValueException {
-		this.person.setPhone(new Phone(phone, isPrivate));
-		return this;
-	}
-	
-	public PersonBuilder withEmail(String email, boolean isPrivate) throws IllegalValueException {
-		this.person.setEmail(new Email(email, isPrivate));
-		return this;
-	}
-	
-	public PersonBuilder withAddress(String address, boolean isPrivate) throws IllegalValueException {
-		this.person.setAddress(new Address(address, isPrivate));
-		return this;
-	}
-	
-	public TestPerson build() {
-		return this.person;
-	}
+    private TestPerson person;
+
+    public PersonBuilder() {
+        this.person = new TestPerson();
+    }
+
+    public PersonBuilder withName(String name) throws IllegalValueException {
+        this.person.setName(new Name(name));
+        return this;
+    }
+
+    public PersonBuilder withPhone(String phone, boolean isPrivate) throws IllegalValueException {
+        this.person.setPhone(new Phone(phone, isPrivate));
+        return this;
+    }
+
+    public PersonBuilder withEmail(String email, boolean isPrivate) throws IllegalValueException {
+        this.person.setEmail(new Email(email, isPrivate));
+        return this;
+    }
+
+    public PersonBuilder withAddress(String address, boolean isPrivate) throws IllegalValueException {
+        this.person.setAddress(new Address(address, isPrivate));
+        return this;
+    }
+
+    public TestPerson build() {
+        return this.person;
+    }
 }
