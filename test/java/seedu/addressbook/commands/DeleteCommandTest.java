@@ -24,10 +24,6 @@ import seedu.addressbook.ui.TextUi;
 
 public class DeleteCommandTest {
 
-    private Person johnDoe;
-    private Person janeDoe;
-    private Person davidGrant;
-
     private AddressBook emptyAddressBook;
     private AddressBook addressBook;
 
@@ -37,11 +33,11 @@ public class DeleteCommandTest {
 
     @Before
     public void setUp() throws Exception {
-        johnDoe = new Person(new Name("John Doe"), new Phone("111", false), new Email("john@doe.com", false),
-                new Address("395C Ben Road", false), new UniqueTagList());
-        janeDoe = new Person(new Name("Jane Doe"), new Phone("222", false), new Email("jane@doe.com", false),
-                new Address("33G Ohm Road", false), new UniqueTagList());
-        davidGrant = new Person(new Name("David Grant"), new Phone("333", false),
+        Person johnDoe = new Person(new Name("John Doe"), new Phone("111", false),
+                new Email("john@doe.com", false), new Address("395C Ben Road", false), new UniqueTagList());
+        Person janeDoe = new Person(new Name("Jane Doe"), new Phone("222", false),
+                new Email("jane@doe.com", false), new Address("33G Ohm Road", false), new UniqueTagList());
+        Person davidGrant = new Person(new Name("David Grant"), new Phone("333", false),
                 new Email("david@grant.com", false), new Address("44H Define Road", false),
                 new UniqueTagList());
 
