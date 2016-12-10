@@ -126,13 +126,13 @@ public class DeleteCommandTest {
      * @param addressBook to perform the delete operation on, must not be null
      * @param displayList to get the selected person to delete, must not be null
      */
-    public void assertInvalidIndex(int invalidIndex, AddressBook addressBook, 
+    public void assertInvalidIndex(int invalidVisibleIndex, AddressBook addressBook, 
             List<ReadOnlyPerson> displayList) {
 
         assert addressBook != null;
         assert displayList != null;
         
-        DeleteCommand command = createDeleteCommand(invalidIndex, addressBook, displayList);
+        DeleteCommand command = createDeleteCommand(invalidVisibleIndex, addressBook, displayList);
 
         assertCommandBehaviour(command, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, addressBook,
                 addressBook);
@@ -142,12 +142,13 @@ public class DeleteCommandTest {
      * Selects a person in the display list using the index, that does not exist in the address book, and 
      * checks that the command reports that the person is not in the address book.
      */
-    public void assertNoSuchPerson(int index, AddressBook addressBook, List<ReadOnlyPerson> displayList) {
+    public void assertNoSuchPerson(int visibleIndex, AddressBook addressBook, 
+            List<ReadOnlyPerson> displayList) {
 
         assert addressBook != null;
         assert displayList != null;
         
-        DeleteCommand command = createDeleteCommand(index, addressBook, displayList);
+        DeleteCommand command = createDeleteCommand(visibleIndex, addressBook, displayList);
 
         assertCommandBehaviour(command, Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK, addressBook,
                 addressBook);
