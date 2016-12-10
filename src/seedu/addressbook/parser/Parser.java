@@ -2,6 +2,7 @@ package seedu.addressbook.parser;
 
 import seedu.addressbook.commands.*;
 import seedu.addressbook.data.exception.IllegalValueException;
+import seedu.addressbook.data.person.Printable;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -238,6 +239,16 @@ public class Parser {
         final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
         return new FindCommand(keywordSet);
     }
-
+    
+    /**
+     * Returns a concatenated version of the printable strings of each object.
+     */
+   String getPrintableString(Printable... printables){
+       StringBuilder str = new StringBuilder();
+       for(Printable p: printables) {
+           str.append(p.getPrintableString() + " ");
+       }
+       return str.toString();
+   }
 
 }
