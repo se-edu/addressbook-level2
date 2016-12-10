@@ -26,26 +26,27 @@ public class AddressBookTest {
     private Tag tagMathematician;
     private Tag tagEconomist;
 
-    private Person personAlice;   // has tagMathematician
-    private Person personBob;     // has tagMathematician
-    private Person personCharlie; // has tagScientist
-    private Person personDouglas; // has tagEconomist, tagPrizeWinner
+    private Person personAliceBetsy; // has tagMathematician
+    private Person personBobChaplin; // has tagMathematician
+    private Person personCharlieDouglas; // has tagScientist
+    private Person personDavidElliot; // has tagEconomist, tagPrizeWinner
 
     /**
      * Initialises an AddressBook with some default values.
      * 
-     * Contains personBarack and personBill. Contains used tag tagMathematician
-     * and unused tag tagScientist. Does not contain tagEconomist.
+     * Contains personAliceBetsy and personBobChaplin.
+     * Contains used tag tagMathematician and unused tag tagScientist.
+     * Does not contain tagEconomist.
      * 
-     * Although the method has a throw clause, the method will never throw
-     * due to the Tag and Person values being chosen as such.
+     * Although the method has a throw clause, the method will never throw due
+     * to the Tag and Person values being chosen as such.
      * 
      * @return the initialised AddressBook
      * @throws Exception
      */
     private AddressBook createDefaultAddressBook() throws Exception {
         UniqueTagList tags = new UniqueTagList(tagMathematician, tagScientist);
-        UniquePersonList persons = new UniquePersonList(personAlice, personBob);
+        UniquePersonList persons = new UniquePersonList(personAliceBetsy, personBobChaplin);
 
         AddressBook addressBook = new AddressBook(persons, tags);
 
@@ -89,43 +90,42 @@ public class AddressBookTest {
     public void setUp() throws Exception {
         // Tag constructor will not throw as the strings supplied match the
         // regex \p{Alnum}+
-        tagPrizeWinner = new Tag("prizewinner");
-        tagScientist = new Tag("scientist");
+        tagPrizeWinner   = new Tag("prizewinner");
+        tagScientist     = new Tag("scientist");
         tagMathematician = new Tag("mathematician");
-        tagEconomist = new Tag("economist");
+        tagEconomist     = new Tag("economist");
 
         // UniqueTagList constructor will not throw as there are no duplicate
         // elements
-        personAlice   = new Person(new Name("Alice"),
-                                   new Phone("91235468", false),
-                                   new Email("alice@nushackers.org", false),
-                                   new Address("8 Computing Drive, Singapore", false),
-                                   new UniqueTagList(tagMathematician));
-        
-        personBob     = new Person(new Name("Bob"),
-                                   new Phone("94321500", false),
-                                   new Email("bob@nusgreyhats.org", false),
-                                   new Address("9 Computing Drive", false),
-                                   new UniqueTagList(tagMathematician));
-        
-        personCharlie = new Person(new Name("Charlie"),
-                                   new Phone("98751365", false),
-                                   new Email("charlie@nusgdg.org", false),
-                                   new Address("10 Science Drive", false),
-                                   new UniqueTagList(tagScientist));
-        
-        personDouglas = new Person(new Name("Douglas"),
-                                   new Phone("84512575", false),
-                                   new Email("douglas@nuscomputing.com", false),
-                                   new Address("11 Arts Link", false),
-                                   new UniqueTagList(tagEconomist, tagPrizeWinner));
+        personAliceBetsy     = new Person(new Name("Alice Betsy"),
+                                          new Phone("91235468", false),
+                                          new Email("alice@nushackers.org", false),
+                                          new Address("8 Computing Drive, Singapore", false),
+                                          new UniqueTagList(tagMathematician));
+
+        personBobChaplin     = new Person(new Name("Bob Chaplin"),
+                                          new Phone("94321500", false),
+                                          new Email("bob@nusgreyhats.org", false),
+                                          new Address("9 Computing Drive", false),
+                                          new UniqueTagList(tagMathematician));
+
+        personCharlieDouglas = new Person(new Name("Charlie Douglas"),
+                                          new Phone("98751365", false),
+                                          new Email("charlie@nusgdg.org", false),
+                                          new Address("10 Science Drive", false),
+                                          new UniqueTagList(tagScientist));
+
+        personDavidElliot    = new Person(new Name("David Elliot"),
+                                          new Phone("84512575", false),
+                                          new Email("douglas@nuscomputing.com", false),
+                                          new Address("11 Arts Link", false),
+                                          new UniqueTagList(tagEconomist, tagPrizeWinner));
     }
 
     @Test
     public void sync_emptyInitialTagList_addsAllIntoTagList() throws Exception {
         UniqueTagList emptyTagList = new UniqueTagList();
-        UniquePersonList persons = new UniquePersonList(personBob, personCharlie); // no
-                                                                                   // duplicates
+        UniquePersonList persons = new UniquePersonList(personBobChaplin, personCharlieDouglas);
 
         AddressBook addressBook = new AddressBook(persons, emptyTagList);
 
@@ -141,7 +141,7 @@ public class AddressBookTest {
 
         assertFalse(addressBook.containsTag(tagEconomist));
         assertFalse(addressBook.containsTag(tagPrizeWinner));
-        addressBook.addPerson(personDouglas);
+        addressBook.addPerson(personDavidElliot);
         assertTrue(addressBook.containsTag(tagEconomist));
         assertTrue(addressBook.containsTag(tagPrizeWinner));
     }
@@ -176,18 +176,18 @@ public class AddressBookTest {
     public void addPerson_addNonDuplicateWhoseTagInTagList_addsNormally() throws Exception {
         AddressBook addressBook = createDefaultAddressBook();
 
-        assertFalse(addressBook.containsPerson(personCharlie));
-        addressBook.addPerson(personCharlie);
-        assertTrue(addressBook.containsPerson(personCharlie));
+        assertFalse(addressBook.containsPerson(personCharlieDouglas));
+        addressBook.addPerson(personCharlieDouglas);
+        assertTrue(addressBook.containsPerson(personCharlieDouglas));
     }
 
     @Test
     public void addPerson_addNonDuplicateWhoseTagNotInTagList_addsNormally() throws Exception {
         AddressBook addressBook = createDefaultAddressBook();
 
-        assertFalse(addressBook.containsPerson(personDouglas));
-        addressBook.addPerson(personDouglas);
-        assertTrue(addressBook.containsPerson(personDouglas));
+        assertFalse(addressBook.containsPerson(personDavidElliot));
+        addressBook.addPerson(personDavidElliot);
+        assertTrue(addressBook.containsPerson(personDavidElliot));
     }
 
     @Test
@@ -197,7 +197,7 @@ public class AddressBookTest {
         boolean expectedExceptionCaught = false;
 
         try {
-            addressBook.addPerson(personAlice);
+            addressBook.addPerson(personAliceBetsy);
         } catch (DuplicatePersonException e) {
             expectedExceptionCaught = true;
         }
@@ -233,7 +233,7 @@ public class AddressBookTest {
     public void containsPerson_personExists_returnsTrue() throws Exception {
         AddressBook addressBook = createDefaultAddressBook();
 
-        boolean foundPerson = addressBook.containsPerson(personAlice);
+        boolean foundPerson = addressBook.containsPerson(personAliceBetsy);
 
         assertTrue(foundPerson);
     }
@@ -242,7 +242,7 @@ public class AddressBookTest {
     public void containsPerson_personNotExists_returnsFalse() throws Exception {
         AddressBook addressBook = createDefaultAddressBook();
 
-        boolean foundPerson = addressBook.containsPerson(personCharlie);
+        boolean foundPerson = addressBook.containsPerson(personCharlieDouglas);
 
         assertFalse(foundPerson);
     }
@@ -269,10 +269,10 @@ public class AddressBookTest {
     public void removePerson_personExists_removesNormally() throws Exception {
         AddressBook addressBook = createDefaultAddressBook();
 
-        assertTrue(addressBook.containsPerson(personAlice));
-        addressBook.removePerson(personAlice);
-        assertFalse(addressBook.containsPerson(personAlice));
-        assertTrue(addressBook.containsPerson(personBob));
+        assertTrue(addressBook.containsPerson(personAliceBetsy));
+        addressBook.removePerson(personAliceBetsy);
+        assertFalse(addressBook.containsPerson(personAliceBetsy));
+        assertTrue(addressBook.containsPerson(personBobChaplin));
     }
 
     @Test
@@ -282,7 +282,7 @@ public class AddressBookTest {
         boolean expectedExceptionCaught = false;
 
         try {
-            addressBook.removePerson(personCharlie);
+            addressBook.removePerson(personCharlieDouglas);
         } catch (PersonNotFoundException e) {
             expectedExceptionCaught = true;
         }
@@ -349,7 +349,7 @@ public class AddressBookTest {
         AddressBook addressBook = createDefaultAddressBook();
 
         UniquePersonList allPersons = addressBook.getAllPersons();
-        UniquePersonList personsToCheck = new UniquePersonList(personAlice, personBob);
+        UniquePersonList personsToCheck = new UniquePersonList(personAliceBetsy, personBobChaplin);
 
         assertTrue(isEqual(allPersons, personsToCheck));
     }
