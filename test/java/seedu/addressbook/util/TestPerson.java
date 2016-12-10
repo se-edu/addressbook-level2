@@ -1,4 +1,4 @@
-package seedu.addressbook.testutil;
+package seedu.addressbook.util;
 
 import seedu.addressbook.data.person.Address;
 import seedu.addressbook.data.person.Email;
