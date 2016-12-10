@@ -38,17 +38,23 @@ public class AddressBookTest {
      * Contains used tag tagMathematician and unused tag tagScientist.
      * Does not contain tagEconomist.
      * 
-     * Although the method has a throw clause, the method will never throw due
-     * to the Tag and Person values being chosen as such.
-     * 
      * @return the initialised AddressBook
      * @throws Exception
      */
-    private AddressBook createDefaultAddressBook() throws Exception {
-        UniqueTagList tags = new UniqueTagList(tagMathematician, tagScientist);
-        UniquePersonList persons = new UniquePersonList(personAliceBetsy, personBobChaplin);
-
-        AddressBook addressBook = new AddressBook(persons, tags);
+    private AddressBook createDefaultAddressBook() {
+        UniqueTagList tags;
+        UniquePersonList persons;
+        AddressBook addressBook;
+        
+        try {
+            tags = new UniqueTagList(tagMathematician, tagScientist);
+            persons = new UniquePersonList(personAliceBetsy, personBobChaplin);
+            addressBook = new AddressBook(persons, tags);    
+        } catch (DuplicateTagException | DuplicatePersonException e) {
+            // The choice of Tag and Person values are such that this method never throws.
+            // We should thus never reach this point.
+            throw new RuntimeException();
+        }
 
         return addressBook;
     }
