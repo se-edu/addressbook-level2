@@ -61,10 +61,7 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_noPersonDisplayed_returnsInvalidIndexMessage() {
-        DeleteCommand command = createDeleteCommand(1, addressBook, emptyDisplayList);
-
-        assertCommandBehaviour(command, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, addressBook,
-                addressBook);
+        assertInvalidIndex(1, addressBook, emptyDisplayList);
     }
 
     @Test
@@ -80,28 +77,10 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_indexZero_returnsInvalidIndexMessage() {
-        DeleteCommand command = createDeleteCommand(0, addressBook, listWithEveryone);
-
-        assertCommandBehaviour(command, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, addressBook,
-                addressBook);
-    }
-
-    @Test
-    public void execute_indexNegative_returnsInvalidIndexMessage() {
-        DeleteCommand command = createDeleteCommand(-1, addressBook, listWithEveryone);
-
-        assertCommandBehaviour(command, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, addressBook,
-                addressBook);
-    }
-
-    @Test
-    public void execute_indexMoreThanListSize_returnsInvalidIndexMessage() {
-        DeleteCommand command = createDeleteCommand(listWithSurnameDoe.size() + 1, addressBook,
-                listWithSurnameDoe);
-
-        assertCommandBehaviour(command, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, addressBook,
-                addressBook);
+    public void execute_invalidIndex_returnsInvalidIndexMessage() {
+        assertInvalidIndex(0, addressBook, listWithEveryone);
+        assertInvalidIndex(-1, addressBook, listWithEveryone);
+        assertInvalidIndex(listWithEveryone.size() + 1, addressBook, listWithEveryone);
     }
 
     @Test
@@ -150,5 +129,23 @@ public class DeleteCommandTest {
 
         assertEquals(expectedMessage, result.feedbackToUser);
         assertEquals(expectedAddressBook.getAllPersons(), actualAddressBook.getAllPersons());
+    }
+    
+    /**
+     * Given an invalid index, checks that the command reports the invalidity of such index.
+     * 
+     * @param addressBook to perform the delete operation on, must not be null
+     * @param displayList to get the selected person to delete, must not be null
+     */
+    public void assertInvalidIndex(int invalidIndex, AddressBook addressBook, 
+            List<ReadOnlyPerson> displayList) {
+
+        assert addressBook != null;
+        assert displayList != null;
+        
+        DeleteCommand command = createDeleteCommand(invalidIndex, addressBook, displayList);
+
+        assertCommandBehaviour(command, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, addressBook,
+                addressBook);
     }
 }
