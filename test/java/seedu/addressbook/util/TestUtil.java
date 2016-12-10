@@ -37,7 +37,8 @@ public class TestUtil {
     }
     
     /**
-     * Creates an exact copy of the original address book.
+     * Creates a copy of the original address book with the same entries
+     * of Persons and Tags. The Persons and Tags are not cloned.
      */
     public static AddressBook clone(AddressBook addressBook) {
         return new AddressBook(addressBook.getAllPersons(), addressBook.getAllTags());
