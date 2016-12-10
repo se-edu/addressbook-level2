@@ -141,13 +141,7 @@ public class DeleteCommandTest {
     }
 
     /**
-     * Executes the command, and checks that the execution was what we had
-     * expected.
-     * 
-     * @param deleteCommand to execute
-     * @param expectedMessage of the result of the execution
-     * @param expectedAddressBook of the result of the execution
-     * @param actualAddressBook that is modified by the command
+     * Executes the command, and checks that the execution was what we had expected.
      */
     public void assertCommandBehaviour(DeleteCommand deleteCommand, String expectedMessage,
             AddressBook expectedAddressBook, AddressBook actualAddressBook) {
