@@ -1,4 +1,4 @@
-package seedu.addressbook.testutil;
+package seedu.addressbook.util;
 
 import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.data.person.Address;
@@ -21,19 +21,34 @@ public class PersonBuilder {
         this.person.setName(new Name(name));
         return this;
     }
-
-    public PersonBuilder withPhone(String phone, boolean isPrivate) throws IllegalValueException {
-        this.person.setPhone(new Phone(phone, isPrivate));
+    
+    public PersonBuilder withPrivatePhone(String phone) throws IllegalValueException {
+        this.person.setPhone(new Phone(phone, true));
+        return this;
+    }
+    
+    public PersonBuilder withPublicPhone(String phone) throws IllegalValueException {
+        this.person.setPhone(new Phone(phone, false));
         return this;
     }
 
-    public PersonBuilder withEmail(String email, boolean isPrivate) throws IllegalValueException {
-        this.person.setEmail(new Email(email, isPrivate));
+    public PersonBuilder withPrivateEmail(String email) throws IllegalValueException {
+        this.person.setEmail(new Email(email, true));
         return this;
     }
 
-    public PersonBuilder withAddress(String address, boolean isPrivate) throws IllegalValueException {
-        this.person.setAddress(new Address(address, isPrivate));
+    public PersonBuilder withPublicEmail(String email) throws IllegalValueException {
+        this.person.setEmail(new Email(email, false));
+        return this;
+    }
+    
+    public PersonBuilder withPrivateAddress(String address) throws IllegalValueException {
+        this.person.setAddress(new Address(address, true));
+        return this;
+    }
+
+    public PersonBuilder withPublicAddress(String address) throws IllegalValueException {
+        this.person.setAddress(new Address(address, false));
         return this;
     }
 

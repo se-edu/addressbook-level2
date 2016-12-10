@@ -1,46 +1,107 @@
 package seedu.addressbook.commands;
 
+import static org.junit.Assert.assertEquals;
+
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
+import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.data.person.Person;
-import seedu.addressbook.testutil.TypicalTestPersons;
+import seedu.addressbook.data.person.ReadOnlyPerson;
+import seedu.addressbook.util.TestUtil;
+import seedu.addressbook.util.TypicalTestPersons;
 
 /**
  * Test class for the Find Command
  */
-public class FindCommandTest extends CommandTest {
+public class FindCommandTest {
 
-    @Test
-    public void execute_find_isCaseSensitive() throws IllegalValueException {
-        List<Person> expectedOne = helper.generatePersonList(new Person(TypicalTestPersons.claude));
-        List<Person> expectedZero = Collections.emptyList();
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
-        assertCommandBehavior("find Claude", Command.getMessageForPersonListShownSummary(expectedOne),
-                testMain.getAddressBook(), expectedOne);
+    private AddressBook addressBook;
+    private AddressBook unmutatedAddressBook;
 
-        assertCommandBehavior("find cLaude", Command.getMessageForPersonListShownSummary(expectedZero),
-                testMain.getAddressBook(), expectedZero);
+    @Before public void setUp() {
+        this.addressBook = new TypicalTestPersons().getTypicalAddressBook();
+        this.unmutatedAddressBook = new TypicalTestPersons().getTypicalAddressBook();
     }
 
     @Test
-    public void execute_find_onlyMatchesFullWordsInNames() throws IllegalValueException {
-        List<Person> expectedList = Collections.emptyList();
+    public void execute_find_matchesOnlyIfCaseSensitive() throws IllegalValueException {
+        List<ReadOnlyPerson> expectedOne = TestUtil.createList(new Person(TypicalTestPersons.amy));
+        List<ReadOnlyPerson> expectedZero = Collections.emptyList();
 
-        assertCommandBehavior("find Laude", Command.getMessageForPersonListShownSummary(expectedList),
-                testMain.getAddressBook(), expectedList);
+        String[] caseSensitiveKeywords = {"Amy"};
+        String[] caseInsensitiveKeywords = {"aMy"};
+        
+        FindCommand command = createFindCommand(caseSensitiveKeywords);
+        assertCommandBehavior(command, Command.getMessageForPersonListShownSummary(expectedOne),
+                unmutatedAddressBook, addressBook);
+        
+        command = createFindCommand(caseInsensitiveKeywords);
+        assertCommandBehavior(command, Command.getMessageForPersonListShownSummary(expectedZero),
+                unmutatedAddressBook, addressBook);
+
+
+    }
+
+    @Test
+    public void execute_find_matchesOnlyFullWordsInNames() throws IllegalValueException {
+        List<ReadOnlyPerson> expectedZero = Collections.emptyList();
+        
+        String[] keywords = {"my"};
+        
+        FindCommand command = createFindCommand(keywords);
+        assertCommandBehavior(command, Command.getMessageForPersonListShownSummary(expectedZero),
+                unmutatedAddressBook, addressBook);
+
     }
 
     @Test
     public void execute_find_multipleMatches() throws IllegalValueException {
-        List<Person> expectedList = helper.generatePersonList(new Person(TypicalTestPersons.claude),
-                new Person(TypicalTestPersons.hopper));
+        List<ReadOnlyPerson> expectedTwo = TestUtil.createList(new Person(TypicalTestPersons.amy),
+                new Person(TypicalTestPersons.bill));
+        
+        String[] keywords = {"Amy", "Bill"};
+        
+        FindCommand command = createFindCommand(keywords);
+        assertCommandBehavior(command, Command.getMessageForPersonListShownSummary(expectedTwo),
+                unmutatedAddressBook, addressBook);
 
-        assertCommandBehavior("find Claude Hopper", Command.getMessageForPersonListShownSummary(expectedList),
-                testMain.getAddressBook(), expectedList);
     }
 
+    /**
+     * Executes the find command, and checks that the execution was what we had expected.
+     */
+    private void assertCommandBehavior(Command command, String expectedMessage, 
+            AddressBook expectedAddressBook, AddressBook actualAddressBook) {
+
+        CommandResult result = command.execute();
+        
+        assertEquals(expectedMessage, result.feedbackToUser);
+        assertEquals(expectedAddressBook, actualAddressBook);
+    }
+
+    
+    /**
+     * Creates a new find command.
+     * 
+     * @param keywords to search for in the names' of persons
+     */
+    private FindCommand createFindCommand(String[] keywords) {
+        final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
+        FindCommand command = new FindCommand(keywordSet);
+        command.setData(addressBook, Collections.emptyList());
+        return command;
+    }
 }
