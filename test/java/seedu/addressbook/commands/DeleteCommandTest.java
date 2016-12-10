@@ -21,6 +21,7 @@ import seedu.addressbook.data.person.ReadOnlyPerson;
 import seedu.addressbook.data.person.UniquePersonList.PersonNotFoundException;
 import seedu.addressbook.data.tag.UniqueTagList;
 import seedu.addressbook.ui.TextUi;
+import seedu.addressbook.util.TestUtil;
 
 public class DeleteCommandTest {
 
@@ -41,23 +42,13 @@ public class DeleteCommandTest {
                 new Email("david@grant.com", false), new Address("44H Define Road", false),
                 new UniqueTagList());
 
-        emptyAddressBook = new AddressBook();
+        emptyAddressBook = TestUtil.createAddressBook();
+        addressBook = TestUtil.createAddressBook(johnDoe, janeDoe, davidGrant);
 
-        addressBook = new AddressBook();
-        addressBook.addPerson(johnDoe);
-        addressBook.addPerson(janeDoe);
-        addressBook.addPerson(davidGrant);
-
-        emptyDisplayList = new ArrayList<ReadOnlyPerson>();
-
-        listWithEveryone = new ArrayList<ReadOnlyPerson>();
-        listWithEveryone.add(johnDoe);
-        listWithEveryone.add(janeDoe);
-        listWithEveryone.add(davidGrant);
-
-        listWithSurnameDoe = new ArrayList<ReadOnlyPerson>();
-        listWithSurnameDoe.add(johnDoe);
-        listWithSurnameDoe.add(janeDoe);
+        emptyDisplayList = TestUtil.createList();
+        
+        listWithEveryone = TestUtil.createList(johnDoe, janeDoe, davidGrant);
+        listWithSurnameDoe = TestUtil.createList(johnDoe, janeDoe);
     }
 
     @Test
