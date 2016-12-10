@@ -114,7 +114,7 @@ public class DeleteCommandTest {
     }
     
     /**
-     * Given an invalid index, checks that the command reports the invalidity of such index.
+     * Asserts that the index is not valid for the given display list.
      */
     public void assertDeletionFailsDueToInvalidIndex(int invalidVisibleIndex, AddressBook addressBook, 
                                                                         List<ReadOnlyPerson> displayList) {
@@ -126,8 +126,8 @@ public class DeleteCommandTest {
     }
     
     /**
-     * Selects a person in the display list using the index, that does not exist in the address book, and 
-     * checks that the command reports that the person is not in the address book.
+     * Asserts that the person at the specified index cannot be deleted, because that person
+     * is not in the address book.
      */
     public void assertDeletionFailsDueToNoSuchPerson(int visibleIndex, AddressBook addressBook, 
                                                                        List<ReadOnlyPerson> displayList) {
@@ -139,8 +139,7 @@ public class DeleteCommandTest {
     }
     
     /**
-     * Selects a person in the display list using the index, and tries to delete it. The expected outcome
-     * of the command should be successful.
+     * Asserts that the person at the specified index can be successfully deleted.
      * 
      * The addressBook passed in will not be modified (no side effects).
      * 
