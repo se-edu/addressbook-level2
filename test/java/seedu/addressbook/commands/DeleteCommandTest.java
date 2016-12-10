@@ -95,7 +95,7 @@ public class DeleteCommandTest {
      * @param displayList to get the selected person to delete, must not be null
      */
     public DeleteCommand createDeleteCommand(int targetVisibleIndex, AddressBook addressBook,
-            List<ReadOnlyPerson> displayList) {
+                                                                     List<ReadOnlyPerson> displayList) {
 
         assert addressBook != null;
         assert displayList != null;
@@ -110,7 +110,7 @@ public class DeleteCommandTest {
      * Executes the command, and checks that the execution was what we had expected.
      */
     public void assertCommandBehaviour(DeleteCommand deleteCommand, String expectedMessage,
-            AddressBook expectedAddressBook, AddressBook actualAddressBook) {
+                                       AddressBook expectedAddressBook, AddressBook actualAddressBook) {
 
         CommandResult result = deleteCommand.execute();
 
@@ -125,7 +125,7 @@ public class DeleteCommandTest {
      * @param displayList to get the selected person to delete, must not be null
      */
     public void assertDeletionFailsDueToInvalidIndex(int invalidVisibleIndex, AddressBook addressBook, 
-            List<ReadOnlyPerson> displayList) {
+                                                                        List<ReadOnlyPerson> displayList) {
 
         assert addressBook != null;
         assert displayList != null;
@@ -141,7 +141,7 @@ public class DeleteCommandTest {
      * checks that the command reports that the person is not in the address book.
      */
     public void assertDeletionFailsDueToNoSuchPerson(int visibleIndex, AddressBook addressBook, 
-            List<ReadOnlyPerson> displayList) {
+                                                                       List<ReadOnlyPerson> displayList) {
 
         assert addressBook != null;
         assert displayList != null;
@@ -161,7 +161,7 @@ public class DeleteCommandTest {
      * @throws PersonNotFoundException if the selected person is not in the address book
      */
     public void assertDeletionSuccessful(int targetVisibleIndex, AddressBook addressBook, 
-            List<ReadOnlyPerson> displayList) throws PersonNotFoundException {
+                                         List<ReadOnlyPerson> displayList) throws PersonNotFoundException {
 
         assert addressBook != null;
         assert displayList != null;
