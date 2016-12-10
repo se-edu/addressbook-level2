@@ -35,4 +35,11 @@ public class TestUtil {
         
         return list;
     }
+    
+    /**
+     * Creates an exact copy of the original address book.
+     */
+    public static AddressBook clone(AddressBook addressBook) {
+        return new AddressBook(addressBook.getAllPersons(), addressBook.getAllTags());
+    }
 }

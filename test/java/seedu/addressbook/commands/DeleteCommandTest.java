@@ -83,8 +83,7 @@ public class DeleteCommandTest {
         final int targetPersonIndex = 0;
 
         ReadOnlyPerson targetPerson = listWithSurnameDoe.get(targetPersonIndex);
-        AddressBook expectedAddressBook = new AddressBook(addressBook.getAllPersons(),
-                addressBook.getAllTags());
+        AddressBook expectedAddressBook = TestUtil.clone(addressBook);
         expectedAddressBook.removePerson(targetPerson);
 
         DeleteCommand command = createDeleteCommand(targetPersonIndex + TextUi.DISPLAYED_INDEX_OFFSET,
