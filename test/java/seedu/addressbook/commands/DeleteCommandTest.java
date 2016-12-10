@@ -53,10 +53,7 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_emptyAddressBook_returnsPersonNotFoundMessage() {
-        DeleteCommand command = createDeleteCommand(1, emptyAddressBook, listWithEveryone);
-
-        assertCommandBehaviour(command, Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK, emptyAddressBook,
-                emptyAddressBook);
+        assertNoSuchPerson(1, emptyAddressBook, listWithEveryone);
     }
 
     @Test
@@ -71,9 +68,7 @@ public class DeleteCommandTest {
                 new Email("notin@book.com", false), new Address("156D Grant Road", false), new UniqueTagList());
         List<ReadOnlyPerson> listWithPersonNotInAddressBook = TestUtil.createList(notInAddressBookPerson);
 
-        DeleteCommand command = createDeleteCommand(1, addressBook, listWithPersonNotInAddressBook);
-
-        assertCommandBehaviour(command, Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK, addressBook, addressBook);
+        assertNoSuchPerson(1, addressBook, listWithPersonNotInAddressBook);
     }
 
     @Test
@@ -146,6 +141,21 @@ public class DeleteCommandTest {
         DeleteCommand command = createDeleteCommand(invalidIndex, addressBook, displayList);
 
         assertCommandBehaviour(command, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, addressBook,
+                addressBook);
+    }
+    
+    /**
+     * Selects a person in the display list using the index, that does not exist in the address book, and 
+     * checks that the command reports that the person is not in the address book.
+     */
+    public void assertNoSuchPerson(int index, AddressBook addressBook, List<ReadOnlyPerson> displayList) {
+
+        assert addressBook != null;
+        assert displayList != null;
+        
+        DeleteCommand command = createDeleteCommand(index, addressBook, displayList);
+
+        assertCommandBehaviour(command, Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK, addressBook,
                 addressBook);
     }
 }
