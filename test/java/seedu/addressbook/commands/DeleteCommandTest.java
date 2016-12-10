@@ -91,14 +91,9 @@ public class DeleteCommandTest {
      * Creates a new delete command.
      * 
      * @param targetVisibleIndex of the person that we want to delete
-     * @param addressBook to perform the delete operation on, must not be null
-     * @param displayList to get the selected person to delete, must not be null
      */
     public DeleteCommand createDeleteCommand(int targetVisibleIndex, AddressBook addressBook,
                                                                      List<ReadOnlyPerson> displayList) {
-
-        assert addressBook != null;
-        assert displayList != null;
 
         DeleteCommand command = new DeleteCommand(targetVisibleIndex);
         command.setData(addressBook, displayList);
@@ -120,15 +115,9 @@ public class DeleteCommandTest {
     
     /**
      * Given an invalid index, checks that the command reports the invalidity of such index.
-     * 
-     * @param addressBook to perform the delete operation on, must not be null
-     * @param displayList to get the selected person to delete, must not be null
      */
     public void assertDeletionFailsDueToInvalidIndex(int invalidVisibleIndex, AddressBook addressBook, 
                                                                         List<ReadOnlyPerson> displayList) {
-
-        assert addressBook != null;
-        assert displayList != null;
         
         DeleteCommand command = createDeleteCommand(invalidVisibleIndex, addressBook, displayList);
 
@@ -142,9 +131,6 @@ public class DeleteCommandTest {
      */
     public void assertDeletionFailsDueToNoSuchPerson(int visibleIndex, AddressBook addressBook, 
                                                                        List<ReadOnlyPerson> displayList) {
-
-        assert addressBook != null;
-        assert displayList != null;
         
         DeleteCommand command = createDeleteCommand(visibleIndex, addressBook, displayList);
 
@@ -162,9 +148,6 @@ public class DeleteCommandTest {
      */
     public void assertDeletionSuccessful(int targetVisibleIndex, AddressBook addressBook, 
                                          List<ReadOnlyPerson> displayList) throws PersonNotFoundException {
-
-        assert addressBook != null;
-        assert displayList != null;
 
         ReadOnlyPerson targetPerson = displayList.get(targetVisibleIndex - TextUi.DISPLAYED_INDEX_OFFSET);
         AddressBook expectedAddressBook = TestUtil.clone(addressBook);
