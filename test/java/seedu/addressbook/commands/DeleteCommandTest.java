@@ -53,12 +53,12 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_emptyAddressBook_returnsPersonNotFoundMessage() {
-        assertNoSuchPerson(1, emptyAddressBook, listWithEveryone);
+        assertDeletionFailsDueToNoSuchPerson(1, emptyAddressBook, listWithEveryone);
     }
 
     @Test
     public void execute_noPersonDisplayed_returnsInvalidIndexMessage() {
-        assertInvalidIndex(1, addressBook, emptyDisplayList);
+        assertDeletionFailsDueToInvalidIndex(1, addressBook, emptyDisplayList);
     }
 
     @Test
@@ -68,23 +68,23 @@ public class DeleteCommandTest {
                 new Email("notin@book.com", false), new Address("156D Grant Road", false), new UniqueTagList());
         List<ReadOnlyPerson> listWithPersonNotInAddressBook = TestUtil.createList(notInAddressBookPerson);
 
-        assertNoSuchPerson(1, addressBook, listWithPersonNotInAddressBook);
+        assertDeletionFailsDueToNoSuchPerson(1, addressBook, listWithPersonNotInAddressBook);
     }
 
     @Test
     public void execute_invalidIndex_returnsInvalidIndexMessage() {
-        assertInvalidIndex(0, addressBook, listWithEveryone);
-        assertInvalidIndex(-1, addressBook, listWithEveryone);
-        assertInvalidIndex(listWithEveryone.size() + 1, addressBook, listWithEveryone);
+        assertDeletionFailsDueToInvalidIndex(0, addressBook, listWithEveryone);
+        assertDeletionFailsDueToInvalidIndex(-1, addressBook, listWithEveryone);
+        assertDeletionFailsDueToInvalidIndex(listWithEveryone.size() + 1, addressBook, listWithEveryone);
     }
 
     @Test
     public void execute_validIndex_personIsDeleted() throws PersonNotFoundException {
-        assertDeleteSuccessful(1, addressBook, listWithSurnameDoe);
-        assertDeleteSuccessful(listWithSurnameDoe.size(), addressBook, listWithSurnameDoe);
+        assertDeletionSuccessful(1, addressBook, listWithSurnameDoe);
+        assertDeletionSuccessful(listWithSurnameDoe.size(), addressBook, listWithSurnameDoe);
         
         int middleIndex = (listWithSurnameDoe.size() / 2) + 1;
-        assertDeleteSuccessful(middleIndex, addressBook, listWithSurnameDoe);
+        assertDeletionSuccessful(middleIndex, addressBook, listWithSurnameDoe);
     }
 
     /**
@@ -124,7 +124,7 @@ public class DeleteCommandTest {
      * @param addressBook to perform the delete operation on, must not be null
      * @param displayList to get the selected person to delete, must not be null
      */
-    public void assertInvalidIndex(int invalidVisibleIndex, AddressBook addressBook, 
+    public void assertDeletionFailsDueToInvalidIndex(int invalidVisibleIndex, AddressBook addressBook, 
             List<ReadOnlyPerson> displayList) {
 
         assert addressBook != null;
@@ -140,7 +140,7 @@ public class DeleteCommandTest {
      * Selects a person in the display list using the index, that does not exist in the address book, and 
      * checks that the command reports that the person is not in the address book.
      */
-    public void assertNoSuchPerson(int visibleIndex, AddressBook addressBook, 
+    public void assertDeletionFailsDueToNoSuchPerson(int visibleIndex, AddressBook addressBook, 
             List<ReadOnlyPerson> displayList) {
 
         assert addressBook != null;
@@ -160,7 +160,7 @@ public class DeleteCommandTest {
      * 
      * @throws PersonNotFoundException if the selected person is not in the address book
      */
-    public void assertDeleteSuccessful(int targetVisibleIndex, AddressBook addressBook, 
+    public void assertDeletionSuccessful(int targetVisibleIndex, AddressBook addressBook, 
             List<ReadOnlyPerson> displayList) throws PersonNotFoundException {
 
         assert addressBook != null;
