@@ -38,17 +38,19 @@ public class DeleteCommandTest {
                 new Email("john@doe.com", false), new Address("395C Ben Road", false), new UniqueTagList());
         Person janeDoe = new Person(new Name("Jane Doe"), new Phone("91234567", false),
                 new Email("jane@doe.com", false), new Address("33G Ohm Road", false), new UniqueTagList());
+        Person samDoe = new Person(new Name("Sam Doe"), new Phone("63345566", false),
+                new Email("sam@doe.com", false), new Address("55G Abc Road", false), new UniqueTagList());
         Person davidGrant = new Person(new Name("David Grant"), new Phone("61121122", false),
                 new Email("david@grant.com", false), new Address("44H Define Road", false),
                 new UniqueTagList());
 
         emptyAddressBook = TestUtil.createAddressBook();
-        addressBook = TestUtil.createAddressBook(johnDoe, janeDoe, davidGrant);
+        addressBook = TestUtil.createAddressBook(johnDoe, janeDoe, davidGrant, samDoe);
 
         emptyDisplayList = TestUtil.createList();
         
-        listWithEveryone = TestUtil.createList(johnDoe, janeDoe, davidGrant);
-        listWithSurnameDoe = TestUtil.createList(johnDoe, janeDoe);
+        listWithEveryone = TestUtil.createList(johnDoe, janeDoe, davidGrant, samDoe);
+        listWithSurnameDoe = TestUtil.createList(johnDoe, janeDoe, samDoe);
     }
 
     @Test
@@ -80,18 +82,11 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validIndex_personIsDeleted() throws PersonNotFoundException {
-        final int targetPersonIndex = 0;
-
-        ReadOnlyPerson targetPerson = listWithSurnameDoe.get(targetPersonIndex);
-        AddressBook expectedAddressBook = TestUtil.clone(addressBook);
-        expectedAddressBook.removePerson(targetPerson);
-
-        DeleteCommand command = createDeleteCommand(targetPersonIndex + TextUi.DISPLAYED_INDEX_OFFSET,
-                addressBook, listWithSurnameDoe);
-
-        assertCommandBehaviour(command,
-                String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, targetPerson), expectedAddressBook,
-                addressBook);
+        assertDeleteSuccessful(1, addressBook, listWithSurnameDoe);
+        assertDeleteSuccessful(listWithSurnameDoe.size(), addressBook, listWithSurnameDoe);
+        
+        int middleIndex = (listWithSurnameDoe.size() / 2) + 1;
+        assertDeleteSuccessful(middleIndex, addressBook, listWithSurnameDoe);
     }
 
     /**
@@ -156,5 +151,32 @@ public class DeleteCommandTest {
 
         assertCommandBehaviour(command, Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK, addressBook,
                 addressBook);
+    }
+    
+    /**
+     * Selects a person in the display list using the index, and tries to delete it. The expected outcome
+     * of the command should be successful.
+     * 
+     * The addressBook passed in will not be modified (no side effects).
+     * 
+     * @throws PersonNotFoundException if the selected person is not in the address book
+     */
+    public void assertDeleteSuccessful(int targetVisibleIndex, AddressBook addressBook, 
+            List<ReadOnlyPerson> displayList) throws PersonNotFoundException {
+
+        assert addressBook != null;
+        assert displayList != null;
+
+        ReadOnlyPerson targetPerson = displayList.get(targetVisibleIndex - TextUi.DISPLAYED_INDEX_OFFSET);
+        AddressBook expectedAddressBook = TestUtil.clone(addressBook);
+        expectedAddressBook.removePerson(targetPerson);
+
+        AddressBook actualAddressBook = TestUtil.clone(addressBook);
+        
+        DeleteCommand command = createDeleteCommand(targetVisibleIndex, actualAddressBook, displayList);
+
+        assertCommandBehaviour(command,
+                String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, targetPerson), 
+                expectedAddressBook, actualAddressBook);
     }
 }
