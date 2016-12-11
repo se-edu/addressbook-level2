@@ -35,7 +35,7 @@ public class TypicalPersons {
         }
     }
 
-    public void loadAddressBookWithSampleData(AddressBook ab) {
+    private void loadAddressBookWithSampleData(AddressBook ab) {
         try {
             for (Person t : getTypicalPersons()) {
                 ab.addPerson(new Person(t));

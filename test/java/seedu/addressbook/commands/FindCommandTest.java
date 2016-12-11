@@ -9,9 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.exception.IllegalValueException;
@@ -24,9 +22,6 @@ import seedu.addressbook.util.TypicalPersons;
  * Test class for the Find Command
  */
 public class FindCommandTest {
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
     private AddressBook addressBook;
     private AddressBook unmutatedAddressBook;
@@ -44,7 +39,7 @@ public class FindCommandTest {
         
         FindCommand command = createFindCommand(keywordsWithMatchingCase);
         assertCommandBehavior(command, Command.getMessageForPersonListShownSummary(expected),
-                unmutatedAddressBook, addressBook);
+                                                                    unmutatedAddressBook, addressBook);
     }
     
     @Test
@@ -55,32 +50,30 @@ public class FindCommandTest {
         
         FindCommand command = createFindCommand(keywordsWithNonMatchingCase);
         assertCommandBehavior(command, Command.getMessageForPersonListShownSummary(expected),
-                unmutatedAddressBook, addressBook);
+                                                                    unmutatedAddressBook, addressBook);
     }
     
-    
-
     @Test
-    public void execute_find_matchesOnlyFullWordsInNames() throws IllegalValueException {
+    public void execute_partialKeyword_notMatched() throws IllegalValueException {
         List<ReadOnlyPerson> expected = Collections.emptyList();
         
         String[] keywords = {"my"};
         
         FindCommand command = createFindCommand(keywords);
         assertCommandBehavior(command, Command.getMessageForPersonListShownSummary(expected),
-                unmutatedAddressBook, addressBook);
+                                                                    unmutatedAddressBook, addressBook);
     }
 
     @Test
-    public void execute_find_multipleMatches() throws IllegalValueException {
+    public void execute_multipleKeywords_matched() throws IllegalValueException {
         List<ReadOnlyPerson> expected = TestUtil.createList(new Person(TypicalPersons.amy),
-                new Person(TypicalPersons.bill));
+                                                            new Person(TypicalPersons.bill));
         
         String[] keywords = {"Amy", "Bill"};
         
         FindCommand command = createFindCommand(keywords);
         assertCommandBehavior(command, Command.getMessageForPersonListShownSummary(expected),
-                unmutatedAddressBook, addressBook);
+                                                                    unmutatedAddressBook, addressBook);
     }
 
     /**
@@ -95,12 +88,6 @@ public class FindCommandTest {
         assertEquals(expectedAddressBook, actualAddressBook);
     }
 
-    
-    /**
-     * Creates a new find command.
-     * 
-     * @param keywords to search for in the names' of persons
-     */
     private FindCommand createFindCommand(String[] keywords) {
         final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
         FindCommand command = new FindCommand(keywordSet);
