@@ -1,6 +1,7 @@
 package seedu.addressbook.util;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import seedu.addressbook.data.AddressBook;
@@ -42,5 +43,31 @@ public class TestUtil {
      */
     public static AddressBook clone(AddressBook addressBook) {
         return new AddressBook(addressBook.getAllPersons(), addressBook.getAllTags());
+    }
+    
+    /**
+     * Returns true iff the underlying container behind an iterable is empty.
+     */
+    public static <T> boolean isEmpty(Iterable<T> it) {
+        return !it.iterator().hasNext();
+    }
+
+    /**
+     * Returns true iff the underlying containers behind two iterables are equal.
+     */
+    public static <T> boolean isEqual(Iterable<T> firstIterable, Iterable<T> secondIterable) {
+        Iterator<T> currentPtr0 = firstIterable.iterator();
+        Iterator<T> currentPtr1 = secondIterable.iterator();
+
+        while (currentPtr0.hasNext()) {
+            T val0 = currentPtr0.next();
+            T val1 = currentPtr1.next();
+
+            if (!val0.equals(val1)) {
+                return false;
+            }
+        }
+
+        return !currentPtr1.hasNext();
     }
 }
