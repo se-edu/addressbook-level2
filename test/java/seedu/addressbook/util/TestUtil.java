@@ -3,10 +3,12 @@ package seedu.addressbook.util;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.function.BiPredicate;
 
 import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.exception.IllegalValueException;
@@ -58,29 +60,51 @@ public class TestUtil {
     }
     
     /**
-     * Returns true iff the underlying container behind an iterable is empty.
+     * Returns true iff every corresponding pair of elements in two iterables
+     * satisfy a given predicate.
      */
-    public static <T> boolean isEmpty(Iterable<T> it) {
-        return !it.iterator().hasNext();
-    }
-
-    /**
-     * Returns true iff the underlying containers behind two iterables are equal.
-     */
-    public static <T> boolean isEqual(Iterable<T> firstIterable, Iterable<T> secondIterable) {
+    public static <T> boolean satisfiesPredicate(BiPredicate<T,T> predicate,
+                                                 Iterable<T> firstIterable,
+                                                 Iterable<T> secondIterable) {
         Iterator<T> currentPtr0 = firstIterable.iterator();
         Iterator<T> currentPtr1 = secondIterable.iterator();
 
-        while (currentPtr0.hasNext()) {
+        while (currentPtr0.hasNext() && currentPtr1.hasNext()) {
             T val0 = currentPtr0.next();
             T val1 = currentPtr1.next();
 
-            if (!val0.equals(val1)) {
+            if (!predicate.test(val0, val1)) {
                 return false;
             }
         }
 
-        return !currentPtr1.hasNext();
+        // If any of the two iterables still have elements, then they have different sizes.
+        return !(currentPtr0.hasNext() || currentPtr1.hasNext());
+    }
+
+    /**
+     * Returns true iff every pair of corresponding elements two iterables are (deeply) identical.
+     */
+    public static <T> boolean isIdentical(Iterable<T> firstIterable, Iterable<T> secondIterable) {
+        return satisfiesPredicate((T x, T y) -> x.equals(y),
+                                  firstIterable,
+                                  secondIterable);
+    }
+    
+    /**
+     * Returns true iff every pair of corresponding elements in the two iterables are equal (as references).
+     */
+    public static <T> boolean isEqual(Iterable<T> firstIterable, Iterable<T> secondIterable) {
+        return satisfiesPredicate((T x, T y) -> x == y,
+                                  firstIterable,
+                                  secondIterable);
+    }
+    
+    /**
+     * Returns true iff the underlying container behind an iterable is empty.
+     */
+    public static <T> boolean isEmpty(Iterable<T> it) {
+        return !it.iterator().hasNext();
     }
     
     public static Person generateTestPerson() {
@@ -94,7 +118,7 @@ public class TestUtil {
     }
     
     public static UniqueTagList getAllTags(UniquePersonList persons) {
-        Set<Tag> combinedTagList = new TreeSet<Tag>();
+        Set<Tag> combinedTagList = new HashSet<Tag>();
         
         for (Person person : persons) {
             for (Tag tag : person.getTags()) {
