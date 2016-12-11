@@ -21,7 +21,8 @@ public interface ReadOnlyPerson {
     UniqueTagList getTags();
 
     /**
-     * Returns true if the values inside this object is same as those of the other (Note: interfaces cannot override .equals)
+     * Returns true if the values inside this object is same as those of the other
+     * (Note: interfaces cannot override .equals)
      */
     default boolean isSameStateAs(ReadOnlyPerson other) {
         return other == this // short circuit if same object

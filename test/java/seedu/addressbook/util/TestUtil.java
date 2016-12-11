@@ -23,27 +23,27 @@ public class TestUtil {
      */
     public static AddressBook createAddressBook(Person... persons) throws DuplicatePersonException {
         AddressBook addressBook = new AddressBook();
-        
+
         for (Person person : persons) {
             addressBook.addPerson(person);
         }
-        
+
         return addressBook;
     }
-    
+
     /**
      * Creates a list of persons.
      */
     public static List<ReadOnlyPerson> createList(Person...persons) {
         List<ReadOnlyPerson> list = new ArrayList<ReadOnlyPerson>();
-        
+
         for (Person person : persons) {
             list.add(person);
         }
-        
+
         return list;
     }
-    
+
     /**
      * Creates a copy of the original address book with the same entries
      * of Persons and Tags. The Persons and Tags are not cloned.

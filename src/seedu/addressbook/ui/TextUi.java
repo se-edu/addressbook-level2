@@ -38,7 +38,7 @@ public class TextUi {
     private final Scanner in;
     private final PrintStream out;
 
-    public TextUi(){
+    public TextUi() {
         this(System.in, System.out);
     }
 
@@ -122,7 +122,7 @@ public class TextUi {
      */
     public void showResultToUser(CommandResult result) {
         final Optional<List<? extends ReadOnlyPerson>> resultPersons = result.getRelevantPersons();
-        if(resultPersons.isPresent()) {
+        if (resultPersons.isPresent()) {
             showPersonListView(resultPersons.get());
         }
         showToUser(result.feedbackToUser, DIVIDER);
