@@ -18,7 +18,7 @@ import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.data.person.Person;
 import seedu.addressbook.data.person.ReadOnlyPerson;
 import seedu.addressbook.util.TestUtil;
-import seedu.addressbook.util.TypicalTestPersons;
+import seedu.addressbook.util.TypicalPersons;
 
 /**
  * Test class for the Find Command
@@ -32,52 +32,55 @@ public class FindCommandTest {
     private AddressBook unmutatedAddressBook;
 
     @Before public void setUp() {
-        this.addressBook = new TypicalTestPersons().getTypicalAddressBook();
-        this.unmutatedAddressBook = new TypicalTestPersons().getTypicalAddressBook();
+        this.addressBook = new TypicalPersons().getTypicalAddressBook();
+        this.unmutatedAddressBook = new TypicalPersons().getTypicalAddressBook();
     }
 
     @Test
-    public void execute_find_matchesOnlyIfCaseSensitive() throws IllegalValueException {
-        List<ReadOnlyPerson> expectedOne = TestUtil.createList(new Person(TypicalTestPersons.amy));
-        List<ReadOnlyPerson> expectedZero = Collections.emptyList();
-
-        String[] caseSensitiveKeywords = {"Amy"};
-        String[] caseInsensitiveKeywords = {"aMy"};
+    public void execute_sameWordSameCase_matched() throws IllegalValueException {
+        List<ReadOnlyPerson> expected = TestUtil.createList(new Person(TypicalPersons.amy));
         
-        FindCommand command = createFindCommand(caseSensitiveKeywords);
-        assertCommandBehavior(command, Command.getMessageForPersonListShownSummary(expectedOne),
-                unmutatedAddressBook, addressBook);
+        String[] keywordsWithMatchingCase = {"Amy"};
         
-        command = createFindCommand(caseInsensitiveKeywords);
-        assertCommandBehavior(command, Command.getMessageForPersonListShownSummary(expectedZero),
+        FindCommand command = createFindCommand(keywordsWithMatchingCase);
+        assertCommandBehavior(command, Command.getMessageForPersonListShownSummary(expected),
                 unmutatedAddressBook, addressBook);
-
-
     }
+    
+    @Test
+    public void execute_sameWordDifferentCase_notMatched() throws IllegalValueException {
+        List<ReadOnlyPerson> expected = Collections.emptyList();
+        
+        String[] keywordsWithNonMatchingCase = {"aMy"};
+        
+        FindCommand command = createFindCommand(keywordsWithNonMatchingCase);
+        assertCommandBehavior(command, Command.getMessageForPersonListShownSummary(expected),
+                unmutatedAddressBook, addressBook);
+    }
+    
+    
 
     @Test
     public void execute_find_matchesOnlyFullWordsInNames() throws IllegalValueException {
-        List<ReadOnlyPerson> expectedZero = Collections.emptyList();
+        List<ReadOnlyPerson> expected = Collections.emptyList();
         
         String[] keywords = {"my"};
         
         FindCommand command = createFindCommand(keywords);
-        assertCommandBehavior(command, Command.getMessageForPersonListShownSummary(expectedZero),
+        assertCommandBehavior(command, Command.getMessageForPersonListShownSummary(expected),
                 unmutatedAddressBook, addressBook);
-
     }
 
     @Test
     public void execute_find_multipleMatches() throws IllegalValueException {
-        List<ReadOnlyPerson> expectedTwo = TestUtil.createList(new Person(TypicalTestPersons.amy),
-                new Person(TypicalTestPersons.bill));
+        List<ReadOnlyPerson> expected = TestUtil.createList(new Person(TypicalPersons.amy),
+                new Person(TypicalPersons.bill));
         
         String[] keywords = {"Amy", "Bill"};
         
         FindCommand command = createFindCommand(keywords);
-        assertCommandBehavior(command, Command.getMessageForPersonListShownSummary(expectedTwo),
+        assertCommandBehavior(command, Command.getMessageForPersonListShownSummary(expected),
                 unmutatedAddressBook, addressBook);
-
     }
 
     /**
