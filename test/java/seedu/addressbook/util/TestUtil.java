@@ -5,6 +5,8 @@ import static org.junit.Assert.fail;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.exception.IllegalValueException;
@@ -14,7 +16,9 @@ import seedu.addressbook.data.person.Name;
 import seedu.addressbook.data.person.Person;
 import seedu.addressbook.data.person.Phone;
 import seedu.addressbook.data.person.ReadOnlyPerson;
+import seedu.addressbook.data.person.UniquePersonList;
 import seedu.addressbook.data.person.UniquePersonList.DuplicatePersonException;
+import seedu.addressbook.data.tag.Tag;
 import seedu.addressbook.data.tag.UniqueTagList;
 
 public class TestUtil {
@@ -87,5 +91,17 @@ public class TestUtil {
             fail("test person data should be valid by definition");
             return null;
         }
+    }
+    
+    public static UniqueTagList getAllTags(UniquePersonList persons) {
+        Set<Tag> combinedTagList = new TreeSet<Tag>();
+        
+        for (Person person : persons) {
+            for (Tag tag : person.getTags()) {
+                combinedTagList.add(tag);
+            }
+        }
+        
+        return new UniqueTagList(combinedTagList);
     }
 }
