@@ -1,6 +1,11 @@
 package seedu.addressbook.commands;
 
+import static seedu.addressbook.ui.TextUi.DISPLAYED_INDEX_OFFSET;
+
+import java.util.List;
+
 import seedu.addressbook.common.Messages;
+import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.person.ReadOnlyPerson;
 
 
@@ -8,7 +13,10 @@ import seedu.addressbook.data.person.ReadOnlyPerson;
  * Shows details of the person identified using the last displayed index.
  * Private contact details are not shown.
  */
-public class ViewCommand extends Command {
+public class ViewCommand {
+    protected AddressBook addressBook;
+    protected List<? extends ReadOnlyPerson> relevantPersons;
+    private int targetIndex = -1;
 
     public static final String COMMAND_WORD = "view";
 
@@ -21,11 +29,12 @@ public class ViewCommand extends Command {
 
 
     public ViewCommand(int targetVisibleIndex) {
-        super(targetVisibleIndex);
+        this.setTargetIndex(targetVisibleIndex);
     }
 
-
-    @Override
+    /**
+     * Executes the command and returns the result.
+     */
     public CommandResult execute() {
         try {
             final ReadOnlyPerson target = getTargetPerson();
@@ -36,6 +45,31 @@ public class ViewCommand extends Command {
         } catch (IndexOutOfBoundsException ie) {
             return new CommandResult(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
+    }
+
+    /**
+     * Supplies the data the command will operate on.
+     */
+    public void setData(AddressBook addressBook, List<? extends ReadOnlyPerson> relevantPersons) {
+        this.addressBook = addressBook;
+        this.relevantPersons = relevantPersons;
+    }
+
+    /**
+     * Extracts the the target person in the last shown list from the given arguments.
+     *
+     * @throws IndexOutOfBoundsException if the target index is out of bounds of the last viewed listing
+     */
+    protected ReadOnlyPerson getTargetPerson() throws IndexOutOfBoundsException {
+        return relevantPersons.get(getTargetIndex() - DISPLAYED_INDEX_OFFSET);
+    }
+
+    public int getTargetIndex() {
+        return targetIndex;
+    }
+
+    public void setTargetIndex(int targetIndex) {
+        this.targetIndex = targetIndex;
     }
 
 }
