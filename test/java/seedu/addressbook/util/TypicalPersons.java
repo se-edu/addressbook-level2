@@ -8,11 +8,11 @@ import seedu.addressbook.data.person.UniquePersonList;
 /**
  * Class to generate typical test persons
  */
-public class TypicalTestPersons {
+public class TypicalPersons {
 
     public static Person amy, bill, candy, donald, grace;
 
-    public TypicalTestPersons() {
+    public TypicalPersons() {
         try {
             amy = new PersonBuilder().withName("Amy Buck").withPublicPhone("91119111")
                     .withPublicEmail("ab@gmail.com").withPublicAddress("1 Clementi Road").build();
