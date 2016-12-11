@@ -7,8 +7,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
-import java.util.function.BiPredicate;
 
 import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.exception.IllegalValueException;
@@ -58,14 +56,11 @@ public class TestUtil {
     public static AddressBook clone(AddressBook addressBook) {
         return new AddressBook(addressBook.getAllPersons(), addressBook.getAllTags());
     }
-    
+
     /**
-     * Returns true iff every corresponding pair of elements in two iterables
-     * satisfy a given predicate.
+     * Returns true iff every pair of corresponding elements two iterables are (deeply) identical.
      */
-    public static <T> boolean satisfiesPredicate(BiPredicate<T,T> predicate,
-                                                 Iterable<T> firstIterable,
-                                                 Iterable<T> secondIterable) {
+    public static <T> boolean isIdentical(Iterable<T> firstIterable, Iterable<T> secondIterable) {
         Iterator<T> currentPtr0 = firstIterable.iterator();
         Iterator<T> currentPtr1 = secondIterable.iterator();
 
@@ -73,31 +68,13 @@ public class TestUtil {
             T val0 = currentPtr0.next();
             T val1 = currentPtr1.next();
 
-            if (!predicate.test(val0, val1)) {
+            if (!val0.equals(val1)) {
                 return false;
             }
         }
 
         // If any of the two iterables still have elements, then they have different sizes.
         return !(currentPtr0.hasNext() || currentPtr1.hasNext());
-    }
-
-    /**
-     * Returns true iff every pair of corresponding elements two iterables are (deeply) identical.
-     */
-    public static <T> boolean isIdentical(Iterable<T> firstIterable, Iterable<T> secondIterable) {
-        return satisfiesPredicate((T x, T y) -> x.equals(y),
-                                  firstIterable,
-                                  secondIterable);
-    }
-    
-    /**
-     * Returns true iff every pair of corresponding elements in the two iterables are equal (as references).
-     */
-    public static <T> boolean isEqual(Iterable<T> firstIterable, Iterable<T> secondIterable) {
-        return satisfiesPredicate((T x, T y) -> x == y,
-                                  firstIterable,
-                                  secondIterable);
     }
     
     /**
