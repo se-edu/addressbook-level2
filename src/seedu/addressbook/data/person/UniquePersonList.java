@@ -124,7 +124,7 @@ public class UniquePersonList implements Iterable<Person> {
     public Iterator<Person> iterator() {
         return internalList.iterator();
     }
-    
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
