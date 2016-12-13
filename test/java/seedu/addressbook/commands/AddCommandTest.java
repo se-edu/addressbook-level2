@@ -49,7 +49,7 @@ public class AddCommandTest {
     @Test
     public void addCommand_invalidEmail_throwsException() {
         final String[] invalidEmails = { "", " ", "def.com", "@", "@def", "@def.com", "abc@",
-                "@invalid@email", "invalid@email!", "!invalid@email" };
+                                         "@invalid@email", "invalid@email!", "!invalid@email" };
         for (String email : invalidEmails) {
             assertConstructingInvalidAddCmdThrowsException(Name.EXAMPLE, Phone.EXAMPLE, false, email, false,
                     Address.EXAMPLE, false, EMPTY_STRING_LIST);
@@ -68,7 +68,7 @@ public class AddCommandTest {
     @Test
     public void addCommand_invalidTags_throwsException() {
         final String[][] invalidTags = { { "" }, { " " }, { "'" }, { "[]\\[;]" }, { "validTag", "" },
-                { "", " " } };
+                                         { "", " " } };
         for (String[] tags : invalidTags) {
             Set<String> tagsToAdd = new HashSet<>(Arrays.asList(tags));
             assertConstructingInvalidAddCmdThrowsException(Name.EXAMPLE, Phone.EXAMPLE, true, Email.EXAMPLE,
