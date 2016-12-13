@@ -99,7 +99,7 @@ public class Main {
 
     /**
      * Executes the command and returns the result.
-     * 
+     *
      * @param command user command
      * @return result of the command
      */

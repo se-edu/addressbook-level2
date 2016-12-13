@@ -134,8 +134,8 @@ public class UniqueTagList implements Iterable<Tag> {
      * @throws TagNotFoundException if no such Tag could be found in the list.
      */
     public void remove(Tag toRemove) throws TagNotFoundException {
-        final boolean TagFoundAndDeleted = internalList.remove(toRemove);
-        if (!TagFoundAndDeleted) {
+        final boolean tagFoundAndDeleted = internalList.remove(toRemove);
+        if (!tagFoundAndDeleted) {
             throw new TagNotFoundException();
         }
     }

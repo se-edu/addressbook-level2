@@ -46,13 +46,13 @@ public class ParserTest {
     /*
      * Tests for 0-argument commands =======================================================================
      */
-    
+
     @Test
     public void parse_helpCommand_parsedCorrectly() {
         final String input = "help";
         parseAndAssertCommandType(input, HelpCommand.class);
     }
-    
+
     @Test
     public void parse_clearCommand_parsedCorrectly() {
         final String input = "clear";
@@ -74,7 +74,7 @@ public class ParserTest {
     /*
      * Tests for ingle index argument commands ===============================================================
      */
-    
+
     @Test
     public void parse_deleteCommandNoArgs_errorMessage() {
         final String[] inputs = { "delete", "delete " };
@@ -88,7 +88,7 @@ public class ParserTest {
         final String resultMessage = MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
         parseAndAssertIncorrectWithMessage(resultMessage, inputs);
     }
-    
+
     @Test
     public void parse_deleteCommandNumericArg_indexParsedCorrectly() {
         final int testIndex = 1;
@@ -110,7 +110,7 @@ public class ParserTest {
         final String resultMessage = MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
         parseAndAssertIncorrectWithMessage(resultMessage, inputs);
     }
-    
+
     @Test
     public void parse_viewCommandNumericArg_indexParsedCorrectly() {
         final int testIndex = 2;
@@ -150,8 +150,8 @@ public class ParserTest {
     public void parse_findCommandInvalidArgs_errorMessage() {
         // no keywords
         final String[] inputs = {
-                "find",
-                "find "
+            "find",
+            "find "
         };
         final String resultMessage =
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
@@ -184,19 +184,19 @@ public class ParserTest {
     /*
      * Tests for add person command ==============================================================================
      */
-    
+
     @Test
     public void parse_addCommandInvalidArgs_errorMessage() {
         final String[] inputs = {
-                "add",
-                "add ",
-                "add wrong args format",
-                // no phone prefix
-                String.format("add $s $s e/$s a/$s", Name.EXAMPLE, Phone.EXAMPLE, Email.EXAMPLE, Address.EXAMPLE),
-                // no email prefix
-                String.format("add $s p/$s $s a/$s", Name.EXAMPLE, Phone.EXAMPLE, Email.EXAMPLE, Address.EXAMPLE),
-                // no address prefix
-                String.format("add $s p/$s e/$s $s", Name.EXAMPLE, Phone.EXAMPLE, Email.EXAMPLE, Address.EXAMPLE)
+            "add",
+            "add ",
+            "add wrong args format",
+            // no phone prefix
+            String.format("add $s $s e/$s a/$s", Name.EXAMPLE, Phone.EXAMPLE, Email.EXAMPLE, Address.EXAMPLE),
+            // no email prefix
+            String.format("add $s p/$s $s a/$s", Name.EXAMPLE, Phone.EXAMPLE, Email.EXAMPLE, Address.EXAMPLE),
+            // no address prefix
+            String.format("add $s p/$s e/$s $s", Name.EXAMPLE, Phone.EXAMPLE, Email.EXAMPLE, Address.EXAMPLE)
         };
         final String resultMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         parseAndAssertIncorrectWithMessage(resultMessage, inputs);
