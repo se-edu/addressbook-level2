@@ -59,6 +59,7 @@ public class TestUtil {
 
     /**
      * Returns true iff every pair of corresponding elements two iterables are (deeply) identical.
+     * In other words, the two containers must have the same elements, in the same order.
      */
     public static <T> boolean isIdentical(Iterable<T> firstIterable, Iterable<T> secondIterable) {
         Iterator<T> currentPtr0 = firstIterable.iterator();
