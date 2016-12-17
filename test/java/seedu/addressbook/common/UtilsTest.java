@@ -46,9 +46,9 @@ public class UtilsTest {
 
     @Test
     public void elementsAreUnique() throws Exception {
-        tag1 = buildTag("tag1");
-        tag1Copy = buildTag("tag1");
-        tag2 = buildTag("tag2");
+        tag1 = new Tag("tag1");
+        tag1Copy = new Tag("tag1");
+        tag2 = new Tag("tag2");
 
         // empty list
         assertAreUnique();
@@ -64,10 +64,6 @@ public class UtilsTest {
         // some identical objects
         assertNotUnique("abc", "", "abc");
         assertNotUnique(tag1, tag1Copy, tag2);
-    }
-    
-    private static Tag buildTag(String tagName) throws Exception {
-        return new Tag(tagName);
     }
 
     private void assertAreUnique(Object... objects) {
