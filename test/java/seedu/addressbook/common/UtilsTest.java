@@ -18,13 +18,6 @@ public class UtilsTest {
     private static Tag tag1Copy;
     private static Tag tag2;
 
-    @Before
-    public void setup() {
-        tag1 = buildTag("tag1");
-        tag1Copy = buildTag("tag1");
-        tag2 = buildTag("tag2");
-    }
-
     private static Tag buildTag(String tagName) {
         try {
             return new Tag(tagName);
@@ -61,6 +54,10 @@ public class UtilsTest {
 
     @Test
     public void elementsAreUnique() {
+        tag1 = buildTag("tag1");
+        tag1Copy = buildTag("tag1");
+        tag2 = buildTag("tag2");
+        
         //empty list
         assertAreUnique();
 
