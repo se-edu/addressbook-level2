@@ -13,10 +13,7 @@ import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.data.tag.Tag;
 
 public class UtilsTest {
-    private static Object nullObject = null;
-    private static Tag tag1;
-    private static Tag tag1Copy;
-    private static Tag tag2;
+    private static final Object NULL_OBJECT = null;
 
     @Test
     public void isAnyNull() {
@@ -32,29 +29,30 @@ public class UtilsTest {
         assertFalse(Utils.isAnyNull(emptyList));
 
         // non empty list with just one at the beginning
-        assertTrue(Utils.isAnyNull(nullObject, "", new Object()));
-        assertTrue(Utils.isAnyNull(nullObject, emptyList, nonEmptyList));
+        assertTrue(Utils.isAnyNull(NULL_OBJECT));
+        assertTrue(Utils.isAnyNull(NULL_OBJECT, "", new Object()));
+        assertTrue(Utils.isAnyNull(NULL_OBJECT, emptyList, nonEmptyList));
 
         // non empty list with nulls in the middle
-        assertTrue(Utils.isAnyNull(nonEmptyList, nullObject, nullObject, emptyList));
-        assertTrue(Utils.isAnyNull("", nullObject, new Object()));
+        assertTrue(Utils.isAnyNull(nonEmptyList, NULL_OBJECT, NULL_OBJECT, emptyList));
+        assertTrue(Utils.isAnyNull("", NULL_OBJECT, new Object()));
 
         // non empty list with one null as the last element
-        assertTrue(Utils.isAnyNull("", new Object(), nullObject));
-        assertTrue(Utils.isAnyNull(nonEmptyList, emptyList, nullObject));
+        assertTrue(Utils.isAnyNull("", new Object(), NULL_OBJECT));
+        assertTrue(Utils.isAnyNull(nonEmptyList, emptyList, NULL_OBJECT));
     }
 
     @Test
     public void elementsAreUnique() throws Exception {
-        tag1 = new Tag("tag1");
-        tag1Copy = new Tag("tag1");
-        tag2 = new Tag("tag2");
+        Tag tag1 = new Tag("tag1"),
+            tag1Copy = new Tag("tag1"),
+            tag2 = new Tag("tag2");
 
         // empty list
         assertAreUnique();
 
         // only one object
-        assertAreUnique(nullObject);
+        assertAreUnique(NULL_OBJECT);
         assertAreUnique(tag1);
 
         // all objects unique
@@ -62,8 +60,10 @@ public class UtilsTest {
         assertAreUnique(tag1, tag2);
 
         // some identical objects
-        assertNotUnique("abc", "", "abc");
-        assertNotUnique(tag1, tag1Copy, tag2);
+        assertNotUnique("abc", "", "abc", "ABC");
+        assertNotUnique(NULL_OBJECT, tag1, tag1Copy, tag2);
+        assertNotUnique("", "abc", "a", "abc");
+        assertNotUnique(NULL_OBJECT, "a", "b", NULL_OBJECT);
     }
 
     private void assertAreUnique(Object... objects) {
