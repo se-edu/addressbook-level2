@@ -4,6 +4,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -23,7 +24,7 @@ public class UtilsTest {
         tag1Copy = buildTag("tag1");
         tag2 = buildTag("tag2");
     }
-    
+
     private static Tag buildTag(String tagName) {
         try {
             return new Tag(tagName);
@@ -34,10 +35,10 @@ public class UtilsTest {
 
     @Test
     public void isAnyNull_noNulls_returnsFalse() {
-        //empty list
+        // empty list
         assertFalse(Utils.isAnyNull());
-        
-        //Any non-empty list
+
+        // Any non-empty list
         ArrayList<String> emptyList = new ArrayList<String>();
         assertFalse(Utils.isAnyNull(new Object(), new Object()));
         assertFalse(Utils.isAnyNull(emptyList));
@@ -48,107 +49,46 @@ public class UtilsTest {
         ArrayList<String> emptyList = new ArrayList<String>();
         ArrayList<String> nonEmptyList = new ArrayList<String>();
         nonEmptyList.add("A string");
-        
-        //non empty list with just one at the beginning
+
+        // non empty list with just one at the beginning
         assertTrue(Utils.isAnyNull(nullObject, "", new Object()));
         assertTrue(Utils.isAnyNull(nullObject, emptyList, nonEmptyList));
-        
-        //non empty list with nulls in the middle
+
+        // non empty list with nulls in the middle
         assertTrue(Utils.isAnyNull(nonEmptyList, nullObject, nullObject, emptyList));
         assertTrue(Utils.isAnyNull("", nullObject, new Object()));
-        
-        //non empty list with one null as the last element
+
+        // non empty list with one null as the last element
         assertTrue(Utils.isAnyNull("", new Object(), nullObject));
         assertTrue(Utils.isAnyNull(nonEmptyList, emptyList, nullObject));
     }
 
     @Test
-    public void elementsAreUnique_emptyCollection_returnsTrue() {
-        assertTrue(Utils.elementsAreUnique(new ArrayList<>()));
+    public void elementsAreUnique() {
+        //empty list
+        assertAreUnique();
+
+        //only one object
+        assertAreUnique(nullObject);
+        assertAreUnique(tag1);
+
+        //all objects unique
+        assertAreUnique("abc", "ab", "a");
+        assertAreUnique(tag1, tag2);
+        
+        //some identical objects
+        assertNotUnique("abc", "", "abc");
+        assertNotUnique(tag1, tag1Copy, tag2);
     }
 
-    @Test
-    public void elementsAreUnique_singleElement_returnsTrue() {
-        assertTrue(Utils.elementsAreUnique(new ArrayList<Object>() {
-            {
-                add(nullObject);
-            }
-        }));
-        assertTrue(Utils.elementsAreUnique(new ArrayList<String>() {
-            {
-                add("String1");
-            }
-        }));
-        assertTrue(Utils.elementsAreUnique(new ArrayList<Tag>() {
-            {
-                add(tag1);
-            }
-        }));
+    void assertAreUnique(Object... objects) {
+        ArrayList<Object> list = new ArrayList<Object>(Arrays.asList(objects));
+        assertTrue(Utils.elementsAreUnique(list));
     }
 
-    @Test
-    public void elementsAreUnique_sameElements_returnsFalse() {
-        assertFalse(Utils.elementsAreUnique(new ArrayList<String>() {
-            {
-                add("abc");
-                add("abc");
-            }
-        }));
-        assertFalse(Utils.elementsAreUnique(new ArrayList<Tag>() {
-            {
-                add(tag1);
-                add(tag1);
-                add(tag1);
-            }
-        }));
-    }
-
-    @Test
-    public void elementsAreUnique_allNulls_returnsFalse() {
-        assertFalse(Utils.elementsAreUnique(new ArrayList<Object>() {
-            {
-                add(nullObject);
-                add(nullObject);
-            }
-        }));
-    }
-
-    @Test
-    public void elementsAreUnique_someIdenticalTags_returnsFalse() {
-        // To compare tags only
-        assertFalse(Utils.elementsAreUnique(new ArrayList<Tag>() {
-            {
-                add(tag1);
-                add(tag2);
-                add(tag2);
-            }
-        }));
-
-        assertFalse(Utils.elementsAreUnique(new ArrayList<Tag>() {
-            {
-                add(tag1);
-                add(tag1Copy);
-                add(tag2);
-            }
-        }));
-    }
-
-    @Test
-    public void elementsAreUnique_differentTags_returnsTrue() {
-        assertTrue(Utils.elementsAreUnique(new ArrayList<Tag>() {
-            {
-                add(tag1);
-                add(tag2);
-            }
-        }));
-
-        assertTrue(Utils.elementsAreUnique(new ArrayList<Tag>() {
-            {
-                add(tag1);
-                add(tag2);
-                add(null);
-            }
-        }));
+    void assertNotUnique(Object... objects) {
+        ArrayList<Object> list = new ArrayList<Object>(Arrays.asList(objects));
+        assertFalse(Utils.elementsAreUnique(list));
     }
 
 }
