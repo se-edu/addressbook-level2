@@ -34,21 +34,17 @@ public class UtilsTest {
     }
 
     @Test
-    public void isAnyNull_noNulls_returnsFalse() {
+    public void isAnyNull() {
+        ArrayList<String> emptyList = new ArrayList<String>();
+        ArrayList<String> nonEmptyList = new ArrayList<String>();
+        nonEmptyList.add("A string");
+
         // empty list
         assertFalse(Utils.isAnyNull());
 
         // Any non-empty list
-        ArrayList<String> emptyList = new ArrayList<String>();
         assertFalse(Utils.isAnyNull(new Object(), new Object()));
         assertFalse(Utils.isAnyNull(emptyList));
-    }
-
-    @Test
-    public void isAnyNull_someNulls_returnsTrue() {
-        ArrayList<String> emptyList = new ArrayList<String>();
-        ArrayList<String> nonEmptyList = new ArrayList<String>();
-        nonEmptyList.add("A string");
 
         // non empty list with just one at the beginning
         assertTrue(Utils.isAnyNull(nullObject, "", new Object()));
@@ -75,20 +71,19 @@ public class UtilsTest {
         //all objects unique
         assertAreUnique("abc", "ab", "a");
         assertAreUnique(tag1, tag2);
-        
+
         //some identical objects
         assertNotUnique("abc", "", "abc");
         assertNotUnique(tag1, tag1Copy, tag2);
     }
 
-    void assertAreUnique(Object... objects) {
+    private void assertAreUnique(Object... objects) {
         ArrayList<Object> list = new ArrayList<Object>(Arrays.asList(objects));
         assertTrue(Utils.elementsAreUnique(list));
     }
 
-    void assertNotUnique(Object... objects) {
+    private void assertNotUnique(Object... objects) {
         ArrayList<Object> list = new ArrayList<Object>(Arrays.asList(objects));
         assertFalse(Utils.elementsAreUnique(list));
     }
-
 }
