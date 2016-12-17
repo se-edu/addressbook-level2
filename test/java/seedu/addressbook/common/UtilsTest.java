@@ -18,14 +18,6 @@ public class UtilsTest {
     private static Tag tag1Copy;
     private static Tag tag2;
 
-    private static Tag buildTag(String tagName) {
-        try {
-            return new Tag(tagName);
-        } catch (IllegalValueException e) {
-            throw new RuntimeException("test tag name should be valid", e);
-        }
-    }
-
     @Test
     public void isAnyNull() {
         ArrayList<String> emptyList = new ArrayList<String>();
@@ -53,25 +45,29 @@ public class UtilsTest {
     }
 
     @Test
-    public void elementsAreUnique() {
+    public void elementsAreUnique() throws Exception {
         tag1 = buildTag("tag1");
         tag1Copy = buildTag("tag1");
         tag2 = buildTag("tag2");
-        
-        //empty list
+
+        // empty list
         assertAreUnique();
 
-        //only one object
+        // only one object
         assertAreUnique(nullObject);
         assertAreUnique(tag1);
 
-        //all objects unique
+        // all objects unique
         assertAreUnique("abc", "ab", "a");
         assertAreUnique(tag1, tag2);
 
-        //some identical objects
+        // some identical objects
         assertNotUnique("abc", "", "abc");
         assertNotUnique(tag1, tag1Copy, tag2);
+    }
+    
+    private static Tag buildTag(String tagName) throws Exception {
+        return new Tag(tagName);
     }
 
     private void assertAreUnique(Object... objects) {
