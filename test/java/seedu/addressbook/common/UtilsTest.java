@@ -33,46 +33,33 @@ public class UtilsTest {
     }
 
     @Test
-    public void isAnyNull_emptyInput_returnsFalse() {
+    public void isAnyNull_noNulls_returnsFalse() {
+        //empty list
         assertFalse(Utils.isAnyNull());
+        
+        //Any non-empty list
+        ArrayList<String> emptyList = new ArrayList<String>();
+        assertFalse(Utils.isAnyNull(new Object(), new Object()));
+        assertFalse(Utils.isAnyNull(emptyList));
     }
 
-    @Test
-    public void isAnyNull_allNulls_returnsTrue() {
-        assertTrue(Utils.isAnyNull(nullObject));
-        assertTrue(Utils.isAnyNull(nullObject, nullObject));
-        assertTrue(Utils.isAnyNull(nullObject, nullObject, nullObject));
-    }
-    
     @Test
     public void isAnyNull_someNulls_returnsTrue() {
-        assertTrue(Utils.isAnyNull(nullObject, ""));
-        assertTrue(Utils.isAnyNull("", nullObject, ""));
-        assertTrue(Utils.isAnyNull(new Object(), nullObject));
-        
         ArrayList<String> emptyList = new ArrayList<String>();
         ArrayList<String> nonEmptyList = new ArrayList<String>();
         nonEmptyList.add("A string");
-
-        assertTrue(Utils.isAnyNull(emptyList, nonEmptyList, nullObject));
-        assertTrue(Utils.isAnyNull(nonEmptyList, nonEmptyList, nullObject, nullObject));
-    }
-
-    @Test
-    public void isAnyNull_noNulls_returnsFalse() {
-        assertFalse(Utils.isAnyNull(new Object()));
-        assertFalse(Utils.isAnyNull(new Object(), new Object()));
         
-        assertFalse(Utils.isAnyNull(""));
+        //non empty list with just one at the beginning
+        assertTrue(Utils.isAnyNull(nullObject, "", new Object()));
+        assertTrue(Utils.isAnyNull(nullObject, emptyList, nonEmptyList));
         
-        ArrayList<String> emptyList = new ArrayList<String>();
-        assertFalse(Utils.isAnyNull(emptyList));
+        //non empty list with nulls in the middle
+        assertTrue(Utils.isAnyNull(nonEmptyList, nullObject, nullObject, emptyList));
+        assertTrue(Utils.isAnyNull("", nullObject, new Object()));
         
-        ArrayList<String> nonEmptyList = new ArrayList<String>();
-        nonEmptyList.add("A string");
-
-        assertFalse(Utils.isAnyNull(nonEmptyList, emptyList));
-        assertFalse(Utils.isAnyNull(emptyList, "A string"));
+        //non empty list with one null as the last element
+        assertTrue(Utils.isAnyNull("", new Object(), nullObject));
+        assertTrue(Utils.isAnyNull(nonEmptyList, emptyList, nullObject));
     }
 
     @Test
