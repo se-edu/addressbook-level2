@@ -85,6 +85,19 @@ public class TestUtil {
         return !it.iterator().hasNext();
     }
     
+    /**
+     * Returns the number of elements in the container behind an iterable.
+     */
+    public static <T> int getSize(Iterable<T> it) {
+        int numberOfElementsSeen = 0;
+        
+        for (T elem : it) {
+            numberOfElementsSeen++;
+        }
+        
+        return numberOfElementsSeen;
+    }
+    
     public static Person generateTestPerson() {
         try {
             return new Person(new Name(Name.EXAMPLE), new Phone(Phone.EXAMPLE, false),
