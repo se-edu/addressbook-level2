@@ -24,6 +24,7 @@ import seedu.addressbook.data.tag.UniqueTagList.TagNotFoundException;
 import static seedu.addressbook.util.TestUtil.isEmpty;
 import static seedu.addressbook.util.TestUtil.isIdentical;
 import static seedu.addressbook.util.TestUtil.getAllTags;
+import static seedu.addressbook.util.TestUtil.getSize;
 
 public class AddressBookTest {
     private Tag tagPrizeWinner;
@@ -31,15 +32,18 @@ public class AddressBookTest {
     private Tag tagMathematician;
     private Tag tagEconomist;
 
-    private Person aliceBetsy; // has tagMathematician
-    private Person bobChaplin; // has tagMathematician
-    private Person charlieDouglas; // has tagScientist
-    private Person davidElliot; // has tagEconomist, tagPrizeWinner
+    private Person aliceBetsy;
+    private Person bobChaplin;
+    private Person charlieDouglas;
+    private Person davidElliot;
+    
+    private AddressBook defaultAddressBook;
+    private AddressBook emptyAddressBook;
 
     /**
      * Initialises an AddressBook with some default values.
      * 
-     * Contains personAliceBetsy and personBobChaplin.
+     * Contains aliceBetsy and bobChaplin.
      * Contains used tag tagMathematician and unused tag tagScientist.
      * Does not contain tagEconomist.
      */
@@ -91,6 +95,9 @@ public class AddressBookTest {
                                     new Email("douglas@nuscomputing.com", false),
                                     new Address("11 Arts Link", false),
                                     new UniqueTagList(tagEconomist, tagPrizeWinner));
+        
+        defaultAddressBook = createDefaultAddressBook();
+        emptyAddressBook = new AddressBook();
     }
     
     @Rule
@@ -100,32 +107,28 @@ public class AddressBookTest {
     public void syncTagsWithMasterList_emptyInitialTagList_addsAllIntoTagList() throws Exception {
         UniqueTagList emptyTagList = new UniqueTagList();
         UniquePersonList persons = new UniquePersonList(bobChaplin, charlieDouglas);
-
-        AddressBook addressBook = new AddressBook(persons, emptyTagList);
-
-        assertTrue(addressBook.containsTag(tagMathematician));
-        assertTrue(addressBook.containsTag(tagScientist));
-        assertFalse(addressBook.containsTag(tagEconomist));
+        AddressBook addressBookUnderTest = new AddressBook(persons, emptyTagList);
+        
+        UniqueTagList expectedTagList = new UniqueTagList(tagMathematician, tagScientist);
+        
+        assertTrue(isIdentical(expectedTagList, addressBookUnderTest.getAllTags()));
 
     }
 
     @Test
     public void syncTagsWithMasterList_someTagsNotInTagList_addsMissingTagsIntoTagList() throws Exception {
-        AddressBook addressBook = createDefaultAddressBook();
-
-        assertFalse(addressBook.containsTag(tagEconomist));
-        assertFalse(addressBook.containsTag(tagPrizeWinner));
-        addressBook.addPerson(davidElliot);
-        assertTrue(addressBook.containsTag(tagEconomist));
-        assertTrue(addressBook.containsTag(tagPrizeWinner));
+        assertFalse(defaultAddressBook.containsTag(tagEconomist));
+        assertFalse(defaultAddressBook.containsTag(tagPrizeWinner));
+        defaultAddressBook.addPerson(davidElliot);
+        assertTrue(defaultAddressBook.containsTag(tagEconomist));
+        assertTrue(defaultAddressBook.containsTag(tagPrizeWinner));
     }
 
     @Test
     public void syncTagsWithMasterList_defaultAddressBook_tagEqualityPropertyHolds() throws Exception {
-        AddressBook addressBook = createDefaultAddressBook();
-        UniquePersonList persons = addressBook.getAllPersons();
+        UniquePersonList persons = defaultAddressBook.getAllPersons();
         UniqueTagList tagsInPersons = getAllTags(persons);
-        UniqueTagList tags = addressBook.getAllTags();
+        UniqueTagList tags = defaultAddressBook.getAllTags();
         
         // all person tags are equal to some tag in the master list
         boolean allPersonTagsValid = true;
@@ -143,121 +146,134 @@ public class AddressBookTest {
 
     @Test
     public void addPerson_personNotInList_addsNormally() throws Exception {
-        AddressBook addressBook = createDefaultAddressBook();
-        
         // add person whose tag is in tag list
-        assertFalse(addressBook.containsPerson(charlieDouglas));
-        addressBook.addPerson(charlieDouglas);
-        assertTrue(addressBook.containsPerson(charlieDouglas));
+        assertFalse(defaultAddressBook.containsPerson(charlieDouglas));
+        defaultAddressBook.addPerson(charlieDouglas);
+        assertTrue(defaultAddressBook.containsPerson(charlieDouglas));
         
         // add person whose tag is not in tag list
-        assertFalse(addressBook.containsPerson(davidElliot));
-        addressBook.addPerson(davidElliot);
-        assertTrue(addressBook.containsPerson(davidElliot));
+        assertFalse(defaultAddressBook.containsPerson(davidElliot));
+        defaultAddressBook.addPerson(davidElliot);
+        assertTrue(defaultAddressBook.containsPerson(davidElliot));
     }
 
     @Test
     public void addPerson_personAlreadyInList_throwsDuplicatePersonException() throws Exception {
-        AddressBook addressBook = createDefaultAddressBook();
-        
         thrown.expect(DuplicatePersonException.class);
-        addressBook.addPerson(aliceBetsy);
+        defaultAddressBook.addPerson(aliceBetsy);
+    }
+    
+    @Test
+    public void addPerson_personAlreadyInListButHasTagNotInList_tagNotAdded() throws Exception {
+        aliceBetsy.setTags(new UniqueTagList(tagMathematician, tagPrizeWinner));
+        
+        try {
+            defaultAddressBook.addPerson(aliceBetsy);
+        } catch (DuplicatePersonException e) {
+            assertFalse(defaultAddressBook.containsTag(tagPrizeWinner));
+            return;
+        }
+        
+        fail("Expected DuplicatePersonException was not caught.");
     }
 
     @Test
     public void addTag_tagNotInList_addsNormally() throws Exception {
-        AddressBook addressBook = createDefaultAddressBook();
-
-        assertFalse(addressBook.containsTag(tagEconomist));
-        addressBook.addTag(tagEconomist);
-        assertTrue(addressBook.containsTag(tagEconomist));
+        assertFalse(defaultAddressBook.containsTag(tagEconomist));
+        defaultAddressBook.addTag(tagEconomist);
+        assertTrue(defaultAddressBook.containsTag(tagEconomist));
     }
 
     @Test
     public void addTag_tagAlreadyInList_throwsDuplicateTagException() throws Exception {
-        AddressBook addressBook = createDefaultAddressBook();
-        
         thrown.expect(DuplicateTagException.class);
-        addressBook.addTag(tagMathematician);
+        defaultAddressBook.addTag(tagMathematician);
     }
 
     @Test
     public void containsPerson() throws Exception {
-        AddressBook addressBook = createDefaultAddressBook();
-
-        assertTrue(addressBook.containsPerson(aliceBetsy));
-        assertFalse(addressBook.containsPerson(charlieDouglas));
+        UniquePersonList personsWhoShouldBeIn = new UniquePersonList(aliceBetsy, bobChaplin);
+        UniquePersonList personsWhoShouldNotBeIn = new UniquePersonList(charlieDouglas, davidElliot);
+        
+        for (Person personWhoShouldBeIn : personsWhoShouldBeIn) {
+            assertTrue(defaultAddressBook.containsPerson(personWhoShouldBeIn));
+        }
+        for (Person personWhoShouldNotBeIn : personsWhoShouldNotBeIn) {
+            assertFalse(defaultAddressBook.containsPerson(personWhoShouldNotBeIn));
+        }
+        
+        UniquePersonList allPersons = new UniquePersonList(aliceBetsy, bobChaplin, charlieDouglas, davidElliot);
+        
+        for (Person person : allPersons) {
+            assertFalse(emptyAddressBook.containsPerson(person));
+        }
     }
 
     @Test
     public void containsTag() throws Exception {
-        AddressBook addressBook = createDefaultAddressBook();
+        assertTrue(defaultAddressBook.containsTag(tagScientist));
+        assertFalse(defaultAddressBook.containsTag(tagEconomist));
         
-        assertTrue(addressBook.containsTag(tagScientist));
-        assertFalse(addressBook.containsTag(tagEconomist));
+        UniqueTagList allTags = new UniqueTagList(tagPrizeWinner, tagScientist, tagMathematician, tagEconomist);
+        
+        for (Tag tag : allTags) {
+            assertFalse(emptyAddressBook.containsTag(tag));
+        }
     }
 
     @Test
     public void removePerson_personExists_removesNormally() throws Exception {
-        AddressBook addressBook = createDefaultAddressBook();
-
-        assertTrue(addressBook.containsPerson(aliceBetsy));
-        addressBook.removePerson(aliceBetsy);
-        assertFalse(addressBook.containsPerson(aliceBetsy));
-        assertTrue(addressBook.containsPerson(bobChaplin));
+        int numberOfPersonsBeforeRemoval = getSize(defaultAddressBook.getAllPersons());
+        defaultAddressBook.removePerson(aliceBetsy);
+        int numberOfPersonsAfterRemoval = getSize(defaultAddressBook.getAllPersons());
+        
+        assertFalse(defaultAddressBook.containsPerson(aliceBetsy));
+        assertTrue(numberOfPersonsBeforeRemoval == numberOfPersonsAfterRemoval + 1);
+        
     }
 
     @Test
     public void removePerson_personNotExists_throwsPersonNotFoundException() throws Exception {
-        AddressBook addressBook = createDefaultAddressBook();
-        
         thrown.expect(PersonNotFoundException.class);
-        addressBook.removePerson(charlieDouglas);
+        defaultAddressBook.removePerson(charlieDouglas);
     }
 
     @Test
     public void removeTag_tagExistsAndUnused_removesNormally() throws Exception {
-        AddressBook addressBook = createDefaultAddressBook();
-
-        assertTrue(addressBook.containsTag(tagScientist));
-        addressBook.removeTag(tagScientist);
-        assertFalse(addressBook.containsTag(tagScientist));
+        int numberOfTagsBeforeRemoval = getSize(defaultAddressBook.getAllTags());
+        defaultAddressBook.removeTag(tagScientist);
+        int numberOfTagsAfterRemoval = getSize(defaultAddressBook.getAllTags());
+        
+        assertFalse(defaultAddressBook.containsTag(tagScientist));
+        assertTrue(numberOfTagsBeforeRemoval == numberOfTagsAfterRemoval + 1);
 
     }
 
     @Test
     public void removeTag_tagExistsAndUsed_throwsConstraintViolationException() throws Exception {
-        AddressBook addressBook = createDefaultAddressBook();
-        
         thrown.expect(ConstraintViolationException.class);
-        addressBook.removeTag(tagMathematician);
+        defaultAddressBook.removeTag(tagMathematician);
     }
 
     @Test
     public void removeTag_tagNotExists_throwsTagNotFoundException() throws Exception {
-        AddressBook addressBook = createDefaultAddressBook();
-        
         thrown.expect(TagNotFoundException.class);
-        addressBook.removeTag(tagEconomist);
+        defaultAddressBook.removeTag(tagEconomist);
     }
 
     @Test
     public void clear_emptiesTagListAndPersonList() throws Exception {
-        AddressBook addressBook = createDefaultAddressBook();
-
-        addressBook.clear();
+        defaultAddressBook.clear();
 
         // If the iterator does not have next element at start, then underlying
         // container has no elements.
-        assertTrue(isEmpty(addressBook.getAllPersons()));
-        assertTrue(isEmpty(addressBook.getAllTags()));
+        assertTrue(isEmpty(defaultAddressBook.getAllPersons()));
+        assertTrue(isEmpty(defaultAddressBook.getAllTags()));
     }
 
     @Test
     public void getAllPersons_returnsAllPersons() throws Exception {
-        AddressBook addressBook = createDefaultAddressBook();
-
-        UniquePersonList allPersons = addressBook.getAllPersons();
+        UniquePersonList allPersons = defaultAddressBook.getAllPersons();
         UniquePersonList personsToCheck = new UniquePersonList(aliceBetsy, bobChaplin);
 
         assertTrue(isIdentical(allPersons, personsToCheck));
@@ -265,9 +281,7 @@ public class AddressBookTest {
 
     @Test
     public void getAllTags_returnsAllTags() throws Exception {
-        AddressBook addressBook = createDefaultAddressBook();
-
-        UniqueTagList allTags = addressBook.getAllTags();
+        UniqueTagList allTags = defaultAddressBook.getAllTags();
         UniqueTagList tagsToCheck = new UniqueTagList(tagMathematician, tagScientist);
 
         assertTrue(isIdentical(allTags, tagsToCheck));
