@@ -23,7 +23,6 @@ import seedu.addressbook.data.tag.UniqueTagList.TagNotFoundException;
 
 import static seedu.addressbook.util.TestUtil.isEmpty;
 import static seedu.addressbook.util.TestUtil.isIdentical;
-import static seedu.addressbook.util.TestUtil.getAllTags;
 import static seedu.addressbook.util.TestUtil.getSize;
 
 public class AddressBookTest {
@@ -63,6 +62,20 @@ public class AddressBookTest {
         }
 
         return addressBook;
+    }
+    
+    /**
+     * Checks if the AddressBook guarantee that every Tag in every Person in an AddressBook
+     * is equal (as references) to some tag in the master list of that AddressBook.
+     */
+    private boolean checkTagEqualityProperty(Tag tagToCheck, AddressBook addressBook) {
+        boolean tagEqualityPropertyHolds = false;
+        
+        for (Tag tag : addressBook.getAllTags()) {
+            tagEqualityPropertyHolds = tagEqualityPropertyHolds || (tag == tagToCheck);
+        }
+        
+        return tagEqualityPropertyHolds;
     }
     
     @Before
@@ -105,13 +118,14 @@ public class AddressBookTest {
 
     @Test
     public void syncTagsWithMasterList_emptyInitialTagList_addsAllIntoTagList() throws Exception {
-        UniqueTagList emptyTagList = new UniqueTagList();
-        UniquePersonList persons = new UniquePersonList(bobChaplin, charlieDouglas);
-        AddressBook addressBookUnderTest = new AddressBook(persons, emptyTagList);
+        emptyAddressBook.addPerson(bobChaplin);
+        emptyAddressBook.addPerson(charlieDouglas);
         
         UniqueTagList expectedTagList = new UniqueTagList(tagMathematician, tagScientist);
+        assertTrue(isIdentical(expectedTagList, emptyAddressBook.getAllTags()));
         
-        assertTrue(isIdentical(expectedTagList, addressBookUnderTest.getAllTags()));
+        assertTrue(checkTagEqualityProperty(tagMathematician, emptyAddressBook));
+        assertTrue(checkTagEqualityProperty(tagScientist, emptyAddressBook));
 
     }
 
@@ -122,26 +136,9 @@ public class AddressBookTest {
         defaultAddressBook.addPerson(davidElliot);
         assertTrue(defaultAddressBook.containsTag(tagEconomist));
         assertTrue(defaultAddressBook.containsTag(tagPrizeWinner));
-    }
-
-    @Test
-    public void syncTagsWithMasterList_defaultAddressBook_tagEqualityPropertyHolds() throws Exception {
-        UniquePersonList persons = defaultAddressBook.getAllPersons();
-        UniqueTagList tagsInPersons = getAllTags(persons);
-        UniqueTagList tags = defaultAddressBook.getAllTags();
         
-        // all person tags are equal to some tag in the master list
-        boolean allPersonTagsValid = true;
-        for (Tag personTag : tagsInPersons) {
-            // particular person tag is equal to some tag in the master list
-            boolean personTagValid = false;
-            for (Tag tag : tags) {
-                personTagValid = personTagValid || (personTag == tag);
-            }
-            allPersonTagsValid = allPersonTagsValid && personTagValid;
-        }
-        
-        assertTrue(allPersonTagsValid);
+        assertTrue(checkTagEqualityProperty(tagEconomist, defaultAddressBook));
+        assertTrue(checkTagEqualityProperty(tagPrizeWinner, defaultAddressBook));
     }
 
     @Test
@@ -150,11 +147,14 @@ public class AddressBookTest {
         assertFalse(defaultAddressBook.containsPerson(charlieDouglas));
         defaultAddressBook.addPerson(charlieDouglas);
         assertTrue(defaultAddressBook.containsPerson(charlieDouglas));
+        assertTrue(checkTagEqualityProperty(tagScientist, defaultAddressBook));
         
         // add person whose tag is not in tag list
         assertFalse(defaultAddressBook.containsPerson(davidElliot));
         defaultAddressBook.addPerson(davidElliot);
         assertTrue(defaultAddressBook.containsPerson(davidElliot));
+        assertTrue(checkTagEqualityProperty(tagEconomist, defaultAddressBook));
+        assertTrue(checkTagEqualityProperty(tagPrizeWinner, defaultAddressBook));
     }
 
     @Test
