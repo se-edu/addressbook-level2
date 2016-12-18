@@ -3,21 +3,18 @@ package seedu.addressbook.common;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.Test;
-
-import seedu.addressbook.data.tag.Tag;
 
 public class UtilsTest {
     private static final Object NULL_OBJECT = null;
 
     @Test
     public void isAnyNull() {
-        ArrayList<String> emptyList = new ArrayList<String>();
-        ArrayList<String> nonEmptyList = new ArrayList<String>();
-        nonEmptyList.add("A string");
+        List<Object> emptyList = createList();
+        List<Object> nonEmptyList = createList("A string");
 
         // empty list
         assertFalse(Utils.isAnyNull());
@@ -27,8 +24,8 @@ public class UtilsTest {
         assertFalse(Utils.isAnyNull(emptyList));
 
         // non empty list with just one at the beginning
-        assertTrue(Utils.isAnyNull(NULL_OBJECT));
-        assertTrue(Utils.isAnyNull(NULL_OBJECT, "", new Object()));
+ //       assertTrue(Utils.isAnyNull(null));
+        assertTrue(Utils.isAnyNull(NULL_OBJECT, "", new Object(), null));
         assertTrue(Utils.isAnyNull(NULL_OBJECT, emptyList, nonEmptyList));
 
         // non empty list with nulls in the middle
@@ -42,35 +39,33 @@ public class UtilsTest {
 
     @Test
     public void elementsAreUnique() throws Exception {
-        Tag tag1 = new Tag("tag1"),
-            tag1Copy = new Tag("tag1"),
-            tag2 = new Tag("tag2");
-
         // empty list
         assertAreUnique();
 
         // only one object
         assertAreUnique(NULL_OBJECT);
-        assertAreUnique(tag1);
+        assertAreUnique(1);
 
         // all objects unique
         assertAreUnique("abc", "ab", "a");
-        assertAreUnique(tag1, tag2);
+        assertAreUnique(1, 2);
 
         // some identical objects
         assertNotUnique("abc", "", "abc", "ABC");
-        assertNotUnique(NULL_OBJECT, tag1, tag1Copy, tag2);
+        assertNotUnique(NULL_OBJECT, 1, new Integer(1));
         assertNotUnique("", "abc", "a", "abc");
         assertNotUnique(NULL_OBJECT, "a", "b", NULL_OBJECT);
     }
 
     private void assertAreUnique(Object... objects) {
-        ArrayList<Object> list = new ArrayList<Object>(Arrays.asList(objects));
-        assertTrue(Utils.elementsAreUnique(list));
+        assertTrue(Utils.elementsAreUnique(createList(objects)));
     }
 
     private void assertNotUnique(Object... objects) {
-        ArrayList<Object> list = new ArrayList<Object>(Arrays.asList(objects));
-        assertFalse(Utils.elementsAreUnique(list));
+        assertFalse(Utils.elementsAreUnique(createList(objects)));
+    }
+    
+    private List<Object> createList(Object... objects) {
+        return Arrays.asList(objects);
     }
 }
