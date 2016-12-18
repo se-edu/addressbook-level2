@@ -37,8 +37,8 @@ public class TypicalPersons {
 
     private void loadAddressBookWithSampleData(AddressBook ab) {
         try {
-            for (Person t : getTypicalPersons()) {
-                ab.addPerson(new Person(t));
+            for (Person p : getTypicalPersons()) {
+                ab.addPerson(new Person(p));
             }
         } catch (UniquePersonList.DuplicatePersonException e) {
             assert false : "not possible";
