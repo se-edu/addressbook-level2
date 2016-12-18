@@ -73,7 +73,6 @@ public class FindCommandTest {
      * Executes the find command, and checks that the execution was what we had expected.
      */
     private void assertCommandBehavior(Command command, List<ReadOnlyPerson> expectedPersonList, AddressBook actualAddressBook) {
-        
         CommandResult result = command.execute();
         AddressBook expectedAddressBook = new TypicalPersons().getTypicalAddressBook();
         
