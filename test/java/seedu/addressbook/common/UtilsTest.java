@@ -33,7 +33,7 @@ public class UtilsTest {
         assertTrue(Utils.isAnyNull(new Object(), new Object(), null));
         
         // test whether method peeks into the elements inside container
-        List<Object> nullList = createList((Object)null);
+        List<Object> nullList = Arrays.asList((Object) null);
         assertFalse(Utils.isAnyNull(nullList));
     }
 
@@ -60,14 +60,10 @@ public class UtilsTest {
     }
 
     private void assertAreUnique(Object... objects) {
-        assertTrue(Utils.elementsAreUnique(createList(objects)));
+        assertTrue(Utils.elementsAreUnique(Arrays.asList(objects)));
     }
 
     private void assertNotUnique(Object... objects) {
-        assertFalse(Utils.elementsAreUnique(createList(objects)));
-    }
-    
-    private List<Object> createList(Object... objects) {
-        return Arrays.asList(objects);
+        assertFalse(Utils.elementsAreUnique(Arrays.asList(objects)));
     }
 }
