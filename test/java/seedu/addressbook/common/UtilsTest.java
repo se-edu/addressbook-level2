@@ -31,7 +31,7 @@ public class UtilsTest {
         // non empty list with one null as the last element
         assertTrue(Utils.isAnyNull("", new Object(), null));
         assertTrue(Utils.isAnyNull(new Object(), new Object(), null));
-        
+
         // test whether method peeks into the elements inside container
         List<Object> nullList = Arrays.asList((Object) null);
         assertFalse(Utils.isAnyNull(nullList));
@@ -53,9 +53,14 @@ public class UtilsTest {
         assertAreUnique(1, 2);
 
         // some identical objects
+        assertNotUnique("abc", "abc");
         assertNotUnique("abc", "", "abc", "ABC");
-        assertNotUnique(null, 1, new Integer(1));
         assertNotUnique("", "abc", "a", "abc");
+
+        assertNotUnique(1, new Integer(1));
+        assertNotUnique(null, 1, new Integer(1));
+
+        assertNotUnique(null, null);
         assertNotUnique(null, "a", "b", null);
     }
 
