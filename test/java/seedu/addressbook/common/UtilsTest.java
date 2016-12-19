@@ -32,8 +32,8 @@ public class UtilsTest {
         assertTrue(Utils.isAnyNull(new Object(), new Integer(1), null));
         
         // test whether method peeks into the elements inside container
-        List<Object> emptyList = createList((Object)null);
-        assertFalse(Utils.isAnyNull(emptyList));
+        List<Object> nullList = createList((Object)null);
+        assertFalse(Utils.isAnyNull(nullList));
     }
 
     @Test
