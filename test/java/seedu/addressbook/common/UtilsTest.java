@@ -11,28 +11,29 @@ import org.junit.Test;
 public class UtilsTest {
     @Test
     public void isAnyNull() {
-        List<Object> emptyList = createList();
-        List<Object> nonEmptyList = createList("A string");
-
         // empty list
         assertFalse(Utils.isAnyNull());
 
         // Any non-empty list
         assertFalse(Utils.isAnyNull(new Object(), new Object()));
-        assertFalse(Utils.isAnyNull(emptyList));
+        assertFalse(Utils.isAnyNull("test"));
 
         // non empty list with just one at the beginning
         assertTrue(Utils.isAnyNull((Object)null));
         assertTrue(Utils.isAnyNull(null, "", new Object(), null));
-        assertTrue(Utils.isAnyNull(null, emptyList, nonEmptyList));
+        assertTrue(Utils.isAnyNull(null, new Object(), new Object()));
 
         // non empty list with nulls in the middle
-        assertTrue(Utils.isAnyNull(nonEmptyList, null, null, emptyList));
+        assertTrue(Utils.isAnyNull(new Object(), null, null, "test"));
         assertTrue(Utils.isAnyNull("", null, new Object()));
 
         // non empty list with one null as the last element
         assertTrue(Utils.isAnyNull("", new Object(), null));
-        assertTrue(Utils.isAnyNull(nonEmptyList, emptyList, null));
+        assertTrue(Utils.isAnyNull(new Object(), new Integer(1), null));
+        
+        // test whether method peeks into the elements inside container
+        List<Object> emptyList = createList((Object)null);
+        assertFalse(Utils.isAnyNull(emptyList));
     }
 
     @Test
