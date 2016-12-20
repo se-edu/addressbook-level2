@@ -21,7 +21,7 @@ public class UtilsTest {
 
         // non empty list with just one at the beginning
         assertTrue(Utils.isAnyNull((Object)null));
-        assertTrue(Utils.isAnyNull(null, "", new Object(), null));
+        assertTrue(Utils.isAnyNull(null, "", new Object()));
         assertTrue(Utils.isAnyNull(null, new Object(), new Object()));
 
         // non empty list with nulls in the middle
