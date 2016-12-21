@@ -20,7 +20,7 @@ public class UtilsTest {
         assertFalse(Utils.isAnyNull(""));
 
         // non empty list with just one at the beginning
-        assertTrue(Utils.isAnyNull((Object)null));
+        assertTrue(Utils.isAnyNull((Object) null));
         assertTrue(Utils.isAnyNull(null, "", new Object()));
         assertTrue(Utils.isAnyNull(null, new Object(), new Object()));
 
@@ -43,7 +43,7 @@ public class UtilsTest {
         assertAreUnique();
 
         // only one object
-        assertAreUnique((Object)null);
+        assertAreUnique((Object) null);
         assertAreUnique(1);
         assertAreUnique("");
         assertAreUnique("abc");
