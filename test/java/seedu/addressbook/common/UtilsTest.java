@@ -19,7 +19,7 @@ public class UtilsTest {
         assertFalse(Utils.isAnyNull("test"));
         assertFalse(Utils.isAnyNull(""));
 
-        // non empty list with just one at the beginning
+        // non empty list with just one null at the beginning
         assertTrue(Utils.isAnyNull((Object) null));
         assertTrue(Utils.isAnyNull(null, "", new Object()));
         assertTrue(Utils.isAnyNull(null, new Object(), new Object()));
@@ -32,7 +32,7 @@ public class UtilsTest {
         assertTrue(Utils.isAnyNull("", new Object(), null));
         assertTrue(Utils.isAnyNull(new Object(), new Object(), null));
 
-        // test whether method peeks into the elements inside container
+        // confirms nulls inside the list are not considered
         List<Object> nullList = Arrays.asList((Object) null);
         assertFalse(Utils.isAnyNull(nullList));
     }
@@ -56,10 +56,8 @@ public class UtilsTest {
         assertNotUnique("abc", "abc");
         assertNotUnique("abc", "", "abc", "ABC");
         assertNotUnique("", "abc", "a", "abc");
-
         assertNotUnique(1, new Integer(1));
         assertNotUnique(null, 1, new Integer(1));
-
         assertNotUnique(null, null);
         assertNotUnique(null, "a", "b", null);
     }
