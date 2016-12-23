@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <AddressBook>
     <persons>
-        <name>John Doe</name>
-
-        <email isPrivate="false">johnd@gmail.com</email>
-        <address isPrivate="false">John street, block 123, #01-01</address>
+		<invalid>data</invalid>
     </persons>
 </AddressBook>
