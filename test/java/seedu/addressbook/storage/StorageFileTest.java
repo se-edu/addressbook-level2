@@ -29,7 +29,6 @@ public class StorageFileTest {
 
     @Test
     public void initStorageFile_nullFilePath_exceptionThrown() throws InvalidStorageFilePathException {
-        //creating StroageFile with null filepath
         thrown.expect(NullPointerException.class);
         new StorageFile(null);
     }
@@ -44,15 +43,14 @@ public class StorageFileTest {
     @Test
     public void load_invalidFormat_exceptionThrown() throws InvalidStorageFilePathException, StorageOperationException {
         //the field in xml data does not match the AddressBook class, exception thrown 
-        StorageFile storage = new StorageFile(TEST_DATA_FOLDER + "/InvalidData.txt");
+        StorageFile storage = getStorage("/InvalidData.txt");
         thrown.expect(StorageOperationException.class);
         storage.load();
     }
 
     @Test
     public void load_validFormat() throws StorageOperationException, IllegalValueException {
-        StorageFile storage = new StorageFile(TEST_DATA_FOLDER + "/ValidData.txt");
-        AddressBook ab = storage.load();
+        AddressBook ab = getStorage("/ValidData.txt").load();
         Person testPerson = new Person(new Name("John Doe"), 
                                        new Phone("98765432", false),
                                        new Email("johnd@gmail.com", false), 
@@ -66,14 +64,14 @@ public class StorageFileTest {
     @Test
     public void save_nullAddressBook_exceptionThrown() throws InvalidStorageFilePathException, StorageOperationException {
         //save null AddressBook object to StorageFile
-        StorageFile storage = new StorageFile(TEST_DATA_FOLDER + "/temp.txt");
+        StorageFile storage = getStorage("/temp.txt");
         thrown.expect(NullPointerException.class);
         storage.save(null);
     }
 
     @Test
     public void save_validAddressBook() throws IllegalValueException, StorageOperationException, IOException {
-        StorageFile storage = new StorageFile(TEST_DATA_FOLDER + "/temp.txt");
+        StorageFile storage = getStorage("/temp.txt");
         AddressBook ab = new AddressBook();
         Person testPerson = new Person(new Name("John Doe"), 
                                        new Phone("98765432", false),
@@ -85,6 +83,10 @@ public class StorageFileTest {
 
         // ensure xml data for sample data is properly structured and saved
         assertTrue(compareFile("/temp.txt", "/ValidData.txt"));
+    }
+    
+    private StorageFile getStorage(String filename) throws InvalidStorageFilePathException {
+        return new StorageFile(TEST_DATA_FOLDER + filename);
     }
 
     private boolean compareFile(String file1, String file2) throws IOException {
