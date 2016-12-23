@@ -71,8 +71,9 @@ public class AddressBookTest {
                                     new Address("11 Arts Link", false),
                                     new UniqueTagList(tagEconomist, tagPrizeWinner));
         
-        defaultAddressBook = createDefaultAddressBook();
         emptyAddressBook = new AddressBook();
+        defaultAddressBook = new AddressBook(new UniquePersonList(aliceBetsy, bobChaplin),
+                                             new UniqueTagList(tagMathematician, tagScientist));
     }
     
     @Rule
@@ -236,13 +237,7 @@ public class AddressBookTest {
     }
     
     
-    /**
-     * Initialises an AddressBook with some default values.
-     */
-    private AddressBook createDefaultAddressBook() throws Exception {
-        return new AddressBook(new UniquePersonList(aliceBetsy, bobChaplin),
-                               new UniqueTagList(tagMathematician, tagScientist));
-    }
+    // Helper Methods
     
     /**
      * Returns true if the given Tag object if found in the tag list of the given AddressBook.
