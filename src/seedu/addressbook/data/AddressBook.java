@@ -78,8 +78,8 @@ public class AddressBook {
      * @throws DuplicatePersonException if an equivalent person already exists.
      */
     public void addPerson(Person toAdd) throws DuplicatePersonException {
-        syncTagsWithMasterList(toAdd);
         allPersons.add(toAdd);
+        syncTagsWithMasterList(toAdd);
     }
 
     /**
