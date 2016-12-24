@@ -18,7 +18,6 @@ import seedu.addressbook.data.person.Person;
 import seedu.addressbook.data.person.Phone;
 import seedu.addressbook.data.person.UniquePersonList;
 import seedu.addressbook.data.tag.UniqueTagList;
-import seedu.addressbook.storage.StorageFile.InvalidStorageFilePathException;
 import seedu.addressbook.storage.StorageFile.StorageOperationException;
 
 public class StorageFileTest {
@@ -28,19 +27,19 @@ public class StorageFileTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void initStorageFile_nullFilePath_exceptionThrown() throws InvalidStorageFilePathException {
+    public void initStorageFile_nullFilePath_exceptionThrown() throws Exception {
         thrown.expect(NullPointerException.class);
         new StorageFile(null);
     }
 
     @Test
-    public void initStorageFile_noTxtExtension_exceptionThrown() throws InvalidStorageFilePathException {
+    public void initStorageFile_noTxtExtension_exceptionThrown() throws Exception {
         thrown.expect(IllegalValueException.class);
         new StorageFile(TEST_DATA_FOLDER + "/InvalidFileName");
     }
 
     @Test
-    public void load_invalidFormat_exceptionThrown() throws InvalidStorageFilePathException, StorageOperationException {
+    public void load_invalidFormat_exceptionThrown() throws Exception {
         // The file contains valid xml data, but does not match the AddressBook class
         StorageFile storage = getStorage("/InvalidData.txt");
         thrown.expect(StorageOperationException.class);
@@ -48,7 +47,7 @@ public class StorageFileTest {
     }
 
     @Test
-    public void load_validFormat() throws StorageOperationException, IllegalValueException {
+    public void load_validFormat() throws Exception {
         AddressBook ab = getStorage("/ValidData.txt").load();
         Person testPerson = new Person(new Name("John Doe"), 
                                        new Phone("98765432", false),
@@ -62,14 +61,15 @@ public class StorageFileTest {
     }
 
     @Test
-    public void save_nullAddressBook_exceptionThrown() throws InvalidStorageFilePathException, StorageOperationException {
+    public void save_nullAddressBook_exceptionThrown() throws Exception {
         // save null AddressBook object to StorageFile
+        StorageFile storage = getStorage("/temp.txt");
         thrown.expect(NullPointerException.class);
-        getStorage("/temp.txt").save(null);
+        storage.save(null);
     }
 
     @Test
-    public void save_validAddressBook() throws IllegalValueException, StorageOperationException, IOException {
+    public void save_validAddressBook() throws Exception {
         StorageFile storage = getStorage("/temp.txt");
         AddressBook ab = new AddressBook();
         Person testPerson = new Person(new Name("John Doe"), 
@@ -81,14 +81,14 @@ public class StorageFileTest {
         storage.save(ab);
 
         // ensure xml data for sample data is properly structured and saved
-        compareFile("temp.txt", "ValidData.txt");
+        assertSaveSuccess("temp.txt", "ValidData.txt");
     }
 
-    private StorageFile getStorage(String filename) throws InvalidStorageFilePathException {
+    private StorageFile getStorage(String filename) throws Exception {
         return new StorageFile(TEST_DATA_FOLDER + filename);
     }
 
-    private void compareFile(String file1, String file2) throws IOException {
+    private void assertSaveSuccess(String file1, String file2) throws Exception {
         String s1 = new String(Files.readAllBytes(Paths.get(TEST_DATA_FOLDER, file1)));
         String s2 = new String(Files.readAllBytes(Paths.get(TEST_DATA_FOLDER, file2)));
         assertTrue(s1.equals(s2));
