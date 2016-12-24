@@ -43,7 +43,7 @@ public class StorageFileTest {
 
     @Test
     public void load_invalidFormat_exceptionThrown() throws InvalidStorageFilePathException, StorageOperationException {
-        //the field in xml data does not match the AddressBook class, exception thrown 
+        // The file contains valid xml data, but does not match the AddressBook class
         StorageFile storage = getStorage("/InvalidData.txt");
         thrown.expect(StorageOperationException.class);
         storage.load();
@@ -58,7 +58,7 @@ public class StorageFileTest {
                                        new Address("John street, block 123, #01-01", false),
                                        new UniqueTagList(Collections.emptySet()));
         UniquePersonList list = new UniquePersonList(testPerson);
-        
+
         // ensure loaded AddressBook Object is properly constructed with sample data
         assertTrue(ab.getAllPersons().equals(list));
     }
@@ -66,9 +66,8 @@ public class StorageFileTest {
     @Test
     public void save_nullAddressBook_exceptionThrown() throws InvalidStorageFilePathException, StorageOperationException {
         //save null AddressBook object to StorageFile
-        StorageFile storage = getStorage("/temp.txt");
         thrown.expect(NullPointerException.class);
-        storage.save(null);
+        getStorage("/temp.txt").save(null);
     }
 
     @Test
@@ -86,7 +85,7 @@ public class StorageFileTest {
         // ensure xml data for sample data is properly structured and saved
         assertTrue(compareFile("/temp.txt", "/ValidData.txt"));
     }
-    
+
     private StorageFile getStorage(String filename) throws InvalidStorageFilePathException {
         return new StorageFile(TEST_DATA_FOLDER + filename);
     }
