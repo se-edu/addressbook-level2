@@ -23,7 +23,7 @@ import seedu.addressbook.storage.StorageFile.InvalidStorageFilePathException;
 import seedu.addressbook.storage.StorageFile.StorageOperationException;
 
 public class StorageFileTest {
-    private static final String TEST_DATA_FOLDER = "./test/java/seedu/addressbook/storage";
+    private static final String TEST_DATA_FOLDER = "test/java/seedu/addressbook/storage";
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -35,8 +35,7 @@ public class StorageFileTest {
     }
 
     @Test
-    public void initStorageFile_invalidFilePath_exceptionThrown() throws InvalidStorageFilePathException {
-        //creating StorageFile with file not ending with .txt
+    public void initStorageFile_noTxtExtension_exceptionThrown() throws InvalidStorageFilePathException {
         thrown.expect(IllegalValueException.class);
         new StorageFile(TEST_DATA_FOLDER + "/InvalidFileName");
     }
@@ -65,7 +64,7 @@ public class StorageFileTest {
 
     @Test
     public void save_nullAddressBook_exceptionThrown() throws InvalidStorageFilePathException, StorageOperationException {
-        //save null AddressBook object to StorageFile
+        // save null AddressBook object to StorageFile
         thrown.expect(NullPointerException.class);
         getStorage("/temp.txt").save(null);
     }
@@ -83,16 +82,16 @@ public class StorageFileTest {
         storage.save(ab);
 
         // ensure xml data for sample data is properly structured and saved
-        assertTrue(compareFile("/temp.txt", "/ValidData.txt"));
+        compareFile("temp.txt", "ValidData.txt");
     }
 
     private StorageFile getStorage(String filename) throws InvalidStorageFilePathException {
         return new StorageFile(TEST_DATA_FOLDER + filename);
     }
 
-    private boolean compareFile(String file1, String file2) throws IOException {
-        String s1 = new String(Files.readAllBytes(Paths.get(TEST_DATA_FOLDER + file1)));
-        String s2 = new String(Files.readAllBytes(Paths.get(TEST_DATA_FOLDER + file2)));
-        return s1.equals(s2);
+    private void compareFile(String file1, String file2) throws IOException {
+        String s1 = new String(Files.readAllBytes(Paths.get(TEST_DATA_FOLDER, file1)));
+        String s2 = new String(Files.readAllBytes(Paths.get(TEST_DATA_FOLDER, file2)));
+        assertTrue(s1.equals(s2));
     }
 }
