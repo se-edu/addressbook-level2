@@ -17,6 +17,7 @@ import seedu.addressbook.data.person.Email;
 import seedu.addressbook.data.person.Name;
 import seedu.addressbook.data.person.Person;
 import seedu.addressbook.data.person.Phone;
+import seedu.addressbook.data.person.UniquePersonList;
 import seedu.addressbook.data.tag.UniqueTagList;
 import seedu.addressbook.storage.StorageFile.InvalidStorageFilePathException;
 import seedu.addressbook.storage.StorageFile.StorageOperationException;
@@ -56,9 +57,10 @@ public class StorageFileTest {
                                        new Email("johnd@gmail.com", false), 
                                        new Address("John street, block 123, #01-01", false),
                                        new UniqueTagList(Collections.emptySet()));
+        UniquePersonList list = new UniquePersonList(testPerson);
         
         // ensure loaded AddressBook Object is properly constructed with sample data
-        assertTrue(ab.getAllPersons().contains(testPerson));
+        assertTrue(ab.getAllPersons().equals(list));
     }
 
     @Test
