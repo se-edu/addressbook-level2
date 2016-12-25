@@ -22,7 +22,7 @@ import seedu.addressbook.data.tag.UniqueTagList;
 import seedu.addressbook.storage.StorageFile.StorageOperationException;
 
 public class StorageFileTest {
-    private static final String TEST_DATA_FOLDER = "test/java/seedu/addressbook/storage";
+    private static final String TEST_DATA_FOLDER = "test/data/StorageFileTest";
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
