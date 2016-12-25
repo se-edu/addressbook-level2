@@ -1,6 +1,7 @@
 package seedu.addressbook.storage;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -62,7 +63,6 @@ public class StorageFileTest {
 
     @Test
     public void save_nullAddressBook_exceptionThrown() throws Exception {
-        // save null AddressBook object to StorageFile
         StorageFile storage = getStorage("/temp.txt");
         thrown.expect(NullPointerException.class);
         storage.save(null);
@@ -91,6 +91,6 @@ public class StorageFileTest {
     private void assertSaveSuccess(String file1, String file2) throws Exception {
         String s1 = new String(Files.readAllBytes(Paths.get(TEST_DATA_FOLDER, file1)));
         String s2 = new String(Files.readAllBytes(Paths.get(TEST_DATA_FOLDER, file2)));
-        assertTrue(s1.equals(s2));
+        assertEquals(s1, s2);
     }
 }
