@@ -37,19 +37,19 @@ public class FindCommandTest {
         List<ReadOnlyPerson> expected = TestUtil.createList(new Person(TypicalPersons.amy()));
         String[] keywordsWithMatchingCase = {"Amy"};
         
-        assertCommandBehavior(keywordsWithMatchingCase, expected, addressBook);
+        assertFindCommandBehavior(keywordsWithMatchingCase, expected, addressBook);
     }
     
     @Test
     public void execute_sameWordDifferentCase_notMatched() throws IllegalValueException {
         String[] keywordsWithNonMatchingCase = {"aMy"};  
-        assertCommandBehavior(keywordsWithNonMatchingCase, EMPTY_LIST, addressBook);
+        assertFindCommandBehavior(keywordsWithNonMatchingCase, EMPTY_LIST, addressBook);
     }
     
     @Test
     public void execute_partialKeyword_notMatched() throws IllegalValueException {        
         String[] keywords = {"my"};
-        assertCommandBehavior(keywords, EMPTY_LIST, addressBook);
+        assertFindCommandBehavior(keywords, EMPTY_LIST, addressBook);
     }
     
     @Test
@@ -59,13 +59,13 @@ public class FindCommandTest {
                                                             new Person(TypicalPersons.candy()));
         
         String[] keywords = {"Amy", "Bill", "Destiny"};
-        assertCommandBehavior(keywords, expected, addressBook);
+        assertFindCommandBehavior(keywords, expected, addressBook);
     }
 
     /**
      * Executes the find command, and checks that the execution was what we had expected.
      */
-    private void assertCommandBehavior(String[] keywords, List<ReadOnlyPerson> expectedPersonList, AddressBook actualAddressBook) {
+    private void assertFindCommandBehavior(String[] keywords, List<ReadOnlyPerson> expectedPersonList, AddressBook actualAddressBook) {
         FindCommand command = createFindCommand(keywords);
         CommandResult result = command.execute();
         
