@@ -1,13 +1,8 @@
 package seedu.addressbook.storage;
 
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-
 import java.nio.file.Paths;
 import java.util.Collections;
-import java.util.Scanner;
-
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -73,7 +68,7 @@ public class StorageFileTest {
         Person[] testPerson = getTestPerson();
         ab.addPerson(testPerson[0]);
         ab.addPerson(testPerson[1]);
-        
+
         getStorage("/temp.txt").save(ab);
 
         // ensure xml data for sample data is properly structured and saved
@@ -81,7 +76,7 @@ public class StorageFileTest {
     }
 
     // getPath() method in StorageFile class is trivial so it is not tested
-    
+
     private void assertSaveSuccess(String file1, String file2) throws Exception {
         TestUtil.compareFiles(Paths.get(TEST_DATA_FOLDER, file1), Paths.get(TEST_DATA_FOLDER, file2));
     }
