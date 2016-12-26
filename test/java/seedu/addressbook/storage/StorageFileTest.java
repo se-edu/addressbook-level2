@@ -6,6 +6,7 @@ import java.util.Collections;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.junit.rules.TemporaryFolder;
 
 import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.exception.IllegalValueException;
@@ -17,13 +18,16 @@ import seedu.addressbook.data.person.Phone;
 import seedu.addressbook.data.tag.Tag;
 import seedu.addressbook.data.tag.UniqueTagList;
 import seedu.addressbook.storage.StorageFile.StorageOperationException;
-import seedu.addressbook.util.TestUtil;
+import static seedu.addressbook.util.TestUtil.assertTextFilesEqual;
 
 public class StorageFileTest {
     private static final String TEST_DATA_FOLDER = "test/data/StorageFileTest";
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
+    
+    @Rule
+    public TemporaryFolder testFolder = new TemporaryFolder();
 
     @Test
     public void constructor_nullFilePath_exceptionThrown() throws Exception {
@@ -34,7 +38,7 @@ public class StorageFileTest {
     @Test
     public void constructor_noTxtExtension_exceptionThrown() throws Exception {
         thrown.expect(IllegalValueException.class);
-        new StorageFile(TEST_DATA_FOLDER + "/InvalidFileName");
+        new StorageFile(TEST_DATA_FOLDER + "/InvalidfileName");
     }
 
     @Test
@@ -50,14 +54,14 @@ public class StorageFileTest {
         AddressBook actualAB = getStorage("/ValidData.txt").load();
         AddressBook expectedAB = getTestAddressBook();
 
-        // ensure loaded AddressBook Object is properly constructed with test data
-        //TODO overwrite equals method in AddressBook class and replace with equals method below
+        // ensure loaded AddressBook is properly constructed with test data
+        // TODO: overwrite equals method in AddressBook class and replace with equals method below
         assertEquals(actualAB.getAllPersons(), expectedAB.getAllPersons());
     }
 
     @Test
     public void save_nullAddressBook_exceptionThrown() throws Exception {
-        StorageFile storage = getStorage("/temp.txt");
+        StorageFile storage = getTempStorage();
         thrown.expect(NullPointerException.class);
         storage.save(null);
     }
@@ -66,20 +70,28 @@ public class StorageFileTest {
     public void save_validAddressBook() throws Exception {
         AddressBook ab = getTestAddressBook();
 
-        getStorage("/temp.txt").save(ab);
+        getTempStorage().save(ab);
 
         // ensure xml data for sample data is properly structured and saved
-        assertSaveSuccess("temp.txt", "ValidData.txt");
+        assertSaveSuccess("ValidData.txt");
     }
 
     // getPath() method in StorageFile class is trivial so it is not tested
 
-    private void assertSaveSuccess(String file1, String file2) throws Exception {
-        TestUtil.assertTextFilesEqual(Paths.get(TEST_DATA_FOLDER, file1), Paths.get(TEST_DATA_FOLDER, file2));
+    private void assertSaveSuccess(String fileName) throws Exception {
+        assertTextFilesEqual(Paths.get(getTempFilePath("temp.txt")), Paths.get(TEST_DATA_FOLDER, fileName));
     }
 
-    private StorageFile getStorage(String filename) throws Exception {
-        return new StorageFile(TEST_DATA_FOLDER + filename);
+    private StorageFile getStorage(String fileName) throws Exception {
+        return new StorageFile(TEST_DATA_FOLDER + fileName);
+    }
+    
+    private StorageFile getTempStorage() throws Exception {
+        return new StorageFile(getTempFilePath("temp.txt"));
+    }
+
+    private String getTempFilePath(String fileName) {
+        return testFolder.getRoot().getPath() + fileName;
     }
 
     private AddressBook getTestAddressBook() throws Exception {
