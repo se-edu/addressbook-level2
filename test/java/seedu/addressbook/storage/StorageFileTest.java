@@ -74,21 +74,22 @@ public class StorageFileTest {
         ab.addPerson(testPerson[0]);
         ab.addPerson(testPerson[1]);
         
-        StorageFile storage = getStorage("/temp.txt");
-        storage.save(ab);
+        getStorage("/temp.txt").save(ab);
 
         // ensure xml data for sample data is properly structured and saved
         assertSaveSuccess("temp.txt", "ValidData.txt");
+    }
+
+    // getPath() method in StorageFile class is trivial so it is not tested
+    
+    private void assertSaveSuccess(String file1, String file2) throws Exception {
+        TestUtil.compareFiles(Paths.get(TEST_DATA_FOLDER, file1), Paths.get(TEST_DATA_FOLDER, file2));
     }
 
     private StorageFile getStorage(String filename) throws Exception {
         return new StorageFile(TEST_DATA_FOLDER + filename);
     }
 
-    private void assertSaveSuccess(String file1, String file2) throws Exception {
-        TestUtil.compareFiles(Paths.get(TEST_DATA_FOLDER, file1), Paths.get(TEST_DATA_FOLDER, file2));
-    }
-    
     private Person[] getTestPerson() throws Exception {
         return new Person[] {
                 new Person(new Name("John Doe"), 
