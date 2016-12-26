@@ -1,6 +1,6 @@
 package seedu.addressbook.storage;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 import java.nio.file.Paths;
 import java.util.Collections;
 import org.junit.Rule;
@@ -14,7 +14,6 @@ import seedu.addressbook.data.person.Email;
 import seedu.addressbook.data.person.Name;
 import seedu.addressbook.data.person.Person;
 import seedu.addressbook.data.person.Phone;
-import seedu.addressbook.data.person.UniquePersonList;
 import seedu.addressbook.data.tag.Tag;
 import seedu.addressbook.data.tag.UniqueTagList;
 import seedu.addressbook.storage.StorageFile.StorageOperationException;
@@ -48,11 +47,12 @@ public class StorageFileTest {
 
     @Test
     public void load_validFormat() throws Exception {
-        AddressBook ab = getStorage("/ValidData.txt").load();
-        UniquePersonList list = new UniquePersonList(getTestPerson());
+        AddressBook actualAB = getStorage("/ValidData.txt").load();
+        AddressBook expectedAB = getTestAddressBook();
 
         // ensure loaded AddressBook Object is properly constructed with test data
-        assertTrue(ab.getAllPersons().equals(list));
+        //TODO overwrite equals method in AddressBook class and replace with equals method below
+        assertEquals(actualAB.getAllPersons(), expectedAB.getAllPersons());
     }
 
     @Test
@@ -64,10 +64,7 @@ public class StorageFileTest {
 
     @Test
     public void save_validAddressBook() throws Exception {
-        AddressBook ab = new AddressBook();
-        Person[] testPerson = getTestPerson();
-        ab.addPerson(testPerson[0]);
-        ab.addPerson(testPerson[1]);
+        AddressBook ab = getTestAddressBook();
 
         getStorage("/temp.txt").save(ab);
 
@@ -85,18 +82,18 @@ public class StorageFileTest {
         return new StorageFile(TEST_DATA_FOLDER + filename);
     }
 
-    private Person[] getTestPerson() throws Exception {
-        return new Person[] {
-                new Person(new Name("John Doe"), 
-                        new Phone("98765432", false),
-                        new Email("johnd@gmail.com", false), 
-                        new Address("John street, block 123, #01-01", false),
-                        new UniqueTagList(Collections.emptySet())),
-                new Person(new Name("Betsy Crowe"),
-                        new Phone("1234567", true),
-                        new Email("betsycrowe@gmail.com", false),
-                        new Address("Newgate Prison", true),
-                        new UniqueTagList(new Tag("friend"), new Tag("criminal")))
-        };
+    private AddressBook getTestAddressBook() throws Exception {
+        AddressBook ab = new AddressBook();
+        ab.addPerson(new Person(new Name("John Doe"), 
+                                new Phone("98765432", false),
+                                new Email("johnd@gmail.com", false), 
+                                new Address("John street, block 123, #01-01", false),
+                                new UniqueTagList(Collections.emptySet())));
+        ab.addPerson(new Person(new Name("Betsy Crowe"),
+                                new Phone("1234567", true),
+                                new Email("betsycrowe@gmail.com", false),
+                                new Address("Newgate Prison", true),
+                                new UniqueTagList(new Tag("friend"), new Tag("criminal"))));
+        return ab;
     }
 }
