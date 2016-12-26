@@ -25,7 +25,7 @@ public class StorageFileTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
-    
+
     @Rule
     public TemporaryFolder testFolder = new TemporaryFolder();
 
@@ -85,7 +85,7 @@ public class StorageFileTest {
     private StorageFile getStorage(String fileName) throws Exception {
         return new StorageFile(TEST_DATA_FOLDER + fileName);
     }
-    
+
     private StorageFile getTempStorage() throws Exception {
         return new StorageFile(getTempFilePath("temp.txt"));
     }
