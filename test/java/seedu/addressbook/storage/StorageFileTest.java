@@ -2,10 +2,12 @@ package seedu.addressbook.storage;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
-import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Collections;
+import java.util.Scanner;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -83,9 +85,16 @@ public class StorageFileTest {
     }
 
     private void assertSaveSuccess(String file1, String file2) throws Exception {
-        String s1 = new String(Files.readAllBytes(Paths.get(TEST_DATA_FOLDER, file1)));
-        String s2 = new String(Files.readAllBytes(Paths.get(TEST_DATA_FOLDER, file2)));
-        assertEquals(s1, s2);
+        Scanner scan1 = new Scanner(Paths.get(TEST_DATA_FOLDER, file1));
+        Scanner scan2 = new Scanner(Paths.get(TEST_DATA_FOLDER, file2));
+        while (scan1.hasNext() && scan2.hasNext()) {
+            assertEquals(scan1.nextLine(), scan2.nextLine());
+        }
+        
+        //ensure no additional lines for both files
+        assertFalse(scan1.hasNext() || scan2.hasNext());
+        scan1.close();
+        scan2.close();
     }
     
     private Person[] getTestPerson() throws Exception {
