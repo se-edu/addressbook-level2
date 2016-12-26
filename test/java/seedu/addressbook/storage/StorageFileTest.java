@@ -75,7 +75,7 @@ public class StorageFileTest {
     // getPath() method in StorageFile class is trivial so it is not tested
 
     private void assertSaveSuccess(String file1, String file2) throws Exception {
-        TestUtil.compareFiles(Paths.get(TEST_DATA_FOLDER, file1), Paths.get(TEST_DATA_FOLDER, file2));
+        TestUtil.assertTextFilesEqual(Paths.get(TEST_DATA_FOLDER, file1), Paths.get(TEST_DATA_FOLDER, file2));
     }
 
     private StorageFile getStorage(String filename) throws Exception {

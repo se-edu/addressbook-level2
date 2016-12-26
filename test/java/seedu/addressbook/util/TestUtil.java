@@ -1,14 +1,14 @@
 package seedu.addressbook.util;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.fail;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.exception.IllegalValueException;
@@ -65,17 +65,13 @@ public class TestUtil {
             return null;
         }
     }
-    
-    public static void compareFiles(Path path1, Path path2) throws IOException {
-        Scanner scan1 = new Scanner(path1);
-        Scanner scan2 = new Scanner(path2);
-        while (scan1.hasNext() && scan2.hasNext()) {
-            assertEquals(scan1.nextLine(), scan2.nextLine());
-        }
 
-        //ensure no additional lines for both files
-        assertFalse(scan1.hasNext() || scan2.hasNext());
-        scan1.close();
-        scan2.close();
+    /**
+     * Assert whether the data in the two given files are the same.
+     */
+    public static void assertTextFilesEqual(Path path1, Path path2) throws IOException {
+        List<String> list1 = Files.readAllLines(path1, Charset.defaultCharset());
+        List<String> list2 = Files.readAllLines(path2, Charset.defaultCharset());
+        assertEquals(list1, list2);
     }
 }
