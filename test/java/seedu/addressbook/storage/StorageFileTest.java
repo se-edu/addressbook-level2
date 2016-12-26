@@ -18,6 +18,7 @@ import seedu.addressbook.data.person.Name;
 import seedu.addressbook.data.person.Person;
 import seedu.addressbook.data.person.Phone;
 import seedu.addressbook.data.person.UniquePersonList;
+import seedu.addressbook.data.tag.Tag;
 import seedu.addressbook.data.tag.UniqueTagList;
 import seedu.addressbook.storage.StorageFile.StorageOperationException;
 
@@ -28,13 +29,13 @@ public class StorageFileTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void initStorageFile_nullFilePath_exceptionThrown() throws Exception {
+    public void constructor_nullFilePath_exceptionThrown() throws Exception {
         thrown.expect(NullPointerException.class);
         new StorageFile(null);
     }
 
     @Test
-    public void initStorageFile_noTxtExtension_exceptionThrown() throws Exception {
+    public void constructor_noTxtExtension_exceptionThrown() throws Exception {
         thrown.expect(IllegalValueException.class);
         new StorageFile(TEST_DATA_FOLDER + "/InvalidFileName");
     }
@@ -50,14 +51,9 @@ public class StorageFileTest {
     @Test
     public void load_validFormat() throws Exception {
         AddressBook ab = getStorage("/ValidData.txt").load();
-        Person testPerson = new Person(new Name("John Doe"), 
-                                       new Phone("98765432", false),
-                                       new Email("johnd@gmail.com", false), 
-                                       new Address("John street, block 123, #01-01", false),
-                                       new UniqueTagList(Collections.emptySet()));
-        UniquePersonList list = new UniquePersonList(testPerson);
+        UniquePersonList list = new UniquePersonList(getTestPerson());
 
-        // ensure loaded AddressBook Object is properly constructed with sample data
+        // ensure loaded AddressBook Object is properly constructed with test data
         assertTrue(ab.getAllPersons().equals(list));
     }
 
@@ -70,14 +66,12 @@ public class StorageFileTest {
 
     @Test
     public void save_validAddressBook() throws Exception {
-        StorageFile storage = getStorage("/temp.txt");
         AddressBook ab = new AddressBook();
-        Person testPerson = new Person(new Name("John Doe"), 
-                                       new Phone("98765432", false),
-                                       new Email("johnd@gmail.com", false), 
-                                       new Address("John street, block 123, #01-01", false),
-                                       new UniqueTagList(Collections.emptySet()));
-        ab.addPerson(testPerson);
+        Person[] testPerson = getTestPerson();
+        ab.addPerson(testPerson[0]);
+        ab.addPerson(testPerson[1]);
+        
+        StorageFile storage = getStorage("/temp.txt");
         storage.save(ab);
 
         // ensure xml data for sample data is properly structured and saved
@@ -92,5 +86,20 @@ public class StorageFileTest {
         String s1 = new String(Files.readAllBytes(Paths.get(TEST_DATA_FOLDER, file1)));
         String s2 = new String(Files.readAllBytes(Paths.get(TEST_DATA_FOLDER, file2)));
         assertEquals(s1, s2);
+    }
+    
+    private Person[] getTestPerson() throws Exception {
+        return new Person[] {
+                new Person(new Name("John Doe"), 
+                        new Phone("98765432", false),
+                        new Email("johnd@gmail.com", false), 
+                        new Address("John street, block 123, #01-01", false),
+                        new UniqueTagList(Collections.emptySet())),
+                new Person(new Name("Betsy Crowe"),
+                        new Phone("1234567", true),
+                        new Email("betsycrowe@gmail.com", false),
+                        new Address("Newgate Prison", true),
+                        new UniqueTagList(new Tag("friend"), new Tag("criminal")))
+        };
     }
 }
