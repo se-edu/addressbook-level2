@@ -79,7 +79,8 @@ public class StorageFileTest {
     // getPath() method in StorageFile class is trivial so it is not tested
 
     private void assertSaveSuccess(String fileName) throws Exception {
-        assertTextFilesEqual(Paths.get(getTempFilePath("temp.txt")), Paths.get(TEST_DATA_FOLDER, fileName));
+        assertTextFilesEqual(Paths.get(testFolder.getRoot().getPath() + "temp.txt"), 
+                             Paths.get(TEST_DATA_FOLDER, fileName));
     }
 
     private StorageFile getStorage(String fileName) throws Exception {
@@ -87,11 +88,7 @@ public class StorageFileTest {
     }
 
     private StorageFile getTempStorage() throws Exception {
-        return new StorageFile(getTempFilePath("temp.txt"));
-    }
-
-    private String getTempFilePath(String fileName) {
-        return testFolder.getRoot().getPath() + fileName;
+        return new StorageFile(testFolder.getRoot().getPath() + "temp.txt");
     }
 
     private AddressBook getTestAddressBook() throws Exception {
