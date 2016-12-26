@@ -22,6 +22,7 @@ import static seedu.addressbook.util.TestUtil.assertTextFilesEqual;
 
 public class StorageFileTest {
     private static final String TEST_DATA_FOLDER = "test/data/StorageFileTest";
+    private static final String TEST_TEMP = "temp.txt";
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -79,7 +80,7 @@ public class StorageFileTest {
     // getPath() method in StorageFile class is trivial so it is not tested
 
     private void assertSaveSuccess(String fileName) throws Exception {
-        assertTextFilesEqual(Paths.get(testFolder.getRoot().getPath() + "temp.txt"), 
+        assertTextFilesEqual(Paths.get(testFolder.getRoot().getPath() + TEST_TEMP), 
                              Paths.get(TEST_DATA_FOLDER, fileName));
     }
 
@@ -88,7 +89,7 @@ public class StorageFileTest {
     }
 
     private StorageFile getTempStorage() throws Exception {
-        return new StorageFile(testFolder.getRoot().getPath() + "temp.txt");
+        return new StorageFile(testFolder.getRoot().getPath() + TEST_TEMP);
     }
 
     private AddressBook getTestAddressBook() throws Exception {
