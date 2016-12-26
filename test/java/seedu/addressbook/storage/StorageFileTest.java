@@ -23,6 +23,7 @@ import seedu.addressbook.data.person.UniquePersonList;
 import seedu.addressbook.data.tag.Tag;
 import seedu.addressbook.data.tag.UniqueTagList;
 import seedu.addressbook.storage.StorageFile.StorageOperationException;
+import seedu.addressbook.util.TestUtil;
 
 public class StorageFileTest {
     private static final String TEST_DATA_FOLDER = "test/data/StorageFileTest";
@@ -85,16 +86,7 @@ public class StorageFileTest {
     }
 
     private void assertSaveSuccess(String file1, String file2) throws Exception {
-        Scanner scan1 = new Scanner(Paths.get(TEST_DATA_FOLDER, file1));
-        Scanner scan2 = new Scanner(Paths.get(TEST_DATA_FOLDER, file2));
-        while (scan1.hasNext() && scan2.hasNext()) {
-            assertEquals(scan1.nextLine(), scan2.nextLine());
-        }
-        
-        //ensure no additional lines for both files
-        assertFalse(scan1.hasNext() || scan2.hasNext());
-        scan1.close();
-        scan2.close();
+        TestUtil.compareFiles(Paths.get(TEST_DATA_FOLDER, file1), Paths.get(TEST_DATA_FOLDER, file2));
     }
     
     private Person[] getTestPerson() throws Exception {

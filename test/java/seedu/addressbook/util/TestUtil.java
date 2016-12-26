@@ -1,9 +1,15 @@
 package seedu.addressbook.util;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.fail;
 
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.exception.IllegalValueException;
@@ -59,5 +65,18 @@ public class TestUtil {
             fail("test person data should be valid by definition");
             return null;
         }
+    }
+    
+    public static void compareFiles(Path path1, Path path2) throws IOException {
+        Scanner scan1 = new Scanner(path1);
+        Scanner scan2 = new Scanner(path2);
+        while (scan1.hasNext() && scan2.hasNext()) {
+            assertEquals(scan1.nextLine(), scan2.nextLine());
+        }
+
+        //ensure no additional lines for both files
+        assertFalse(scan1.hasNext() || scan2.hasNext());
+        scan1.close();
+        scan2.close();
     }
 }
