@@ -77,6 +77,9 @@ public class StorageFileTest {
 
     // getPath() method in StorageFile class is trivial so it is not tested
 
+    /**
+     * Ensure text file for test data is properly structured and saved.
+     */
     private void assertStorageFilesEqual(StorageFile sf1, StorageFile sf2) throws Exception {
         assertTextFilesEqual(Paths.get(sf1.getPath()), Paths.get(sf2.getPath()));
     }

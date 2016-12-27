@@ -67,8 +67,7 @@ public class TestUtil {
     }
 
     /**
-     * Asserts whether the text in the two given files are the same. Ensure text
-     * for test data is properly structured and saved.
+     * Asserts whether the text in the two given files are the same.
      */
     public static void assertTextFilesEqual(Path path1, Path path2) throws IOException {
         List<String> list1 = Files.readAllLines(path1, Charset.defaultCharset());
