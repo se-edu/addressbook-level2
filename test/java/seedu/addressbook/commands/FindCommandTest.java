@@ -24,55 +24,40 @@ import seedu.addressbook.util.TypicalPersons;
 public class FindCommandTest {
 
     private AddressBook addressBook;
+    private TypicalPersons td;
     
     private final List<ReadOnlyPerson> EMPTY_LIST = Collections.emptyList();
 
     @Before 
     public void setUp() {
         this.addressBook = new TypicalPersons().getTypicalAddressBook();
+        this.td = new TypicalPersons();
     }
 
     @Test
-    public void execute_sameWordSameCase_matched() throws IllegalValueException {
-        List<ReadOnlyPerson> expected = TestUtil.createList(new Person(TypicalPersons.amy()));
-        String[] keywordsWithMatchingCase = {"Amy"};
+    public void execute() throws IllegalValueException {
+        //same word, same case: matched
+        assertFindCommandBehavior(new String[]{"Amy"}, TestUtil.createList(td.amy));
         
-        assertFindCommandBehavior(keywordsWithMatchingCase, expected, addressBook);
-    }
-    
-    @Test
-    public void execute_sameWordDifferentCase_notMatched() throws IllegalValueException {
-        String[] keywordsWithNonMatchingCase = {"aMy"};  
-        assertFindCommandBehavior(keywordsWithNonMatchingCase, EMPTY_LIST, addressBook);
-    }
-    
-    @Test
-    public void execute_partialKeyword_notMatched() throws IllegalValueException {        
-        String[] keywords = {"my"};
-        assertFindCommandBehavior(keywords, EMPTY_LIST, addressBook);
-    }
-    
-    @Test
-    public void execute_multipleKeywords_matched() throws IllegalValueException {
-        List<ReadOnlyPerson> expected = TestUtil.createList(new Person(TypicalPersons.amy()),
-                                                            new Person(TypicalPersons.bill()),
-                                                            new Person(TypicalPersons.candy()));
+        //same word, different case: not matched
+        assertFindCommandBehavior(new String[]{"aMy"}, EMPTY_LIST);
         
-        String[] keywords = {"Amy", "Bill", "Destiny"};
-        assertFindCommandBehavior(keywords, expected, addressBook);
+        //partial word: not matched
+        assertFindCommandBehavior(new String[]{"my"}, EMPTY_LIST);
+        
+        //multiple words: matched
+        assertFindCommandBehavior(new String[]{"Amy", "Bill", "Destiny"}, TestUtil.createList(td.amy, td.bill, td.candy));
     }
+
 
     /**
      * Executes the find command, and checks that the execution was what we had expected.
      */
-    private void assertFindCommandBehavior(String[] keywords, List<ReadOnlyPerson> expectedPersonList, AddressBook actualAddressBook) {
+    private void assertFindCommandBehavior(String[] keywords, List<ReadOnlyPerson> expectedPersonList) {
         FindCommand command = createFindCommand(keywords);
         CommandResult result = command.execute();
         
-        AddressBook expectedAddressBook = new TypicalPersons().getTypicalAddressBook();
-        
         assertEquals(Command.getMessageForPersonListShownSummary(expectedPersonList), result.feedbackToUser);
-        assertEquals(expectedAddressBook, actualAddressBook);
     }
 
     private FindCommand createFindCommand(String[] keywords) {
