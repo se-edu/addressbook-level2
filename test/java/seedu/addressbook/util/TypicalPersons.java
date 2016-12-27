@@ -2,39 +2,50 @@ package seedu.addressbook.util;
 
 import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.exception.IllegalValueException;
+import seedu.addressbook.data.person.Address;
+import seedu.addressbook.data.person.Email;
+import seedu.addressbook.data.person.Name;
 import seedu.addressbook.data.person.Person;
+import seedu.addressbook.data.person.Phone;
+import seedu.addressbook.data.tag.UniqueTagList;
 
 /**
  * Class to generate typical test persons
  */
 public class TypicalPersons {
 
-    public static Person amy() throws IllegalValueException {
-        return new PersonBuilder().withName("Amy Buck").withPublicPhone("91119111")
-                .withPublicEmail("ab@gmail.com").withPublicAddress("1 Clementi Road").build();
-    }
+    public Person amy, bill, candy;
     
-    public static Person bill() throws IllegalValueException {
-        return new PersonBuilder().withName("Bill Clint").withPublicPhone("92229222")
-                .withPublicEmail("bc@gmail.com").withPrivateAddress("2 Clementi Road").build();
-    }
-    
-    public static Person candy() throws IllegalValueException {
-        return new PersonBuilder().withName("Candy Destiny").withPrivatePhone("93339333")
-                .withPublicEmail("cd@gmail.com").withPublicAddress("3 Clementi Road").build();
+    public TypicalPersons() {
+        try {
+            amy =  new Person(new Name("Amy Buck"), new Phone("91119111", false), new Email("ab@gmail.com", false), 
+                    new Address("1 Clementi Road", false), new UniqueTagList());
+            bill =  new Person(new Name("Bill Clint"), new Phone("92229222", false), new Email("bc@gmail.com", false), 
+                    new Address("2 Clementi Road", false), new UniqueTagList());
+            candy =  new Person(new Name("Candy Destiny"), new Phone("93339333", false), new Email("cd@gmail.com", false), 
+                    new Address("3 Clementi Road", false), new UniqueTagList());
+        } catch (IllegalValueException e) {
+            e.printStackTrace();
+            assert false : "not possible";
+        }
+        
+              
     }
    
     private void loadAddressBookWithSampleData(AddressBook ab) {        
         try {
-            Person[] sampleData = new Person[] {amy(), bill(), candy()};
-            for (Person p : sampleData) {
+            for (Person p : this.getTypicalPersons()) {
                 ab.addPerson(new Person(p));
             }
         } catch (IllegalValueException e) {
             assert false : "not possible";
         } 
     }
-
+    
+    public Person[] getTypicalPersons() {
+        return new Person[]{amy, bill, candy};
+    }
+    
     public AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
         loadAddressBookWithSampleData(ab);
