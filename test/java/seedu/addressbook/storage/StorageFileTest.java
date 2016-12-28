@@ -78,8 +78,7 @@ public class StorageFileTest {
     // getPath() method in StorageFile class is trivial so it is not tested
 
     /**
-     * Asserts that the contents of two storage files are the same. Ensures text 
-     * file for test data is properly structured and saved.
+     * Asserts that the contents of two storage files are the same.
      */
     private void assertStorageFilesEqual(StorageFile sf1, StorageFile sf2) throws Exception {
         assertTextFilesEqual(Paths.get(sf1.getPath()), Paths.get(sf2.getPath()));
