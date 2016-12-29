@@ -17,9 +17,6 @@ import seedu.addressbook.data.person.ReadOnlyPerson;
 import seedu.addressbook.util.TestUtil;
 import seedu.addressbook.util.TypicalPersons;
 
-/**
- * Test class for the Find Command
- */
 public class FindCommandTest {
 
     private AddressBook addressBook;
@@ -45,12 +42,18 @@ public class FindCommandTest {
         assertFindCommandBehavior(new String[]{"my"}, EMPTY_LIST);
         
         //multiple words: matched
-        assertFindCommandBehavior(new String[]{"Amy", "Bill", "Destiny"}, TestUtil.createList(td.amy, td.bill, td.candy));
+        assertFindCommandBehavior(new String[]{"Amy", "Bill", "Candy", "Destiny"}, TestUtil.createList(td.amy, td.bill, td.candy));
+        
+        //repeated keywords: matched
+        assertFindCommandBehavior(new String[]{"Amy", "Amy"}, TestUtil.createList(td.amy));
+        
+        //Keyword matching a word in address: not matched
+        assertFindCommandBehavior(new String[]{"Clementi"}, EMPTY_LIST);
+        
     }
 
-
     /**
-     * Executes the find command, and checks that the execution was what we had expected.
+     * Executes the find command for the given keywords and verifies the result matches the persons in the expectedPersonList exactly.
      */
     private void assertFindCommandBehavior(String[] keywords, List<ReadOnlyPerson> expectedPersonList) {
         FindCommand command = createFindCommand(keywords);
