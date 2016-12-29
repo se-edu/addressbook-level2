@@ -166,5 +166,4 @@ public class UniqueTagList implements Iterable<Tag> {
                 || (other instanceof UniqueTagList // instanceof handles nulls
                         && this.internalList.equals(((UniqueTagList) other).internalList));
     }
-
 }

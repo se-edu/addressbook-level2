@@ -49,7 +49,6 @@ public class FindCommandTest {
         
         //Keyword matching a word in address: not matched
         assertFindCommandBehavior(new String[]{"Clementi"}, EMPTY_LIST);
-        
     }
 
     /**
