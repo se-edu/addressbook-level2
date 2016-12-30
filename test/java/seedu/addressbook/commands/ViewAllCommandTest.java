@@ -14,9 +14,10 @@ import seedu.addressbook.data.person.Name;
 import seedu.addressbook.data.person.Person;
 import seedu.addressbook.data.person.Phone;
 import seedu.addressbook.data.person.ReadOnlyPerson;
-import seedu.addressbook.data.tag.Tag;
 import seedu.addressbook.data.tag.UniqueTagList;
 import seedu.addressbook.util.TestUtil;
+import seedu.addressbook.util.TypicalPersons;
+
 import static seedu.addressbook.util.TestUtil.assertCommandResult;
 
 public class ViewAllCommandTest {
@@ -28,23 +29,13 @@ public class ViewAllCommandTest {
 
     @Before
     public void setUp() throws Exception {
-        Person johnDoe = new Person(new Name("John Doe"),
-                                    new Phone("98765432", false),
-                                    new Email("johnd@gmail.com", false),
-                                    new Address("John street, block 123, #01-01", false),
-                                    new UniqueTagList(Collections.emptySet()));
-        Person betsyCrowe = new Person(new Name("Betsy Crowe"),
-                                       new Phone("1234567", true),
-                                       new Email("betsycrowe@gmail.com", false),
-                                       new Address("Newgate Prison", true),
-                                       new UniqueTagList(new Tag("friend"), new Tag("criminal")));
-
         emptyAddressBook = TestUtil.createAddressBook();
-        addressBook = TestUtil.createAddressBook(johnDoe, betsyCrowe);
+        addressBook = TestUtil.createAddressBook();
+        TypicalPersons.loadAddressBookWithSampleData(addressBook);
 
         emptyDisplayList = TestUtil.createList();
-        listWithAll = TestUtil.createList(johnDoe, betsyCrowe);
-        listWithSome = TestUtil.createList(betsyCrowe);
+        listWithAll = TypicalPersons.getListWithAllPersons();
+        listWithSome = TypicalPersons.getListWithSomePersons();
     }
 
     @Test
@@ -55,7 +46,7 @@ public class ViewAllCommandTest {
         // non-empty addressbook
         assertViewAllErrorInvalidIndex(addressBook, listWithAll, -1);
         assertViewAllErrorInvalidIndex(addressBook, listWithAll, 0);
-        assertViewAllErrorInvalidIndex(addressBook, listWithAll, 3);
+        assertViewAllErrorInvalidIndex(addressBook, listWithAll, listWithAll.size() + 1);
     }
 
     @Test
@@ -72,7 +63,7 @@ public class ViewAllCommandTest {
         assertViewAllErrorPersonNotInAddressBook(emptyAddressBook, listWithAll, 1);
 
         // non-empty addressbook
-        assertViewAllErrorPersonNotInAddressBook(addressBook, listWithAll, 3);
+        assertViewAllErrorPersonNotInAddressBook(addressBook, listWithAll, listWithAll.size());
     }
 
     @Test
