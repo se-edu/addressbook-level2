@@ -22,10 +22,10 @@ import seedu.addressbook.util.TestUtil;
 
 public class ViewCommandTest {
     private AddressBook addressBook;
-    private AddressBook backUpAddressBook;
     private AddressBook emptyAddressBook;
     private List<ReadOnlyPerson> emptyDisplayList;
     private List<ReadOnlyPerson> listWithAll;
+    private List<ReadOnlyPerson> listWithSome;
 
     @Before
     public void setUp() throws Exception {
@@ -42,20 +42,18 @@ public class ViewCommandTest {
 
         emptyAddressBook = TestUtil.createAddressBook();
         addressBook = TestUtil.createAddressBook(johnDoe, betsyCrowe);
-        
+
         emptyDisplayList = TestUtil.createList();
         listWithAll = TestUtil.createList(johnDoe, betsyCrowe);
-        TestUtil.createList(johnDoe);
+        listWithSome = TestUtil.createList(betsyCrowe);
     }
 
     @Test
     public void viewCommand_invalidIndex_returnsInvalidIndexMessage() {
         // empty addressbook
-        backUpAddressBook = TestUtil.clone(emptyAddressBook);
         assertViewErrorInvalidIndex(emptyAddressBook, emptyDisplayList, 1);
 
         // non-empty addressbook
-        backUpAddressBook = TestUtil.clone(addressBook);
         assertViewErrorInvalidIndex(addressBook, listWithAll, -1);
         assertViewErrorInvalidIndex(addressBook, listWithAll, 0);
         assertViewErrorInvalidIndex(addressBook, listWithAll, 3);
@@ -63,7 +61,7 @@ public class ViewCommandTest {
 
     @Test
     public void viewCommand_personNotInAddressBook_returnsPersonNotInAddressBookMessage() throws Exception {
-        // person not in addressbook
+        // generate person not in addressbook, add to displayList
         Person someone = new Person(new Name("me"),
                                     new Phone("123", true),
                                     new Email("some@hey.go", true),
@@ -72,29 +70,28 @@ public class ViewCommandTest {
         listWithAll.add(someone);
 
         // empty addressbook
-        backUpAddressBook = TestUtil.clone(emptyAddressBook);
         assertViewErrorPersonNotInAddressBook(emptyAddressBook, listWithAll, 1);
 
         // non-empty addressbook
-        backUpAddressBook = TestUtil.clone(addressBook);
         assertViewErrorPersonNotInAddressBook(addressBook, listWithAll, 3);
     }
 
     @Test
     public void viewCommand_validIndex_returnsPersonDetails() {
-        backUpAddressBook = TestUtil.clone(addressBook);
         // person with no private information
         assertViewSuccess(addressBook, listWithAll, 1);
-        
+
         // person with some private information
         assertViewSuccess(addressBook, listWithAll, 2);
 
+        // addressbook has more people than displayList
+        assertViewSuccess(addressBook, listWithSome, 1);
     }
 
     /**
      * Creates a new view command.
      *
-     * @param targetVisibleIndex of the person
+     * @param Index of the person in the displayed list
      */
     private Command generateViewCommand(AddressBook addressBook, List<ReadOnlyPerson> displayList, int index) {
 
@@ -104,6 +101,10 @@ public class ViewCommandTest {
         return command;
     }
 
+    /**
+     * Asserts that the details person at specific index can be successfully retrieved
+     * and displayed.
+     */
     private void assertViewSuccess(AddressBook addressBook, List<ReadOnlyPerson> list, int index) {
         String expectedMessage = String.format(ViewCommand.MESSAGE_VIEW_PERSON_DETAILS, list.get(index - 1).getAsTextHidePrivate());
 
@@ -111,6 +112,10 @@ public class ViewCommandTest {
         assertCommandResult(command, expectedMessage, addressBook);
     }
 
+    /**
+     * Asserts that the details of person at specific index cannot be retrieved due to
+     * invalid index.
+     */
     private void assertViewErrorInvalidIndex(AddressBook addressBook, List<ReadOnlyPerson> list, int index) {
         String expectedMessage = Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 
@@ -118,6 +123,10 @@ public class ViewCommandTest {
         assertCommandResult(command, expectedMessage, addressBook);
     }
 
+    /**
+     * Asserts that the details of person at specific index cannot be retrieved due to
+     * person not existing in the addressbook.
+     */
     private void assertViewErrorPersonNotInAddressBook(AddressBook addressBook, List<ReadOnlyPerson> list, int index) {
         String expectedMessage = Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK;
 
@@ -130,6 +139,7 @@ public class ViewCommandTest {
      */
     private void assertCommandResult(Command command, String expectedMessage,
                                         AddressBook addressBook) {
+        AddressBook backUpAddressBook = TestUtil.clone(addressBook);
         CommandResult result = command.execute();
 
         // asserts the result message is correct as expected
