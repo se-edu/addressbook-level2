@@ -1,10 +1,13 @@
 package seedu.addressbook.util;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import seedu.addressbook.commands.Command;
+import seedu.addressbook.commands.CommandResult;
 import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.data.person.Address;
@@ -59,5 +62,19 @@ public class TestUtil {
             fail("test person data should be valid by definition");
             return null;
         }
+    }
+    
+    /**
+     * Executes the command, and asserts the result message is as expected.
+     */
+    public static void assertCommandResult(Command command, String expectedMessage, AddressBook addressBook, 
+            AddressBook expectedAddressBook) {
+        CommandResult result = command.execute();
+
+        // asserts the result message is correct as expected
+        assertEquals(expectedMessage, result.feedbackToUser);
+
+        // TODO: overwrite equals method in AddressBook and replace with equals method below 
+        assertEquals(addressBook.getAllPersons(), expectedAddressBook.getAllPersons());
     }
 }

@@ -1,7 +1,5 @@
 package seedu.addressbook.commands;
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.Collections;
 import java.util.List;
 
@@ -19,6 +17,7 @@ import seedu.addressbook.data.person.ReadOnlyPerson;
 import seedu.addressbook.data.tag.Tag;
 import seedu.addressbook.data.tag.UniqueTagList;
 import seedu.addressbook.util.TestUtil;
+import static seedu.addressbook.util.TestUtil.assertCommandResult;
 
 public class ViewAllCommandTest {
     private AddressBook addressBook;
@@ -104,10 +103,11 @@ public class ViewAllCommandTest {
      * and displayed.
      */
     private void assertViewAllSuccess(AddressBook addressBook, List<ReadOnlyPerson> list, int index) {
-        String expectedMessage = String.format(ViewAllCommand.MESSAGE_VIEW_PERSON_DETAILS, list.get(index - 1).getAsTextShowAll());
+        String expectedMessage = String.format(ViewAllCommand.MESSAGE_VIEW_PERSON_DETAILS,
+                                               list.get(index - 1).getAsTextShowAll());
 
         Command command = generateViewAllCommand(addressBook, list, index);
-        assertCommandResult(command, expectedMessage, addressBook);
+        assertCommandResult(command, expectedMessage, addressBook, TestUtil.clone(addressBook));
     }
 
     /**
@@ -118,7 +118,7 @@ public class ViewAllCommandTest {
         String expectedMessage = Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 
         Command command = generateViewAllCommand(addressBook, list, index);
-        assertCommandResult(command, expectedMessage, addressBook);
+        assertCommandResult(command, expectedMessage, addressBook, TestUtil.clone(addressBook));
     }
 
     /**
@@ -129,22 +129,6 @@ public class ViewAllCommandTest {
         String expectedMessage = Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK;
 
         Command command = generateViewAllCommand(addressBook, list, index);
-        assertCommandResult(command, expectedMessage, addressBook);
-    }
-
-    /**
-     * Executes the command, and asserts the result message is as expected.
-     */
-    private void assertCommandResult(Command command, String expectedMessage,
-                                        AddressBook addressBook) {
-        AddressBook backUpAddressBook = TestUtil.clone(addressBook);
-        CommandResult result = command.execute();
-
-        // asserts the result message is correct as expected
-        assertEquals(expectedMessage, result.feedbackToUser);
-
-        // asserts the ViewAll command does not mutate the data
-        // TODO: overwrite equals method in AddressBook and replace with equals method below 
-        assertEquals(addressBook.getAllPersons(), backUpAddressBook.getAllPersons());
+        assertCommandResult(command, expectedMessage, addressBook, TestUtil.clone(addressBook));
     }
 }
