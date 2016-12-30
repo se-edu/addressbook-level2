@@ -26,13 +26,11 @@ public class ViewAllCommandTest {
     private List<ReadOnlyPerson> emptyDisplayList;
     private List<ReadOnlyPerson> listWithAll;
     private List<ReadOnlyPerson> listWithSome;
-    
-    private TypicalPersons td;
 
     @Before
     public void setUp() throws Exception {
-        td = new TypicalPersons();
-        
+        TypicalPersons td = new TypicalPersons();
+
         emptyAddressBook = TestUtil.createAddressBook();
         addressBook = td.getTypicalAddressBook();
 
@@ -85,7 +83,6 @@ public class ViewAllCommandTest {
      * Creates a new ViewAll command.
      */
     private Command generateViewAllCommand(AddressBook addressBook, List<ReadOnlyPerson> displayList, int index) {
-
         Command command = new ViewAllCommand(index);
         command.setData(addressBook, displayList);
 

@@ -26,12 +26,10 @@ public class ViewCommandTest {
     private List<ReadOnlyPerson> emptyDisplayList;
     private List<ReadOnlyPerson> listWithAll;
     private List<ReadOnlyPerson> listWithSome;
-    
-    private TypicalPersons td;
 
     @Before
     public void setUp() throws Exception {
-        td = new TypicalPersons();
+        TypicalPersons td = new TypicalPersons();
         
         emptyAddressBook = TestUtil.createAddressBook();
         addressBook = td.getTypicalAddressBook();
@@ -85,7 +83,6 @@ public class ViewCommandTest {
      * Creates a new view command.
      */
     private Command generateViewCommand(AddressBook addressBook, List<ReadOnlyPerson> displayList, int index) {
-
         ViewCommand command = new ViewCommand(index);
         command.setData(addressBook, displayList);
 
