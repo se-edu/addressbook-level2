@@ -89,9 +89,7 @@ public class ViewAllCommandTest {
     }
 
     /**
-     * Creates a new view command.
-     *
-     * @param Index of the person in the displayed list
+     * Creates a new ViewAll command.
      */
     private Command generateViewAllCommand(AddressBook addressBook, List<ReadOnlyPerson> displayList, int index) {
 

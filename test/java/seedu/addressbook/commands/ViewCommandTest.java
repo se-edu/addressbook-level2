@@ -90,8 +90,6 @@ public class ViewCommandTest {
 
     /**
      * Creates a new view command.
-     *
-     * @param Index of the person in the displayed list
      */
     private Command generateViewCommand(AddressBook addressBook, List<ReadOnlyPerson> displayList, int index) {
 
