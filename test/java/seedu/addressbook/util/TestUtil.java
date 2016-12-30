@@ -63,18 +63,4 @@ public class TestUtil {
             return null;
         }
     }
-    
-    /**
-     * Executes the command, and asserts the result message is as expected.
-     */
-    public static void assertCommandResult(Command command, String expectedMessage, AddressBook addressBook, 
-            AddressBook expectedAddressBook) {
-        CommandResult result = command.execute();
-
-        // asserts the result message is correct as expected
-        assertEquals(expectedMessage, result.feedbackToUser);
-
-        // TODO: overwrite equals method in AddressBook and replace with equals method below 
-        assertEquals(addressBook.getAllPersons(), expectedAddressBook.getAllPersons());
-    }
 }
