@@ -8,13 +8,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.data.person.ReadOnlyPerson;
-import seedu.addressbook.util.TestUtil;
 import seedu.addressbook.util.TypicalPersons;
 
 public class FindCommandTest {
