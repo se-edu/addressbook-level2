@@ -26,16 +26,19 @@ public class ViewAllCommandTest {
     private List<ReadOnlyPerson> emptyDisplayList;
     private List<ReadOnlyPerson> listWithAll;
     private List<ReadOnlyPerson> listWithSome;
+    
+    private TypicalPersons td;
 
     @Before
     public void setUp() throws Exception {
+        td = new TypicalPersons();
+        
         emptyAddressBook = TestUtil.createAddressBook();
-        addressBook = TestUtil.createAddressBook();
-        TypicalPersons.loadAddressBookWithSampleData(addressBook);
+        addressBook = td.getTypicalAddressBook();
 
         emptyDisplayList = TestUtil.createList();
-        listWithAll = TypicalPersons.getListWithAllPersons();
-        listWithSome = TypicalPersons.getListWithSomePersons();
+        listWithAll = td.getListWithAllPersons();
+        listWithSome = td.getListWithSomePersons();
     }
 
     @Test

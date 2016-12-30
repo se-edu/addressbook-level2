@@ -1,7 +1,6 @@
 package seedu.addressbook.util;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import seedu.addressbook.data.AddressBook;
@@ -12,71 +11,66 @@ import seedu.addressbook.data.person.Name;
 import seedu.addressbook.data.person.Person;
 import seedu.addressbook.data.person.Phone;
 import seedu.addressbook.data.person.ReadOnlyPerson;
-import seedu.addressbook.data.person.UniquePersonList;
 import seedu.addressbook.data.tag.Tag;
 import seedu.addressbook.data.tag.UniqueTagList;
 
 /**
- *
+ * Class to generate typical test persons
  */
 public class TypicalPersons {
 
-    public static Person johnDoe, selbyWhite, betsyCrowe, steveSam;
-    
-    private static void initialisePersons() {
+    public Person amy, bill, candy, dan;
+
+    public TypicalPersons() {
         try {
-            johnDoe = new Person(new Name("John Doe"),
-                                 new Phone("98765432", false),
-                                 new Email("johnd@gmail.com", false),
-                                 new Address("John street, block 123, #01-01", false),
-                                 new UniqueTagList(Collections.emptySet()));
-            selbyWhite = new Person(new Name("Selby White"),
-                                    new Phone("111344", false),
-                                    new Email("me@haoo.com", true),
-                                    new Address("UK", false),
-                                    new UniqueTagList(Collections.emptySet()));
-            betsyCrowe = new Person(new Name("Betsy Crowe"),
-                                    new Phone("1234567", true),
-                                    new Email("betsycrowe@gmail.com", false),
-                                    new Address("Newgate Prison", true),
-                                    new UniqueTagList(new Tag("friend"), new Tag("criminal")));
-            steveSam = new Person(new Name("Steve Sam"),
-                                  new Phone("1231", true),
-                                  new Email("ab@apple.com", true),
-                                  new Address("Silicon Vally", true),
-                                  new UniqueTagList(new Tag("boss")));
+            amy = new Person(new Name("Amy Buck"), new Phone("91119111", false), new Email("ab@gmail.com", false),
+                    new Address("1 Clementi Road", false), new UniqueTagList());
+            bill = new Person(new Name("Bill Clint"), new Phone("92229222", false), new Email("bc@gmail.com", true),
+                    new Address("2 Clementi Road", false), new UniqueTagList(new Tag("bb")));
+            candy = new Person(new Name("Candy Destiny"), new Phone("93339333", true), new Email("cd@gmail.com", false),
+                    new Address("3 Clementi Road", true), new UniqueTagList(new Tag("a")));
+            dan = new Person(new Name("Dan Smith"), new Phone("12312", true), new Email("d@b", true),
+                    new Address("USA", true), new UniqueTagList(new Tag("c"), new Tag("D")));
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
         }
     }
 
-    public static void loadAddressBookWithSampleData(AddressBook ab) {
+    private void loadAddressBookWithSampleData(AddressBook ab) {
         try {
-            initialisePersons();
-            ab.addPerson(johnDoe);
-            ab.addPerson(selbyWhite);
-            ab.addPerson(betsyCrowe);
-            ab.addPerson(steveSam);
-        } catch (UniquePersonList.DuplicatePersonException e) {
+            for (Person p : this.getTypicalPersons()) {
+                ab.addPerson(new Person(p));
+            }
+        } catch (IllegalValueException e) {
             assert false : "not possible";
         }
     }
-    
-    public static List<ReadOnlyPerson> getListWithAllPersons() {
+
+    public Person[] getTypicalPersons() {
+        return new Person[] { amy, bill, candy };
+    }
+
+    public AddressBook getTypicalAddressBook() {
+        AddressBook ab = new AddressBook();
+        loadAddressBookWithSampleData(ab);
+        return ab;
+    }
+
+    public List<ReadOnlyPerson> getListWithAllPersons() {
         List<ReadOnlyPerson> list = new ArrayList<ReadOnlyPerson>();
-        list.add(johnDoe);
-        list.add(selbyWhite);
-        list.add(betsyCrowe);
-        list.add(steveSam);
+        for (Person p : getTypicalPersons()) {
+            list.add(new Person(p));
+        }
         return list;
     }
-    
-    public static List<ReadOnlyPerson> getListWithSomePersons() {
+
+    public List<ReadOnlyPerson> getListWithSomePersons() {
         List<ReadOnlyPerson> list = new ArrayList<ReadOnlyPerson>();
-        list.add(johnDoe);
-        list.add(selbyWhite);
-        list.add(steveSam);
+        for (Person p : getTypicalPersons()) {
+            list.add(new Person(p));
+        }
+        list.remove(0);
         return list;
     }
 }
