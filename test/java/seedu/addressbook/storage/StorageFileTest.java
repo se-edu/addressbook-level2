@@ -44,14 +44,14 @@ public class StorageFileTest {
     @Test
     public void load_invalidFormat_exceptionThrown() throws Exception {
         // The file contains valid xml data, but does not match the AddressBook class
-        StorageFile storage = getStorage("InvalidData.txt");
+        StorageFile storage = getStorage("InvalidData.xml");
         thrown.expect(StorageOperationException.class);
         storage.load();
     }
 
     @Test
     public void load_validFormat() throws Exception {
-        AddressBook actualAB = getStorage("ValidData.txt").load();
+        AddressBook actualAB = getStorage("ValidData.xml").load();
         AddressBook expectedAB = getTestAddressBook();
 
         // ensure loaded AddressBook is properly constructed with test data
@@ -72,7 +72,7 @@ public class StorageFileTest {
         StorageFile storage = getTempStorage();
         storage.save(ab);
 
-        assertStorageFilesEqual(storage, getStorage("ValidData.txt"));
+        assertStorageFilesEqual(storage, getStorage("ValidData.xml"));
     }
 
     // getPath() method in StorageFile class is trivial so it is not tested
@@ -89,7 +89,7 @@ public class StorageFileTest {
     }
 
     private StorageFile getTempStorage() throws Exception {
-        return new StorageFile(testFolder.getRoot().getPath() + "/" + "temp.txt");
+        return new StorageFile(testFolder.getRoot().getPath() + "/" + "temp.xml");
     }
 
     private AddressBook getTestAddressBook() throws Exception {
