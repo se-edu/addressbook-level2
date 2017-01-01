@@ -9,6 +9,8 @@ import seedu.addressbook.parser.Parser;
 import seedu.addressbook.storage.StorageFile;
 import seedu.addressbook.ui.TextUi;
 
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -26,16 +28,17 @@ public class Main {
     private TextUi ui;
     private StorageFile storage;
     private AddressBook addressBook;
-
+    private PrintStream out;
     /** The list of person shown to the user most recently.  */
     private List<? extends ReadOnlyPerson> lastShownList = Collections.emptyList();
-
-
+    
     public static void main(String... launchArgs) {
         new Main().run(launchArgs);
     }
 
-    /** Runs the program until termination.  */
+    /** Runs the program until termination.  
+     * @throws FileNotFoundException 
+     * @throws InvalidFilePathException */
     public void run(String[] launchArgs) {
         start(launchArgs);
         runCommandLoopUntilExitCommand();
@@ -112,7 +115,7 @@ public class Main {
         } catch (Exception e) {
             ui.showToUser(e.getMessage());
             throw new RuntimeException(e);
-        }
+        } 
     }
 
     /**

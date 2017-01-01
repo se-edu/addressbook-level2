@@ -14,6 +14,8 @@ public class Person implements ReadOnlyPerson {
     private Phone phone;
     private Email email;
     private Address address;
+    public int sequenceNumber;
+    public static int nextSequenceNumber = 0;
 
     private final UniqueTagList tags;
     /**

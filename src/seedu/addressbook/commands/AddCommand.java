@@ -60,6 +60,7 @@ public class AddCommand extends Command {
     @Override
     public CommandResult execute() {
         try {
+        	Person.nextSequenceNumber++;
             addressBook.addPerson(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniquePersonList.DuplicatePersonException dpe) {
