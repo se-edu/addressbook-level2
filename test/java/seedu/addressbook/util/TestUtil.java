@@ -58,7 +58,7 @@ public class TestUtil {
     }
 
     /**
-     * Returns true iff every pair of corresponding elements two iterables are (deeply) identical.
+     * Returns true if every pair of corresponding elements two iterables are (deeply) identical.
      * In other words, the two containers must have the same elements, in the same order.
      */
     public static <T> boolean isIdentical(Iterable<T> firstIterable, Iterable<T> secondIterable) {
@@ -79,7 +79,7 @@ public class TestUtil {
     }
     
     /**
-     * Returns true iff the underlying container behind an iterable is empty.
+     * Returns true if the underlying container behind an iterable is empty.
      */
     public static <T> boolean isEmpty(Iterable<T> it) {
         return !it.iterator().hasNext();

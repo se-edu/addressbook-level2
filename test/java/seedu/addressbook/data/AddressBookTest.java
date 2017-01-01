@@ -244,9 +244,6 @@ public class AddressBookTest {
         assertTrue(isIdentical(allTags, tagsToCheck));
     }
     
-    
-    // Helper Methods
-    
     /**
      * Returns true if the given Tag object if found in the tag list of the given AddressBook.
      */
