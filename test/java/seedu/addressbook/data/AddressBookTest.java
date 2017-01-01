@@ -7,7 +7,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.addressbook.data.exception.ConstraintViolationException;
 import seedu.addressbook.data.person.Address;
 import seedu.addressbook.data.person.Email;
 import seedu.addressbook.data.person.Name;
@@ -199,9 +198,18 @@ public class AddressBookTest {
     }
 
     @Test
-    public void removeTag_tagExistsAndUsed_throwsConstraintViolationException() throws Exception {
-        thrown.expect(ConstraintViolationException.class);
+    public void removeTag_tagExistsAndUsed_removesUsedTagFromPersons() throws Exception {
+        aliceBetsy.setTags(new UniqueTagList(tagMathematician, tagPrizeWinner));
+        bobChaplin.setTags(new UniqueTagList(tagEconomist));
+        
+        int numberOfTagsBeforeRemoval = getSize(defaultAddressBook.getAllTags());
         defaultAddressBook.removeTag(tagMathematician);
+        int numberOfTagsAfterRemoval = getSize(defaultAddressBook.getAllTags());
+        
+        assertTrue(isIdentical(aliceBetsy.getTags(), new UniqueTagList(tagPrizeWinner)));
+        assertTrue(isIdentical(bobChaplin.getTags(), new UniqueTagList(tagEconomist)));
+        assertFalse(defaultAddressBook.containsTag(tagMathematician));
+        assertTrue(numberOfTagsBeforeRemoval == numberOfTagsAfterRemoval + 1);
     }
 
     @Test

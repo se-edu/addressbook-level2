@@ -1,6 +1,5 @@
 package seedu.addressbook.data;
 
-import seedu.addressbook.data.exception.ConstraintViolationException;
 import seedu.addressbook.data.person.*;
 import seedu.addressbook.data.person.UniquePersonList.*;
 import seedu.addressbook.data.tag.UniqueTagList;
@@ -119,13 +118,21 @@ public class AddressBook {
      *
      * @throws TagNotFoundException if no such Tag could be found.
      */
-    public void removeTag(Tag toRemove) throws TagNotFoundException, ConstraintViolationException {
-        for (Person person : allPersons) {
-            if (person.getTags().contains(toRemove)) {
-                throw new ConstraintViolationException("The Tag to be removed is present in a Person object.");
-            }
-        }
+    public void removeTag(Tag toRemove) throws TagNotFoundException {
+        removeTagFromAllPersons(toRemove);
         allTags.remove(toRemove);
+    }
+    
+    private void removeTagFromAllPersons(Tag toRemove) throws TagNotFoundException {
+        for (Person person : allPersons) {
+            UniqueTagList personTagList = person.getTags();
+            
+            if (personTagList.contains(toRemove)) {
+                personTagList.remove(toRemove);
+            }
+            
+            person.setTags(personTagList);
+        }
     }
 
     /**
