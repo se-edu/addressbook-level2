@@ -74,7 +74,7 @@
 || Tags names should be alphanumeric
 || ===================================================
 || Enter command: || [Command entered:  add []\[;] p/12345 e/valid@e.mail a/valid, address]
-|| Person names should be spaces or alphabetic characters
+|| Names should consist of letters, spaces, numbers, ', - or .
 || ===================================================
 || Enter command: || [Command entered:  add Valid Name p/not_numbers e/valid@e.mail a/valid, address]
 || Person phone numbers should only contain numbers
