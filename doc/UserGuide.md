@@ -123,13 +123,13 @@ Address book data are saved in the hard disk automatically after any command tha
 There is no need to save manually.
 
 #### Changing the save location
-Address book data are saved in a file called `addressbook.txt` in the project root folder.
+Address book data are saved in a file called `addressbook.xml` in the project root folder.
 You can change the location by specifying the file path as a program argument.
 
 Example: 
-* `java seedu.addressbook.Main mydata.txt`
+* `java seedu.addressbook.Main mydata.xml`
 
-> The file name must end in `.txt` for it to be acceptable to the program.
+> The file name must end in `.xml` for it to be acceptable to the program.
 >
 > When running the program inside Eclipse, you can set command line parameters 
   before running the program.

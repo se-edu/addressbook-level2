@@ -26,7 +26,7 @@ import java.nio.file.Paths;
 public class StorageFile {
 
     /** Default file path used if the user doesn't provide the file name. */
-    public static final String DEFAULT_STORAGE_FILEPATH = "addressbook.txt";
+    public static final String DEFAULT_STORAGE_FILEPATH = "addressbook.xml";
 
     /* Note: Note the use of nested classes below.
      * More info https://docs.oracle.com/javase/tutorial/java/javaOO/nested.html
@@ -74,16 +74,16 @@ public class StorageFile {
 
         path = Paths.get(filePath);
         if (!isValidPath(path)) {
-            throw new InvalidStorageFilePathException("Storage file should end with '.txt'");
+            throw new InvalidStorageFilePathException("Storage file should end with '.xml'");
         }
     }
 
     /**
      * Returns true if the given path is acceptable as a storage file.
-     * The file path is considered acceptable if it ends with '.txt'
+     * The file path is considered acceptable if it ends with '.xml'
      */
     private static boolean isValidPath(Path filePath) {
-        return filePath.toString().endsWith(".txt");
+        return filePath.toString().endsWith(".xml");
     }
 
     /**
