@@ -66,11 +66,8 @@ public class TypicalPersons {
      }
 
      public List<ReadOnlyPerson> getListWithSomePersons() {
-         List<ReadOnlyPerson> list = new ArrayList<ReadOnlyPerson>();
-         for (Person p : getTypicalPersons()) {
-             list.add(new Person(p));
-         }
-         list.remove(0);
+         List<ReadOnlyPerson> list = getListWithAllPersons();
+         list.remove(0); //remove a person in the list
          return list;
      }
  }
