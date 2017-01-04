@@ -101,12 +101,14 @@ public class ViewCommandTest {
      * and displayed.
      */
     private void assertViewSuccess(AddressBook addressBook, List<ReadOnlyPerson> list, int index) {
+        ReadOnlyPerson personToBeViewed = list.get(index - 1); // -1 is because index is one-indexed
+
         String expectedMessage = String.format(ViewCommand.MESSAGE_VIEW_PERSON_DETAILS,
-                                               list.get(index - 1).getAsTextHidePrivate());
+                                               personToBeViewed.getAsTextHidePrivate());
         assertViewCommandBehaviour(addressBook, list, index, expectedMessage);
 
         expectedMessage = String.format(ViewCommand.MESSAGE_VIEW_PERSON_DETAILS,
-                                        list.get(index - 1).getAsTextShowAll());
+                                        personToBeViewed.getAsTextShowAll());
         assertViewAllCommandBehaviour(addressBook, list, index, expectedMessage);
     }
 
