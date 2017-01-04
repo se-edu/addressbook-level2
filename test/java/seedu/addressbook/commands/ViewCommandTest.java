@@ -136,7 +136,7 @@ public class ViewCommandTest {
      */
     private void assertViewCommandBehaviour(AddressBook addressBook, List<ReadOnlyPerson> list, int index, String expectedMessage) {
         Command command = generateViewCommand(addressBook, list, index);
-        assertCommandResult(command, expectedMessage, addressBook, TestUtil.clone(addressBook));
+        assertCommandResult(command, addressBook, TestUtil.clone(addressBook), expectedMessage);
     }
 
     /**
@@ -144,6 +144,6 @@ public class ViewCommandTest {
      */
     private void assertViewAllCommandBehaviour(AddressBook addressBook, List<ReadOnlyPerson> list, int index, String expectedMessage) {
         Command command = generateViewAllCommand(addressBook, list, index);
-        assertCommandResult(command, expectedMessage, addressBook, TestUtil.clone(addressBook));
+        assertCommandResult(command, addressBook, TestUtil.clone(addressBook), expectedMessage);
     }
 }
