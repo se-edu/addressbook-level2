@@ -99,8 +99,10 @@ public class ViewCommandTest {
     }
 
     /**
-     * Asserts that the details of the person at specific index can be successfully retrieved
-     * and displayed.
+     * Asserts that both a ViewCommand and a ViewAllCommand can retrieve from 
+     * the {@code addressBook} details of the person at the given {@code index} in the given {@code list}.
+     * 
+     * @param index one-indexed position of the target person in the list
      */
     private void assertViewSuccess(AddressBook addressBook, List<ReadOnlyPerson> list, int index) {
         ReadOnlyPerson personToBeViewed = list.get(index - 1); // -1 is because index is one-indexed
@@ -131,7 +133,7 @@ public class ViewCommandTest {
     }
 
     /**
-     * Asserts that the Viewcommand and ViewAllcommand reports error for given input
+     * Asserts that the Viewcommand and ViewAllcommand reports the given error for the given input
      */
     private void assertCommandError(AddressBook addressBook, List<ReadOnlyPerson> list, int index,
                                                                             String expectedMessage) {
@@ -140,7 +142,7 @@ public class ViewCommandTest {
     }
 
     /**
-     * Asserts that the View command gives correct feedback information
+     * Asserts that the View command gives given feedback information
      */
     private void assertViewCommandBehaviour(AddressBook addressBook, List<ReadOnlyPerson> list, int index, String expectedMessage) {
         Command command = generateViewCommand(addressBook, list, index);
@@ -148,7 +150,7 @@ public class ViewCommandTest {
     }
 
     /**
-     * Asserts that the ViewAll command gives correct feedback information
+     * Asserts that the ViewAll command gives given feedback information
      */
     private void assertViewAllCommandBehaviour(AddressBook addressBook, List<ReadOnlyPerson> list, int index, String expectedMessage) {
         Command command = generateViewAllCommand(addressBook, list, index);

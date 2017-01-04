@@ -1,5 +1,5 @@
 package seedu.addressbook.util;
- 
+
 import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.data.person.Address;
@@ -52,4 +52,5 @@ public class TypicalPersons {
         loadAddressBookWithSampleData(ab);
         return ab;
     }
+
 }
