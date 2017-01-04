@@ -41,7 +41,7 @@ public class TestUtil {
     /**
      * Creates a list of persons.
      */
-    public static List<ReadOnlyPerson> createList(Person... persons) {
+    public static List<ReadOnlyPerson> createList(Person...persons) {
         List<ReadOnlyPerson> list = new ArrayList<ReadOnlyPerson>();
 
         for (Person person : persons) {

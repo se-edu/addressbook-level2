@@ -1,6 +1,7 @@
 package seedu.addressbook.commands;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -34,8 +35,8 @@ public class ViewCommandTest {
 
         TypicalPersons td = new TypicalPersons();
         addressBook = td.getTypicalAddressBook();
-        listWithAll = td.getListWithAllPersons();
-        listWithSome = td.getList(td.amy, td.candy, td.dan);
+        listWithAll = Arrays.asList(td.getTypicalPersons());
+        listWithSome = Arrays.asList(td.amy, td.candy, td.dan);
     }
 
     @Test
@@ -52,11 +53,12 @@ public class ViewCommandTest {
     @Test
     public void viewCommand_personNotInAddressBook_returnsPersonNotInAddressBookMessage() throws Exception {
         // generate person not in addressbook, add to displayList
-        Person someone = new Person(new Name("me"),
-                                    new Phone("123", true),
-                                    new Email("some@hey.go", true),
-                                    new Address("nus", false),
-                                    new UniqueTagList(Collections.emptySet()));
+        ReadOnlyPerson someone = new Person(new Name("me"),
+                                            new Phone("123", true),
+                                            new Email("some@hey.go", true),
+                                            new Address("nus", false),
+                                            new UniqueTagList(Collections.emptySet()));
+        listWithAll = new ArrayList<ReadOnlyPerson>(listWithAll);
         listWithAll.add(someone);
 
         // empty addressbook

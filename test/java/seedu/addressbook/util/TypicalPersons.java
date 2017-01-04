@@ -56,20 +56,4 @@ public class TypicalPersons {
         loadAddressBookWithSampleData(ab);
         return ab;
     }
-
-    public List<ReadOnlyPerson> getListWithAllPersons() {
-        List<ReadOnlyPerson> list = new ArrayList<ReadOnlyPerson>();
-        for (Person p : getTypicalPersons()) {
-            list.add(new Person(p));
-        }
-        return list;
-    }
-
-    public List<ReadOnlyPerson> getList(ReadOnlyPerson... personsToInclude) {
-        List<ReadOnlyPerson> list = new ArrayList<ReadOnlyPerson>();
-        for (ReadOnlyPerson p : personsToInclude) {
-            list.add(new Person(p));
-        }
-        return list;
-    }
 }
