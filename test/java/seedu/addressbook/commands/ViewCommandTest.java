@@ -78,7 +78,7 @@ public class ViewCommandTest {
         assertViewSuccess(addressBook, listWithAll, 4);
 
         // addressbook has more people than displayList
-        // This can happen when delete from filtered list caused by some commands(eg. FindCommand)
+        // This can happen when view from filtered list caused by some commands(eg. FindCommand)
         assertViewSuccess(addressBook, listWithSome, 1);
     }
 
