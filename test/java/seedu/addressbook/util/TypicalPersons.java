@@ -13,7 +13,7 @@ import seedu.addressbook.data.person.Phone;
 import seedu.addressbook.data.person.ReadOnlyPerson;
 import seedu.addressbook.data.tag.Tag;
 import seedu.addressbook.data.tag.UniqueTagList;
- 
+
 /**
  * Class to generate typical test persons
  */
@@ -65,9 +65,11 @@ public class TypicalPersons {
         return list;
     }
 
-    public List<ReadOnlyPerson> getListWithSomePersons() {
-        List<ReadOnlyPerson> list = getListWithAllPersons();
-        list.remove(0); //remove a person in the list
+    public List<ReadOnlyPerson> getList(ReadOnlyPerson... personsToInclude) {
+        List<ReadOnlyPerson> list = new ArrayList<ReadOnlyPerson>();
+        for (ReadOnlyPerson p : personsToInclude) {
+            list.add(new Person(p));
+        }
         return list;
     }
 }

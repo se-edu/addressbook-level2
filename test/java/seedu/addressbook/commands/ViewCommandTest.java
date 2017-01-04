@@ -35,7 +35,7 @@ public class ViewCommandTest {
         TypicalPersons td = new TypicalPersons();
         addressBook = td.getTypicalAddressBook();
         listWithAll = td.getListWithAllPersons();
-        listWithSome = td.getListWithSomePersons();
+        listWithSome = td.getList(td.amy, td.candy, td.dan);
     }
 
     @Test
