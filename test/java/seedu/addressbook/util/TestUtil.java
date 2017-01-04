@@ -82,7 +82,7 @@ public class TestUtil {
      * Executes the command, and asserts the result message is as expected.
      */
     public static void assertCommandResult(Command command, String expectedMessage, AddressBook addressBook, 
-            AddressBook expectedAddressBook) {
+                                                                             AddressBook expectedAddressBook) {
         CommandResult result = command.execute();
 
         // asserts the result message is correct as expected
