@@ -100,7 +100,7 @@ public class ViewCommandTest {
         String expectedMessage = String.format(ViewCommand.MESSAGE_VIEW_PERSON_DETAILS,
                                                list.get(index - 1).getAsTextHidePrivate());
         assertViewCommandBehaviour(addressBook, list, index, expectedMessage);
-        
+
         expectedMessage = String.format(ViewCommand.MESSAGE_VIEW_PERSON_DETAILS,
                                         list.get(index - 1).getAsTextShowAll());
         assertViewAllCommandBehaviour(addressBook, list, index, expectedMessage);

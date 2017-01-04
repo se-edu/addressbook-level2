@@ -26,9 +26,7 @@ import seedu.addressbook.data.tag.UniqueTagList;
 public class TestUtil {
     /**
      * Creates an address book containing the given persons.
-     * 
-     * @throws DuplicatePersonException
-     *             if two or more given persons are the same
+     * @throws DuplicatePersonException if two or more given persons are the same
      */
     public static AddressBook createAddressBook(Person... persons) throws DuplicatePersonException {
         AddressBook addressBook = new AddressBook();
@@ -43,7 +41,7 @@ public class TestUtil {
     /**
      * Creates a list of persons.
      */
-    public static List<ReadOnlyPerson> createList(Person... persons) {
+    public static List<ReadOnlyPerson> createList(Person...persons) {
         List<ReadOnlyPerson> list = new ArrayList<ReadOnlyPerson>();
 
         for (Person person : persons) {
@@ -54,17 +52,16 @@ public class TestUtil {
     }
 
     /**
-     * Creates a copy of the original address book with the same entries of
-     * Persons and Tags. The Persons and Tags are not cloned.
+     * Creates a copy of the original address book with the same entries
+     * of Persons and Tags. The Persons and Tags are not cloned.
      */
     public static AddressBook clone(AddressBook addressBook) {
         return new AddressBook(addressBook.getAllPersons(), addressBook.getAllTags());
     }
-
     public static Person generateTestPerson() {
         try {
-            return new Person(new Name(Name.EXAMPLE), new Phone(Phone.EXAMPLE, false), new Email(Email.EXAMPLE, true),
-                    new Address(Address.EXAMPLE, false), new UniqueTagList());
+            return new Person(new Name(Name.EXAMPLE), new Phone(Phone.EXAMPLE, false),
+                    new Email(Email.EXAMPLE, true), new Address(Address.EXAMPLE, false), new UniqueTagList());
         } catch (IllegalValueException e) {
             fail("test person data should be valid by definition");
             return null;
@@ -91,8 +88,7 @@ public class TestUtil {
         // asserts the result message is correct as expected
         assertEquals(expectedMessage, result.feedbackToUser);
 
-        // TODO: overwrite equals method in AddressBook and replace with equals
-        // method below
+        // TODO: overwrite equals method in AddressBook and replace with equals method below 
         assertEquals(addressBook.getAllPersons(), expectedAddressBook.getAllPersons());
     }
 }
