@@ -1,5 +1,6 @@
 package seedu.addressbook.commands;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -23,7 +24,7 @@ import static seedu.addressbook.util.TestUtil.assertCommandResult;
 public class ViewCommandTest {
     private AddressBook addressBook;
     private AddressBook emptyAddressBook;
-    private List<ReadOnlyPerson> emptyDisplayList = TestUtil.createList();
+    private List<ReadOnlyPerson> emptyDisplayList = new ArrayList<ReadOnlyPerson>();
     private List<ReadOnlyPerson> listWithAll;
     private List<ReadOnlyPerson> listWithSome;
 
