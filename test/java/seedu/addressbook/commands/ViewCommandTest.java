@@ -25,8 +25,8 @@ import static seedu.addressbook.util.TestUtil.assertCommandResult;
 public class ViewCommandTest {
     private AddressBook addressBook;
     private AddressBook emptyAddressBook;
-    private List<ReadOnlyPerson> emptyDisplayList = new ArrayList<ReadOnlyPerson>();
-    private List<ReadOnlyPerson> listWithAll;
+    private List<ReadOnlyPerson> emptyDisplayList = Collections.emptyList();
+    private List<ReadOnlyPerson> displayListWithAllTypicalPersons;
     private List<ReadOnlyPerson> listWithSome;
 
     @Before
@@ -35,7 +35,7 @@ public class ViewCommandTest {
 
         TypicalPersons td = new TypicalPersons();
         addressBook = td.getTypicalAddressBook();
-        listWithAll = Arrays.asList(td.getTypicalPersons());
+        displayListWithAllTypicalPersons = Arrays.asList(td.getTypicalPersons());
         listWithSome = Arrays.asList(td.amy, td.candy, td.dan);
     }
 
@@ -45,9 +45,9 @@ public class ViewCommandTest {
         assertViewErrorInvalidIndex(emptyAddressBook, emptyDisplayList, 1);
 
         // non-empty addressbook
-        assertViewErrorInvalidIndex(addressBook, listWithAll, -1);
-        assertViewErrorInvalidIndex(addressBook, listWithAll, 0);
-        assertViewErrorInvalidIndex(addressBook, listWithAll, listWithAll.size() + 1);
+        assertViewErrorInvalidIndex(addressBook, displayListWithAllTypicalPersons, -1);
+        assertViewErrorInvalidIndex(addressBook, displayListWithAllTypicalPersons, 0);
+        assertViewErrorInvalidIndex(addressBook, displayListWithAllTypicalPersons, displayListWithAllTypicalPersons.size() + 1);
     }
 
     @Test
@@ -58,26 +58,26 @@ public class ViewCommandTest {
                                             new Email("some@hey.go", true),
                                             new Address("nus", false),
                                             new UniqueTagList(Collections.emptySet()));
-        listWithAll = new ArrayList<ReadOnlyPerson>(listWithAll);
-        listWithAll.add(someone);
+        List <ReadOnlyPerson> displayListWithExtraPerson = new ArrayList<ReadOnlyPerson>(displayListWithAllTypicalPersons);
+        displayListWithExtraPerson.add(someone);
 
         // empty addressbook
-        assertViewErrorPersonNotInAddressBook(emptyAddressBook, listWithAll, 1);
+        assertViewErrorPersonNotInAddressBook(emptyAddressBook, displayListWithExtraPerson, 1);
 
         // non-empty addressbook
-        assertViewErrorPersonNotInAddressBook(addressBook, listWithAll, listWithAll.size());
+        assertViewErrorPersonNotInAddressBook(addressBook, displayListWithExtraPerson, displayListWithExtraPerson.size());
     }
 
     @Test
     public void viewCommand_validIndex_returnsPersonDetails() {
         // person with no private information
-        assertViewSuccess(addressBook, listWithAll, 1);
+        assertViewSuccess(addressBook, displayListWithAllTypicalPersons, 1);
 
         // person with some private information
-        assertViewSuccess(addressBook, listWithAll, 2);
+        assertViewSuccess(addressBook, displayListWithAllTypicalPersons, 2);
 
         // person with all private information
-        assertViewSuccess(addressBook, listWithAll, 4);
+        assertViewSuccess(addressBook, displayListWithAllTypicalPersons, 4);
 
         // addressbook has more people than displayList
         // This can happen when view from filtered list caused by some commands(eg. FindCommand)
