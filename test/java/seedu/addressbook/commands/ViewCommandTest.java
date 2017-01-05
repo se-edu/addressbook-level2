@@ -99,9 +99,9 @@ public class ViewCommandTest {
     }
 
     /**
-     * Asserts that both a ViewCommand and a ViewAllCommand can retrieve from 
+     * Asserts that both a ViewCommand and a ViewAllCommand can retrieve from
      * the {@code addressBook} details of the person at the given {@code index} in the given {@code list}.
-     * 
+     *
      * @param index one-indexed position of the target person in the list
      */
     private void assertViewSuccess(AddressBook addressBook, List<ReadOnlyPerson> list, int index) {

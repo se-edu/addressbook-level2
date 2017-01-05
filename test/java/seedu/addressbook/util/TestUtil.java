@@ -93,7 +93,7 @@ public class TestUtil {
         // TODO: overwrite equals method in CommandResult and replace with equals method below
         assertEquals(expectedMessage, result.feedbackToUser);
 
-        // TODO: overwrite equals method in AddressBook and replace with equals method below 
+        // TODO: overwrite equals method in AddressBook and replace with equals method below
         assertEquals(addressBook.getAllPersons(), expectedAddressBook.getAllPersons());
     }
 }
