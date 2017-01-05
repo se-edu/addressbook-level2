@@ -26,13 +26,17 @@ import seedu.addressbook.data.tag.UniqueTagList;
 public class TestUtil {
     /**
      * Creates an address book containing the given persons.
-     * @throws DuplicatePersonException if two or more given persons are the same
      */
-    public static AddressBook createAddressBook(Person... persons) throws DuplicatePersonException {
+    public static AddressBook createAddressBook(Person... persons) {
         AddressBook addressBook = new AddressBook();
 
         for (Person person : persons) {
-            addressBook.addPerson(person);
+            try {
+                addressBook.addPerson(person);
+            } catch (DuplicatePersonException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
 
         return addressBook;
@@ -86,6 +90,7 @@ public class TestUtil {
         CommandResult result = command.execute();
 
         // asserts the result message is correct as expected
+        // TODO: overwrite equals method in CommandResult and replace with equals method below
         assertEquals(expectedMessage, result.feedbackToUser);
 
         // TODO: overwrite equals method in AddressBook and replace with equals method below 
