@@ -40,7 +40,7 @@ public class ViewCommandTest {
     }
 
     @Test
-    public void viewCommand_invalidIndex_returnsInvalidIndexMessage() {
+    public void execute_invalidIndex_returnsInvalidIndexMessage() {
         // empty addressbook
         assertViewErrorInvalidIndex(emptyAddressBook, emptyDisplayList, 1);
 
@@ -51,7 +51,7 @@ public class ViewCommandTest {
     }
 
     @Test
-    public void viewCommand_personNotInAddressBook_returnsPersonNotInAddressBookMessage() throws Exception {
+    public void execute_personNotInAddressBook_returnsPersonNotInAddressBookMessage() throws Exception {
         // generate person not in addressbook, add to displayList
         ReadOnlyPerson someone = new Person(new Name("me"),
                                             new Phone("123", true),
@@ -69,7 +69,7 @@ public class ViewCommandTest {
     }
 
     @Test
-    public void viewCommand_validIndex_returnsPersonDetails() {
+    public void execute_validIndex_returnsPersonDetails() {
         // person with no private information
         assertViewSuccess(addressBook, displayListWithAllTypicalPersons, 1);
 
@@ -84,16 +84,16 @@ public class ViewCommandTest {
         assertViewSuccess(addressBook, listWithSome, 1);
     }
 
-    private Command generateViewCommand(AddressBook addressBook, List<ReadOnlyPerson> displayList, int index) {
-        ViewCommand command = new ViewCommand(index);
-        command.setData(addressBook, displayList);
+    private Command generateViewCommand(AddressBook addressBook, List<ReadOnlyPerson> relevantPersons, int targetIndex) {
+        Command command = new ViewCommand(targetIndex);
+        command.setData(addressBook, relevantPersons);
 
         return command;
     }
 
-    private Command generateViewAllCommand(AddressBook addressBook, List<ReadOnlyPerson> displayList, int index) {
-        Command command = new ViewAllCommand(index);
-        command.setData(addressBook, displayList);
+    private Command generateViewAllCommand(AddressBook addressBook, List<ReadOnlyPerson> relevantPersons, int targetIndex) {
+        Command command = new ViewAllCommand(targetIndex);
+        command.setData(addressBook, relevantPersons);
 
         return command;
     }
