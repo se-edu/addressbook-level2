@@ -136,7 +136,7 @@ public class ViewCommandTest {
      * Asserts that the Viewcommand and ViewAllcommand reports the given error for the given input
      */
     private void assertCommandError(AddressBook addressBook, List<ReadOnlyPerson> list, int index,
-                                                                            String expectedMessage) {
+                                    String expectedMessage) {
         assertViewCommandBehaviour(addressBook, list, index, expectedMessage);
         assertViewAllCommandBehaviour(addressBook, list, index, expectedMessage);
     }
@@ -144,7 +144,8 @@ public class ViewCommandTest {
     /**
      * Asserts that the View command gives given feedback information
      */
-    private void assertViewCommandBehaviour(AddressBook addressBook, List<ReadOnlyPerson> list, int index, String expectedMessage) {
+    private void assertViewCommandBehaviour(AddressBook addressBook, List<ReadOnlyPerson> list, int index, 
+                                            String expectedMessage) {
         Command command = generateViewCommand(addressBook, list, index);
         assertCommandResult(command, addressBook, TestUtil.clone(addressBook), expectedMessage);
     }
@@ -152,7 +153,8 @@ public class ViewCommandTest {
     /**
      * Asserts that the ViewAll command gives given feedback information
      */
-    private void assertViewAllCommandBehaviour(AddressBook addressBook, List<ReadOnlyPerson> list, int index, String expectedMessage) {
+    private void assertViewAllCommandBehaviour(AddressBook addressBook, List<ReadOnlyPerson> list, int index,
+                                               String expectedMessage) {
         Command command = generateViewAllCommand(addressBook, list, index);
         assertCommandResult(command, addressBook, TestUtil.clone(addressBook), expectedMessage);
     }

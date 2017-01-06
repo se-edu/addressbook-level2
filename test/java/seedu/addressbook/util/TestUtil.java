@@ -85,8 +85,8 @@ public class TestUtil {
     /**
      * Executes the command, and asserts the result message is as expected.
      */
-    public static void assertCommandResult(Command command, AddressBook addressBook, AddressBook expectedAddressBook,
-                                                                                               String expectedMessage) {
+    public static void assertCommandResult(Command command, AddressBook addressBook,
+                                           AddressBook expectedAddressBook, String expectedMessage) {
         CommandResult result = command.execute();
 
         // asserts the result message is correct as expected
