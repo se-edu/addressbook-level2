@@ -34,7 +34,6 @@ public class TestUtil {
             try {
                 addressBook.addPerson(person);
             } catch (DuplicatePersonException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
