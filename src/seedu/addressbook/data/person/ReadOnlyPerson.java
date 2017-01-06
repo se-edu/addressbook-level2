@@ -21,9 +21,7 @@ public interface ReadOnlyPerson {
     UniqueTagList getTags();
 
     /**
-     * Returns true if this person is the same as that represented in another
-     * object. Two people are the same if their identity fields (name and
-     * telephone) are the same.
+     * Returns true if both persons have the same identity fields (name and telephone).
      */
     default boolean isSamePerson(ReadOnlyPerson other) {
         return other == this || (other != null && other.getName().equals(this.getName())
@@ -37,11 +35,11 @@ public interface ReadOnlyPerson {
     default boolean hasSameData(ReadOnlyPerson other) {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
-                && other.getName().equals(this.getName()) // state checks here onwards
-                && other.getPhone().equals(this.getPhone())
-                && other.getEmail().equals(this.getEmail())
-                && other.getAddress().equals(this.getAddress())
-                && other.getTags().equals(this.getTags()));
+                    && other.getName().equals(this.getName()) // state checks here onwards
+                    && other.getPhone().equals(this.getPhone())
+                    && other.getEmail().equals(this.getEmail())
+                    && other.getAddress().equals(this.getAddress())
+                    && other.getTags().equals(this.getTags()));
     }
 
     /**
