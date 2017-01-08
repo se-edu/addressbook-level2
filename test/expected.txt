@@ -3,7 +3,7 @@
 || Welcome to your Address Book!
 || AddessBook Level 2 - Version 1.0
 || Launch command format: java seedu.addressbook.Main [STORAGE_FILE_PATH]
-|| Using storage file : addressbook.txt
+|| Using storage file : addressbook.xml
 || ===================================================
 || Enter command: || [Command entered:  sfdfd]
 || add: Adds a person to the address book. Contact details can be marked private by prepending 'p' to the prefix.
@@ -74,7 +74,7 @@
 || Tags names should be alphanumeric
 || ===================================================
 || Enter command: || [Command entered:  add []\[;] p/12345 e/valid@e.mail a/valid, address]
-|| Person names should be spaces or alphabetic characters
+|| Names should consist of letters, spaces, numbers, ', - or .
 || ===================================================
 || Enter command: || [Command entered:  add Valid Name p/not_numbers e/valid@e.mail a/valid, address]
 || Person phone numbers should only contain numbers
