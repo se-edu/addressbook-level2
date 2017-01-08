@@ -116,11 +116,10 @@ public class AddressBookTest {
         try {
             defaultAddressBook.addPerson(aliceBetsy);
         } catch (DuplicatePersonException e) {
-            assertFalse(defaultAddressBook.containsTag(tagPrizeWinner));
-            return;
+            // ignore expected exception
         }
         
-        fail("Expected DuplicatePersonException was not caught.");
+        assertFalse(defaultAddressBook.containsTag(tagPrizeWinner));
     }
 
     @Test
@@ -159,8 +158,15 @@ public class AddressBookTest {
 
     @Test
     public void containsTag() throws Exception {
-        assertTrue(defaultAddressBook.containsTag(tagScientist));
-        assertFalse(defaultAddressBook.containsTag(tagEconomist));
+        UniqueTagList tagsWhichShouldBeIn = new UniqueTagList(tagMathematician, tagScientist);
+        UniqueTagList tagsWHichShouldNotBeIn = new UniqueTagList(tagEconomist, tagPrizeWinner);
+        
+        for (Tag tagWhichShouldBeIn : tagsWhichShouldBeIn) {
+            assertTrue(defaultAddressBook.containsTag(tagWhichShouldBeIn));
+        }
+        for (Tag tagWhichShouldNotBeIn : tagsWHichShouldNotBeIn) {
+            assertFalse(defaultAddressBook.containsTag(tagWhichShouldNotBeIn));
+        }
         
         UniqueTagList allTags = new UniqueTagList(tagPrizeWinner, tagScientist, tagMathematician, tagEconomist);
         
@@ -173,9 +179,10 @@ public class AddressBookTest {
     public void removePerson_personExists_removesNormally() throws Exception {
         int numberOfPersonsBeforeRemoval = getSize(defaultAddressBook.getAllPersons());
         defaultAddressBook.removePerson(aliceBetsy);
-        int numberOfPersonsAfterRemoval = getSize(defaultAddressBook.getAllPersons());
         
         assertFalse(defaultAddressBook.containsPerson(aliceBetsy));
+        
+        int numberOfPersonsAfterRemoval = getSize(defaultAddressBook.getAllPersons());
         assertTrue(numberOfPersonsBeforeRemoval == numberOfPersonsAfterRemoval + 1);
         
     }
@@ -190,9 +197,10 @@ public class AddressBookTest {
     public void removeTag_tagExistsAndUnused_removesNormally() throws Exception {
         int numberOfTagsBeforeRemoval = getSize(defaultAddressBook.getAllTags());
         defaultAddressBook.removeTag(tagScientist);
-        int numberOfTagsAfterRemoval = getSize(defaultAddressBook.getAllTags());
         
         assertFalse(defaultAddressBook.containsTag(tagScientist));
+        
+        int numberOfTagsAfterRemoval = getSize(defaultAddressBook.getAllTags());
         assertTrue(numberOfTagsBeforeRemoval == numberOfTagsAfterRemoval + 1);
 
     }
@@ -204,11 +212,12 @@ public class AddressBookTest {
         
         int numberOfTagsBeforeRemoval = getSize(defaultAddressBook.getAllTags());
         defaultAddressBook.removeTag(tagMathematician);
-        int numberOfTagsAfterRemoval = getSize(defaultAddressBook.getAllTags());
         
         assertTrue(isIdentical(aliceBetsy.getTags(), new UniqueTagList(tagPrizeWinner)));
         assertTrue(isIdentical(bobChaplin.getTags(), new UniqueTagList(tagEconomist)));
         assertFalse(defaultAddressBook.containsTag(tagMathematician));
+        
+        int numberOfTagsAfterRemoval = getSize(defaultAddressBook.getAllTags());
         assertTrue(numberOfTagsBeforeRemoval == numberOfTagsAfterRemoval + 1);
     }
 
@@ -221,9 +230,7 @@ public class AddressBookTest {
     @Test
     public void clear() throws Exception {
         defaultAddressBook.clear();
-
-        // If the iterator does not have next element at start, then underlying
-        // container has no elements.
+        
         assertTrue(isEmpty(defaultAddressBook.getAllPersons()));
         assertTrue(isEmpty(defaultAddressBook.getAllTags()));
     }
@@ -245,7 +252,7 @@ public class AddressBookTest {
     }
     
     /**
-     * Returns true if the given Tag object if found in the tag list of the given AddressBook.
+     * Returns true if the given Tag object is found in the tag list of the given AddressBook.
      */
     private boolean isTagObjectInAddressBookList(Tag tagToCheck, AddressBook addressBook) {
         for (Tag tag : addressBook.getAllTags()) {
