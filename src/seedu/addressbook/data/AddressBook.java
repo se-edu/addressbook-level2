@@ -115,6 +115,7 @@ public class AddressBook {
 
     /**
      * Removes the equivalent Tag from the address book.
+     * The Tag will also be removed from any Person in the address book who has that tag.
      *
      * @throws TagNotFoundException if no such Tag could be found.
      */

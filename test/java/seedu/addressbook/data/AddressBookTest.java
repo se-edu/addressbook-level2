@@ -183,7 +183,7 @@ public class AddressBookTest {
         assertFalse(defaultAddressBook.containsPerson(aliceBetsy));
         
         int numberOfPersonsAfterRemoval = getSize(defaultAddressBook.getAllPersons());
-        assertTrue(numberOfPersonsBeforeRemoval == numberOfPersonsAfterRemoval + 1);
+        assertTrue(numberOfPersonsAfterRemoval == numberOfPersonsBeforeRemoval - 1);
         
     }
 
@@ -201,7 +201,7 @@ public class AddressBookTest {
         assertFalse(defaultAddressBook.containsTag(tagScientist));
         
         int numberOfTagsAfterRemoval = getSize(defaultAddressBook.getAllTags());
-        assertTrue(numberOfTagsBeforeRemoval == numberOfTagsAfterRemoval + 1);
+        assertTrue(numberOfTagsAfterRemoval == numberOfTagsBeforeRemoval - 1);
 
     }
 
@@ -218,7 +218,7 @@ public class AddressBookTest {
         assertFalse(defaultAddressBook.containsTag(tagMathematician));
         
         int numberOfTagsAfterRemoval = getSize(defaultAddressBook.getAllTags());
-        assertTrue(numberOfTagsBeforeRemoval == numberOfTagsAfterRemoval + 1);
+        assertTrue(numberOfTagsAfterRemoval == numberOfTagsBeforeRemoval - 1);
     }
 
     @Test
