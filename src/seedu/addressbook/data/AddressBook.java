@@ -77,8 +77,8 @@ public class AddressBook {
      * @throws DuplicatePersonException if an equivalent person already exists.
      */
     public void addPerson(Person toAdd) throws DuplicatePersonException {
-        syncTagsWithMasterList(toAdd);
         allPersons.add(toAdd);
+        syncTagsWithMasterList(toAdd);
     }
 
     /**
@@ -115,11 +115,25 @@ public class AddressBook {
 
     /**
      * Removes the equivalent Tag from the address book.
+     * The Tag will also be removed from any Person in the address book who has that tag.
      *
      * @throws TagNotFoundException if no such Tag could be found.
      */
     public void removeTag(Tag toRemove) throws TagNotFoundException {
+        removeTagFromAllPersons(toRemove);
         allTags.remove(toRemove);
+    }
+    
+    private void removeTagFromAllPersons(Tag toRemove) throws TagNotFoundException {
+        for (Person person : allPersons) {
+            UniqueTagList personTagList = person.getTags();
+            
+            if (personTagList.contains(toRemove)) {
+                personTagList.remove(toRemove);
+            }
+            
+            person.setTags(personTagList);
+        }
     }
 
     /**
