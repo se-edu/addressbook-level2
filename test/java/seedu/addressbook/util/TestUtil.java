@@ -10,8 +10,6 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-import seedu.addressbook.commands.Command;
-import seedu.addressbook.commands.CommandResult;
 import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.data.person.Address;
@@ -34,7 +32,7 @@ public class TestUtil {
             try {
                 addressBook.addPerson(person);
             } catch (DuplicatePersonException e) {
-                e.printStackTrace();
+                throw new AssertionError(e);
             }
         }
 
@@ -81,18 +79,4 @@ public class TestUtil {
         assertEquals(String.join("\n", list1), String.join("\n", list2));
     }
 
-    /**
-     * Executes the command, and asserts the result message is as expected.
-     */
-    public static void assertCommandResult(Command command, AddressBook addressBook,
-                                           AddressBook expectedAddressBook, String expectedMessage) {
-        CommandResult result = command.execute();
-
-        // asserts the result message is correct as expected
-        // TODO: overwrite equals method in CommandResult and replace with equals method below
-        assertEquals(expectedMessage, result.feedbackToUser);
-
-        // TODO: overwrite equals method in AddressBook and replace with equals method below
-        assertEquals(addressBook.getAllPersons(), expectedAddressBook.getAllPersons());
-    }
 }

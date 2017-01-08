@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
-import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 import seedu.addressbook.common.Messages;
 import seedu.addressbook.data.AddressBook;
@@ -20,24 +21,14 @@ import seedu.addressbook.data.tag.UniqueTagList;
 import seedu.addressbook.util.TestUtil;
 import seedu.addressbook.util.TypicalPersons;
 
-import static seedu.addressbook.util.TestUtil.assertCommandResult;
-
 public class ViewCommandTest {
-    private AddressBook typicalAddressBook;
-    private AddressBook emptyAddressBook;
+    private TypicalPersons td = new TypicalPersons();
+    
+    private AddressBook typicalAddressBook = td.getTypicalAddressBook();
+    private AddressBook emptyAddressBook = TestUtil.createAddressBook();
     private List<ReadOnlyPerson> emptyDisplayList = Collections.emptyList();
-    private List<ReadOnlyPerson> displayListWithAllTypicalPersons;
-    private List<ReadOnlyPerson> listWithSome;
-
-    @Before
-    public void setUp() {
-        emptyAddressBook = TestUtil.createAddressBook();
-
-        TypicalPersons td = new TypicalPersons();
-        typicalAddressBook = td.getTypicalAddressBook();
-        displayListWithAllTypicalPersons = Arrays.asList(td.getTypicalPersons());
-        listWithSome = Arrays.asList(td.amy, td.candy, td.dan);
-    }
+    private List<ReadOnlyPerson> displayListWithAllTypicalPersons = Arrays.asList(td.getTypicalPersons());
+    private List<ReadOnlyPerson> listWithSome = Arrays.asList(td.amy, td.candy, td.dan);
 
     @Test
     public void execute_invalidIndex_returnsInvalidIndexMessage() {
@@ -84,44 +75,12 @@ public class ViewCommandTest {
         assertViewSuccess(typicalAddressBook, listWithSome, 1);
     }
 
-    private Command generateViewCommand(AddressBook addressBook, List<ReadOnlyPerson> relevantPersons, int targetIndex) {
-        Command command = new ViewCommand(targetIndex);
-        command.setData(addressBook, relevantPersons);
-
-        return command;
-    }
-
-    private Command generateViewAllCommand(AddressBook addressBook, List<ReadOnlyPerson> relevantPersons, int targetIndex) {
-        Command command = new ViewAllCommand(targetIndex);
-        command.setData(addressBook, relevantPersons);
-
-        return command;
-    }
-
-    /**
-     * Asserts that both a ViewCommand and a ViewAllCommand can retrieve from
-     * the {@code addressBook} details of the person at the given {@code index} in the given {@code list}.
-     *
-     * @param index one-indexed position of the target person in the list
-     */
-    private void assertViewSuccess(AddressBook addressBook, List<ReadOnlyPerson> list, int index) {
-        ReadOnlyPerson personToBeViewed = list.get(index - 1); // -1 is because index is one-indexed
-
-        String expectedMessage = String.format(ViewCommand.MESSAGE_VIEW_PERSON_DETAILS,
-                                               personToBeViewed.getAsTextHidePrivate());
-        assertViewCommandBehaviour(addressBook, list, index, expectedMessage);
-
-        expectedMessage = String.format(ViewCommand.MESSAGE_VIEW_PERSON_DETAILS,
-                                        personToBeViewed.getAsTextShowAll());
-        assertViewAllCommandBehaviour(addressBook, list, index, expectedMessage);
-    }
-
     /**
      * Asserts that the details of person at specific index cannot be retrieved due to
      * invalid index.
      */
     private void assertViewErrorInvalidIndex(AddressBook addressBook, List<ReadOnlyPerson> list, int index) {
-        assertCommandError(addressBook, list, index, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertViewError(addressBook, list, index, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     /**
@@ -129,33 +88,52 @@ public class ViewCommandTest {
      * person not existing in the addressbook.
      */
     private void assertViewErrorPersonNotInAddressBook(AddressBook addressBook, List<ReadOnlyPerson> list, int index) {
-        assertCommandError(addressBook, list, index, Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK);
+        assertViewError(addressBook, list, index, Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK);
+    }
+
+    /**
+     * Asserts that both a ViewCommand and a ViewAllCommand can retrieve from
+     * the {@code addressBook} details of the person at the given {@code index} in the given {@code list}.
+     * 
+     * @param targetVisibleIndex one-indexed position of the target person in the list
+     */
+    private void assertViewSuccess(AddressBook addressBook, List<ReadOnlyPerson> list, int targetVisibleIndex) {
+        ReadOnlyPerson personToBeViewed = list.get(targetVisibleIndex - 1); // -1 is because index is one-indexed
+
+        String expectedMessage = String.format(ViewCommand.MESSAGE_VIEW_PERSON_DETAILS,
+                                               personToBeViewed.getAsTextHidePrivate());
+        assertViewBehavior(new ViewCommand(targetVisibleIndex), addressBook, list, expectedMessage);
+
+        expectedMessage = String.format(ViewAllCommand.MESSAGE_VIEW_PERSON_DETAILS,
+                                        personToBeViewed.getAsTextShowAll());
+        assertViewBehavior(new ViewAllCommand(targetVisibleIndex), addressBook, list, expectedMessage);
     }
 
     /**
      * Asserts that the Viewcommand and ViewAllcommand reports the given error for the given input
      */
-    private void assertCommandError(AddressBook addressBook, List<ReadOnlyPerson> list, int index,
-                                    String expectedMessage) {
-        assertViewCommandBehaviour(addressBook, list, index, expectedMessage);
-        assertViewAllCommandBehaviour(addressBook, list, index, expectedMessage);
+    private static void assertViewError(AddressBook addressBook, List<ReadOnlyPerson> displayList,
+                                                                int targetVisibleIndex, String expectedMessage) {
+        assertViewBehavior(new ViewCommand(targetVisibleIndex), addressBook, displayList, expectedMessage);
+        assertViewBehavior(new ViewAllCommand(targetVisibleIndex), addressBook, displayList, expectedMessage);
     }
 
     /**
-     * Asserts that the View command gives given feedback information
+     * Asserts that the ViewCommand and ViewAllCommand show given feedback information
      */
-    private void assertViewCommandBehaviour(AddressBook addressBook, List<ReadOnlyPerson> list, int index, 
-                                            String expectedMessage) {
-        Command command = generateViewCommand(addressBook, list, index);
-        assertCommandResult(command, addressBook, TestUtil.clone(addressBook), expectedMessage);
+    private static void assertViewBehavior(Command viewCommand, AddressBook addressBook,
+        List<ReadOnlyPerson> list, String expectedMessage) {
+        AddressBook expectedAddressBook = TestUtil.clone(addressBook);
+
+        viewCommand.setData(addressBook, list);
+        CommandResult result = viewCommand.execute();
+
+        // Feedback message is as expected and there are no relevant persons returned
+        assertEquals(expectedMessage, result.feedbackToUser);
+        assertEquals(Optional.empty(), result.getRelevantPersons());
+
+        // Address book was not modified
+        assertEquals(expectedAddressBook.getAllPersons(), addressBook.getAllPersons());
     }
 
-    /**
-     * Asserts that the ViewAll command gives given feedback information
-     */
-    private void assertViewAllCommandBehaviour(AddressBook addressBook, List<ReadOnlyPerson> list, int index,
-                                               String expectedMessage) {
-        Command command = generateViewAllCommand(addressBook, list, index);
-        assertCommandResult(command, addressBook, TestUtil.clone(addressBook), expectedMessage);
-    }
 }
