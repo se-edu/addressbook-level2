@@ -47,10 +47,10 @@ public class ViewCommandTest {
     public void execute_personNotInAddressBook_returnsPersonNotInAddressBookMessage() throws Exception {
         // generate person not in addressbook, add to displayList
         ReadOnlyPerson someone = new Person(new Name("me"),
-                new Phone("123", true),
-                new Email("some@hey.go", true),
-                new Address("nus", false),
-                new UniqueTagList(Collections.emptySet()));
+                                            new Phone("123", true),
+                                            new Email("some@hey.go", true),
+                                            new Address("nus", false),
+                                            new UniqueTagList(Collections.emptySet()));
         List <ReadOnlyPerson> displayListWithExtraPerson
                 = new ArrayList<ReadOnlyPerson>(displayListWithAllTypicalPersons);
         displayListWithExtraPerson.add(someone);
