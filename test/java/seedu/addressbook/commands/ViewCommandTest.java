@@ -27,74 +27,74 @@ public class ViewCommandTest {
 
     private AddressBook typicalAddressBook = td.getTypicalAddressBook();
     private AddressBook emptyAddressBook = TestUtil.createAddressBook();
-    private List<ReadOnlyPerson> emptyDisplayList = Collections.emptyList();
-    private List<ReadOnlyPerson> displayListWithAllTypicalPersons = Arrays.asList(td.getTypicalPersons());
-    private List<ReadOnlyPerson> listWithSome = Arrays.asList(td.amy, td.candy, td.dan);
+    private List<ReadOnlyPerson> emptyPersonList = Collections.emptyList();
+    private List<ReadOnlyPerson> listWithAllTypicalPersons = Arrays.asList(td.getTypicalPersons());
+    private List<ReadOnlyPerson> listWithSomeTypicalPersons = Arrays.asList(td.amy, td.candy, td.dan);
 
     @Test
     public void execute_invalidIndex_returnsInvalidIndexMessage() {
         // empty addressbook
-        assertViewErrorInvalidIndex(emptyAddressBook, emptyDisplayList, 1);
+        assertViewErrorInvalidIndex(emptyAddressBook, emptyPersonList, 1);
 
         // non-empty addressbook
-        assertViewErrorInvalidIndex(typicalAddressBook, displayListWithAllTypicalPersons, -1);
-        assertViewErrorInvalidIndex(typicalAddressBook, displayListWithAllTypicalPersons, 0);
-        assertViewErrorInvalidIndex(typicalAddressBook, displayListWithAllTypicalPersons,
-                displayListWithAllTypicalPersons.size() + 1);
+        assertViewErrorInvalidIndex(typicalAddressBook, listWithAllTypicalPersons, -1);
+        assertViewErrorInvalidIndex(typicalAddressBook, listWithAllTypicalPersons, 0);
+        assertViewErrorInvalidIndex(typicalAddressBook, listWithAllTypicalPersons,
+                listWithAllTypicalPersons.size() + 1);
     }
 
     @Test
     public void execute_personNotInAddressBook_returnsPersonNotInAddressBookMessage() throws Exception {
-        // generate person not in addressbook, add to displayList
+        // generate list with person not in addressbook, add to list
         ReadOnlyPerson someone = new Person(new Name("me"),
                                             new Phone("123", true),
                                             new Email("some@hey.go", true),
                                             new Address("nus", false),
                                             new UniqueTagList(Collections.emptySet()));
-        List <ReadOnlyPerson> displayListWithExtraPerson
-                = new ArrayList<ReadOnlyPerson>(displayListWithAllTypicalPersons);
-        displayListWithExtraPerson.add(someone);
+        List<ReadOnlyPerson> listWithExtraPerson
+                = new ArrayList<ReadOnlyPerson>(listWithAllTypicalPersons);
+        listWithExtraPerson.add(someone);
 
         // empty addressbook
-        assertViewErrorPersonNotInAddressBook(emptyAddressBook, displayListWithExtraPerson, 1);
+        assertViewErrorPersonNotInAddressBook(emptyAddressBook, listWithExtraPerson, 1);
 
         // non-empty addressbook
-        assertViewErrorPersonNotInAddressBook(typicalAddressBook, displayListWithExtraPerson,
-                displayListWithExtraPerson.size());
+        assertViewErrorPersonNotInAddressBook(typicalAddressBook, listWithExtraPerson,
+                listWithExtraPerson.size());
     }
 
     @Test
     public void execute_validIndex_returnsPersonDetails() {
         // person with no private information
-        assertViewSuccess(typicalAddressBook, displayListWithAllTypicalPersons, 1);
+        assertViewSuccess(typicalAddressBook, listWithAllTypicalPersons, 1);
 
         // person with some private information
-        assertViewSuccess(typicalAddressBook, displayListWithAllTypicalPersons, 2);
+        assertViewSuccess(typicalAddressBook, listWithAllTypicalPersons, 2);
 
         // person with all private information
-        assertViewSuccess(typicalAddressBook, displayListWithAllTypicalPersons, 4);
+        assertViewSuccess(typicalAddressBook, listWithAllTypicalPersons, 4);
 
-        // addressbook has more people than displayList
+        // addressbook has more people than the list
         // This can happen when view from filtered list caused by some commands(eg. FindCommand)
-        assertViewSuccess(typicalAddressBook, listWithSome, 1);
+        assertViewSuccess(typicalAddressBook, listWithSomeTypicalPersons, 1);
     }
 
     /**
      * Asserts that the details of person at specific index cannot be retrieved due to
      * invalid index.
      */
-    private void assertViewErrorInvalidIndex(AddressBook addressBook, List<ReadOnlyPerson> list,
+    private void assertViewErrorInvalidIndex(AddressBook addressBook, List<ReadOnlyPerson> relevantPersons,
                                              int targetVisibleIndex) {
-        assertViewError(addressBook, list, targetVisibleIndex, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertViewError(addressBook, relevantPersons, targetVisibleIndex, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     /**
      * Asserts that the details of person at specific index cannot be retrieved due to
      * person not existing in the addressbook.
      */
-    private void assertViewErrorPersonNotInAddressBook(AddressBook addressBook, List<ReadOnlyPerson> list,
+    private void assertViewErrorPersonNotInAddressBook(AddressBook addressBook, List<ReadOnlyPerson> relevantPersons,
                                                        int targetVisibleIndex) {
-        assertViewError(addressBook, list, targetVisibleIndex, Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK);
+        assertViewError(addressBook, relevantPersons, targetVisibleIndex, Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK);
     }
 
     /**
@@ -117,7 +117,7 @@ public class ViewCommandTest {
     }
 
     /**
-     * Asserts that the Viewcommand and ViewAllcommand reports the given error for the given input
+     * Asserts that the Viewcommand and ViewAllcommand reports the given error for the given input.
      */
     private static void assertViewError(AddressBook addressBook, List<ReadOnlyPerson> relevantPersons,
                                         int targetVisibleIndex, String expectedMessage) {
@@ -126,7 +126,11 @@ public class ViewCommandTest {
     }
 
     /**
-     * Asserts that the ViewCommand and ViewAllCommand show given feedback information
+     * Executes the test command for the given addressbook data.
+     * Checks that ViewCommand and ViewAllCommand exhibits the correct command behavior, namely:
+     * 1. The feedback message of the CommandResult it returns matches expectedMessage.
+     * 2. The CommandResult it returns has no relevant persons.
+     * 3. The original addressbook data is not modified after executing ViewCommand and ViewAllCommand.
      */
     private static void assertViewBehavior(Command viewCommand, AddressBook addressBook,
                                            List<ReadOnlyPerson> relevantPersons, String expectedMessage) {
