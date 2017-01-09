@@ -78,5 +78,4 @@ public class TestUtil {
         List<String> list2 = Files.readAllLines(path2, Charset.defaultCharset());
         assertEquals(String.join("\n", list1), String.join("\n", list2));
     }
-
 }
