@@ -85,7 +85,8 @@ public class ViewCommandTest {
      */
     private void assertViewErrorInvalidIndex(AddressBook addressBook, List<ReadOnlyPerson> relevantPersons,
                                              int targetVisibleIndex) {
-        assertViewError(addressBook, relevantPersons, targetVisibleIndex, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertViewError(addressBook, relevantPersons, targetVisibleIndex,
+                Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     /**
@@ -94,18 +95,21 @@ public class ViewCommandTest {
      */
     private void assertViewErrorPersonNotInAddressBook(AddressBook addressBook, List<ReadOnlyPerson> relevantPersons,
                                                        int targetVisibleIndex) {
-        assertViewError(addressBook, relevantPersons, targetVisibleIndex, Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK);
+        assertViewError(addressBook, relevantPersons, targetVisibleIndex,
+                Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK);
     }
 
     /**
      * Asserts that both a ViewCommand and a ViewAllCommand can retrieve from
-     * the {@code addressBook} details of the person at the given {@code index} in the given {@code list}.
+     * the {@code addressBook} details of the person at the given {@code targetVisibleIndex}
+     * in the given {@code relevantPersons} list.
      *
      * @param targetVisibleIndex one-indexed position of the target person in the list
      */
     private void assertViewSuccess(AddressBook addressBook, List<ReadOnlyPerson> relevantPersons,
                                    int targetVisibleIndex) {
-        ReadOnlyPerson personToBeViewed = relevantPersons.get(targetVisibleIndex - 1); // -1 is because index is one-indexed
+        // Get person to be viewed (targetVisibleIndex - 1 because index is one-indexed)
+        ReadOnlyPerson personToBeViewed = relevantPersons.get(targetVisibleIndex - 1);
 
         String expectedMessage = String.format(ViewCommand.MESSAGE_VIEW_PERSON_DETAILS,
                                                personToBeViewed.getAsTextHidePrivate());
