@@ -10,7 +10,7 @@ import java.util.Set;
 public class Utils {
 
     /**
-     * Checks whether any of the given items are null.
+     * Returns true if any of the given items are null.
      */
     public static boolean isAnyNull(Object... items) {
         for (Object item : items) {
@@ -22,7 +22,7 @@ public class Utils {
     }
 
     /**
-     * Checks if every element in a collection are unique by {@link Object#equals(Object)}.
+     * Returns true if every element the given collection are unique by {@link Object#equals(Object)}.
      */
     public static boolean elementsAreUnique(Collection<?> items) {
         final Set<Object> testSet = new HashSet<>();
