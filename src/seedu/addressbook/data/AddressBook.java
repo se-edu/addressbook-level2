@@ -77,8 +77,8 @@ public class AddressBook {
      * @throws DuplicatePersonException if an equivalent person already exists.
      */
     public void addPerson(Person toAdd) throws DuplicatePersonException {
-        syncTagsWithMasterList(toAdd);
         allPersons.add(toAdd);
+        syncTagsWithMasterList(toAdd);
     }
 
     /**
@@ -91,14 +91,14 @@ public class AddressBook {
     }
 
     /**
-     * Checks if an equivalent person exists in the address book.
+     * Returns true if an equivalent person exists in the address book.
      */
     public boolean containsPerson(ReadOnlyPerson key) {
         return allPersons.contains(key);
     }
 
     /**
-     * Checks if an equivalent person exists in the address book.
+     * Returns true if an equivalent person exists in the address book.
      */
     public boolean containsTag(Tag key) {
         return allTags.contains(key);
@@ -115,11 +115,25 @@ public class AddressBook {
 
     /**
      * Removes the equivalent Tag from the address book.
+     * The Tag will also be removed from any Person in the address book who has that tag.
      *
      * @throws TagNotFoundException if no such Tag could be found.
      */
     public void removeTag(Tag toRemove) throws TagNotFoundException {
+        removeTagFromAllPersons(toRemove);
         allTags.remove(toRemove);
+    }
+    
+    private void removeTagFromAllPersons(Tag toRemove) throws TagNotFoundException {
+        for (Person person : allPersons) {
+            UniqueTagList personTagList = person.getTags();
+            
+            if (personTagList.contains(toRemove)) {
+                personTagList.remove(toRemove);
+            }
+            
+            person.setTags(personTagList);
+        }
     }
 
     /**
@@ -131,14 +145,14 @@ public class AddressBook {
     }
 
     /**
-     * Defensively copied UniquePersonList of all persons in the address book at the time of the call.
+     * Returns a new UniquePersonList of all persons in the address book at the time of the call.
      */
     public UniquePersonList getAllPersons() {
         return new UniquePersonList(allPersons);
     }
 
     /**
-     * Defensively copied UniqueTagList of all tags in the address book at the time of the call.
+     * Returns a new UniqueTagList of all tags in the address book at the time of the call.
      */
     public UniqueTagList getAllTags() {
         return new UniqueTagList(allTags);

@@ -27,7 +27,7 @@ public class CommandResult {
     }
 
     /**
-     * Returns list of persons relevant to the command command result, if any.
+     * Returns a list of persons relevant to the command command result, if any.
      */
     public Optional<List<? extends ReadOnlyPerson>> getRelevantPersons() {
         return Optional.ofNullable(relevantPersons);
