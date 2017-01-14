@@ -145,14 +145,14 @@ public class AddressBook {
     }
 
     /**
-     * Defensively copied UniquePersonList of all persons in the address book at the time of the call.
+     * Returns a new UniquePersonList of all persons in the address book at the time of the call.
      */
     public UniquePersonList getAllPersons() {
         return new UniquePersonList(allPersons);
     }
 
     /**
-     * Defensively copied UniqueTagList of all tags in the address book at the time of the call.
+     * Returns a new UniqueTagList of all tags in the address book at the time of the call.
      */
     public UniqueTagList getAllTags() {
         return new UniqueTagList(allTags);
