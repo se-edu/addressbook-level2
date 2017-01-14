@@ -115,16 +115,15 @@ public class StorageFile {
     /**
      * Loads data from this storage file.
      *
+     * @return an {@link AddressBook} containing the data in the file, or an empty {@link AddressBook} if it
+     *    does not exist.
      * @throws StorageOperationException if there were errors reading and/or converting data from file.
      */
     public AddressBook load() throws StorageOperationException {
         File fileOnDisk = path.toFile();
 
-        // create empty file if not found
         if (!fileOnDisk.exists()) {
-            final AddressBook empty = new AddressBook();
-            save(empty);
-            return empty;
+            return new AddressBook();
         }
 
         try (final Reader fileReader =
@@ -139,7 +138,7 @@ public class StorageFile {
             return loaded.toModelType();
 
         } catch (FileNotFoundException fnfe) {
-            assert false : "not possible: is already handled earlier";
+            assert false : "A non-existant file scenario is already handled earlier.";
             throw new StorageOperationException("File does not exist: " + path);
         // other errors
         } catch (IOException ioe) {
