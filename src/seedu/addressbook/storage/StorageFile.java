@@ -11,6 +11,7 @@ import javax.xml.bind.Unmarshaller;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -117,8 +118,17 @@ public class StorageFile {
      * @throws StorageOperationException if there were errors reading and/or converting data from file.
      */
     public AddressBook load() throws StorageOperationException {
+        File fileOnDisk = path.toFile();
+
+        // create empty file if not found
+        if (!fileOnDisk.exists()) {
+            final AddressBook empty = new AddressBook();
+            save(empty);
+            return empty;
+        }
+
         try (final Reader fileReader =
-                     new BufferedReader(new FileReader(path.toFile()))) {
+                     new BufferedReader(new FileReader(fileOnDisk))) {
 
             final Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
             final AdaptedAddressBook loaded = (AdaptedAddressBook) unmarshaller.unmarshal(fileReader);
@@ -128,17 +138,9 @@ public class StorageFile {
             }
             return loaded.toModelType();
 
-        /* Note: Here, we are using an exception to create the file if it is missing. However, we should minimize
-         * using exceptions to facilitate normal paths of execution. If we consider the missing file as a 'normal'
-         * situation (i.e. not truly exceptional) we should not use an exception to handle it.
-         */
-
-        // create empty file if not found
         } catch (FileNotFoundException fnfe) {
-            final AddressBook empty = new AddressBook();
-            save(empty);
-            return empty;
-
+            assert false : "not possible: is already handled earlier";
+            throw new StorageOperationException("File does not exist: " + path);
         // other errors
         } catch (IOException ioe) {
             throw new StorageOperationException("Error writing to file: " + path);
