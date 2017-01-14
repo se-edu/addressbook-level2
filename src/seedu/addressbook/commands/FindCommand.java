@@ -28,7 +28,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Returns copy of keywords in this command.
+     * Returns a copy of keywords in this command.
      */
     public Set<String> getKeywords() {
         return new HashSet<>(keywords);
@@ -41,7 +41,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Retrieve all persons in the address book whose names contain some of the specified keywords.
+     * Retrieves all persons in the address book whose names contain some of the specified keywords.
      *
      * @param keywords for searching
      * @return list of persons found
