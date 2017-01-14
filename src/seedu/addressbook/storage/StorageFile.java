@@ -114,7 +114,9 @@ public class StorageFile {
 
     /**
      * Loads data from this storage file.
-     *
+     * 
+     * @return an {@link AddressBook} containing the data in the file, or an empty {@link AddressBook} if it
+     *    does not exist.
      * @throws StorageOperationException if there were errors reading and/or converting data from file.
      */
     public AddressBook load() throws StorageOperationException {
