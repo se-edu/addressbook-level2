@@ -120,10 +120,8 @@ public class StorageFile {
     public AddressBook load() throws StorageOperationException {
         File fileOnDisk = path.toFile();
 
-        // create empty file if not found
         if (!fileOnDisk.exists()) {
             final AddressBook empty = new AddressBook();
-            save(empty);
             return empty;
         }
 
