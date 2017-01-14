@@ -83,7 +83,7 @@ public class UniquePersonList implements Iterable<Person> {
 
 
     /**
-     * Checks if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains an equivalent person as the given argument.
      */
     public boolean contains(ReadOnlyPerson toCheck) {
         return internalList.contains(toCheck);
