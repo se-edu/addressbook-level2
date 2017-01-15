@@ -74,7 +74,7 @@ public class ViewCommandTest {
         // person with all private information
         assertViewSuccess(typicalAddressBook, listWithAllTypicalPersons, 4);
 
-        // addressbook has more people than the list
+        // addressbook has more people than the list.
         // this can happen when a command causes the list to show only a sub-set of persons(e.g. FindCommand).
         assertViewSuccess(typicalAddressBook, listWithSomeTypicalPersons, 1);
     }
@@ -143,11 +143,11 @@ public class ViewCommandTest {
         viewCommand.setData(addressBook, relevantPersons);
         CommandResult result = viewCommand.execute();
 
-        // feedback message is as expected and there are no relevant persons returned
+        // feedback message is as expected and there are no relevant persons returned.
         assertEquals(expectedMessage, result.feedbackToUser);
         assertEquals(Optional.empty(), result.getRelevantPersons());
 
-        // addressbook was not modified
+        // addressbook was not modified.
         assertEquals(expectedAddressBook.getAllPersons(), addressBook.getAllPersons());
     }
 
