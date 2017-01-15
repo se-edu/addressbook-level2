@@ -74,8 +74,8 @@ public class ViewCommandTest {
         // person with all private information
         assertViewSuccess(typicalAddressBook, listWithAllTypicalPersons, 4);
 
-        // addressbook has more people than the list.
-        // this can happen when a command causes the list to show only a sub-set of persons(e.g. FindCommand).
+        // Addressbook has more people than the list.
+        // This can happen when a command causes the list to show only a sub-set of persons(e.g. FindCommand).
         assertViewSuccess(typicalAddressBook, listWithSomeTypicalPersons, 1);
     }
 
