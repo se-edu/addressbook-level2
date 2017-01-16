@@ -1,7 +1,17 @@
 apply plugin: 'java'
+apply plugin: 'checkstyle'
 
 repositories {
+    jcenter()
     mavenCentral()
+}
+
+project.ext {
+    checkstyleVersion = '7.1.2'
+}
+
+checkstyle {
+    toolVersion = "$checkstyleVersion"
 }
 
 sourceSets {
