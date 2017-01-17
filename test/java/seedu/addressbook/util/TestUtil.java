@@ -29,13 +29,16 @@ import seedu.addressbook.data.tag.UniqueTagList;
 public class TestUtil {
     /**
      * Creates an address book containing the given persons.
-     * @throws DuplicatePersonException if two or more given persons are the same
      */
-    public static AddressBook createAddressBook(Person... persons) throws DuplicatePersonException {
+    public static AddressBook createAddressBook(Person... persons) {
         AddressBook addressBook = new AddressBook();
 
         for (Person person : persons) {
-            addressBook.addPerson(person);
+            try {
+                addressBook.addPerson(person);
+            } catch (DuplicatePersonException e) {
+                throw new AssertionError(e);
+            }
         }
 
         return addressBook;
