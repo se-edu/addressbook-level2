@@ -94,4 +94,13 @@ public interface ReadOnlyPerson {
         }
         return builder.toString();
     }
+    
+    default String getPrintableString(Printable... printables) {
+        final StringBuilder builder = new StringBuilder();
+        for (Printable printable : printables) {
+            builder.append(printable.getPrintableString());
+            builder.append(" ");
+        }
+        return builder.toString();
+    }
 }

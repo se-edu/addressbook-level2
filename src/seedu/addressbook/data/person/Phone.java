@@ -6,7 +6,7 @@ import seedu.addressbook.data.exception.IllegalValueException;
  * Represents a Person's phone number in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
  */
-public class Phone {
+public class Phone implements Printable {
 
     public static final String EXAMPLE = "123456789";
     public static final String MESSAGE_PHONE_CONSTRAINTS = "Person phone numbers should only contain numbers";
@@ -51,6 +51,11 @@ public class Phone {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+    
+    @Override
+    public String getPrintableString() {
+        return "Phone: " + this.value;
     }
 
     public boolean isPrivate() {
