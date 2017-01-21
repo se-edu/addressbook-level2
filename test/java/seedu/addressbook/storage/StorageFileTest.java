@@ -1,8 +1,10 @@
 package seedu.addressbook.storage;
 
 import static org.junit.Assert.assertEquals;
+
 import java.nio.file.Paths;
 import java.util.Collections;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -19,9 +21,11 @@ import seedu.addressbook.data.tag.Tag;
 import seedu.addressbook.data.tag.UniqueTagList;
 import seedu.addressbook.storage.StorageFile.StorageOperationException;
 import static seedu.addressbook.util.TestUtil.assertTextFilesEqual;
+import static seedu.addressbook.util.TestUtil.assertFileDoesNotExist;
 
 public class StorageFileTest {
     private static final String TEST_DATA_FOLDER = "test/data/StorageFileTest";
+    private static final String NON_EXISTANT_FILE_NAME = "ThisFileDoesNotExist.xml";
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -57,6 +61,17 @@ public class StorageFileTest {
         // ensure loaded AddressBook is properly constructed with test data
         // TODO: overwrite equals method in AddressBook class and replace with equals method below
         assertEquals(actualAB.getAllPersons(), expectedAB.getAllPersons());
+    }
+
+    @Test
+    public void load_nonExistantFile_returnsEmptyAddressBook() throws Exception {
+        AddressBook actualAB = getStorage(NON_EXISTANT_FILE_NAME).load();
+        AddressBook expectedAB = new AddressBook();
+
+        assertEquals(actualAB, expectedAB);
+
+        // verify that loading does not result in the file being created
+        assertFileDoesNotExist(TEST_DATA_FOLDER + "/" + NON_EXISTANT_FILE_NAME);
     }
 
     @Test
