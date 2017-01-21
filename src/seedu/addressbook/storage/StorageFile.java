@@ -11,13 +11,13 @@ import javax.xml.bind.Unmarshaller;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -120,14 +120,13 @@ public class StorageFile {
      * @throws StorageOperationException if there were errors reading and/or converting data from file.
      */
     public AddressBook load() throws StorageOperationException {
-        File fileOnDisk = path.toFile();
 
-        if (!fileOnDisk.exists()) {
+        if (!Files.exists(path) || !Files.isRegularFile(path)) {
             return new AddressBook();
         }
 
         try (final Reader fileReader =
-                     new BufferedReader(new FileReader(fileOnDisk))) {
+                     new BufferedReader(new FileReader(path.toFile()))) {
 
             final Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
             final AdaptedAddressBook loaded = (AdaptedAddressBook) unmarshaller.unmarshal(fileReader);
@@ -138,8 +137,7 @@ public class StorageFile {
             return loaded.toModelType();
 
         } catch (FileNotFoundException fnfe) {
-            assert false : "A non-existant file scenario is already handled earlier.";
-            throw new StorageOperationException("File does not exist: " + path);
+            throw new AssertionError("A non-existant file scenario is already handled earlier.");
         // other errors
         } catch (IOException ioe) {
             throw new StorageOperationException("Error writing to file: " + path);

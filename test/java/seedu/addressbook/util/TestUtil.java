@@ -4,11 +4,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -144,7 +144,6 @@ public class TestUtil {
      * Asserts that the file given does not exist on the filesystem.
      */
     public static void assertFileDoesNotExist(String filePath) {
-        File file = new File(filePath);
-        assertTrue(!file.exists());
+        assertTrue(Files.notExists(Paths.get(filePath)));
     }
 }
