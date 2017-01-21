@@ -1,15 +1,19 @@
 package seedu.addressbook.data;
 
-import seedu.addressbook.data.person.*;
-import seedu.addressbook.data.person.UniquePersonList.*;
-import seedu.addressbook.data.tag.UniqueTagList;
-import seedu.addressbook.data.tag.UniqueTagList.*;
-import seedu.addressbook.data.tag.Tag;
-
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+
+import seedu.addressbook.data.person.Person;
+import seedu.addressbook.data.person.ReadOnlyPerson;
+import seedu.addressbook.data.person.UniquePersonList;
+import seedu.addressbook.data.person.UniquePersonList.DuplicatePersonException;
+import seedu.addressbook.data.person.UniquePersonList.PersonNotFoundException;
+import seedu.addressbook.data.tag.Tag;
+import seedu.addressbook.data.tag.UniqueTagList;
+import seedu.addressbook.data.tag.UniqueTagList.DuplicateTagException;
+import seedu.addressbook.data.tag.UniqueTagList.TagNotFoundException;
 
 /**
  * Represents the entire address book. Contains the data of the address book.
@@ -123,15 +127,15 @@ public class AddressBook {
         removeTagFromAllPersons(toRemove);
         allTags.remove(toRemove);
     }
-    
+
     private void removeTagFromAllPersons(Tag toRemove) throws TagNotFoundException {
         for (Person person : allPersons) {
             UniqueTagList personTagList = person.getTags();
-            
+
             if (personTagList.contains(toRemove)) {
                 personTagList.remove(toRemove);
             }
-            
+
             person.setTags(personTagList);
         }
     }
