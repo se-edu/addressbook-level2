@@ -24,8 +24,8 @@ public interface ReadOnlyPerson {
      * Returns true if both persons have the same identity fields (name and telephone).
      */
     default boolean isSamePerson(ReadOnlyPerson other) {
-        return (other == this) 
-                || (other != null 
+        return (other == this)
+                || (other != null
                     && other.getName().equals(this.getName())
                     && other.getPhone().equals(this.getPhone()));
     }
