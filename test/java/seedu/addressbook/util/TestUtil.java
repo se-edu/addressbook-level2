@@ -85,27 +85,27 @@ public class TestUtil {
         // If any of the two iterables still have elements, then they have different sizes.
         return !(currentPtr0.hasNext() || currentPtr1.hasNext());
     }
-    
+
     /**
      * Returns true if the underlying container behind an iterable is empty.
      */
     public static <T> boolean isEmpty(Iterable<T> it) {
         return !it.iterator().hasNext();
     }
-    
+
     /**
      * Returns the number of elements in the container behind an iterable.
      */
     public static <T> int getSize(Iterable<T> it) {
         int numberOfElementsSeen = 0;
-        
+
         for (T elem : it) {
             numberOfElementsSeen++;
         }
-        
+
         return numberOfElementsSeen;
     }
-    
+
     public static Person generateTestPerson() {
         try {
             return new Person(new Name(Name.EXAMPLE), new Phone(Phone.EXAMPLE, false),
@@ -115,16 +115,16 @@ public class TestUtil {
             return null;
         }
     }
-    
+
     public static UniqueTagList getAllTags(UniquePersonList persons) {
         Set<Tag> combinedTagList = new HashSet<Tag>();
-        
+
         for (Person person : persons) {
             for (Tag tag : person.getTags()) {
                 combinedTagList.add(tag);
             }
         }
-        
+
         return new UniqueTagList(combinedTagList);
     }
 
