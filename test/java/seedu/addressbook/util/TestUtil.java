@@ -1,8 +1,10 @@
 package seedu.addressbook.util;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -136,5 +138,13 @@ public class TestUtil {
         List<String> list1 = Files.readAllLines(path1, Charset.defaultCharset());
         List<String> list2 = Files.readAllLines(path2, Charset.defaultCharset());
         assertEquals(String.join("\n", list1), String.join("\n", list2));
+    }
+
+    /**
+     * Asserts that the file given does not exist on the filesystem.
+     */
+    public static void assertFileDoesNotExist(String filePath) {
+        File file = new File(filePath);
+        assertTrue(!file.exists());
     }
 }
