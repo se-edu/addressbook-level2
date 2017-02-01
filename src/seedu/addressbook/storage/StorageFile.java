@@ -11,6 +11,7 @@ import javax.xml.bind.Unmarshaller;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -27,7 +28,14 @@ public class StorageFile {
 
     /** Default file path used if the user doesn't provide the file name. */
     public static final String DEFAULT_STORAGE_FILEPATH = "addressbook.xml";
-
+    
+    /** Error messages when an exception is thrown. */
+    public static final String MESSAGE_ERROR_CONVERT_ADDRESSBOOK = "Error converting address book into storage format";
+    public static final String MESSAGE_STORAGE_FILE_NOT_FOUND = "Storage File could not be found: %1$s";
+    public static final String MESSAGE_ERROR_WRITING_TO_FILE = "Error writing to file: %1$s";
+    public static final String MESSAGE_ERROR_PARSING_FILE_DATA = "Error parsing file data format";
+    public static final String MESSAGE_MISSINGL_DATA_ELEMENTS = "File data missing some elements";
+    public static final String MESSAGE_ILLEGAL_DATA_VALUES = "File contains illegal data values; data type constraints not met";
     /* Note: Note the use of nested classes below.
      * More info https://docs.oracle.com/javase/tutorial/java/javaOO/nested.html
      */
@@ -85,19 +93,30 @@ public class StorageFile {
     private static boolean isValidPath(Path filePath) {
         return filePath.toString().endsWith(".xml");
     }
+    
+    /**
+     * Check if the file from the given file path exist
+     * @return true if file exist and false otherwise
+     */
+    private boolean isFileExist() {
+        File file = path.toFile();
+        return file.exists();
+    }
 
     /**
      * Saves all data to this storage file.
      *
+     * @throws FileNotFoundException if the file does not exist.
      * @throws StorageOperationException if there were errors converting and/or storing data to file.
      */
-    public void save(AddressBook addressBook) throws StorageOperationException {
-
+    public void save(AddressBook addressBook) throws StorageOperationException, FileNotFoundException {
+        if (!isFileExist()) {
+            throw new FileNotFoundException(String.format(MESSAGE_STORAGE_FILE_NOT_FOUND, path));
+        }
         /* Note: Note the 'try with resource' statement below.
          * More info: https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html
          */
-        try (final Writer fileWriter =
-                     new BufferedWriter(new FileWriter(path.toFile()))) {
+        try (final Writer fileWriter = new BufferedWriter(new FileWriter(path.toFile()))) {
 
             final AdaptedAddressBook toSave = new AdaptedAddressBook(addressBook);
             final Marshaller marshaller = jaxbContext.createMarshaller();
@@ -105,9 +124,9 @@ public class StorageFile {
             marshaller.marshal(toSave, fileWriter);
 
         } catch (IOException ioe) {
-            throw new StorageOperationException("Error writing to file: " + path);
+            throw new StorageOperationException(String.format(MESSAGE_ERROR_WRITING_TO_FILE, path));
         } catch (JAXBException jaxbe) {
-            throw new StorageOperationException("Error converting address book into storage format");
+            throw new StorageOperationException(MESSAGE_ERROR_CONVERT_ADDRESSBOOK);
         }
     }
 
@@ -116,15 +135,14 @@ public class StorageFile {
      *
      * @throws StorageOperationException if there were errors reading and/or converting data from file.
      */
-    public AddressBook load() throws StorageOperationException {
-        try (final Reader fileReader =
-                     new BufferedReader(new FileReader(path.toFile()))) {
+    public AddressBook load() throws StorageOperationException, FileNotFoundException {
+        try (final Reader fileReader = new BufferedReader(new FileReader(path.toFile()))) {
 
             final Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
             final AdaptedAddressBook loaded = (AdaptedAddressBook) unmarshaller.unmarshal(fileReader);
             // manual check for missing elements
             if (loaded.isAnyRequiredFieldMissing()) {
-                throw new StorageOperationException("File data missing some elements");
+                throw new StorageOperationException(MESSAGE_MISSINGL_DATA_ELEMENTS);
             }
             return loaded.toModelType();
 
@@ -141,11 +159,11 @@ public class StorageFile {
 
         // other errors
         } catch (IOException ioe) {
-            throw new StorageOperationException("Error writing to file: " + path);
+            throw new StorageOperationException(String.format(MESSAGE_ERROR_WRITING_TO_FILE, path));
         } catch (JAXBException jaxbe) {
-            throw new StorageOperationException("Error parsing file data format");
+            throw new StorageOperationException(MESSAGE_ERROR_PARSING_FILE_DATA);
         } catch (IllegalValueException ive) {
-            throw new StorageOperationException("File contains illegal data values; data type constraints not met");
+            throw new StorageOperationException(MESSAGE_ILLEGAL_DATA_VALUES);
         }
     }
 
