@@ -11,10 +11,16 @@ public class Address {
     public static final String EXAMPLE = "123, some street";
     public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses can be in any format";
     public static final String ADDRESS_VALIDATION_REGEX = ".+";
+    public static final String ADDRESS_PREFIX = "a/";
 
     public final String value;
     private boolean isPrivate;
-
+    
+    public final Block block;
+    public final Street street;
+    public final Unit unit;
+    public final PostalCode postalCode;
+    
     /**
      * Validates given address.
      *
@@ -27,6 +33,13 @@ public class Address {
             throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
         }
         this.value = trimmedAddress;
+        String copyTrimmedAddress = new String(trimmedAddress);
+        String[] addressParts = copyTrimmedAddress.split(",");
+        this.block = new Block(addressParts[0].trim().substring(2));
+        this.street = new Street(addressParts[1].trim());
+        this.unit = new Unit(addressParts[2].trim());
+        this.postalCode = new PostalCode(addressParts[3].trim());
+        
     }
 
     /**
@@ -38,7 +51,9 @@ public class Address {
 
     @Override
     public String toString() {
-        return value;
+        //return value;
+    	return ADDRESS_PREFIX + this.block.getBlock() + ", " + this.street.getStreet()
+    		+ ", " + this.unit.getUnit() + ", " + this.postalCode.getPostalCode();
     }
 
     @Override
