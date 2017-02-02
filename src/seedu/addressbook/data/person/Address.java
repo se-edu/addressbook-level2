@@ -1,6 +1,7 @@
 package seedu.addressbook.data.person;
 
 import seedu.addressbook.data.exception.IllegalValueException;
+import seedu.addressbook.data.person.address.*;
 
 /**
  * Represents a Person's address in the address book.
@@ -14,6 +15,10 @@ public class Address {
 
     public final String value;
     private boolean isPrivate;
+    private Block block;
+    private Street street;
+    private Unit unit;
+    private PostalCode postalCode;
 
     /**
      * Validates given address.
@@ -27,6 +32,19 @@ public class Address {
             throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
         }
         this.value = trimmedAddress;
+        splitAddressStringIntoComponents(this.value);
+    }
+    
+    /**
+     * Splits address into components e.g. Block, PostalCode
+     * 
+     */
+    private static void splitAddressStringIntoComponents(String value){
+    	String[] strArr = value.split(",");
+    	this.block = strArr[0].trim();
+    	this.street = strArr[1].trim();
+    	this.unit = strArr[2].trim();
+    	this.postalCode = strArr[3].trim();
     }
 
     /**
