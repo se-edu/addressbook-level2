@@ -63,14 +63,14 @@ public class StorageFileTest {
     public void save_nullAddressBook_exceptionThrown() throws Exception {
         StorageFile storage = getTempStorage();
         thrown.expect(NullPointerException.class);
-        storage.save(null);
+        storage.checkSaveFile(null);
     }
 
     @Test
     public void save_validAddressBook() throws Exception {
         AddressBook ab = getTestAddressBook();
         StorageFile storage = getTempStorage();
-        storage.save(ab);
+        storage.checkSaveFile(ab);
 
         assertStorageFilesEqual(storage, getStorage("ValidData.xml"));
     }

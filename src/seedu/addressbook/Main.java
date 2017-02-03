@@ -109,7 +109,7 @@ public class Main {
         try {
             command.setData(addressBook, lastShownList);
             CommandResult result = command.execute();
-            storage.save(addressBook);
+            storage.checkSaveFile(addressBook);
             return result;
         } catch (Exception e) {
             ui.showToUser(e.getMessage());
