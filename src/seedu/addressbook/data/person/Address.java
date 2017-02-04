@@ -12,6 +12,10 @@ public class Address {
     public static final String EXAMPLE = "123, some street";
     public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses can be in any format";
     public static final String ADDRESS_VALIDATION_REGEX = ".+";
+    private static final int INDEX_BLOCK = 0;
+    private static final int INDEX_STREET = 1;
+    private static final int INDEX_UNIT = 2;
+    private static final int INDEX_POSTALCODE = 3;
 
     public final String value;
     private boolean isPrivate;
@@ -39,12 +43,12 @@ public class Address {
      * Splits address into components e.g. Block, PostalCode
      * 
      */
-    private static void splitAddressStringIntoComponents(String value){
+    private void splitAddressStringIntoComponents(String value){
     	String[] strArr = value.split(",");
-    	this.block = strArr[0].trim();
-    	this.street = strArr[1].trim();
-    	this.unit = strArr[2].trim();
-    	this.postalCode = strArr[3].trim();
+    	this.block = new Block(Integer.valueOf(strArr[INDEX_BLOCK].trim()));
+    	this.street = new Street(strArr[INDEX_STREET].trim());
+    	this.unit = new Unit(strArr[INDEX_UNIT].trim());
+    	this.postalCode = new PostalCode(Integer.valueOf(strArr[INDEX_POSTALCODE].trim()));
     }
 
     /**
@@ -73,5 +77,18 @@ public class Address {
 
     public boolean isPrivate() {
         return isPrivate;
+    }
+    
+    public int getBlock(){
+    	return this.block.getNumber();
+    }
+    public String getStreet(){
+    	return this.street.getStreet();
+    }
+    public String getUnit(){
+    	return this.unit.getUnit();
+    }
+    public int getPostalCode(){
+    	return this.postalCode.getPostalCode();
     }
 }

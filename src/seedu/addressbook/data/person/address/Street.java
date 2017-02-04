@@ -8,7 +8,7 @@ public class Street {
 		this.street = street;
 	}
 	
-	public getStreet(){
+	public String getStreet(){
 		return this.street;
 	}
 

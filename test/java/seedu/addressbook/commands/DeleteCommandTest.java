@@ -109,7 +109,7 @@ public class DeleteCommandTest {
 
         CommandResult result = deleteCommand.execute();
 
-        assertEquals(expectedMessage, result.feedbackToUser);
+        assertEquals(expectedMessage, result.showFeedbackToUser());
         assertEquals(expectedAddressBook.getAllPersons(), actualAddressBook.getAllPersons());
     }
 
