@@ -12,7 +12,7 @@ import seedu.addressbook.ui.TextUi;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-
+import java.io.FileNotFoundException;;
 
 /**
  * Entry point of the Address Book application.
@@ -49,12 +49,16 @@ public class Main {
      *
      */
     private void start(String[] launchArgs) {
-        try {
+        try {if(!doesFileExist()){
+			throw new FileNotFoundException();
+		}
             this.ui = new TextUi();
             this.storage = initializeStorage(launchArgs);
             this.addressBook = storage.load();
             ui.showWelcomeMessage(VERSION, storage.getPath());
-
+        }
+            catch (FileNotFoundException fnfe){ 
+            	System.out.println(fnfe.getMessage());
         } catch (InvalidStorageFilePathException | StorageOperationException e) {
             ui.showInitFailedMessage();
             /*
@@ -104,12 +108,15 @@ public class Main {
      * @return result of the command
      */
     private CommandResult executeCommand(Command command)  {
-        try {
+    	try {
+    		
             command.setData(addressBook, lastShownList);
             CommandResult result = command.execute();
             storage.save(addressBook);
             return result;
-        } catch (Exception e) {
+        
+        }
+        catch (Exception e) {
             ui.showToUser(e.getMessage());
             throw new RuntimeException(e);
         }
@@ -123,6 +130,10 @@ public class Main {
     private StorageFile initializeStorage(String[] launchArgs) throws InvalidStorageFilePathException {
         boolean isStorageFileSpecifiedByUser = launchArgs.length > 0;
         return isStorageFileSpecifiedByUser ? new StorageFile(launchArgs[0]) : new StorageFile();
+    }
+    
+    private boolean doesFileExist(){
+    	return storage.path.toFile().exists();
     }
 
 
