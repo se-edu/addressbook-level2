@@ -2,6 +2,8 @@ package seedu.addressbook.ui;
 
 import static seedu.addressbook.common.Messages.*;
 
+import seedu.addressbook.ui.TextUi;
+
 import seedu.addressbook.commands.CommandResult;
 import seedu.addressbook.data.person.ReadOnlyPerson;
 
@@ -17,16 +19,6 @@ import java.util.Scanner;
  */
 public class TextUi {
 
-    /** A decorative prefix added to the beginning of lines printed by AddressBook */
-    private static final String LINE_PREFIX = "|| ";
-
-    /** A platform independent line separator. */
-    private static final String LS = System.lineSeparator();
-
-    private static final String DIVIDER = "===================================================";
-
-    /** Format of indexed list item */
-    private static final String MESSAGE_INDEXED_LIST_ITEM = "\t%1$d. %2$s";
 
 
     /** Offset required to convert between 1-indexing and 0-indexing.  */
@@ -34,16 +26,22 @@ public class TextUi {
 
     /** Format of a comment input line. Comment lines are silently consumed when reading user input. */
     private static final String COMMENT_LINE_FORMAT_REGEX = "#.*";
+    
+    /** Format of indexed list item */
+    private static final String MESSAGE_INDEXED_LIST_ITEM = "\t%1$d. %2$s";
 
     private final Scanner in;
     private final PrintStream out;
+    
+    private Formatter formatter;
 
     public TextUi() {
         this(System.in, System.out);
     }
 
     public TextUi(InputStream in, PrintStream out) {
-        this.in = new Scanner(in);
+        this.formatter = new Formatter();
+    	this.in = new Scanner(in);
         this.out = out;
     }
 
@@ -75,7 +73,8 @@ public class TextUi {
      * @return command (full line) entered by the user
      */
     public String getUserCommand() {
-        out.print(LINE_PREFIX + "Enter command: ");
+        
+    	showMessage(formatter.formatEnterCommand());
         String fullInputLine = in.nextLine();
 
         // silently consume all ignored lines
@@ -83,39 +82,39 @@ public class TextUi {
             fullInputLine = in.nextLine();
         }
 
-        showToUser("[Command entered:" + fullInputLine + "]");
+        showMessage("[Command entered:" + fullInputLine + "]");
         return fullInputLine;
     }
 
 
     public void showWelcomeMessage(String version, String storageFilePath) {
         String storageFileInfo = String.format(MESSAGE_USING_STORAGE_FILE, storageFilePath);
-        showToUser(
-                DIVIDER,
-                DIVIDER,
-                MESSAGE_WELCOME,
-                version,
-                MESSAGE_PROGRAM_LAUNCH_ARGS_USAGE,
-                storageFileInfo,
-                DIVIDER);
+        showMessage(formatter.formatWelcomeMessage(version, storageFileInfo));
     }
-
+    
+    /**
+     * Shows goodbye message based on formatter
+     */
     public void showGoodbyeMessage() {
-        showToUser(MESSAGE_GOODBYE, DIVIDER, DIVIDER);
+    	showMessage(formatter.formatGoodbyeMessage());
     }
 
-
+    /**
+     * Shows init failed message based on formatter
+     */
     public void showInitFailedMessage() {
-        showToUser(MESSAGE_INIT_FAILED, DIVIDER, DIVIDER);
+    	showMessage(formatter.formatInitFailedMessage());
     }
 
-    /** Shows message(s) to the user */
-    public void showToUser(String... message) {
-        for (String m : message) {
-            out.println(LINE_PREFIX + m.replace("\n", LS + LINE_PREFIX));
-        }
+    /**
+     * Shows message to user
+     */
+    public void showMessage(String message){
+    	out.println(message);
     }
 
+    
+    
     /**
      * Shows the result of a command execution to the user. Includes additional formatting to demarcate different
      * command execution segments.
@@ -125,7 +124,7 @@ public class TextUi {
         if (resultPersons.isPresent()) {
             showPersonListView(resultPersons.get());
         }
-        showToUser(result.showFeedbackToUser(), DIVIDER);
+        formatter.formatCommandResultString(result.showFeedbackToUser());
     }
 
     /**
@@ -156,6 +155,12 @@ public class TextUi {
         return formatted.toString();
     }
 
+    /** Shows message(s) to the user */
+    public void showToUser(String... message) {
+        for (String m : message) {
+            out.println(System.lineSeparator() + m.replace("\n", System.lineSeparator() + "|| "));
+        }
+    }
     /**
      * Formats a string as a viewable indexed list item.
      *

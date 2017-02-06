@@ -110,7 +110,7 @@ public class Main {
             storage.save(addressBook);
             return result;
         } catch (Exception e) {
-            ui.showToUser(e.getMessage());
+            ui.showMessage(e.getMessage());
             throw new RuntimeException(e);
         }
     }
