@@ -33,10 +33,12 @@ public class TextUi {
     private final Scanner in;
     private final PrintStream out;
     
+    /** Formatter class to handle all the formatting */
     private Formatter formatter;
 
     public TextUi() {
         this(System.in, System.out);
+    	this.formatter = new Formatter();
     }
 
     public TextUi(InputStream in, PrintStream out) {
@@ -82,11 +84,15 @@ public class TextUi {
             fullInputLine = in.nextLine();
         }
 
-        showMessage("[Command entered:" + fullInputLine + "]");
+        showMessage(formatter.formatCommandEntered(fullInputLine));
         return fullInputLine;
     }
-
-
+    
+    /**
+     * Show welcome message to user
+     * @param version
+     * @param storageFilePath
+     */
     public void showWelcomeMessage(String version, String storageFilePath) {
         String storageFileInfo = String.format(MESSAGE_USING_STORAGE_FILE, storageFilePath);
         showMessage(formatter.formatWelcomeMessage(version, storageFileInfo));
@@ -113,8 +119,6 @@ public class TextUi {
     	out.println(message);
     }
 
-    
-    
     /**
      * Shows the result of a command execution to the user. Includes additional formatting to demarcate different
      * command execution segments.
@@ -124,8 +128,10 @@ public class TextUi {
         if (resultPersons.isPresent()) {
             showPersonListView(resultPersons.get());
         }
-        formatter.formatCommandResultString(result.showFeedbackToUser());
+        //showToUser(result.showFeedbackToUser(), "===================================================");
+        showMessage(formatter.formatResultToUser(result.showFeedbackToUser()));
     }
+    
 
     /**
      * Shows a list of persons to the user, formatted as an indexed list.
@@ -141,7 +147,7 @@ public class TextUi {
 
     /** Shows a list of strings to the user, formatted as an indexed list. */
     private void showToUserAsIndexedList(List<String> list) {
-        showToUser(getIndexedListForViewing(list));
+        showMessage(getIndexedListForViewing(list));
     }
 
     /** Formats a list of strings as a viewable indexed list. */
@@ -155,12 +161,6 @@ public class TextUi {
         return formatted.toString();
     }
 
-    /** Shows message(s) to the user */
-    public void showToUser(String... message) {
-        for (String m : message) {
-            out.println(System.lineSeparator() + m.replace("\n", System.lineSeparator() + "|| "));
-        }
-    }
     /**
      * Formats a string as a viewable indexed list item.
      *

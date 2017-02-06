@@ -22,28 +22,59 @@ public class Formatter {
      * @param message
      * @return divider prefix formatted accordingly as: LINE_PREFIX + DIVIDER + LS + LINE_PREFIX + message;
      */
+    
+    public String addLinePrefix(String message){
+    	return LINE_PREFIX + message;
+    }
+    /**
+     * || ====================================
+     * || message goes here
+     * @param message
+     * @return
+     */
     public String addDividerPrefix(String message){
     	return LINE_PREFIX + DIVIDER + LS + LINE_PREFIX + message;
     }
     /**
-     * 
      * @param message
      * @return divider suffix formatted accordingly as: LINE_PREFIX + message + LS + LINE_PREFIX + DIVIDER;
      */
     public String addDividerSuffix(String message){
     	return LINE_PREFIX + message + LS + LINE_PREFIX + DIVIDER;
     }
-    
+
     /**
-     * formats goodbye message according to:
-     * showToUser(MESSAGE_GOODBYE, DIVIDER, DIVIDER);
+     * || message goes here
+     * =======================================
      * @param message
      * @return
      */
+    public String formatResultToUser(String message){
+    	return addLinePrefix(message) + LS + DIVIDER;
+    }
     
+    /**
+     * || Enter command: 
+     * @return
+     */
     public String formatEnterCommand(){
     	return LINE_PREFIX + "Enter command: ";
     }
+    
+    /**
+     * formats etc. [Command entered: add]
+     * @param fullInputLine
+     * @return
+     */
+    public String formatCommandEntered(String fullInputLine){
+    	return "[Command entered:" + fullInputLine + "]";
+    }
+        
+    /**
+     * formats goodbye message according to:
+     * showToUser(MESSAGE_GOODBYE, DIVIDER, DIVIDER);
+     * @return
+     */
     public String formatGoodbyeMessage(){
     	return addDividerSuffix(addDividerSuffix(MESSAGE_GOODBYE));
     }
@@ -57,9 +88,6 @@ public class Formatter {
     	return addDividerSuffix(addDividerSuffix(MESSAGE_INIT_FAILED));
     }
     
-    public String formatCommandResultString(String message){
-    	return addDividerSuffix(message);
-    }
     /**
      * format welcome message according to:
      * return DIVIDER + LS +
