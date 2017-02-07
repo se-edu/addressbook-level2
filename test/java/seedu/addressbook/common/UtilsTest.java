@@ -36,7 +36,7 @@ public class UtilsTest {
         // confirms nulls inside the list are not considered
         List<Object> nullList = Arrays.asList((Object) null);
         assertFalse(Utils.isAnyNull(nullList));
-        
+
         // 2d array tests
         ArrayList<ArrayList<String>> nullArrayList = new ArrayList<ArrayList<String>>(3);
         for(int i = 0; i < 3; i++) {
