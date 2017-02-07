@@ -94,7 +94,7 @@ public class UtilsTest {
         nullArrayList2.get(2).add("notNull");        
         assertAreUnique(nullArrayList, nullArrayList2);
     }
-    
+
     private void assertAreUnique(Object... objects) {
         assertTrue(Utils.elementsAreUnique(Arrays.asList(objects)));
     }
