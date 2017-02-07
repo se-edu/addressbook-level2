@@ -61,6 +61,10 @@ public class Address {
         return other == this // short circuit if same object
                 || (other instanceof Address // instanceof handles nulls
                 && this.value.equals(((Address) other).value)); // state check
+                && this.block.equals(((Address) other).block));
+                && this.street.equals(((Address) other).street));
+                && this.unit.equals(((Address) other).unit));
+                && this.postalCode.equals(((Address) other).postalCode));
     }
 
     @Override
