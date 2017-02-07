@@ -3,6 +3,7 @@ package seedu.addressbook.common;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -35,6 +36,20 @@ public class UtilsTest {
         // confirms nulls inside the list are not considered
         List<Object> nullList = Arrays.asList((Object) null);
         assertFalse(Utils.isAnyNull(nullList));
+        
+        // 2d array tests
+        ArrayList<ArrayList<String>> nullArrayList = new ArrayList<ArrayList<String>>(3);
+        for(int i = 0; i < 3; i++) {
+        	nullArrayList.add( i, new ArrayList<String>());
+        }
+        assertFalse(Utils.isAnyNull(nullArrayList));
+        
+        ArrayList<ArrayList<String>> notNullArrayList = new ArrayList<ArrayList<String>>(3);
+        for(int i = 0; i < 3; i++) {
+        	notNullArrayList.add( i, new ArrayList<String>());
+        	notNullArrayList.get(i).add("notNull");
+        }
+        assertFalse(Utils.isAnyNull(notNullArrayList));
     }
 
     @Test
@@ -60,8 +75,26 @@ public class UtilsTest {
         assertNotUnique(null, 1, new Integer(1));
         assertNotUnique(null, null);
         assertNotUnique(null, "a", "b", null);
+        
+        //2d ArrayList tests
+        ArrayList<ArrayList<String>> nullArrayList = new ArrayList<ArrayList<String>>(3);
+        ArrayList<ArrayList<String>> nullArrayList2 = new ArrayList<ArrayList<String>>(3);
+        for(int i = 0; i < 3; i++) {
+        	nullArrayList.add( i, new ArrayList<String>());
+        	nullArrayList2.add( i, new ArrayList<String>());
+        }
+        assertNotUnique(nullArrayList, nullArrayList2);
+        
+        nullArrayList.get(1).add("notNull");        
+        assertAreUnique(nullArrayList, nullArrayList2);
+        
+        nullArrayList2.get(1).add("notNull");        
+        assertNotUnique(nullArrayList, nullArrayList2);
+        
+        nullArrayList2.get(2).add("notNull");        
+        assertAreUnique(nullArrayList, nullArrayList2);
     }
-
+    
     private void assertAreUnique(Object... objects) {
         assertTrue(Utils.elementsAreUnique(Arrays.asList(objects)));
     }
