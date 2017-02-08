@@ -68,6 +68,7 @@ public class AddressBook {
         }
         person.setTags(new UniqueTagList(commonTagReferences));
     }
+    
 
     /**
      * Adds a person to the address book.
@@ -142,6 +143,14 @@ public class AddressBook {
      */
     public UniqueTagList getAllTags() {
         return new UniqueTagList(allTags);
+    }
+    
+    public String getPrintableString(Printable... printables){
+    	String allPrintableString = "";
+    	for (Printable printable : printables) {
+    		allPrintableString += printable.getPrintableString() + " ";
+    	}
+    	return allPrintableString;
     }
 
     @Override
