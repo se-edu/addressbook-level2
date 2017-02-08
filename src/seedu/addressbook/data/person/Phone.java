@@ -11,6 +11,7 @@ public class Phone implements Printable {
     public static final String EXAMPLE = "123456789";
     public static final String MESSAGE_PHONE_CONSTRAINTS = "Person phone numbers should only contain numbers";
     public static final String PHONE_VALIDATION_REGEX = "\\d+";
+    public static final String PRIVATE_DATA_CANNOT_PRINT = "Attribute is private, cannot access and print";
 
     public final String value;
     private boolean isPrivate;
@@ -59,6 +60,9 @@ public class Phone implements Printable {
 
 	@Override
 	public String getPrintableString() {
-		return "Phone" + this.toString();
+		if(!this.isPrivate())
+			return "Phone" + this.toString();
+		else 
+			return PRIVATE_DATA_CANNOT_PRINT;
 	}
 }
