@@ -91,13 +91,6 @@ public class AddressBook {
     }
 
     /**
-     * Returns true if an equivalent person exists in the address book.
-     */
-    public boolean containsTag(Tag key) {
-        return allTags.contains(key);
-    }
-
-    /**
      * Removes the equivalent person from the address book.
      *
      * @throws PersonNotFoundException if no such Person could be found.
