@@ -91,12 +91,9 @@ public class AddressBookTest {
 
     @Test
     public void addPerson_someTagsNotInTagList() throws Exception {
-        assertFalse(defaultAddressBook.getAllTags().contains(tagEconomist));
-        assertFalse(defaultAddressBook.getAllTags().contains(tagPrizeWinner));
+        assertFalse(isTagObjectInAddressBookList(tagEconomist, defaultAddressBook));
+        assertFalse(isTagObjectInAddressBookList(tagPrizeWinner, defaultAddressBook));
         defaultAddressBook.addPerson(davidElliot);
-        assertTrue(defaultAddressBook.getAllTags().contains(tagEconomist));
-        assertTrue(defaultAddressBook.getAllTags().contains(tagPrizeWinner));
-
         assertTrue(isTagObjectInAddressBookList(tagEconomist, defaultAddressBook));
         assertTrue(isTagObjectInAddressBookList(tagPrizeWinner, defaultAddressBook));
     }
@@ -117,7 +114,7 @@ public class AddressBookTest {
             // ignore expected exception
         }
 
-        assertFalse(defaultAddressBook.getAllTags().contains(tagPrizeWinner));
+        assertFalse(isTagObjectInAddressBookList(tagPrizeWinner, defaultAddressBook));
     }
 
     @Test
