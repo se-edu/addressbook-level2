@@ -21,7 +21,6 @@ import seedu.addressbook.data.person.UniquePersonList.DuplicatePersonException;
 import seedu.addressbook.data.person.UniquePersonList.PersonNotFoundException;
 import seedu.addressbook.data.tag.Tag;
 import seedu.addressbook.data.tag.UniqueTagList;
-import seedu.addressbook.data.tag.UniqueTagList.TagNotFoundException;
 
 public class AddressBookTest {
     private Tag tagPrizeWinner;
@@ -175,40 +174,6 @@ public class AddressBookTest {
     public void removePerson_personNotExists_throwsPersonNotFoundException() throws Exception {
         thrown.expect(PersonNotFoundException.class);
         defaultAddressBook.removePerson(charlieDouglas);
-    }
-
-    @Test
-    public void removeTag_tagExistsAndUnused_removesNormally() throws Exception {
-        int numberOfTagsBeforeRemoval = getSize(defaultAddressBook.getAllTags());
-        defaultAddressBook.removeTag(tagScientist);
-
-        assertFalse(defaultAddressBook.containsTag(tagScientist));
-
-        int numberOfTagsAfterRemoval = getSize(defaultAddressBook.getAllTags());
-        assertTrue(numberOfTagsAfterRemoval == numberOfTagsBeforeRemoval - 1);
-
-    }
-
-    @Test
-    public void removeTag_tagExistsAndUsed_removesUsedTagFromPersons() throws Exception {
-        aliceBetsy.setTags(new UniqueTagList(tagMathematician, tagPrizeWinner));
-        bobChaplin.setTags(new UniqueTagList(tagEconomist));
-
-        int numberOfTagsBeforeRemoval = getSize(defaultAddressBook.getAllTags());
-        defaultAddressBook.removeTag(tagMathematician);
-
-        assertTrue(isIdentical(aliceBetsy.getTags(), new UniqueTagList(tagPrizeWinner)));
-        assertTrue(isIdentical(bobChaplin.getTags(), new UniqueTagList(tagEconomist)));
-        assertFalse(defaultAddressBook.containsTag(tagMathematician));
-
-        int numberOfTagsAfterRemoval = getSize(defaultAddressBook.getAllTags());
-        assertTrue(numberOfTagsAfterRemoval == numberOfTagsBeforeRemoval - 1);
-    }
-
-    @Test
-    public void removeTag_tagNotExists_throwsTagNotFoundException() throws Exception {
-        thrown.expect(TagNotFoundException.class);
-        defaultAddressBook.removeTag(tagEconomist);
     }
 
     @Test
