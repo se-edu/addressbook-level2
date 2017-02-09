@@ -91,11 +91,11 @@ public class AddressBookTest {
 
     @Test
     public void addPerson_someTagsNotInTagList() throws Exception {
-        assertFalse(defaultAddressBook.containsTag(tagEconomist));
-        assertFalse(defaultAddressBook.containsTag(tagPrizeWinner));
+        assertFalse(defaultAddressBook.getAllTags().contains(tagEconomist));
+        assertFalse(defaultAddressBook.getAllTags().contains(tagPrizeWinner));
         defaultAddressBook.addPerson(davidElliot);
-        assertTrue(defaultAddressBook.containsTag(tagEconomist));
-        assertTrue(defaultAddressBook.containsTag(tagPrizeWinner));
+        assertTrue(defaultAddressBook.getAllTags().contains(tagEconomist));
+        assertTrue(defaultAddressBook.getAllTags().contains(tagPrizeWinner));
 
         assertTrue(isTagObjectInAddressBookList(tagEconomist, defaultAddressBook));
         assertTrue(isTagObjectInAddressBookList(tagPrizeWinner, defaultAddressBook));
@@ -117,7 +117,7 @@ public class AddressBookTest {
             // ignore expected exception
         }
 
-        assertFalse(defaultAddressBook.containsTag(tagPrizeWinner));
+        assertFalse(defaultAddressBook.getAllTags().contains(tagPrizeWinner));
     }
 
     @Test
@@ -136,25 +136,6 @@ public class AddressBookTest {
 
         for (Person person : allPersons) {
             assertFalse(emptyAddressBook.containsPerson(person));
-        }
-    }
-
-    @Test
-    public void containsTag() throws Exception {
-        UniqueTagList tagsWhichShouldBeIn = new UniqueTagList(tagMathematician, tagScientist);
-        UniqueTagList tagsWHichShouldNotBeIn = new UniqueTagList(tagEconomist, tagPrizeWinner);
-
-        for (Tag tagWhichShouldBeIn : tagsWhichShouldBeIn) {
-            assertTrue(defaultAddressBook.containsTag(tagWhichShouldBeIn));
-        }
-        for (Tag tagWhichShouldNotBeIn : tagsWHichShouldNotBeIn) {
-            assertFalse(defaultAddressBook.containsTag(tagWhichShouldNotBeIn));
-        }
-
-        UniqueTagList allTags = new UniqueTagList(tagPrizeWinner, tagScientist, tagMathematician, tagEconomist);
-
-        for (Tag tag : allTags) {
-            assertFalse(emptyAddressBook.containsTag(tag));
         }
     }
 
