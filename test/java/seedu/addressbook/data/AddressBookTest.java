@@ -21,7 +21,6 @@ import seedu.addressbook.data.person.UniquePersonList.DuplicatePersonException;
 import seedu.addressbook.data.person.UniquePersonList.PersonNotFoundException;
 import seedu.addressbook.data.tag.Tag;
 import seedu.addressbook.data.tag.UniqueTagList;
-import seedu.addressbook.data.tag.UniqueTagList.DuplicateTagException;
 import seedu.addressbook.data.tag.UniqueTagList.TagNotFoundException;
 
 public class AddressBookTest {
@@ -120,21 +119,6 @@ public class AddressBookTest {
         }
 
         assertFalse(defaultAddressBook.containsTag(tagPrizeWinner));
-    }
-
-    @Test
-    public void addTag_tagNotInList_addsNormally() throws Exception {
-        assertFalse(defaultAddressBook.containsTag(tagEconomist));
-        defaultAddressBook.addTag(tagEconomist);
-
-        UniqueTagList expectedTagsAfterAddition = new UniqueTagList(tagMathematician, tagScientist, tagEconomist);
-        assertTrue(isIdentical(expectedTagsAfterAddition, defaultAddressBook.getAllTags()));
-    }
-
-    @Test
-    public void addTag_tagAlreadyInList_throwsDuplicateTagException() throws Exception {
-        thrown.expect(DuplicateTagException.class);
-        defaultAddressBook.addTag(tagMathematician);
     }
 
     @Test
