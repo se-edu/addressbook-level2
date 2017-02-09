@@ -12,7 +12,6 @@ import seedu.addressbook.data.person.UniquePersonList.DuplicatePersonException;
 import seedu.addressbook.data.person.UniquePersonList.PersonNotFoundException;
 import seedu.addressbook.data.tag.Tag;
 import seedu.addressbook.data.tag.UniqueTagList;
-import seedu.addressbook.data.tag.UniqueTagList.DuplicateTagException;
 import seedu.addressbook.data.tag.UniqueTagList.TagNotFoundException;
 
 /**
@@ -83,15 +82,6 @@ public class AddressBook {
     public void addPerson(Person toAdd) throws DuplicatePersonException {
         allPersons.add(toAdd);
         syncTagsWithMasterList(toAdd);
-    }
-
-    /**
-     * Adds a tag to the list of tags present in the address book.
-     *
-     * @throws DuplicateTagException if an equivalent tag already exists.
-     */
-    public void addTag(Tag toAdd) throws DuplicateTagException {
-        allTags.add(toAdd);
     }
 
     /**
