@@ -94,18 +94,6 @@ public class UniqueTagList implements Iterable<Tag> {
     }
 
     /**
-     * Adds a Tag to the list.
-     *
-     * @throws DuplicateTagException if the Tag to add is a duplicate of an existing Tag in the list.
-     */
-    public void add(Tag toAdd) throws DuplicateTagException {
-        if (contains(toAdd)) {
-            throw new DuplicateTagException();
-        }
-        internalList.add(toAdd);
-    }
-
-    /**
      * Adds all the given tags to this list.
      *
      * @throws DuplicateTagException if the argument tag list contains tag(s) that already exist in this list.
