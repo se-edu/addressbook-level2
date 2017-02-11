@@ -30,12 +30,6 @@ public class UniqueTagList implements Iterable<Tag> {
         }
     }
 
-    /**
-     * Signals that an operation targeting a specified Tag in the list would fail because
-     * there is no such matching Tag in the list.
-     */
-    public static class TagNotFoundException extends Exception {}
-
     private final List<Tag> internalList = new ArrayList<>();
 
     /**
@@ -114,18 +108,6 @@ public class UniqueTagList implements Iterable<Tag> {
             if (!alreadyInside.contains(tag)) {
                 internalList.add(tag);
             }
-        }
-    }
-
-    /**
-     * Removes the equivalent Tag from the list.
-     *
-     * @throws TagNotFoundException if no such Tag could be found in the list.
-     */
-    public void remove(Tag toRemove) throws TagNotFoundException {
-        final boolean tagFoundAndDeleted = internalList.remove(toRemove);
-        if (!tagFoundAndDeleted) {
-            throw new TagNotFoundException();
         }
     }
 
