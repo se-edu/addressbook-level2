@@ -17,6 +17,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -114,9 +115,16 @@ public class StorageFile {
     /**
      * Loads data from this storage file.
      *
+     * @return an {@link AddressBook} containing the data in the file, or an empty {@link AddressBook} if it
+     *    does not exist.
      * @throws StorageOperationException if there were errors reading and/or converting data from file.
      */
     public AddressBook load() throws StorageOperationException {
+
+        if (!Files.exists(path) || !Files.isRegularFile(path)) {
+            return new AddressBook();
+        }
+
         try (final Reader fileReader =
                      new BufferedReader(new FileReader(path.toFile()))) {
 
@@ -128,17 +136,8 @@ public class StorageFile {
             }
             return loaded.toModelType();
 
-        /* Note: Here, we are using an exception to create the file if it is missing. However, we should minimize
-         * using exceptions to facilitate normal paths of execution. If we consider the missing file as a 'normal'
-         * situation (i.e. not truly exceptional) we should not use an exception to handle it.
-         */
-
-        // create empty file if not found
         } catch (FileNotFoundException fnfe) {
-            final AddressBook empty = new AddressBook();
-            save(empty);
-            return empty;
-
+            throw new AssertionError("A non-existent file scenario is already handled earlier.");
         // other errors
         } catch (IOException ioe) {
             throw new StorageOperationException("Error writing to file: " + path);
