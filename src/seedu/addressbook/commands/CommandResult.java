@@ -37,8 +37,4 @@ public class CommandResult {
 		return feedbackToUser;
 	}
 
-	public String getFeedbackToUser() {
-		return feedbackToUser;
-	}
-
 }
