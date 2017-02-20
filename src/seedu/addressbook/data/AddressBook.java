@@ -12,8 +12,6 @@ import seedu.addressbook.data.person.UniquePersonList.DuplicatePersonException;
 import seedu.addressbook.data.person.UniquePersonList.PersonNotFoundException;
 import seedu.addressbook.data.tag.Tag;
 import seedu.addressbook.data.tag.UniqueTagList;
-import seedu.addressbook.data.tag.UniqueTagList.DuplicateTagException;
-import seedu.addressbook.data.tag.UniqueTagList.TagNotFoundException;
 
 /**
  * Represents the entire address book. Contains the data of the address book.
@@ -86,26 +84,10 @@ public class AddressBook {
     }
 
     /**
-     * Adds a tag to the list of tags present in the address book.
-     *
-     * @throws DuplicateTagException if an equivalent tag already exists.
-     */
-    public void addTag(Tag toAdd) throws DuplicateTagException {
-        allTags.add(toAdd);
-    }
-
-    /**
      * Returns true if an equivalent person exists in the address book.
      */
     public boolean containsPerson(ReadOnlyPerson key) {
         return allPersons.contains(key);
-    }
-
-    /**
-     * Returns true if an equivalent person exists in the address book.
-     */
-    public boolean containsTag(Tag key) {
-        return allTags.contains(key);
     }
 
     /**
@@ -115,29 +97,6 @@ public class AddressBook {
      */
     public void removePerson(ReadOnlyPerson toRemove) throws PersonNotFoundException {
         allPersons.remove(toRemove);
-    }
-
-    /**
-     * Removes the equivalent Tag from the address book.
-     * The Tag will also be removed from any Person in the address book who has that tag.
-     *
-     * @throws TagNotFoundException if no such Tag could be found.
-     */
-    public void removeTag(Tag toRemove) throws TagNotFoundException {
-        removeTagFromAllPersons(toRemove);
-        allTags.remove(toRemove);
-    }
-
-    private void removeTagFromAllPersons(Tag toRemove) throws TagNotFoundException {
-        for (Person person : allPersons) {
-            UniqueTagList personTagList = person.getTags();
-
-            if (personTagList.contains(toRemove)) {
-                personTagList.remove(toRemove);
-            }
-
-            person.setTags(personTagList);
-        }
     }
 
     /**

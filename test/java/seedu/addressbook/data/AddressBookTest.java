@@ -21,8 +21,6 @@ import seedu.addressbook.data.person.UniquePersonList.DuplicatePersonException;
 import seedu.addressbook.data.person.UniquePersonList.PersonNotFoundException;
 import seedu.addressbook.data.tag.Tag;
 import seedu.addressbook.data.tag.UniqueTagList;
-import seedu.addressbook.data.tag.UniqueTagList.DuplicateTagException;
-import seedu.addressbook.data.tag.UniqueTagList.TagNotFoundException;
 
 public class AddressBookTest {
     private Tag tagPrizeWinner;
@@ -93,12 +91,9 @@ public class AddressBookTest {
 
     @Test
     public void addPerson_someTagsNotInTagList() throws Exception {
-        assertFalse(defaultAddressBook.containsTag(tagEconomist));
-        assertFalse(defaultAddressBook.containsTag(tagPrizeWinner));
+        assertFalse(isTagObjectInAddressBookList(tagEconomist, defaultAddressBook));
+        assertFalse(isTagObjectInAddressBookList(tagPrizeWinner, defaultAddressBook));
         defaultAddressBook.addPerson(davidElliot);
-        assertTrue(defaultAddressBook.containsTag(tagEconomist));
-        assertTrue(defaultAddressBook.containsTag(tagPrizeWinner));
-
         assertTrue(isTagObjectInAddressBookList(tagEconomist, defaultAddressBook));
         assertTrue(isTagObjectInAddressBookList(tagPrizeWinner, defaultAddressBook));
     }
@@ -119,22 +114,7 @@ public class AddressBookTest {
             // ignore expected exception
         }
 
-        assertFalse(defaultAddressBook.containsTag(tagPrizeWinner));
-    }
-
-    @Test
-    public void addTag_tagNotInList_addsNormally() throws Exception {
-        assertFalse(defaultAddressBook.containsTag(tagEconomist));
-        defaultAddressBook.addTag(tagEconomist);
-
-        UniqueTagList expectedTagsAfterAddition = new UniqueTagList(tagMathematician, tagScientist, tagEconomist);
-        assertTrue(isIdentical(expectedTagsAfterAddition, defaultAddressBook.getAllTags()));
-    }
-
-    @Test
-    public void addTag_tagAlreadyInList_throwsDuplicateTagException() throws Exception {
-        thrown.expect(DuplicateTagException.class);
-        defaultAddressBook.addTag(tagMathematician);
+        assertFalse(isTagObjectInAddressBookList(tagPrizeWinner, defaultAddressBook));
     }
 
     @Test
@@ -157,25 +137,6 @@ public class AddressBookTest {
     }
 
     @Test
-    public void containsTag() throws Exception {
-        UniqueTagList tagsWhichShouldBeIn = new UniqueTagList(tagMathematician, tagScientist);
-        UniqueTagList tagsWHichShouldNotBeIn = new UniqueTagList(tagEconomist, tagPrizeWinner);
-
-        for (Tag tagWhichShouldBeIn : tagsWhichShouldBeIn) {
-            assertTrue(defaultAddressBook.containsTag(tagWhichShouldBeIn));
-        }
-        for (Tag tagWhichShouldNotBeIn : tagsWHichShouldNotBeIn) {
-            assertFalse(defaultAddressBook.containsTag(tagWhichShouldNotBeIn));
-        }
-
-        UniqueTagList allTags = new UniqueTagList(tagPrizeWinner, tagScientist, tagMathematician, tagEconomist);
-
-        for (Tag tag : allTags) {
-            assertFalse(emptyAddressBook.containsTag(tag));
-        }
-    }
-
-    @Test
     public void removePerson_personExists_removesNormally() throws Exception {
         int numberOfPersonsBeforeRemoval = getSize(defaultAddressBook.getAllPersons());
         defaultAddressBook.removePerson(aliceBetsy);
@@ -191,40 +152,6 @@ public class AddressBookTest {
     public void removePerson_personNotExists_throwsPersonNotFoundException() throws Exception {
         thrown.expect(PersonNotFoundException.class);
         defaultAddressBook.removePerson(charlieDouglas);
-    }
-
-    @Test
-    public void removeTag_tagExistsAndUnused_removesNormally() throws Exception {
-        int numberOfTagsBeforeRemoval = getSize(defaultAddressBook.getAllTags());
-        defaultAddressBook.removeTag(tagScientist);
-
-        assertFalse(defaultAddressBook.containsTag(tagScientist));
-
-        int numberOfTagsAfterRemoval = getSize(defaultAddressBook.getAllTags());
-        assertTrue(numberOfTagsAfterRemoval == numberOfTagsBeforeRemoval - 1);
-
-    }
-
-    @Test
-    public void removeTag_tagExistsAndUsed_removesUsedTagFromPersons() throws Exception {
-        aliceBetsy.setTags(new UniqueTagList(tagMathematician, tagPrizeWinner));
-        bobChaplin.setTags(new UniqueTagList(tagEconomist));
-
-        int numberOfTagsBeforeRemoval = getSize(defaultAddressBook.getAllTags());
-        defaultAddressBook.removeTag(tagMathematician);
-
-        assertTrue(isIdentical(aliceBetsy.getTags(), new UniqueTagList(tagPrizeWinner)));
-        assertTrue(isIdentical(bobChaplin.getTags(), new UniqueTagList(tagEconomist)));
-        assertFalse(defaultAddressBook.containsTag(tagMathematician));
-
-        int numberOfTagsAfterRemoval = getSize(defaultAddressBook.getAllTags());
-        assertTrue(numberOfTagsAfterRemoval == numberOfTagsBeforeRemoval - 1);
-    }
-
-    @Test
-    public void removeTag_tagNotExists_throwsTagNotFoundException() throws Exception {
-        thrown.expect(TagNotFoundException.class);
-        defaultAddressBook.removeTag(tagEconomist);
     }
 
     @Test
