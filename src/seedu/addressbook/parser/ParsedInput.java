@@ -2,6 +2,8 @@ package seedu.addressbook.parser;
 
 import java.util.Set;
 
+import seedu.addressbook.commands.ExitCommand;
+
 public class ParsedInput {
     public static final String INCORRECT_COMMAND = "incorrect command";
 

@@ -12,6 +12,7 @@ import static seedu.addressbook.ui.TextUi.DISPLAYED_INDEX_OFFSET;
  * Represents an executable command.
  */
 public abstract class Command {
+
     protected AddressBook addressBook;
     protected List<? extends ReadOnlyPerson> relevantPersons;
     private int targetIndex = -1;
@@ -35,11 +36,6 @@ public abstract class Command {
     public static String getMessageForPersonListShownSummary(List<? extends ReadOnlyPerson> personsDisplayed) {
         return String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, personsDisplayed.size());
     }
-
-    /**
-     * Executes the command and returns the result.
-     */
-    public abstract CommandResult execute();
 
     /**
      * Supplies the data the command will operate on.
