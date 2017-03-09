@@ -125,11 +125,11 @@ public class Main {
             case DeleteCommand.COMMAND_WORD:
                 return executeDeleteCommand(parsedInput);
             case ClearCommand.COMMAND_WORD:
-                return new ClearCommand().execute();
+                return new ClearCommand().execute(addressBook);
             case FindCommand.COMMAND_WORD:
                 return executeFindCommand(parsedInput);
             case ListCommand.COMMAND_WORD:
-                return new ListCommand().execute();
+                return new ListCommand().execute(addressBook);
             case ViewCommand.COMMAND_WORD:
                 return executeViewCommand(parsedInput);
             case ViewAllCommand.COMMAND_WORD:
@@ -155,47 +155,41 @@ public class Main {
                 parsedInput.getEmail(), parsedInput.getIsEmailPrivate(),
                 parsedInput.getAddress(), parsedInput.getIsAddressPrivate(),
                 parsedInput.getTags());
-        command.setData(addressBook, lastShownList);
-        CommandResult result = command.execute();
+        CommandResult result = command.execute(addressBook);
         storage.save(addressBook);
         return result;
     }
 
     private CommandResult executeDeleteCommand(ParsedInput parsedInput) throws StorageOperationException {
         DeleteCommand command = new DeleteCommand(parsedInput.getTargetVisibleIndex());
-        command.setData(addressBook, lastShownList);
-        CommandResult result = command.execute();
+        CommandResult result = command.execute(addressBook, lastShownList);
         storage.save(addressBook);
         return result;
     }
 
     private CommandResult executeFindCommand(ParsedInput parsedInput) throws StorageOperationException {
         FindCommand command = new FindCommand(parsedInput.getKeywords());
-        command.setData(addressBook, lastShownList);
-        CommandResult result = command.execute();
+        CommandResult result = command.execute(addressBook);
         storage.save(addressBook);
         return result;
     }
 
     private CommandResult executeViewCommand(ParsedInput parsedInput) throws StorageOperationException {
         ViewCommand command = new ViewCommand(parsedInput.getTargetVisibleIndex());
-        command.setData(addressBook, lastShownList);
-        CommandResult result = command.execute();
+        CommandResult result = command.execute(addressBook, lastShownList);
         storage.save(addressBook);
         return result;
     }
 
     private CommandResult executeViewAllCommand(ParsedInput parsedInput) throws StorageOperationException {
         ViewAllCommand command = new ViewAllCommand(parsedInput.getTargetVisibleIndex());
-        command.setData(addressBook, lastShownList);
-        CommandResult result = command.execute();
+        CommandResult result = command.execute(addressBook, lastShownList);
         storage.save(addressBook);
         return result;
     }
 
     private CommandResult executeIncorrectCommand(ParsedInput parsedInput) throws StorageOperationException {
         IncorrectCommand command = new IncorrectCommand(parsedInput.getFeedbackToUser());
-        command.setData(addressBook, lastShownList);
         CommandResult result = command.execute();
         storage.save(addressBook);
         return result;

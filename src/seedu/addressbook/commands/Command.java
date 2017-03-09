@@ -13,8 +13,6 @@ import static seedu.addressbook.ui.TextUi.DISPLAYED_INDEX_OFFSET;
  */
 public abstract class Command {
 
-    protected AddressBook addressBook;
-    protected List<? extends ReadOnlyPerson> relevantPersons;
     private int targetIndex = -1;
 
     /**
@@ -38,19 +36,11 @@ public abstract class Command {
     }
 
     /**
-     * Supplies the data the command will operate on.
-     */
-    public void setData(AddressBook addressBook, List<? extends ReadOnlyPerson> relevantPersons) {
-        this.addressBook = addressBook;
-        this.relevantPersons = relevantPersons;
-    }
-
-    /**
      * Extracts the the target person in the last shown list from the given arguments.
      *
      * @throws IndexOutOfBoundsException if the target index is out of bounds of the last viewed listing
      */
-    protected ReadOnlyPerson getTargetPerson() throws IndexOutOfBoundsException {
+    protected ReadOnlyPerson getTargetPerson(List<? extends ReadOnlyPerson> relevantPersons) throws IndexOutOfBoundsException {
         return relevantPersons.get(getTargetIndex() - DISPLAYED_INDEX_OFFSET);
     }
 

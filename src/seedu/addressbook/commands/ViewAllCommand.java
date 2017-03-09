@@ -1,6 +1,9 @@
 package seedu.addressbook.commands;
 
+import java.util.List;
+
 import seedu.addressbook.common.Messages;
+import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.person.ReadOnlyPerson;
 
 
@@ -25,9 +28,9 @@ public class ViewAllCommand extends Command {
     }
 
 
-    public CommandResult execute() {
+    public CommandResult execute(AddressBook addressBook, List<? extends ReadOnlyPerson> lastShownList) {
         try {
-            final ReadOnlyPerson target = getTargetPerson();
+            final ReadOnlyPerson target = getTargetPerson(lastShownList);
             if (!addressBook.containsPerson(target)) {
                 return new CommandResult(Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK);
             }
