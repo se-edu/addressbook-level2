@@ -13,12 +13,10 @@ import java.util.regex.Pattern;
 
 import seedu.addressbook.commands.AddCommand;
 import seedu.addressbook.commands.ClearCommand;
-import seedu.addressbook.commands.Command;
 import seedu.addressbook.commands.DeleteCommand;
 import seedu.addressbook.commands.ExitCommand;
 import seedu.addressbook.commands.FindCommand;
 import seedu.addressbook.commands.HelpCommand;
-import seedu.addressbook.commands.IncorrectCommand;
 import seedu.addressbook.commands.ListCommand;
 import seedu.addressbook.commands.ViewAllCommand;
 import seedu.addressbook.commands.ViewCommand;
@@ -64,10 +62,11 @@ public class Parser {
      * @param userInput full user input string
      * @return the command based on the user input
      */
-    public Command parseCommand(String userInput) {
+    public ParsedInput parseCommand(String userInput) {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+            return new ParsedInput(ParsedInput.INCORRECT_COMMAND)
+                    .setFeedbackToUser(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
         final String commandWord = matcher.group("commandWord");
@@ -82,13 +81,13 @@ public class Parser {
             return prepareDelete(arguments);
 
         case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+            return new ParsedInput(ClearCommand.COMMAND_WORD);
 
         case FindCommand.COMMAND_WORD:
             return prepareFind(arguments);
 
         case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            return new ParsedInput(ListCommand.COMMAND_WORD);
 
         case ViewCommand.COMMAND_WORD:
             return prepareView(arguments);
@@ -97,11 +96,11 @@ public class Parser {
             return prepareViewAll(arguments);
 
         case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
+            return new ParsedInput(ExitCommand.COMMAND_WORD);
 
         case HelpCommand.COMMAND_WORD: // Fallthrough
         default:
-            return new HelpCommand();
+            return new ParsedInput(HelpCommand.COMMAND_WORD);
         }
     }
 
@@ -111,29 +110,26 @@ public class Parser {
      * @param args full command args string
      * @return the prepared command
      */
-    private Command prepareAdd(String args) {
+    private ParsedInput prepareAdd(String args) {
         final Matcher matcher = PERSON_DATA_ARGS_FORMAT.matcher(args.trim());
         // Validate arg string format
         if (!matcher.matches()) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            return new ParsedInput(ParsedInput.INCORRECT_COMMAND)
+                    .setFeedbackToUser(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
+
         try {
-            return new AddCommand(
-                    matcher.group("name"),
-
-                    matcher.group("phone"),
-                    isPrivatePrefixPresent(matcher.group("isPhonePrivate")),
-
-                    matcher.group("email"),
-                    isPrivatePrefixPresent(matcher.group("isEmailPrivate")),
-
-                    matcher.group("address"),
-                    isPrivatePrefixPresent(matcher.group("isAddressPrivate")),
-
-                    getTagsFromArgs(matcher.group("tagArguments"))
-            );
+            return new ParsedInput(AddCommand.COMMAND_WORD)
+                    .setName(matcher.group("name"))
+                    .setPhone(matcher.group("phone"))
+                    .setIsPhonePrivate(isPrivatePrefixPresent(matcher.group("isPhonePrivate")))
+                    .setEmail(matcher.group("email"))
+                    .setIsEmailPrivate(isPrivatePrefixPresent(matcher.group("isEmailPrivate")))
+                    .setAddress(matcher.group("address"))
+                    .setIsAddressPrivate(isPrivatePrefixPresent(matcher.group("isAddressPrivate")))
+                    .setTags(getTagsFromArgs(matcher.group("tagArguments")));
         } catch (IllegalValueException ive) {
-            return new IncorrectCommand(ive.getMessage());
+            return new ParsedInput(ParsedInput.INCORRECT_COMMAND).setFeedbackToUser(ive.getMessage());
         }
     }
 
@@ -165,14 +161,16 @@ public class Parser {
      * @param args full command args string
      * @return the prepared command
      */
-    private Command prepareDelete(String args) {
+    private ParsedInput prepareDelete(String args) {
         try {
             final int targetIndex = parseArgsAsDisplayedIndex(args);
-            return new DeleteCommand(targetIndex);
+            return new ParsedInput(DeleteCommand.COMMAND_WORD).setTargetVisibleIndex(targetIndex);
         } catch (ParseException pe) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+            return new ParsedInput(ParsedInput.INCORRECT_COMMAND)
+                    .setFeedbackToUser(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         } catch (NumberFormatException nfe) {
-            return new IncorrectCommand(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            return new ParsedInput(ParsedInput.INCORRECT_COMMAND)
+                    .setFeedbackToUser(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
     }
 
@@ -182,16 +180,16 @@ public class Parser {
      * @param args full command args string
      * @return the prepared command
      */
-    private Command prepareView(String args) {
-
+    private ParsedInput prepareView(String args) {
         try {
             final int targetIndex = parseArgsAsDisplayedIndex(args);
-            return new ViewCommand(targetIndex);
+            return new ParsedInput(ViewCommand.COMMAND_WORD).setTargetVisibleIndex(targetIndex);
         } catch (ParseException pe) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    ViewCommand.MESSAGE_USAGE));
+            return new ParsedInput(ParsedInput.INCORRECT_COMMAND)
+                    .setFeedbackToUser(String.format(MESSAGE_INVALID_COMMAND_FORMAT,ViewCommand.MESSAGE_USAGE));
         } catch (NumberFormatException nfe) {
-            return new IncorrectCommand(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            return new ParsedInput(ParsedInput.INCORRECT_COMMAND)
+                    .setFeedbackToUser(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
     }
 
@@ -201,16 +199,16 @@ public class Parser {
      * @param args full command args string
      * @return the prepared command
      */
-    private Command prepareViewAll(String args) {
-
+    private ParsedInput prepareViewAll(String args) {
         try {
             final int targetIndex = parseArgsAsDisplayedIndex(args);
-            return new ViewAllCommand(targetIndex);
+            return new ParsedInput(ViewAllCommand.COMMAND_WORD).setTargetVisibleIndex(targetIndex);
         } catch (ParseException pe) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    ViewAllCommand.MESSAGE_USAGE));
+            return new ParsedInput(ParsedInput.INCORRECT_COMMAND)
+                    .setFeedbackToUser(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewAllCommand.MESSAGE_USAGE));
         } catch (NumberFormatException nfe) {
-            return new IncorrectCommand(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            return new ParsedInput(ParsedInput.INCORRECT_COMMAND)
+                    .setFeedbackToUser(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
     }
 
@@ -237,17 +235,17 @@ public class Parser {
      * @param args full command args string
      * @return the prepared command
      */
-    private Command prepareFind(String args) {
+    private ParsedInput prepareFind(String args) {
         final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    FindCommand.MESSAGE_USAGE));
+            return new ParsedInput(ParsedInput.INCORRECT_COMMAND)
+                    .setFeedbackToUser(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
         // keywords delimited by whitespace
         final String[] keywords = matcher.group("keywords").split("\\s+");
         final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
-        return new FindCommand(keywordSet);
+        return new ParsedInput(FindCommand.COMMAND_WORD).setKeywords(keywordSet);
     }
 
 

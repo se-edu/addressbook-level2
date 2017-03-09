@@ -4,11 +4,22 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import seedu.addressbook.commands.AddCommand;
+import seedu.addressbook.commands.ClearCommand;
 import seedu.addressbook.commands.Command;
 import seedu.addressbook.commands.CommandResult;
+import seedu.addressbook.commands.DeleteCommand;
 import seedu.addressbook.commands.ExitCommand;
+import seedu.addressbook.commands.FindCommand;
+import seedu.addressbook.commands.HelpCommand;
+import seedu.addressbook.commands.IncorrectCommand;
+import seedu.addressbook.commands.ListCommand;
+import seedu.addressbook.commands.ViewAllCommand;
+import seedu.addressbook.commands.ViewCommand;
 import seedu.addressbook.data.AddressBook;
+import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.data.person.ReadOnlyPerson;
+import seedu.addressbook.parser.ParsedInput;
 import seedu.addressbook.parser.Parser;
 import seedu.addressbook.storage.StorageFile;
 import seedu.addressbook.storage.StorageFile.InvalidStorageFilePathException;
@@ -83,12 +94,52 @@ public class Main {
         Command command;
         do {
             String userCommandText = ui.getUserCommand();
-            command = new Parser().parseCommand(userCommandText);
+            ParsedInput parsedInput = new Parser().parseCommand(userCommandText);
+            command = parseToCommand(parsedInput);
             CommandResult result = executeCommand(command);
             recordResult(result);
             ui.showResultToUser(result);
 
         } while (!ExitCommand.isExit(command));
+    }
+
+    /**
+     * Converts ParsedInput to Command.
+     */
+    private Command parseToCommand(ParsedInput parsedInput) {
+        String cmdType = parsedInput.getCommandType();
+        try {
+            switch (cmdType) {
+            case AddCommand.COMMAND_WORD:
+                return new AddCommand(parsedInput.getName(),
+                                      parsedInput.getPhone(), parsedInput.getIsPhonePrivate(),
+                                      parsedInput.getEmail(), parsedInput.getIsEmailPrivate(),
+                                      parsedInput.getAddress(), parsedInput.getIsAddressPrivate(),
+                                      parsedInput.getTags());
+            case DeleteCommand.COMMAND_WORD:
+                return new DeleteCommand(parsedInput.getTargetVisibleIndex());
+            case ClearCommand.COMMAND_WORD:
+                return new ClearCommand();
+            case FindCommand.COMMAND_WORD:
+                return new FindCommand(parsedInput.getTags());
+            case ListCommand.COMMAND_WORD:
+                return new ListCommand();
+            case ViewCommand.COMMAND_WORD:
+                return new ViewCommand(parsedInput.getTargetVisibleIndex());
+            case ViewAllCommand.COMMAND_WORD:
+                return new ViewAllCommand(parsedInput.getTargetVisibleIndex());
+            case ExitCommand.COMMAND_WORD:
+                return new ExitCommand();
+            case HelpCommand.COMMAND_WORD:
+                return new HelpCommand();
+            case ParsedInput.INCORRECT_COMMAND:
+                return new IncorrectCommand(parsedInput.getFeedbackToUser());
+            default:
+                throw new AssertionError("Missing support for command!");
+            }
+        } catch (IllegalValueException e) {
+            return new IncorrectCommand(e.getMessage());
+        }
     }
 
     /** Updates the {@link #lastShownList} if the result contains a list of Persons. */
