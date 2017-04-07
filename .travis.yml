@@ -2,7 +2,11 @@ language: java
 matrix:
   include:
     - jdk: oraclejdk8
-    
+
+script:
+  - (cd test && ./runtests.sh) # I/O tests
+  - (./gradlew clean test) # JUnit tests
+
 addons:
   apt:
     packages:
