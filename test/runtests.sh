@@ -7,7 +7,7 @@ then
 fi
 
 # delete output from previous run
-if [ ! -d "../actual.txt" ]
+if [ -e "./actual.txt" ]
 then
     rm actual.txt
 fi
