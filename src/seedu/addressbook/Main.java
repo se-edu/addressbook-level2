@@ -4,11 +4,22 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import seedu.addressbook.commands.AddCommand;
+import seedu.addressbook.commands.ClearCommand;
 import seedu.addressbook.commands.Command;
 import seedu.addressbook.commands.CommandResult;
+import seedu.addressbook.commands.DeleteCommand;
 import seedu.addressbook.commands.ExitCommand;
+import seedu.addressbook.commands.FindCommand;
+import seedu.addressbook.commands.HelpCommand;
+import seedu.addressbook.commands.IncorrectCommand;
+import seedu.addressbook.commands.ListCommand;
+import seedu.addressbook.commands.ViewAllCommand;
+import seedu.addressbook.commands.ViewCommand;
 import seedu.addressbook.data.AddressBook;
+import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.data.person.ReadOnlyPerson;
+import seedu.addressbook.parser.ParsedInput;
 import seedu.addressbook.parser.Parser;
 import seedu.addressbook.storage.StorageFile;
 import seedu.addressbook.storage.StorageFile.InvalidStorageFilePathException;
@@ -80,15 +91,15 @@ public class Main {
 
     /** Reads the user command and executes it, until the user issues the exit command.  */
     private void runCommandLoopUntilExitCommand() {
-        Command command;
+        ParsedInput parsedInput;
         do {
             String userCommandText = ui.getUserCommand();
-            command = new Parser().parseCommand(userCommandText);
-            CommandResult result = executeCommand(command);
+            parsedInput = new Parser().parseCommand(userCommandText);
+            CommandResult result = executeCommand(parsedInput);
             recordResult(result);
             ui.showResultToUser(result);
 
-        } while (!ExitCommand.isExit(command));
+        } while (!parsedInput.getCommandType().equals(ExitCommand.COMMAND_WORD));
     }
 
     /** Updates the {@link #lastShownList} if the result contains a list of Persons. */
@@ -105,16 +116,83 @@ public class Main {
      * @param command user command
      * @return result of the command
      */
-    private CommandResult executeCommand(Command command)  {
+    private CommandResult executeCommand(ParsedInput parsedInput)  {
+        String cmdType = parsedInput.getCommandType();
         try {
-            command.setData(addressBook, lastShownList);
-            CommandResult result = command.execute();
-            storage.save(addressBook);
-            return result;
+            switch (cmdType) {
+            case AddCommand.COMMAND_WORD:
+                return executeAddCommand(parsedInput);
+            case DeleteCommand.COMMAND_WORD:
+                return executeDeleteCommand(parsedInput);
+            case ClearCommand.COMMAND_WORD:
+                return new ClearCommand().execute(addressBook);
+            case FindCommand.COMMAND_WORD:
+                return executeFindCommand(parsedInput);
+            case ListCommand.COMMAND_WORD:
+                return new ListCommand().execute(addressBook);
+            case ViewCommand.COMMAND_WORD:
+                return executeViewCommand(parsedInput);
+            case ViewAllCommand.COMMAND_WORD:
+                return executeViewAllCommand(parsedInput);
+            case ExitCommand.COMMAND_WORD:
+                return new ExitCommand().execute();
+            case HelpCommand.COMMAND_WORD:
+                return new HelpCommand().execute();
+            case ParsedInput.INCORRECT_COMMAND:
+                return executeIncorrectCommand(parsedInput);
+            default:
+                throw new AssertionError("Missing support for command!");
+            }
         } catch (Exception e) {
             ui.showToUser(e.getMessage());
             throw new RuntimeException(e);
         }
+    }
+
+    private CommandResult executeAddCommand(ParsedInput parsedInput) throws IllegalValueException, StorageOperationException {
+        AddCommand command = new AddCommand(parsedInput.getName(),
+                parsedInput.getPhone(), parsedInput.getIsPhonePrivate(),
+                parsedInput.getEmail(), parsedInput.getIsEmailPrivate(),
+                parsedInput.getAddress(), parsedInput.getIsAddressPrivate(),
+                parsedInput.getTags());
+        CommandResult result = command.execute(addressBook);
+        storage.save(addressBook);
+        return result;
+    }
+
+    private CommandResult executeDeleteCommand(ParsedInput parsedInput) throws StorageOperationException {
+        DeleteCommand command = new DeleteCommand(parsedInput.getTargetVisibleIndex());
+        CommandResult result = command.execute(addressBook, lastShownList);
+        storage.save(addressBook);
+        return result;
+    }
+
+    private CommandResult executeFindCommand(ParsedInput parsedInput) throws StorageOperationException {
+        FindCommand command = new FindCommand(parsedInput.getKeywords());
+        CommandResult result = command.execute(addressBook);
+        storage.save(addressBook);
+        return result;
+    }
+
+    private CommandResult executeViewCommand(ParsedInput parsedInput) throws StorageOperationException {
+        ViewCommand command = new ViewCommand(parsedInput.getTargetVisibleIndex());
+        CommandResult result = command.execute(addressBook, lastShownList);
+        storage.save(addressBook);
+        return result;
+    }
+
+    private CommandResult executeViewAllCommand(ParsedInput parsedInput) throws StorageOperationException {
+        ViewAllCommand command = new ViewAllCommand(parsedInput.getTargetVisibleIndex());
+        CommandResult result = command.execute(addressBook, lastShownList);
+        storage.save(addressBook);
+        return result;
+    }
+
+    private CommandResult executeIncorrectCommand(ParsedInput parsedInput) throws StorageOperationException {
+        IncorrectCommand command = new IncorrectCommand(parsedInput.getFeedbackToUser());
+        CommandResult result = command.execute();
+        storage.save(addressBook);
+        return result;
     }
 
     /**

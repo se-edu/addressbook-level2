@@ -1,5 +1,6 @@
 package seedu.addressbook.commands;
 
+import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.person.ReadOnlyPerson;
 
 import java.util.List;
@@ -17,8 +18,7 @@ public class ListCommand extends Command {
             + "Example: " + COMMAND_WORD;
 
 
-    @Override
-    public CommandResult execute() {
+    public CommandResult execute(AddressBook addressBook) {
         List<ReadOnlyPerson> allPersons = addressBook.getAllPersons().immutableListView();
         return new CommandResult(getMessageForPersonListShownSummary(allPersons), allPersons);
     }
