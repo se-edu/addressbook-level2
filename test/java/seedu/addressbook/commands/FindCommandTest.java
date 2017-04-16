@@ -50,7 +50,7 @@ public class FindCommandTest {
         FindCommand command = createFindCommand(keywords);
         CommandResult result = command.execute();
 
-        assertEquals(Command.getMessageForPersonListShownSummary(expectedPersonList), result.feedbackToUser);
+        assertEquals(Command.getMessageForPersonListShownSummary(expectedPersonList), result.getFeedbackToUser());
     }
 
     private FindCommand createFindCommand(String[] keywords) {
