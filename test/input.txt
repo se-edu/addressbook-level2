@@ -34,25 +34,26 @@
   add Valid Name p/12345 e/valid@email.butNoTagPrefix a/valid, address t/goodTag noPrefixTag
   
   # should catch invalid person data
-  add []\[;] p/12345 e/valid@e.mail a/valid, address
-  add Valid Name p/not_numbers e/valid@e.mail a/valid, address
-  add Valid Name p/12345 e/notAnEmail a/valid, address
-  add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag
+  add []\[;] p/12345 e/valid@e.mail a/123, address, #12-22, 123
+  add Valid Name p/not_numbers e/valid@e.mail a/123, address, #12-22, 123
+  add Valid Name p/12345 e/notAnEmail a/123, address, #12-22, 123
+  add Valid Name p/12345 e/valid@e.mail a/invalid
+  add Valid Name p/12345 e/valid@e.mail a/123, address, #12-22, 123 t/invalid_-[.tag
 
   # should add correctly and list non private information
-  add Adam Brown p/111111 e/adam@gmail.com a/111, alpha street
+  add Adam Brown p/111111 e/adam@gmail.com a/111, alpha street, #12-22, 123
   list
-  add Betsy Choo pp/222222 pe/benchoo@nus.edu.sg pa/222, beta street t/secretive
+  add Betsy Choo pp/222222 pe/benchoo@nus.edu.sg pa/222, beta street, #12-22, 124 t/secretive
   list
-  add Charlie Dickson pp/333333 e/charlie.d@nus.edu.sg a/333, gamma street t/friends t/school
+  add Charlie Dickson pp/333333 e/charlie.d@nus.edu.sg a/333, gamma street, #12-22, 125 t/friends t/school
   list
-  add Dickson Ee p/444444 pe/dickson@nus.edu.sg a/444, delta street t/friends
+  add Dickson Ee p/444444 pe/dickson@nus.edu.sg a/444, delta street, #12-22, 126 t/friends
   list
-  add Esther Potato p/555555 e/esther@not.a.real.potato pa/555, epsilon street t/tubers t/starchy
+  add Esther Potato p/555555 e/esther@not.a.real.potato pa/555, epsilon street, #12-22, 127 t/tubers t/starchy
   list
 
   # should not allow adding duplicate persons
-  add Esther Potato p/555555 e/esther@not.a.real.potato pa/555, epsilon street t/tubers t/starchy
+  add Esther Potato p/555555 e/esther@not.a.real.potato pa/555, epsilon street, #12-22, 127 t/tubers t/starchy
 
 ##########################################################
 # test view/viewall persons command
