@@ -66,7 +66,7 @@ public class AdaptedPerson {
 
         address = new AdaptedContactDetail();
         address.isPrivate = source.getAddress().isPrivate();
-        address.value = source.getAddress().value;
+        address.value = source.getAddress().stringAddress();
 
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
