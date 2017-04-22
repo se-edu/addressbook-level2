@@ -11,7 +11,7 @@ import java.util.Optional;
 public class CommandResult {
 
     /** The feedback message to be shown to the user. Contains a description of the execution result */
-    public final String feedbackToUser;
+    private String feedbackToUser;
 
     /** The list of persons that was produced by the command */
     private final List<? extends ReadOnlyPerson> relevantPersons;
@@ -25,6 +25,15 @@ public class CommandResult {
         this.feedbackToUser = feedbackToUser;
         this.relevantPersons = relevantPersons;
     }
+    
+    public void setfeedbackToUser(String feedbackToUser){
+    	this.feedbackToUser = feedbackToUser;
+    }
+    
+    public String getfeedbackToUser(){
+    	return this.feedbackToUser;
+    }
+    
 
     /**
      * Returns a list of persons relevant to the command command result, if any.
