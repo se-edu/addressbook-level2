@@ -100,6 +100,21 @@ public class UniqueTagList implements Iterable<Tag> {
     }
 
     /**
+     * Removes a tag from the list.
+     *
+     * If it is not present, the list is not modified.
+     * @return boolean indicating success or failure of removal
+     */
+    public boolean remove(Tag toRemove) {
+        final int tagIndex = internalList.indexOf(toRemove);
+        if (tagIndex != -1) { // It is in the list
+            internalList.remove(tagIndex);
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * Adds every tag from the argument list that does not yet exist in this list.
      */
     public void mergeFrom(UniqueTagList tags) {
