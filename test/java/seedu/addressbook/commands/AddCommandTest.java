@@ -104,11 +104,11 @@ public class AddCommandTest {
         // TODO: add comparison of tags to person.equals and equality methods to
         // individual fields that compare privacy to simplify this
         assertEquals(Name.EXAMPLE, p.getName().fullName);
-        assertEquals(Phone.EXAMPLE, p.getPhone().value);
+        assertEquals(Phone.EXAMPLE, p.getPhone().getValue());
         assertTrue(p.getPhone().isPrivate());
-        assertEquals(Email.EXAMPLE, p.getEmail().value);
+        assertEquals(Email.EXAMPLE, p.getEmail().getValue());
         assertFalse(p.getEmail().isPrivate());
-        assertEquals(Address.EXAMPLE, p.getAddress().value);
+        assertEquals(Address.EXAMPLE, p.getAddress().getValue());
         assertTrue(p.getAddress().isPrivate());
         boolean isTagListEmpty = !p.getTags().iterator().hasNext();
         assertTrue(isTagListEmpty);
