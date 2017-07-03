@@ -14,6 +14,7 @@ import java.util.Optional;
 import java.util.Scanner;
 
 import seedu.addressbook.commands.CommandResult;
+import seedu.addressbook.data.person.Printable;
 import seedu.addressbook.data.person.ReadOnlyPerson;
 
 /**
@@ -167,6 +168,15 @@ public class TextUi {
      */
     private static String getIndexedListItem(int visibleIndex, String listItem) {
         return String.format(MESSAGE_INDEXED_LIST_ITEM, visibleIndex, listItem);
+    }
+    
+    private static String getPrintableString(Printable... printables){
+    	String string = "";  
+    	 for(Printable printable : printables){  
+    		 string += printable.getPrintableString() + " ";  
+    	 }  
+    	 return string;  
+    	
     }
 
 }
