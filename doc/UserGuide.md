@@ -5,19 +5,20 @@ Please refer to the [Setting up](DeveloperGuide.md#setting-up) section to learn 
 
 #### Starting the program
 
-**Using Eclipse**
+**Using IntelliJ**
 
-1. Find the project in the `Project Explorer` or `Package Explorer` (usually located at the left side)
-2. Right click on the project
-3. Click `Run As` > `Java Application`
+1. Find the project in the `Project Explorer` (usually located at the left side)
+   1. If the `Project Explorer` is not visible, press <kbd>ALT</kbd>+<kbd>1</kbd> for Windows/Linux, <kbd>CMD</kbd>+<kbd>1</kbd> for macOS to open the `Project Explorer` tab
+2. Go to the `src` folder and locate the `Main` file
+3. Right click the file and select `Run Main.main()`
 4. The program now should run on the `Console` (usually located at the bottom side)
 5. Now you can interact with the program through the `Console`
 
 **Using Command Line**
 
-1. 'Build' the project using Eclipse
+1. 'Build' the project using IntelliJ
 2. Open the `Terminal`/`Command Prompt`
-3. `cd` into the project's `bin` directory
+3. `cd` into the project's `out\production\addressbook-level2` directory
 4. Type `java seedu.addressbook.Main`, then <kbd>Enter</kbd> to execute
 5. Now you can interact with the program through the CLI
 
@@ -131,5 +132,5 @@ Example:
 
 > The file name must end in `.xml` for it to be acceptable to the program.
 >
-> When running the program inside Eclipse, you can set command line parameters 
+> When running the program inside IntelliJ, you can set command line parameters 
   before running the program.

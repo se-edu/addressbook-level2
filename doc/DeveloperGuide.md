@@ -5,16 +5,25 @@
 **Prerequisites**
 
 * JDK 8 or later 
-* Eclipse IDE
+* IntelliJ IDE
 
-**Importing the project into Eclipse**
+**Importing the project into IntelliJ**
 
 0. Fork this repo, and clone the fork to your computer
-1. Open Eclipse
-2. Click `File` > `Import`
-3. Click `General` > `Existing Projects into Workspace` > `Next`
-4. Click `Browse`, then locate the project's directory
-5. Click `Finish`
+1. Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
+2. Set up the correct JDK version
+   1. Click `Configure` > `Project Defaults` > `Project Structure`
+   2. Click `New...` and find the directory of the JDK
+3. Click `Import Project`
+4. Locate the project directory and click `OK`
+5. Select `Create project from existing sources` and click `Next`
+6. Rename the project if you want. Click `Next`
+7. Ensure that your `\src` and `\test\java` folders are checked. Keep clicking `Next`
+8. Click `Finish`
+9. Add JUnit 4 to classpath
+   1. Open any test file in `\test\java` and place your cursor over any `@Test` highlighted in red
+   2. Press <kbd>ALT</kbd>+<kbd>ENTER</kbd> and select `Add 'JUnit4' to classpath`
+   3. Select `Use 'JUnit4' from IntelliJ IDEA distribution` and click `OK`
 
 ## Design
 <img src="images/mainClassDiagram.png"/>
@@ -39,7 +48,8 @@
 
 ### JUnit tests
 
-* In Eclipse, right-click on the `test/java` folder and choose `Run as` > `JUnit Test`
+* In IntelliJ, right-click on the `test` folder and choose `Run 'All Tests'`
+> If `StorageFileTest` throws `NoSuchFileException`, click the `All in test` drop down menu at the top right corner of the window. Select `Edit configurations...`. Under `Configuration`, change the `Working directory` to the `addressbook-level2` folder
 
 ### Troubleshooting test failures
 
