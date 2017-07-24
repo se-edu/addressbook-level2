@@ -21,7 +21,7 @@
 7. Ensure that your `\src` and `\test\java` folders are checked. Keep clicking `Next`
 8. Click `Finish`
 9. Add JUnit 4 to classpath
-   1. Open any test file in `\test\java` and place your cursor over any `@test` highlighted in red
+   1. Open any test file in `\test\java` and place your cursor over any `@Test` highlighted in red
    2. Press <kbd>ALT</kbd>+<kbd>ENTER</kbd> and select `Add 'JUnit4' to classpath`
    3. Select `Use 'JUnit4' from IntelliJ IDEA distribution` and click `OK`
 
@@ -49,7 +49,7 @@
 ### JUnit tests
 
 * In IntelliJ, right-click on the `test` folder and choose `Run 'All Tests'`
-* If `StorageFileTest` throws `NoSuchFileException`, click the `All in test` drop down menu at the top right corner of the window. Select `Edit configurations...`. Under `Configuration`, change the `Working directory` to the `addressbook-level2` folder
+> If `StorageFileTest` throws `NoSuchFileException`, click the `All in test` drop down menu at the top right corner of the window. Select `Edit configurations...`. Under `Configuration`, change the `Working directory` to the `addressbook-level2` folder
 
 ### Troubleshooting test failures
 
