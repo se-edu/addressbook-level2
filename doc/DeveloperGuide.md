@@ -49,12 +49,6 @@
 ### JUnit tests
 
 * In IntelliJ, right-click on the `test` folder and choose `Run 'All Tests'`
-```
-If `StorageFileTest` throws `NoSuchFileException`,
-1. Click the `All in test` drop down menu at the top right corner of the window
-2. Select `Edit configurations...`
-3. Under `Configuration`, change the `Working directory` to the `addressbook-level2` folder
-```
 
 ### Troubleshooting test failures
 
@@ -66,3 +60,8 @@ If `StorageFileTest` throws `NoSuchFileException`,
 * Problem: Test fails during the very first time.<br>
   Solution: The output of the very first test run could be slightly different because the program
   creates a new storage file. Tests should pass from the 2nd run onwards.
+* Problem: `StorageFileTest` throws `NoSuchFileException`<br>
+  Solution:
+  1. Click the `All in test` drop down menu at the top right corner of the window
+  2. Select `Edit configurations...`
+  3. Under `Configuration`, change the `Working directory` to the `addressbook-level2` folder
