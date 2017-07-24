@@ -49,6 +49,7 @@
 ### JUnit tests
 
 * In IntelliJ, right-click on the `test` folder and choose `Run 'All Tests'`
+* If `StorageFileTest` throws `NoSuchFileException`, click the `All in test` drop down menu at the top right corner of the window. Select `Edit configurations...`. Under `Configuration`, change the `Working directory` to the `addressbook-level2` folder
 
 ### Troubleshooting test failures
 
