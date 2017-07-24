@@ -18,8 +18,12 @@
 4. Locate the project directory and click `OK`
 5. Select `Create project from existing sources` and click `Next`
 6. Rename the project if you want. Click `Next`
-7. Ensure that your src folder is checked. Keep clicking `Next`
+7. Ensure that your `\src` and `\test\java` folders are checked. Keep clicking `Next`
 8. Click `Finish`
+9. Add JUnit 4 to classpath
+   1. Open any test file in `\test\java` and place your cursor over any `@test` highlighted in red
+   2. Press <kbd>ALT</kbd>+<kbd>ENTER</kbd> and select `Add 'JUnit4' to classpath`
+   3. Select `Use 'JUnit4' from IntelliJ IDEA distribution` and click `OK`
 
 ## Design
 <img src="images/mainClassDiagram.png"/>
@@ -44,7 +48,7 @@
 
 ### JUnit tests
 
-* In IntelliJ, right-click on the `test/java` folder and choose `Run 'All Tests'`
+* In IntelliJ, right-click on the `test` folder and choose `Run 'All Tests'`
 
 ### Troubleshooting test failures
 
