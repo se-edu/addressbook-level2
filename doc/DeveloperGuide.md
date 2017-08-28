@@ -13,7 +13,8 @@
 1. Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
 2. Set up the correct JDK version
    1. Click `Configure` > `Project Defaults` > `Project Structure`
-   2. Click `New...` and find the directory of the JDK
+   2. If JDK 8 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 8.
+   3. Click `OK`.
 3. Click `Import Project`
 4. Locate the project directory and click `OK`
 5. Select `Create project from existing sources` and click `Next`
@@ -24,6 +25,13 @@
    1. Open any test file in `\test\java` and place your cursor over any `@Test` highlighted in red
    2. Press <kbd>ALT</kbd>+<kbd>ENTER</kbd> and select `Add 'JUnit4' to classpath`
    3. Select `Use 'JUnit4' from IntelliJ IDEA distribution` and click `OK`
+10. Run all the tests (right-click the `test` folder, and click `Run 'All Tests'`)
+11. Observe how some tests fail. That is because they try to access the test data from the wrong directory (the working directory is expected to be the root directory, but IntelliJ runs the test with `test\` as the working directory by default). To fix this issue:
+    1. Go to `Run` -> `Edit Configurations...`
+    2. On the list at the left, ensure that `All in test` is selected
+    3. Under `Configuration`, change the `Working directory` to the `addressbook-level2` folder
+    4. Click `OK`
+12. Run the tests again to ensure they all pass now.
 
 ## Design
 <img src="images/mainClassDiagram.png"/>
@@ -60,8 +68,3 @@
 * Problem: Test fails during the very first time.<br>
   Solution: The output of the very first test run could be slightly different because the program
   creates a new storage file. Tests should pass from the 2nd run onwards.
-* Problem: `StorageFileTest` throws `NoSuchFileException`<br>
-  Solution:
-  1. Click the `All in test` drop down menu at the top right corner of the window
-  2. Select `Edit configurations...`
-  3. Under `Configuration`, change the `Working directory` to the `addressbook-level2` folder
