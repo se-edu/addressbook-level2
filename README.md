@@ -15,8 +15,7 @@
 
 # Contributors
 
-* [Leow Yijin](http://github.com/yijinl) : Main developer for AddressBook-level2
-* [Damith C. Rajapakse](http://www.comp.nus.edu.sg/~damithch) : Project Advisor
+The full list of contributors for se-edu can be found [here](https://se-edu.github.io/docs/Team.html).
 
 # Contact Us
 
