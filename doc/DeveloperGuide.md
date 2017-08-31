@@ -38,7 +38,7 @@
 
 ## Testing
 
-### System tests
+### I/O tests
 
 **Windows**
 
