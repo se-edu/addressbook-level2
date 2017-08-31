@@ -17,6 +17,9 @@ After studying this code and completing the corresponding exercises, you should 
 ------------------------------------------------------------------------------------------------------
 
 ### Apply Encapsulation `[LO-Encapsulation]`
+
+##### References
+* [se-edu/se-book: Design: OOP: Objects: Encapsulation](https://se-edu.github.io/se-book/oopDesign/objects/encapsulation/)
   
 ##### Exercise: Encapsulate `CommandResult` class members 
 
@@ -27,12 +30,13 @@ After studying this code and completing the corresponding exercises, you should 
 
 ### Implement a class `[LO-ImplementClass]`
 
-##### Side readings
+##### References
 
-* [Code smell: Primitive Obsession](https://sourcemaking.com/refactoring/smells/primitive-obsession) -
-  Using primitives instead of small objects for simple tasks
+* [se-edu/se-book: Design: OOP: Classes](https://se-edu.github.io/se-book/oopDesign/classes/)
 
 ##### Exercise: Split `Address` into more classes 
+
+Side reading: [Code smell: Primitive Obsession](https://sourcemaking.com/refactoring/smells/primitive-obsession) - A case against using primitives instead of small objects for simple tasks
 
 * Assume the address is entered in the following format `a/BLOCK, STREET, UNIT, POSTAL_CODE` <br>
   e.g. `a/123, Clementi Ave 3, #12-34, 231534`
@@ -44,16 +48,10 @@ After studying this code and completing the corresponding exercises, you should 
 
 ### Follow the Single Responsibility Principle `[LO-SRP]`
 
-The *Single Responsibility Principle (SRP)* states that a class should have only one reason to change. 
-The code given follows SRP to a reasonable extent, but there are places where it can be applied further.
+##### References
 
-##### Resources
+* [se-edu/se-book: Principles: Single Responsibility Principle](https://se-edu.github.io/se-book/principles/singleResponsibilityPrinciple/)
 
-* [An explanation of the SRP](http://www.oodesign.com/single-responsibility-principle.html) from www.oodesign.com
-* [Another explanation (more detailed)](http://code.tutsplus.com/tutorials/solid-part-1-the-single-responsibility-principle--net-36074) 
-  by Patkos Csaba
-* [A book chapter on SRP](https://drive.google.com/file/d/0ByOwmqah_nuGNHEtcU5OekdDMkk/view) by Robert C. Martin
-  
 ##### Exercise: Split `TextUi` class 
 
 The exercise in the `LO-ImplementClass` section is somewhat related to SRP as well. 
@@ -67,10 +65,9 @@ Here's a slightly more difficult exercise.
 
 ### Handle Exceptions `[LO-Exceptions]`
 
-##### Resources
+##### References
 
-* [Best Practices for Exception Handling](http://www.onjava.com/pub/a/onjava/2003/11/19/exceptions.html)
-  by Gunjan Doshi 
+* [se-edu/se-book: Error Handling: Exceptions](https://se-edu.github.io/se-book/errorHandling/exceptions/)
 
 ##### Exercise: Handle 'file deleted' situation 
 
@@ -85,6 +82,11 @@ Note how the `Command` class contains some code that is reused by some of its ch
 By defining `*Command` classes as child classes of `Command`, we have avoided having to duplicate those methods
 in multiple `*Command` classes.
 
+##### References
+
+* [se-edu/se-book: Design: OOP: Inheritance](https://se-edu.github.io/se-book/oopDesign/inheritance/)
+* [se-edu/se-book: Implementation: OOP: Inheritance](https://se-edu.github.io/se-book/oopImplementation/inheritance/)
+
 ##### Exercise: Extract a `Contact` class 
 
 * Extract commonalities from `Phone`, `Email` and `Address` classes into a parent class called `Contact`.<br>
@@ -94,11 +96,13 @@ in multiple `*Command` classes.
 
 ### Follow Interface Segregation Principle `[LO-ISP]`
 
-The *Interface-Segregation Principle (ISP)* states that no client should be forced to depend on methods it does not use.
-
 Note how the `Person` class implements the `ReadOnlyPerson` interface so that clients who don't need write access to
 `Person` objects can access `Person` objects through the `ReadOnlyPerson` interface instead.
 <img src="images/ReadOnlyPersonUsage.png" width='600' />
+
+##### References
+
+* [se-edu/se-book: Principles: Interface Segregation Principle](https://se-edu.github.io/se-book/principles/interfaceSegregationPrinciple/)
 
 ##### Exercise: Add a `Printable` interface 
 
@@ -133,6 +137,10 @@ Note how some of the variables and methods are declared `static`. That means the
 rather than *instance-level* members.<br>
 e.g.<br> `Main.VERSION`, `Name.EXAMPLE`, `Utils.isAnyNull(...)`
 
+##### References
+
+* [se-edu/se-book: Design: OOP: Classes: Class-Level Members](https://se-edu.github.io/se-book/oopDesign/classes/classLevelMembers/)
+
 ##### Exercise: Add class-level members
 
 * Convert the `Parser::parseCommand(...)` method (i.e. the `parseCommand()` method of the `Parser` class) to a 
@@ -164,11 +172,21 @@ Container           | Contained
 `UniquePersonList`  | `Person`
 `UuniqueTagList`    | `Tag`
 
+##### References
+
+* [se-edu/se-book: Design: OOP: Associations: Composition](https://se-edu.github.io/se-book/oopDesign/associations/composition/)
+* [se-edu/se-book: Implementation: OOP: Composition](https://se-edu.github.io/se-book/oopImplementation/composition/)
+
 ------------------------------------------------------------------------------------------------------
 
 ### Use Association Classes `[LO-AssociationClass]`
 
 The current design does not have any association classes.
+
+##### References
+
+* [se-edu/se-book: Design: OOP: Associations: Association Classes](https://se-edu.github.io/se-book/oopDesign/associations/associationClasses/)
+* [se-edu/se-book: Implementation: OOP: Association Classes](https://se-edu.github.io/se-book/oopImplementation/associationClasses/)
 
 ##### Exercise: Add an Association Class `Tagging`
 
@@ -195,30 +213,17 @@ The current design does not have any association classes.
 
 ### Use JUnit to implement unit tests `[LO-JUnit]`
 
-Note the `test/seedu/addressbook/parser/ParserTest.java` class that users Junit to implement automated unit tests.
+##### References
 
-##### Resources
+ * [se-edu/se-book: JUnit](https://se-edu.github.io/se-book/junit/)
 
-* [JUnit cookbook](http://junit.sourceforge.net/doc/cookbook/cookbook.htm) - a short tutorial from JUnit creators
-* [JUnit tutorial](http://www.vogella.com/articles/JUnit/article.html) - a more detailed tutorial from a developer Lars Vogel
-* How to test private methods in Java? 
-  [ [short answer](http://stackoverflow.com/questions/34571/whats-the-proper-way-to-test-a-class-with-private-methods-using-junit) ] 
-  [ [long answer](http://www.artima.com/suiterunner/private.html) ]
-                                
-##### Side readings
+Note how there are many test classes in this code base that uses JUnit to implement automated unit tests e.g. [`test/java/seedu/addressbook/parser/ParserTest.java`](../test/java/seedu/addressbook/parser/ParserTest.java) class contains tests for the [`seedu.addressbook.parser.Parser`](../src/seedu/addressbook/parser/Parser.java) class.
 
-* [Quora post] [What is the best way to avoid bugs](href="http://www.quora.com/What-are-good-ways-to-avoid-bugs-while-programming/answer/Mattias-Petter-Johansson)
-* [Web article] [The three pillars of unit testing](http://blog.goyello.com/2011/10/06/three-pillars-of-unit-tests) -
-  A short article about what makes a good unit test.
-* [Quora post] [Is automated testing relevant to startups?](http://www.quora.com/What-kind-of-automated-testing-should-a-startup-have-from-the-beginning-through-the-first-six-months-of-live-operation/answer/Zach-Brock)
-* [Learning from Apple’s #gotofail Security Bug](http://avandeursen.com/2014/02/22/gotofail-security/) - 
-  How unit testing (and other good coding practices) could have prevented a major security bug.
+##### Exercise: Write unit tests for the `Utils#isAnyNull(Object...)` method 
 
-##### Exercise: Write unit tests for the `Utils` class 
-
-* First, make sure you know how to run JUnit tests by running the `ParserTest.java`. 
+* First, make sure you know how to run JUnit tests by running existing JUnit tests. 
   Instructions are in the [Developer Guide](DeveloperGuide.md#junit-tests).
-* Add a `test/seedu/addressbook/common/UtilsTest.java` containing JUnit tests for the `Utils` class.
+* Next, add a test to [`test/seedu/addressbook/common/UtilsTest.java`](../test/java/seedu/addressbook/common/UtilsTest.java) to test the [`seedu.addressbook.common.Utils#isAnyNull(Object...)`](../src/seedu/addressbook/common/Utils.java) method.
 
 ------------------------------------------------------------------------------------------------------
 
@@ -226,21 +231,9 @@ Note the `test/seedu/addressbook/parser/ParserTest.java` class that users Junit 
 
 It's recommended you do `[LO-JUnit]` before attempting TDD.
 
-##### Resources
+##### References
 
-* [Uncle Bob’s three rules of TDD](http://butunclebob.com/ArticleS.UncleBob.TheThreeRulesOfTdd) - 
-  (Uncle Bob = Robert C. Martin, the author of Clean Code)
-* Let’s play TDD screencasts by James Shore:
-  [ [episode 1](http://jamesshore.com/Blog/Lets-Play/Lets-Play-Test-Driven-Development.html) ]
-  [ [episode 2](http://jamesshore.com/Blog/Lets-Play/Episode-2.html) ]
-  [ [the rest](http://jamesshore.com/index.index) ]
-* [TDD: Is There Really Any Debate Any Longer?](http://www.drdobbs.com/testing/tdd-is-there-really-any-debate-any-longe/240007457)
-
-
-##### Side readings
-
-* [Dev opinion][Programmers Without TDD Will be Unemployable by 2022](http://css.dzone.com/articles/programmers-without-tdd-will)
-
+ * [se-edu/se-book: Quality Assurance: Testing: TDD](https://se-edu.github.io/se-book/testing/tdd/)
 
 ##### Exercise: Add a method in TDD fashion
 
