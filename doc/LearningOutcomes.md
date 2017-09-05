@@ -69,10 +69,9 @@ Here's a slightly more difficult exercise.
 
 * [se-edu/se-book: Error Handling: Exceptions](https://se-edu.github.io/se-book/errorHandling/exceptions/)
 
-##### Exercise: Handle 'file deleted' situation 
+##### Exercise: Handle 'file readonly' situation 
 
-* The current code does not handle the situation where the user deletes the storage file while the
-  AddressBook program is running. Use exceptions to handle that situation.
+* The current code does not handle the situation where the user accidentally makes the storage file _read only_ while the AddressBook program is running. Use exceptions to handle that situation better. e.g. instead of crashing, the program can inform the user of the problem.
 
 ------------------------------------------------------------------------------------------------------
 
