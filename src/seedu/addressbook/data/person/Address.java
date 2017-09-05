@@ -76,10 +76,7 @@ public class Address {
     public boolean equals(Object other) {
          return other == this // short circuit if same object
                 || (other instanceof Address // instanceof handles nulls
-                && this.value.equals(((Address) other).value)); // state check
-
-        //return block.isSameBlock(((Address) other).getBlock()) || street.isSameStreet(((Address) other).getStreet())
-        // || unit.isSameUnit(((Address) other).getUnit()) ||   postal_code.isSamePostalCode((Address) other).getPostalCode())  ;
+                &&  (block.isSameBlock(((Address) other).getBlock()) || street.isSameStreet(((Address) other).getStreet())|| unit.isSameUnit(((Address) other).getUnit()) || postal_code.isSamePostalCode(((Address) other).getPostalCode())));
     }
 
     @Override
@@ -118,6 +115,10 @@ class Street {
     public String getStreetName(){
         return streetname;
     }
+	
+	public boolean isSameStreet(Street other){
+        return streetname.trim().equals(other.getStreetName().trim());
+    }
 }
 
 class Unit {
@@ -130,6 +131,9 @@ class Unit {
     public String getUnitNo(){
         return unitno;
     }
+	public boolean isSameUnit(Unit other){
+        return unitno.trim().equals(other.getUnitNo().trim());
+    }
 }
 
 class PostalCode{
@@ -141,5 +145,9 @@ class PostalCode{
 
     public String getPostalCode(){
         return postalcode;
+    }
+
+    public boolean isSamePostalCode(PostalCode other){
+        return postalcode.trim().equals(other.getPostalCode().trim());
     }
 }
