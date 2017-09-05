@@ -40,7 +40,7 @@ Side reading: [Code smell: Primitive Obsession](https://sourcemaking.com/refacto
 
 * Assume the address is entered in the following format `a/BLOCK, STREET, UNIT, POSTAL_CODE` <br>
   e.g. `a/123, Clementi Ave 3, #12-34, 231534`
-* Split the `Address` class as follows.<br>
+* Split the `Address` class as follows. Note: the filled diamond symbol &#9670; means an `Address` _consists of_ `Block`, `Street`, etc.<br>
   <img src="images/AddressClasses.png" width='250'/>
 * Update the user guide and tests to match.
 
