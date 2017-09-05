@@ -12,7 +12,7 @@ public class Street {
             "Person address' street should be alphanumeric";
     
     //TODO: better regex validation
-    public static final String STREET_VALIDATION_REGEX = "[A-Za-z0-9]";
+    public static final String STREET_VALIDATION_REGEX = "[A-Za-z0-9 ]+";
 
     public final String value;
 
@@ -24,7 +24,7 @@ public class Street {
      */
     Street(String street) throws IllegalValueException {
         if(!isValidStreet(street)){
-            throw new IllegalValueException(MESSAGE_STREET_CONSTRAINTS);
+            throw new IllegalValueException(MESSAGE_STREET_CONSTRAINTS + " " + street);
         }
 
         this.value = street;
