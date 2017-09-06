@@ -44,11 +44,11 @@
   list
   add Betsy Choo pp/222222 pe/benchoo@nus.edu.sg pa/222, beta street, #03-444, 566111 t/secretive
   list
-  add Charlie Dickson pp/333333 e/charlie.d@nus.edu.sg a/333, gamma street, #03-444, 566111 t/friends t/school
+  add Charlie Dickson pp/333333 e/charlie.d@nus.edu.sg a/333, gamma street t/friends t/school
   list
-  add Dickson Ee p/444444 pe/dickson@nus.edu.sg a/444, delta street, #03-444, 566111 t/friends
+  add Dickson Ee p/444444 pe/dickson@nus.edu.sg a/444, delta street t/friends
   list
-  add Esther Potato p/555555 e/esther@not.a.real.potato pa/555, epsilon street, #03-444, 566111 t/tubers t/starchy
+  add Esther Potato p/555555 e/esther@not.a.real.potato pa/555, epsilon street t/tubers t/starchy
   list
 
   # should not allow adding duplicate persons

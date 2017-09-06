@@ -2,7 +2,12 @@ package seedu.addressbook.data.person.address;
 
 public class PostalCode {
 
-    public PostalCode(String postalcode){
+    private String postalCodeNumber;
 
+    public PostalCode(String postalCode){
+        postalCodeNumber = postalCode;
+    }
+    public String getPostalCode(){
+        return postalCodeNumber;
     }
 }
