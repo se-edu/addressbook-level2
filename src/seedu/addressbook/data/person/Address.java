@@ -12,6 +12,11 @@ public class Address {
     public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses can be in any format";
     public static final String ADDRESS_VALIDATION_REGEX = ".+";
 
+    Block block;
+    Street street;
+    Unit unit;
+    PostalCode postalCode;
+
     public final String value;
     private boolean isPrivate;
 
@@ -22,13 +27,27 @@ public class Address {
      */
     public Address(String address, boolean isPrivate) throws IllegalValueException {
         String trimmedAddress = address.trim();
+        //Added for week4LO
+        String[] addressHolder = new String[99];
+        int i=0;
+       for(String retVal: trimmedAddress.split(",")){
+            addressHolder[i++] = retVal;
+        }
+        block = new Block(addressHolder[0]);
+        street = new Street(addressHolder[1]);
+        unit = new Unit(addressHolder[2]);
+        postalCode = new PostalCode(addressHolder[3]);
+
         this.isPrivate = isPrivate;
         if (!isValidAddress(trimmedAddress)) {
             throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
         }
         this.value = trimmedAddress;
     }
-
+    public String getBlock(){ return block.getBlock();}
+    public String getStreet(){ return street.getStreet();}
+    public String getUnit(){return unit.getUnit();}
+    public String getPostalCode(){return postalCode.getPostalCode();}
     /**
      * Returns true if a given string is a valid person address.
      */
