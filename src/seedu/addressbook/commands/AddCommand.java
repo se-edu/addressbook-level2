@@ -23,9 +23,9 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
             + "Contact details can be marked private by prepending 'p' to the prefix.\n"
-            + "Parameters: NAME [p]p/PHONE [p]e/EMAIL [p]a/ADDRESS  [t/TAG]...\n"
+            + "Parameters: NAME [p]p/PHONE [p]e/EMAIL [p]a/ADDRESS(a/BLOCK, STREET, UNIT, POSTAL_CODE)  [t/TAG]...\n"
             + "Example: " + COMMAND_WORD
-            + " John Doe p/98765432 e/johnd@gmail.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney";
+            + " YangMinxing p/93570067 e/e0134082@u.nus.edu a/123, Clementi Ave 3, #12-34, 231534 t/friends t/owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
