@@ -56,7 +56,7 @@ public class Address {
 
     @Override
     public String toString() {
-        return block.getBlock() + "," + street.getStreet() + "," + unit.getUnit() + "," + postalcode.getPostalCode();
+        return block.getBlock() + ", " + street.getStreet() + ", " + unit.getUnit() + ", " + postalcode.getPostalCode();
     }
 
     @Override
