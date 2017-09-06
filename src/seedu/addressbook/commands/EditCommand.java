@@ -8,7 +8,9 @@ import seedu.addressbook.data.tag.UniqueTagList;
 
 import java.util.HashSet;
 import java.util.Set;
-
+/**
+ * Edit a person identified using it's last displayed index from the address book.
+ */
 public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
@@ -35,11 +37,13 @@ public class EditCommand extends Command {
                 new Phone(phone, isPhonePrivate),
                 new Email(email, isEmailPrivate),
                 new Address(address, isAddressPrivate),
-                new UniqueTagList(tagSet)
+                new TimeStamp(), new UniqueTagList(tagSet)
         );
     }
 
-    public EditCommand(Person toAdd) {this.toAdd = toAdd;}
+    public EditCommand(Person toAdd) {
+        this.toAdd = toAdd;
+    }
 
     public ReadOnlyPerson getPerson() {
         return toAdd;

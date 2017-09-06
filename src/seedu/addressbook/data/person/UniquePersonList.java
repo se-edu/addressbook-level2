@@ -19,7 +19,8 @@ import seedu.addressbook.data.exception.DuplicateDataException;
  * @see Utils#elementsAreUnique(Collection)
  */
 public class UniquePersonList implements Iterable<Person> {
-
+    private static final int INDEX_ZERO = 0;
+    private static final int NEXT_INDEX = 1;
     /**
      * Signals that an operation would have violated the 'no duplicates' property of the list.
      */
@@ -73,14 +74,21 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Sorts the list according to name in alphabetical order.
      * Returns an unmodifiable java List view with elements cast as immutable {@link ReadOnlyPerson}s.
      * For use with other methods/libraries.
      * Any changes to the internal list/elements are immediately visible in the returned list.
      */
     public List<ReadOnlyPerson> immutableListView() {
+        for(int i = INDEX_ZERO; i < internalList.size(); i++) {
+            for(int j = i + NEXT_INDEX;j < internalList.size();j++) {
+                if (internalList.get(i).compareTo(internalList.get(j)) >= NEXT_INDEX) {
+                    Collections.swap(internalList,i,j);
+                }
+            }
+        }
         return Collections.unmodifiableList(internalList);
     }
-
 
     /**
      * Checks if the list contains an equivalent person as the given argument.
@@ -95,7 +103,6 @@ public class UniquePersonList implements Iterable<Person> {
         }
         return false;
     }
-
     /**
      * Adds a person to the list.
      *

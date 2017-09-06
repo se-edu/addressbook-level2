@@ -23,7 +23,7 @@ public class Name {
      */
     public Name(String name) throws IllegalValueException {
         String trimmedName = name.trim();
-        System.out.println(trimmedName);
+
         if (!isValidName(trimmedName)) {
             throw new IllegalValueException(MESSAGE_NAME_CONSTRAINTS);
         }
@@ -59,6 +59,14 @@ public class Name {
     @Override
     public int hashCode() {
         return fullName.hashCode();
+    }
+
+
+    public int compareTo(Name task) {
+
+        int result = this.fullName.compareTo(task.fullName);
+
+        return result;
     }
 
 }
