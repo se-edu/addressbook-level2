@@ -1,6 +1,7 @@
 package seedu.addressbook.data.person;
 
 import seedu.addressbook.data.tag.UniqueTagList;
+import seedu.addressbook.data.address.Address;
 
 import java.util.Objects;
 

@@ -15,7 +15,7 @@ import org.junit.Test;
 
 import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.exception.IllegalValueException;
-import seedu.addressbook.data.person.Address;
+import seedu.addressbook.data.address.Address;
 import seedu.addressbook.data.person.Email;
 import seedu.addressbook.data.person.Name;
 import seedu.addressbook.data.person.Person;
@@ -108,7 +108,7 @@ public class AddCommandTest {
         assertTrue(p.getPhone().isPrivate());
         assertEquals(Email.EXAMPLE, p.getEmail().value);
         assertFalse(p.getEmail().isPrivate());
-        assertEquals(Address.EXAMPLE, p.getAddress().value);
+        assertEquals(Address.EXAMPLE, p.getAddress().toString());
         assertTrue(p.getAddress().isPrivate());
         boolean isTagListEmpty = !p.getTags().iterator().hasNext();
         assertTrue(isTagListEmpty);

@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.addressbook.data.exception.IllegalValueException;
-import seedu.addressbook.data.person.Address;
+import seedu.addressbook.data.address.Address;
 import seedu.addressbook.data.person.Email;
 import seedu.addressbook.data.person.Name;
 import seedu.addressbook.data.person.Person;
