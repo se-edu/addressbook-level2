@@ -1,7 +1,5 @@
 package seedu.addressbook;
 
-import java.io.IOException;
-import java.nio.file.ReadOnlyFileSystemException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -15,7 +13,6 @@ import seedu.addressbook.parser.Parser;
 import seedu.addressbook.storage.StorageFile;
 import seedu.addressbook.storage.StorageFile.InvalidStorageFilePathException;
 import seedu.addressbook.storage.StorageFile.StorageOperationException;
-import seedu.addressbook.ui.Formatter;
 import seedu.addressbook.ui.TextUi;
 
 
@@ -29,7 +26,6 @@ public class Main {
     public static final String VERSION = "AddessBook Level 2 - Version 1.0";
 
     private TextUi ui;
-    private Formatter fmt;
     private StorageFile storage;
     private AddressBook addressBook;
 
@@ -56,14 +52,13 @@ public class Main {
      */
     private void start(String[] launchArgs) {
         try {
-            this.fmt = new Formatter();
-            this.ui = new TextUi(System.in, System.out, fmt);
+            this.ui = new TextUi();
             this.storage = initializeStorage(launchArgs);
             this.addressBook = storage.load();
-            fmt.showWelcomeMessage(VERSION, storage.getPath());
+            ui.showWelcomeMessage(VERSION, storage.getPath());
 
         } catch (InvalidStorageFilePathException | StorageOperationException e) {
-            fmt.showInitFailedMessage();
+            ui.showInitFailedMessage();
             /*
              * ==============NOTE TO STUDENTS=========================================================================
              * We are throwing a RuntimeException which is an 'unchecked' exception. Unchecked exceptions do not need
@@ -79,7 +74,7 @@ public class Main {
 
     /** Prints the Goodbye message and exits. */
     private void exit() {
-        fmt.showGoodbyeMessage();
+        ui.showGoodbyeMessage();
         System.exit(0);
     }
 
@@ -91,7 +86,7 @@ public class Main {
             command = new Parser().parseCommand(userCommandText);
             CommandResult result = executeCommand(command);
             recordResult(result);
-            fmt.showResultToUser(result);
+            ui.showResultToUser(result);
 
         } while (!ExitCommand.isExit(command));
     }
@@ -117,7 +112,7 @@ public class Main {
             storage.save(addressBook);
             return result;
         } catch (Exception e) {
-            fmt.showToUser(e.getMessage());
+            ui.showToUser(e.getMessage());
             throw new RuntimeException(e);
         }
     }
@@ -131,5 +126,6 @@ public class Main {
         boolean isStorageFileSpecifiedByUser = launchArgs.length > 0;
         return isStorageFileSpecifiedByUser ? new StorageFile(launchArgs[0]) : new StorageFile();
     }
+
 
 }
