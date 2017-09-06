@@ -12,9 +12,11 @@ public class Address {
     public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses can be in any format";
     public static final String ADDRESS_VALIDATION_REGEX = ".+";
 
-    public final String value;
     private boolean isPrivate;
-
+    private Block block;
+    private Street street;
+    private Unit unit;
+    private PostalCode postalCode;
     /**
      * Validates given address.
      *
@@ -26,7 +28,15 @@ public class Address {
         if (!isValidAddress(trimmedAddress)) {
             throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
         }
-        this.value = trimmedAddress;
+        /*
+        This will give indexOutOfBound when input does not
+        follow format of "a/BLOCK, STREET, UNIT, POSTAL_CODE"
+        */
+        String[] addressComponentArray = trimmedAddress.split(", ");
+        this.block = new Block(addressComponentArray[0]);
+        this.street = new Street(addressComponentArray[1]);
+        this.unit = new Unit(addressComponentArray[2]);
+        this.postalCode = new PostalCode(addressComponentArray[3]);
     }
 
     /**
@@ -38,22 +48,72 @@ public class Address {
 
     @Override
     public String toString() {
-        return value;
+        return this.block.getBlockValue() + ", " + this.street.getStreetValue()
+                + ", " + this.unit.getUnitValue() + ", " + this.postalCode.getPostalCodeValue();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Address // instanceof handles nulls
-                && this.value.equals(((Address) other).value)); // state check
+                && this.toString().equals(((Address) other).toString())); // state check
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return this.toString().hashCode();
     }
 
     public boolean isPrivate() {
         return isPrivate;
     }
+
+
+    /**
+     * A bunch of classes Address class relies on
+     */
+    private class Block{
+
+        private String value;
+
+        public Block(String block){
+            this.value = block;
+        }
+
+        public String getBlockValue(){return this.value;}
+    }
+
+    private class Street{
+
+        private String value;
+
+        public Street(String street){
+            this.value = street;
+        }
+
+        public String getStreetValue(){return this.value;}
+    }
+
+    private class Unit{
+
+        private String value;
+
+        public Unit(String unit){
+            this.value = unit;
+        }
+
+        public String getUnitValue(){return this.value;}
+    }
+
+    private class PostalCode{
+
+        private String value;
+
+        public PostalCode(String postalCode){
+            this.value = postalCode;
+        }
+
+        public String getPostalCodeValue(){return this.value;}
+    }
 }
+
