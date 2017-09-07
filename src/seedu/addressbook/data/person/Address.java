@@ -13,7 +13,11 @@ public class Address {
             "BLOCK, STREET, UNIT, POSTAL_CODE";
     public static final String ADDRESS_VALIDATION_REGEX = "\\d+, [\\w\\d\\s]+, #\\d+-\\d+, \\d{6}$";
 
-    public final String value;
+    public final Block block;
+    public final Street street;
+    public final Unit unit;
+    public final PostalCode postalCode;
+
     private boolean isPrivate;
 
     /**
@@ -27,7 +31,12 @@ public class Address {
         if (!isValidAddress(trimmedAddress)) {
             throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
         }
-        this.value = trimmedAddress;
+
+        String[] splitAddress = trimmedAddress.split(", ");
+        block = new Block(splitAddress[0]);
+        street = new Street(splitAddress[1]);
+        unit = new Unit(splitAddress[2]);
+        postalCode = new PostalCode(splitAddress[3]);
     }
 
     /**
@@ -39,22 +48,46 @@ public class Address {
 
     @Override
     public String toString() {
-        return value;
+        return String.format("%s, %s, %s, %s", block.get(), street.get(), unit.get(), postalCode.get());
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Address // instanceof handles nulls
-                && this.value.equals(((Address) other).value)); // state check
+                && this.toString().equals(((Address) other).toString())); // state check
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return this.toString().hashCode();
     }
 
     public boolean isPrivate() {
         return isPrivate;
+    }
+
+    private class Block {
+        private final String _block;
+        Block(String block) { _block = block; }
+        String get() { return _block; }
+    }
+
+    private class Street {
+        private final String _street;
+        Street(String street) { _street = street; }
+        String get() { return _street; }
+    }
+
+    private class Unit {
+        private final String _unit;
+        Unit(String unit) { _unit = unit; }
+        String get() { return _unit; }
+    }
+
+    private class PostalCode {
+        private final String _postalCode;
+        PostalCode(String postalCode) { _postalCode = postalCode; }
+        String get() { return _postalCode; }
     }
 }
