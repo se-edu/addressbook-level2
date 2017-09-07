@@ -5,18 +5,19 @@ import seedu.addressbook.data.exception.IllegalValueException;
 public class Street {
 
     public static final String EXAMPLE = "123456";
-    public static final String MESSAGE_STREETNAME_CONSTRAINTS = "Postal Code should only contain numbers in XXXXXX format";
+    public static final String MESSAGE_STREET_CONSTRAINTS = "Street Name can be in most formats";
+    public static final String STREET_VALIDATION_REGEX = ".*";
     public final String value;
 
     public Street(String street) throws IllegalValueException {
         if (!isValidStreet(street)) {
-            throw new IllegalValueException(MESSAGE_STREETNAME_CONSTRAINTS);
+            throw new IllegalValueException(MESSAGE_STREET_CONSTRAINTS);
         }
         this.value = street;
     }
 
-    private boolean isValidStreet(String street) {
-        return value.getClass().equals(String.class);
+    private boolean isValidStreet(String value) {
+        return value.matches(STREET_VALIDATION_REGEX);
     }
 
     @Override

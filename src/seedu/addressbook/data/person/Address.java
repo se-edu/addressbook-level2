@@ -10,11 +10,12 @@ public class Address {
 
     public static final String EXAMPLE = "123, some street, #00-000, 999999";
     public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses should be in the format <block>,<street>,<unit>,<postalcode>";
-    public static final String ADDRESS_VALIDATION_REGEX = "(.*),(.*),(.*)-(.*),(.*)";
+    public static final String ADDRESS_VALIDATION_REGEX = "(.*),(.*),(.*),(.*)";
     public static final int ADDRESS_INDEX_BLOCK = 0;
     public static final int ADDRESS_INDEX_STREET = 1;
     public static final int ADDRESS_INDEX_UNIT = 2;
     public static final int ADDRESS_INDEX_POSTAL_CODE = 3;
+    public static final int ADDRESS_INDEX_PRIVATE = 4;
 
     private boolean isPrivate;
 
@@ -35,10 +36,10 @@ public class Address {
             throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
         }
         String[] values = address.split(",");
-        this.block = new Block(values[ADDRESS_INDEX_BLOCK]);
-        this.street = new Street(values[ADDRESS_INDEX_STREET]);
-        this.unit = new Unit(values[ADDRESS_INDEX_UNIT]);
-        this.postalCode = new PostalCode(values[ADDRESS_INDEX_POSTAL_CODE]);
+        this.block = new Block(values[ADDRESS_INDEX_BLOCK].trim());
+        this.street = new Street(values[ADDRESS_INDEX_STREET].trim());
+        this.unit = new Unit(values[ADDRESS_INDEX_UNIT].trim());
+        this.postalCode = new PostalCode(values[ADDRESS_INDEX_POSTAL_CODE].trim());
     }
 
     /**

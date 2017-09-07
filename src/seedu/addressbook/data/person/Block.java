@@ -6,7 +6,7 @@ public class Block {
 
     public static final String EXAMPLE = "123";
     public static final String MESSAGE_BLOCK_CONSTRAINTS = "Block should only contain numbers";
-    public static final String BLOCK_VALIDATION_REGEX = "\\d{1,3}\\a?";
+    public static final String BLOCK_VALIDATION_REGEX = "\\d{1,3}\\D?";
     public final String value;
 
     public Block(String block) throws IllegalValueException {

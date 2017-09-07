@@ -5,8 +5,8 @@ import seedu.addressbook.data.exception.IllegalValueException;
 public class Unit {
 
     public static final String EXAMPLE = "123";
-    public static final String MESSAGE_UNIT_CONSTRAINTS = "Postal Code should only contain numbers in XXXXXX format";
-    public static final String UNIT_VALIDATION_REGEX = "\\d{1,3}\\a?";
+    public static final String MESSAGE_UNIT_CONSTRAINTS = "Unit should only contain numbers in XXXXXX or XX-XXX format";
+    public static final String UNIT_VALIDATION_REGEX = "\\d{0,3}\\-?\\d{0,5}";
     public final String value;
 
     public Unit(String unit) throws IllegalValueException {
