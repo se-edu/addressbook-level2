@@ -8,11 +8,16 @@ import seedu.addressbook.data.exception.IllegalValueException;
  */
 public class Address {
 
-    public static final String EXAMPLE = "123, some street";
-    public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses can be in any format";
-    public static final String ADDRESS_VALIDATION_REGEX = ".+";
+    public static final String EXAMPLE = "123, Clementi Ave 3, #12-34, 231534";
+    public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses should be in the following format: " +
+            "BLOCK, STREET, UNIT, POSTAL_CODE";
+    public static final String ADDRESS_VALIDATION_REGEX = "\\d+, [\\w\\d\\s]+, #\\d+-\\d+, \\d{6}$";
 
-    public final String value;
+    public final Block block;
+    public final Street street;
+    public final Unit unit;
+    public final PostalCode postalCode;
+
     private boolean isPrivate;
 
     /**
@@ -26,7 +31,12 @@ public class Address {
         if (!isValidAddress(trimmedAddress)) {
             throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
         }
-        this.value = trimmedAddress;
+
+        String[] splitAddress = trimmedAddress.split(", ");
+        block = new Block(splitAddress[0]);
+        street = new Street(splitAddress[1]);
+        unit = new Unit(splitAddress[2]);
+        postalCode = new PostalCode(splitAddress[3]);
     }
 
     /**
@@ -38,22 +48,62 @@ public class Address {
 
     @Override
     public String toString() {
-        return value;
+        return String.format("%s, %s, %s, %s", block.get(), street.get(), unit.get(), postalCode.get());
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Address // instanceof handles nulls
-                && this.value.equals(((Address) other).value)); // state check
+                && this.toString().equals(((Address) other).toString())); // state check
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return this.toString().hashCode();
     }
 
     public boolean isPrivate() {
         return isPrivate;
+    }
+
+    private class Block {
+        private final String block;
+        private Block(String b) {
+            block = b;
+        }
+        private String get() {
+            return block;
+        }
+    }
+
+    private class Street {
+        private final String street;
+        private Street(String s) {
+            street = s;
+        }
+        private String get() {
+            return street;
+        }
+    }
+
+    private class Unit {
+        private final String unit;
+        private Unit(String u) {
+            unit = u;
+        }
+        private String get() {
+            return unit;
+        }
+    }
+
+    private class PostalCode {
+        private final String postalCode;
+        private PostalCode(String p) {
+            postalCode = p;
+        }
+        private String get() {
+            return postalCode;
+        }
     }
 }
