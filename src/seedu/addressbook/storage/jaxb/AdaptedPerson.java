@@ -64,7 +64,7 @@ public class AdaptedPerson {
         address.isPrivate = source.getAddress().isPrivate();
         address.value = source.getAddress().value;
 
-        currTime = ""+ source.getCurrTime().currTime;
+        currTime = ""+ source.getCurrTime();
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new AdaptedTag(tag));

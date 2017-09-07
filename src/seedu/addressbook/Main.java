@@ -24,7 +24,7 @@ public class Main {
 
     /** Version info of the program. */
     public static final String VERSION = "AddessBook Level 2 - Version 1.0";
-
+    public static final String MESSAGE_EXCEPTION_FILE_ERROR = "Storage File unable to read";
     private TextUi ui;
     private StorageFile storage;
     private AddressBook addressBook;
@@ -111,6 +111,9 @@ public class Main {
             CommandResult result = command.execute();
             storage.save(addressBook);
             return result;
+            
+        } catch(StorageOperationException e){
+            return new CommandResult(MESSAGE_EXCEPTION_FILE_ERROR);
         } catch (Exception e) {
             ui.showToUser(e.getMessage());
             throw new RuntimeException(e);
