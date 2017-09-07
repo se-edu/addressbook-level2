@@ -1,6 +1,11 @@
 package seedu.addressbook.data.person;
 
+import seedu.addressbook.data.address.block;
+import seedu.addressbook.data.address.postalcode;
+import seedu.addressbook.data.address.street;
+import seedu.addressbook.data.address.unit;
 import seedu.addressbook.data.exception.IllegalValueException;
+
 
 /**
  * Represents a Person's address in the address book.
@@ -9,8 +14,14 @@ import seedu.addressbook.data.exception.IllegalValueException;
 public class Address {
 
     public static final String EXAMPLE = "123, some street";
-    public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses can be in any format";
-    public static final String ADDRESS_VALIDATION_REGEX = ".+";
+    public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses must be in this format: "
+                                                            + "Block, Street Name, Unit Number, Postal Code";
+    public static final String ADDRESS_VALIDATION_REGEX = ".+,\\s.+,\\s.+,\\s.+";
+
+    public final block BLOCK = new block("");
+    public final street STREET = new street("");
+    public final unit UNIT = new unit("");
+    public final postalcode POSTAL_CODE = new postalcode("");
 
     public final String value;
     private boolean isPrivate;
@@ -26,7 +37,19 @@ public class Address {
         if (!isValidAddress(trimmedAddress)) {
             throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
         }
+
+        parseAddress(trimmedAddress);
+
         this.value = trimmedAddress;
+    }
+
+    private void parseAddress(String trimmedAddress) {
+        String[] parsedAddress = trimmedAddress.split(", ");
+
+        BLOCK.setBlock(parsedAddress[0]);
+        STREET.setStreetName(parsedAddress[1]);
+        UNIT.setUnitNumber(parsedAddress[2]);
+        POSTAL_CODE.setPostalcodeNumber(parsedAddress[3]);
     }
 
     /**
@@ -38,7 +61,7 @@ public class Address {
 
     @Override
     public String toString() {
-        return value;
+        return "" + BLOCK + " " + STREET + " " + UNIT + " " + POSTAL_CODE;
     }
 
     @Override
