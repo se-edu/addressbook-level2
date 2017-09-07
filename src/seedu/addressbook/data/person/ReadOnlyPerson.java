@@ -70,7 +70,7 @@ public interface ReadOnlyPerson {
         for (Tag tag : getTags()) {
             builder.append(tag);
         }
-        return builder.toString();
+        return builder.toString().trim();
     }
 
     /**
