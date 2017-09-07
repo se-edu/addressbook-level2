@@ -68,26 +68,42 @@ public class Address {
     }
 
     private class Block {
-        private final String _block;
-        Block(String block) { _block = block; }
-        String get() { return _block; }
+        private final String block;
+        private Block(String b) {
+            block = b;
+        }
+        private String get() {
+            return block;
+        }
     }
 
     private class Street {
-        private final String _street;
-        Street(String street) { _street = street; }
-        String get() { return _street; }
+        private final String street;
+        private Street(String s) {
+            street = s;
+        }
+        private String get() {
+            return street;
+        }
     }
 
     private class Unit {
-        private final String _unit;
-        Unit(String unit) { _unit = unit; }
-        String get() { return _unit; }
+        private final String unit;
+        private Unit(String u) {
+            unit = u;
+        }
+        private String get() {
+            return unit;
+        }
     }
 
     private class PostalCode {
-        private final String _postalCode;
-        PostalCode(String postalCode) { _postalCode = postalCode; }
-        String get() { return _postalCode; }
+        private final String postalCode;
+        private PostalCode(String p) {
+            postalCode = p;
+        }
+        private String get() {
+            return postalCode;
+        }
     }
 }
