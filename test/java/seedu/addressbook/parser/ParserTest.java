@@ -21,6 +21,7 @@ import seedu.addressbook.commands.FindCommand;
 import seedu.addressbook.commands.HelpCommand;
 import seedu.addressbook.commands.IncorrectCommand;
 import seedu.addressbook.commands.ListCommand;
+import seedu.addressbook.commands.SortedListCommand;
 import seedu.addressbook.commands.ViewAllCommand;
 import seedu.addressbook.commands.ViewCommand;
 import seedu.addressbook.data.exception.IllegalValueException;
@@ -80,6 +81,12 @@ public class ParserTest {
     public void parse_listCommand_parsedCorrectly() {
         final String input = "list";
         parseAndAssertCommandType(input, ListCommand.class);
+    }
+
+    @Test
+    public void parse_sortedListCommand_parseCorrectly() {
+        final String input = "sortedlist";
+        parseAndAssertCommandType(input, SortedListCommand.class);
     }
 
     @Test

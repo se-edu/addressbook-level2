@@ -84,8 +84,7 @@ public class UniquePersonList implements Iterable<Person> {
      * Any changes to the internal list/elements are immediately visible in the returned list.
      */
     public List<ReadOnlyPerson> immutableSortedListView() {
-        List<ReadOnlyPerson> sortedList = new ArrayList<>();
-        Collections.copy(sortedList, internalList);
+        List<ReadOnlyPerson> sortedList = new ArrayList<>(internalList);
         sortedList.sort((P1,P2) -> P1.getName().compareTo(P2.getName()));
         return Collections.unmodifiableList(sortedList);
     }
