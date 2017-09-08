@@ -1,12 +1,8 @@
 package seedu.addressbook.data.person;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
+import javafx.collections.transformation.SortedList;
 import seedu.addressbook.common.Utils;
 import seedu.addressbook.data.exception.DuplicateDataException;
 
@@ -79,6 +75,19 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public List<ReadOnlyPerson> immutableListView() {
         return Collections.unmodifiableList(internalList);
+    }
+
+    /**
+     * Returns an unmodifiable java List view with elements in alphabetical order cast as immutable
+     * {@link ReadOnlyPerson}s.
+     * For use with other methods/libraries.
+     * Any changes to the internal list/elements are immediately visible in the returned list.
+     */
+    public List<ReadOnlyPerson> immutableSortedListView() {
+        List<ReadOnlyPerson> sortedList = new ArrayList<>();
+        Collections.copy(sortedList, internalList);
+        sortedList.sort((P1,P2) -> P1.getName().compareTo(P2.getName()));
+        return Collections.unmodifiableList(sortedList);
     }
 
 
