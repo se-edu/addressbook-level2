@@ -80,8 +80,8 @@ public class Parser {
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
-        case SortedListCommand.COMMAND_WORD:
-            return new SortedListCommand();
+        case SortCommand.COMMAND_WORD:
+            return new SortCommand();
 
         case ViewCommand.COMMAND_WORD:
             return prepareView(arguments);
