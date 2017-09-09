@@ -1,6 +1,7 @@
 package seedu.addressbook.parser;
 
 import static seedu.addressbook.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.addressbook.common.Messages.MESSAGE_INVALID_CONFIRMATION;
 import static seedu.addressbook.common.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 
 import java.util.Arrays;
@@ -57,6 +58,28 @@ public class Parser {
     public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
     public Parser() {}
+
+    /**
+     * Parses user input to check if Y or N.
+     *
+     * Input is case-insensitive, input is taken as
+     * the first character
+     *
+     * @param userInput full user input string
+     * @return {@code true} if Y, {@code false} if N
+     */
+    public boolean parseConfirmation(String userInput) throws IllegalValueException{
+        //trims and makes the input lowercase
+        final String input = userInput.trim().toLowerCase();
+
+        if(input.startsWith("y")){
+            return true;
+        }else if(input.startsWith("n")){
+            return false;
+        }else{
+            throw new IllegalValueException(MESSAGE_INVALID_CONFIRMATION);
+        }
+    }
 
     /**
      * Parses user input into command for execution.

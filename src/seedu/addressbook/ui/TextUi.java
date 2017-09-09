@@ -92,6 +92,25 @@ public class TextUi {
     }
 
 
+    /**
+     * Prompts for a Y/n confirmation.
+     * Ignores empty, pure whitespace, and comment lines.
+     * Echos the command back to the user.
+     * @return command (full line) entered by the user
+     */
+    public String getUserConfirmation() {
+        out.print(LINE_PREFIX + "Confirm? [Y/n]: ");
+        String fullInputLine = in.nextLine();
+
+        // silently consume all ignored lines
+        while (shouldIgnore(fullInputLine)) {
+            fullInputLine = in.nextLine();
+        }
+
+        showToUser("[Entered:" + fullInputLine + "]");
+        return fullInputLine;
+    }
+
     public void showWelcomeMessage(String version, String storageFilePath) {
         String storageFileInfo = String.format(MESSAGE_USING_STORAGE_FILE, storageFilePath);
         showToUser(
