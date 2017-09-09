@@ -158,6 +158,7 @@ public class StorageFile {
     public String getPath() {
         return path.toString();
     }
+    
     public void checkIfReadOnly(){
         try {
             if (!this.path.toFile().canWrite()) {

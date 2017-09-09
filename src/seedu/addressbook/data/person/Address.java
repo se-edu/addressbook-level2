@@ -64,16 +64,16 @@ public class Address {
     @Override
     public String toString() {
         String address = "";
-        if (block.getBlock() != "") {
+        if (block.getBlock().equals("")) {
             address += block.getBlock();
         }
-        if (street.getStreet() != "") {
+        if (street.getStreet().equals("")) {
             address += DIVIDER + street.getStreet();
         }
-        if (unit.getUnit() != "") {
+        if (unit.getUnit().equals("")) {
             address += DIVIDER + unit.getUnit();
         }
-        if (postalcode.getPostalCode() != "") {
+        if (postalcode.getPostalCode().equals("")) {
             address += DIVIDER + postalcode.getPostalCode();
         }
         return address;
