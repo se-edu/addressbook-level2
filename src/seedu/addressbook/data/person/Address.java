@@ -47,7 +47,7 @@ public class Address {
 
     @Override
     public String toString() {
-        return blockNumber+", "+streetName+", "+unitNumber+", "+postalNumber;
+        return blockNumber + ", " + streetName + ", " + unitNumber + ", " + postalNumber;
     }
 
     @Override

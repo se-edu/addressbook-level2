@@ -9,7 +9,13 @@ import javax.xml.bind.annotation.XmlValue;
 
 import seedu.addressbook.common.Utils;
 import seedu.addressbook.data.exception.IllegalValueException;
-import seedu.addressbook.data.person.*;
+import seedu.addressbook.data.person.Person;
+import seedu.addressbook.data.person.Phone;
+import seedu.addressbook.data.person.TimeStamp;
+import seedu.addressbook.data.person.Address;
+import seedu.addressbook.data.person.Email;
+import seedu.addressbook.data.person.Name;
+import seedu.addressbook.data.person.ReadOnlyPerson;
 import seedu.addressbook.data.tag.Tag;
 import seedu.addressbook.data.tag.UniqueTagList;
 
@@ -17,13 +23,6 @@ import seedu.addressbook.data.tag.UniqueTagList;
  * JAXB-friendly adapted person data holder class.
  */
 public class AdaptedPerson {
-
-    private static class AdaptedContactDetail {
-        @XmlValue
-        public String value;
-        @XmlAttribute(required = true)
-        public boolean isPrivate;
-    }
 
     @XmlElement(required = true)
     private String name;
@@ -36,7 +35,15 @@ public class AdaptedPerson {
     @XmlElement (required = true)
     private String currTime;
     @XmlElement
+
     private List<AdaptedTag> tagged = new ArrayList<>();
+
+    private static class AdaptedContactDetail {
+        @XmlValue
+        public String value;
+        @XmlAttribute(required = true)
+        public boolean isPrivate;
+    }
 
     /**
      * No-arg constructor for JAXB use.
@@ -64,7 +71,7 @@ public class AdaptedPerson {
         address.isPrivate = source.getAddress().isPrivate();
         address.value = source.getAddress().value;
 
-        currTime = ""+ source.getCurrTime();
+        currTime = "" + source.getCurrTime();
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new AdaptedTag(tag));

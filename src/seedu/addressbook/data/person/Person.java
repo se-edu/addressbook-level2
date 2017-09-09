@@ -33,17 +33,18 @@ public class Person implements ReadOnlyPerson {
      * Copy constructor.
      */
     public Person(ReadOnlyPerson source) {
-        this(source.getName(), source.getPhone(), source.getEmail(), source.getAddress(),source.getCurrTime(), source.getTags());
+        this(source.getName(), source.getPhone(), source.getEmail(), source.getAddress(), source.getCurrTime(),
+            source.getTags());
     }
 
     public void setName(Name name) {
-        this.name=name;
+        this.name = name;
     }
 
-    public void setPhone(Phone phone) {this.phone= phone; }
+    public void setPhone(Phone phone) { this.phone = phone; }
 
     public void setEmail(Email email) {
-        this.email= email;
+        this.email = email;
     }
 
     public void setAddress(Address address) {

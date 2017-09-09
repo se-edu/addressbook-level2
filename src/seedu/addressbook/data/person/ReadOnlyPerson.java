@@ -57,7 +57,7 @@ public interface ReadOnlyPerson {
             builder.append(detailIsPrivate);
         }
         builder.append(getPhone())
-                .append(" Email: ");
+            .append(" Email: ");
         if (getEmail().isPrivate()) {
             builder.append(detailIsPrivate);
         }

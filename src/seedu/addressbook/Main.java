@@ -111,8 +111,7 @@ public class Main {
             CommandResult result = command.execute();
             storage.save(addressBook);
             return result;
-            
-        } catch(StorageOperationException e){
+        } catch (StorageOperationException e){
             return new CommandResult(MESSAGE_EXCEPTION_FILE_ERROR);
         } catch (Exception e) {
             ui.showToUser(e.getMessage());

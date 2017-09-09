@@ -80,10 +80,10 @@ public class UniquePersonList implements Iterable<Person> {
      * Any changes to the internal list/elements are immediately visible in the returned list.
      */
     public List<ReadOnlyPerson> immutableListView() {
-        for(int i = INDEX_ZERO; i < internalList.size(); i++) {
-            for(int j = i + NEXT_INDEX;j < internalList.size();j++) {
+        for (int i = INDEX_ZERO; i < internalList.size(); i++) {
+            for (int j = i + NEXT_INDEX; j < internalList.size(); j++) {
                 if (internalList.get(i).compareTo(internalList.get(j)) >= NEXT_INDEX) {
-                    Collections.swap(internalList,i,j);
+                    Collections.swap(internalList, i, j);
                 }
             }
         }

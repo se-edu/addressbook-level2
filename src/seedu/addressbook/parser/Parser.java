@@ -108,7 +108,7 @@ public class Parser {
 
         // Validate arg string format
         int targetIndex= 100;
-        String target = args.substring(0,2);
+        String target = args.substring(0, 2);
         args = args.substring(3);
         final Matcher matcher = PERSON_DATA_ARGS_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
@@ -132,12 +132,12 @@ public class Parser {
 
                     getTagsFromArgs(matcher.group("tagArguments"))
             );
-        }
+            }
         catch (ParseException pe) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
         catch (NumberFormatException nfe) {
-            return new IncorrectCommand(targetIndex+"$$"+MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            return new IncorrectCommand(targetIndex + "$$" + MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());

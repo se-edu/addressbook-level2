@@ -35,7 +35,8 @@ public class DeleteCommandTest {
         Person johnDoe = new Person(new Name("John Doe"), new Phone("61234567", false),
                 new Email("john@doe.com", false), new Address("395C Ben Road", false), source.getCurrTime(), new UniqueTagList());
         Person janeDoe = new Person(new Name("Jane Doe"), new Phone("91234567", false),
-                new Email("jane@doe.com", false), new Address("33G Ohm Road", false), source.getCurrTime(), new UniqueTagList());
+                new Email("jane@doe.com", false), new Address("33G Ohm Road", false),
+                source.getCurrTime(), new UniqueTagList());
         Person samDoe = new Person(new Name("Sam Doe"), new Phone("63345566", false),
                 new Email("sam@doe.com", false), new Address("55G Abc Road", false), source.getCurrTime(), new UniqueTagList());
         Person davidGrant = new Person(new Name("David Grant"), new Phone("61121122", false),
