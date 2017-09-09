@@ -1,5 +1,6 @@
 package seedu.addressbook.data.person;
 
+import javafx.geometry.Pos;
 import seedu.addressbook.data.exception.IllegalValueException;
 
 /**
@@ -14,6 +15,10 @@ public class Address {
 
     public final String value;
     private boolean isPrivate;
+    private Block block;
+    private Street street;
+    private Unit unit;
+    private PostalCode postalcode;
 
     /**
      * Validates given address.
@@ -27,6 +32,13 @@ public class Address {
             throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
         }
         this.value = trimmedAddress;
+        /*
+        String[] addressArr = trimmedAddress.split(",");
+        block = new Block(addressArr[0]);
+        street = new Street(addressArr[1]);
+        unit = new Unit(addressArr[2]);
+        postalcode = new PostalCode(addressArr[3]);
+        */
     }
 
     /**
@@ -55,5 +67,42 @@ public class Address {
 
     public boolean isPrivate() {
         return isPrivate;
+    }
+
+    private class Block {
+        private String blockName;
+        public Block(String blockName) {
+            this.blockName = blockName.trim();
+        }
+        public String getBlock() {
+            return blockName;
+        }
+    }
+    private class Street {
+        private String streetName;
+        public Street(String streetName) {
+            this.streetName = streetName.trim();
+        }
+        public String getStreet() {
+            return streetName;
+        }
+    }
+    private class Unit {
+        private String unitName;
+        public Unit(String unitName) {
+            this.unitName = unitName.trim();
+        }
+        public String getUnit() {
+            return unitName;
+        }
+    }
+    private class PostalCode {
+        private String postalCodeName;
+        public PostalCode(String postalCodeName) {
+            this.postalCodeName = postalCodeName.trim();
+        }
+        public String getPostalCode() {
+            return postalCodeName;
+        }
     }
 }
