@@ -84,9 +84,15 @@ public class Main {
         do {
             String userCommandText = ui.getUserCommand();
             command = new Parser().parseCommand(userCommandText);
+            int size = addressBook.getSize();
             CommandResult result = executeCommand(command);
             recordResult(result);
             ui.showResultToUser(result);
+            if(size != addressBook.getSize()){
+                command = new Parser().parseCommand("list");
+                result = executeCommand(command);
+                ui.showResultToUser(result);
+            }
 
         } while (!ExitCommand.isExit(command));
     }
