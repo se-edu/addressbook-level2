@@ -12,8 +12,8 @@ public class Address {
     public static final String EXAMPLE = "123, some street";
     public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses can be in any format";
     public static final String ADDRESS_VALIDATION_REGEX = ".+";
+    public static final String DIVIDER = ", ";
 
-    public final String value;
     private boolean isPrivate;
     private Block block;
     private Street street;
@@ -31,14 +31,27 @@ public class Address {
         if (!isValidAddress(trimmedAddress)) {
             throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
         }
-        this.value = trimmedAddress;
-        /*
         String[] addressArr = trimmedAddress.split(",");
-        block = new Block(addressArr[0]);
-        street = new Street(addressArr[1]);
-        unit = new Unit(addressArr[2]);
-        postalcode = new PostalCode(addressArr[3]);
-        */
+        if (addressArr.length > 0) {
+            block = new Block(addressArr[0]);
+        } else {
+            block = new Block("");
+        }
+        if (addressArr.length > 1) {
+            street = new Street(addressArr[1]);
+        } else {
+            street = new Street("");
+        }
+        if (addressArr.length > 2) {
+            unit = new Unit(addressArr[2]);
+        } else {
+            unit = new Unit("");
+        }
+        if (addressArr.length > 3) {
+            postalcode = new PostalCode(addressArr[3]);
+        } else {
+            postalcode = new PostalCode("");
+        }
     }
 
     /**
@@ -50,25 +63,42 @@ public class Address {
 
     @Override
     public String toString() {
-        return value;
+        String address = "";
+        if (block.getBlock() != "") {
+            address += block.getBlock();
+        }
+        if (street.getStreet() != "") {
+            address += DIVIDER + street.getStreet();
+        }
+        if (unit.getUnit() != "") {
+            address += DIVIDER + unit.getUnit();
+        }
+        if (postalcode.getPostalCode() != "") {
+            address += DIVIDER + postalcode.getPostalCode();
+        }
+        return address;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Address // instanceof handles nulls
-                && this.value.equals(((Address) other).value)); // state check
+                && this.toString().equals(((Address) other).toString())); // state check
     }
-
+    /*
     @Override
     public int hashCode() {
         return value.hashCode();
     }
+    */
 
     public boolean isPrivate() {
         return isPrivate;
     }
 
+    /**
+     * Stores Block number
+     */
     private class Block {
         private String blockName;
         public Block(String blockName) {
@@ -78,6 +108,9 @@ public class Address {
             return blockName;
         }
     }
+    /**
+     * Stores Street name
+     */
     private class Street {
         private String streetName;
         public Street(String streetName) {
@@ -87,6 +120,9 @@ public class Address {
             return streetName;
         }
     }
+    /**
+     * Stores Unit number
+     */
     private class Unit {
         private String unitName;
         public Unit(String unitName) {
@@ -96,6 +132,9 @@ public class Address {
             return unitName;
         }
     }
+    /**
+     * Stores Postal Code
+     */
     private class PostalCode {
         private String postalCodeName;
         public PostalCode(String postalCodeName) {
