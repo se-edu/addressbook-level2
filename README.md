@@ -15,7 +15,7 @@
 
 # Contributors
 
-The full list of contributors for se-edu can be found [here](https://se-edu.github.io/docs/Team.html).
+Affalen, Halinx, Vanessa Lim Shi Min, Xavier Xie and SE-EDU Project Team.
 
 # Contact Us
 
