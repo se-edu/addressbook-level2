@@ -30,6 +30,8 @@ public class StorageFile {
     /** Default file path used if the user doesn't provide the file name. */
     public static final String DEFAULT_STORAGE_FILEPATH = "addressbook.xml";
 
+    private static boolean isFileExist = false;
+
     /* Note: Note the use of nested classes below.
      * More info https://docs.oracle.com/javase/tutorial/java/javaOO/nested.html
      */
@@ -99,10 +101,15 @@ public class StorageFile {
      */
     public CommandResult save(AddressBook addressBook) throws StorageOperationException {
 
+        if(Files.exists(path)){
+            isFileExist = true;
+        }else{
+            isFileExist = false;
+        }
         /**
          * Read Only
          */
-        if(Files.isWritable(path) == false){
+        if(isFileExist && Files.isWritable(path) == false){
             return new CommandResult("Please allow the file to be written");
         }
 
