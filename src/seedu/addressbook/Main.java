@@ -85,7 +85,11 @@ public class Main {
             String userCommandText = ui.getUserCommand();
             command = new Parser().parseCommand(userCommandText);
             CommandResult result = executeCommand(command);
-            recordResult(result);
+            if(result == null){
+                result = new CommandResult("Please allow the file to be written");
+            }else{
+                recordResult(result);
+            }
             ui.showResultToUser(result);
 
         } while (!ExitCommand.isExit(command));
@@ -109,7 +113,10 @@ public class Main {
         try {
             command.setData(addressBook, lastShownList);
             CommandResult result = command.execute();
-            storage.save(addressBook);
+            CommandResult save = storage.save(addressBook);
+            if(save != null){
+                return null;
+            }
             return result;
         } catch (Exception e) {
             ui.showToUser(e.getMessage());
@@ -126,6 +133,8 @@ public class Main {
         boolean isStorageFileSpecifiedByUser = launchArgs.length > 0;
         return isStorageFileSpecifiedByUser ? new StorageFile(launchArgs[0]) : new StorageFile();
     }
+
+
 
 
 }
