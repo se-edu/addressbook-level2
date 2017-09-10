@@ -28,9 +28,10 @@
 10. Run all the tests (right-click the `test` folder, and click `Run 'All Tests'`)
 11. Observe how some tests fail. That is because they try to access the test data from the wrong directory (the working directory is expected to be the root directory, but IntelliJ runs the test with `test\` as the working directory by default). To fix this issue:
     1. Go to `Run` -> `Edit Configurations...`
-    2. On the list at the left, ensure that `All in test` is selected
-    3. Under `Configuration`, change the `Working directory` to the `addressbook-level2` folder
-    4. Click `OK`
+    2. On the list at the left, expand `JUnit`, and remove all the test configurations (e.g. `All in test`) by selecting it and clicking on the '-' icon at the top of the list
+    3. Expand `Defaults`, and ensure that `JUnit` is selected
+    4. Under `Configuration`, change the `Working directory` to the `addressbook-level2` folder
+    5. Click `OK`
 12. Run the tests again to ensure they all pass now.
 
 ## Design
