@@ -54,6 +54,7 @@ public class Main {
         try {
             this.ui = new TextUi();
             this.storage = initializeStorage(launchArgs);
+            storage.checkIfReadOnly();
             this.addressBook = storage.load();
             ui.showWelcomeMessage(VERSION, storage.getPath());
 

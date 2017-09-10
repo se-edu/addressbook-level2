@@ -52,6 +52,13 @@ public class StorageFile {
         }
     }
 
+    /**
+     * Signals that the file is Read-Only.
+     */
+    public static class ReadOnlyException extends Exception {
+        public ReadOnlyException(String message) { super(message); }
+    }
+
     private final JAXBContext jaxbContext;
 
     public final Path path;
@@ -151,5 +158,15 @@ public class StorageFile {
     public String getPath() {
         return path.toString();
     }
-
+    
+    public void checkIfReadOnly(){
+        try {
+            if (!this.path.toFile().canWrite()) {
+                throw new ReadOnlyException("File is Read-Only.");
+            }
+        }
+        catch (ReadOnlyException ex) {
+            System.out.println("File is Read-Only.");
+        }
+    }
 }
