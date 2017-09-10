@@ -1,14 +1,9 @@
 package seedu.addressbook.data.person;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-
 import seedu.addressbook.common.Utils;
 import seedu.addressbook.data.exception.DuplicateDataException;
+
+import java.util.*;
 
 
 
@@ -81,7 +76,8 @@ public class UniquePersonList implements Iterable<Person> {
         return Collections.unmodifiableList(internalList);
     }
 
-
+    public ArrayList<Person> mutableListView() {return new ArrayList(internalList);
+    }
     /**
      * Checks if the list contains an equivalent person as the given argument.
      * The {@link ReadOnlyPerson#isSamePerson} method is used for this comparison, which
