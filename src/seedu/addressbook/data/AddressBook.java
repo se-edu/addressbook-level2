@@ -132,4 +132,8 @@ public class AddressBook {
     public int getSize(){
         return allPersons.getSize();
     }
+
+    public void sortList(){
+        allPersons.sortList();
+    }
 }
