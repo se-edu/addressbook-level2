@@ -19,6 +19,8 @@
 || Example: find alice bob charlie
 || list: Displays all persons in the address book as a list with index numbers.
 || Example: list
+|| sort: Sort all persons in the address book in alphabetically order.
+|| Example: sort
 || view: Views the non-private details of the person identified by the index number in the last shown person listing.
 || Parameters: INDEX
 || Example: view 1
@@ -85,27 +87,33 @@
 || Enter command: || [Command entered:  add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag]
 || Tags names should be alphanumeric
 || ===================================================
-|| Enter command: || [Command entered:  add Adam Brown p/111111 e/adam@gmail.com a/111, alpha street, #02-13, 666666]
-|| New person added: Adam Brown Phone: 111111 Email: adam@gmail.com Address: 111, alpha street, #02-13, 666666 Tags: 
+|| Enter command: || [Command entered:  add Betsy Choo pp/222222 pe/benchoo@nus.edu.sg pa/222, beta street,#03-23, t/secretive]
+|| New person added: Betsy Choo Phone: (private) 222222 Email: (private) benchoo@nus.edu.sg Address: (private) 222, beta street,#03-23, Tags: [secretive]
 || ===================================================
-|| 	1. Adam Brown Phone: 111111 Email: adam@gmail.com Address: 111, alpha street, #02-13, 666666 Tags: 
+|| 	1. Betsy Choo Tags: [secretive]
 || 
 || 1 persons listed!
 || ===================================================
 || Enter command: || [Command entered:  list]
-|| 	1. Adam Brown Phone: 111111 Email: adam@gmail.com Address: 111, alpha street, #02-13, 666666 Tags: 
+|| 	1. Betsy Choo Tags: [secretive]
 || 
 || 1 persons listed!
 || ===================================================
-|| Enter command: || [Command entered:  add Betsy Choo pp/222222 pe/benchoo@nus.edu.sg pa/222, beta street,#03-23, t/secretive]
-|| New person added: Betsy Choo Phone: (private) 222222 Email: (private) benchoo@nus.edu.sg Address: (private) 222, beta street,#03-23, Tags: [secretive]
+|| Enter command: || [Command entered:  add Adam Brown p/111111 e/adam@gmail.com a/111, alpha street, #02-13, 666666]
+|| New person added: Adam Brown Phone: 111111 Email: adam@gmail.com Address: 111, alpha street, #02-13, 666666 Tags: 
 || ===================================================
-|| 	1. Adam Brown Phone: 111111 Email: adam@gmail.com Address: 111, alpha street, #02-13, 666666 Tags: 
-|| 	2. Betsy Choo Tags: [secretive]
+|| 	1. Betsy Choo Tags: [secretive]
+|| 	2. Adam Brown Phone: 111111 Email: adam@gmail.com Address: 111, alpha street, #02-13, 666666 Tags: 
 || 
 || 2 persons listed!
 || ===================================================
 || Enter command: || [Command entered:  list]
+|| 	1. Betsy Choo Tags: [secretive]
+|| 	2. Adam Brown Phone: 111111 Email: adam@gmail.com Address: 111, alpha street, #02-13, 666666 Tags: 
+|| 
+|| 2 persons listed!
+|| ===================================================
+|| Enter command: || [Command entered:  sort]
 || 	1. Adam Brown Phone: 111111 Email: adam@gmail.com Address: 111, alpha street, #02-13, 666666 Tags: 
 || 	2. Betsy Choo Tags: [secretive]
 || 
