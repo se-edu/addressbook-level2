@@ -50,7 +50,7 @@ public class ViewCommandTest {
                                              new Phone("123", true),
                                              new Email("some@hey.go", true),
                                              new Address("nus", false),
-                                             new UniqueTagList(Collections.emptySet()));
+                source.getCurrTime(), new UniqueTagList(Collections.emptySet()));
         List<ReadOnlyPerson> listWithExtraPerson
                 = new ArrayList<ReadOnlyPerson>(listWithAllTypicalPersons);
         listWithExtraPerson.add(stranger);
