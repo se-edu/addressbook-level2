@@ -1,5 +1,6 @@
 package seedu.addressbook.storage;
 
+import seedu.addressbook.commands.CommandResult;
 import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.storage.jaxb.AdaptedAddressBook;
@@ -29,9 +30,12 @@ public class StorageFile {
     /** Default file path used if the user doesn't provide the file name. */
     public static final String DEFAULT_STORAGE_FILEPATH = "addressbook.xml";
 
+    private static boolean isFileExist = false;
+
     /* Note: Note the use of nested classes below.
      * More info https://docs.oracle.com/javase/tutorial/java/javaOO/nested.html
      */
+
 
     /**
      * Signals that the given file path does not fulfill the storage filepath constraints.
@@ -41,6 +45,7 @@ public class StorageFile {
             super(message);
         }
     }
+
 
     /**
      * Signals that some error has occured while trying to convert and read/write data between the application
@@ -79,6 +84,8 @@ public class StorageFile {
         }
     }
 
+
+
     /**
      * Returns true if the given path is acceptable as a storage file.
      * The file path is considered acceptable if it ends with '.xml'
@@ -92,7 +99,19 @@ public class StorageFile {
      *
      * @throws StorageOperationException if there were errors converting and/or storing data to file.
      */
-    public void save(AddressBook addressBook) throws StorageOperationException {
+    public CommandResult save(AddressBook addressBook) throws StorageOperationException {
+
+        if(Files.exists(path)){
+            isFileExist = true;
+        }else{
+            isFileExist = false;
+        }
+        /**
+         * Read Only
+         */
+        if(isFileExist && Files.isWritable(path) == false){
+            return new CommandResult("Please allow the file to be written");
+        }
 
         /* Note: Note the 'try with resource' statement below.
          * More info: https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html
@@ -110,6 +129,7 @@ public class StorageFile {
         } catch (JAXBException jaxbe) {
             throw new StorageOperationException("Error converting address book into storage format");
         }
+        return null;
     }
 
     /**

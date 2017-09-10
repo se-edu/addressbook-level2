@@ -128,4 +128,12 @@ public class AddressBook {
                         && this.allPersons.equals(((AddressBook) other).allPersons)
                         && this.allTags.equals(((AddressBook) other).allTags));
     }
+
+    public int getSize(){
+        return allPersons.getSize();
+    }
+
+    public void sortList(){
+        allPersons.sortList();
+    }
 }

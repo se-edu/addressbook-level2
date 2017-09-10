@@ -10,6 +10,12 @@ import java.util.Objects;
  */
 public class Person implements ReadOnlyPerson {
 
+    /**
+     * nextSequenceNumber will always increase by 1 when a new person is added
+     */
+    public static int nextSequenceNumber = 1;
+    public int sequenceNumber;
+
     private Name name;
     private Phone phone;
     private Email email;
@@ -20,6 +26,8 @@ public class Person implements ReadOnlyPerson {
      * Assumption: Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, UniqueTagList tags) {
+        this.sequenceNumber = Person.nextSequenceNumber;
+        Person.nextSequenceNumber++;
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -61,6 +69,7 @@ public class Person implements ReadOnlyPerson {
 
     /**
      * Replaces this person's tags with the tags in the argument tag list.
+     * setTag can not be class-level method because each person has different tag
      */
     public void setTags(UniqueTagList replacement) {
         tags.setTags(replacement);
