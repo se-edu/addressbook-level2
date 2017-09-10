@@ -7,7 +7,7 @@ import seedu.addressbook.ui.TextUi;
 /**
  * Clears the address book.
  */
-public class ClearCommand extends Command {
+public class ClearCommand extends ConfirmableCommand{
 
     public static final String COMMAND_WORD = "clear";
     public static final String MESSAGE_USAGE = "Clears address book permanently.\n"
@@ -16,32 +16,20 @@ public class ClearCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
     private static final String MESSAGE_FAILED = "Address book has not been cleared!";
 
-    private static final String MESSAGE_CONFIRMATION = "Clear the address book? [Y/N]";
-
-    private static final TextUi ui = new TextUi();
+    private static final String MESSAGE_CONFIRMATION = "Clear the address book?";
 
     public ClearCommand() {
+        super(MESSAGE_CONFIRMATION);
     }
-
 
     @Override
-    public CommandResult execute() {
-        if(confirmed()){
-            addressBook.clear();
-            return new CommandResult(MESSAGE_SUCCESS);
-        }else {
-            return new CommandResult(MESSAGE_FAILED);
-        }
+    public CommandResult confirmed() {
+        addressBook.clear();
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 
-    private boolean confirmed() {
-        ui.showToUser(MESSAGE_CONFIRMATION);
-        final String userConfirmation = ui.getUserConfirmation();
-        try {
-            return new Parser().parseConfirmation(userConfirmation);
-        }catch (IllegalValueException e){
-            ui.showToUser(e.getMessage());
-            return false;
-        }
+    @Override
+    public CommandResult rejected() {
+        return new CommandResult(MESSAGE_FAILED);
     }
 }

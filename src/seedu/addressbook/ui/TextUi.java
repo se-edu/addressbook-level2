@@ -98,8 +98,8 @@ public class TextUi {
      * Echos the command back to the user.
      * @return command (full line) entered by the user
      */
-    public String getUserConfirmation() {
-        out.print(LINE_PREFIX + "Confirm? [Y/n]: ");
+    public String getUserConfirmation(String confirmation_msg) {
+        out.print(LINE_PREFIX + confirmation_msg);
         String fullInputLine = in.nextLine();
 
         // silently consume all ignored lines
