@@ -44,7 +44,7 @@ public class FindCommand extends Command {
      */
     private List<ReadOnlyPerson> getPersonsWithNameContainingAnyKeyword(Set<String> keywords) {
         final List<ReadOnlyPerson> matchedPersons = new ArrayList<>();
-        for(String s : keywords){
+        for (String s : keywords){
             keywords.add(s.toLowerCase());
         }
         for (ReadOnlyPerson person : addressBook.getAllPersons()) {
