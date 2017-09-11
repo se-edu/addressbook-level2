@@ -1,7 +1,7 @@
 || ===================================================
 || ===================================================
 || Welcome to your Address Book!
-|| AddessBook Level 2 - Version 1.0
+|| AddressBook Level 2 - Version 1.0
 || Launch command format: java seedu.addressbook.Main [STORAGE_FILE_PATH]
 || Using storage file : addressbook.xml
 || ===================================================
