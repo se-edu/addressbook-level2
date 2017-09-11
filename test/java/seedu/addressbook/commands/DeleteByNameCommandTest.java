@@ -9,7 +9,6 @@ import org.junit.Test;
 
 import seedu.addressbook.common.Messages;
 import seedu.addressbook.data.AddressBook;
-import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.data.person.Address;
 import seedu.addressbook.data.person.Email;
 import seedu.addressbook.data.person.Name;
@@ -53,6 +52,33 @@ public class DeleteByNameCommandTest {
     @Test
     public void execute_not_emptyAddressBook_returnsPersonNotFoundMessage() {
         assertDeletionFailsDueToNoSuchPerson("hello", addressBook, listWithEveryone);
+    }
+
+    @Test
+    public void execute_valid_personIsDeleted() throws PersonNotFoundException {
+        assertDeletionSuccessful("John Doe", addressBook, listWithEveryone);
+    }
+
+    /**
+     * Asserts that the person at the specified index can be successfully deleted.
+     *
+     * The addressBook passed in will not be modified (no side effects).
+     *
+     * @throws PersonNotFoundException if the selected person is not in the address book
+     */
+    private void assertDeletionSuccessful(String name, AddressBook addressBook,
+                                          List<ReadOnlyPerson> displayList) throws PersonNotFoundException {
+
+        ReadOnlyPerson targetPerson = null;
+        for (ReadOnlyPerson person : displayList){
+            if (person.getName().toString().equals(name)){
+                targetPerson = person;
+            }
+        }
+        String expectedMessage = String.format(DeleteByNameCommand.MESSAGE_DELETE_PERSON_BY_NAME_SUCCESS, targetPerson);
+
+        DeleteByNameCommand command = createDeleteByNameCommand(name, addressBook, displayList);
+        assertCommandBehaviour(command, expectedMessage, addressBook, addressBook);
     }
 
     /**
