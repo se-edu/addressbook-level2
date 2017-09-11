@@ -84,6 +84,15 @@ public class AddressBook {
     }
 
     /**
+     * Sorts the address book based on alphabetical order
+     * Can be either ascending or descending
+     */
+    public void sortPerson(String sorting) throws UniquePersonList.WrongSortException {
+
+        allPersons.sort(sorting);
+    }
+
+    /**
      * Returns true if an equivalent person exists in the address book.
      */
     public boolean containsPerson(ReadOnlyPerson key) {

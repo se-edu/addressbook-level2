@@ -1,15 +1,10 @@
 package seedu.addressbook.data.person;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 import seedu.addressbook.common.Utils;
 import seedu.addressbook.data.exception.DuplicateDataException;
-
+import seedu.addressbook.data.exception.IllegalValueException;
 
 
 /**
@@ -26,6 +21,15 @@ public class UniquePersonList implements Iterable<Person> {
     public static class DuplicatePersonException extends DuplicateDataException {
         protected DuplicatePersonException() {
             super("Operation would result in duplicate persons");
+        }
+    }
+
+    /**
+     * Signals that an operation has no proper sorting order for the list.
+     */
+    public static class WrongSortException extends IllegalValueException {
+        protected WrongSortException() {
+            super("Operation would result in no sort");
         }
     }
 
@@ -119,6 +123,35 @@ public class UniquePersonList implements Iterable<Person> {
         final boolean personFoundAndDeleted = internalList.remove(toRemove);
         if (!personFoundAndDeleted) {
             throw new PersonNotFoundException();
+        }
+    }
+
+    /**
+     * Sorts the list.
+     *
+     * @throws WrongSortException if the sorting method for the list does not exist.
+     */
+
+    public void sort(String sorting) throws WrongSortException{
+        if(sorting.equals(" ascending")){
+            Collections.sort(internalList, new Comparator<Person>() {
+                public int compare(Person personOne, Person personTwo) {
+                    return personOne.getName().toString().compareTo(personTwo.getName().toString());
+                }
+            });
+            return;
+        }
+        if(sorting.equals(" descending")){
+            Collections.sort(internalList, new Comparator<Person>() {
+                public int compare(Person personOne, Person personTwo) {
+                    return -1 * personOne.getName().toString().compareTo(personTwo.getName().toString());
+                }
+            });
+            return;
+        }
+        if(sorting != " ascending" && sorting != " descending"){
+            System.out.println("wrong");
+            throw new WrongSortException();
         }
     }
 
