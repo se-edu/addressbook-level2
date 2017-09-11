@@ -80,6 +80,16 @@ Examples:
 * `find Betsy`<br> 
   `delete 1`<br>
   Deletes the 1st person in the results of the `find` command.
+  
+### Deleting a person by name: `deleteByName`
+Deletes the specified person from the address book. Case-sensitive. Irreversible.<br>
+Format: `delete NAME`
+
+> Deletes the person with the exact, matching `NAME`. 
+
+Examples: 
+* `delete John Doe`<br>
+  Deletes John Doe from the address book, if the entry exists.
 
 ### View non-private details of a person : `view`
 Displays the non-private details of the specified person.<br>
