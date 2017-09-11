@@ -33,14 +33,11 @@ public class Main {
     private List<? extends ReadOnlyPerson> lastShownList = Collections.emptyList();
 
 
-    public static void main(String... launchArgs) throws StorageOperationException  {
+    public static void main(String... launchArgs) {
         new Main().run(launchArgs);
     }
 
-    /** Runs the program until termination.
-    * throws storageoperationexception.*/
-
-    public void run(String[] launchArgs) throws StorageOperationException {
+    public void run(String[] launchArgs) {
         start(launchArgs);
         runCommandLoopUntilExitCommand();
         exit();
@@ -82,10 +79,7 @@ public class Main {
 
     /** Reads the user command and executes it, until the user issues the exit command.
      * @throws StorageOperationException */
-     private void runCommandLoopUntilExitCommand() throws StorageOperationException {
-         if(!storage.path.toFile().isFile()){
-             throw new StorageOperationException( "File not found: "+storage.path);
-         }
+     private void runCommandLoopUntilExitCommand() {
 
         Command command;
         do {
