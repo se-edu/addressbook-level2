@@ -11,6 +11,7 @@ public class Address {
     public static final String EXAMPLE = "123, some street";
     public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses can be in any format";
     public static final String ADDRESS_VALIDATION_REGEX = ".+";
+    public static final String ADDRESS_PLACEHOLDER = " ";
 
     public final String value;
     private boolean isPrivate;
@@ -21,19 +22,27 @@ public class Address {
      * @throws IllegalValueException if given address string is invalid.
      */
     public Address(String address, boolean isPrivate) throws IllegalValueException {
-        String trimmedAddress = address.trim();
-        this.isPrivate = isPrivate;
-        if (!isValidAddress(trimmedAddress)) {
+        if (address == null){
+            this.value = ADDRESS_PLACEHOLDER;
+            this.isPrivate = isPrivate;
+        } else if (address.equals(ADDRESS_PLACEHOLDER)){
+            this.value = ADDRESS_PLACEHOLDER;
+            this.isPrivate = isPrivate;
+        }  else if (!isValidAddress(address)){
             throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
+        } else {
+            String trimmedAddress = address.trim();
+            this.value = trimmedAddress;
+            this.isPrivate = isPrivate;
         }
-        this.value = trimmedAddress;
     }
 
     /**
      * Returns true if a given string is a valid person address.
      */
     public static boolean isValidAddress(String test) {
-        return test.matches(ADDRESS_VALIDATION_REGEX);
+        String trimmed = test.trim();
+        return trimmed.matches(ADDRESS_VALIDATION_REGEX) || test.equals(ADDRESS_PLACEHOLDER);
     }
 
     @Override

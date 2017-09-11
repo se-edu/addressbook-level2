@@ -11,6 +11,7 @@ public class Phone {
     public static final String EXAMPLE = "123456789";
     public static final String MESSAGE_PHONE_CONSTRAINTS = "Person phone numbers should only contain numbers";
     public static final String PHONE_VALIDATION_REGEX = "\\d+";
+    public static final String PHONE_PLACEHOLDER = " ";
 
     public final String value;
     private boolean isPrivate;
@@ -22,18 +23,26 @@ public class Phone {
      */
     public Phone(String phone, boolean isPrivate) throws IllegalValueException {
         this.isPrivate = isPrivate;
-        String trimmedPhone = phone.trim();
-        if (!isValidPhone(trimmedPhone)) {
+        if (phone == null){
+            this.value = PHONE_PLACEHOLDER;
+            this.isPrivate = isPrivate;
+        } else if (phone.equals(PHONE_PLACEHOLDER)){
+            this.value = PHONE_PLACEHOLDER;
+            this.isPrivate = isPrivate;
+        } else if (!isValidPhone(phone)) {
             throw new IllegalValueException(MESSAGE_PHONE_CONSTRAINTS);
+        } else {
+            this.value = phone.trim();;
+            this.isPrivate = isPrivate;
         }
-        this.value = trimmedPhone;
     }
 
     /**
      * Returns true if the given string is a valid person phone number.
      */
     public static boolean isValidPhone(String test) {
-        return test.matches(PHONE_VALIDATION_REGEX);
+        String trimmed = test.trim();
+        return trimmed.matches(PHONE_VALIDATION_REGEX) || test.equals(PHONE_PLACEHOLDER);
     }
 
     @Override
