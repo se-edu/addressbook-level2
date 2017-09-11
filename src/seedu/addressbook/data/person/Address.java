@@ -6,7 +6,7 @@ import seedu.addressbook.data.exception.IllegalValueException;
  * Represents a Person's address in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
  */
-public class Address {
+public class Address extends Contact {
 
     public static final String EXAMPLE = "123, some street";
     public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses can be in any format";
@@ -15,7 +15,7 @@ public class Address {
     public final String value;
     private final Block block;
     private final Street street;
-    private  final Unit unit;
+    private final Unit unit;
     private final Postal postal;
     private boolean isPrivate;
 
@@ -25,6 +25,7 @@ public class Address {
      * @throws IllegalValueException if given address string is invalid.
      */
     public Address(String address, boolean isPrivate) throws IllegalValueException {
+        super(address, isPrivate);
         String trimmedAddress = address.trim();
         this.isPrivate = isPrivate;
         if (!isValidAddress(trimmedAddress)) {
@@ -33,7 +34,7 @@ public class Address {
         String[] split = address.split(",");
         block = new Block(split[0]);
         street = new Street(split[1]);
-        unit = new Unit (split[2]);
+        unit = new Unit(split[2]);
         postal = new Postal(split[3]);
         this.value = trimmedAddress;
     }
@@ -47,7 +48,7 @@ public class Address {
 
     @Override
     public String toString() {
-        String Address = block.getBlockNo() +"," + street.getStreetName() +"," + unit.getUnitNo() +"," + postal.getPostalCode();
+        String Address = block.getBlockNo() + "," + street.getStreetName() + "," + unit.getUnitNo() + "," + postal.getPostalCode();
         return Address;
     }
 
@@ -58,12 +59,4 @@ public class Address {
                 && this.value.equals(((Address) other).value)); // state check
     }
 
-    @Override
-    public int hashCode() {
-        return value.hashCode();
-    }
-
-    public boolean isPrivate() {
-        return isPrivate;
-    }
 }
