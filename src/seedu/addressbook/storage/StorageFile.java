@@ -57,16 +57,6 @@ public class StorageFile {
     public final Path path;
 
     /**
-     * returns true if the file is in read-only mode
-     */
-
-    private boolean checkReadOnly(){
-        return  !path.toFile().canWrite();
-
-    }
-
-
-    /**
      * @throws InvalidStorageFilePathException if the default path is invalid
      */
     public StorageFile() throws InvalidStorageFilePathException {
@@ -114,9 +104,6 @@ public class StorageFile {
             final Marshaller marshaller = jaxbContext.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             marshaller.marshal(toSave, fileWriter);
-            if(checkReadOnly()) {
-                throw new StorageOperationException("Error: File is in read only mode.");
-            }
 
         } catch (IOException ioe) {
             throw new StorageOperationException("Error writing to file: " + path);
