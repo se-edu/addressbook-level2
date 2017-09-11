@@ -50,6 +50,11 @@ public class DeleteByNameCommandTest {
         assertDeletionFailsDueToNoSuchPerson("hello", emptyAddressBook, emptyDisplayList);
     }
 
+    @Test
+    public void execute_not_emptyAddressBook_returnsPersonNotFoundMessage() {
+        assertDeletionFailsDueToNoSuchPerson("hello", addressBook, listWithEveryone);
+    }
+
     /**
      * Asserts that the person at the specified index cannot be deleted, because that person
      * is not in the address book.
