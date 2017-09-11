@@ -54,6 +54,18 @@
   # should not allow adding duplicate persons
   add Esther Potato p/555555 e/esther@not.a.real.potato pa/555, epsilon street t/tubers t/starchy
 
+  #add new person not in alphabetical order
+  add Albert Sng p/666666 e/albert@nus.edu.sg a/666 Devils Street t/friends
+  list 
+
+##########################################################
+# test sort command
+##########################################################
+
+  #should display contacts sorted by name
+  sort
+  list
+
 ##########################################################
 # test view/viewall persons command
 ##########################################################
