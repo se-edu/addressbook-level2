@@ -49,6 +49,14 @@ Examples:
 * `add John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01`
 * `add Betsy Crowe pp/1234567 e/betsycrowe@gmail.com pa/Newgate Prison t/criminal t/friend`
 
+> Incomplete data may be provided by leaving the parameter empty.
+
+Examples:
+* `add Homere Suman p/98322113 e/homer@gmail.com a/`
+* `add Ima Hideitall p/ e/ a/ t/getmoredetails`
+
+The first example will add in Homere Suman with a phone and email, but with no address, while the second example will add in Ima Hideitall with no details.
+
 ### Listing all persons : `list`
 Shows a list of all persons in the address book.<br>
 Format: `list`
