@@ -149,6 +149,17 @@
   list
 
 ##########################################################
+# test deleteByName command
+##########################################################
+  
+  #Add person
+  add John Doe p/98765432 e/johnd@gmail.com a/311, Clementi Ave 2, #02-25
+  #Delete the person
+  deleteByName John Doe
+  #Verify addressbook is empty
+  list
+
+##########################################################
 # test exit command
 ##########################################################
 
