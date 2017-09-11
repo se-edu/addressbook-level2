@@ -297,6 +297,16 @@
 || 
 || 0 persons listed!
 || ===================================================
+|| Enter command: || [Command entered:  add John Doe p/98765432 e/johnd@gmail.com a/311, Clementi Ave 2, #02-25]
+|| New person added: John Doe Phone: 98765432 Email: johnd@gmail.com Address: 311, Clementi Ave 2, #02-25 Tags: 
+|| ===================================================
+|| Enter command: || [Command entered:  deleteByName John Doe]
+|| Deleted Person: John Doe Phone: 98765432 Email: johnd@gmail.com Address: 311, Clementi Ave 2, #02-25 Tags: 
+|| ===================================================
+|| Enter command: || [Command entered:  list]
+|| 
+|| 0 persons listed!
+|| ===================================================
 || Enter command: || [Command entered:  exit]
 || Exiting Address Book as requested ...
 || ===================================================
