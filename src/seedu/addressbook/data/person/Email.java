@@ -12,6 +12,7 @@ public class Email {
     public static final String MESSAGE_EMAIL_CONSTRAINTS =
             "Person emails should be 2 alphanumeric/period strings separated by '@'";
     public static final String EMAIL_VALIDATION_REGEX = "[\\w\\.]+@[\\w\\.]+";
+    public static final String EMAIL_PLACEHOLDER = " ";
 
     public final String value;
     private boolean isPrivate;
@@ -23,18 +24,26 @@ public class Email {
      */
     public Email(String email, boolean isPrivate) throws IllegalValueException {
         this.isPrivate = isPrivate;
-        String trimmedEmail = email.trim();
-        if (!isValidEmail(trimmedEmail)) {
+        if (email == null){
+            this.value = EMAIL_PLACEHOLDER;
+            this.isPrivate = isPrivate;
+        } else if (email.equals(EMAIL_PLACEHOLDER)){
+            this.value = EMAIL_PLACEHOLDER;
+            this.isPrivate = isPrivate;
+        } else if (!isValidEmail(email)) {
             throw new IllegalValueException(MESSAGE_EMAIL_CONSTRAINTS);
+        } else {
+            this.value = email.trim();
+            this.isPrivate = isPrivate;
         }
-        this.value = trimmedEmail;
     }
 
     /**
      * Returns true if the given string is a valid person email.
      */
     public static boolean isValidEmail(String test) {
-        return test.matches(EMAIL_VALIDATION_REGEX);
+        String trimmed = test.trim();
+        return trimmed.matches(EMAIL_VALIDATION_REGEX) || test.equals(EMAIL_PLACEHOLDER);
     }
 
     @Override

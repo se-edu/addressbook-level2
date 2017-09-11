@@ -39,7 +39,7 @@ public class AddCommandTest {
 
     @Test
     public void addCommand_invalidPhone_throwsException() {
-        final String[] invalidNumbers = { "", " ", "1234-5678", "[]\\[;]", "abc", "a123", "+651234" };
+        final String[] invalidNumbers = { "1234-5678", "[]\\[;]", "abc", "a123", "+651234" };
         for (String number : invalidNumbers) {
             assertConstructingInvalidAddCmdThrowsException(Name.EXAMPLE, number, false, Email.EXAMPLE, true,
                     Address.EXAMPLE, false, EMPTY_STRING_LIST);
@@ -48,20 +48,11 @@ public class AddCommandTest {
 
     @Test
     public void addCommand_invalidEmail_throwsException() {
-        final String[] invalidEmails = { "", " ", "def.com", "@", "@def", "@def.com", "abc@",
+        final String[] invalidEmails = { "def.com", "@", "@def", "@def.com", "abc@",
                                          "@invalid@email", "invalid@email!", "!invalid@email" };
         for (String email : invalidEmails) {
             assertConstructingInvalidAddCmdThrowsException(Name.EXAMPLE, Phone.EXAMPLE, false, email, false,
                     Address.EXAMPLE, false, EMPTY_STRING_LIST);
-        }
-    }
-
-    @Test
-    public void addCommand_invalidAddress_throwsException() {
-        final String[] invalidAddresses = { "", " " };
-        for (String address : invalidAddresses) {
-            assertConstructingInvalidAddCmdThrowsException(Name.EXAMPLE, Phone.EXAMPLE, true, Email.EXAMPLE,
-                    true, address, true, EMPTY_STRING_LIST);
         }
     }
 
