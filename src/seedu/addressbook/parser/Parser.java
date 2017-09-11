@@ -17,6 +17,7 @@ import seedu.addressbook.commands.Command;
 import seedu.addressbook.commands.DeleteCommand;
 import seedu.addressbook.commands.ExitCommand;
 import seedu.addressbook.commands.FindCommand;
+import seedu.addressbook.commands.FindAllCommand;
 import seedu.addressbook.commands.HelpCommand;
 import seedu.addressbook.commands.IncorrectCommand;
 import seedu.addressbook.commands.ListCommand;
@@ -86,6 +87,9 @@ public class Parser {
 
         case FindCommand.COMMAND_WORD:
             return prepareFind(arguments);
+
+        case FindAllCommand.COMMAND_WORD:
+            return prepareFindAll(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
@@ -248,6 +252,19 @@ public class Parser {
         final String[] keywords = matcher.group("keywords").split("\\s+");
         final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
         return new FindCommand(keywordSet);
+    }
+
+    private Command prepareFindAll(String args) {
+        final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim().toLowerCase());
+        if (!matcher.matches()) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    FindAllCommand.MESSAGE_USAGE));
+        }
+
+        // keywords delimited by whitespace
+        final String[] keywords = matcher.group("keywords").split("\\s+");
+        final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
+        return new FindAllCommand(keywordSet);
     }
 
 
