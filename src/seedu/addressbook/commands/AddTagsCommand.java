@@ -29,6 +29,10 @@ public class AddTagsCommand extends Command {
         this.tagList = new UniqueTagList(tagSet);
     }
 
+    public UniqueTagList getTagList() {
+        return tagList;
+    }
+
     @Override
     public CommandResult execute() {
         try {

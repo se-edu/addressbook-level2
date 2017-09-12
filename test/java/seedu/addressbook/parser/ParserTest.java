@@ -12,17 +12,7 @@ import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
 
-import seedu.addressbook.commands.AddCommand;
-import seedu.addressbook.commands.ClearCommand;
-import seedu.addressbook.commands.Command;
-import seedu.addressbook.commands.DeleteCommand;
-import seedu.addressbook.commands.ExitCommand;
-import seedu.addressbook.commands.FindCommand;
-import seedu.addressbook.commands.HelpCommand;
-import seedu.addressbook.commands.IncorrectCommand;
-import seedu.addressbook.commands.ListCommand;
-import seedu.addressbook.commands.ViewAllCommand;
-import seedu.addressbook.commands.ViewCommand;
+import seedu.addressbook.commands.*;
 import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.data.person.Address;
 import seedu.addressbook.data.person.Email;
@@ -267,6 +257,27 @@ public class ParserTest {
 
         final AddCommand result = parseAndAssertCommandType(input, AddCommand.class);
         assertEquals(result.getPerson(), testPerson);
+    }
+
+    /*
+     * Tests for add tags command ==============================================================================
+     */
+
+    @Test
+    public void parse_addTagsCommandInvalidTargetIndex_errorMessage() {
+        String input = "addTags abc /t tag";
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagsCommand.MESSAGE_USAGE);
+        parseAndAssertIncorrectWithMessage(expectedMessage, input);
+    }
+
+    @Test
+    public void parse_addTagsCommandValidInput_parsedCorrectly() throws IllegalValueException {
+        String input = "addTags 1 t/ tag1 t/ tag2";
+        final AddTagsCommand result = parseAndAssertCommandType(input, AddTagsCommand.class);
+        assertEquals(1, result.getTargetIndex());
+
+        UniqueTagList expectedTagList = new UniqueTagList(new Tag("tag1"), new Tag("tag2"));
+        assertEquals(expectedTagList, result.getTagList());
     }
 
     private static Person generateTestPerson() {
