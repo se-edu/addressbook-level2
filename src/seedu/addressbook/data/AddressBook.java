@@ -1,13 +1,9 @@
 package seedu.addressbook.data;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
-import seedu.addressbook.data.person.Person;
-import seedu.addressbook.data.person.ReadOnlyPerson;
-import seedu.addressbook.data.person.UniquePersonList;
+import seedu.addressbook.commands.AddCommand;
+import seedu.addressbook.data.person.*;
 import seedu.addressbook.data.person.UniquePersonList.DuplicatePersonException;
 import seedu.addressbook.data.person.UniquePersonList.PersonNotFoundException;
 import seedu.addressbook.data.tag.Tag;
@@ -24,7 +20,7 @@ public class AddressBook {
 
     private final UniquePersonList allPersons;
     private final UniqueTagList allTags; // can contain tags not attached to any person
-
+    private static final Scanner SCANNER = new Scanner(System.in);
     /**
      * Creates an empty address book.
      */
@@ -97,6 +93,38 @@ public class AddressBook {
      */
     public void removePerson(ReadOnlyPerson toRemove) throws PersonNotFoundException {
         allPersons.remove(toRemove);
+    }
+
+    /**
+     * Removes the equivalent person from the address book.
+     *
+     * @throws PersonNotFoundException if no such Person could be found.
+     */
+    public void UpdatePerson(ReadOnlyPerson toRemove) throws PersonNotFoundException {
+
+        String CurrName = (toRemove.getName()).toString();
+        String CurrPhone = (toRemove.getPhone()).toString();
+        String CurrEmail = (toRemove.getEmail()).toString();
+        String CurrAddress = (toRemove.getAddress()).toString();
+        String action = SelectUpdateAction() ;
+        String newname = "John Doe";
+
+
+        Person UpdatedAdd = new Person(toRemove);
+        allPersons.remove(toRemove);
+        UpdatedAdd.name.fullName = newname;
+    }
+
+    public static String SelectUpdateAction() {
+
+        System.out.println("|| " + "Enter 1 to update name , 2 to update phone no and 3 to update email: ");
+        String inputLine = SCANNER.nextLine();
+        // silently consume all blank and comment lines
+        while (inputLine.trim().isEmpty() || inputLine.trim().charAt(0) == '#') {
+            inputLine = SCANNER.nextLine();
+        }
+        System.out.println("[Action chosen:" + inputLine + "]");
+        return inputLine;
     }
 
     /**
