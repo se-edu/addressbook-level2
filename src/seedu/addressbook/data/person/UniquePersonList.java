@@ -136,7 +136,7 @@ public class UniquePersonList implements Iterable<Person> {
                         && this.internalList.equals(((UniquePersonList) other).internalList));
     }
 
-    public void sort {
+    public void sort() {
         Collections.sort(internalList, new Comparator<Person>() {
             public int compare(final Person o1, final Person o2) {
                 return o1.getName().toString().compareTo(o2.getName().toString());
