@@ -33,7 +33,7 @@ public class UniqueTagList implements Iterable<Tag> {
     private final List<Tag> internalList = new ArrayList<>();
 
     /**
-     * Constructs an empty TagList.
+     * Constructs an empty TagList.add
      */
     public UniqueTagList() {}
 

@@ -128,4 +128,11 @@ public class AddressBook {
                         && this.allPersons.equals(((AddressBook) other).allPersons)
                         && this.allTags.equals(((AddressBook) other).allTags));
     }
+
+    /**
+     * Check if the address book is empty.
+     */
+    public boolean isEmpty(){
+        return allPersons.isEmpty();
+    }
 }
