@@ -99,7 +99,7 @@ public class AddressBook {
         allPersons.remove(toRemove);
     }
 
-    public void sortPerson(){
+    public void sortPerson() {
         allPersons.sort();
     }
 
