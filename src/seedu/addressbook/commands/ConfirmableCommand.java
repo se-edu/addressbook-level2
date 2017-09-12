@@ -25,9 +25,13 @@ public abstract class ConfirmableCommand extends Command {
 
     /**
      * Requests user confirmation and returns the result.
+     *
+     * {@code final} keyword added to prevent subclasses from removing
+     * the prompt by overriding this method.
      */
     @Override
-    public CommandResult execute() {
+    final public CommandResult execute() {
+        onExecute();
         final String userConfirmation = ui.getUserConfirmation(confirmation_msg);
         try {
             if(new Parser().parseConfirmation(userConfirmation)){
@@ -50,4 +54,11 @@ public abstract class ConfirmableCommand extends Command {
      * responses are also considered rejection.
      */
     public abstract CommandResult rejected();
+
+    /**
+     * Override this execute code before the confirmation prompt.
+     */
+    public void onExecute(){
+        //Do nothing.
+    }
 }
