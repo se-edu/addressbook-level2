@@ -83,7 +83,7 @@ Examples:
   
 ### Editting a person : `edit`
 Edits the specified person from the address book. Irreversible.<br>
-Format: `delete INDEX`
+Format: `edit INDEX`
 
 > Edits the person at the specified `INDEX`. 
   The index refers to the index number shown in the most recent listing.

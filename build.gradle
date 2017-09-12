@@ -15,7 +15,7 @@ allprojects {
         toolVersion = "$checkstyleVersion"
     }
 
-    sourceSets {h
+    sourceSets {
         main {
             java {
                 srcDirs = ['src']

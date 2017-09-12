@@ -35,24 +35,19 @@ public class EditCommand extends Command {
     }
 
 
-//    String name,
-//    String phone, boolean isPhonePrivate,
-//    String email, boolean isEmailPrivate,
-//    String address, boolean isAddressPrivate,
-//    Set<String> tags
     @Override
     public CommandResult execute() {
         try {
             final ReadOnlyPerson target = getTargetPerson();
 
-            String name= target.getName().fullName;
-            String phoneNum=target.getPhone().value;
-            Boolean phonePriv=target.getPhone().isPrivate();
-            String email=target.getEmail().value;
-            Boolean emailPriv=target.getEmail().isPrivate();
-            String address=target.getAddress().value;
-            Boolean addressPriv=target.getAddress().isPrivate();
-            Set<Tag> tagSet=target.getTags().toSet();
+            String name = target.getName().fullName;
+            String phoneNum = target.getPhone().value;
+            Boolean phonePriv = target.getPhone().isPrivate();
+            String email = target.getEmail().value;
+            Boolean emailPriv = target.getEmail().isPrivate();
+            String address = target.getAddress().value;
+            Boolean addressPriv = target.getAddress().isPrivate();
+            Set<Tag> tagSet = target.getTags().toSet();
 
 
 
