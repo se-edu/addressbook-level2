@@ -19,6 +19,9 @@
 || Example: find alice bob charlie
 || list: Displays all persons in the address book as a list with index numbers.
 || Example: list
+|| update: Updates the person identified by the index number used in the last person listing with the details provided
+|| Parameters: INDEX [p]p/PHONE [p]e/EMAIL [p]a/ADDRESS  [t/TAG]...
+|| Example: update 1 p/98765432 e/johnd@gmail.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney
 || view: Views the non-private details of the person identified by the index number in the last shown person listing.
 || Parameters: INDEX
 || Example: view 1
@@ -287,6 +290,22 @@
 || Enter command: || [Command entered:  list]
 || 	1. Betsy Choo Tags: [secretive]
 || 	2. Dickson Ee Phone: 444444 Address: 444, delta street Tags: [friends]
+|| 
+|| 2 persons listed!
+|| ===================================================
+|| Enter command: || [Command entered: list]
+||      1. Betsy Choo Tags: [secretive]
+||      2. Dickson Ee Phone: 444444 Address: 444, delta street Tags: [friends]
+|| 
+|| 2 persons listed!
+|| ===================================================
+|| Enter command: || [Command entered: update 1 p/111111 e/adam@gmail.com a/111, alpha street]
+1
+|| Details updated: Betsy Choo Phone: 111111 Email: adam@gmail.com Address: 111, alpha street Tags: 
+|| ===================================================
+|| Enter command: || [Command entered: list]
+||      1. Dickson Ee Phone: 444444 Address: 444, delta street Tags: [friends]
+||      2. Betsy Choo Phone: 111111 Email: adam@gmail.com Address: 111, alpha street Tags: 
 || 
 || 2 persons listed!
 || ===================================================
