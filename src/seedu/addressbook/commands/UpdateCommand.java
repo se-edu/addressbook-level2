@@ -8,19 +8,20 @@ import seedu.addressbook.data.person.UniquePersonList.PersonNotFoundException;
 /**
  * Deletes a person identified using it's last displayed index from the address book.
  */
-public class ReplaceCommand extends Command {
+public class UpdateCommand extends Command {
 
-    public static final String COMMAND_WORD = "replace";
+    public static final String COMMAND_WORD = "update";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the last person listing.\n"
-            + "Parameters: INDEX\n"
+            + ": Updates the person identified by the index number used in the last person listing with the details provided\n"
+            + "Parameters: INDEX [p]p/PHONE [p]e/EMAIL [p]a/ADDRESS  [t/TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1";
+            + " John Doe p/98765432 e/johnd@gmail.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
 
-    public ReplaceCommand(int targetVisibleIndex) {
+    public UpdateCommand(int targetVisibleIndex) {
         super(targetVisibleIndex);
     }
 
