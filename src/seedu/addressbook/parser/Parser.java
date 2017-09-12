@@ -99,7 +99,7 @@ public class Parser {
             return new ListCommand();
 
         case UpdateCommand.COMMAND_WORD:
-            return prepareDelete(arguments);
+            return prepareUpdate(arguments);
 
         case ViewCommand.COMMAND_WORD:
             return prepareView(arguments);
@@ -201,6 +201,7 @@ public class Parser {
         }
         try {
             final int targetIndex = parseArgsAsDisplayedIndex(matcher.group("targetIndex"));
+            System.out.println(targetIndex);
             return new UpdateCommand(
                     targetIndex,
 
