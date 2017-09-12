@@ -13,6 +13,10 @@ public class Utils {
      * Returns true if any of the given items are null.
      */
     public static boolean isAnyNull(Object... items) {
+        if (items == null){ // Handle if all the input is null
+            return true;
+        }
+
         for (Object item : items) {
             if (item == null) {
                 return true;
