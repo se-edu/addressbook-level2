@@ -17,7 +17,7 @@ public class UpdateCommand extends Command {
             +  "parameters :  INDEX"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_UPDATE_SUCCESS = "Person updated: %1$s";
+    public static final String MESSAGE_UPDATE_SUCCESS = "Person after update: %1$s";
 
     public UpdateCommand(int targetVisibleIndex) {
         super(targetVisibleIndex);

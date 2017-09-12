@@ -21,6 +21,8 @@ public class AddressBook {
     private final UniquePersonList allPersons;
     private final UniqueTagList allTags; // can contain tags not attached to any person
     private static final Scanner SCANNER = new Scanner(System.in);
+    private static final char INPUT_COMMENT_MARKER = '#';
+    private static final String LINE_PREFIX = "|| ";
     /**
      * Creates an empty address book.
      */
@@ -102,17 +104,9 @@ public class AddressBook {
      */
     public void UpdatePerson(ReadOnlyPerson toRemove) throws PersonNotFoundException {
 
-        String CurrName = (toRemove.getName()).toString();
-        String CurrPhone = (toRemove.getPhone()).toString();
-        String CurrEmail = (toRemove.getEmail()).toString();
-        String CurrAddress = (toRemove.getAddress()).toString();
-        String action = SelectUpdateAction() ;
-        String newname = "John Doe";
+        Person toUpdate = new Person(toRemove);
+        ChooseUpdateMethod(SelectUpdateAction(), toUpdate );
 
-
-        Person UpdatedAdd = new Person(toRemove);
-        allPersons.remove(toRemove);
-        UpdatedAdd.name.fullName = newname;
     }
 
     public static String SelectUpdateAction() {
@@ -127,9 +121,55 @@ public class AddressBook {
         return inputLine;
     }
 
-    /**
-     * Clears all persons and tags from the address book.
-     */
+    private static void ChooseUpdateMethod(String inputLine , Person toUpdate ) {
+
+
+        switch (inputLine) {
+            case "1":
+                System.out.println(LINE_PREFIX +" Enter new name ");
+                String newname = SCANNER.nextLine();
+                // silently consume all blank and comment lines
+                while (newname.trim().isEmpty() || newname.trim().charAt(0) == INPUT_COMMENT_MARKER) {
+                    newname = SCANNER.nextLine();
+                }
+                toUpdate.name.fullName = newname;
+                System.out.println(LINE_PREFIX +" The name has been replaced with " + toUpdate.name.fullName);
+
+                break;
+
+            case "2":
+                System.out.println(LINE_PREFIX +" Enter new phone no ");
+                String newphone = SCANNER.nextLine();
+                // silently consume all blank and comment lines
+                while (newphone.trim().isEmpty() || newphone.trim().charAt(0) == INPUT_COMMENT_MARKER) {
+                    newphone = SCANNER.nextLine();
+                }
+                toUpdate.phone.value = newphone;
+                System.out.println(LINE_PREFIX +" The phone has been replaced with " + toUpdate.phone.value);
+                break;
+
+            case "3":
+                System.out.println(LINE_PREFIX +" Enter new email without prefix ");
+                String newemail = SCANNER.nextLine();
+                // silently consume all blank and comment lines
+                while (newemail.trim().isEmpty() || newemail.trim().charAt(0) == INPUT_COMMENT_MARKER) {
+                    newemail = SCANNER.nextLine();
+                }
+
+                toUpdate.email.value = newemail;
+                System.out.println(LINE_PREFIX +" The phone has been replaced with " + toUpdate.email.value);
+                break;
+
+            default:
+                ChooseUpdateMethod(SelectUpdateAction(), toUpdate);
+                break;
+        }
+    }
+
+
+        /**
+         * Clears all persons and tags from the address book.
+         */
     public void clear() {
         allPersons.clear();
         allTags.clear();
