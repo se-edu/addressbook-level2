@@ -115,6 +115,10 @@ Examples:
 Clears all entries from the address book.<br>
 Format: `clear`  
 
+### Sorting all entries : 'sort'
+Sort all entries in alphabatical order.<br>
+Format: 'sort'
+
 #### Exiting the program : `exit`
 Exits the program.<br>
 Format: `exit`  
