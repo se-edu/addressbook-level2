@@ -140,15 +140,13 @@ public class UniquePersonList implements Iterable<Person> {
      * Check if the contacts is empty.
      */
     public boolean isEmpty(){
-        return internalList.isEmpty();
+        return this.internalList.isEmpty();
     }
 
+    /**
+     * Sort all persons in list alphabetically
+     */
     public void sort(){
-        Collections.sort(internalList, new Comparator<Person>() {
-            @Override
-            public int compare(Person o1, Person o2) {
-                return 0;
-            }
-        });
+        Collections.sort(this.internalList, new PersonComparator());
     }
 }

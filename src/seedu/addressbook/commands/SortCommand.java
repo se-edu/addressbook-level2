@@ -16,6 +16,7 @@ public class SortCommand extends Command{
 	@Override
 	public CommandResult execute() {
 		if(!addressBook.isEmpty()){
+			addressBook.sort();
 			return new CommandResult(MESSAGE_SORT_ADDRESSBOOK_SUCCESS);
 		}
 		else{
