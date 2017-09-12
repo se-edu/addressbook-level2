@@ -288,7 +288,7 @@ public class ParserTest {
                 + person.getName().fullName
                 + (person.getPhone().isPrivate() ? " pp/" : " p/") + person.getPhone().value
                 + (person.getEmail().isPrivate() ? " pe/" : " e/") + person.getEmail().value
-                + (person.getAddress().isPrivate() ? " pa/" : " a/") + person.getAddress().value;
+                + (person.getAddress().isPrivate() ? " pa/" : " a/") + person.getAddress().toString();
         for (Tag tag : person.getTags()) {
             addCommand += " t/" + tag.tagName;
         }
@@ -320,5 +320,10 @@ public class ParserTest {
         final Command result = parser.parseCommand(input);
         assertTrue(result.getClass().isAssignableFrom(expectedCommandClass));
         return (T) result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
     }
 }
