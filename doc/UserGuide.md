@@ -81,6 +81,28 @@ Examples:
   `delete 1`<br>
   Deletes the 1st person in the results of the `find` command.
 
+### Updating a person : `UPDATE`. 
+Updates the specified person from the address book with a new set of details.
+Format: `update INDEX [p]p/PHONE_NUMBER [p]e/EMAIL [p]a/ADDRESS [t/TAG]...`
+
+> Updates the person at the specified `INDEX` with details as inputted. 
+  The index refers to the index number shown in the most recent listing.
+> Words in `UPPER_CASE` are the parameters, items in `SQUARE_BRACKETS` are optional, 
+> items with `...` after them can have multiple instances. Order of parameters are fixed. 
+> 
+> Put a `p` before the phone / email / address prefixes to mark it as `private`. `private` details can only
+> be seen using the `viewall` command.
+> 
+> Persons can have any number of tags (including 0)
+
+Examples: 
+* `list`<br>
+  `update 2 p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01`<br>
+  Updates the second person in the address book with the new phone number, address, email and tags. Name remains the same.
+* `find Betsy`<br> 
+  `update 1 pp/1234567 e/betsycrowe@gmail.com pa/Newgate Prison t/criminal t/friend`<br>
+  Updates the 1st person in the results of the `find` command with the new information as provided. Name remains the same.
+
 ### View non-private details of a person : `view`
 Displays the non-private details of the specified person.<br>
 Format: `view INDEX`
