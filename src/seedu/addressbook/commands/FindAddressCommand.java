@@ -45,8 +45,8 @@ public class FindAddressCommand extends Command{
     private List<ReadOnlyPerson> getPersonsWithAddressContainingAnyKeyword(Set<String> keywords) {
         final List<ReadOnlyPerson> matchedPersons = new ArrayList<>();
         for (ReadOnlyPerson person : addressBook.getAllPersons()) {
-            final Set<String> wordsInName = new HashSet<>(person.getAddress().getWordsInName());
-            if (!Collections.disjoint(wordsInName, keywords)) {
+            final Set<String> wordsInAddress = new HashSet<>(person.getAddress().getWordsInAddress());
+            if (!Collections.disjoint(wordsInAddress, keywords)) {
                 matchedPersons.add(person);
             }
         }
