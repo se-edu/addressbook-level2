@@ -32,7 +32,7 @@ public class UpdateCommand extends Command {
 
     private final Person toAdd;
 
-    public UpdateCommand(int targetVisibleIndex, String name,
+    public UpdateCommand(int targetVisibleIndex,
                       String phone, boolean isPhonePrivate,
                       String email, boolean isEmailPrivate,
                       String address, boolean isAddressPrivate,
@@ -43,7 +43,7 @@ public class UpdateCommand extends Command {
             tagSet.add(new Tag(tagName));
         }
         this.toAdd = new Person(
-                new Name(name),
+                new Name("temp"),
                 new Phone(phone, isPhonePrivate),
                 new Email(email, isEmailPrivate),
                 new Address(address, isAddressPrivate),
