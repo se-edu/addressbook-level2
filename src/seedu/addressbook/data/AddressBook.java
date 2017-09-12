@@ -99,6 +99,10 @@ public class AddressBook {
         allPersons.remove(toRemove);
     }
 
+    public void sortPerson() {
+        allPersons.sort();
+    }
+
     /**
      * Clears all persons and tags from the address book.
      */
