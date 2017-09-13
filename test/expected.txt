@@ -9,6 +9,9 @@
 || add: Adds a person to the address book. Contact details can be marked private by prepending 'p' to the prefix.
 || Parameters: NAME [p]p/PHONE [p]e/EMAIL [p]a/ADDRESS  [t/TAG]...
 || Example: add John Doe p/98765432 e/johnd@gmail.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney
+|| edit: Edits a person's info the address book. Contact details can be marked private by prepending 'p' to the prefix.
+|| Parameters: INDEX [p]p/PHONE (or) [p]e/EMAIL (or) [p]a/ADDRESS
+|| Example: edit 1 p/23456789 (or) e/johndoe@gmail.com (or) a/311, Clementi Ave 2, #02-25
 || delete: Deletes the person identified by the index number used in the last person listing.
 || Parameters: INDEX
 || Example: delete 1
@@ -289,6 +292,69 @@
 || 	2. Dickson Ee Phone: 444444 Address: 444, delta street Tags: [friends]
 || 
 || 2 persons listed!
+|| ===================================================
+|| Enter command: || [Command entered:  edit]
+|| Invalid command format! 
+|| edit: Edits a person's info the address book. Contact details can be marked private by prepending 'p' to the prefix.
+|| Parameters: INDEX [p]p/PHONE (or) [p]e/EMAIL (or) [p]a/ADDRESS
+|| Example: edit 1 p/23456789 (or) e/johndoe@gmail.com (or) a/311, Clementi Ave 2, #02-25
+|| ===================================================
+|| Enter command: || [Command entered:  edit wrong args wrong args]
+|| Invalid command format! 
+|| edit: Edits a person's info the address book. Contact details can be marked private by prepending 'p' to the prefix.
+|| Parameters: INDEX [p]p/PHONE (or) [p]e/EMAIL (or) [p]a/ADDRESS
+|| Example: edit 1 p/23456789 (or) e/johndoe@gmail.com (or) a/311, Clementi Ave 2, #02-25
+|| ===================================================
+|| Enter command: || [Command entered:  edit 2 12345]
+|| Invalid command format! 
+|| edit: Edits a person's info the address book. Contact details can be marked private by prepending 'p' to the prefix.
+|| Parameters: INDEX [p]p/PHONE (or) [p]e/EMAIL (or) [p]a/ADDRESS
+|| Example: edit 1 p/23456789 (or) e/johndoe@gmail.com (or) a/311, Clementi Ave 2, #02-25
+|| ===================================================
+|| Enter command: || [Command entered:  edit 2 valid@e.mail]
+|| Invalid command format! 
+|| edit: Edits a person's info the address book. Contact details can be marked private by prepending 'p' to the prefix.
+|| Parameters: INDEX [p]p/PHONE (or) [p]e/EMAIL (or) [p]a/ADDRESS
+|| Example: edit 1 p/23456789 (or) e/johndoe@gmail.com (or) a/311, Clementi Ave 2, #02-25
+|| ===================================================
+|| Enter command: || [Command entered:  edit 2 valid, address]
+|| Invalid command format! 
+|| edit: Edits a person's info the address book. Contact details can be marked private by prepending 'p' to the prefix.
+|| Parameters: INDEX [p]p/PHONE (or) [p]e/EMAIL (or) [p]a/ADDRESS
+|| Example: edit 1 p/23456789 (or) e/johndoe@gmail.com (or) a/311, Clementi Ave 2, #02-25
+|| ===================================================
+|| Enter command: || [Command entered:  edit -1 p/00000]
+|| The person index provided is invalid
+|| ===================================================
+|| Enter command: || [Command entered:  edit 0 p/00000]
+|| The person index provided is invalid
+|| ===================================================
+|| Enter command: || [Command entered:  edit 3 p/00000]
+|| The person index provided is invalid
+|| ===================================================
+|| Enter command: || [Command entered:  edit 1 p/not_numbers]
+|| Person phone numbers should only contain numbers
+|| ===================================================
+|| Enter command: || [Command entered:  edit 1 e/notAnEmail]
+|| Person emails should be 2 alphanumeric/period strings separated by '@'
+|| ===================================================
+|| Enter command: || [Command entered:  edit 2 p/00000]
+|| Edited Person: Dickson Ee Phone: 00000 Email: (private) dickson@nus.edu.sg Address: 444, delta street Tags: [friends]
+|| ===================================================
+|| Enter command: || [Command entered:  edit 2 pe/dickson@gmail.com]
+|| Edited Person: Dickson Ee Phone: 00000 Email: (private) dickson@gmail.com Address: 444, delta street Tags: [friends]
+|| ===================================================
+|| Enter command: || [Command entered:  edit 2 a/Universe]
+|| Edited Person: Dickson Ee Phone: 00000 Email: (private) dickson@gmail.com Address: Universe Tags: [friends]
+|| ===================================================
+|| Enter command: || [Command entered:  list]
+|| 	1. Betsy Choo Tags: [secretive]
+|| 	2. Dickson Ee Phone: 00000 Address: Universe Tags: [friends]
+|| 
+|| 2 persons listed!
+|| ===================================================
+|| Enter command: || [Command entered:  viewall 2]
+|| Viewing person: Dickson Ee Phone: 00000 Email: (private) dickson@gmail.com Address: Universe Tags: [friends]
 || ===================================================
 || Enter command: || [Command entered:  clear]
 || Address book has been cleared!

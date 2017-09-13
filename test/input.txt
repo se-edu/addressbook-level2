@@ -154,12 +154,11 @@
   edit 2 valid, address
 
   # should catch invalid index
-  edit -1
-  edit 0
-  edit 3
+  edit -1 p/00000
+  edit 0 p/00000
+  edit 3 p/00000
 
   # should catch invalid person data
-  edit []\[;] p/12345 e/valid@e.mail a/valid, address
   edit 1 p/not_numbers
   edit 1 e/notAnEmail
 

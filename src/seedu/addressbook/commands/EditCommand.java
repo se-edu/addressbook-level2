@@ -18,7 +18,7 @@ public class EditCommand extends Command {
             + "Contact details can be marked private by prepending 'p' to the prefix.\n"
             + "Parameters: INDEX [p]p/PHONE (or) [p]e/EMAIL (or) [p]a/ADDRESS\n"
             + "Example: " + COMMAND_WORD
-            + " 1 p/23456789 e/johndoe@gmail.com a/311, Clementi Ave 2, #02-25";
+            + " 1 p/23456789 (or) e/johndoe@gmail.com (or) a/311, Clementi Ave 2, #02-25";
 
     private static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     private static final String MESSAGE_EDIT_ARGS_INVALID = "Edit command's arguments are invalid. Please check.";
