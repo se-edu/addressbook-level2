@@ -14,6 +14,7 @@ import java.util.regex.Pattern;
 import seedu.addressbook.commands.AddCommand;
 import seedu.addressbook.commands.ClearCommand;
 import seedu.addressbook.commands.Command;
+import seedu.addressbook.commands.ConfirmCommand;
 import seedu.addressbook.commands.DeleteCommand;
 import seedu.addressbook.commands.ExitCommand;
 import seedu.addressbook.commands.FindCommand;
@@ -82,6 +83,9 @@ public class Parser {
             return prepareDelete(arguments);
 
         case ClearCommand.COMMAND_WORD:
+            return new ConfirmCommand();
+
+        case ConfirmCommand.COMMAND_WORD:
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
