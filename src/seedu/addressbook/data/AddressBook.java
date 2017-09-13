@@ -117,7 +117,7 @@ public class AddressBook {
         while (inputLine.trim().isEmpty() || inputLine.trim().charAt(0) == '#') {
             inputLine = SCANNER.nextLine();
         }
-        System.out.println("[Action chosen:" + inputLine + "]");
+        System.out.println("|| " +"[Action chosen:" + inputLine + "]");
         return inputLine;
     }
 
@@ -157,7 +157,7 @@ public class AddressBook {
                 }
 
                 toUpdate.email.value = newemail;
-                System.out.println(LINE_PREFIX +" The phone has been replaced with " + toUpdate.email.value);
+                System.out.println(LINE_PREFIX +" The email has been replaced with " + toUpdate.email.value);
                 break;
 
             default:
