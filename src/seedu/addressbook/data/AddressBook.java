@@ -103,8 +103,8 @@ public class AddressBook {
     /**
      * Edit a person in the address book.
      */
-    public void editPerson(ReadOnlyPerson toEdit, String[] newData, boolean[] newPrivacyStatus) throws IllegalValueException {
-        allPersons.edit(toEdit, newData, newPrivacyStatus);
+    public void editPerson(ReadOnlyPerson toEdit, Object[] newPersonData) {
+        allPersons.edit(toEdit, newPersonData);
     }
 
     /**

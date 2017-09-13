@@ -125,12 +125,12 @@ public class UniquePersonList implements Iterable<Person> {
     /**
      * Removes the equivalent person from the list.
      */
-    public void edit(ReadOnlyPerson toEdit, String[] newData, boolean[] newPrivacyStatus) throws IllegalValueException {
+    public void edit(ReadOnlyPerson toEdit, Object[] newPersonData) {
         for (Person p : internalList) {
             if (p.isSamePerson(toEdit)) {
-                if(!newData[1].equals("")) p.setPhone(new Phone(newData[1], newPrivacyStatus[1]));
-                if(!newData[2].equals("")) p.setEmail(new Email(newData[2], newPrivacyStatus[2]));
-                if(!newData[3].equals("")) p.setAddress(new Address(newData[3], newPrivacyStatus[3]));
+                if(newPersonData[1] != null) p.setPhone((Phone) newPersonData[1]);
+                if(newPersonData[2] != null) p.setEmail((Email) newPersonData[2]);
+                if(newPersonData[3] != null) p.setAddress((Address) newPersonData[3]);
             }
         }
     }

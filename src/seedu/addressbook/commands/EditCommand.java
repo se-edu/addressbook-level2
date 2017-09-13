@@ -2,6 +2,9 @@ package seedu.addressbook.commands;
 
 import seedu.addressbook.common.Messages;
 import seedu.addressbook.data.exception.IllegalValueException;
+import seedu.addressbook.data.person.Address;
+import seedu.addressbook.data.person.Email;
+import seedu.addressbook.data.person.Phone;
 import seedu.addressbook.data.person.ReadOnlyPerson;
 
 /**
@@ -27,45 +30,32 @@ public class EditCommand extends Command {
     private static final int EDIT_PERSON_DATA_INDEX_EMAIL = 2;
     private static final int EDIT_PERSON_DATA_INDEX_ADDRESS = 3;
 
-    private final String[] newData;
-    private final boolean[] newPrivacyStatus;
+    private final Object[] newPersonData;
 
+    /**
+     * Convenience constructor using raw values.
+     *
+     * @throws IllegalValueException if any of the raw values are invalid
+     */
     public EditCommand(int targetVisibleIndex,
                        String phone, boolean isPhonePrivate,
                        String email, boolean isEmailPrivate,
                        String address, boolean isAddressPrivate) throws IllegalValueException {
         super(targetVisibleIndex);
-        this.newData = makeNewData("", phone, email, address);
-        this.newPrivacyStatus = makeNewPrivacyStatus(isPhonePrivate, isEmailPrivate, isAddressPrivate);
-    }
-
-    private static String[] makeNewData(String name, String phone, String email, String address) {
-        final String[] data = new String[EDIT_PERSON_DATA_COUNT];
-        data[EDIT_PERSON_DATA_INDEX_NAME] = name;
-        data[EDIT_PERSON_DATA_INDEX_PHONE] = phone;
-        data[EDIT_PERSON_DATA_INDEX_EMAIL] = email;
-        data[EDIT_PERSON_DATA_INDEX_ADDRESS] = address;
-        return data;
-    }
-
-    private static boolean[] makeNewPrivacyStatus(boolean isPhonePrivate, boolean isEmailPrivate, boolean isAddressPrivate) {
-        final boolean[] privacyStatus = new boolean[EDIT_PERSON_DATA_COUNT];
-        privacyStatus[EDIT_PERSON_DATA_INDEX_PHONE] = isPhonePrivate;
-        privacyStatus[EDIT_PERSON_DATA_INDEX_EMAIL] = isEmailPrivate;
-        privacyStatus[EDIT_PERSON_DATA_INDEX_ADDRESS] = isAddressPrivate;
-        return privacyStatus;
+        this.newPersonData = new Object[EDIT_PERSON_DATA_COUNT];
+        if (!phone.equals("")) this.newPersonData[EDIT_PERSON_DATA_INDEX_PHONE] = new Phone(phone, isPhonePrivate);
+        if (!email.equals("")) this.newPersonData[EDIT_PERSON_DATA_INDEX_EMAIL] = new Email(email, isEmailPrivate);
+        if (!address.equals("")) this.newPersonData[EDIT_PERSON_DATA_INDEX_ADDRESS] = new Address(address, isAddressPrivate);
     }
 
     @Override
     public CommandResult execute() {
         try {
             final ReadOnlyPerson target = getTargetPerson();
-            addressBook.editPerson(target, newData, newPrivacyStatus);
+            addressBook.editPerson(target, newPersonData);
             return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, target));
         } catch (IndexOutOfBoundsException ie) {
             return new CommandResult(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        } catch (IllegalValueException ive) {
-            return new CommandResult(MESSAGE_EDIT_ARGS_INVALID);
         }
     }
 }
