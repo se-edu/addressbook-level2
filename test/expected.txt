@@ -39,11 +39,11 @@
 || Enter command: || [Command entered:  viewall 1]
 || The person index provided is invalid
 || ===================================================
-|| Enter command: || [Command entered:clear]
+|| Enter command: || [Command entered:  clear]
 || Your command may cause invertible harm to the data storage.
 || Type 'confirm' to confirm.
 || ===================================================
-|| Enter command: || [Command entered:confirm]
+|| Enter command: || [Command entered:  confirm]
 || Address book has been cleared!
 || ===================================================
 || Enter command: || [Command entered:  list]
@@ -294,11 +294,11 @@
 || 
 || 2 persons listed!
 || ===================================================
-|| Enter command: || [Command entered:clear]
+|| Enter command: || [Command entered:  clear]
 || Your command may cause invertible harm to the data storage.
 || Type 'confirm' to confirm.
 || ===================================================
-|| Enter command: || [Command entered:confirm]
+|| Enter command: || [Command entered:  confirm]
 || Address book has been cleared!
 || ===================================================
 || Enter command: || [Command entered:  list]
