@@ -29,6 +29,8 @@
 || Example: help
 || exit: Exits the program.
 || Example: exit
+|| sort: Sorts the list of persons in the address book alphabetically.
+|| Example: sort
 || ===================================================
 || Enter command: || [Command entered:  delete 1]
 || The person index provided is invalid
