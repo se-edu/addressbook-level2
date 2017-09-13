@@ -81,6 +81,19 @@ Examples:
   `delete 1`<br>
   Deletes the 1st person in the results of the `find` command.
 
+### Finding all persons containing any keyword in their name (NON-CASE SENSITIVE VERSION): `findnotc`
+Finds persons whose names contain any of the given keywords.<br>
+Format: `find KEYWORD [MORE_KEYWORDS]`
+
+> The search is NOT case sensitive, the order of the keywords does not matter, only the name is searched,
+and persons matching at least one keyword will be returned (i.e. `OR` search).
+
+Examples:
+* `find John`<br>
+  Returns `John Doe` but not `john`
+* `find Betsy Tim John`<br>
+  Returns Any person having names `Betsy`, `Tim`, or `John`
+
 ### View non-private details of a person : `view`
 Displays the non-private details of the specified person.<br>
 Format: `view INDEX`
