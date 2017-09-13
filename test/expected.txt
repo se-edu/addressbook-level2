@@ -12,7 +12,7 @@
 || delete: Deletes the person identified by the index number used in the last person listing.
 || Parameters: INDEX
 || Example: delete 1
-|| Clears address book permanently.
+|| clear: Clears address book permanently.
 || Example: clear
 || find: Finds all persons whose names contain any of the specified keywords (case-sensitive) and displays them as a list with index numbers.
 || Parameters: KEYWORD [MORE_KEYWORDS]...
@@ -22,7 +22,7 @@
 || view: Views the non-private details of the person identified by the index number in the last shown person listing.
 || Parameters: INDEX
 || Example: view 1
-|| viewall: Views the non-private details of the person identified by the index number in the last shown person listing.
+|| viewall: Views all the details of the person identified by the index number in the last shown person listing.
 || Parameters: INDEX
 || Example: viewall 1
 || help: Shows program usage instructions.
@@ -39,11 +39,11 @@
 || Enter command: || [Command entered:  viewall 1]
 || The person index provided is invalid
 || ===================================================
-|| Enter command: clear|| [Command entered:clear]
+|| Enter command: || [Command entered:clear]
 || Your command may cause invertible harm to the data storage.
 || Type 'confirm' to confirm.
 || ===================================================
-|| Enter command: confirm|| [Command entered:confirm]
+|| Enter command: || [Command entered:confirm]
 || Address book has been cleared!
 || ===================================================
 || Enter command: || [Command entered:  list]
@@ -150,7 +150,7 @@
 || ===================================================
 || Enter command: || [Command entered:  viewall]
 || Invalid command format! 
-|| viewall: Views the non-private details of the person identified by the index number in the last shown person listing.
+|| viewall: Views all the details of the person identified by the index number in the last shown person listing.
 || Parameters: INDEX
 || Example: viewall 1
 || ===================================================
@@ -294,11 +294,11 @@
 || 
 || 2 persons listed!
 || ===================================================
-|| Enter command: clear|| [Command entered:clear]
+|| Enter command: || [Command entered:clear]
 || Your command may cause invertible harm to the data storage.
 || Type 'confirm' to confirm.
 || ===================================================
-|| Enter command: confirm|| [Command entered:confirm]
+|| Enter command: || [Command entered:confirm]
 || Address book has been cleared!
 || ===================================================
 || Enter command: || [Command entered:  list]
