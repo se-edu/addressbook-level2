@@ -9,6 +9,7 @@ import seedu.addressbook.commands.CommandResult;
 import seedu.addressbook.commands.EditCommand;
 import seedu.addressbook.commands.ExitCommand;
 import seedu.addressbook.data.AddressBook;
+import seedu.addressbook.data.person.Person;
 import seedu.addressbook.data.person.ReadOnlyPerson;
 import seedu.addressbook.parser.Parser;
 import seedu.addressbook.storage.StorageFile;
@@ -32,7 +33,6 @@ public class Main {
 
     /** The list of person shown to the user most recently.  */
     private List<? extends ReadOnlyPerson> lastShownList = Collections.emptyList();
-
 
     public static void main(String... launchArgs) {
         new Main().run(launchArgs);
@@ -83,17 +83,17 @@ public class Main {
     private void runCommandLoopUntilExitCommand() {
         Command command;
         do {
-            command = runCommand();
+            command = runCommand(false);
+            if (command instanceof EditCommand) {
+                command = runCommand(true);
+            }
         } while (!ExitCommand.isExit(command));
     }
 
-    private Command runCommand(){
+    private Command runCommand(boolean isEditorial){
         Command command;
         String userCommandText = ui.getUserCommand();
-        command = new Parser().parseCommand(userCommandText);
-            /*if (command instanceof EditCommand) {
-                runCommand();
-            }*/
+        command = new Parser(isEditorial).parseCommand(userCommandText);
         try {
             CommandResult result = executeCommand(command);
             recordResult(result);

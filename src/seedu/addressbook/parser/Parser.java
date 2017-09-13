@@ -19,6 +19,8 @@ import seedu.addressbook.data.exception.IllegalValueException;
  */
 public class Parser {
 
+    private boolean isEditorial;
+
     public static final Pattern PERSON_INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
 
     public static final Pattern KEYWORDS_ARGS_FORMAT =
@@ -31,6 +33,16 @@ public class Parser {
                     + " (?<isAddressPrivate>p?)a/(?<address>[^/]+)"
                     + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
 
+    public static final Pattern EDIT_PERSON_ARGS_FORMAT =
+            Pattern.compile("(?<index>\\d+)"
+                    + "(?<name>(?: n/[^/]+)*)"
+                    + "(?<phone>(?: p/[^/]+)*)"
+                    + "(?<email>(?: e/[^/]+)*)"
+                    + "(?<address>(?: a/[^/]+)*)");
+
+    public Parser(boolean isEditorial){
+        this.isEditorial = isEditorial;
+    }
 
     /**
      * Signals that the user input could not be parsed.
@@ -45,6 +57,7 @@ public class Parser {
      * Used for initial separation of command word and args.
      */
     public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+    public static final Pattern EDITORIAL_COMMAND_FORMAT = Pattern.compile("(?<index>\\d+)(?<arguments>.*)");
 
     public Parser() {}
 
@@ -55,6 +68,14 @@ public class Parser {
      * @return the command based on the user input
      */
     public Command parseCommand(String userInput) {
+        if (this.isEditorial) {
+            return parseEditorialCommand(userInput);
+        } else{
+            return parseCommonCommand(userInput);
+        }
+    }
+
+    private Command parseCommonCommand(String userInput) {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -65,42 +86,81 @@ public class Parser {
 
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
-            return prepareAdd(arguments);
+            case AddCommand.COMMAND_WORD:
+                return prepareAdd(arguments);
 
-        case EditCommand.COMMAND_WORD:
-            return prepareEdit(arguments);
+            case EditCommand.COMMAND_WORD:
+                return prepareEdit(arguments);
 
-        case DeleteCommand.COMMAND_WORD:
-            return prepareDelete(arguments);
+            case DeleteCommand.COMMAND_WORD:
+                return prepareDelete(arguments);
 
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+            case ClearCommand.COMMAND_WORD:
+                return new ClearCommand();
 
-        case FindCommand.COMMAND_WORD:
-            return prepareFind(arguments,false);
+            case FindCommand.COMMAND_WORD:
+                return prepareFind(arguments);
 
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            case ListCommand.COMMAND_WORD:
+                return new ListCommand();
 
-        case ViewCommand.COMMAND_WORD:
-            return prepareView(arguments);
+            case ViewCommand.COMMAND_WORD:
+                return prepareView(arguments);
 
-        case ViewAllCommand.COMMAND_WORD:
-            return prepareViewAll(arguments);
+            case ViewAllCommand.COMMAND_WORD:
+                return prepareViewAll(arguments);
 
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
+            case ExitCommand.COMMAND_WORD:
+                return new ExitCommand();
 
-        case HelpCommand.COMMAND_WORD: // Fallthrough
-        default:
-            return new HelpCommand();
+            case HelpCommand.COMMAND_WORD: // Fallthrough
+            default:
+                return new HelpCommand();
         }
     }
 
+
+    private Command parseEditorialCommand(String userInput) {
+        final Matcher matcher = EDITORIAL_COMMAND_FORMAT.matcher(userInput.trim());
+        if (!matcher.matches()) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+        }
+        return prepareEditP2(userInput);
+
+    }
+
+    private Command prepareEditP2(String userInput) {
+        final Matcher matcher = EDIT_PERSON_ARGS_FORMAT.matcher(userInput.trim());
+        if (!matcher.matches()) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    EditCommand.MESSAGE_USAGE));
+        }
+        try{
+            final int targetIndex = parseArgsAsDisplayedIndex(matcher.group("index"));
+            final String name = matcher.group("name").replaceFirst(" n/", "");
+            final String phone = matcher.group("phone").replaceFirst(" p/", "");
+            final String email = matcher.group("email").replaceFirst(" e/", "");
+            final String address = matcher.group("address").replaceFirst(" a/", "");
+            return new EditCommandP2(targetIndex, name, phone, email, address);
+        } catch (ParseException pe) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommandP2.MESSAGE_USAGE));
+        } catch (NumberFormatException nfe) {
+            return new IncorrectCommand(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+    }
+
+
     private Command prepareEdit(String args){
-        boolean isEdit = true;
-        return prepareFind(args,isEdit);
+        final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
+        if (!matcher.matches()) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    EditCommand.MESSAGE_USAGE));
+        }
+
+        // keywords delimited by whitespace
+        final String[] keywords = matcher.group("keywords").split("\\s+");
+        final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
+        return new EditCommand(keywordSet);
     }
 
     /**
@@ -235,16 +295,11 @@ public class Parser {
      * @param args full command args string
      * @return the prepared command
      */
-    private Command prepareFind(String args, boolean isEdit) {
+    private Command prepareFind(String args) {
         final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
-            if (!isEdit){
-                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        FindCommand.MESSAGE_USAGE));
-            } else{
-                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        FindCommand.MESSAGE_USAGE_EDITORIAL));
-            }
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    FindCommand.MESSAGE_USAGE));
         }
 
         // keywords delimited by whitespace

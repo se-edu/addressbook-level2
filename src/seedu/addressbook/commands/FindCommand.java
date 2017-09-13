@@ -21,11 +21,6 @@ public class FindCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
 
-    public static final String MESSAGE_USAGE_EDITORIAL = EditCommand.COMMAND_WORD + ": Edit all persons whose names contain any of "
-            + "the specified keywords (case-sensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + EditCommand.COMMAND_WORD + " alice bob charlie";
-
     private final Set<String> keywords;
 
     public FindCommand(Set<String> keywords) {
