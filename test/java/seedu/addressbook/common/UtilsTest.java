@@ -12,6 +12,12 @@ public class UtilsTest {
 
 
     @Test
+    public void isAnyNull() throws Exception {
+        assertTrue(Utils.isAnyNull(null, "a", "b"));
+        assertFalse(Utils.isAnyNull("a", "b" ,"c"));
+    }
+
+    @Test
     public void elementsAreUnique() throws Exception {
         // empty list
         assertAreUnique();
