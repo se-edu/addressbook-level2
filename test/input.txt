@@ -10,6 +10,7 @@
 ##########################################################
 
   # should show appropriate message when no listing has happened yet
+  findaddress test
   delete 1
   view 1
   viewall 1
