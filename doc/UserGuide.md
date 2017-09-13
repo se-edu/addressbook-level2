@@ -112,8 +112,8 @@ Examples:
   Views all details of the 1st person in the results of the `find` command.
 
 ### Clearing all entries : `clear`
-Clears all entries from the address book.<br>
-Format: `clear`  
+Clears all entries from the address book. Irrevertible, require a confirmation. Which means, you need to type a `confirm` keyword before address book actually clear the data.<br>
+Format: `clear`  and then `confirm`
 
 #### Exiting the program : `exit`
 Exits the program.<br>
