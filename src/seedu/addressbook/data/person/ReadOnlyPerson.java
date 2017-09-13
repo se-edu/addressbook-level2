@@ -73,6 +73,7 @@ public interface ReadOnlyPerson {
         return builder.toString();
     }
 
+    // To get tags of a particular person
     default String getOnlyTags()
     {
         final StringBuilder builder = new StringBuilder();
@@ -102,5 +103,6 @@ public interface ReadOnlyPerson {
             builder.append(tag);
         }
         return builder.toString();
+
     }
 }
