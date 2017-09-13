@@ -53,10 +53,6 @@ Examples:
 Shows a list of all persons in the address book.<br>
 Format: `list`
 
-#### Sorting all persons : `sort`
-Sorts the list of all persons in the address book alphabetically.<br>
-Format: `sort`
-
 ### Finding all persons containing any keyword in their name: `find`
 Finds persons whose names contain any of the given keywords.<br>
 Format: `find KEYWORD [MORE_KEYWORDS]`
@@ -122,6 +118,10 @@ Format: `clear`
 #### Exiting the program : `exit`
 Exits the program.<br>
 Format: `exit`  
+
+#### Sorting all persons : `sort`
+Sorts the list of all persons in the address book alphabetically.<br>
+Format: `sort`
 
 #### Saving the data 
 Address book data are saved in the hard disk automatically after any command that changes the data.<br>
