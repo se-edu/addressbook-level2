@@ -15,13 +15,11 @@ public class SortCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        if (!addressBook.isEmpty())
-        {
+        if (!addressBook.isEmpty()) {
             addressBook.sort();
             return new CommandResult(MESSAGE_SORT_ACKNOWLEDGEMENT);
         }
-        else
-        {
+        else {
             return new CommandResult(Messages.MESSAGE_SORTING_FAILED);
         }
     }
