@@ -14,6 +14,7 @@ import java.util.regex.Pattern;
 import seedu.addressbook.commands.AddCommand;
 import seedu.addressbook.commands.ClearCommand;
 import seedu.addressbook.commands.Command;
+import seedu.addressbook.commands.EditCommand;
 import seedu.addressbook.commands.DeleteCommand;
 import seedu.addressbook.commands.ExitCommand;
 import seedu.addressbook.commands.FindCommand;
@@ -41,6 +42,23 @@ public class Parser {
                     + " (?<isAddressPrivate>p?)a/(?<address>[^/]+)"
                     + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
 
+    public static final Pattern EDIT_ALL_COMMAND_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
+            Pattern.compile("(?<targetIndex>.+)"
+                    + " (?<isPhonePrivate>p?)p/(?<phone>[^/]+)"
+                    + " (?<isEmailPrivate>p?)e/(?<email>[^/]+)"
+                    + " (?<isAddressPrivate>p?)a/(?<address>[^/]+)");
+
+    public static final Pattern EDIT_PHONE_COMMAND_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
+            Pattern.compile("(?<targetIndex>.+)"
+                    + " (?<isPhonePrivate>p?)p/(?<phone>[^/]+)");
+
+    public static final Pattern EDIT_EMAIL_COMMAND_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
+            Pattern.compile("(?<targetIndex>.+)"
+                    + " (?<isEmailPrivate>p?)e/(?<email>[^/]+)");
+
+    public static final Pattern EDIT_ADDRESS_COMMAND_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
+            Pattern.compile("(?<targetIndex>.+)"
+                    + " (?<isAddressPrivate>p?)a/(?<address>[^/]+)");
 
     /**
      * Signals that the user input could not be parsed.
@@ -77,6 +95,9 @@ public class Parser {
 
         case AddCommand.COMMAND_WORD:
             return prepareAdd(arguments);
+
+        case EditCommand.COMMAND_WORD:
+            return prepareEdit(arguments);
 
         case DeleteCommand.COMMAND_WORD:
             return prepareDelete(arguments);
@@ -158,6 +179,57 @@ public class Parser {
         return new HashSet<>(tagStrings);
     }
 
+    /**
+     * Parses arguments in the context of the edit person command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private Command prepareEdit(String args) {
+        try {
+            // Can only edit one parameter at a time
+            Pattern pattern = EDIT_PHONE_COMMAND_ARGS_FORMAT;
+            Matcher matcher = pattern.matcher(args.trim());
+            if(!matcher.matches()) {
+                pattern = EDIT_EMAIL_COMMAND_ARGS_FORMAT;
+                matcher = pattern.matcher(args.trim());
+            }
+            if(!matcher.matches()) {
+                pattern = EDIT_ADDRESS_COMMAND_ARGS_FORMAT;
+                matcher = pattern.matcher(args.trim());
+            }
+            if(!matcher.matches()) {
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+            }
+            return new EditCommand(Integer.parseInt(matcher.group("targetIndex")),
+
+                    pattern.equals(EDIT_PHONE_COMMAND_ARGS_FORMAT) ? matcher.group("phone") : "",
+                    pattern.equals(EDIT_PHONE_COMMAND_ARGS_FORMAT) && isPrivatePrefixPresent(matcher.group("isPhonePrivate")),
+
+                    pattern.equals(EDIT_EMAIL_COMMAND_ARGS_FORMAT) ? matcher.group("email") : "",
+                    pattern.equals(EDIT_EMAIL_COMMAND_ARGS_FORMAT) && isPrivatePrefixPresent(matcher.group("isEmailPrivate")),
+
+                    pattern.equals(EDIT_ADDRESS_COMMAND_ARGS_FORMAT) ? matcher.group("address") : "",
+                    pattern.equals(EDIT_ADDRESS_COMMAND_ARGS_FORMAT) && isPrivatePrefixPresent(matcher.group("isAddressPrivate"))
+            );
+        } catch (IllegalValueException ive) {
+            return new IncorrectCommand(ive.getMessage());
+        }
+    }
+
+    private boolean checkMatcher(Pattern pattern, String args) {
+        final Matcher matcher = pattern.matcher(args.trim());
+        return matcher.matches();
+    }
+
+//    private int getTargetIndexFromEditPersonArgs(String args) {
+//        int closestPrefixIndex = args.indexOf("p/");
+//        if (closestPrefixIndex == -1)
+//            closestPrefixIndex = args.indexOf("e/");
+//        if (closestPrefixIndex == -1)
+//            closestPrefixIndex = args.indexOf("a/");
+//        return Integer.parseInt(args.substring(0, closestPrefixIndex-1).trim());
+//    }
 
     /**
      * Parses arguments in the context of the delete person command.
@@ -166,6 +238,7 @@ public class Parser {
      * @return the prepared command
      */
     private Command prepareDelete(String args) {
+
         try {
             final int targetIndex = parseArgsAsDisplayedIndex(args);
             return new DeleteCommand(targetIndex);

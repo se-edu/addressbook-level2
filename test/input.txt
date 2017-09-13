@@ -141,6 +141,35 @@
   list
 
 ##########################################################
+# test edit person command
+##########################################################
+
+# last active view: [1] betsy [2] dickson
+
+  # should catch invalid args format
+  edit
+  edit wrong args wrong args
+  edit 2 12345
+  edit 2 valid@e.mail
+  edit 2 valid, address
+
+  # should catch invalid index
+  edit -1 p/00000
+  edit 0 p/00000
+  edit 3 p/00000
+
+  # should catch invalid person data
+  edit 1 p/not_numbers
+  edit 1 e/notAnEmail
+
+  # edits correct person
+  edit 2 p/00000
+  edit 2 pe/dickson@gmail.com
+  edit 2 a/Universe
+  list
+  viewall 2
+
+##########################################################
 # test clear command
 ##########################################################
 

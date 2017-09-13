@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.data.person.Person;
 import seedu.addressbook.data.person.ReadOnlyPerson;
 import seedu.addressbook.data.person.UniquePersonList;
@@ -97,6 +98,13 @@ public class AddressBook {
      */
     public void removePerson(ReadOnlyPerson toRemove) throws PersonNotFoundException {
         allPersons.remove(toRemove);
+    }
+
+    /**
+     * Edit a person in the address book.
+     */
+    public void editPerson(ReadOnlyPerson toEdit, Object[] newPersonData) {
+        allPersons.edit(toEdit, newPersonData);
     }
 
     /**
