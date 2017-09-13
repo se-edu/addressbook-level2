@@ -15,7 +15,7 @@ public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Displays all all contacts in the addressbook in alphabetical order.\n"
+            + ": Displays all contacts in the addressbook in alphabetical order.\n"
             + "Example: " + COMMAND_WORD;
 
 
@@ -26,3 +26,4 @@ public class SortCommand extends Command {
         return new CommandResult(getMessageForPersonListShownSummary(allPersons), allPersons);
     }
 }
+
