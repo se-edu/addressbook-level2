@@ -23,7 +23,7 @@ import seedu.addressbook.ui.TextUi;
 public class Main {
 
     /** Version info of the program. */
-    public static final String VERSION = "AddessBook Level 2 - Version 1.0";
+    public static final String VERSION = "AddressBook Level 2 - Version 1.0";
 
     private TextUi ui;
     private StorageFile storage;
@@ -84,10 +84,13 @@ public class Main {
         do {
             String userCommandText = ui.getUserCommand();
             command = new Parser().parseCommand(userCommandText);
-            CommandResult result = executeCommand(command);
-            recordResult(result);
-            ui.showResultToUser(result);
-
+            try {
+                CommandResult result = executeCommand(command);
+                recordResult(result);
+                ui.showResultToUser(result);
+            } catch (Exception e){
+                ui.showToUser(e.getMessage());
+            }
         } while (!ExitCommand.isExit(command));
     }
 
@@ -105,16 +108,11 @@ public class Main {
      * @param command user command
      * @return result of the command
      */
-    private CommandResult executeCommand(Command command)  {
-        try {
-            command.setData(addressBook, lastShownList);
-            CommandResult result = command.execute();
-            storage.save(addressBook);
-            return result;
-        } catch (Exception e) {
-            ui.showToUser(e.getMessage());
-            throw new RuntimeException(e);
-        }
+    private CommandResult executeCommand(Command command) throws Exception {
+        command.setData(addressBook, lastShownList);
+        CommandResult result = command.execute();
+        storage.save(addressBook);
+        return result;
     }
 
     /**
