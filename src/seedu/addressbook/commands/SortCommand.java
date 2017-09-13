@@ -17,11 +17,9 @@ public class SortCommand extends Command {
     public CommandResult execute() {
         if (!addressBook.isEmpty()) {
             addressBook.sort();
-            return new CommandResult(MESSAGE_SORT_ACKNOWLEDGEMENT);
-        }
+            return new CommandResult(MESSAGE_SORT_ACKNOWLEDGEMENT); }
         else {
-            return new CommandResult(Messages.MESSAGE_SORTING_FAILED);
-        }
+            return new CommandResult(Messages.MESSAGE_SORTING_FAILED); }
     }
 
 }
