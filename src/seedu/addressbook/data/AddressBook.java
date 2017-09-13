@@ -84,6 +84,13 @@ public class AddressBook {
     }
 
     /**
+     * Sort persons in alphabetical order
+     */
+    public void sort(){
+        allPersons.sort();
+    }
+
+    /**
      * Returns true if an equivalent person exists in the address book.
      */
     public boolean containsPerson(ReadOnlyPerson key) {
@@ -127,5 +134,12 @@ public class AddressBook {
                 || (other instanceof AddressBook // instanceof handles nulls
                         && this.allPersons.equals(((AddressBook) other).allPersons)
                         && this.allTags.equals(((AddressBook) other).allTags));
+    }
+
+    /**
+     * Check if the address book is empty.
+     */
+    public boolean isEmpty(){
+        return allPersons.isEmpty();
     }
 }
