@@ -50,7 +50,7 @@ Examples:
 * `add Betsy Crowe pp/1234567 e/betsycrowe@gmail.com pa/Newgate Prison t/criminal t/friend`
 
 ### Listing all persons : `list`
-Shows a list of all persons in the address book.<br>
+Shows a list of all persons in the address book in alphabetical order, A - Z.<br>
 Format: `list`
 
 ### Finding all persons containing any keyword in their name: `find`
