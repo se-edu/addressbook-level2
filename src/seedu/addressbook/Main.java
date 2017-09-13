@@ -37,7 +37,6 @@ public class Main {
         new Main().run(launchArgs);
     }
 
-    /** Runs the program until termination.  */
     public void run(String[] launchArgs) {
         start(launchArgs);
         runCommandLoopUntilExitCommand();
@@ -78,8 +77,10 @@ public class Main {
         System.exit(0);
     }
 
-    /** Reads the user command and executes it, until the user issues the exit command.  */
-    private void runCommandLoopUntilExitCommand() {
+    /** Reads the user command and executes it, until the user issues the exit command.
+     * @throws StorageOperationException */
+     private void runCommandLoopUntilExitCommand() {
+
         Command command;
         do {
             String userCommandText = ui.getUserCommand();
