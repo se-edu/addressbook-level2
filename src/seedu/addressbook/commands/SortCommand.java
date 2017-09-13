@@ -5,11 +5,15 @@ import seedu.addressbook.data.person.ReadOnlyPerson;
 
 import java.util.*;
 
+/**
+ * Lists all persons in the address book to the user in alphabetical order.
+ */
+
 public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Sort the contact list in alphabetical order\n"
+            + ": Sort and display the contact list in alphabetical order\n"
             + "Example: " + COMMAND_WORD;
 
     @Override
@@ -31,6 +35,8 @@ public class SortCommand extends Command {
     }
 }
 
+/** Comparator for name field in lower case
+ */
 class NameComparator implements Comparator<ReadOnlyPerson> {
     public int compare(ReadOnlyPerson person1, ReadOnlyPerson person2) {
         return person1.getName().fullName.toLowerCase().compareTo(person2.getName().fullName.toLowerCase());
