@@ -1,6 +1,8 @@
 package seedu.addressbook.commands;
 
 
+import seedu.addressbook.parser.EditCommandP2;
+
 /**
  * Shows help instructions.
  */
@@ -20,6 +22,7 @@ public class HelpCommand extends Command {
                 + "\n" + DeleteCommand.MESSAGE_USAGE
                 + "\n" + ClearCommand.MESSAGE_USAGE
                 + "\n" + FindCommand.MESSAGE_USAGE
+                        + "\n" + EditCommand.MESSAGE_USAGE+"\n" + EditCommandP2.MESSAGE_USAGE
                 + "\n" + ListCommand.MESSAGE_USAGE
                 + "\n" + ViewCommand.MESSAGE_USAGE
                 + "\n" + ViewAllCommand.MESSAGE_USAGE

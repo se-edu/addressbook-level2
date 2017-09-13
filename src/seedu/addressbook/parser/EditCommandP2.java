@@ -11,7 +11,7 @@ import java.util.HashMap;
 
 public class EditCommandP2 extends Command{
 
-    public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_WORD = "edit phase 2";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Phase two of edit will edit person " +
             "(specified by index) according to particulars included.\n"

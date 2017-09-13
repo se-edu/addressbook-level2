@@ -12,17 +12,7 @@ import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
 
-import seedu.addressbook.commands.AddCommand;
-import seedu.addressbook.commands.ClearCommand;
-import seedu.addressbook.commands.Command;
-import seedu.addressbook.commands.DeleteCommand;
-import seedu.addressbook.commands.ExitCommand;
-import seedu.addressbook.commands.FindCommand;
-import seedu.addressbook.commands.HelpCommand;
-import seedu.addressbook.commands.IncorrectCommand;
-import seedu.addressbook.commands.ListCommand;
-import seedu.addressbook.commands.ViewAllCommand;
-import seedu.addressbook.commands.ViewCommand;
+import seedu.addressbook.commands.*;
 import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.data.person.Address;
 import seedu.addressbook.data.person.Email;
@@ -71,6 +61,12 @@ public class ParserTest {
     }
 
     @Test
+    public void parse_editCommandP2_parsedCorrectly() {
+        final String input = "nonNumerical";
+        parseAndAssertCommandType(input, EditCommandP2.class);
+    }
+
+    @Test
     public void parse_clearCommand_parsedCorrectly() {
         final String input = "clear";
         parseAndAssertCommandType(input, ClearCommand.class);
@@ -91,6 +87,20 @@ public class ParserTest {
     /*
      * Tests for ingle index argument commands ===============================================================
      */
+
+    @Test
+    public void parse_editCommandNoArgs_errorMessage(){
+        final String[] inputs = {"edit", "edit "};
+        final String resultMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
+        parseAndAssertIncorrectWithMessage(resultMessage, inputs);
+    }
+
+    @Test
+    public void parse_editCommandP2NoArgs_errorMessage(){
+        final String[] inputs = {"nonNumerical", "nonNumerical "};
+        final String resultMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommandP2.MESSAGE_USAGE);
+        parseAndAssertIncorrectWithMessage(resultMessage, inputs);
+    }
 
     @Test
     public void parse_deleteCommandNoArgs_errorMessage() {
