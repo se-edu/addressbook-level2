@@ -26,8 +26,8 @@ public interface ReadOnlyPerson {
     default boolean isSamePerson(ReadOnlyPerson other) {
         return (other == this)
                 || (other != null
-                    && other.getName().equals(this.getName())
-                    && other.getPhone().equals(this.getPhone()));
+                && other.getName().equals(this.getName())
+                && other.getPhone().equals(this.getPhone()));
     }
 
     /**
@@ -37,11 +37,11 @@ public interface ReadOnlyPerson {
     default boolean hasSameData(ReadOnlyPerson other) {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
-                    && other.getName().equals(this.getName()) // state checks here onwards
-                    && other.getPhone().equals(this.getPhone())
-                    && other.getEmail().equals(this.getEmail())
-                    && other.getAddress().equals(this.getAddress())
-                    && other.getTags().equals(this.getTags()));
+                && other.getName().equals(this.getName()) // state checks here onwards
+                && other.getPhone().equals(this.getPhone())
+                && other.getEmail().equals(this.getEmail())
+                && other.getAddress().equals(this.getAddress())
+                && other.getTags().equals(this.getTags()));
     }
 
     /**
@@ -69,6 +69,15 @@ public interface ReadOnlyPerson {
                 .append(" Tags: ");
         for (Tag tag : getTags()) {
             builder.append(tag);
+        }
+        return builder.toString();
+    }
+
+    default String getOnlyTags()
+    {
+        final StringBuilder builder = new StringBuilder();
+        for (Tag tag : getTags()) {
+            builder.append(" "+tag.tagName);
         }
         return builder.toString();
     }
