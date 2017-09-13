@@ -100,6 +100,17 @@ public class AddressBook {
     }
 
     /**
+     * Adds input tags to the equivalent person
+     * @param toAddTags
+     * @param tagList
+     * @throws PersonNotFoundException if no such Person could be found.
+     */
+    public void addTagsToPerson(ReadOnlyPerson toAddTags, UniqueTagList tagList) throws PersonNotFoundException {
+        final Person personTagsAdded = allPersons.addTagsToPerson(toAddTags, tagList);
+        syncTagsWithMasterList(personTagsAdded);
+    }
+
+    /**
      * Clears all persons and tags from the address book.
      */
     public void clear() {

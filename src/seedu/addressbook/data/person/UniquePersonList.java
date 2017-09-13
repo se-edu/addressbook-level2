@@ -9,7 +9,7 @@ import java.util.List;
 
 import seedu.addressbook.common.Utils;
 import seedu.addressbook.data.exception.DuplicateDataException;
-
+import seedu.addressbook.data.tag.UniqueTagList;
 
 
 /**
@@ -96,6 +96,15 @@ public class UniquePersonList implements Iterable<Person> {
         return false;
     }
 
+    private Person getPerson(ReadOnlyPerson toGet) throws PersonNotFoundException {
+        for (Person p : internalList) {
+            if (p.isSamePerson(toGet)) {
+                return p;
+            }
+        }
+        throw new PersonNotFoundException();
+    }
+
     /**
      * Adds a person to the list.
      *
@@ -120,6 +129,20 @@ public class UniquePersonList implements Iterable<Person> {
         if (!personFoundAndDeleted) {
             throw new PersonNotFoundException();
         }
+    }
+
+    /**
+     * Adds input tags to the equivalent person from the list, and returns the person with the updated tags.
+     * @param toAddTags
+     * @param tagList
+     * @throws PersonNotFoundException if no such person could be found in the list.
+     */
+    public Person addTagsToPerson(ReadOnlyPerson toAddTags, UniqueTagList tagList) throws PersonNotFoundException {
+        Person personToAddTags = getPerson(toAddTags);
+        UniqueTagList personTags = personToAddTags.getTags();
+        personTags.mergeFrom(tagList);
+        personToAddTags.setTags(personTags);
+        return personToAddTags;
     }
 
     /**
