@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import seedu.addressbook.commands.Command;
 import seedu.addressbook.commands.CommandResult;
+import seedu.addressbook.commands.EditCommand;
 import seedu.addressbook.commands.ExitCommand;
 import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.person.ReadOnlyPerson;
@@ -82,16 +83,25 @@ public class Main {
     private void runCommandLoopUntilExitCommand() {
         Command command;
         do {
-            String userCommandText = ui.getUserCommand();
-            command = new Parser().parseCommand(userCommandText);
-            try {
-                CommandResult result = executeCommand(command);
-                recordResult(result);
-                ui.showResultToUser(result);
-            } catch (Exception e){
-                ui.showToUser(e.getMessage());
-            }
+            command = runCommand();
         } while (!ExitCommand.isExit(command));
+    }
+
+    private Command runCommand(){
+        Command command;
+        String userCommandText = ui.getUserCommand();
+        command = new Parser().parseCommand(userCommandText);
+            /*if (command instanceof EditCommand) {
+                runCommand();
+            }*/
+        try {
+            CommandResult result = executeCommand(command);
+            recordResult(result);
+            ui.showResultToUser(result);
+        } catch (Exception e){
+            ui.showToUser(e.getMessage());
+        }
+        return command;
     }
 
     /** Updates the {@link #lastShownList} if the result contains a list of Persons. */
