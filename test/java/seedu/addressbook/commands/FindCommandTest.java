@@ -25,8 +25,11 @@ public class FindCommandTest {
         //same word, same case: matched
         assertFindCommandBehavior(new String[]{"Amy"}, Arrays.asList(td.amy));
 
-        //same word, different case: not matched
-        assertFindCommandBehavior(new String[]{"aMy"}, Collections.emptyList());
+        //same word, different case: not matched - CASE INSENSITIVE
+        assertFindCommandBehavior(new String[]{"aMy"}, Arrays.asList(td.amy));
+
+        //original line
+        //assertFindCommandBehavior(new String[]{"aMy"}, Collections.emptyList());
 
         //partial word: not matched
         assertFindCommandBehavior(new String[]{"my"}, Collections.emptyList());
@@ -34,6 +37,10 @@ public class FindCommandTest {
         //multiple words: matched
         assertFindCommandBehavior(new String[]{"Amy", "Bill", "Candy", "Destiny"},
                 Arrays.asList(td.amy, td.bill, td.candy));
+
+        // additional test - to search for tags
+        assertFindCommandBehavior(new String[]{"test", "Bill", "Candy", "Destiny"},
+                Arrays.asList(td.dan, td.bill, td.candy));
 
         //repeated keywords: matched
         assertFindCommandBehavior(new String[]{"Amy", "Amy"}, Arrays.asList(td.amy));
