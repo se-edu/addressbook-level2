@@ -107,6 +107,14 @@ public class AddressBook {
         allTags.clear();
     }
 
+    public void sort()  {
+        allPersons.sort();
+    }
+
+    public boolean isEmpty()    {
+        return allPersons.isEmpty();
+    }
+
     /**
      * Returns a new UniquePersonList of all persons in the address book at the time of the call.
      */
