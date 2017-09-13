@@ -23,7 +23,7 @@
   list
 
 ##########################################################
-# test add person command, setup state for futuer tests
+# test add person command, setup state for future tests
 ##########################################################
 
   # should catch invalid args format
@@ -139,6 +139,19 @@
   # listing indexes get updated on next request
   delete 1
   list
+
+##########################################################
+# test sort command
+##########################################################
+
+ # should add correctly and list non private information
+ add Adam Brown p/111111 e/adam@gmail.com a/111, alpha street
+ list
+
+ # should sort the address book alphabetically
+ sort
+
+
 
 ##########################################################
 # test clear command

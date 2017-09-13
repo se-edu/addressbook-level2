@@ -25,6 +25,8 @@
 || viewall: Views the non-private details of the person identified by the index number in the last shown person listing.
 || Parameters: INDEX
 || Example: viewall 1
+|| sort: Sorts all persons in the address book alphabetically as a list with index numbers.
+|| Example: sort
 || help: Shows program usage instructions.
 || Example: help
 || exit: Exits the program.
@@ -289,6 +291,23 @@
 || 	2. Dickson Ee Phone: 444444 Address: 444, delta street Tags: [friends]
 || 
 || 2 persons listed!
+|| ===================================================
+|| Enter command: || [Command entered: add Adam Brown p/111111 e/adam@gmail.com a/111, alpha street]
+|| New person added: Adam Brown Phone: 111111 Email: adam@gmail.com Address: 111, alpha street Tags: 
+|| ===================================================
+|| Enter command: || [Command entered: list]
+|| 	1. Betsy Choo Tags: [secretive]
+|| 	2. Dickson Ee Phone: 444444 Address: 444, delta street Tags: [friends]
+|| 	3. Adam Brown Phone: 111111 Email: adam@gmail.com Address: 111, alpha street Tags: 
+|| 
+|| 3 persons listed!
+|| ===================================================
+|| Enter command: || [Command entered: sort]
+|| 	1. Adam Brown Phone: 111111 Email: adam@gmail.com Address: 111, alpha street Tags: 
+|| 	2. Betsy Choo Tags: [secretive]
+|| 	3. Dickson Ee Phone: 444444 Address: 444, delta street Tags: [friends]
+|| 
+|| 3 persons listed!
 || ===================================================
 || Enter command: || [Command entered:  clear]
 || Address book has been cleared!
