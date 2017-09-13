@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import seedu.addressbook.data.person.ReadOnlyPerson;
+import seedu.addressbook.data.tag.UniqueTagList;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -16,10 +17,10 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
-            + "the specified keywords (case-sensitive) and displays them as a list with index numbers.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names or tags contain any of "
+            + "the specified keywords (NOT case-sensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+            + "Example: " + COMMAND_WORD + " alice Bob AUNT charlie friend";
 
     private final Set<String> keywords;
 
@@ -49,12 +50,41 @@ public class FindCommand extends Command {
     private List<ReadOnlyPerson> getPersonsWithNameContainingAnyKeyword(Set<String> keywords) {
         final List<ReadOnlyPerson> matchedPersons = new ArrayList<>();
         for (ReadOnlyPerson person : addressBook.getAllPersons()) {
-            final Set<String> wordsInName = new HashSet<>(person.getName().getWordsInName());
-            if (!Collections.disjoint(wordsInName, keywords)) {
+
+            Set<String> wordsInName = new HashSet<>(person.getName().getWordsInName());
+
+            String[] words=person.getOnlyTags().split(" ");
+
+            Set<String> tagsForName= new HashSet<String>();
+
+            Collections.addAll(tagsForName,words);
+
+            keywords=changeSetElements(keywords);
+            wordsInName=changeSetElements(wordsInName);
+            tagsForName=changeSetElements(tagsForName);
+
+            // additional tags
+            String tagList=person.getOnlyTags();
+
+            if ((!Collections.disjoint(wordsInName, keywords))||(!Collections.disjoint(tagsForName, keywords))) {
                 matchedPersons.add(person);
             }
         }
         return matchedPersons;
+    }
+
+
+
+    // Method to convert all words to lowercase so that the comparison can be case-insensitive
+    public Set<String> changeSetElements(Set<String> s)
+    {
+        Set<String> temp= new HashSet<String>();
+        for(String i : s)
+            temp.add(i.toLowerCase());
+        s.clear();
+        s.addAll(temp);
+        return s;
+
     }
 
 }
