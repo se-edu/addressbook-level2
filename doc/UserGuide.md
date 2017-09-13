@@ -80,6 +80,14 @@ Examples:
 * `find Betsy`<br> 
   `delete 1`<br>
   Deletes the 1st person in the results of the `find` command.
+  
+### Editting a person : `edit`
+Edits the specified person from the address book. Irreversible.<br>
+Format: `edit INDEX`
+
+> Edits the person at the specified `INDEX`. 
+  The index refers to the index number shown in the most recent listing.
+  Prompts will indicate to the user what to enter.
 
 ### View non-private details of a person : `view`
 Displays the non-private details of the specified person.<br>
