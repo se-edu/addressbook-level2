@@ -39,9 +39,17 @@ public class Person implements ReadOnlyPerson {
         return name;
     }
 
+    public void setName(Name name) {
+        this.name = name;
+    }
+
     @Override
     public Phone getPhone() {
         return phone;
+    }
+
+    public void setPhone(Phone phone) {
+        this.phone = phone;
     }
 
     @Override
@@ -49,9 +57,17 @@ public class Person implements ReadOnlyPerson {
         return email;
     }
 
+    public void setEmail(Email email) {
+        this.email = email;
+    }
+
     @Override
     public Address getAddress() {
         return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     @Override

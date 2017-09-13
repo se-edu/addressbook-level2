@@ -9,7 +9,7 @@ import java.util.List;
 
 import seedu.addressbook.common.Utils;
 import seedu.addressbook.data.exception.DuplicateDataException;
-
+import seedu.addressbook.data.exception.IllegalValueException;
 
 
 /**
@@ -119,6 +119,19 @@ public class UniquePersonList implements Iterable<Person> {
         final boolean personFoundAndDeleted = internalList.remove(toRemove);
         if (!personFoundAndDeleted) {
             throw new PersonNotFoundException();
+        }
+    }
+
+    /**
+     * Removes the equivalent person from the list.
+     */
+    public void edit(ReadOnlyPerson toEdit, String[] newData, boolean[] newPrivacyStatus) throws IllegalValueException {
+        for (Person p : internalList) {
+            if (p.isSamePerson(toEdit)) {
+                if(!newData[1].equals("")) p.setPhone(new Phone(newData[1], newPrivacyStatus[1]));
+                if(!newData[2].equals("")) p.setEmail(new Email(newData[2], newPrivacyStatus[2]));
+                if(!newData[3].equals("")) p.setAddress(new Address(newData[3], newPrivacyStatus[3]));
+            }
         }
     }
 
