@@ -1,6 +1,7 @@
 package seedu.addressbook.commands;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.addressbook.data.exception.IllegalValueException;
@@ -42,9 +43,9 @@ public class AddCommand extends Command {
                       String email, boolean isEmailPrivate,
                       String address, boolean isAddressPrivate,
                       Set<String> tags) throws IllegalValueException {
-        final Set<Tag> tagSet = new HashSet<>();
+        final Set<Tag> tagSet = new HashSet<>(); //hashmap
         for (String tagName : tags) {
-            tagSet.add(new Tag(tagName));
+            tagSet.add(new Tag(tagName)); //add tagname to hashmap tagSet
         }
         this.toAdd = new Person(
                 new Name(name),
@@ -68,9 +69,19 @@ public class AddCommand extends Command {
         try {
             addressBook.addPerson(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+            /*List<ReadOnlyPerson> allPersons = addressBook.getAllPersons().immutableListView();
+            return new CommandResult(getMessageForPersonListShownSummary(allPersons), allPersons);*/
+            //getList();  why cannot resolve?
+
         } catch (UniquePersonList.DuplicatePersonException dpe) {
-            return new CommandResult(MESSAGE_DUPLICATE_PERSON);
+            return new CommandResult(MESSAGE_DUPLICATE_PERSON); //catch for duplicate names
         }
+
     }
+
+    /*public CommandResult execute() {
+        List<ReadOnlyPerson> allPersons = addressBook.getAllPersons().immutableListView();
+        return new CommandResult(getMessageForPersonListShownSummary(allPersons), allPersons);
+    }*/
 
 }
