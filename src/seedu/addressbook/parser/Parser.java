@@ -78,7 +78,7 @@ public class Parser {
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
-            return prepareFind(arguments);
+            return prepareFind(arguments,false);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
@@ -98,7 +98,10 @@ public class Parser {
         }
     }
 
-    private void prepareEdit(String args){}
+    private Command prepareEdit(String args){
+        boolean isEdit = true;
+        return prepareFind(args,isEdit);
+    }
 
     /**
      * Parses arguments in the context of the add person command.
@@ -232,11 +235,16 @@ public class Parser {
      * @param args full command args string
      * @return the prepared command
      */
-    private Command prepareFind(String args) {
+    private Command prepareFind(String args, boolean isEdit) {
         final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    FindCommand.MESSAGE_USAGE));
+            if (!isEdit){
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        FindCommand.MESSAGE_USAGE));
+            } else{
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        FindCommand.MESSAGE_USAGE_EDITORIAL));
+            }
         }
 
         // keywords delimited by whitespace
