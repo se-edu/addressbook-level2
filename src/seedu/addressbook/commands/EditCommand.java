@@ -8,13 +8,11 @@ public class EditCommand extends Command{
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edit all persons whose names contain any of "
-            + "the specified keywords (case-sensitive) and displays them as a list with index numbers.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Phase one of edit performs same row as " +
+            "find -- it lists down the list of person you are potentially editing.\n "
+            + "     the specified keywords (case-sensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
-
-    public static final String MESSAGE_SUCCESS = "Person editted: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
     private final Set<String> keywords;
     //private final Person toEdit;

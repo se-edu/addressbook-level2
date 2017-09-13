@@ -13,10 +13,11 @@ public class EditCommandP2 extends Command{
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edit all persons whose names contain any of "
-            + "the specified keywords (case-sensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Phase two of edit will edit person " +
+            "(specified by index) according to particulars included.\n"
+            + "      Arguments similar to that of add command\n"
+            + "Parameters: INDEX OPTIONAL[n/NAME, p/PHONE, e/EMAIL, a/ADDRESS]\n"
+            + "Example: 3 n/Jon p/90000000";
 
     public static final String MESSAGE_SUCCESS = "Person edited";
 

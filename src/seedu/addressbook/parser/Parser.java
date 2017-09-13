@@ -133,7 +133,7 @@ public class Parser {
         final Matcher matcher = EDIT_PERSON_ARGS_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    EditCommand.MESSAGE_USAGE));
+                    EditCommandP2.MESSAGE_USAGE));
         }
         try{
             final int targetIndex = parseArgsAsDisplayedIndex(matcher.group("index"));
