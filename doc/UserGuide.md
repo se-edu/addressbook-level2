@@ -27,6 +27,7 @@ What's different from AddressBook-Level1:
 * Support for storing address (`a/`) and tags (`t/`)
 * Support for marking a contact detail as 'private' (`pa/`) (`pe/`) (`pp/`) 
 * View details of a person (`view` : shows non-private details), (`viewall` : shows all details)
+* View contact list sorted in alphabetical order
 
 ### Viewing help : `help`
 Format: `help`
@@ -52,6 +53,10 @@ Examples:
 ### Listing all persons : `list`
 Shows a list of all persons in the address book.<br>
 Format: `list`
+
+### List all persons in alphabetical order : `sort`
+Shows a list of all persons in address book sorted by name. Case insensitive.<br>
+Format: `sort`
 
 ### Finding all persons containing any keyword in their name: `find`
 Finds persons whose names contain any of the given keywords.<br>

@@ -155,3 +155,11 @@
   # exits properly
   exit
   list
+
+##########################################################
+# test sort command
+##########################################################
+
+  # contacts sorted in alphabetical order
+  sort
+  list
