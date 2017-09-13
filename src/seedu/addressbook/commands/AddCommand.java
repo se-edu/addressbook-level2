@@ -69,8 +69,8 @@ public class AddCommand extends Command {
         try {
             addressBook.addPerson(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
-            List<ReadOnlyPerson> allPersons = addressBook.getAllPersons().immutableListView();
-            return new CommandResult(getMessageForPersonListShownSummary(allPersons), allPersons);
+            /*List<ReadOnlyPerson> allPersons = addressBook.getAllPersons().immutableListView();
+            return new CommandResult(getMessageForPersonListShownSummary(allPersons), allPersons);*/
             //getList();  why cannot resolve?
 
         } catch (UniquePersonList.DuplicatePersonException dpe) {
