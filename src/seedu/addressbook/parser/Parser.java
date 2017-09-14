@@ -244,7 +244,7 @@ public class Parser {
     }
 
     /**
-     * Parses arguments in the context of the find person command.
+     * Parses arguments in the context of the findall person command.
      *
      * @param args full command args string
      * @return the prepared command
