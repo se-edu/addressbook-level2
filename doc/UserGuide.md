@@ -62,9 +62,9 @@ and persons matching at least one keyword will be returned (i.e. `OR` search).
 
 Examples: 
 * `find John`<br>
-  Returns `John Doe` but not `john`
+  Returns `John Doe`, as well as `JoHn DOe`. It is CasE-INsensitive.
 * `find Betsy Tim John`<br>
-  Returns Any person having names `Betsy`, `Tim`, or `John`
+  Returns any person having names `Betsy`, `Tim`, or `John`, as well as `BeTSy`, `TiM`, or `JOHN`.
 
 ### Deleting a person : `delete`
 Deletes the specified person from the address book. Irreversible.<br>

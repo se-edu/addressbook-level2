@@ -50,7 +50,19 @@ public class FindCommand extends Command {
         final List<ReadOnlyPerson> matchedPersons = new ArrayList<>();
         for (ReadOnlyPerson person : addressBook.getAllPersons()) {
             final Set<String> wordsInName = new HashSet<>(person.getName().getWordsInName());
-            if (!Collections.disjoint(wordsInName, keywords)) {
+
+            //Create 2 temporary arrays to store lowercase for both for comparison
+            final ArrayList<String> lowercaseName = new ArrayList<>();
+            final ArrayList<String> lowercaseKeywords = new ArrayList<>();
+            for (String s: wordsInName) {
+                lowercaseName.add(s.toLowerCase());
+            }
+            for (String s: keywords) {
+                lowercaseKeywords.add(s.toLowerCase());
+            }
+
+            //End of setting up the 2 temporary collections, next compare them
+            if (!Collections.disjoint(lowercaseName, lowercaseKeywords)) {
                 matchedPersons.add(person);
             }
         }
