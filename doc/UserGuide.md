@@ -66,7 +66,7 @@ Examples:
 * `find Betsy Tim John`<br>
   Returns Any person having names `Betsy`, `Tim`, or `John`
   
-### Finding all persons containing any keyword in their name case insensitive: `findci`
+### Finding all persons containing any keyword in their name or address case insensitive: `findci`
 Finds persons whose names contain any of the given keywords.<br>
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -78,6 +78,8 @@ Examples:
   Returns `John Doe` and `john`
 * `find Betsy Tim john`<br>
   Returns Any person having names `Betsy`, `Tim`, `JOHN` or `john`
+* `find avenue`<br>
+  Returns Any person having an address including `Avenue` or `avenue`
 
 ### Deleting a person : `delete`
 Deletes the specified person from the address book. Irreversible.<br>

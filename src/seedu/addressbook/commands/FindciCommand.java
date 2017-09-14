@@ -5,17 +5,17 @@ import seedu.addressbook.data.person.ReadOnlyPerson;
 import java.util.*;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
+ * Finds and lists all persons in address book whose name or address contains any of the argument keywords.
  * Keyword matching is case sensitive.
  */
 public class FindciCommand extends Command {
 
     public static final String COMMAND_WORD = "findci";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose name or address contains any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice BOB cHaRLie";
+            + "Example: " + COMMAND_WORD + " alice BOB cHaRLie Avenue";
 
     private final Set<String> keywords;
     public FindciCommand(Set<String> keywords) {
@@ -45,7 +45,7 @@ public class FindciCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        final List<ReadOnlyPerson> personsFound = getPersonsWithNameContainingAnyKeyword(keywords);
+        final List<ReadOnlyPerson> personsFound = getPersonsWithNameContainingAnyKeywordci(keywords);
         return new CommandResult(getMessageForPersonListShownSummary(personsFound), personsFound);
     }
 
@@ -55,11 +55,12 @@ public class FindciCommand extends Command {
      * @param keywords for searching
      * @return list of persons found
      */
-    private List<ReadOnlyPerson> getPersonsWithNameContainingAnyKeyword(Set<String> keywords) {
+    private List<ReadOnlyPerson> getPersonsWithNameContainingAnyKeywordci(Set<String> keywords) {
         final List<ReadOnlyPerson> matchedPersons = new ArrayList<>();
         for (ReadOnlyPerson person : addressBook.getAllPersons()) {
             final Set<String> wordsInName = new HashSet<>(person.getName().getWordsInName());
-            if (!Collections.disjoint(lower(wordsInName), lower(keywords))) {
+            final Set<String> wordsInAddress = new HashSet<>(person.getAddress().getWordsInAddress());
+            if ((!Collections.disjoint(lower(wordsInName), lower(keywords))) || (!Collections.disjoint(lower(wordsInAddress), lower(keywords)))) {
                 matchedPersons.add(person);
             }
         }

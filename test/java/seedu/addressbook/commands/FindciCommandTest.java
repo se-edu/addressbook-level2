@@ -27,14 +27,14 @@ public class FindciCommandTest {
         assertFindciCommandBehavior(new String[]{"my"}, Collections.emptyList());
 
         //multiple words: matched
-        assertFindciCommandBehavior(new String[]{"Amy", "Bill", "Candy", "Destiny"},
+        assertFindciCommandBehavior(new String[]{"Amy", "Bill", "CAndy", "Destiny"},
                 Arrays.asList(td.amy, td.bill, td.candy));
 
         //repeated keywords: matched
         assertFindciCommandBehavior(new String[]{"Amy", "Amy"}, Arrays.asList(td.amy));
 
-        //Keyword matching a word in address: not matched
-        assertFindciCommandBehavior(new String[]{"Clementi"}, Collections.emptyList());
+        //Keyword matching a word in address: matched
+        assertFindciCommandBehavior(new String[]{"Clementi"}, Arrays.asList(td.amy, td.bill, td.candy));
     }
 
     /**
