@@ -1,13 +1,9 @@
 package seedu.addressbook.data;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
-import seedu.addressbook.data.person.Person;
-import seedu.addressbook.data.person.ReadOnlyPerson;
-import seedu.addressbook.data.person.UniquePersonList;
+import seedu.addressbook.commands.AddCommand;
+import seedu.addressbook.data.person.*;
 import seedu.addressbook.data.person.UniquePersonList.DuplicatePersonException;
 import seedu.addressbook.data.person.UniquePersonList.PersonNotFoundException;
 import seedu.addressbook.data.tag.Tag;
@@ -24,7 +20,9 @@ public class AddressBook {
 
     private final UniquePersonList allPersons;
     private final UniqueTagList allTags; // can contain tags not attached to any person
-
+    private static final Scanner SCANNER = new Scanner(System.in);
+    private static final char INPUT_COMMENT_MARKER = '#';
+    private static final String LINE_PREFIX = "|| ";
     /**
      * Creates an empty address book.
      */
@@ -100,8 +98,78 @@ public class AddressBook {
     }
 
     /**
-     * Clears all persons and tags from the address book.
+     * Removes the equivalent person from the address book.
+     *
+     * @throws PersonNotFoundException if no such Person could be found.
      */
+    public void UpdatePerson(ReadOnlyPerson toRemove) throws PersonNotFoundException {
+
+        Person toUpdate = new Person(toRemove);
+        ChooseUpdateMethod(SelectUpdateAction(), toUpdate );
+
+    }
+
+    public static String SelectUpdateAction() {
+
+        System.out.println("|| " + "Enter 1 to update name , 2 to update phone no and 3 to update email: ");
+        String inputLine = SCANNER.nextLine();
+        // silently consume all blank and comment lines
+        while (inputLine.trim().isEmpty() || inputLine.trim().charAt(0) == '#') {
+            inputLine = SCANNER.nextLine();
+        }
+        System.out.println("|| " +"[Action chosen:" + inputLine + "]");
+        return inputLine;
+    }
+
+    private static void ChooseUpdateMethod(String inputLine , Person toUpdate ) {
+
+
+        switch (inputLine) {
+            case "1":
+                System.out.println(LINE_PREFIX +" Enter new name ");
+                String newname = SCANNER.nextLine();
+                // silently consume all blank and comment lines
+                while (newname.trim().isEmpty() || newname.trim().charAt(0) == INPUT_COMMENT_MARKER) {
+                    newname = SCANNER.nextLine();
+                }
+                toUpdate.name.fullName = newname;
+                System.out.println(LINE_PREFIX +" The name has been replaced with " + toUpdate.name.fullName);
+
+                break;
+
+            case "2":
+                System.out.println(LINE_PREFIX +" Enter new phone no ");
+                String newphone = SCANNER.nextLine();
+                // silently consume all blank and comment lines
+                while (newphone.trim().isEmpty() || newphone.trim().charAt(0) == INPUT_COMMENT_MARKER) {
+                    newphone = SCANNER.nextLine();
+                }
+                toUpdate.phone.value = newphone;
+                System.out.println(LINE_PREFIX +" The phone has been replaced with " + toUpdate.phone.value);
+                break;
+
+            case "3":
+                System.out.println(LINE_PREFIX +" Enter new email without prefix ");
+                String newemail = SCANNER.nextLine();
+                // silently consume all blank and comment lines
+                while (newemail.trim().isEmpty() || newemail.trim().charAt(0) == INPUT_COMMENT_MARKER) {
+                    newemail = SCANNER.nextLine();
+                }
+
+                toUpdate.email.value = newemail;
+                System.out.println(LINE_PREFIX +" The email has been replaced with " + toUpdate.email.value);
+                break;
+
+            default:
+                ChooseUpdateMethod(SelectUpdateAction(), toUpdate);
+                break;
+        }
+    }
+
+
+        /**
+         * Clears all persons and tags from the address book.
+         */
     public void clear() {
         allPersons.clear();
         allTags.clear();
