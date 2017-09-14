@@ -61,12 +61,6 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_editCommandP2_parsedCorrectly() {
-        final String input = "nonNumerical";
-        parseAndAssertCommandType(input, EditCommandP2.class);
-    }
-
-    @Test
     public void parse_clearCommand_parsedCorrectly() {
         final String input = "clear";
         parseAndAssertCommandType(input, ClearCommand.class);
@@ -92,13 +86,6 @@ public class ParserTest {
     public void parse_editCommandNoArgs_errorMessage(){
         final String[] inputs = {"edit", "edit "};
         final String resultMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
-        parseAndAssertIncorrectWithMessage(resultMessage, inputs);
-    }
-
-    @Test
-    public void parse_editCommandP2NoArgs_errorMessage(){
-        final String[] inputs = {"nonNumerical", "nonNumerical "};
-        final String resultMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommandP2.MESSAGE_USAGE);
         parseAndAssertIncorrectWithMessage(resultMessage, inputs);
     }
 
