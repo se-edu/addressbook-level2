@@ -1,26 +1,16 @@
 package seedu.addressbook.commands;
 
-import static org.junit.Assert.assertEquals;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-
 import org.junit.Test;
-
 import seedu.addressbook.common.Messages;
 import seedu.addressbook.data.AddressBook;
-import seedu.addressbook.data.person.Address;
-import seedu.addressbook.data.person.Email;
-import seedu.addressbook.data.person.Name;
-import seedu.addressbook.data.person.Person;
-import seedu.addressbook.data.person.Phone;
-import seedu.addressbook.data.person.ReadOnlyPerson;
+import seedu.addressbook.data.person.*;
 import seedu.addressbook.data.tag.UniqueTagList;
 import seedu.addressbook.util.TestUtil;
 import seedu.addressbook.util.TypicalPersons;
+
+import java.util.*;
+
+import static org.junit.Assert.assertEquals;
 
 public class ViewCommandTest {
     private TypicalPersons td = new TypicalPersons();
@@ -117,7 +107,7 @@ public class ViewCommandTest {
 
         expectedMessage = String.format(ViewAllCommand.MESSAGE_VIEW_PERSON_DETAILS,
                                                 personToBeViewed.getAsTextShowAll());
-        assertViewBehavior(new ViewAllCommand(targetVisibleIndex), addressBook, relevantPersons, expectedMessage);
+        assertViewBehavior(new ViewAllCommand(targetVisibleIndex, "ABC123"), addressBook, relevantPersons, expectedMessage);
     }
 
     /**
@@ -126,7 +116,7 @@ public class ViewCommandTest {
     private static void assertViewError(AddressBook addressBook, List<ReadOnlyPerson> relevantPersons,
                                                         int targetVisibleIndex, String expectedMessage) {
         assertViewBehavior(new ViewCommand(targetVisibleIndex), addressBook, relevantPersons, expectedMessage);
-        assertViewBehavior(new ViewAllCommand(targetVisibleIndex), addressBook, relevantPersons, expectedMessage);
+        assertViewBehavior(new ViewAllCommand(targetVisibleIndex, "ABC123"), addressBook, relevantPersons, expectedMessage);
     }
 
     /**
