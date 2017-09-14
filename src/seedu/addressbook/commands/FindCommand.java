@@ -54,10 +54,10 @@ public class FindCommand extends Command {
             //Create 2 temporary arrays to store lowercase for both for comparison
             final ArrayList<String> lowercaseName = new ArrayList<>();
             final ArrayList<String> lowercaseKeywords = new ArrayList<>();
-            for (String s: wordsInName){
+            for (String s: wordsInName) {
                 lowercaseName.add(s.toLowerCase());
             }
-            for (String s: keywords){
+            for (String s: keywords) {
                 lowercaseKeywords.add(s.toLowerCase());
             }
 
