@@ -233,6 +233,38 @@
 || 
 || 2 persons listed!
 || ===================================================
+|| Enter command: || [Command entered:  findall]
+|| Invalid command format! 
+|| findall: Finds all persons whose names contain any of the keywords (case-insensitive) and displays them as a list with index numbers.
+|| Parameters: KEYWORD [MORE_KEYWORDS]...
+|| Example: findall alice bob charlie
+|| ===================================================
+|| Enter command: || [Command entered:  findall Bet]
+|| 	1. Betsy Choo Tags: [secretive]
+|| 
+|| 1 persons listed!
+|| ===================================================
+|| Enter command: || [Command entered:  findall 23912039120]
+|| 
+|| 0 persons listed!
+|| ===================================================
+|| Enter command: || [Command entered:  findall betsy]
+|| 	1. Betsy Choo Tags: [secretive]
+|| 
+|| 1 persons listed!
+|| ===================================================
+|| Enter command: || [Command entered:  findall dickson]
+|| 	1. Charlie Dickson Email: charlie.d@nus.edu.sg Address: 333, gamma street Tags: [school][friends]
+|| 	2. Dickson Ee Phone: 444444 Address: 444, delta street Tags: [friends]
+|| 
+|| 2 persons listed!
+|| ===================================================
+|| Enter command: || [Command entered:  findall Char Bet]
+|| 	1. Betsy Choo Tags: [secretive]
+|| 	2. Charlie Dickson Email: charlie.d@nus.edu.sg Address: 333, gamma street Tags: [school][friends]
+|| 
+|| 2 persons listed!
+|| ===================================================
 || Enter command: || [Command entered:  delete]
 || Invalid command format! 
 || delete: Deletes the person identified by the index number used in the last person listing.
