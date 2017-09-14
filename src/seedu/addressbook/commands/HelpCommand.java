@@ -20,6 +20,7 @@ public class HelpCommand extends Command {
                 + "\n" + DeleteCommand.MESSAGE_USAGE
                 + "\n" + ClearCommand.MESSAGE_USAGE
                 + "\n" + FindCommand.MESSAGE_USAGE
+                + "\n" + FindciCommand.MESSAGE_USAGE
                 + "\n" + ListCommand.MESSAGE_USAGE
                 + "\n" + ViewCommand.MESSAGE_USAGE
                 + "\n" + ViewAllCommand.MESSAGE_USAGE
