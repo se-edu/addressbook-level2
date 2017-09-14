@@ -12,8 +12,5 @@ public class RenameCommand extends Command {
         super(targetVisibleIndex);
     }
 
- //   @Override
- //   public CommandResult execute() {
-  //      return;
-   // }
+
 }
