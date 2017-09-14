@@ -115,6 +115,13 @@ public class AddressBook {
     }
 
     /**
+     * Sorts all person in alphabetical order from the address book
+     */
+    public void sort() {
+        allPersons.sort();
+    }
+
+    /**
      * Returns a new UniqueTagList of all tags in the address book at the time of the call.
      */
     public UniqueTagList getAllTags() {

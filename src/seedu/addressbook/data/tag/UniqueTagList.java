@@ -11,6 +11,7 @@ import java.util.Set;
 
 import seedu.addressbook.common.Utils;
 import seedu.addressbook.data.exception.DuplicateDataException;
+import seedu.addressbook.data.person.Person;
 
 
 /**
@@ -117,6 +118,11 @@ public class UniqueTagList implements Iterable<Tag> {
     public void clear() {
         internalList.clear();
     }
+
+    /**
+     * Sorts all tags in list.
+     */
+
 
     /**
      * Replaces the Tags in this list with those in the argument tag list.
