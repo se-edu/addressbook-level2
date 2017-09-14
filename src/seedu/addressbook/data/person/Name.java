@@ -39,10 +39,7 @@ public class Name {
     /**
      * Retrieves a listing of every word in the name, in order.
      */
-    public List<String> getWordsInName(boolean isLowerCase) {
-        if (isLowerCase){
-            return Arrays.asList(fullName.toLowerCase().split("\\s+"));
-        }
+    public List<String> getWordsInName() {
         return Arrays.asList(fullName.split("\\s+"));
     }
 
