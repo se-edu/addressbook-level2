@@ -12,7 +12,7 @@
   # should show appropriate message when no listing has happened yet
   delete 1
   view 1
-  viewall 1
+  viewall 1 ABC123
 
 ##########################################################
 # clean and check state
@@ -62,19 +62,19 @@
   view
   viewall
   view should be only one number
-  viewall should only be one number
+  viewall should only be one number with password
 
   # should catch invalid index
   view -1
   view 0
   view 6
-  viewall -1
-  viewall 0
-  viewall 6
+  viewall -1 ABC123
+  viewall 0 ABC123
+  viewall 6 ABC123
 
   # should show all non private for both view and viewall
   view 1
-  viewall 1
+  viewall 1 ABC123
 
   # should show only non private details for view
   view 3
@@ -82,9 +82,14 @@
   view 5
 
   # should show all details even private for viewall
-  viewall 3
-  viewall 4
-  viewall 5
+  viewall 3 ABC123
+  viewall 4 ABC123
+  viewall 5 ABC123
+
+  # should detect wrong password
+  viewall 3 dfas
+  viewall 4 fsd32
+  viewall 5 @@@dd11
 
 ##########################################################
 # test find persons command
@@ -127,7 +132,7 @@
 
   # should catch attempt to view something already deleted
   view 2
-  viewall 2
+  viewall 2 ABC123
 
   # should have deleted based on last active view's index
   list

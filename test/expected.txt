@@ -24,7 +24,7 @@
 || Example: view 1
 || viewall: Views the non-private details of the person identified by the index number in the last shown person listing.
 || Parameters: INDEX
-|| Example: viewall 1
+|| Example: viewall 1 example_password
 || help: Shows program usage instructions.
 || Example: help
 || exit: Exits the program.
@@ -36,7 +36,7 @@
 || Enter command: || [Command entered:  view 1]
 || The person index provided is invalid
 || ===================================================
-|| Enter command: || [Command entered:  viewall 1]
+|| Enter command: || [Command entered:  viewall 1 ABC123]
 || The person index provided is invalid
 || ===================================================
 || Enter command: || [Command entered:  clear]
@@ -148,12 +148,12 @@
 || Invalid command format! 
 || viewall: Views the non-private details of the person identified by the index number in the last shown person listing.
 || Parameters: INDEX
-|| Example: viewall 1
+|| Example: viewall 1 example_password
 || ===================================================
 || Enter command: || [Command entered:  view should be only one number]
 || The person index provided is invalid
 || ===================================================
-|| Enter command: || [Command entered:  viewall should only be one number]
+|| Enter command: || [Command entered:  viewall should only be one number with password]
 || The person index provided is invalid
 || ===================================================
 || Enter command: || [Command entered:  view -1]
@@ -165,19 +165,19 @@
 || Enter command: || [Command entered:  view 6]
 || The person index provided is invalid
 || ===================================================
-|| Enter command: || [Command entered:  viewall -1]
+|| Enter command: || [Command entered:  viewall -1 ABC123]
 || The person index provided is invalid
 || ===================================================
-|| Enter command: || [Command entered:  viewall 0]
+|| Enter command: || [Command entered:  viewall 0 ABC123]
 || The person index provided is invalid
 || ===================================================
-|| Enter command: || [Command entered:  viewall 6]
+|| Enter command: || [Command entered:  viewall 6 ABC123]
 || The person index provided is invalid
 || ===================================================
 || Enter command: || [Command entered:  view 1]
 || Viewing person: Adam Brown Phone: 111111 Email: adam@gmail.com Address: 111, alpha street Tags: 
 || ===================================================
-|| Enter command: || [Command entered:  viewall 1]
+|| Enter command: || [Command entered:  viewall 1 ABC123]
 || Viewing person: Adam Brown Phone: 111111 Email: adam@gmail.com Address: 111, alpha street Tags: 
 || ===================================================
 || Enter command: || [Command entered:  view 3]
@@ -189,14 +189,23 @@
 || Enter command: || [Command entered:  view 5]
 || Viewing person: Esther Potato Phone: 555555 Email: esther@not.a.real.potato Tags: [tubers][starchy]
 || ===================================================
-|| Enter command: || [Command entered:  viewall 3]
+|| Enter command: || [Command entered:  viewall 3 ABC123]
 || Viewing person: Charlie Dickson Phone: (private) 333333 Email: charlie.d@nus.edu.sg Address: 333, gamma street Tags: [school][friends]
 || ===================================================
-|| Enter command: || [Command entered:  viewall 4]
+|| Enter command: || [Command entered:  viewall 4 ABC123]
 || Viewing person: Dickson Ee Phone: 444444 Email: (private) dickson@nus.edu.sg Address: 444, delta street Tags: [friends]
 || ===================================================
-|| Enter command: || [Command entered:  viewall 5]
+|| Enter command: || [Command entered:  viewall 5 ABC123]
 || Viewing person: Esther Potato Phone: 555555 Email: esther@not.a.real.potato Address: (private) 555, epsilon street Tags: [tubers][starchy]
+|| ===================================================
+|| Enter command: || [Command entered:  viewall 3 dfas]
+|| Please enter the correct password
+|| ===================================================
+|| Enter command: || [Command entered:  viewall 4 fsd32]
+|| Please enter the correct password
+|| ===================================================
+|| Enter command: || [Command entered:  viewall 5 @@@dd11]
+|| Please enter the correct password
 || ===================================================
 || Enter command: || [Command entered:  find]
 || Invalid command format! 
@@ -260,7 +269,7 @@
 || Enter command: || [Command entered:  view 2]
 || Person could not be found in address book
 || ===================================================
-|| Enter command: || [Command entered:  viewall 2]
+|| Enter command: || [Command entered:  viewall 2 ABC123]
 || Person could not be found in address book
 || ===================================================
 || Enter command: || [Command entered:  list]
