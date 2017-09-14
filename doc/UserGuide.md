@@ -50,7 +50,7 @@ Examples:
 * `add Betsy Crowe pp/1234567 e/betsycrowe@gmail.com pa/Newgate Prison t/criminal t/friend`
 
 ### Listing all persons : `list`
-Shows a list of all persons in the address book in alphabetical order, A - Z.<br>
+Shows a list of all persons in the address book.<br>
 Format: `list`
 
 ### Finding all persons containing any keyword in their name: `find`
@@ -62,9 +62,9 @@ and persons matching at least one keyword will be returned (i.e. `OR` search).
 
 Examples: 
 * `find John`<br>
-  Returns `John Doe` but not `john`
+  Returns `John Doe`, as well as `JoHn DOe`. It is CasE-INsensitive.
 * `find Betsy Tim John`<br>
-  Returns Any person having names `Betsy`, `Tim`, or `John`
+  Returns any person having names `Betsy`, `Tim`, or `John`, as well as `BeTSy`, `TiM`, or `JOHN`.
 
 ### Deleting a person : `delete`
 Deletes the specified person from the address book. Irreversible.<br>
