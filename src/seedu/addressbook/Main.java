@@ -20,7 +20,7 @@ import seedu.addressbook.ui.TextUi;
  * Entry point of the Address Book application.
  * Initializes the application and starts the interaction with the user.
  */
-public class Main {
+public class                                                                                                        Main {
 
     /** Version info of the program. */
     public static final String VERSION = "AddressBook Level 2 - Version 1.0";
@@ -83,7 +83,7 @@ public class Main {
         Command command;
         do {
             String userCommandText = ui.getUserCommand();
-            command = new Parser().parseCommand(userCommandText);
+            command = new Parser() .parseCommand(userCommandText);
             CommandResult result = executeCommand(command);
             recordResult(result);
             ui.showResultToUser(result);

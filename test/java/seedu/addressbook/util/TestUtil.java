@@ -137,6 +137,7 @@ public class TestUtil {
     public static void assertTextFilesEqual(Path path1, Path path2) throws IOException {
         List<String> list1 = Files.readAllLines(path1, Charset.defaultCharset());
         List<String> list2 = Files.readAllLines(path2, Charset.defaultCharset());
+
         assertEquals(String.join("\n", list1), String.join("\n", list2));
     }
 
