@@ -98,17 +98,18 @@ Examples:
 
 ### View all details of a person : `viewall`
 Displays all details (including private details) of the specified person.<br>
-Format: `viewall INDEX`
+Currently, the default password is ABC123.
+Format: `viewall INDEX PASSWORD`
 
 > Views all details of the person at the specified `INDEX`. 
   The index refers to the index number shown in the most recent listing.
 
 Examples: 
 * `list`<br>
-  `viewall 2`<br>
+  `viewall 2 EXAMPLE_PASSWORD`<br>
   Views all details of the 2nd person in the address book.
 * `find Betsy`<br> 
-  `viewall 1`<br>
+  `viewall 1 EXAMPLE_PASSWORD`<br>
   Views all details of the 1st person in the results of the `find` command.
 
 ### Clearing all entries : `clear`
