@@ -126,6 +126,17 @@
   findall Char Bet
 
 ##########################################################
+# test sort persons command
+##########################################################
+
+  # should sort the list by ascending on default
+  sort
+  # should sort the list by descending
+  sort desc
+  # should sort the list by ascending
+  sort asc
+
+##########################################################
 # test delete person command
 ##########################################################
 

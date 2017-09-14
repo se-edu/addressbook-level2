@@ -124,6 +124,21 @@ Examples:
   `viewall 1`<br>
   Views all details of the 1st person in the results of the `find` command.
 
+### Sorting the list : `sort`
+Sort all person in the list based on ascending or descending order.<br>
+Format: `sort asc | desc`
+
+> Sorts all the person based on their name with `asc` or `desc` with ascending as default.
+  asc refers to ascending and desc refers to descending.
+
+Examples:
+* `sort`<br>
+  Sorts the list by ascending names on default
+* `sort asc`<br>
+  Sorts the list by ascending names
+* `sort desc`<br>
+  Sorts the list by descending names
+
 ### Clearing all entries : `clear`
 Clears all entries from the address book.<br>
 Format: `clear`  

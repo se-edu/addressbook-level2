@@ -2,6 +2,7 @@ package seedu.addressbook.parser;
 
 import static seedu.addressbook.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.addressbook.common.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.addressbook.common.Messages.MESSAGE_INVALID_SORT_FORMAT;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -79,6 +80,9 @@ public class Parser {
 
         case FindAllCommand.COMMAND_WORD:
             return prepareFindAll(arguments);
+
+        case SortCommand.COMMAND_WORD:
+            return prepareSort(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
@@ -166,6 +170,23 @@ public class Parser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         } catch (NumberFormatException nfe) {
             return new IncorrectCommand(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+    }
+
+    /**
+     * Parses arguments in the context of the sort command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private Command prepareSort(String args) {
+        if (args.trim().equalsIgnoreCase("asc") || args.trim().equalsIgnoreCase("desc") || args.isEmpty()) {
+            if (args.trim().equalsIgnoreCase("desc"))
+                return new SortCommand(SortCommand.TYPE.DESC);
+            else
+                return new SortCommand(SortCommand.TYPE.ASC);
+        } else {
+            return new IncorrectCommand(MESSAGE_INVALID_SORT_FORMAT);
         }
     }
 
