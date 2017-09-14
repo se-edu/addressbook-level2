@@ -6,8 +6,10 @@ import java.util.Optional;
 
 import seedu.addressbook.commands.Command;
 import seedu.addressbook.commands.CommandResult;
+import seedu.addressbook.commands.EditCommand;
 import seedu.addressbook.commands.ExitCommand;
 import seedu.addressbook.data.AddressBook;
+import seedu.addressbook.data.person.Person;
 import seedu.addressbook.data.person.ReadOnlyPerson;
 import seedu.addressbook.parser.Parser;
 import seedu.addressbook.storage.StorageFile;
@@ -31,7 +33,6 @@ public class Main {
 
     /** The list of person shown to the user most recently.  */
     private List<? extends ReadOnlyPerson> lastShownList = Collections.emptyList();
-
 
     public static void main(String... launchArgs) {
         new Main().run(launchArgs);
@@ -82,13 +83,25 @@ public class Main {
     private void runCommandLoopUntilExitCommand() {
         Command command;
         do {
-            String userCommandText = ui.getUserCommand();
-            command = new Parser().parseCommand(userCommandText);
+            command = runCommand(false);
+            if (command instanceof EditCommand) {
+                command = runCommand(true);
+            }
+        } while (!ExitCommand.isExit(command));
+    }
+
+    private Command runCommand(boolean isEditorial){
+        Command command;
+        String userCommandText = ui.getUserCommand();
+        command = new Parser(isEditorial).parseCommand(userCommandText);
+        try {
             CommandResult result = executeCommand(command);
             recordResult(result);
             ui.showResultToUser(result);
-
-        } while (!ExitCommand.isExit(command));
+        } catch (Exception e){
+            ui.showToUser(e.getMessage());
+        }
+        return command;
     }
 
     /** Updates the {@link #lastShownList} if the result contains a list of Persons. */
@@ -105,16 +118,11 @@ public class Main {
      * @param command user command
      * @return result of the command
      */
-    private CommandResult executeCommand(Command command)  {
-        try {
-            command.setData(addressBook, lastShownList);
-            CommandResult result = command.execute();
-            storage.save(addressBook);
-            return result;
-        } catch (Exception e) {
-            ui.showToUser(e.getMessage());
-            throw new RuntimeException(e);
-        }
+    private CommandResult executeCommand(Command command) throws Exception {
+        command.setData(addressBook, lastShownList);
+        CommandResult result = command.execute();
+        storage.save(addressBook);
+        return result;
     }
 
     /**

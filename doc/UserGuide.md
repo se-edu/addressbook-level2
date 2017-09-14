@@ -65,6 +65,31 @@ Examples:
   Returns `John Doe` but not `john`
 * `find Betsy Tim John`<br>
   Returns Any person having names `Betsy`, `Tim`, or `John`
+  
+### Editing a person of the particulars: `edit`
+Edit command is comprised of 2 phases:<br>
+
+Phase 1: Same functionality as find command - to list out potential persons user wish to edit<br>
+
+Format: `edit KEYWORD [MORE_KEYWORDS]`
+
+> The search is case sensitive, the order of the keywords does not matter, only the name is searched, 
+and persons matching at least one keyword will be returned (i.e. `OR` search).
+
+Examples: 
+* `edit John`<br>
+  Returns `John Doe` but not `john`
+* `edit Betsy Tim John`<br>
+  Returns Any person having names `Betsy`, `Tim`, or `John`
+  
+Phase 2: Edit person specified by index from previous phase, according to keywords provided.<br>
+
+Format: `INDEX OPTIONAL[n/NAME, p/PHONE, e/EMAIL, a/ADDRESS]`
+
+Example: 
+* `3 n/Jon p/90000000`<br>
+Changes the name of 3rd person on previous list to 'Jon'and phone number to '90000000'
+
 
 ### Deleting a person : `delete`
 Deletes the specified person from the address book. Irreversible.<br>

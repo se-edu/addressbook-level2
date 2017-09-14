@@ -17,6 +17,14 @@
 || find: Finds all persons whose names contain any of the specified keywords (case-sensitive) and displays them as a list with index numbers.
 || Parameters: KEYWORD [MORE_KEYWORDS]...
 || Example: find alice bob charlie
+|| edit: Phase one of edit performs same row as find -- it lists down the list of person you are potentially editing.
+||       the specified keywords (case-sensitive) and displays them as a list with index numbers.
+|| Parameters: KEYWORD [MORE_KEYWORDS]...
+|| Example: edit alice bob charlie
+|| edit phase 2: Phase two of edit will edit person (specified by index) according to particulars included.
+||       Arguments similar to that of add command
+|| Parameters: INDEX OPTIONAL[n/NAME, p/PHONE, e/EMAIL, a/ADDRESS]
+|| Example: 3 n/Jon p/90000000
 || list: Displays all persons in the address book as a list with index numbers.
 || Example: list
 || view: Views the non-private details of the person identified by the index number in the last shown person listing.

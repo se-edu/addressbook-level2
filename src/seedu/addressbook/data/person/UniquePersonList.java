@@ -1,15 +1,10 @@
 package seedu.addressbook.data.person;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 import seedu.addressbook.common.Utils;
 import seedu.addressbook.data.exception.DuplicateDataException;
-
+import seedu.addressbook.data.exception.IllegalValueException;
 
 
 /**
@@ -108,6 +103,29 @@ public class UniquePersonList implements Iterable<Person> {
             throw new DuplicatePersonException();
         }
         internalList.add(toAdd);
+    }
+
+    public void edit(ReadOnlyPerson toEdit, HashMap<String, String> toChangeMap) throws IllegalValueException {
+        Person editedPerson = internalList.get(internalList.indexOf(toEdit));
+        for (String key: toChangeMap.keySet()){
+            String value = toChangeMap.get(key);
+            if (!value.equals("")){
+                switch (key){
+                    case "name":
+                        editedPerson.editName(value);
+                        break;
+                    case "phone":
+                        editedPerson.editPhone(value);
+                        break;
+                    case "email":
+                        editedPerson.editEmail(value);
+                        break;
+                    case "address":
+                        editedPerson.editAddress(value);
+                        break;
+                }
+            }
+        }
     }
 
     /**
