@@ -84,6 +84,23 @@ public class AddressBook {
     }
 
     /**
+     * Updates a person to the address book.
+     * Also checks the new person's tags and updates {@link #allTags} with any new tags found,
+     * and updates the Tag objects in the person to point to those in {@link #allTags}.
+     *
+     * @throws PersonNotFoundException if an equivalent person already exists.
+     */
+    public void updatePerson(Person toUpdate) throws PersonNotFoundException, DuplicatePersonException {
+        Person target = allPersons.nameIsInList(toUpdate.getName());
+        if(target != null) {
+            allPersons.remove(target);
+            allPersons.add(toUpdate);
+        }
+
+        syncTagsWithMasterList(toUpdate);
+    }
+
+    /**
      * Returns true if an equivalent person exists in the address book.
      */
     public boolean containsPerson(ReadOnlyPerson key) {
@@ -125,7 +142,7 @@ public class AddressBook {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
-                        && this.allPersons.equals(((AddressBook) other).allPersons)
-                        && this.allTags.equals(((AddressBook) other).allTags));
+                        && this.getAllPersons().equals(((AddressBook) other).getAllPersons()));
     }
+
 }

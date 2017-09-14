@@ -97,6 +97,20 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Checks if the list contains a person with an equivalent name as the given argument.
+     * The {@link ReadOnlyPerson#isSamePerson} method is used for this comparison, which
+     * defines a weaker notion of equality.
+     */
+    public Person nameIsInList(Name toCheck) {
+        for (Person p : internalList) {
+            if (p.getName().equals(toCheck)) {
+                return p;
+            }
+        }
+        return null;
+    }
+
+    /**
      * Adds a person to the list.
      *
      * @throws DuplicatePersonException if the person to add is a duplicate of an existing person in the list.
