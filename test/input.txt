@@ -96,8 +96,6 @@
   find bet
   # does not match if none have keyword
   find 23912039120
-  # matching should be case-sensitive
-  find betsy
 
   # find unique keyword
   find Betsy
@@ -146,6 +144,18 @@
 
   # clears all
   clear
+  list
+
+##########################################################
+# test sort command
+##########################################################
+
+  # add person for comparison
+  add adam Brown p/111111 e/adam@gmail.com a/111, alpha street
+  add ADAM Brown p/222222 e/adam@test.com a/222, beta street
+
+  #test sort and list command
+  sort
   list
 
 ##########################################################

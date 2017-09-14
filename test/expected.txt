@@ -19,6 +19,8 @@
 || Example: find alice bob charlie
 || list: Displays all persons in the address book as a list with index numbers.
 || Example: list
+|| sort: Displays all contacts in the addressbook in alphabetical order.
+|| Example: sort
 || view: Views the non-private details of the person identified by the index number in the last shown person listing.
 || Parameters: INDEX
 || Example: view 1
@@ -212,10 +214,6 @@
 || 
 || 0 persons listed!
 || ===================================================
-|| Enter command: || [Command entered:  find betsy]
-|| 
-|| 0 persons listed!
-|| ===================================================
 || Enter command: || [Command entered:  find Betsy]
 || 	1. Betsy Choo Tags: [secretive]
 || 
@@ -296,6 +294,24 @@
 || Enter command: || [Command entered:  list]
 || 
 || 0 persons listed!
+|| ===================================================
+|| Enter command: || [Command entered:  add adam Brown p/111111 e/adam@gmail.com a/111, alpha street]
+|| New person added: adam Brown Phone: 111111 Email: adam@gmail.com Address: 111, alpha street Tags: 
+|| ===================================================
+|| Enter command: || [Command entered:  add ADAM Brown p/222222 e/adam@test.com a/222, beta street]
+|| New person added: ADAM Brown Phone: 222222 Email: adam@test.com Address: 222, beta street Tags: 
+|| ===================================================
+|| Enter command: || [Command entered:  sort]
+|| 	1. ADAM Brown Phone: 222222 Email: adam@test.com Address: 222, beta street Tags: 
+|| 	2. adam Brown Phone: 111111 Email: adam@gmail.com Address: 111, alpha street Tags: 
+|| 
+|| 2 persons listed!
+|| ===================================================
+|| Enter command: || [Command entered:  list]
+|| 	1. adam Brown Phone: 111111 Email: adam@gmail.com Address: 111, alpha street Tags: 
+|| 	2. ADAM Brown Phone: 222222 Email: adam@test.com Address: 222, beta street Tags: 
+|| 
+|| 2 persons listed!
 || ===================================================
 || Enter command: || [Command entered:  exit]
 || Exiting Address Book as requested ...
