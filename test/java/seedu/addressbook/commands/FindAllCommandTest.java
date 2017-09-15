@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.exception.IllegalValueException;
+import seedu.addressbook.data.person.Person;
 import seedu.addressbook.data.person.ReadOnlyPerson;
 import seedu.addressbook.util.TypicalPersons;
 
@@ -23,30 +24,30 @@ public class FindAllCommandTest {
     @Test
     public void execute() throws IllegalValueException {
         //same word, same case: matched
-        assertFindCommandBehavior(new String[]{"Amy"}, Arrays.asList(td.amy));
+        assertFindAllCommandBehavior(new String[]{"Amy"}, Arrays.asList(td.amy));
 
-        //same word, different case: not matched
-        assertFindCommandBehavior(new String[]{"aMy"}, Collections.emptyList());
+        //same word, different case: matched
+        assertFindAllCommandBehavior(new String[]{"aMy"}, Arrays.asList(td.amy));
 
-        //partial word: not matched
-        assertFindCommandBehavior(new String[]{"my"}, Collections.emptyList());
+        //partial word: matched
+        assertFindAllCommandBehavior(new String[]{"my"}, Arrays.asList(td.amy));
 
         //multiple words: matched
-        assertFindCommandBehavior(new String[]{"Amy", "Bill", "Candy", "Destiny"},
+        assertFindAllCommandBehavior(new String[]{"my", "Bil", "and"},
                 Arrays.asList(td.amy, td.bill, td.candy));
 
         //repeated keywords: matched
-        assertFindCommandBehavior(new String[]{"Amy", "Amy"}, Arrays.asList(td.amy));
+        assertFindAllCommandBehavior(new String[]{"Amy", "Amy"}, Arrays.asList(td.amy));
 
         //Keyword matching a word in address: not matched
-        assertFindCommandBehavior(new String[]{"Clementi"}, Collections.emptyList());
+        assertFindAllCommandBehavior(new String[]{"Clementi"}, Collections.emptyList());
     }
 
     /**
      * Executes the find command for the given keywords and verifies
      * the result matches the persons in the expectedPersonList exactly.
      */
-    private void assertFindCommandBehavior(String[] keywords, List<ReadOnlyPerson> expectedPersonList) {
+    private void assertFindAllCommandBehavior(String[] keywords, List<Person> expectedPersonList) {
         FindAllCommand command = createFindAllCommand(keywords);
         CommandResult result = command.execute();
 
