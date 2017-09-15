@@ -1,28 +1,14 @@
 package seedu.addressbook.parser;
 
-import static seedu.addressbook.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.addressbook.common.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import seedu.addressbook.commands.*;
+import seedu.addressbook.data.exception.IllegalValueException;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.addressbook.commands.AddCommand;
-import seedu.addressbook.commands.ClearCommand;
-import seedu.addressbook.commands.Command;
-import seedu.addressbook.commands.DeleteCommand;
-import seedu.addressbook.commands.ExitCommand;
-import seedu.addressbook.commands.FindCommand;
-import seedu.addressbook.commands.HelpCommand;
-import seedu.addressbook.commands.IncorrectCommand;
-import seedu.addressbook.commands.ListCommand;
-import seedu.addressbook.commands.ViewAllCommand;
-import seedu.addressbook.commands.ViewCommand;
-import seedu.addressbook.data.exception.IllegalValueException;
+import static seedu.addressbook.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.addressbook.common.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 
 /**
  * Parses user input.
@@ -30,6 +16,8 @@ import seedu.addressbook.data.exception.IllegalValueException;
 public class Parser {
 
     public static final Pattern PERSON_INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
+    public static final Pattern PERSON_INDEX_ARGS_FORMAT_FOR_VIEWALL = Pattern.compile("^[1-9]+[0-9]*$");
+    public static final int MAX_NUMBER_OF_STRING_TO_PARSE = 3;
 
     public static final Pattern KEYWORDS_ARGS_FORMAT =
             Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one or more keywords separated by whitespace
@@ -204,13 +192,16 @@ public class Parser {
     private Command prepareViewAll(String args) {
 
         try {
-            final int targetIndex = parseArgsAsDisplayedIndex(args);
-            return new ViewAllCommand(targetIndex);
+            final int targetIndex = parseArgsAsDisplayedIndexForViewAll(args);
+            final String password = parseArgsAsPassword(args);
+            return new ViewAllCommand(targetIndex, password);
         } catch (ParseException pe) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    ViewAllCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         } catch (NumberFormatException nfe) {
             return new IncorrectCommand(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        } catch (IndexOutOfBoundsException av){
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    ViewAllCommand.MESSAGE_USAGE));
         }
     }
 
@@ -228,6 +219,38 @@ public class Parser {
             throw new ParseException("Could not find index number to parse");
         }
         return Integer.parseInt(matcher.group("targetIndex"));
+    }
+    /**
+     * Parses the given arguments string as a single index number.
+     *
+     * @param args arguments string to parse as index number for Viewall command specifcally
+     * @return the parsed index number
+     * @throws ParseException if no region of the args string could be found for the index
+     * @throws NumberFormatException the args string region is not a valid number
+     * @throws IndexOutOfBoundsException if " " input is passed in.
+     */
+    private int parseArgsAsDisplayedIndexForViewAll(String args) throws ParseException, NumberFormatException, IndexOutOfBoundsException {
+        final String parseUserIndex = args.split(" ")[1];
+        final int numberStringsPreparedForParse = args.split(" ").length;
+        final Matcher matcher = PERSON_INDEX_ARGS_FORMAT_FOR_VIEWALL.matcher(parseUserIndex.trim());
+        if (!matcher.matches() || numberStringsPreparedForParse > MAX_NUMBER_OF_STRING_TO_PARSE ) {
+            throw new ParseException("Could not find index number to parse");
+        }
+        return Integer.parseInt(matcher.group(0));
+    }
+
+    /**
+     * Parses the given arguments string as a string of Password.
+     *
+     * @param args arguments string to parse as index number
+     * @return the parsed index number
+     * @throws ParseException if no region of the args string could be found for the index
+     * @throws NumberFormatException the args string region is not a valid number
+     * @throws IndexOutOfBoundsException if args.split()[] method cannot be carried out.
+     */
+    private String parseArgsAsPassword(String args) throws IndexOutOfBoundsException, ParseException, NumberFormatException{
+        final String parsePassword = args.split(" ")[2];
+        return parsePassword.trim();
     }
 
 
