@@ -66,6 +66,19 @@ Examples:
 * `find Betsy Tim John`<br>
   Returns Any person having names `Betsy`, `Tim`, or `John`
 
+### Finding all persons containing any case insensitive keywords in their name: `findall`
+Finds persons whose names contain any of the given keywords.<br>
+Format: `findall KEYWORD [MORE_KEYWORDS]`
+
+> The search is case insensitive, the order of the keywords does not matter, only the name is searched,
+and persons containing at least one keyword pattern will be returned (i.e. `OR` search).
+
+Examples:
+* `findall john`<br>
+  Returns `John Doe` or `john`
+* `findall pot`<br>
+  Returns Any person having names `Esther Potato`, `Potter Charlie` or `Chipotle Bombaba`
+
 ### Deleting a person : `delete`
 Deletes the specified person from the address book. Irreversible.<br>
 Format: `delete INDEX`
@@ -110,6 +123,21 @@ Examples:
 * `find Betsy`<br> 
   `viewall 1`<br>
   Views all details of the 1st person in the results of the `find` command.
+
+### Sorting the list : `sort`
+Sort all person in the list based on ascending or descending order.<br>
+Format: `sort asc | desc`
+
+> Sorts all the person based on their name with `asc` or `desc` with ascending as default.
+  asc refers to ascending and desc refers to descending.
+
+Examples:
+* `sort`<br>
+  Sorts the list by ascending names on default
+* `sort asc`<br>
+  Sorts the list by ascending names
+* `sort desc`<br>
+  Sorts the list by descending names
 
 ### Clearing all entries : `clear`
 Clears all entries from the address book.<br>

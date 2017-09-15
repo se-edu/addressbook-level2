@@ -106,6 +106,36 @@
   # find multiple with some keywords
   find Charlie Betsy
 
+
+##########################################################
+# test findall persons command
+##########################################################
+
+  # should consider no keywords as invalid command format
+  findall
+  # should match any words in person names
+  findall Bet
+  # does not match if none have keyword
+  findall 23912039120
+  # matching should be case-insensitive
+  findall betsy
+
+  # find same non-matching keyword
+  findall dickson
+  # find multiple with some non-matching keywords
+  findall Char Bet
+
+##########################################################
+# test sort persons command
+##########################################################
+
+  # should sort the list by ascending on default
+  sort
+  # should sort the list by descending
+  sort desc
+  # should sort the list by ascending
+  sort asc
+
 ##########################################################
 # test delete person command
 ##########################################################
