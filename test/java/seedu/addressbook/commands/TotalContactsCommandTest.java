@@ -28,6 +28,7 @@ public class TotalContactsCommandTest {
         assertEquals(0, addressBook.getAllPersons().immutableListView().size());
     }
 
+    
     @Test
     public void afterAddingOneContact() throws Exception {
         for (int i=0; i<1; i++) {
