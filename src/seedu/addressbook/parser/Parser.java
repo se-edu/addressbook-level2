@@ -92,9 +92,6 @@ public class Parser {
         case TotalContactsCommand.COMMAND_WORD:
             return new TotalContactsCommand();
 
-        case RenameCommand.COMMAND_WORD:
-            return  prepareRename(arguments);
-
         case HelpCommand.COMMAND_WORD: // Fallthrough
         default:
             return new HelpCommand();
@@ -211,15 +208,6 @@ public class Parser {
         }
     }
 
-    private Command prepareRename(String args) {
-        try {
-            int contactIndex = parseArgsAsDisplayedIndex(args);
-            return new RenameCommand(contactIndex);
-        } catch (ParseException pe) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    RenameCommand.MESSAGE_USAGE));
-        }
-    }
 
     /**
      * Parses the given arguments string as a single index number.
