@@ -120,11 +120,6 @@ public class UniqueTagList implements Iterable<Tag> {
     }
 
     /**
-     * Sorts all tags in list.
-     */
-
-
-    /**
      * Replaces the Tags in this list with those in the argument tag list.
      */
     public void setTags(UniqueTagList replacement) {

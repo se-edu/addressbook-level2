@@ -215,7 +215,7 @@ public class Parser {
      *
      * @param args arguments string to parse as index number
      * @return the parsed index number
-     * @throws ParseException        if no region of the args string could be found for the index
+     * @throws ParseException if no region of the args string could be found for the index
      * @throws NumberFormatException the args string region is not a valid number
      */
     private int parseArgsAsDisplayedIndex(String args) throws ParseException, NumberFormatException {
