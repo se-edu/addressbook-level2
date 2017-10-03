@@ -79,6 +79,8 @@ public class AddressBookTest {
     @Test
     public void addPerson_emptyAddressBook() throws Exception {
         emptyAddressBook.addPerson(bobChaplin);
+        Person bobChaplinConfirmPerson = emptyAddressBook.getAllPersons().iterator().next();
+        assertTrue(bobChaplin.equals(bobChaplinConfirmPerson));
         emptyAddressBook.addPerson(charlieDouglas);
 
         UniqueTagList expectedTagList = new UniqueTagList(tagMathematician, tagScientist);
