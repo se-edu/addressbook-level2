@@ -75,11 +75,10 @@ public class AddressBookTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
-    
 
     @Test
     public void addPerson_emptyAddressBook() throws Exception {
-        emptyAddressBook.addPerson(bobChaplin); 
+        emptyAddressBook.addPerson(bobChaplin);
         Person bobChaplin_confirmPerson = emptyAddressBook.getAllPersons().iterator().next();
         assertTrue(bobChaplin.equals(bobChaplin_confirmPerson));
         emptyAddressBook.addPerson(charlieDouglas);
