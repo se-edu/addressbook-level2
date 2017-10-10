@@ -11,6 +11,7 @@ import java.util.Set;
 
 import seedu.addressbook.common.Utils;
 import seedu.addressbook.data.exception.DuplicateDataException;
+import seedu.addressbook.data.exception.IllegalValueException;
 
 
 /**
@@ -124,6 +125,21 @@ public class UniqueTagList implements Iterable<Tag> {
     public void setTags(UniqueTagList replacement) {
         this.internalList.clear();
         this.internalList.addAll(replacement.internalList);
+    }
+
+    public void add(Tag tag) throws DuplicateTagException {
+        if(contains(tag)) {
+            throw new DuplicateTagException();
+        }
+
+        this.internalList.add(tag);
+    }
+
+    public void remove(Tag tag) throws IllegalValueException{
+        if(!contains(tag)) {
+            throw new IllegalValueException("This tag does not exist.");
+        }
+        this.internalList.remove(tag);
     }
 
     @Override
