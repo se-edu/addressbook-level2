@@ -1,10 +1,13 @@
 package seedu.addressbook.data;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.data.person.Person;
 import seedu.addressbook.data.person.ReadOnlyPerson;
 import seedu.addressbook.data.person.UniquePersonList;
@@ -24,13 +27,16 @@ public class AddressBook {
 
     private final UniquePersonList allPersons;
     private final UniqueTagList allTags; // can contain tags not attached to any person
-
+    private final List<Tagging> taggings;
+    private final String ADD_TAG_OPERATION = "+";
+    private final String REMOVE_TAG_OPERATION = "-";
     /**
      * Creates an empty address book.
      */
     public AddressBook() {
         allPersons = new UniquePersonList();
         allTags = new UniqueTagList();
+        taggings = new ArrayList<>();
     }
 
     /**
@@ -46,6 +52,7 @@ public class AddressBook {
         for (Person p : allPersons) {
             syncTagsWithMasterList(p);
         }
+        this.taggings = new ArrayList<>();
     }
 
     /**
@@ -97,6 +104,28 @@ public class AddressBook {
      */
     public void removePerson(ReadOnlyPerson toRemove) throws PersonNotFoundException {
         allPersons.remove(toRemove);
+    }
+
+    public void addTag(Person person, Tag tag) throws PersonNotFoundException, UniqueTagList.DuplicateTagException {
+        if(!containsPerson(person)) {
+            throw new PersonNotFoundException();
+        }
+        person.addTag(tag);
+        taggings.add(new Tagging(person, tag, ADD_TAG_OPERATION));
+    }
+
+    public void removeTag(Person person, Tag tag) throws PersonNotFoundException, IllegalValueException {
+        if(!containsPerson(person)) {
+            throw new PersonNotFoundException();
+        }
+        person.removeTag(tag);
+        taggings.add(new Tagging(person, tag, REMOVE_TAG_OPERATION));
+    }
+
+    public void printAllTaggings() {
+        for(Tagging tagging : taggings) {
+            System.out.println(tagging);
+        }
     }
 
     /**
