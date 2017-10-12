@@ -6,7 +6,7 @@ import seedu.addressbook.data.person.Person;
  * Represents the adding or deleting of a Tag that happened during a session
  * Association class between Person and the deleted/added Tag
  */
-class Tagging {
+public class Tagging {
 
 	private final Person person;
 	private final Tag tag;
