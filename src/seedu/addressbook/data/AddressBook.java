@@ -2,7 +2,9 @@ package seedu.addressbook.data;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Set;
 
 import seedu.addressbook.data.person.Person;
@@ -11,6 +13,7 @@ import seedu.addressbook.data.person.UniquePersonList;
 import seedu.addressbook.data.person.UniquePersonList.DuplicatePersonException;
 import seedu.addressbook.data.person.UniquePersonList.PersonNotFoundException;
 import seedu.addressbook.data.tag.Tag;
+import seedu.addressbook.data.tag.Tagging;
 import seedu.addressbook.data.tag.UniqueTagList;
 
 /**
@@ -24,6 +27,7 @@ public class AddressBook {
 
     private final UniquePersonList allPersons;
     private final UniqueTagList allTags; // can contain tags not attached to any person
+    private final Queue<Tagging> taggings;
 
     /**
      * Creates an empty address book.
@@ -31,18 +35,19 @@ public class AddressBook {
     public AddressBook() {
         allPersons = new UniquePersonList();
         allTags = new UniqueTagList();
+        taggings = new LinkedList<>();
     }
 
     /**
      * Constructs an address book with the given data.
      * Also updates the tag list with any missing tags found in any person.
-     *
-     * @param persons external changes to this will not affect this address book
+     *  @param persons external changes to this will not affect this address book
      * @param tags external changes to this will not affect this address book
      */
     public AddressBook(UniquePersonList persons, UniqueTagList tags) {
         this.allPersons = new UniquePersonList(persons);
         this.allTags = new UniqueTagList(tags);
+        this.taggings = new LinkedList<>();
         for (Person p : allPersons) {
             syncTagsWithMasterList(p);
         }
