@@ -8,17 +8,17 @@ import seedu.addressbook.data.person.Person;
  */
 public class Tagging {
 
-	private final Person person;
-	private final Tag tag;
-	private final boolean isAdd;
+    private final Person person;
+    private final Tag tag;
+    private final boolean isAdd;
 
-	public Tagging(Person person, Tag tag, boolean isAdd) {
-		this.person = person;
-		this.tag = tag;
-		this.isAdd = isAdd;
-	}
+    public Tagging(Person person, Tag tag, boolean isAdd) {
+        this.person = person;
+        this.tag = tag;
+        this.isAdd = isAdd;
+    }
 
-	public String toString() {
-		return String.format("%c %s [%s]", isAdd ? '+' : '-', person.getName().fullName, tag.tagName);
-	}
+    public String toString() {
+        return String.format("%c %s [%s]", isAdd ? '+' : '-', person.getName().fullName, tag.tagName);
+    }
 }
