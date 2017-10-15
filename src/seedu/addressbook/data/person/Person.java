@@ -1,5 +1,7 @@
 package seedu.addressbook.data.person;
 
+import seedu.addressbook.data.exception.IllegalValueException;
+import seedu.addressbook.data.tag.Tag;
 import seedu.addressbook.data.tag.UniqueTagList;
 
 import java.util.Objects;
@@ -64,6 +66,24 @@ public class Person implements ReadOnlyPerson {
      */
     public void setTags(UniqueTagList replacement) {
         tags.setTags(replacement);
+    }
+
+    /**
+     * add tag to a given person tag list
+     * @param tag
+     * @throws UniqueTagList.DuplicateTagException
+     */
+    public void addTag(Tag tag) throws UniqueTagList.DuplicateTagException {
+        tags.addTag(tag);
+    }
+
+    /**
+     * removes a specific tag from a given person
+     * @param tag
+     * @throws IllegalValueException
+     */
+    public void removeTag(Tag tag) throws IllegalValueException {
+        tags.removeTag(tag);
     }
 
     @Override

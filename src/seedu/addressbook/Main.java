@@ -41,6 +41,7 @@ public class Main {
     public void run(String[] launchArgs) {
         start(launchArgs);
         runCommandLoopUntilExitCommand();
+        addressBook.printTaggings();
         exit();
     }
 

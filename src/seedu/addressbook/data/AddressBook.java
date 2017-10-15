@@ -1,16 +1,15 @@
 package seedu.addressbook.data;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
+import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.data.person.Person;
 import seedu.addressbook.data.person.ReadOnlyPerson;
 import seedu.addressbook.data.person.UniquePersonList;
 import seedu.addressbook.data.person.UniquePersonList.DuplicatePersonException;
 import seedu.addressbook.data.person.UniquePersonList.PersonNotFoundException;
 import seedu.addressbook.data.tag.Tag;
+import seedu.addressbook.data.tag.Tagging;
 import seedu.addressbook.data.tag.UniqueTagList;
 
 /**
@@ -24,13 +23,14 @@ public class AddressBook {
 
     private final UniquePersonList allPersons;
     private final UniqueTagList allTags; // can contain tags not attached to any person
-
+    private final ArrayList<Tagging> allTaggings;
     /**
      * Creates an empty address book.
      */
     public AddressBook() {
         allPersons = new UniquePersonList();
         allTags = new UniqueTagList();
+        allTaggings = new ArrayList<Tagging>();
     }
 
     /**
@@ -46,6 +46,7 @@ public class AddressBook {
         for (Person p : allPersons) {
             syncTagsWithMasterList(p);
         }
+        this.allTaggings = new ArrayList<Tagging>();
     }
 
     /**
@@ -134,5 +135,27 @@ public class AddressBook {
                 || (other instanceof AddressBook // instanceof handles nulls
                         && this.allPersons.equals(((AddressBook) other).allPersons)
                         && this.allTags.equals(((AddressBook) other).allTags));
+    }
+
+    public void addTag(Person person, Tag tag) throws PersonNotFoundException, UniqueTagList.DuplicateTagException {
+        if (!allPersons.contains(person)) {
+            throw new PersonNotFoundException();
+        }
+        person.addTag(tag);
+        allTaggings.add(new Tagging(person, tag, "ADD"));
+    }
+
+    public void removeTag(Person person, Tag tag) throws PersonNotFoundException, IllegalValueException {
+        if (!allPersons.contains(person)) {
+            throw new PersonNotFoundException();
+        }
+        person.removeTag(tag);
+        allTaggings.add(new Tagging(person, tag, "REMOVE"));
+    }
+
+    public void printTaggings() {
+        for (Tagging t : allTaggings) {
+            System.out.println(t);
+        }
     }
 }
