@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
-
 import seedu.addressbook.common.Utils;
 import seedu.addressbook.data.exception.DuplicateDataException;
 
@@ -139,5 +139,19 @@ public class UniquePersonList implements Iterable<Person> {
         return other == this // short circuit if same object
                 || (other instanceof UniquePersonList // instanceof handles nulls
                         && this.internalList.equals(((UniquePersonList) other).internalList));
+    }
+
+    /**
+     * Sorts the list according to alphabetical order
+     */
+    public void sort() {
+        if (internalList.size() > 0) {
+            internalList.sort(new Comparator<Person>() {
+                @Override
+                public int compare(final Person object1, final Person object2) {
+                    return object1.getName().toString().compareTo(object2.getName().toString());
+                }
+            });
+        }
     }
 }
