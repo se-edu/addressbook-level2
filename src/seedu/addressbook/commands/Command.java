@@ -6,6 +6,8 @@ import seedu.addressbook.data.person.ReadOnlyPerson;
 
 import java.util.List;
 
+import javax.swing.text.View;
+
 import static seedu.addressbook.ui.TextUi.DISPLAYED_INDEX_OFFSET;
 
 /**
@@ -16,6 +18,17 @@ public class Command {
     protected List<? extends ReadOnlyPerson> relevantPersons;
     private int targetIndex = -1;
 
+    private AddCommand addCommand;
+    private ClearCommand clearCommand;
+    private DeleteCommand deleteCommand;
+    private ExitCommand exitCommand;
+    private FindCommand findCommand;
+    private HelpCommand helpCommand;
+    private IncorrectCommand incorrectCommand;
+    private ListCommand listCommand;
+    private ViewAllCommand viewAllCommand;
+    private ViewCommand viewCommand;
+
     /**
      * @param targetIndex last visible listing index of the target person
      */
@@ -24,6 +37,46 @@ public class Command {
     }
 
     protected Command() {
+    }
+
+    public Command(AddCommand addCommand) {
+        this.addCommand = addCommand;
+    }
+
+    public Command(ClearCommand clearCommand) {
+        this.clearCommand = clearCommand;
+    }
+
+    public Command(DeleteCommand deleteCommand) {
+        this.deleteCommand = deleteCommand;
+    }
+
+    public Command(ExitCommand exitCommand) {
+        this.exitCommand = exitCommand;
+    }
+
+    public Command(FindCommand findCommand) {
+        this.findCommand = findCommand;
+    }
+
+    public Command(HelpCommand helpCommand) {
+        this.helpCommand = helpCommand;
+    }
+
+    public Command(IncorrectCommand incorrectCommand) {
+        this.incorrectCommand = incorrectCommand;
+    }
+
+    public Command(ListCommand listCommand) {
+        this.listCommand = listCommand;
+    }
+
+    public Command(ViewAllCommand viewAllCommand) {
+        this.viewAllCommand = viewAllCommand;
+    }
+
+    public Command(ViewCommand viewCommand) {
+        this.viewCommand = viewCommand;
     }
 
     /**
