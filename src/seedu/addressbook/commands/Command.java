@@ -118,6 +118,32 @@ public class Command {
         }
     };
 
+    public Class getCommandClass() {
+        if (addCommand != null) {
+            return addCommand.getClass();
+        } else if (clearCommand != null) {
+            return clearCommand.getClass();
+        } else if (deleteCommand != null) {
+            return deleteCommand.getClass();
+        } else if (exitCommand != null) {
+            return exitCommand.getClass();
+        } else if (findCommand != null) {
+            return findCommand.getClass();
+        } else if (helpCommand != null) {
+            return helpCommand.getClass();
+        } else if (incorrectCommand != null) {
+            return incorrectCommand.getClass();
+        } else if (listCommand != null) {
+            return listCommand.getClass();
+        } else if (viewAllCommand != null) {
+            return viewAllCommand.getClass();
+        } else if (viewCommand != null) {
+            return viewCommand.getClass();
+        } else {
+            throw new UnsupportedOperationException("None of the commands are valid.");
+        }
+    }
+
     /**
      * Supplies the data the command will operate on.
      */
