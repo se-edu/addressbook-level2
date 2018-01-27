@@ -119,8 +119,7 @@ public class AddCommandTest {
         Person p = TestUtil.generateTestPerson();
         AddCommand command = new AddCommand(p);
         AddressBook book = new AddressBook();
-        command.setData(book, EMPTY_PERSON_LIST);
-        CommandResult result = command.execute();
+        CommandResult result = command.execute(book);
         UniquePersonList people = book.getAllPersons();
 
         assertTrue(people.contains(p));
@@ -135,8 +134,7 @@ public class AddCommandTest {
         AddressBook book = new AddressBook();
         book.addPerson(p);
         AddCommand command = new AddCommand(p);
-        command.setData(book, EMPTY_PERSON_LIST);
-        CommandResult result = command.execute();
+        CommandResult result = command.execute(book);
 
         assertFalse(result.getRelevantPersons().isPresent());
         assertEquals(AddCommand.MESSAGE_DUPLICATE_PERSON, result.feedbackToUser);

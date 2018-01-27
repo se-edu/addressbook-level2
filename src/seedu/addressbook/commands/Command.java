@@ -14,8 +14,8 @@ import static seedu.addressbook.ui.TextUi.DISPLAYED_INDEX_OFFSET;
  * Represents an executable command.
  */
 public class Command {
-    protected AddressBook addressBook;
-    protected List<? extends ReadOnlyPerson> relevantPersons;
+    private AddressBook addressBook;
+    private List<? extends ReadOnlyPerson> relevantPersons;
     private int targetIndex = -1;
 
     private AddCommand addCommand;
@@ -94,25 +94,25 @@ public class Command {
      */
     public CommandResult execute(){
         if (addCommand != null) {
-            return addCommand.execute();
+            return addCommand.execute(addressBook);
         } else if (clearCommand != null) {
-            return clearCommand.execute();
+            return clearCommand.execute(addressBook);
         } else if (deleteCommand != null) {
-            return deleteCommand.execute();
+            return deleteCommand.execute(addressBook, relevantPersons);
         } else if (exitCommand != null) {
             return exitCommand.execute();
         } else if (findCommand != null) {
-            return findCommand.execute();
+            return findCommand.execute(addressBook);
         } else if (helpCommand != null) {
             return helpCommand.execute();
         } else if (incorrectCommand != null) {
             return incorrectCommand.execute();
         } else if (listCommand != null) {
-            return listCommand.execute();
+            return listCommand.execute(addressBook);
         } else if (viewAllCommand != null) {
-            return viewAllCommand.execute();
+            return viewAllCommand.execute(addressBook, relevantPersons);
         } else if (viewCommand != null) {
-            return viewCommand.execute();
+            return viewCommand.execute(addressBook, relevantPersons);
         } else {
             throw new UnsupportedOperationException("None of the commands are valid.");
         }
@@ -124,15 +124,6 @@ public class Command {
     public void setData(AddressBook addressBook, List<? extends ReadOnlyPerson> relevantPersons) {
         this.addressBook = addressBook;
         this.relevantPersons = relevantPersons;
-    }
-
-    /**
-     * Extracts the the target person in the last shown list from the given arguments.
-     *
-     * @throws IndexOutOfBoundsException if the target index is out of bounds of the last viewed listing
-     */
-    protected ReadOnlyPerson getTargetPerson() throws IndexOutOfBoundsException {
-        return relevantPersons.get(getTargetIndex() - DISPLAYED_INDEX_OFFSET);
     }
 
     public int getTargetIndex() {

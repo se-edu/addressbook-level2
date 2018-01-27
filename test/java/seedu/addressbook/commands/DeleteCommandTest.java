@@ -105,9 +105,10 @@ public class DeleteCommandTest {
      * Executes the command, and checks that the execution was what we had expected.
      */
     private void assertCommandBehaviour(DeleteCommand deleteCommand, String expectedMessage,
+                                        AddressBook addressBook, List<? extends ReadOnlyPerson> relevantPersons,
                                         AddressBook expectedAddressBook, AddressBook actualAddressBook) {
 
-        CommandResult result = deleteCommand.execute();
+        CommandResult result = deleteCommand.execute(addressBook, relevantPersons);
 
         assertEquals(expectedMessage, result.feedbackToUser);
         assertEquals(expectedAddressBook.getAllPersons(), actualAddressBook.getAllPersons());
@@ -122,7 +123,7 @@ public class DeleteCommandTest {
         String expectedMessage = Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 
         DeleteCommand command = createDeleteCommand(invalidVisibleIndex, addressBook, displayList);
-        assertCommandBehaviour(command, expectedMessage, addressBook, addressBook);
+        assertCommandBehaviour(command, expectedMessage, addressBook, displayList, addressBook, addressBook);
     }
 
     /**
@@ -135,7 +136,7 @@ public class DeleteCommandTest {
         String expectedMessage = Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK;
 
         DeleteCommand command = createDeleteCommand(visibleIndex, addressBook, displayList);
-        assertCommandBehaviour(command, expectedMessage, addressBook, addressBook);
+        assertCommandBehaviour(command, expectedMessage, addressBook, displayList, addressBook, addressBook);
     }
 
     /**
@@ -157,6 +158,7 @@ public class DeleteCommandTest {
         AddressBook actualAddressBook = TestUtil.clone(addressBook);
 
         DeleteCommand command = createDeleteCommand(targetVisibleIndex, actualAddressBook, displayList);
-        assertCommandBehaviour(command, expectedMessage, expectedAddressBook, actualAddressBook);
+        assertCommandBehaviour(command, expectedMessage, actualAddressBook, displayList, expectedAddressBook,
+                actualAddressBook);
     }
 }
