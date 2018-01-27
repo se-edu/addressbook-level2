@@ -1,8 +1,13 @@
 package seedu.addressbook.commands;
 
 import seedu.addressbook.common.Messages;
+import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.person.ReadOnlyPerson;
 import seedu.addressbook.data.person.UniquePersonList.PersonNotFoundException;
+
+import java.util.List;
+
+import static seedu.addressbook.ui.TextUi.DISPLAYED_INDEX_OFFSET;
 
 
 /**
@@ -24,11 +29,9 @@ public class DeleteCommand extends Command {
         super(targetVisibleIndex);
     }
 
-
-    @Override
-    public CommandResult execute() {
+    public CommandResult execute(AddressBook addressBook, List<? extends ReadOnlyPerson> relevantPersons) {
         try {
-            final ReadOnlyPerson target = getTargetPerson();
+            final ReadOnlyPerson target = getTargetPerson(relevantPersons);
             addressBook.removePerson(target);
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, target));
 
@@ -39,4 +42,13 @@ public class DeleteCommand extends Command {
         }
     }
 
+    /**
+     * Extracts the the target person in the last shown list from the given arguments.
+     *
+     * @throws IndexOutOfBoundsException if the target index is out of bounds of the last viewed listing
+     */
+    private ReadOnlyPerson getTargetPerson(List<? extends ReadOnlyPerson> relevantPersons)
+            throws IndexOutOfBoundsException {
+        return relevantPersons.get(getTargetIndex() - DISPLAYED_INDEX_OFFSET);
+    }
 }

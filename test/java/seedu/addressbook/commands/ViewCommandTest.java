@@ -22,6 +22,8 @@ import seedu.addressbook.data.tag.UniqueTagList;
 import seedu.addressbook.util.TestUtil;
 import seedu.addressbook.util.TypicalPersons;
 
+import javax.swing.text.View;
+
 public class ViewCommandTest {
     private TypicalPersons td = new TypicalPersons();
 
@@ -113,11 +115,13 @@ public class ViewCommandTest {
 
         String expectedMessage = String.format(ViewCommand.MESSAGE_VIEW_PERSON_DETAILS,
                                                 personToBeViewed.getAsTextHidePrivate());
-        assertViewBehavior(new ViewCommand(targetVisibleIndex), addressBook, relevantPersons, expectedMessage);
+        ViewCommand viewCommand = new ViewCommand(targetVisibleIndex);
+        assertViewBehavior(new Command(viewCommand), addressBook, relevantPersons, expectedMessage);
 
         expectedMessage = String.format(ViewAllCommand.MESSAGE_VIEW_PERSON_DETAILS,
                                                 personToBeViewed.getAsTextShowAll());
-        assertViewBehavior(new ViewAllCommand(targetVisibleIndex), addressBook, relevantPersons, expectedMessage);
+        ViewAllCommand viewAllCommand = new ViewAllCommand(targetVisibleIndex);
+        assertViewBehavior(new Command(viewAllCommand), addressBook, relevantPersons, expectedMessage);
     }
 
     /**
@@ -125,8 +129,10 @@ public class ViewCommandTest {
      */
     private static void assertViewError(AddressBook addressBook, List<ReadOnlyPerson> relevantPersons,
                                                         int targetVisibleIndex, String expectedMessage) {
-        assertViewBehavior(new ViewCommand(targetVisibleIndex), addressBook, relevantPersons, expectedMessage);
-        assertViewBehavior(new ViewAllCommand(targetVisibleIndex), addressBook, relevantPersons, expectedMessage);
+        ViewCommand viewCommand = new ViewCommand(targetVisibleIndex);
+        assertViewBehavior(new Command(viewCommand), addressBook, relevantPersons, expectedMessage);
+        ViewAllCommand viewAllCommand = new ViewAllCommand(targetVisibleIndex);
+        assertViewBehavior(new Command(viewAllCommand), addressBook, relevantPersons, expectedMessage);
     }
 
     /**
