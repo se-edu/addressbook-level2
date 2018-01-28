@@ -110,7 +110,7 @@ public class ParserTest {
     public void parse_deleteCommandNumericArg_indexParsedCorrectly() {
         final int testIndex = 1;
         final String input = "delete " + testIndex;
-        final DeleteCommand result = parseAndAssertCommandType(input, DeleteCommand.class);
+        final Command result = parseAndAssertCommandType(input, DeleteCommand.class);
         assertEquals(result.getTargetIndex(), testIndex);
     }
 
@@ -132,7 +132,7 @@ public class ParserTest {
     public void parse_viewCommandNumericArg_indexParsedCorrectly() {
         final int testIndex = 2;
         final String input = "view " + testIndex;
-        final ViewCommand result = parseAndAssertCommandType(input, ViewCommand.class);
+        final Command result = parseAndAssertCommandType(input, ViewCommand.class);
         assertEquals(result.getTargetIndex(), testIndex);
     }
 
@@ -155,7 +155,7 @@ public class ParserTest {
     public void parse_viewAllCommandNumericArg_indexParsedCorrectly() {
         final int testIndex = 3;
         final String input = "viewall " + testIndex;
-        final ViewAllCommand result = parseAndAssertCommandType(input, ViewAllCommand.class);
+        final Command result = parseAndAssertCommandType(input, ViewAllCommand.class);
         assertEquals(result.getTargetIndex(), testIndex);
     }
 
@@ -181,7 +181,7 @@ public class ParserTest {
         final Set<String> keySet = new HashSet<>(Arrays.asList(keywords));
 
         final String input = "find " + String.join(" ", keySet);
-        final FindCommand result =
+        final Command result =
                 parseAndAssertCommandType(input, FindCommand.class);
         assertEquals(keySet, result.getKeywords());
     }
@@ -193,7 +193,7 @@ public class ParserTest {
 
         // duplicate every keyword
         final String input = "find " + String.join(" ", keySet) + " " + String.join(" ", keySet);
-        final FindCommand result =
+        final Command result =
                 parseAndAssertCommandType(input, FindCommand.class);
         assertEquals(keySet, result.getKeywords());
     }
@@ -252,7 +252,7 @@ public class ParserTest {
     public void parse_addCommandValidPersonData_parsedCorrectly() {
         final Person testPerson = generateTestPerson();
         final String input = convertPersonToAddCommandString(testPerson);
-        final AddCommand result = parseAndAssertCommandType(input, AddCommand.class);
+        final Command result = parseAndAssertCommandType(input, AddCommand.class);
         assertEquals(result.getPerson(), testPerson);
     }
 
@@ -265,7 +265,7 @@ public class ParserTest {
             input += " t/" + tag.tagName;
         }
 
-        final AddCommand result = parseAndAssertCommandType(input, AddCommand.class);
+        final Command result = parseAndAssertCommandType(input, AddCommand.class);
         assertEquals(result.getPerson(), testPerson);
     }
 
@@ -304,7 +304,7 @@ public class ParserTest {
      */
     private void parseAndAssertIncorrectWithMessage(String feedbackMessage, String... inputs) {
         for (String input : inputs) {
-            final IncorrectCommand result = parseAndAssertCommandType(input, IncorrectCommand.class);
+            final Command result = parseAndAssertCommandType(input, IncorrectCommand.class);
             assertEquals(result.feedbackToUser, feedbackMessage);
         }
     }
@@ -316,9 +316,9 @@ public class ParserTest {
      * @param expectedCommandClass expected class of returned command
      * @return the parsed command object
      */
-    private <T extends Command> T parseAndAssertCommandType(String input, Class<T> expectedCommandClass) {
+    private Command parseAndAssertCommandType(String input, Class expectedCommandClass) {
         final Command result = parser.parseCommand(input);
-        assertTrue(result.getClass().isAssignableFrom(expectedCommandClass));
-        return (T) result;
+        assertTrue(result.getCommandClass() == expectedCommandClass);
+        return result;
     }
 }

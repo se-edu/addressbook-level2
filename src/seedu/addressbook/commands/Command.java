@@ -4,7 +4,9 @@ import seedu.addressbook.common.Messages;
 import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.person.ReadOnlyPerson;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.swing.text.View;
 
@@ -14,6 +16,8 @@ import static seedu.addressbook.ui.TextUi.DISPLAYED_INDEX_OFFSET;
  * Represents an executable command.
  */
 public class Command {
+    public final String feedbackToUser;
+
     private AddressBook addressBook;
     private List<? extends ReadOnlyPerson> relevantPersons;
     private int targetIndex = -1;
@@ -34,49 +38,61 @@ public class Command {
      */
     public Command(int targetIndex) {
         this.setTargetIndex(targetIndex);
+        this.feedbackToUser = null;
     }
 
     protected Command() {
+        this.feedbackToUser = null;
     }
 
     public Command(AddCommand addCommand) {
         this.addCommand = addCommand;
+        this.feedbackToUser = null;
     }
 
     public Command(ClearCommand clearCommand) {
         this.clearCommand = clearCommand;
+        this.feedbackToUser = null;
     }
 
     public Command(DeleteCommand deleteCommand) {
         this.deleteCommand = deleteCommand;
+        this.feedbackToUser = null;
     }
 
     public Command(ExitCommand exitCommand) {
         this.exitCommand = exitCommand;
+        this.feedbackToUser = null;
     }
 
     public Command(FindCommand findCommand) {
         this.findCommand = findCommand;
+        this.feedbackToUser = null;
     }
 
     public Command(HelpCommand helpCommand) {
         this.helpCommand = helpCommand;
+        this.feedbackToUser = null;
     }
 
     public Command(IncorrectCommand incorrectCommand) {
         this.incorrectCommand = incorrectCommand;
+        this.feedbackToUser = incorrectCommand.feedbackToUser;
     }
 
     public Command(ListCommand listCommand) {
         this.listCommand = listCommand;
+        this.feedbackToUser = null;
     }
 
     public Command(ViewAllCommand viewAllCommand) {
         this.viewAllCommand = viewAllCommand;
+        this.feedbackToUser = null;
     }
 
     public Command(ViewCommand viewCommand) {
         this.viewCommand = viewCommand;
+        this.feedbackToUser = null;
     }
 
     /**
@@ -150,6 +166,28 @@ public class Command {
     public void setData(AddressBook addressBook, List<? extends ReadOnlyPerson> relevantPersons) {
         this.addressBook = addressBook;
         this.relevantPersons = relevantPersons;
+    }
+
+    /**
+     * Returns a copy of keywords from find command.
+     */
+    public Set<String> getKeywords() {
+        if (findCommand != null) {
+            return findCommand.getKeywords();
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Returns a copy of to add person from add command.
+     */
+    public ReadOnlyPerson getPerson() {
+        if (addCommand != null) {
+            return addCommand.getPerson();
+        } else {
+            return null;
+        }
     }
 
     public int getTargetIndex() {
