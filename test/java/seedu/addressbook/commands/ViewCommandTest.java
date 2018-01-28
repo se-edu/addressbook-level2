@@ -22,8 +22,6 @@ import seedu.addressbook.data.tag.UniqueTagList;
 import seedu.addressbook.util.TestUtil;
 import seedu.addressbook.util.TypicalPersons;
 
-import javax.swing.text.View;
-
 public class ViewCommandTest {
     private TypicalPersons td = new TypicalPersons();
 
