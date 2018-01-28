@@ -13,7 +13,7 @@ import static seedu.addressbook.ui.TextUi.DISPLAYED_INDEX_OFFSET;
 /**
  * Deletes a person identified using it's last displayed index from the address book.
  */
-public class DeleteCommand extends Command {
+public class DeleteCommand {
 
     public static final String COMMAND_WORD = "delete";
 
@@ -24,9 +24,11 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
+    private int targetVisibleIndex = -1;
+
 
     public DeleteCommand(int targetVisibleIndex) {
-        super(targetVisibleIndex);
+        this.targetVisibleIndex = targetVisibleIndex;
     }
 
     public CommandResult execute(AddressBook addressBook, List<? extends ReadOnlyPerson> relevantPersons) {
@@ -40,6 +42,14 @@ public class DeleteCommand extends Command {
         } catch (PersonNotFoundException pnfe) {
             return new CommandResult(Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK);
         }
+    }
+
+    public int getTargetIndex() {
+        return targetVisibleIndex;
+    }
+
+    public void setTargetIndex(int targetVisibleIndex) {
+        this.targetVisibleIndex = targetVisibleIndex;
     }
 
     /**

@@ -20,7 +20,6 @@ public class Command {
 
     private AddressBook addressBook;
     private List<? extends ReadOnlyPerson> relevantPersons;
-    private int targetIndex = -1;
 
     private AddCommand addCommand;
     private ClearCommand clearCommand;
@@ -32,14 +31,6 @@ public class Command {
     private ListCommand listCommand;
     private ViewAllCommand viewAllCommand;
     private ViewCommand viewCommand;
-
-    /**
-     * @param targetIndex last visible listing index of the target person
-     */
-    public Command(int targetIndex) {
-        this.setTargetIndex(targetIndex);
-        this.feedbackToUser = null;
-    }
 
     protected Command() {
         this.feedbackToUser = null;
@@ -191,10 +182,24 @@ public class Command {
     }
 
     public int getTargetIndex() {
-        return targetIndex;
+        if (deleteCommand != null) {
+            return deleteCommand.getTargetIndex();
+        } else if (viewAllCommand != null) {
+            return viewAllCommand.getTargetIndex();
+        } else if (viewCommand != null) {
+            return viewCommand.getTargetIndex();
+        } else {
+            return -1;
+        }
     }
 
     public void setTargetIndex(int targetIndex) {
-        this.targetIndex = targetIndex;
+        if (deleteCommand != null) {
+            deleteCommand.setTargetIndex(targetIndex);
+        } else if (viewAllCommand != null) {
+            viewAllCommand.setTargetIndex(targetIndex);
+        } else if (viewCommand != null) {
+            viewCommand.setTargetIndex(targetIndex);
+        }
     }
 }

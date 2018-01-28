@@ -5,7 +5,7 @@ import seedu.addressbook.data.AddressBook;
 /**
  * Clears the address book.
  */
-public class ClearCommand extends Command {
+public class ClearCommand {
 
     public static final String COMMAND_WORD = "clear";
     public static final String MESSAGE_USAGE = "Clears address book permanently.\n"

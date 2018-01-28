@@ -18,7 +18,7 @@ import seedu.addressbook.data.tag.UniqueTagList;
 /**
  * Adds a person to the address book.
  */
-public class AddCommand extends Command {
+public class AddCommand {
 
     public static final String COMMAND_WORD = "add";
 

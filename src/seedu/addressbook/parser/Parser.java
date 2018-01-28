@@ -67,7 +67,9 @@ public class Parser {
     public Command parseCommand(String userInput) {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+            IncorrectCommand incorrectCommand = new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+            return new Command(incorrectCommand);
         }
 
         final String commandWord = matcher.group("commandWord");
@@ -82,13 +84,13 @@ public class Parser {
             return prepareDelete(arguments);
 
         case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+            return new Command(new ClearCommand());
 
         case FindCommand.COMMAND_WORD:
             return prepareFind(arguments);
 
         case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            return new Command(new ListCommand());
 
         case ViewCommand.COMMAND_WORD:
             return prepareView(arguments);
@@ -97,11 +99,11 @@ public class Parser {
             return prepareViewAll(arguments);
 
         case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
+            return new Command(new ExitCommand());
 
         case HelpCommand.COMMAND_WORD: // Fallthrough
         default:
-            return new HelpCommand();
+            return new Command(new HelpCommand());
         }
     }
 

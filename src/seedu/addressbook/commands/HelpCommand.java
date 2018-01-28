@@ -4,7 +4,7 @@ package seedu.addressbook.commands;
 /**
  * Shows help instructions.
  */
-public class HelpCommand extends Command {
+public class HelpCommand {
 
     public static final String COMMAND_WORD = "help";
 

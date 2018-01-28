@@ -13,7 +13,7 @@ import static seedu.addressbook.ui.TextUi.DISPLAYED_INDEX_OFFSET;
  * Shows all details of the person identified using the last displayed index.
  * Private contact details are shown.
  */
-public class ViewAllCommand extends Command {
+public class ViewAllCommand {
 
     public static final String COMMAND_WORD = "viewall";
 
@@ -24,9 +24,10 @@ public class ViewAllCommand extends Command {
 
     public static final String MESSAGE_VIEW_PERSON_DETAILS = "Viewing person: %1$s";
 
+    private int targetVisibleIndex = -1;
 
     public ViewAllCommand(int targetVisibleIndex) {
-        super(targetVisibleIndex);
+        this.targetVisibleIndex = targetVisibleIndex;
     }
 
     public CommandResult execute(AddressBook addressBook, List<? extends ReadOnlyPerson> relevantPersons) {
@@ -39,6 +40,14 @@ public class ViewAllCommand extends Command {
         } catch (IndexOutOfBoundsException ie) {
             return new CommandResult(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
+    }
+
+    public int getTargetIndex() {
+        return targetVisibleIndex;
+    }
+
+    public void setTargetIndex(int targetVisibleIndex) {
+        this.targetVisibleIndex = targetVisibleIndex;
     }
 
     /**
