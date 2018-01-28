@@ -117,7 +117,8 @@ public class Parser {
         final Matcher matcher = PERSON_DATA_ARGS_FORMAT.matcher(args.trim());
         // Validate arg string format
         if (!matcher.matches()) {
-            IncorrectCommand incorrectCommand = new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            IncorrectCommand incorrectCommand = new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
             return new Command(incorrectCommand);
         }
         try {
@@ -176,7 +177,8 @@ public class Parser {
             DeleteCommand deleteCommand = new DeleteCommand(targetIndex);
             return new Command(deleteCommand);
         } catch (ParseException pe) {
-            IncorrectCommand incorrectCommand = new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+            IncorrectCommand incorrectCommand = new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
             return new Command(incorrectCommand);
         } catch (NumberFormatException nfe) {
             IncorrectCommand incorrectCommand = new IncorrectCommand(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
