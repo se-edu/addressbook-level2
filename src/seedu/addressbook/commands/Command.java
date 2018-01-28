@@ -1,11 +1,11 @@
 package seedu.addressbook.commands;
 
+import java.util.List;
+import java.util.Set;
+
 import seedu.addressbook.common.Messages;
 import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.person.ReadOnlyPerson;
-
-import java.util.List;
-import java.util.Set;
 
 /**
  * Represents an executable command.
@@ -94,7 +94,7 @@ public class Command {
     /**
      * Executes the command and returns the result.
      */
-    public CommandResult execute(){
+    public CommandResult execute() {
         if (addCommand != null) {
             return addCommand.execute(addressBook);
         } else if (clearCommand != null) {

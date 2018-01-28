@@ -1,13 +1,13 @@
 package seedu.addressbook.commands;
 
+import static seedu.addressbook.ui.TextUi.DISPLAYED_INDEX_OFFSET;
+
+import java.util.List;
+
 import seedu.addressbook.common.Messages;
 import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.person.ReadOnlyPerson;
 import seedu.addressbook.data.person.UniquePersonList.PersonNotFoundException;
-
-import java.util.List;
-
-import static seedu.addressbook.ui.TextUi.DISPLAYED_INDEX_OFFSET;
 
 
 /**
