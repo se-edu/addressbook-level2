@@ -115,10 +115,11 @@ public class Parser {
         final Matcher matcher = PERSON_DATA_ARGS_FORMAT.matcher(args.trim());
         // Validate arg string format
         if (!matcher.matches()) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            IncorrectCommand incorrectCommand = new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            return new Command(incorrectCommand);
         }
         try {
-            return new AddCommand(
+            AddCommand addCommand = new AddCommand(
                     matcher.group("name"),
 
                     matcher.group("phone"),
@@ -132,8 +133,10 @@ public class Parser {
 
                     getTagsFromArgs(matcher.group("tagArguments"))
             );
+            return new Command(addCommand);
         } catch (IllegalValueException ive) {
-            return new IncorrectCommand(ive.getMessage());
+            IncorrectCommand incorrectCommand = new IncorrectCommand(ive.getMessage());
+            return new Command(incorrectCommand);
         }
     }
 
@@ -168,11 +171,14 @@ public class Parser {
     private Command prepareDelete(String args) {
         try {
             final int targetIndex = parseArgsAsDisplayedIndex(args);
-            return new DeleteCommand(targetIndex);
+            DeleteCommand deleteCommand = new DeleteCommand(targetIndex);
+            return new Command(deleteCommand);
         } catch (ParseException pe) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+            IncorrectCommand incorrectCommand = new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+            return new Command(incorrectCommand);
         } catch (NumberFormatException nfe) {
-            return new IncorrectCommand(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            IncorrectCommand incorrectCommand = new IncorrectCommand(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            return new Command(incorrectCommand);
         }
     }
 
@@ -186,12 +192,15 @@ public class Parser {
 
         try {
             final int targetIndex = parseArgsAsDisplayedIndex(args);
-            return new ViewCommand(targetIndex);
+            ViewCommand viewCommand = new ViewCommand(targetIndex);
+            return new Command(viewCommand);
         } catch (ParseException pe) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    ViewCommand.MESSAGE_USAGE));
+            IncorrectCommand incorrectCommand = new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
+            return new Command(incorrectCommand);
         } catch (NumberFormatException nfe) {
-            return new IncorrectCommand(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            IncorrectCommand incorrectCommand = new IncorrectCommand(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            return new Command(incorrectCommand);
         }
     }
 
@@ -205,12 +214,15 @@ public class Parser {
 
         try {
             final int targetIndex = parseArgsAsDisplayedIndex(args);
-            return new ViewAllCommand(targetIndex);
+            ViewAllCommand viewAllCommand = new ViewAllCommand(targetIndex);
+            return new Command(viewAllCommand);
         } catch (ParseException pe) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    ViewAllCommand.MESSAGE_USAGE));
+            IncorrectCommand incorrectCommand = new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewAllCommand.MESSAGE_USAGE));
+            return new Command(incorrectCommand);
         } catch (NumberFormatException nfe) {
-            return new IncorrectCommand(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            IncorrectCommand incorrectCommand = new IncorrectCommand(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            return new Command(incorrectCommand);
         }
     }
 
@@ -240,14 +252,16 @@ public class Parser {
     private Command prepareFind(String args) {
         final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            IncorrectCommand incorrectCommand = new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     FindCommand.MESSAGE_USAGE));
+            return new Command(incorrectCommand);
         }
 
         // keywords delimited by whitespace
         final String[] keywords = matcher.group("keywords").split("\\s+");
         final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
-        return new FindCommand(keywordSet);
+        FindCommand findCommand = new FindCommand(keywordSet);
+        return new Command(findCommand);
     }
 
 
