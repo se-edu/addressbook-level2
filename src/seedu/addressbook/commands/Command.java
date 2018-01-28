@@ -4,13 +4,8 @@ import seedu.addressbook.common.Messages;
 import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.person.ReadOnlyPerson;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import javax.swing.text.View;
-
-import static seedu.addressbook.ui.TextUi.DISPLAYED_INDEX_OFFSET;
 
 /**
  * Represents an executable command.
