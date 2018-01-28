@@ -3,7 +3,7 @@ package seedu.addressbook.commands;
 /**
  * Terminates the program.
  */
-public class ExitCommand extends Command {
+public class ExitCommand {
 
     public static final String COMMAND_WORD = "exit";
 
@@ -16,6 +16,6 @@ public class ExitCommand extends Command {
     }
 
     public static boolean isExit(Command command) {
-        return command instanceof ExitCommand; // instanceof returns false if it is null
+        return command.getCommandClass() == ExitCommand.class; // instanceof returns false if it is null
     }
 }

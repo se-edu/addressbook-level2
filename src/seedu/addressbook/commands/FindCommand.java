@@ -13,7 +13,7 @@ import seedu.addressbook.data.person.ReadOnlyPerson;
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
  * Keyword matching is case sensitive.
  */
-public class FindCommand extends Command {
+public class FindCommand {
 
     public static final String COMMAND_WORD = "find";
 
@@ -37,7 +37,7 @@ public class FindCommand extends Command {
 
     public CommandResult execute(AddressBook addressBook) {
         final List<ReadOnlyPerson> personsFound = getPersonsWithNameContainingAnyKeyword(addressBook, keywords);
-        return new CommandResult(getMessageForPersonListShownSummary(personsFound), personsFound);
+        return new CommandResult(Command.getMessageForPersonListShownSummary(personsFound), personsFound);
     }
 
     /**

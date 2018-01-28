@@ -88,20 +88,6 @@ public class DeleteCommandTest {
     }
 
     /**
-     * Creates a new delete command.
-     *
-     * @param targetVisibleIndex of the person that we want to delete
-     */
-    private DeleteCommand createDeleteCommand(int targetVisibleIndex, AddressBook addressBook,
-                                                                      List<ReadOnlyPerson> displayList) {
-
-        DeleteCommand command = new DeleteCommand(targetVisibleIndex);
-        command.setData(addressBook, displayList);
-
-        return command;
-    }
-
-    /**
      * Executes the command, and checks that the execution was what we had expected.
      */
     private void assertCommandBehaviour(DeleteCommand deleteCommand, String expectedMessage,
@@ -122,7 +108,7 @@ public class DeleteCommandTest {
 
         String expectedMessage = Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 
-        DeleteCommand command = createDeleteCommand(invalidVisibleIndex, addressBook, displayList);
+        DeleteCommand command = new DeleteCommand(invalidVisibleIndex);
         assertCommandBehaviour(command, expectedMessage, addressBook, displayList, addressBook, addressBook);
     }
 
@@ -135,7 +121,7 @@ public class DeleteCommandTest {
 
         String expectedMessage = Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK;
 
-        DeleteCommand command = createDeleteCommand(visibleIndex, addressBook, displayList);
+        DeleteCommand command = new DeleteCommand(visibleIndex);
         assertCommandBehaviour(command, expectedMessage, addressBook, displayList, addressBook, addressBook);
     }
 
@@ -157,7 +143,7 @@ public class DeleteCommandTest {
 
         AddressBook actualAddressBook = TestUtil.clone(addressBook);
 
-        DeleteCommand command = createDeleteCommand(targetVisibleIndex, actualAddressBook, displayList);
+        DeleteCommand command = new DeleteCommand(targetVisibleIndex);
         assertCommandBehaviour(command, expectedMessage, actualAddressBook, displayList, expectedAddressBook,
                 actualAddressBook);
     }
