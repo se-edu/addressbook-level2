@@ -13,7 +13,6 @@ public class HelpCommand extends Command {
 
     public HelpCommand() {}
 
-    @Override
     public CommandResult execute() {
         return new CommandResult(
                 AddCommand.MESSAGE_USAGE
