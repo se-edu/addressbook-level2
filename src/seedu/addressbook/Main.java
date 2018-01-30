@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import seedu.addressbook.commands.AggregateCommand;
 import seedu.addressbook.commands.Command;
 import seedu.addressbook.commands.CommandResult;
 import seedu.addressbook.commands.ExitCommand;
@@ -80,15 +81,15 @@ public class Main {
 
     /** Reads the user command and executes it, until the user issues the exit command.  */
     private void runCommandLoopUntilExitCommand() {
-        Command command;
+        AggregateCommand aggregateCommand;
         do {
             String userCommandText = ui.getUserCommand();
-            command = new Parser().parseCommand(userCommandText);
-            CommandResult result = executeCommand(command);
+            aggregateCommand = new Parser().parseCommand(userCommandText);
+            CommandResult result = executeCommand(aggregateCommand);
             recordResult(result);
             ui.showResultToUser(result);
 
-        } while (!ExitCommand.isExit(command));
+        } while (!ExitCommand.isExit(aggregateCommand.getCommand()));
     }
 
     /** Updates the {@link #lastShownList} if the result contains a list of Persons. */
@@ -102,13 +103,13 @@ public class Main {
     /**
      * Executes the command and returns the result.
      *
-     * @param command user command
+     * @param aggregateCommand user command
      * @return result of the command
      */
-    private CommandResult executeCommand(Command command)  {
+    private CommandResult executeCommand(AggregateCommand aggregateCommand)  {
         try {
-            command.setData(addressBook, lastShownList);
-            CommandResult result = command.execute();
+            aggregateCommand.getCommand().setData(addressBook, lastShownList);
+            CommandResult result = aggregateCommand.execute();
             storage.save(addressBook);
             return result;
         } catch (Exception e) {

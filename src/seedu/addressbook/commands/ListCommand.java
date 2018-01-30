@@ -16,8 +16,6 @@ public class ListCommand extends Command {
             + ": Displays all persons in the address book as a list with index numbers.\n"
             + "Example: " + COMMAND_WORD;
 
-
-    @Override
     public CommandResult execute() {
         List<ReadOnlyPerson> allPersons = addressBook.getAllPersons().immutableListView();
         return new CommandResult(getMessageForPersonListShownSummary(allPersons), allPersons);
