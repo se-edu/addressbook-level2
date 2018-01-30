@@ -77,4 +77,30 @@ public class AggregateCommand {
             throw new UnsupportedOperationException("None of the commands are valid.");
         }
     };
+
+    public Command getCommand() {
+        if (addCommand != null) {
+            return addCommand;
+        } else if (clearCommand != null) {
+            return clearCommand;
+        } else if (deleteCommand != null) {
+            return deleteCommand;
+        } else if (exitCommand != null) {
+            return exitCommand;
+        } else if (findCommand != null) {
+            return findCommand;
+        } else if (helpCommand != null) {
+            return helpCommand;
+        } else if (incorrectCommand != null) {
+            return incorrectCommand;
+        } else if (listCommand != null) {
+            return listCommand;
+        } else if (viewAllCommand != null) {
+            return viewAllCommand;
+        } else if (viewCommand != null) {
+            return viewCommand;
+        } else {
+            throw new UnsupportedOperationException("None of the commands are valid.");
+        }
+    }
 }
