@@ -51,4 +51,30 @@ public class AggregateCommand {
     public AggregateCommand(ViewCommand viewCommand) {
         this.viewCommand = viewCommand;
     }
+
+    public CommandResult execute() {
+        if (addCommand != null) {
+            return addCommand.execute();
+        } else if (clearCommand != null) {
+            return clearCommand.execute();
+        } else if (deleteCommand != null) {
+            return deleteCommand.execute();
+        } else if (exitCommand != null) {
+            return exitCommand.execute();
+        } else if (findCommand != null) {
+            return findCommand.execute();
+        } else if (helpCommand != null) {
+            return helpCommand.execute();
+        } else if (incorrectCommand != null) {
+            return incorrectCommand.execute();
+        } else if (listCommand != null) {
+            return listCommand.execute();
+        } else if (viewAllCommand != null) {
+            return viewAllCommand.execute();
+        } else if (viewCommand != null) {
+            return viewCommand.execute();
+        } else {
+            throw new UnsupportedOperationException("None of the commands are valid.");
+        }
+    };
 }
