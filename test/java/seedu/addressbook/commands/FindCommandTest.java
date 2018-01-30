@@ -48,7 +48,7 @@ public class FindCommandTest {
      */
     private void assertFindCommandBehavior(String[] keywords, List<ReadOnlyPerson> expectedPersonList) {
         FindCommand command = createFindCommand(keywords);
-        CommandResult result = command.execute(addressBook);
+        CommandResult result = command.execute();
 
         assertEquals(Command.getMessageForPersonListShownSummary(expectedPersonList), result.feedbackToUser);
     }
@@ -56,6 +56,7 @@ public class FindCommandTest {
     private FindCommand createFindCommand(String[] keywords) {
         final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
         FindCommand command = new FindCommand(keywordSet);
+        command.setData(addressBook, Collections.emptyList());
         return command;
     }
 

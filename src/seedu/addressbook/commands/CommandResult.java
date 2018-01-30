@@ -1,9 +1,10 @@
 package seedu.addressbook.commands;
 
+import seedu.addressbook.data.person.ReadOnlyPerson;
+
 import java.util.List;
 import java.util.Optional;
 
-import seedu.addressbook.data.person.ReadOnlyPerson;
 /**
  * Represents the result of a command execution.
  */

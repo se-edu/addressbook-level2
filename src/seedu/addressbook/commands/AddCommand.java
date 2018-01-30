@@ -3,7 +3,6 @@ package seedu.addressbook.commands;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.data.person.Address;
 import seedu.addressbook.data.person.Email;
@@ -18,7 +17,7 @@ import seedu.addressbook.data.tag.UniqueTagList;
 /**
  * Adds a person to the address book.
  */
-public class AddCommand {
+public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
@@ -64,7 +63,7 @@ public class AddCommand {
         return toAdd;
     }
 
-    public CommandResult execute(AddressBook addressBook) {
+    public CommandResult execute() {
         try {
             addressBook.addPerson(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));

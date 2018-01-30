@@ -113,13 +113,11 @@ public class ViewCommandTest {
 
         String expectedMessage = String.format(ViewCommand.MESSAGE_VIEW_PERSON_DETAILS,
                                                 personToBeViewed.getAsTextHidePrivate());
-        ViewCommand viewCommand = new ViewCommand(targetVisibleIndex);
-        assertViewBehavior(new Command(viewCommand), addressBook, relevantPersons, expectedMessage);
+        assertViewBehavior(new ViewCommand(targetVisibleIndex), addressBook, relevantPersons, expectedMessage);
 
         expectedMessage = String.format(ViewAllCommand.MESSAGE_VIEW_PERSON_DETAILS,
                                                 personToBeViewed.getAsTextShowAll());
-        ViewAllCommand viewAllCommand = new ViewAllCommand(targetVisibleIndex);
-        assertViewBehavior(new Command(viewAllCommand), addressBook, relevantPersons, expectedMessage);
+        assertViewBehavior(new ViewAllCommand(targetVisibleIndex), addressBook, relevantPersons, expectedMessage);
     }
 
     /**
@@ -127,20 +125,18 @@ public class ViewCommandTest {
      */
     private static void assertViewError(AddressBook addressBook, List<ReadOnlyPerson> relevantPersons,
                                                         int targetVisibleIndex, String expectedMessage) {
-        ViewCommand viewCommand = new ViewCommand(targetVisibleIndex);
-        assertViewBehavior(new Command(viewCommand), addressBook, relevantPersons, expectedMessage);
-        ViewAllCommand viewAllCommand = new ViewAllCommand(targetVisibleIndex);
-        assertViewBehavior(new Command(viewAllCommand), addressBook, relevantPersons, expectedMessage);
+        assertViewBehavior(new ViewCommand(targetVisibleIndex), addressBook, relevantPersons, expectedMessage);
+        assertViewBehavior(new ViewAllCommand(targetVisibleIndex), addressBook, relevantPersons, expectedMessage);
     }
 
     /**
      * Executes the test command for the given addressbook data.
-     * Checks that ViewCommand and ViewAllCommand exhibits the correct command behavior, namely:
+     * Checks that ViewCommand exhibits the correct command behavior, namely:
      * 1. The feedback message of the CommandResult it returns matches expectedMessage.
      * 2. The CommandResult it returns has no relevant persons.
-     * 3. The original addressbook data is not modified after executing ViewCommand and ViewAllCommand.
+     * 3. The original addressbook data is not modified after executing ViewCommand.
      */
-    private static void assertViewBehavior(Command viewCommand, AddressBook addressBook,
+    private static void assertViewBehavior(ViewCommand viewCommand, AddressBook addressBook,
                                            List<ReadOnlyPerson> relevantPersons, String expectedMessage) {
         AddressBook expectedAddressBook = TestUtil.clone(addressBook);
 
@@ -155,4 +151,25 @@ public class ViewCommandTest {
         assertEquals(expectedAddressBook.getAllPersons(), addressBook.getAllPersons());
     }
 
+    /**
+     * Executes the test command for the given addressbook data.
+     * Checks that ViewAllCommand exhibits the correct command behavior, namely:
+     * 1. The feedback message of the CommandResult it returns matches expectedMessage.
+     * 2. The CommandResult it returns has no relevant persons.
+     * 3. The original addressbook data is not modified after executing ViewAllCommand.
+     */
+    private static void assertViewBehavior(ViewAllCommand viewAllCommand, AddressBook addressBook,
+                                           List<ReadOnlyPerson> relevantPersons, String expectedMessage) {
+        AddressBook expectedAddressBook = TestUtil.clone(addressBook);
+
+        viewAllCommand.setData(addressBook, relevantPersons);
+        CommandResult result = viewAllCommand.execute();
+
+        // feedback message is as expected and there are no relevant persons returned.
+        assertEquals(expectedMessage, result.feedbackToUser);
+        assertEquals(Optional.empty(), result.getRelevantPersons());
+
+        // addressbook was not modified.
+        assertEquals(expectedAddressBook.getAllPersons(), addressBook.getAllPersons());
+    }
 }

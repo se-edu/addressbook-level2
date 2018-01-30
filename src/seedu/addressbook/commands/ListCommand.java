@@ -1,6 +1,5 @@
 package seedu.addressbook.commands;
 
-import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.person.ReadOnlyPerson;
 
 import java.util.List;
@@ -9,7 +8,7 @@ import java.util.List;
 /**
  * Lists all persons in the address book to the user.
  */
-public class ListCommand {
+public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
@@ -17,8 +16,8 @@ public class ListCommand {
             + ": Displays all persons in the address book as a list with index numbers.\n"
             + "Example: " + COMMAND_WORD;
 
-    public CommandResult execute(AddressBook addressBook) {
+    public CommandResult execute() {
         List<ReadOnlyPerson> allPersons = addressBook.getAllPersons().immutableListView();
-        return new CommandResult(Command.getMessageForPersonListShownSummary(allPersons), allPersons);
+        return new CommandResult(getMessageForPersonListShownSummary(allPersons), allPersons);
     }
 }

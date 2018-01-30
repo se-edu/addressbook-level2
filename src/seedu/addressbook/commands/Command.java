@@ -1,84 +1,29 @@
 package seedu.addressbook.commands;
 
-import java.util.List;
-import java.util.Set;
-
 import seedu.addressbook.common.Messages;
 import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.person.ReadOnlyPerson;
+
+import java.util.List;
+
+import static seedu.addressbook.ui.TextUi.DISPLAYED_INDEX_OFFSET;
 
 /**
  * Represents an executable command.
  */
 public class Command {
-    public final String feedbackToUser;
+    protected AddressBook addressBook;
+    protected List<? extends ReadOnlyPerson> relevantPersons;
+    private int targetIndex = -1;
 
-    private AddressBook addressBook;
-    private List<? extends ReadOnlyPerson> relevantPersons;
-
-    private AddCommand addCommand;
-    private ClearCommand clearCommand;
-    private DeleteCommand deleteCommand;
-    private ExitCommand exitCommand;
-    private FindCommand findCommand;
-    private HelpCommand helpCommand;
-    private IncorrectCommand incorrectCommand;
-    private ListCommand listCommand;
-    private ViewAllCommand viewAllCommand;
-    private ViewCommand viewCommand;
+    /**
+     * @param targetIndex last visible listing index of the target person
+     */
+    public Command(int targetIndex) {
+        this.setTargetIndex(targetIndex);
+    }
 
     protected Command() {
-        this.feedbackToUser = null;
-    }
-
-    public Command(AddCommand addCommand) {
-        this.addCommand = addCommand;
-        this.feedbackToUser = null;
-    }
-
-    public Command(ClearCommand clearCommand) {
-        this.clearCommand = clearCommand;
-        this.feedbackToUser = null;
-    }
-
-    public Command(DeleteCommand deleteCommand) {
-        this.deleteCommand = deleteCommand;
-        this.feedbackToUser = null;
-    }
-
-    public Command(ExitCommand exitCommand) {
-        this.exitCommand = exitCommand;
-        this.feedbackToUser = null;
-    }
-
-    public Command(FindCommand findCommand) {
-        this.findCommand = findCommand;
-        this.feedbackToUser = null;
-    }
-
-    public Command(HelpCommand helpCommand) {
-        this.helpCommand = helpCommand;
-        this.feedbackToUser = null;
-    }
-
-    public Command(IncorrectCommand incorrectCommand) {
-        this.incorrectCommand = incorrectCommand;
-        this.feedbackToUser = incorrectCommand.feedbackToUser;
-    }
-
-    public Command(ListCommand listCommand) {
-        this.listCommand = listCommand;
-        this.feedbackToUser = null;
-    }
-
-    public Command(ViewAllCommand viewAllCommand) {
-        this.viewAllCommand = viewAllCommand;
-        this.feedbackToUser = null;
-    }
-
-    public Command(ViewCommand viewCommand) {
-        this.viewCommand = viewCommand;
-        this.feedbackToUser = null;
     }
 
     /**
@@ -92,61 +37,6 @@ public class Command {
     }
 
     /**
-     * Executes the command and returns the result.
-     */
-    public CommandResult execute() {
-        if (addCommand != null) {
-            return addCommand.execute(addressBook);
-        } else if (clearCommand != null) {
-            return clearCommand.execute(addressBook);
-        } else if (deleteCommand != null) {
-            return deleteCommand.execute(addressBook, relevantPersons);
-        } else if (exitCommand != null) {
-            return exitCommand.execute();
-        } else if (findCommand != null) {
-            return findCommand.execute(addressBook);
-        } else if (helpCommand != null) {
-            return helpCommand.execute();
-        } else if (incorrectCommand != null) {
-            return incorrectCommand.execute();
-        } else if (listCommand != null) {
-            return listCommand.execute(addressBook);
-        } else if (viewAllCommand != null) {
-            return viewAllCommand.execute(addressBook, relevantPersons);
-        } else if (viewCommand != null) {
-            return viewCommand.execute(addressBook, relevantPersons);
-        } else {
-            throw new UnsupportedOperationException("None of the commands are valid.");
-        }
-    };
-
-    public Class getCommandClass() {
-        if (addCommand != null) {
-            return addCommand.getClass();
-        } else if (clearCommand != null) {
-            return clearCommand.getClass();
-        } else if (deleteCommand != null) {
-            return deleteCommand.getClass();
-        } else if (exitCommand != null) {
-            return exitCommand.getClass();
-        } else if (findCommand != null) {
-            return findCommand.getClass();
-        } else if (helpCommand != null) {
-            return helpCommand.getClass();
-        } else if (incorrectCommand != null) {
-            return incorrectCommand.getClass();
-        } else if (listCommand != null) {
-            return listCommand.getClass();
-        } else if (viewAllCommand != null) {
-            return viewAllCommand.getClass();
-        } else if (viewCommand != null) {
-            return viewCommand.getClass();
-        } else {
-            throw new UnsupportedOperationException("None of the commands are valid.");
-        }
-    }
-
-    /**
      * Supplies the data the command will operate on.
      */
     public void setData(AddressBook addressBook, List<? extends ReadOnlyPerson> relevantPersons) {
@@ -155,46 +45,19 @@ public class Command {
     }
 
     /**
-     * Returns a copy of keywords from find command.
+     * Extracts the the target person in the last shown list from the given arguments.
+     *
+     * @throws IndexOutOfBoundsException if the target index is out of bounds of the last viewed listing
      */
-    public Set<String> getKeywords() {
-        if (findCommand != null) {
-            return findCommand.getKeywords();
-        } else {
-            return null;
-        }
-    }
-
-    /**
-     * Returns a copy of to add person from add command.
-     */
-    public ReadOnlyPerson getPerson() {
-        if (addCommand != null) {
-            return addCommand.getPerson();
-        } else {
-            return null;
-        }
+    protected ReadOnlyPerson getTargetPerson() throws IndexOutOfBoundsException {
+        return relevantPersons.get(getTargetIndex() - DISPLAYED_INDEX_OFFSET);
     }
 
     public int getTargetIndex() {
-        if (deleteCommand != null) {
-            return deleteCommand.getTargetIndex();
-        } else if (viewAllCommand != null) {
-            return viewAllCommand.getTargetIndex();
-        } else if (viewCommand != null) {
-            return viewCommand.getTargetIndex();
-        } else {
-            return -1;
-        }
+        return targetIndex;
     }
 
     public void setTargetIndex(int targetIndex) {
-        if (deleteCommand != null) {
-            deleteCommand.setTargetIndex(targetIndex);
-        } else if (viewAllCommand != null) {
-            viewAllCommand.setTargetIndex(targetIndex);
-        } else if (viewCommand != null) {
-            viewCommand.setTargetIndex(targetIndex);
-        }
+        this.targetIndex = targetIndex;
     }
 }
