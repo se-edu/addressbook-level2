@@ -8,6 +8,11 @@ import seedu.addressbook.data.exception.IllegalValueException;
  */
 public class Address {
 
+    private static final int INDEX_BLOCK = 0;
+    private static final int INDEX_STREET = 1;
+    private static final int INDEX_UNIT = 2;
+    private static final int INDEX_POSTAL_CODE = 3;
+
     public static final String EXAMPLE = "123, Clementi Ave 3, #12-34, 231534";
     public static final String MESSAGE_ADDRESS_CONSTRAINTS =
             "Person addresses should be entered by block number, street, unit and followed by postal code"
@@ -35,24 +40,66 @@ public class Address {
         }
 
         String[] components = address.split(SEPARATOR_COMMA);
-        block = new Block(components[0]);
-        street = new Street(components[1]);
-        unit = new Unit(components[2]);
-        postalCode = new PostalCode((components[3]));
+        block = new Block(initialiseBlockValue(components));
+        street = new Street(initialiseStreetValue(components));
+        unit = new Unit(initialiseUnitValue(components));
+        postalCode = new PostalCode(initialisePostalCodeValue(components));
+
         value = this.getFullAddressValue();
+    }
+
+    /**
+     * Returns the initialised block value from the String array of the Address split into the components.
+     */
+    private String initialiseBlockValue(String[] addressComponents) {
+        return addressComponents.length < 1? "" : addressComponents[INDEX_BLOCK];
+    }
+
+    /**
+     * Returns the initialised street value from the String array of the Address split into the components.
+     */
+    private String initialiseStreetValue(String[] addressComponents) {
+        return addressComponents.length < 2? "" : addressComponents[INDEX_STREET];
+    }
+
+    /**
+     * Returns the initialised unit value from the String array of the Address split into the components.
+     */
+    private String initialiseUnitValue(String[] addressComponents) {
+        return addressComponents.length < 3? "" : addressComponents[INDEX_UNIT];
+    }
+
+    /**
+     * Returns the initialised postal code value from the String array of the Address split into the components.
+     */
+    private String initialisePostalCodeValue(String[] addressComponents) {
+        return addressComponents.length < 4 ? "" : addressComponents[INDEX_POSTAL_CODE];
     }
 
     /**
      * Returns true if a given string is a valid person address.
      */
-    public static boolean isValidAddress(String test) {
+    private static boolean isValidAddress(String test) {
         // TODO: A better validation for each component
-        return test.split(",").length == 4; // valid if contains block number, street, unit and postal code
+        return test.split(",").length > 0; // has at least one component
     }
 
-    public String getFullAddressValue() {
-        return block.toString() + SEPARATOR_COMMA + street.toString() + SEPARATOR_COMMA + unit.toString()
-                + SEPARATOR_COMMA + postalCode.toString();
+    private String getFullAddressValue() {
+        String fullAddress = "";
+        if (!block.getValue().equals("")) {
+            fullAddress += block.getValue();
+        }
+        if (!street.getValue().equals("")) {
+            fullAddress += ", " + street.getValue();
+        }
+        if (!unit.getValue().equals("")) {
+            fullAddress += ", " + unit.getValue();
+        }
+        if (!postalCode.getValue().equals("")) {
+            fullAddress += ", " + postalCode.getValue();
+        }
+
+        return fullAddress;
     }
 
     public Block getBlock() { return block; }
