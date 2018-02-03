@@ -5,7 +5,7 @@ package seedu.addressbook.data.person;
  */
 public class Unit {
 
-    private final String value;
+    private final String value; // empty "" string if user did not specify unit
 
     public Unit(String unit) {
         value = unit.trim();

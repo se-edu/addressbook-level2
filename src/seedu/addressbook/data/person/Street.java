@@ -5,7 +5,7 @@ package seedu.addressbook.data.person;
  */
 public class Street {
 
-    private final String value;
+    private final String value; // empty "" string if user did not specify street
 
     public Street(String street) {
         value = street.trim();

@@ -5,7 +5,7 @@ package seedu.addressbook.data.person;
  */
 public class Block {
 
-    private final String value;
+    private final String value; // empty "" string if user did not specify block
 
     public Block(String block) {
         this.value = block.trim();

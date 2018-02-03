@@ -5,7 +5,7 @@ package seedu.addressbook.data.person;
  */
 public class PostalCode {
 
-    private final String value;
+    private final String value; // empty "" string if user did not specify postal code
 
     public PostalCode(String postalCode) {
         value = postalCode.trim();
