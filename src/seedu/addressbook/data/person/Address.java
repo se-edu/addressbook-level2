@@ -17,6 +17,7 @@ public class Address {
     public static final String MESSAGE_ADDRESS_CONSTRAINTS =
             "Person addresses should be entered by block number, street, unit and followed by postal code"
                     + "separated by ','";
+    public static final String ADDRESS_FORMAT = "a/BLOCK, STREET, UNIT, POSTAL_CODE";
     public static final String SEPARATOR_COMMA = ", ";
     // TODO: add ADDRESS_VALIDATION_REGEX for better input validation
 
