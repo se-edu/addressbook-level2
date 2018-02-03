@@ -116,8 +116,7 @@ public class Address {
 
     @Override
     public String toString() {
-        return block.toString() + SEPARATOR_COMMA + street.toString() + SEPARATOR_COMMA + unit.toString()
-                + SEPARATOR_COMMA + postalCode.toString();
+        return getFullAddressValue();
     }
 
     @Override
