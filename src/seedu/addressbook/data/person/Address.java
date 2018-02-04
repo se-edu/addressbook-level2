@@ -91,13 +91,13 @@ public class Address {
             fullAddress += block.getValue();
         }
         if (!street.getValue().equals("")) {
-            fullAddress += ", " + street.getValue();
+            fullAddress += SEPARATOR_COMMA + street.getValue();
         }
         if (!unit.getValue().equals("")) {
-            fullAddress += ", " + unit.getValue();
+            fullAddress += SEPARATOR_COMMA + unit.getValue();
         }
         if (!postalCode.getValue().equals("")) {
-            fullAddress += ", " + postalCode.getValue();
+            fullAddress += SEPARATOR_COMMA + postalCode.getValue();
         }
 
         return fullAddress;
