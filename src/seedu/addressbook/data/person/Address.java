@@ -125,9 +125,9 @@ public class Address {
         return other == this // short circuit if same object
                 || (other instanceof Address // instanceof handles nulls
                 && this.block.toString().equals(((Address) other).getBlock().toString())
-                && this.street.toString().equals(((Address) other).getStreet().toString()))
+                && this.street.toString().equals(((Address) other).getStreet().toString())
                 && this.unit.toString().equals((((Address) other).getUnit().toString()))
-                && this.postalCode.toString().equals(((Address) other).getPostalCode().toString()); // state check
+                && this.postalCode.toString().equals(((Address) other).getPostalCode().toString())); // state check
     }
 
     @Override
