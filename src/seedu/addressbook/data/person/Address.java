@@ -117,7 +117,7 @@ public class Address {
 
     @Override
     public String toString() {
-        return getFullAddressValue();
+        return value;
     }
 
     @Override
