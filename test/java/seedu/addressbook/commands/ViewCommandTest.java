@@ -1,6 +1,6 @@
 package seedu.addressbook.commands;
 
-// not sure why junit not working
+// not sure why junit not working, hmm
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
