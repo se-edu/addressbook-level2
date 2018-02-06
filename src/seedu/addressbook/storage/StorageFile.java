@@ -169,9 +169,4 @@ public class StorageFile {
     public String getPath() {
         return path.toString();
     }
-
-    public Path getPathName() {
-        return path;
-    }
-
 }
