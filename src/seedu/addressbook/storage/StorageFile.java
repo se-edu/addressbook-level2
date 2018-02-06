@@ -9,14 +9,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Reader;
-import java.io.Writer;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -28,6 +21,8 @@ public class StorageFile {
 
     /** Default file path used if the user doesn't provide the file name. */
     public static final String DEFAULT_STORAGE_FILEPATH = "addressbook.xml";
+
+    //public static final String DEFAULT_STORAGE_FILEPATH = "ReadOnlyData.xml";
 
     /* Note: Note the use of nested classes below.
      * More info https://docs.oracle.com/javase/tutorial/java/javaOO/nested.html
@@ -105,11 +100,34 @@ public class StorageFile {
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             marshaller.marshal(toSave, fileWriter);
 
+            // sets file to read-only
+            //File file = new File(DEFAULT_STORAGE_FILEPATH);
+            //file.setReadOnly();
+
         } catch (IOException ioe) {
+            checkIfFileIsReadOnly();
             throw new StorageOperationException("Error writing to file: " + path);
         } catch (JAXBException jaxbe) {
             throw new StorageOperationException("Error converting address book into storage format");
         }
+    }
+
+    private void checkIfFileIsReadOnly() throws StorageOperationException {
+        File file = path.toFile();
+        boolean canRead = file.canRead();
+        boolean canWrite = file.canWrite();
+
+        if(canRead && !canWrite){
+            throw new StorageOperationException("File: " + path + " is read-only");
+        }
+
+        /* Another method
+        boolean canRead = Files.isReadable(path);
+        boolean canWrite = Files.isWritable(path);
+
+        if(canRead && !canWrite){
+            throw new StorageOperationException("File: " + path + " is read-only");
+        }*/
     }
 
     /**
@@ -151,5 +169,4 @@ public class StorageFile {
     public String getPath() {
         return path.toString();
     }
-
 }
