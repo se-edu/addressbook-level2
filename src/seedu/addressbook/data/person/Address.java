@@ -86,3 +86,19 @@ public class Address {
         return isPrivate;
     }
 }
+
+public class Block {
+    private String blockNumber;
+
+    public Block(String number) {
+        this.blockNumber = blocknumber;
+    }
+
+    public String getBlockNumber(){
+        return  this.blockNumber;
+    }
+
+    public void setBlockNumber(String number){
+        this.blockNumber = number;
+    }
+}
