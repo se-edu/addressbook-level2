@@ -28,7 +28,7 @@ public class Address {
 
     /**
      * Validates given address.
-     *
+     * 
      * @throws IllegalValueException if given address string is invalid.
      */
     public Address(String address, boolean isPrivate) throws IllegalValueException {
@@ -43,8 +43,6 @@ public class Address {
         Street street = new Street(splits[streetIndex].trim());
         Unit unit = new Unit(splits[unitIndex].trim());
         Postal postal = new Postal(splits[postalIndex].trim());
-
-
 
     }
 
@@ -135,3 +133,18 @@ public class Street{
     }
 }
 
+public class Postal {
+    private String postal;
+
+    public Postal(String postal){
+        this.postal = postal;
+    }
+
+    public String getPostal() {
+        return postal;
+    }
+
+    public void setPostal(String postal) {
+        this.postal = postal;
+    }
+}
