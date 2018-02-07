@@ -31,6 +31,11 @@ public class Address {
 
     }
 
+    /**
+     * Creates an object for Block, Street, Unit, and PostalCode class depending on the address input
+     * @param address
+     */
+
     private void setAddressElements(String address) {
         String[] addressList = address.split(",");
         if (addressList.length == 1) {
