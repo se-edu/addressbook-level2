@@ -1,7 +1,7 @@
 public class Block {
-    private int blockNumber;
+    private String blockNumber;
 
-    public Block(int number) {
+    public Block(String number) {
         this.blockNumber = blocknumber;
     }
 }
