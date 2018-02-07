@@ -88,6 +88,7 @@ public class Main {
                 CommandResult result = executeCommand(command);
                 recordResult(result);
                 ui.showResultToUser(result);
+                
             } catch(StorageOperationException soe){
                 ui.showToUser(soe.getMessage());
             }
