@@ -102,3 +102,20 @@ public class Block {
         this.blockNumber = number;
     }
 }
+
+public class Unit{
+    private String unitNumber;
+
+    public Unit(String number){
+        this.unitNumber = number;
+    }
+
+    public String getUnitNumber() {
+        return unitNumber;
+    }
+
+    public void setUnitNumber(String unitNumber) {
+        this.unitNumber = unitNumber;
+    }
+}
+
