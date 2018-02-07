@@ -1,6 +1,5 @@
 package seedu.addressbook.data.person;
 
-import jdk.nashorn.internal.ir.Block;
 import seedu.addressbook.data.exception.IllegalValueException;
 
 /**
@@ -12,8 +11,13 @@ public class Address {
     public static final String EXAMPLE = "123, some street, #02-123, 654123";
     public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Please input in the format: Block, Street, Unit, Postal code";
     public static final String INVALID_UNIT = "Unit is invalid. Example unit: #02-123";
+    public static final String ADDRESS_REGEX = ",";
     public static final String ADDRESS_VALIDATION_REGEX = ".+,.+,.+,.+";
     public static final String UNIT_VALIDATION_REGEX = "^#[0-Z]{1,3}-[0-Z]{1,5}$";
+    public static final int BLOCK_INDEX = 0;
+    public static final int STREET_INDEX = 1;
+    public static final int UNIT_INDEX = 2;
+    public static final int POSTAL_CODE_INDEX = 3;
 
     public final BlockNumber block;
     public final Street street;
@@ -29,26 +33,21 @@ public class Address {
      * @throws IllegalValueException if given address string is invalid.
      */
     public Address(String address, boolean isPrivate) throws IllegalValueException {
-        this.value = address.trim();
-
-        String[] addressParts = address.split(",");
-        if (addressParts.length == 4) {
-            if (!isValidUnit(addressParts[2].trim())) {
-                throw new IllegalValueException(INVALID_UNIT);
-            }
-            block = new BlockNumber(addressParts[0].trim());
-            street = new Street(addressParts[1]);
-            unit = new Unit(addressParts[2].trim());
-            postalCode = new PostalCode(addressParts[3].trim());
-        }
-        else {
-            block = new BlockNumber("123");
-            street = new Street("Dummy Street");
-            unit = new Unit("#05-123");
-            postalCode = new PostalCode("2345");
-        }
-
         this.isPrivate = isPrivate;
+
+        this.value = address.trim();
+        if (!isValidAddress(value)){
+            throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
+        }
+
+        String[] addressParts = address.split(ADDRESS_REGEX);
+        if (!isValidUnit(addressParts[UNIT_INDEX].trim())) {
+            throw new IllegalValueException(INVALID_UNIT);
+        }
+        block = new BlockNumber(addressParts[BLOCK_INDEX].trim());
+        street = new Street(addressParts[STREET_INDEX]);
+        unit = new Unit(addressParts[UNIT_INDEX].trim());
+        postalCode = new PostalCode(addressParts[POSTAL_CODE_INDEX].trim());
     }
 
     /**
