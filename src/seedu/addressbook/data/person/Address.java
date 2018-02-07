@@ -11,13 +11,19 @@ public class Address {
     public static final String EXAMPLE = "123, some street";
     public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses can be in any format";
     public static final String ADDRESS_VALIDATION_REGEX = ".+";
+    public static final String token = ",";
 
-    public final String Value;
+    public static final int blockIndex = 0;
+    public static final int streetIndex = 1;
+    public static final int unitIndex = 2;
+    public static final int postalIndex = 3;
+
+    public final String value;
     public final Block block;
     public final Street street;
     public final Unit unit;
     public final Postal postal;
-    
+
     private boolean isPrivate;
 
     /**
@@ -32,7 +38,19 @@ public class Address {
             throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
         }
         this.value = trimmedAddress;
+        
+
     }
+
+    /**
+     *Splitting address to vasrious components
+     */
+
+    public String[] splitAddress(String address){
+        return String[] splits = address.split(token);
+    }
+
+
 
     /**
      * Returns true if a given string is a valid person address.
