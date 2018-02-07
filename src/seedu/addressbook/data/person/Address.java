@@ -55,7 +55,7 @@ public class Address {
         String[] splits = address.split(token);
 
         return splits;
-}
+    }
 
 
 
