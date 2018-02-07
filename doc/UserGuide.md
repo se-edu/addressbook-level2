@@ -25,6 +25,7 @@ Please refer to the [Setting up](DeveloperGuide.md#setting-up) section to learn 
 #### Changes from level 1
 What's different from AddressBook-Level1:
 * Support for storing address (`a/`) and tags (`t/`)
+* Address have different sections but functions to make use of this feature is not implemented yet.
 * Support for marking a contact detail as 'private' (`pa/`) (`pe/`) (`pp/`) 
 * View details of a person (`view` : shows non-private details), (`viewall` : shows all details)
 
