@@ -27,6 +27,33 @@ public class Address {
             throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
         }
         this.value = trimmedAddress;
+        setAddressElements(address);
+
+    }
+
+    private void setAddressElements(String address) {
+        String[] addressList = address.split(",");
+        if (addressList.length == 1) {
+            Block blockNumber = new Block(Integer.parseInt(addressList[0]));
+        }
+        if (addressList.length == 2) {
+            Block blockNumber = new Block(Integer.parseInt(addressList[0]));
+            Street streetName = new Street(addressList[1]);
+        }
+        if (addressList.length == 3) {
+            Block blockNumber = new Block(Integer.parseInt(addressList[0]));
+            Street streetName = new Street(addressList[1]);
+            Unit unitNumber = new Unit(addressList[2]);
+        }
+        if (addressList.length == 4) {
+            Block blockNumber = new Block(Integer.parseInt(addressList[0]));
+            Street streetName = new Street(addressList[1]);
+            Unit unitNumber = new Unit(addressList[2]);
+            PostalCode postalCodeNumber = new PostalCode(addressList[3]);
+        }
+        else {
+            System.out.println("Address is empty");
+        }
     }
 
     /**
