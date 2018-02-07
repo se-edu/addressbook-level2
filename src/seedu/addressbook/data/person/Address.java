@@ -10,7 +10,9 @@ public class Address {
 
     public static final String EXAMPLE = "123, some street";
     public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses can be in any format";
+    public static final String ADDRESS_FORMAT = "a/BLOCK, STREET, UNIT, POSTAL_CODE";
     public static final String ADDRESS_VALIDATION_REGEX = ".+";
+    public static final int ADDRESS_COMPONENTS = 4;
     public static final String token = ",";
 
     public static final int blockIndex = 0;
@@ -19,10 +21,10 @@ public class Address {
     public static final int postalIndex = 3;
 
     public final String value;
-    public final Block block;
-    public final Street street;
-    public final Unit unit;
-    public final Postal postal;
+    public final Block block = new Block();
+    public final Street street = new Street();
+    public final Unit unit = new Unit();
+    public final Postal postal = new Postal();
 
     private boolean isPrivate;
 
@@ -31,23 +33,32 @@ public class Address {
      *
      * @throws IllegalValueException if given address string is invalid.
      */
-    public Address(String address, boolean isPrivate) throws IllegalValueException {
+    public Address(String address, boolean isPrivate)  {
         String trimmedAddress = address.trim();
+        this.value = trimmedAddress;
+
         this.isPrivate = isPrivate;
         if (!isValidAddress(trimmedAddress)) {
-            throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
+           System.out.println("Address structure is not valid");
         }
-        this.value = trimmedAddress;
-        String[] splits = splitAddress(value);
-        block = new Block(splits[blockIndex].trim());
-        street = new Street(splits[streetIndex].trim());
-        unit = new Unit(splits[unitIndex].trim());
-        postal = new Postal(splits[postalIndex].trim());
+        else {
+
+            String[] splits = splitAddress(value);
+
+
+            block.setBlockNumber(splits[blockIndex].trim());
+            street.setStreet(splits[streetIndex].trim());
+            unit.setUnitNumber(splits[unitIndex].trim());
+            postal.setPostal(splits[postalIndex].trim());
+
+        }
+
 
     }
 
+
     /**
-     *Splitting address to vasrious components
+     *Splitting address to various components
      */
 
     public String[] splitAddress(String address){
@@ -63,7 +74,11 @@ public class Address {
      * Returns true if a given string is a valid person address.
      */
     public static boolean isValidAddress(String test) {
-        return test.matches(ADDRESS_VALIDATION_REGEX);
+        String[] components = test.split(token);
+        if(components.length == 4)
+            return true;
+        else
+            return false;
     }
 
     @Override
@@ -91,6 +106,10 @@ public class Address {
 class Block {
     private String blockNumber;
 
+    public Block(){
+
+    }
+
     public Block(String number) {
         this.blockNumber = blockNumber;
     }
@@ -107,6 +126,9 @@ class Block {
 class Unit{
     private String unitNumber;
 
+    public Unit(){
+
+    }
     public Unit(String number){
         this.unitNumber = number;
     }
@@ -123,6 +145,9 @@ class Unit{
 class Street{
     private String street;
 
+    public Street(){
+
+    }
     public Street(String street){
         this.street = street;
     }
@@ -139,6 +164,9 @@ class Street{
 class Postal {
     private String postal;
 
+    public Postal(){
+
+    }
     public Postal(String postal){
         this.postal = postal;
     }
