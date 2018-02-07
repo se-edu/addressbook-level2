@@ -38,7 +38,13 @@ public class Address {
             throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
         }
         this.value = trimmedAddress;
-        
+        String[] splits = splitAddress(value);
+        Block block = new Block(splits[blockIndex].trim());
+        Street street = new Street(splits[streetIndex].trim());
+        Unit unit = new Unit(splits[unitIndex].trim());
+        Postal postal = new Postal(splits[postalIndex].trim());
+
+
 
     }
 
