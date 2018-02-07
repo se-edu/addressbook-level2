@@ -30,18 +30,24 @@ public class Address {
      */
     public Address(String address, boolean isPrivate) throws IllegalValueException {
         this.value = address.trim();
-        if (!isValidAddress(value)){
-            throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
-        }
-        String[] addressParts = address.split(",");
-        block = new BlockNumber(Integer.parseInt(addressParts[0].trim()));
-        street = new Street(addressParts[1].trim());
-        unit = new Unit(addressParts[2].trim());
-        postalCode = new PostalCode(Integer.parseInt(addressParts[3].trim()));
 
-        if (!isValidUnit(addressParts[2].trim())) {
-            throw new IllegalValueException(INVALID_UNIT);
+        String[] addressParts = address.split(",");
+        if (addressParts.length == 4) {
+            if (!isValidUnit(addressParts[2].trim())) {
+                throw new IllegalValueException(INVALID_UNIT);
+            }
+            block = new BlockNumber(addressParts[0].trim());
+            street = new Street(addressParts[1]);
+            unit = new Unit(addressParts[2].trim());
+            postalCode = new PostalCode(addressParts[3].trim());
         }
+        else {
+            block = new BlockNumber("123");
+            street = new Street("Dummy Street");
+            unit = new Unit("#05-123");
+            postalCode = new PostalCode("2345");
+        }
+
         this.isPrivate = isPrivate;
     }
 
@@ -82,9 +88,9 @@ public class Address {
 }
 
 class BlockNumber{
-    public final int blockNo;
+    public final String blockNo;
 
-    public BlockNumber(int blockNo){
+    public BlockNumber(String blockNo){
         this.blockNo = blockNo;
     }
 }
@@ -106,9 +112,9 @@ class Unit{
 }
 
 class PostalCode{
-    public final int postalCodeNo;
+    public final String postalCodeNo;
 
-    public PostalCode(int postalCodeNo){
+    public PostalCode(String postalCodeNo){
         this.postalCodeNo = postalCodeNo;
     }
 }
