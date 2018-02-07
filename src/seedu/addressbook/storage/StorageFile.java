@@ -106,7 +106,7 @@ public class StorageFile {
             marshaller.marshal(toSave, fileWriter);
 
         } catch (IOException ioe) {
-            WriteNewFile(addressBook);
+            writeNewFile(addressBook);
             throw new StorageOperationException(path + " is read-only. Data has been saved on a new file.");
         } catch (JAXBException jaxbe) {
             throw new StorageOperationException("Error converting address book into storage format");
@@ -118,7 +118,7 @@ public class StorageFile {
      *
      * @throws StorageOperationException if there were errors converting and/or storing data to file.
      */
-    public void WriteNewFile(AddressBook addressBook) throws StorageOperationException {
+    public void writeNewFile(AddressBook addressBook) throws StorageOperationException {
         try(final Writer fileWriter =
                 new BufferedWriter(new FileWriter("New File"))){
 
