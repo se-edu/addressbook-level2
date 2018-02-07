@@ -56,10 +56,8 @@ public class Address {
             Unit unitNumber = new Unit(addressList[2]);
             PostalCode postalCodeNumber = new PostalCode(addressList[3]);
         }
-        else {
-            System.out.println("Address is empty");
-        }
     }
+
 
     /**
      * Returns true if a given string is a valid person address.
