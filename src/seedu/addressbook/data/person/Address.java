@@ -28,7 +28,7 @@ public class Address {
 
     /**
      * Validates given address.
-     * 
+     *
      * @throws IllegalValueException if given address string is invalid.
      */
     public Address(String address, boolean isPrivate) throws IllegalValueException {
@@ -39,10 +39,10 @@ public class Address {
         }
         this.value = trimmedAddress;
         String[] splits = splitAddress(value);
-        Block block = new Block(splits[blockIndex].trim());
-        Street street = new Street(splits[streetIndex].trim());
-        Unit unit = new Unit(splits[unitIndex].trim());
-        Postal postal = new Postal(splits[postalIndex].trim());
+        block = new Block(splits[blockIndex].trim());
+        street = new Street(splits[streetIndex].trim());
+        unit = new Unit(splits[unitIndex].trim());
+        postal = new Postal(splits[postalIndex].trim());
 
     }
 
@@ -51,8 +51,11 @@ public class Address {
      */
 
     public String[] splitAddress(String address){
-        return String[] splits = address.split(token);
-    }
+
+        String[] splits = address.split(token);
+
+        return splits;
+}
 
 
 
@@ -85,11 +88,11 @@ public class Address {
     }
 }
 
-public class Block {
+class Block {
     private String blockNumber;
 
     public Block(String number) {
-        this.blockNumber = blocknumber;
+        this.blockNumber = blockNumber;
     }
 
     public String getBlockNumber(){
@@ -101,7 +104,7 @@ public class Block {
     }
 }
 
-public class Unit{
+class Unit{
     private String unitNumber;
 
     public Unit(String number){
@@ -117,7 +120,7 @@ public class Unit{
     }
 }
 
-public class Street{
+class Street{
     private String street;
 
     public Street(String street){
@@ -133,7 +136,7 @@ public class Street{
     }
 }
 
-public class Postal {
+class Postal {
     private String postal;
 
     public Postal(String postal){
