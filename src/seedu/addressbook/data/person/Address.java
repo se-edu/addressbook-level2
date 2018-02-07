@@ -12,7 +12,11 @@ public class Address {
     public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses can be in any format";
     public static final String ADDRESS_VALIDATION_REGEX = ".+";
 
-    public final String value;
+    public final String Value;
+    public final String Block;
+    public final String Street;
+    public final String Unit;
+    public final String Postal_Code;
     private boolean isPrivate;
 
     /**
