@@ -4,6 +4,8 @@ import seedu.addressbook.common.Messages;
 import seedu.addressbook.data.person.ReadOnlyPerson;
 import seedu.addressbook.data.person.UniquePersonList.PersonNotFoundException;
 
+import java.nio.file.ReadOnlyFileSystemException;
+
 
 /**
  * Deletes a person identified using it's last displayed index from the address book.
@@ -36,6 +38,8 @@ public class DeleteCommand extends Command {
             return new CommandResult(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         } catch (PersonNotFoundException pnfe) {
             return new CommandResult(Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK);
+        } catch (ReadOnlyFileSystemException rfse) {
+            return new CommandResult(Messages.MESSAGE_READ_ONLY_FILE);
         }
     }
 
