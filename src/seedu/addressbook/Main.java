@@ -88,6 +88,7 @@ public class Main {
 
     /**
      * Reads the user command and executes it, until the user issues the exit command.
+     * sad
      */
     private void runCommandLoopUntilExitCommand() {
         Command command;
