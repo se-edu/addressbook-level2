@@ -126,6 +126,7 @@ There is no need to save manually.
 #### Changing the save location
 Address book data are saved in a file called `addressbook.xml` in the project root folder.
 You can change the location by specifying the file path as a program argument.
+The file `addressbook.xml` should not be set to read-only.
 
 Example: 
 * `java seedu.addressbook.Main mydata.xml`
