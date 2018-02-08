@@ -12,6 +12,7 @@ public class Address {
     public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses is entered in the following format "
                                                            + "a/BLOCK, STREET, UNIT, POSTAL_CODE";
     public static final String ADDRESS_VALIDATION_REGEX = ".+,.+,.+,.+";
+    public static final String ADDRESS_SPLIT_DELIMITER = ",";
 
     private Block block;
     private Street street;
@@ -23,7 +24,6 @@ public class Address {
     private static final int UNIT_INDEX = 2;
     private static final int POSTALCODE_INDEX = 3;
 
-    public final String value;
     private boolean isPrivate;
 
     /**
@@ -37,12 +37,11 @@ public class Address {
         if (!isValidAddress(trimmedAddress)) {
             throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
         }
-        String[] splitAddressArray = trimmedAddress.split(",");
+        String[] splitAddressArray = trimmedAddress.split(ADDRESS_SPLIT_DELIMITER);
         this.block = new Block(splitAddressArray[BLOCK_INDEX]);
         this.street = new Street(splitAddressArray[STREET_INDEX]);
         this.unit = new Unit(splitAddressArray[UNIT_INDEX]);
         this.postalCode = new PostalCode(splitAddressArray[POSTALCODE_INDEX]);
-        this.value = trimmedAddress;
     }
 
     /**
@@ -54,19 +53,21 @@ public class Address {
 
     @Override
     public String toString() {
-        return value;
+        String fullAddress = block + ADDRESS_SPLIT_DELIMITER + " " + street + ADDRESS_SPLIT_DELIMITER + " "
+                           + unit + ADDRESS_SPLIT_DELIMITER + " " + postalCode;
+        return fullAddress;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Address // instanceof handles nulls
-                && this.value.equals(((Address) other).value)); // state check
+                && this.toString().equals(((Address) other).toString())); // state check
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return toString().hashCode();
     }
 
     public boolean isPrivate() {
