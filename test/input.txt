@@ -38,7 +38,7 @@
   add []\[;] p/12345 e/valid@e.mail a/111, street, unit, postal code
   add Valid Name p/not_numbers e/valid@e.mail a/111, street, unit, postal code
   add Valid Name p/12345 e/notAnEmail a/111, street, unit, postal code
-  add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag
+  add Valid Name p/12345 e/valid@e.mail a/111, valid street, valid unit, valid postal code t/invalid_-[.tag
 
   # should add correctly and list non private information
   add Adam Brown p/111111 e/adam@gmail.com a/111, alpha street, unit, 111111

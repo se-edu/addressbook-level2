@@ -8,16 +8,23 @@ import seedu.addressbook.data.exception.IllegalValueException;
  */
 public class Address {
 
-    public static final String EXAMPLE = "123, some street";
-    public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses can be in any format";
+    public static final String EXAMPLE = "123, some street, some unit, some postal code";
+    public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses must be in format of <BLOCK, STREET, UNIT, POSTAL CODE>";
     public static final String ADDRESS_VALIDATION_REGEX = ".+";
+    public static final String ADDRESS_SPLIT_REGEX = ",";
 
-    private String value;
+    public static final int ADDRESS_BLOCK_INDEX = 0;
+    public static final int ADDRESS_STREET_INDEX = 1;
+    public static final int ADDRESS_UNIT_INDEX = 2;
+    public static final int ADDRESS_POSTAL_CODE_INDEX = 3;
+    public static final int ADDRESS_FIELD_NUMBER = 4;
+
     private Block block;
     private Street street;
     private Unit unit;
     private PostalCode postalCode;
     private boolean isPrivate;
+    public String value;
 
     /**
      * Validates given address.
@@ -27,14 +34,11 @@ public class Address {
     public Address(String address, boolean isPrivate) throws IllegalValueException {
         String trimmedAddress = address.trim();
         this.isPrivate = isPrivate;
-        String[] splitAddress = trimmedAddress.split(",");
-        for (int i = 0; i <= splitAddress.length; i++) {
-            if (!isValidAddress(splitAddress[i])) {
-                throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
-            }
-            splitAddress[i].replaceAll(",", "").trim();
+        String[] splitAddress = trimmedAddress.split(ADDRESS_SPLIT_REGEX);
+
+        if (!isValidAddress(trimmedAddress)) {
+            throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
         }
-        value = trimmedAddress;
         initializeAddress(splitAddress);
     }
 
@@ -43,22 +47,26 @@ public class Address {
      * @param splitAddress
      */
     private void initializeAddress(String[] splitAddress) {
-        block = new Block(splitAddress[0]);
-        street = new Street(splitAddress[1]);
-        unit = new Unit(splitAddress[2]);
-        postalCode = new PostalCode(splitAddress[3]);
+        block = new Block(splitAddress[ADDRESS_BLOCK_INDEX].replace(ADDRESS_SPLIT_REGEX, "").trim());
+        street = new Street(splitAddress[ADDRESS_STREET_INDEX].replace(ADDRESS_SPLIT_REGEX, "").trim());
+        unit = new Unit(splitAddress[ADDRESS_UNIT_INDEX].replace(ADDRESS_SPLIT_REGEX, "").trim());
+        postalCode = new PostalCode(splitAddress[ADDRESS_POSTAL_CODE_INDEX].replace(ADDRESS_SPLIT_REGEX, "").trim());
+        value = this.toString();
     }
 
     /**
      * Returns true if a given string is a valid person address.
      */
     public static boolean isValidAddress(String test) {
-        return test.matches(ADDRESS_VALIDATION_REGEX);
+        return test.matches(ADDRESS_VALIDATION_REGEX) && test.split(ADDRESS_SPLIT_REGEX).length == ADDRESS_FIELD_NUMBER;
     }
 
     @Override
     public String toString() {
-        return value;
+        return block.getBlock() + ADDRESS_SPLIT_REGEX + " "
+                + street.getStreet() + ADDRESS_SPLIT_REGEX + " "
+                + unit.getUnit() + ADDRESS_SPLIT_REGEX + " "
+                + postalCode.getPostalCode();
     }
 
     @Override
