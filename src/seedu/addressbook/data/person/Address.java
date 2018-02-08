@@ -6,12 +6,32 @@ import seedu.addressbook.data.exception.IllegalValueException;
  * Represents a Person's address in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
  */
+public class Block {
+
+}
+
+public class Street {
+
+
+}
+
+public class Unit {
+
+
+}
+
+public class PostalCode {
+
+}
 public class Address {
 
     public static final String EXAMPLE = "123, some street";
     public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses can be in any format";
     public static final String ADDRESS_VALIDATION_REGEX = ".+";
-
+    private Block block;
+    private Street street;
+    private Unit unit;
+    private PostalCode postalcode;
     public final String value;
     private boolean isPrivate;
 
