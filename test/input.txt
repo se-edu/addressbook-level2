@@ -42,7 +42,7 @@
   # should add correctly and list non private information
   add Adam Brown p/111111 e/adam@gmail.com a/111, alpha street, #12-34, 231534
   list
-  add Betsy Choo pp/222222 pe/benchoo@nus.edu.sg pa/222, beta street , #12-34, 231534 t/secretive
+  add Betsy Choo pp/222222 pe/benchoo@nus.edu.sg pa/222, beta street, #12-34, 231534 t/secretive
   list
   add Charlie Dickson pp/333333 e/charlie.d@nus.edu.sg a/333, gamma street, #12-34, 231534 t/friends t/school
   list
