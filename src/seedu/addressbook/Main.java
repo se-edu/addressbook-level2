@@ -1,5 +1,6 @@
 package seedu.addressbook;
 
+import java.nio.file.ReadOnlyFileSystemException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -13,6 +14,7 @@ import seedu.addressbook.parser.Parser;
 import seedu.addressbook.storage.StorageFile;
 import seedu.addressbook.storage.StorageFile.InvalidStorageFilePathException;
 import seedu.addressbook.storage.StorageFile.StorageOperationException;
+
 import seedu.addressbook.ui.TextUi;
 
 
@@ -57,8 +59,8 @@ public class Main {
             this.addressBook = storage.load();
             ui.showWelcomeMessage(VERSION, storage.getPath());
 
-        } catch (InvalidStorageFilePathException | StorageOperationException e) {
-            ui.showInitFailedMessage();
+       } catch (InvalidStorageFilePathException | StorageOperationException e ) {
+           ui.showInitFailedMessage();
             /*
              * ==============NOTE TO STUDENTS=========================================================================
              * We are throwing a RuntimeException which is an 'unchecked' exception. Unchecked exceptions do not need
