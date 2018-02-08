@@ -1,5 +1,9 @@
 package seedu.addressbook.commands;
 
+import seedu.addressbook.common.Messages;
+
+import java.nio.file.ReadOnlyFileSystemException;
+
 /**
  * Clears the address book.
  */
@@ -16,7 +20,11 @@ public class ClearCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        addressBook.clear();
-        return new CommandResult(MESSAGE_SUCCESS);
+        try {
+            addressBook.clear();
+            return new CommandResult(MESSAGE_SUCCESS);
+        } catch (ReadOnlyFileSystemException rfse) {
+            return new CommandResult(Messages.MESSAGE_READ_ONLY_FILE);
+        }
     }
 }
