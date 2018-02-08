@@ -66,7 +66,7 @@ public class AdaptedPerson {
 
         address = new AdaptedContactDetail();
         address.isPrivate = source.getAddress().isPrivate();
-        address.value = source.getAddress().value;
+        address.value = source.getAddress().toString();
 
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
@@ -90,7 +90,7 @@ public class AdaptedPerson {
         }
         // second call only happens if phone/email/address are all not null
         return Utils.isAnyNull(name, phone, email, address)
-                || Utils.isAnyNull(phone.value, email.value, address.value);
+                || Utils.isAnyNull(phone.value, email.value, address.toString());
     }
 
     /**
