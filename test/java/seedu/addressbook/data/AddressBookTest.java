@@ -47,25 +47,25 @@ public class AddressBookTest {
         aliceBetsy     = new Person(new Name("Alice Betsy"),
                                     new Phone("91235468", false),
                                     new Email("alice@nushackers.org", false),
-                                    new Address("8 Computing Drive, Singapore", false),
+                                    new Address("8, Computing Drive, #02-30, 540219", false),
                                     new UniqueTagList(tagMathematician));
 
         bobChaplin     = new Person(new Name("Bob Chaplin"),
                                     new Phone("94321500", false),
                                     new Email("bob@nusgreyhats.org", false),
-                                    new Address("9 Computing Drive", false),
+                                    new Address("9, Computing Drive, #01-12, 430291", false),
                                     new UniqueTagList(tagMathematician));
 
         charlieDouglas = new Person(new Name("Charlie Douglas"),
                                     new Phone("98751365", false),
                                     new Email("charlie@nusgdg.org", false),
-                                    new Address("10 Science Drive", false),
+                                    new Address("10, Science Drive, #01-23, 430293", false),
                                     new UniqueTagList(tagScientist));
 
         davidElliot    = new Person(new Name("David Elliot"),
                                     new Phone("84512575", false),
                                     new Email("douglas@nuscomputing.com", false),
-                                    new Address("11 Arts Link", false),
+                                    new Address("11, Arts Link, #01-33, 409302", false),
                                     new UniqueTagList(tagEconomist, tagPrizeWinner));
 
         emptyAddressBook = new AddressBook();
