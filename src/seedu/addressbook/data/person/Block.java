@@ -8,7 +8,7 @@ public class Block {
     private final String block;
 
     public Block(String block){
-        String trimmedBlock = block;
+        String trimmedBlock = block.trim();
         this.block = trimmedBlock;
     }
 

@@ -8,7 +8,7 @@ public class Unit {
     private final String unit;
 
     public Unit(String unit){
-        String trimmedUnit = unit;
+        String trimmedUnit = unit.trim();
         this.unit = trimmedUnit;
     }
 

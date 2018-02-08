@@ -8,7 +8,7 @@ public class PostalCode {
     private final String postalCode;
 
     public PostalCode(String postalCode){
-        String trimmedPostalCode = postalCode;
+        String trimmedPostalCode = postalCode.trim();
         this.postalCode = trimmedPostalCode;
     }
 
