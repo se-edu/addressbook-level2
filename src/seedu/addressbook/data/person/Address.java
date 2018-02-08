@@ -1,5 +1,6 @@
 package seedu.addressbook.data.person;
 
+import javafx.geometry.Pos;
 import seedu.addressbook.data.exception.IllegalValueException;
 
 /**
@@ -14,6 +15,10 @@ public class Address {
 
     public final String value;
     private boolean isPrivate;
+    private Block blockNumber;
+    private Street streetName;
+    private Unit unitNumber;
+    private PostalCode postalCodeNumber;
 
     /**
      * Validates given address.
