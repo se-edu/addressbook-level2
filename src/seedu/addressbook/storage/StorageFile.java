@@ -110,12 +110,13 @@ public class StorageFile {
             marshaller.marshal(toSave, fileWriter);
 
         } catch (IOException ioe) {
+            if (!path.toFile().canWrite()){
+                throw new StorageOperationException("STORAGE FILE READ ONLY: Error writing to file: " + path);
+            }
             throw new StorageOperationException("Error writing to file: " + path);
         } catch (JAXBException jaxbe) {
             throw new StorageOperationException("Error converting address book into storage format");
-       } catch (ReadOnlyPropertyException e) {
-            throw new StorageOperationException("Error Storage File is read only but Application is still running");
-        }
+       }
     }
 
     /**
