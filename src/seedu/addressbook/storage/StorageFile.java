@@ -1,8 +1,10 @@
 package seedu.addressbook.storage;
 
+import com.oracle.webservices.internal.api.message.ReadOnlyPropertyException;
 import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.storage.jaxb.AdaptedAddressBook;
+
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -58,6 +60,8 @@ public class StorageFile {
             super(message);
         }
     }
+
+
 
     private final JAXBContext jaxbContext;
 
@@ -116,6 +120,8 @@ public class StorageFile {
             throw new StorageOperationException("Error writing to file: " + path);
         } catch (JAXBException jaxbe) {
             throw new StorageOperationException("Error converting address book into storage format");
+       } catch (ReadOnlyPropertyException e) {
+            throw new StorageOperationException("Error Storage File is read only but Application is still running");
         }
     }
 
