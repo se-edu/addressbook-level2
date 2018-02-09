@@ -118,6 +118,12 @@ public class Main {
      * @param command user command
      * @return result of the command
      */
+    /**
+     * Executes the command and returns the result.
+     *
+     * @param command user command
+     * @return result of the command
+     */
     private CommandResult executeCommand(Command command) {
         try {
             command.setData(addressBook, lastShownList);
