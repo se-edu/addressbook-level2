@@ -1,5 +1,6 @@
 package seedu.addressbook.data.person;
 
+import javafx.geometry.Pos;
 import seedu.addressbook.data.exception.IllegalValueException;
 
 /**
@@ -14,6 +15,10 @@ public class Address {
 
     public final String value;
     private boolean isPrivate;
+    public Block blockNumber;
+    public Street streetName;
+    public Unit unitNumber;
+    public PostalCode postalCodeNumber;
 
     /**
      * Validates given address.
@@ -27,7 +32,37 @@ public class Address {
             throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
         }
         this.value = trimmedAddress;
+        setAddressElements(address);
+
     }
+
+    /**
+     * Creates an object for Block, Street, Unit, and PostalCode class depending on the address input
+     * @param address
+     */
+
+    private void setAddressElements(String address) {
+        String[] addressList = address.split(",");
+        if (addressList.length == 1) {
+            Block blockNumber = new Block(Integer.parseInt(addressList[0]));
+        }
+        if (addressList.length == 2) {
+            Block blockNumber = new Block(Integer.parseInt(addressList[0]));
+            Street streetName = new Street(addressList[1]);
+        }
+        if (addressList.length == 3) {
+            Block blockNumber = new Block(Integer.parseInt(addressList[0]));
+            Street streetName = new Street(addressList[1]);
+            Unit unitNumber = new Unit(addressList[2]);
+        }
+        if (addressList.length == 4) {
+            Block blockNumber = new Block(Integer.parseInt(addressList[0]));
+            Street streetName = new Street(addressList[1]);
+            Unit unitNumber = new Unit(addressList[2]);
+            PostalCode postalCodeNumber = new PostalCode(addressList[3]);
+        }
+    }
+
 
     /**
      * Returns true if a given string is a valid person address.

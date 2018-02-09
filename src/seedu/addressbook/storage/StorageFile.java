@@ -45,6 +45,13 @@ public class StorageFile {
     }
 
     /**
+     * Signals that storage file is made read only when Address book is running
+     */
+    public static class ReadOnlyStorageFileException extends Exception{
+        public ReadOnlyStorageFileException (String message) { super(message); }
+    }
+
+    /**
      * Signals that some error has occured while trying to convert and read/write data between the application
      * and the storage file.
      */
