@@ -24,15 +24,16 @@ public class Address {
      *
      * @throws IllegalValueException if given address string is invalid.
      */
-    public Address(Address a, boolean isPrivate) throws IllegalValueException {
-        int[] splitAddress = a.split(",");
+    public Address(String address, boolean isPrivate) throws IllegalValueException {
+        String trimmedAddress = address.trim();
+        int[] splitAddress = trimmedAddress.split(",");
         addressBlock = splitAddress[0];
         addressStreet = splitAddress[1];
         addressUnit = splitAddress[2];
         addressPostalCode = splitAddress[3];
 
         this.isPrivate = isPrivate;
-        if (!isValidAddress(addressBlock, addressStreet, addressUnit, addressPostalCode)) {
+        if (!isValidAddress(trimmedAddress)) {
             throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
         }
         this.value = trimmedAddress;
