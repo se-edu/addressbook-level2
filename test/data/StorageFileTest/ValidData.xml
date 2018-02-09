@@ -4,13 +4,13 @@
         <name>John Doe</name>
         <phone isPrivate="false">98765432</phone>
         <email isPrivate="false">johnd@gmail.com</email>
-        <address isPrivate="false">John street, block 123, #01-01</address>
+        <address isPrivate="false">123, John street, #01-01, 987654</address>
     </persons>
     <persons>
         <name>Betsy Crowe</name>
         <phone isPrivate="true">1234567</phone>
         <email isPrivate="false">betsycrowe@gmail.com</email>
-        <address isPrivate="true">Newgate Prison</address>
+        <address isPrivate="true">123, Newgate Prison, #09-89, 122345</address>
         <tagged>friend</tagged>
         <tagged>criminal</tagged>
     </persons>

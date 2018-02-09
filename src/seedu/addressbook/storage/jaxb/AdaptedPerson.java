@@ -25,9 +25,9 @@ public class AdaptedPerson {
 
     private static class AdaptedContactDetail {
         @XmlValue
-        public String value;
+        private String value;
         @XmlAttribute(required = true)
-        public boolean isPrivate;
+        private boolean isPrivate;
     }
 
     @XmlElement(required = true)
