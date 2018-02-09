@@ -6,13 +6,68 @@ import seedu.addressbook.data.exception.IllegalValueException;
  * Represents a Person's address in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
  */
+
+public class Block {
+    private final String value;
+
+    public Block(String value) {
+        this.value = value;
+    }
+    public String getValue() {
+        return value;
+    }
+
+}
+
+public class Street {
+    private final String value;
+
+    public Street(String value) {
+        this.value = value;
+    }
+    public String getValue() {
+        return value;
+    }
+
+}
+public class Unit {
+    private  final String value;
+
+    public Unit(String value){
+        this.value = value;
+    }
+    public String getValue() {
+        return value;
+    }
+
+}
+
+public class PostalCode {
+    private final String value;
+
+    public PostalCode(String value) {
+        this.value = value;
+    }
+    public String getValue(){
+        return value;
+    }
+
+}
 public class Address {
 
     public static final String EXAMPLE = "123, some street";
     public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses can be in any format";
     public static final String ADDRESS_VALIDATION_REGEX = ".+";
+    public static final int BLOCK_INDEX = 0;
+    public static final int STREET_INDEX = 1;
+    public static final int UNIT_INDEX = 2;
+    public static final int POSTAL_CODE_INDEX = 3;
 
     public final String value;
+    private Block block;
+    private Street street;
+    private Unit unit;
+    private PostalCode postalCode;
     private boolean isPrivate;
 
     /**
@@ -26,7 +81,13 @@ public class Address {
         if (!isValidAddress(trimmedAddress)) {
             throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
         }
-        this.value = trimmedAddress;
+        splitAddress(address);
+        
+
+    }
+
+    private void splitAddress(String address) {
+        
     }
 
     /**
