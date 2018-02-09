@@ -8,13 +8,23 @@ import seedu.addressbook.data.exception.IllegalValueException;
  */
 public class Address {
 
-    public static final String EXAMPLE = "123, some street";
-    public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses can be in any format";
-    public static final String ADDRESS_VALIDATION_REGEX = ".+";
+    public static final String EXAMPLE = "311, Clementi Ave 2, #02-25, 182938";
+    public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses should be in the format: BLOCK, STREET, UNIT NUMBER, POSTAL CODE";
+    public static final String ADDRESS_VALIDATION_REGEX = ".+,.+,.+,.+";
 
-    public final String value;
+    public String value;
     private boolean isPrivate;
-
+	
+	private Block block;
+	private Street street;
+	private UnitNumber unitNumber;
+	private PostalCode postalCode;
+	
+	private final int BLOCK_INDEX = 0;
+	private final int STREET_INDEX = 1;
+	private final int UNIT_NUMBER_INDEX = 2;
+	private final int POSTAL_CODE_INDEX = 3;
+	
     /**
      * Validates given address.
      *
@@ -26,9 +36,19 @@ public class Address {
         if (!isValidAddress(trimmedAddress)) {
             throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
         }
-        this.value = trimmedAddress;
+        splitAddress(trimmedAddress);
     }
-
+	/**
+	  * Split trimmedAddress into 4 classes: Block, Street, UnitNumber, PostalCode
+	  */
+	public void splitAddress(String trimmedAddress) {
+		String[] addressDetails= trimmedAddress.split(",");
+		block = new Block(addressDetails[BLOCK_INDEX].trim());
+		street = new Street(addressDetails[STREET_INDEX].trim());
+		unitNumber = new UnitNumber(addressDetails[UNIT_NUMBER_INDEX].trim());
+		postalCode = new PostalCode(addressDetails[POSTAL_CODE_INDEX].trim());
+	}
+	
     /**
      * Returns true if a given string is a valid person address.
      */
@@ -37,10 +57,16 @@ public class Address {
     }
 
     @Override
+	/**
+	  * Returns address in the format: block, street, unitNumber, postalCode
+	  */
     public String toString() {
-        return value;
+        return block.toString() + ", " + street.toString() + ", " + unitNumber.toString() + ", " + postalCode.toString();
     }
-
+	/**
+	  * Getter methods to get address details (block, street, unitNumber, postalCode) separately 
+	  */
+	
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
