@@ -15,10 +15,10 @@ public class Address {
 
     public final String value;
     private boolean isPrivate;
-    private Block blockNumber;
-    private Street streetName;
-    private Unit unitNumber;
-    private PostalCode postalCodeNumber;
+    public Block blockNumber;
+    public Street streetName;
+    public Unit unitNumber;
+    public PostalCode postalCodeNumber;
 
     /**
      * Validates given address.
