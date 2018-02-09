@@ -4,6 +4,7 @@ import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.storage.jaxb.AdaptedAddressBook;
 
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -43,6 +44,13 @@ public class StorageFile {
     }
 
     /**
+     * Signals that storage file is made read only when Address book is running
+     */
+    public static class ReadOnlyStorageFileException extends Exception{
+        public ReadOnlyStorageFileException (String message) { super(message); }
+    }
+
+    /**
      * Signals that some error has occured while trying to convert and read/write data between the application
      * and the storage file.
      */
@@ -51,6 +59,8 @@ public class StorageFile {
             super(message);
         }
     }
+
+
 
     private final JAXBContext jaxbContext;
 
@@ -106,10 +116,13 @@ public class StorageFile {
             marshaller.marshal(toSave, fileWriter);
 
         } catch (IOException ioe) {
+            if (!path.toFile().canWrite()){
+                throw new StorageOperationException("STORAGE FILE READ ONLY: Error writing to file: " + path);
+            }
             throw new StorageOperationException("Error writing to file: " + path);
         } catch (JAXBException jaxbe) {
             throw new StorageOperationException("Error converting address book into storage format");
-        }
+       }
     }
 
     /**
