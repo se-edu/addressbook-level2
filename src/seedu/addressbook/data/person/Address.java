@@ -24,11 +24,12 @@ public class Address {
      *
      * @throws IllegalValueException if given address string is invalid.
      */
-    public Address(Block b, Street s, Unit u, PostalCode p, boolean isPrivate) throws IllegalValueException {
-        addressBlock = b;
-        addressStreet = s;
-        addressUnit = u;
-        addressPostalCode = p;
+    public Address(Address a, boolean isPrivate) throws IllegalValueException {
+        int[] splitAddress = a.split(",");
+        addressBlock = splitAddress[0];
+        addressStreet = splitAddress[1];
+        addressUnit = splitAddress[2];
+        addressPostalCode = splitAddress[3];
 
         this.isPrivate = isPrivate;
         if (!isValidAddress(addressBlock, addressStreet, addressUnit, addressPostalCode)) {
@@ -40,9 +41,8 @@ public class Address {
     /**
      * Returns true if a given string is a valid person address.
      */
-    public static boolean isValidAddress(Block b, Street s, Unit u, PostalCode p) {
-        //return test.matches(ADDRESS_VALIDATION_REGEX); change this to check if everything has a value
-        return true;
+    public static boolean isValidAddress(String test) {
+        return test.matches(ADDRESS_VALIDATION_REGEX);
     }
 
     @Override
