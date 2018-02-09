@@ -28,27 +28,27 @@
 
   # should catch invalid args format
   add wrong args wrong args
-  add Valid Name 12345 e/valid@email.butNoPhonePrefix a/valid, address
-  add Valid Name p/12345 valid@email.butNoPrefix a/valid, address
-  add Valid Name p/12345 e/valid@email.butNoAddressPrefix valid, address
-  add Valid Name p/12345 e/valid@email.butNoTagPrefix a/valid, address t/goodTag noPrefixTag
+  add Valid Name 44444 e/valid@email.butNoPhonePrefix a/valid, address, #11-22, 434132
+  add Valid Name p/55555 valid@email.butNoPrefix a/valid, address, #33-44, 434343
+  add Valid Name p/11111 e/valid@email.butNoAddressPrefix valid, address, #22-55, 242478
+  add Valid Name p/22222 e/valid@email.butNoTagPrefix a/valid, address, #66-66, 343444 t/goodTag noPrefixTag
   
   # should catch invalid person data
-  add []\[;] p/12345 e/valid@e.mail a/valid, address
-  add Valid Name p/not_numbers e/valid@e.mail a/valid, address
-  add Valid Name p/12345 e/notAnEmail a/valid, address
-  add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag
+  add []\[;] p/12345 e/valid@e.mail a/valid, address, #01-23, 456789
+  add Valid Name p/not_numbers e/valid@e.mail a/valid, address, #01-23, 456789
+  add Valid Name p/12345 e/notAnEmail a/valid, address, #01-23, 456789
+  add Valid Name p/12345 e/valid@e.mail a/valid, address, #01-23, 456789 t/invalid_-[.tag
 
   # should add correctly and list non private information
-  add Adam Brown p/111111 e/adam@gmail.com a/111, alpha street
+  add Adam Brown p/111111 e/adam@gmail.com a/322, alpha street, #33-44, 443434
   list
-  add Betsy Choo pp/222222 pe/benchoo@nus.edu.sg pa/222, beta street t/secretive
+  add Betsy Choo pp/222222 pe/benchoo@nus.edu.sg pa/444, beta street, #88-88, 3434343 t/secretive
   list
-  add Charlie Dickson pp/333333 e/charlie.d@nus.edu.sg a/333, gamma street t/friends t/school
+  add Charlie Dickson pp/333333 e/charlie.d@nus.edu.sg a/777, gamma street, #44-33, 2323232 t/friends t/school
   list
-  add Dickson Ee p/444444 pe/dickson@nus.edu.sg a/444, delta street t/friends
+  add Dickson Ee p/232323 pe/dickson@nus.edu.sg a/999, delta street, #77-66, 776767 t/friends
   list
-  add Esther Potato p/555555 e/esther@not.a.real.potato pa/555, epsilon street t/tubers t/starchy
+  add Esther Potato p/233232 e/esther@not.a.real.potato pa/444, epsilon street, #66-55, 232323 t/tubers t/starchy
   list
 
   # should not allow adding duplicate persons
@@ -139,6 +139,14 @@
   # listing indexes get updated on next request
   delete 1
   list
+##########################################################
+ # test incorrect address format
+##########################################################
+
+  # adds address incorrectly
+  add cookies p/45454545 e/cookies@hotmail.com a/9, singapore poly
+
+##########################################################
 
 ##########################################################
 # test clear command
