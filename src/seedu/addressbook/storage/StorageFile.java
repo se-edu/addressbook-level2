@@ -43,6 +43,13 @@ public class StorageFile {
     }
 
     /**
+     * Signals that user runs the program in read only mode.
+     */
+    public static class RunningInReadOnlyException extends Exception {
+        public RunningInReadOnlyException(String message) { super(message);}
+    }
+
+    /**
      * Signals that some error has occured while trying to convert and read/write data between the application
      * and the storage file.
      */
