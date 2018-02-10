@@ -13,6 +13,7 @@ import seedu.addressbook.parser.Parser;
 import seedu.addressbook.storage.StorageFile;
 import seedu.addressbook.storage.StorageFile.InvalidStorageFilePathException;
 import seedu.addressbook.storage.StorageFile.StorageOperationException;
+import seedu.addressbook.storage.StorageFile.RunningInReadOnlyException;
 import seedu.addressbook.ui.TextUi;
 
 
@@ -33,12 +34,12 @@ public class Main {
     private List<? extends ReadOnlyPerson> lastShownList = Collections.emptyList();
 
 
-    public static void main(String... launchArgs) {
+    public static void main(String... launchArgs) throws RunningInReadOnlyException {
         new Main().run(launchArgs);
     }
 
     /** Runs the program until termination.  */
-    public void run(String[] launchArgs) {
+    public void run(String[] launchArgs) throws RunningInReadOnlyException {
         start(launchArgs);
         runCommandLoopUntilExitCommand();
         exit();
@@ -79,7 +80,7 @@ public class Main {
     }
 
     /** Reads the user command and executes it, until the user issues the exit command.  */
-    private void runCommandLoopUntilExitCommand() {
+    private void runCommandLoopUntilExitCommand() throws RunningInReadOnlyException {
         Command command;
         do {
             String userCommandText = ui.getUserCommand();
@@ -105,7 +106,7 @@ public class Main {
      * @param command user command
      * @return result of the command
      */
-    private CommandResult executeCommand(Command command)  {
+    private CommandResult executeCommand(Command command) throws RunningInReadOnlyException {
         try {
             command.setData(addressBook, lastShownList);
             CommandResult result = command.execute();
@@ -113,7 +114,7 @@ public class Main {
             return result;
         } catch (Exception e) {
             ui.showToUser(e.getMessage());
-            throw new RuntimeException(e);
+            throw new RunningInReadOnlyException("Invalid mode. Running in read only mode.");
         }
     }
 
