@@ -45,7 +45,6 @@ public class TextUi {
 
     public TextUi() {
         this(System.in, System.out);
-        formatter = new Formatter(System.in, System.out);
     }
 
     public TextUi(InputStream in, PrintStream out) {
@@ -90,30 +89,22 @@ public class TextUi {
             fullInputLine = in.nextLine();
         }
 
-        showToUser("[Command entered:" + fullInputLine + "]");
+        formatter.showUserCommand(fullInputLine);
         return fullInputLine;
     }
 
 
     public void showWelcomeMessage(String version, String storageFilePath) {
-        String storageFileInfo = String.format(MESSAGE_USING_STORAGE_FILE, storageFilePath);
-        showToUser(
-                DIVIDER,
-                DIVIDER,
-                MESSAGE_WELCOME,
-                version,
-                MESSAGE_PROGRAM_LAUNCH_ARGS_USAGE,
-                storageFileInfo,
-                DIVIDER);
+        formatter.showWelcomeMessage(version, storageFilePath);
     }
 
     public void showGoodbyeMessage() {
-        showToUser(MESSAGE_GOODBYE, DIVIDER, DIVIDER);
+        formatter.showGoodbyeMessage();
     }
 
 
     public void showInitFailedMessage() {
-        showToUser(MESSAGE_INIT_FAILED, DIVIDER, DIVIDER);
+        formatter.showInitFailedMessage();
     }
 
     /** Shows message(s) to the user */
@@ -214,5 +205,29 @@ class Formatter{
 
     public void getCommand(){
         out.print(LINE_PREFIX + "Enter command: ");
+    }
+
+    public void showUserCommand(String input){
+        showToUser("[Command entered:" + input + "]");
+    }
+
+    public void showWelcomeMessage(String version, String storageFilePath){
+        String storageFileInfo = String.format(MESSAGE_USING_STORAGE_FILE, storageFilePath);
+        showToUser(
+                DIVIDER,
+                DIVIDER,
+                MESSAGE_WELCOME,
+                version,
+                MESSAGE_PROGRAM_LAUNCH_ARGS_USAGE,
+                storageFileInfo,
+                DIVIDER);
+    }
+
+    public void showGoodbyeMessage(){
+        showToUser(MESSAGE_GOODBYE, DIVIDER, DIVIDER);
+    }
+
+    public void showInitFailedMessage(){
+        showToUser(MESSAGE_INIT_FAILED, DIVIDER, DIVIDER);
     }
 }
