@@ -52,6 +52,16 @@ public class StorageFile {
         }
     }
 
+    /**
+     * Signals that file is unwritable when saving address book
+     *
+     */
+    public static class FileUnwritableException extends Exception {
+        public FileUnwritableException(String message) {
+            super(message);
+        }
+    }
+
     private final JAXBContext jaxbContext;
 
     public final Path path;
@@ -79,6 +89,8 @@ public class StorageFile {
         }
     }
 
+
+
     /**
      * Returns true if the given path is acceptable as a storage file.
      * The file path is considered acceptable if it ends with '.xml'
@@ -93,6 +105,27 @@ public class StorageFile {
      * @throws StorageOperationException if there were errors converting and/or storing data to file.
      */
     public void save(AddressBook addressBook) throws StorageOperationException {
+
+        /*
+         * To check if storage file is read-only
+         *
+         */
+        try {
+
+            fileCanBeWritten(path);
+
+        } catch (FileUnwritableException e){
+            System.err.println(e.getMessage() + "\nPlease enable storage file to be writable now!");
+        }
+
+        while(!path.toFile().canWrite()) {
+            try {
+                Thread.sleep(1500);
+            } catch (InterruptedException e){
+
+            }
+            System.out.println("|| ...");
+        }
 
         /* Note: Note the 'try with resource' statement below.
          * More info: https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html
@@ -151,5 +184,14 @@ public class StorageFile {
     public String getPath() {
         return path.toString();
     }
+
+
+    private void fileCanBeWritten(Path path) throws FileUnwritableException{
+        if(!path.toFile().canWrite()){
+            throw new FileUnwritableException("Warning: Storage file cannot be written!");
+        }
+    }
+
+
 
 }
