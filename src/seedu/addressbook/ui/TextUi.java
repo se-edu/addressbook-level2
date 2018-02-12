@@ -20,19 +20,6 @@ import seedu.addressbook.data.person.ReadOnlyPerson;
  * Text UI of the application.
  */
 public class TextUi {
-
-    /** A decorative prefix added to the beginning of lines printed by AddressBook */
-    private static final String LINE_PREFIX = "|| ";
-
-    /** A platform independent line separator. */
-    private static final String LS = System.lineSeparator();
-
-    private static final String DIVIDER = "===================================================";
-
-    /** Format of indexed list item */
-    private static final String MESSAGE_INDEXED_LIST_ITEM = "\t%1$d. %2$s";
-
-
     /** Offset required to convert between 1-indexing and 0-indexing.  */
     public static final int DISPLAYED_INDEX_OFFSET = 1;
 
@@ -40,15 +27,15 @@ public class TextUi {
     private static final String COMMENT_LINE_FORMAT_REGEX = "#.*";
 
     private final Scanner in;
-    private final PrintStream out;
+    private final Formatter formatter;
 
     public TextUi() {
-        this(System.in, System.out);
+        this(System.in);
     }
 
-    public TextUi(InputStream in, PrintStream out) {
+    public TextUi(InputStream in) {
         this.in = new Scanner(in);
-        this.out = out;
+        formatter = new Formatter(System.out);
     }
 
     /**
@@ -72,6 +59,11 @@ public class TextUi {
         return rawInputLine.trim().matches(COMMENT_LINE_FORMAT_REGEX);
     }
 
+    /** Shows message(s) to the user */
+    public void showToUser(String... message) {
+        formatter.showToUser(message);
+    }
+
     /**
      * Prompts for the command and reads the text entered by the user.
      * Ignores empty, pure whitespace, and comment lines.
@@ -79,7 +71,7 @@ public class TextUi {
      * @return command (full line) entered by the user
      */
     public String getUserCommand() {
-        out.print(LINE_PREFIX + "Enter command: ");
+        formatter.getCommand();
         String fullInputLine = in.nextLine();
 
         // silently consume all ignored lines
@@ -87,12 +79,75 @@ public class TextUi {
             fullInputLine = in.nextLine();
         }
 
-        showToUser("[Command entered:" + fullInputLine + "]");
+        formatter.showUserCommand(fullInputLine);
         return fullInputLine;
     }
 
 
     public void showWelcomeMessage(String version, String storageFilePath) {
+        formatter.showWelcomeMessage(version, storageFilePath);
+    }
+
+    public void showGoodbyeMessage() {
+        formatter.showGoodbyeMessage();
+    }
+
+
+    public void showInitFailedMessage() {
+        formatter.showInitFailedMessage();
+    }
+
+    /**
+     * Shows the result of a command execution to the user. Includes additional formatting to demarcate different
+     * command execution segments.
+     */
+    public void showResultToUser(CommandResult result) {
+        final Optional<List<? extends ReadOnlyPerson>> resultPersons = result.getRelevantPersons();
+        if (resultPersons.isPresent()) {
+            formatter.showPersonListView(resultPersons.get());
+        }
+        formatter.showFeedback(result.feedbackToUser);
+    }
+
+}
+
+class Formatter{
+    /** A decorative prefix added to the beginning of lines printed by AddressBook */
+    private static final String LINE_PREFIX = "|| ";
+
+    /** A platform independent line separator. */
+    private static final String LS = System.lineSeparator();
+
+    private static final String DIVIDER = "===================================================";
+
+    /** Format of indexed list item */
+    private static final String MESSAGE_INDEXED_LIST_ITEM = "\t%1$d. %2$s";
+
+    /** Offset required to convert between 1-indexing and 0-indexing.  */
+    public static final int DISPLAYED_INDEX_OFFSET = 1;
+
+    private final PrintStream out;
+
+    public Formatter(PrintStream out) {
+        this.out = out;
+    }
+
+    /** Shows message(s) to the user */
+    public void showToUser(String... message) {
+        for (String m : message) {
+            out.println(LINE_PREFIX + m.replace("\n", LS + LINE_PREFIX));
+        }
+    }
+
+    public void getCommand(){
+        out.print(LINE_PREFIX + "Enter command: ");
+    }
+
+    public void showUserCommand(String input){
+        showToUser("[Command entered:" + input + "]");
+    }
+
+    public void showWelcomeMessage(String version, String storageFilePath){
         String storageFileInfo = String.format(MESSAGE_USING_STORAGE_FILE, storageFilePath);
         showToUser(
                 DIVIDER,
@@ -104,39 +159,23 @@ public class TextUi {
                 DIVIDER);
     }
 
-    public void showGoodbyeMessage() {
+    public void showGoodbyeMessage(){
         showToUser(MESSAGE_GOODBYE, DIVIDER, DIVIDER);
     }
 
-
-    public void showInitFailedMessage() {
+    public void showInitFailedMessage(){
         showToUser(MESSAGE_INIT_FAILED, DIVIDER, DIVIDER);
     }
 
-    /** Shows message(s) to the user */
-    public void showToUser(String... message) {
-        for (String m : message) {
-            out.println(LINE_PREFIX + m.replace("\n", LS + LINE_PREFIX));
-        }
-    }
-
-    /**
-     * Shows the result of a command execution to the user. Includes additional formatting to demarcate different
-     * command execution segments.
-     */
-    public void showResultToUser(CommandResult result) {
-        final Optional<List<? extends ReadOnlyPerson>> resultPersons = result.getRelevantPersons();
-        if (resultPersons.isPresent()) {
-            showPersonListView(resultPersons.get());
-        }
-        showToUser(result.feedbackToUser, DIVIDER);
+    public void showFeedback(String feedback){
+        showToUser(feedback, DIVIDER);
     }
 
     /**
      * Shows a list of persons to the user, formatted as an indexed list.
      * Private contact details are hidden.
      */
-    private void showPersonListView(List<? extends ReadOnlyPerson> persons) {
+    public void showPersonListView(List<? extends ReadOnlyPerson> persons) {
         final List<String> formattedPersons = new ArrayList<>();
         for (ReadOnlyPerson person : persons) {
             formattedPersons.add(person.getAsTextHidePrivate());
@@ -168,5 +207,4 @@ public class TextUi {
     private static String getIndexedListItem(int visibleIndex, String listItem) {
         return String.format(MESSAGE_INDEXED_LIST_ITEM, visibleIndex, listItem);
     }
-
 }
