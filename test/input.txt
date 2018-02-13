@@ -50,9 +50,16 @@
   list
   add Esther Potato p/555555 e/esther@not.a.real.potato pa/555, epsilon street t/tubers t/starchy
   list
+  add Crystal pp/666666 e/clc@gmail.com pa/666, shiny street t/school t/friends]
 
   # should not allow adding duplicate persons
   add Esther Potato p/555555 e/esther@not.a.real.potato pa/555, epsilon street t/tubers t/starchy
+
+##########################################################
+# test sort command
+##########################################################
+
+sort
 
 ##########################################################
 # test view/viewall persons command
@@ -67,10 +74,10 @@
   # should catch invalid index
   view -1
   view 0
-  view 6
+  view 7
   viewall -1
   viewall 0
-  viewall 6
+  viewall 7
 
   # should show all non private for both view and viewall
   view 1
