@@ -12,8 +12,8 @@ public class Address extends Contact {
     public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses can be in any format";
     public static final String ADDRESS_VALIDATION_REGEX = ".+";
 
-    public final String value;
-    private boolean isPrivate;
+    //public final String value;
+    //private boolean isPrivate;
 
     /**
      * Validates given address.
