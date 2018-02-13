@@ -123,6 +123,13 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Sort the list by name in alphabetical order.
+     */
+    public void sortName() {
+        internalList.sort((Person p1, Person p2)->p1.getName().toString().compareToIgnoreCase(p2.getName().toString()));
+    }
+
+    /**
      * Clears all persons in list.
      */
     public void clear() {
