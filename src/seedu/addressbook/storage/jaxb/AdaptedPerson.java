@@ -38,6 +38,8 @@ public class AdaptedPerson {
     private AdaptedContactDetail email;
     @XmlElement(required = true)
     private AdaptedContactDetail address;
+    @XmlElement(required = true)
+    private int rating;
 
     @XmlElement
     private List<AdaptedTag> tagged = new ArrayList<>();
@@ -72,6 +74,8 @@ public class AdaptedPerson {
         for (Tag tag : source.getTags()) {
             tagged.add(new AdaptedTag(tag));
         }
+
+        rating = source.getRating();
     }
 
     /**
@@ -89,7 +93,7 @@ public class AdaptedPerson {
             }
         }
         // second call only happens if phone/email/address are all not null
-        return Utils.isAnyNull(name, phone, email, address)
+        return Utils.isAnyNull(name, phone, email, address, rating)
                 || Utils.isAnyNull(phone.value, email.value, address.value);
     }
 
@@ -108,6 +112,7 @@ public class AdaptedPerson {
         final Email email = new Email(this.email.value, this.email.isPrivate);
         final Address address = new Address(this.address.value, this.address.isPrivate);
         final UniqueTagList tags = new UniqueTagList(personTags);
-        return new Person(name, phone, email, address, tags);
+        final int rating = this.rating;
+        return new Person(name, phone, email, address, tags, rating);
     }
 }

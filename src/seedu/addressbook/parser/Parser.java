@@ -22,6 +22,8 @@ public class Parser {
 
     public static final Pattern PERSON_INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
 
+    public static final Pattern RATE_ARGS_FORMAT = Pattern.compile("(?<targetIndex>[0-9]+)" + " (?<rating>[0-9]+)");
+
     public static final Pattern KEYWORDS_ARGS_FORMAT =
             Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one or more keywords separated by whitespace
 
@@ -97,6 +99,9 @@ public class Parser {
         case UpdateCommand.COMMAND_WORD:
             return prepareUpdate(arguments);
 
+        case RateCommand.COMMAND_WORD:
+            return prepareRate(arguments);
+
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
@@ -104,6 +109,21 @@ public class Parser {
         default:
             return new HelpCommand();
         }
+    }
+
+    /**
+     * Parses arguments in the context of the rate person command.
+     *
+     * @param arguments full command args string
+     * @return the prepared command
+     */
+    private Command prepareRate(String arguments) {
+        final Matcher matcher = RATE_ARGS_FORMAT.matcher(arguments.trim());
+        if (!matcher.matches()) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RateCommand.MESSAGE_USAGE));
+        }
+        return new RateCommand(Integer.parseInt(matcher.group("targetIndex")), Integer.parseInt(matcher.group
+                ("rating")));
     }
 
     /**
