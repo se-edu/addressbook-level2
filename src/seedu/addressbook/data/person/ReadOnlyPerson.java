@@ -8,11 +8,14 @@ import seedu.addressbook.data.tag.UniqueTagList;
  * Implementations should guarantee: details are present and not null, field values are validated.
  */
 public interface ReadOnlyPerson {
+    String STAR = "*";
+    int INVALID_RATING = -1;
 
     Name getName();
     Phone getPhone();
     Email getEmail();
     Address getAddress();
+    int getRating();
 
     /**
      * Returns a new TagList that is a deep copy of the internal TagList,
@@ -70,6 +73,7 @@ public interface ReadOnlyPerson {
         for (Tag tag : getTags()) {
             builder.append(tag);
         }
+        builder.append(" Rating: " + convertRatingToStars(getRating()));
         return builder.toString();
     }
 
@@ -92,6 +96,21 @@ public interface ReadOnlyPerson {
         for (Tag tag : getTags()) {
             builder.append(tag);
         }
+        builder.append(" Rating: " + convertRatingToStars(getRating()));
         return builder.toString();
+    }
+
+    /**
+     * Turns rating into number of stars
+     *
+     * @return "-" if person is not rated
+     */
+    default String convertRatingToStars(int rating) {
+        if(rating == INVALID_RATING)
+            return "-";
+        String stars = "";
+        while(rating-->0)
+            stars+=STAR;
+        return stars;
     }
 }

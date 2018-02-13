@@ -84,6 +84,18 @@ public class AddressBook {
     }
 
     /**
+     * Sets a person to a specific index of the address book.
+     * Also checks the new person's tags and updates {@link #allTags} with any new tags found,
+     * and updates the Tag objects in the person to point to those in {@link #allTags}.
+     *
+     * @throws DuplicatePersonException if an equivalent person already exists.
+     */
+    public void setPerson(int index, Person toAdd) throws DuplicatePersonException {
+        allPersons.set(index, toAdd);
+        syncTagsWithMasterList(toAdd);
+    }
+
+    /**
      * Returns true if an equivalent person exists in the address book.
      */
     public boolean containsPerson(ReadOnlyPerson key) {

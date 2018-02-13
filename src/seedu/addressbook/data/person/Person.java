@@ -14,24 +14,34 @@ public class Person implements ReadOnlyPerson {
     private Phone phone;
     private Email email;
     private Address address;
+    private int rating;
 
     private final UniqueTagList tags;
+
     /**
-     * Assumption: Every field must be present and not null.
+     * Assumption: Every field must be present and not null; rating not specified
      */
     public Person(Name name, Phone phone, Email email, Address address, UniqueTagList tags) {
+       this(name, phone, email, address, tags, INVALID_RATING);
+    }
+
+    /**
+     * Assumption: Every field must be present and not null; rating specified
+     */
+    public Person(Name name, Phone phone, Email email, Address address, UniqueTagList tags, int rating) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this.rating = rating;
     }
 
     /**
      * Copy constructor.
      */
     public Person(ReadOnlyPerson source) {
-        this(source.getName(), source.getPhone(), source.getEmail(), source.getAddress(), source.getTags());
+        this(source.getName(), source.getPhone(), source.getEmail(), source.getAddress(), source.getTags(), source.getRating());
     }
 
     @Override
@@ -84,4 +94,11 @@ public class Person implements ReadOnlyPerson {
         return getAsTextShowAll();
     }
 
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
 }

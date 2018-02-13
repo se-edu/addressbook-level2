@@ -111,6 +111,13 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Sets a person to a specific index in the list.
+     */
+    public void set(int index, Person toAdd) {
+        internalList.set(index, toAdd);
+    }
+
+    /**
      * Removes the equivalent person from the list.
      *
      * @throws PersonNotFoundException if no such person could be found in the list.

@@ -111,6 +111,56 @@ Examples:
   `viewall 1`<br>
   Views all details of the 1st person in the results of the `find` command.
 
+### Updating information : `update`
+  Updates contact information of a specified person from the address book.<br>
+  Format: `update INDEX NAME [p]p/PHONE_NUMBER [p]e/EMAIL [p]a/ADDRESS [t/TAG]...` 
+   
+  > Words in `UPPER_CASE` are the parameters, items in `SQUARE_BRACKETS` are optional, 
+  > items with `...` after them can have multiple instances. Order of parameters are fixed. 
+  > 
+  > Put a `p` before the phone / email / address prefixes to mark it as `private`. `private` details can only
+  > be seen using the `viewall` command.
+  > 
+  > Persons can have any number of tags (including 0)
+  
+  > Updates contact information for the person at the specified `INDEX`. 
+    The index refers to the index number shown in the most recent listing.
+  
+  Examples: 
+  * `list`<br>
+    `update 2 Iz p/85151997 e/hbx97@gmail.com a/123, themea, #13-31, 118674`<br>
+    Updates contact information of the 2nd person in the address book to:<br>
+    * NAME: Iz<br>
+    * PHONE: 85151997<br>
+    * EMAIL: hbx97@gmail.com<br>
+    * ADDRESS: 123, themea, 13-31, 118674<br>
+  * `find Betsy`<br> 
+    `update 1 Betsy Lee p/85151997 e/hbx97@gmail.com a/123, themea, #13-31, 118674`<br>
+    Updates contact information of the 1st person in the results of find command to:<br>
+    * NAME: Betsy Lee<br>
+    * PHONE: 85151997<br>
+    * EMAIL: hbx97@gmail.com<br>
+    * ADDRESS: 123, themea, 13-31, 118674<br>
+    
+### Rating a person: `rate`
+  Give a specified person from the address book a rating.<br>
+  Format: `rate INDEX RATING` 
+   
+  > Words in `UPPER_CASE` are the parameters.  
+  
+  > Give the person at the specified `INDEX` a `RATING`-star(s) rating 
+    The index refers to the index number shown in the most recent listing.
+  
+  Examples: 
+  * `list`<br>
+    `rate 2 5`<br>
+    Gives the 2nd person in the address book a 5-stars rating.
+  * `find Betsy`<br> 
+    `rate 1 2`<br>
+    Gives the 1st person in the results of find command a 2-stars rating.
+    
+  > For persons that were never given a rating, their rating will be listed as `Rating: -`
+
 ### Clearing all entries : `clear`
 Clears all entries from the address book.<br>
 Format: `clear`  
