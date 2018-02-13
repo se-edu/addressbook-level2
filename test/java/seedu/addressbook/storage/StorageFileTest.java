@@ -112,12 +112,12 @@ public class StorageFileTest {
         ab.addPerson(new Person(new Name("John Doe"),
                                 new Phone("98765432", false),
                                 new Email("johnd@gmail.com", false),
-                                new Address("John street, block 123, #01-01", value, false),
+                                new Address("John street, block 123, #01-01",false),
                                 new UniqueTagList(Collections.emptySet())));
         ab.addPerson(new Person(new Name("Betsy Crowe"),
                                 new Phone("1234567", true),
                                 new Email("betsycrowe@gmail.com", false),
-                                new Address("Newgate Prison", value, true),
+                                new Address("Newgate Prison", true),
                                 new UniqueTagList(new Tag("friend"), new Tag("criminal"))));
         return ab;
     }
