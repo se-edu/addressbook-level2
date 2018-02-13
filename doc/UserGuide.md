@@ -141,6 +141,25 @@ Examples:
     * PHONE: 85151997<br>
     * EMAIL: hbx97@gmail.com<br>
     * ADDRESS: 123, themea, 13-31, 118674<br>
+    
+### Rating a person: `rate`
+  Give a specified person from the address book a rating.<br>
+  Format: `rate INDEX RATING` 
+   
+  > Words in `UPPER_CASE` are the parameters.  
+  
+  > Give the person at the specified `INDEX` a `RATING`-star(s) rating 
+    The index refers to the index number shown in the most recent listing.
+  
+  Examples: 
+  * `list`<br>
+    `rate 2 5`<br>
+    Gives the 2nd person in the address book a 5-stars rating.
+  * `find Betsy`<br> 
+    `rate 1 2`<br>
+    Gives the 1st person in the results of find command a 2-stars rating.
+    
+  > For persons that were never given a rating, their rating will be listed as `Rating: -`
 
 ### Clearing all entries : `clear`
 Clears all entries from the address book.<br>
