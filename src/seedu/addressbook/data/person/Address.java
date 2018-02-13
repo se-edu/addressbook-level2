@@ -7,6 +7,7 @@ import java.util.Objects;
  */
 public class Address {
 
+    public Address address;
     public Block block;
     private Street street;
     private Unit unit;
@@ -28,22 +29,35 @@ public class Address {
         return postalCode;
     }
 
-    public final String value;
     private boolean isPrivate;
 
-    public Address(Block block, Street street, Unit unit, PostalCode postalCode, String value, boolean isPrivate) {
+    public Address(Block block, Street street, Unit unit, PostalCode postalCode, boolean isPrivate) {
         this.block = block;
         this.street = street;
         this.unit = unit;
         this.postalCode = postalCode;
-        this.value = value;
         this.isPrivate = isPrivate;
     }
 
+    public Address(String address, boolean isPrivate) {
+        this.address = address;
+        this.isPrivate = isPrivate;
+    }
 
-    @Override
-    public String toString() {
-        return value;
+    String getAsTextShowAll() {
+        final StringBuilder builder = new StringBuilder();
+        final String detailIsPrivate = "(private) ";
+        builder.append(getBlock())
+                .append(" Phone: ");
+        if (getStreet().isPrivate()) {
+            builder.append(detailIsPrivate);
+        }
+        builder.append(getUnit())
+                .append(" Email: ");
+        if (getPostalCode().isPrivate()) {
+            builder.append(detailIsPrivate);
+        }
+        return builder.toString();
     }
 
     @Override
