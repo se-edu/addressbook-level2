@@ -22,8 +22,8 @@ public class UpdateCommand extends Command {
     public static final String COMMAND_WORD = "update";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Updates information of the person identified by the index number used in the last person listing.\n"
-            + "Parameters: INDEX NAME p/PHONE [p]e/EMAIL [p]a/ADDRESS  [t/TAG]...\n"
+            + ": Updates information of the person identified by the index number used in the last shown person listing.\n"
+            + "Parameters: INDEX NAME p/(new)PHONE [p]e/(new)EMAIL [p]a/(new)ADDRESS  [t/TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 John Doe p/98765432 e/johnd@gmail.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney";
 
     public static final String MESSAGE_UPDATE_PERSON_SUCCESS = "Person updated: %1$s";

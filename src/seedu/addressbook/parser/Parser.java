@@ -148,7 +148,7 @@ public class Parser {
         final Matcher matcher = UPDATE_PERSON_ARGS_FORMAT.matcher(args.trim());
         // Validate arg string format
         if (!matcher.matches()) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdateCommand.MESSAGE_USAGE));
         }
         try {
             return new UpdateCommand(matcher.group("index"),
@@ -181,7 +181,7 @@ public class Parser {
      * Extracts the new person's tags from the add command's tag arguments string.
      * Merges duplicate tag strings.
      */
-    private static Set<String> getTagsFromArgs(String tagArguments) throws IllegalValueException {
+    private static Set<String> getTagsFromArgs(String tagArguments) {
         // no tags
         if (tagArguments.isEmpty()) {
             return Collections.emptySet();
