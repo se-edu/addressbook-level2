@@ -25,6 +25,9 @@
 || viewall: Views the non-private details of the person identified by the index number in the last shown person listing.
 || Parameters: INDEX
 || Example: viewall 1
+|| update: Updates information of the person identified by the index number used in the last shown person listing.
+|| Parameters: INDEX NAME p/(new)PHONE [p]e/(new)EMAIL [p]a/(new)ADDRESS  [t/TAG]...
+|| Example: update 1 John Doe p/98765432 e/johnd@gmail.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney
 || help: Shows program usage instructions.
 || Example: help
 || exit: Exits the program.
@@ -289,6 +292,9 @@
 || 	2. Dickson Ee Phone: 444444 Address: 444, delta street Tags: [friends]
 || 
 || 2 persons listed!
+|| ===================================================
+|| Enter command: || [Command entered:update 2 Dickson Eee p/55555 e/dickson@nus.edu.sg a/555, delta street]
+|| Person updated: Dickson Eee Phone: 55555 Email: dickson@nus.edu.sg Address: 555, delta street Tags:
 || ===================================================
 || Enter command: || [Command entered:  clear]
 || Address book has been cleared!
