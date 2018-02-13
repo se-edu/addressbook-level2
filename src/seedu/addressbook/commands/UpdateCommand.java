@@ -60,6 +60,9 @@ public class UpdateCommand extends Command {
     @Override
     public CommandResult execute() {
         try {
+            ReadOnlyPerson target = addressBook.getAllPersons().immutableListView().get(this.targetIndex-TextUi
+                    .DISPLAYED_INDEX_OFFSET);
+            toAdd.setRating(target.getRating());
             addressBook.setPerson(this.targetIndex- TextUi.DISPLAYED_INDEX_OFFSET, toAdd);
             return new CommandResult(String.format(MESSAGE_UPDATE_PERSON_SUCCESS, toAdd));
         } catch (IndexOutOfBoundsException ie) {

@@ -5,5 +5,6 @@
         <phone isPrivate="false">123456789</phone>
         <email isPrivate="false">valid@e.mail</email>
         <address isPrivate="false">123, some street</address>
+        <rating>0</rating>
     </persons>
 </AddressBook>

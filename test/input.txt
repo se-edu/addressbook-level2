@@ -145,7 +145,14 @@
 ##########################################################
 
     # update 2nd person in list: change content and make email non-private
-    update 2 Dickson Eee e/dickson@nus.edu.sgp/55555 a/555, delta street
+    update 2 Dickson Eee p/55555 e/dickson@nus.edu.sg a/555, delta street
+
+##########################################################
+# test rate command
+##########################################################
+
+    # update 2nd person in list: change content and make email non-private
+    rate 2 5
 
 ##########################################################
 # test clear command

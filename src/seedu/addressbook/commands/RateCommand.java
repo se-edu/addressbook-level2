@@ -23,7 +23,7 @@ public class RateCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Rate a person identified by the index number used in the last shown person listing.\n"
             + "Parameters: INDEX RATING"
-            + "Example: " + COMMAND_WORD + "1 5";
+            + "Example: " + COMMAND_WORD + " 1 5";
 
     public static final String MESSAGE_UPDATE_PERSON_SUCCESS = "Person rated: %1$s";
 
