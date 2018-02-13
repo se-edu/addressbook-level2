@@ -19,7 +19,6 @@ public class Phone extends Contact {
      * @throws IllegalValueException if given phone string is invalid.
      */
     public Phone(String phone, boolean isPrivate) throws IllegalValueException {
-        System.out.print("Phone constructor has been called");
         this.isPrivate = isPrivate;
         String trimmedPhone = phone.trim();
         if (!isValidPhone(trimmedPhone)) {
