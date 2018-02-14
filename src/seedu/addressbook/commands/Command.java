@@ -34,7 +34,7 @@ public class Command {
      * @return summary message for persons sorted and displayed
      */
     public static String getMessageForPersonSortShownSummary(List<? extends ReadOnlyPerson> personsSorted) {
-        return String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, personsSorted.size());
+        return String.format(Messages.MESSAGE_PERSONS_SORTED_OVERVIEW, personsSorted.size());
     }
 
     /**
