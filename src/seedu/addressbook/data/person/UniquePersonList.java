@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Comparator;
 
 import seedu.addressbook.common.Utils;
 import seedu.addressbook.data.exception.DuplicateDataException;
@@ -120,6 +121,17 @@ public class UniquePersonList implements Iterable<Person> {
         if (!personFoundAndDeleted) {
             throw new PersonNotFoundException();
         }
+    }
+    /**
+     * Sorts existing address book
+     */
+    public void sort(){
+        Collections.sort(internalList, new Comparator<Person>() {
+            public int compare(Person p1, Person p2) {
+                int num = p1.getName().toString().compareTo(p2.getName().toString());
+                return num;
+            }
+        });
     }
 
     /**

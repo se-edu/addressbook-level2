@@ -35,6 +35,7 @@ public class AddressBookTest {
 
     private AddressBook defaultAddressBook;
     private AddressBook emptyAddressBook;
+    String reminderMessage = "This is a reminder!";
 
 
     @Before
@@ -43,6 +44,7 @@ public class AddressBookTest {
         tagScientist     = new Tag("scientist");
         tagMathematician = new Tag("mathematician");
         tagEconomist     = new Tag("economist");
+
 
         aliceBetsy     = new Person(new Name("Alice Betsy"),
                                     new Phone("91235468", false),
@@ -70,7 +72,7 @@ public class AddressBookTest {
 
         emptyAddressBook = new AddressBook();
         defaultAddressBook = new AddressBook(new UniquePersonList(aliceBetsy, bobChaplin),
-                                             new UniqueTagList(tagMathematician, tagScientist));
+                                             new UniqueTagList(tagMathematician, tagScientist), reminderMessage);
     }
 
     @Rule

@@ -111,6 +111,15 @@ Examples:
   `viewall 1`<br>
   Views all details of the 1st person in the results of the `find` command.
 
+### Sort the address book  : `sort`
+Sort the address book by name in alphabetic order, case-sensitive<br>
+Format: `sort`
+
+### Reminder which will display in User Interface : `reminder`
+Display your reminder at the top of your addressbook, cool feature isn't it! You can always change it by typing reminder + your message.
+Format: `reminder YOUR_REMINDER_STRING`
+
+
 ### Clearing all entries : `clear`
 Clears all entries from the address book.<br>
 Format: `clear`  
