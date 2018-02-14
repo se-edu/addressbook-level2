@@ -27,6 +27,17 @@ public class Command {
     }
 
     /**
+     * Constructs a feedback message to summarise an operation that sort all persons
+     * in the addressbook and display to user as a listing of persons.
+     *
+     * @param personsSorted used to generate summary
+     * @return summary message for persons sorted and displayed
+     */
+    public static String getMessageForPersonSortShownSummary(List<? extends ReadOnlyPerson> personsSorted) {
+        return String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, personsSorted.size());
+    }
+
+    /**
      * Constructs a feedback message to summarise an operation that displayed a listing of persons.
      *
      * @param personsDisplayed used to generate summary
