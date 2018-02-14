@@ -1,7 +1,6 @@
 package seedu.addressbook.ui;
 
-import static seedu.addressbook.common.Messages.MESSAGE_GOODBYE;
-import static seedu.addressbook.common.Messages.MESSAGE_INIT_FAILED;
+
 import static seedu.addressbook.common.Messages.MESSAGE_PROGRAM_LAUNCH_ARGS_USAGE;
 import static seedu.addressbook.common.Messages.MESSAGE_USING_STORAGE_FILE;
 import static seedu.addressbook.common.Messages.MESSAGE_WELCOME;
@@ -10,6 +9,9 @@ import static seedu.addressbook.common.Messages.MESSAGE_WELCOME;
 import java.util.List;
 
 
+/**
+ * Formatter class that handles all the message from textUI and format it
+ */
 public class Formatter {
     /** A decorative prefix added to the beginning of lines printed by AddressBook */
     private static final String LINE_PREFIX = "|| ";
@@ -42,6 +44,12 @@ public class Formatter {
     }
 
 
+    /**
+     *
+     * @param version
+     * @param storageFilePath
+     * @return
+     */
     public String formatWelcomeMessage(String version, String storageFilePath) {
         String storageFileInfo = String.format(MESSAGE_USING_STORAGE_FILE, storageFilePath);
         return formatShowToUser(DIVIDER, DIVIDER, MESSAGE_WELCOME, version, MESSAGE_PROGRAM_LAUNCH_ARGS_USAGE,
@@ -73,10 +81,20 @@ public class Formatter {
         return formatShowToUser(message, DIVIDER, DIVIDER);
     }
 
+    /**
+     * Format Message that concat a line prefix only
+     * @param message
+     * @return
+     */
     public String formatMessageConcatLinePrefix(String message) {
         return LINE_PREFIX + message;
     }
 
+    /**
+     * append divider and send to formatshowtouser to process for new lines
+     * @param message
+     * @return
+     */
     public String formatMessageAppendDivider(String message) {
         return formatShowToUser(message, DIVIDER);
     }
