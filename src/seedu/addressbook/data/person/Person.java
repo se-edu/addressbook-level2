@@ -10,6 +10,9 @@ import java.util.Objects;
  */
 public class Person implements ReadOnlyPerson {
 
+    public int sequenceNumber;
+    public static int nextSequenceNumber = 1;
+
     private Name name;
     private Phone phone;
     private Email email;
@@ -20,6 +23,11 @@ public class Person implements ReadOnlyPerson {
      * Assumption: Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, UniqueTagList tags) {
+        this.sequenceNumber = nextSequenceNumber;
+        nextSequenceNumber++;
+        if (nextSequenceNumber < 0) {
+            throw new RuntimeException("Too many persons created. Unable to keep track of sequence number.");
+        }
         this.name = name;
         this.phone = phone;
         this.email = email;
