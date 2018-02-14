@@ -129,6 +129,10 @@ public class UniquePersonList implements Iterable<Person> {
         internalList.clear();
     }
 
+    public void sort(){
+        internalList.sort(Person.PersonNameComparator);
+    }
+
     @Override
     public Iterator<Person> iterator() {
         return internalList.iterator();
