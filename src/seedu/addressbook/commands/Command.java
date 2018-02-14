@@ -6,7 +6,7 @@ import seedu.addressbook.data.person.ReadOnlyPerson;
 
 import java.util.List;
 
-import static seedu.addressbook.ui.TextUi.DISPLAYED_INDEX_OFFSET;
+import static seedu.addressbook.ui.Formatter.DISPLAYED_INDEX_OFFSET;
 
 /**
  * Represents an executable command.
@@ -41,7 +41,7 @@ public class Command {
      */
     public CommandResult execute(){
         throw new UnsupportedOperationException("This method is to be implemented by child classes");
-    };
+    }
 
     /**
      * Supplies the data the command will operate on.
