@@ -35,6 +35,7 @@ public class AddressBookTest {
 
     private AddressBook defaultAddressBook;
     private AddressBook emptyAddressBook;
+    private AddressBook notSortedAddressBook;
 
 
     @Before
@@ -70,7 +71,9 @@ public class AddressBookTest {
 
         emptyAddressBook = new AddressBook();
         defaultAddressBook = new AddressBook(new UniquePersonList(aliceBetsy, bobChaplin),
-                                             new UniqueTagList(tagMathematician, tagScientist));
+                                               new UniqueTagList(tagMathematician, tagScientist));
+        notSortedAddressBook = new AddressBook(new UniquePersonList(bobChaplin, aliceBetsy),
+                                               new UniqueTagList(tagScientist, tagMathematician));
     }
 
     @Rule
@@ -154,6 +157,11 @@ public class AddressBookTest {
         defaultAddressBook.removePerson(charlieDouglas);
     }
 
+    @Test
+    public void sortPersonInList(){
+        notSortedAddressBook.sortPersons();
+        assertTrue(isIdentical(notSortedAddressBook.getAllPersons(), defaultAddressBook.getAllPersons()));
+    }
     @Test
     public void clear() throws Exception {
         defaultAddressBook.clear();
