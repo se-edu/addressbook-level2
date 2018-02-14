@@ -3,12 +3,13 @@ package seedu.addressbook.data.person;
 import seedu.addressbook.data.tag.UniqueTagList;
 
 import java.util.Objects;
+import java.util.Comparator;
 
 /**
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated.
  */
-public class Person implements ReadOnlyPerson {
+public class Person implements ReadOnlyPerson{
 
     private Name name;
     private Phone phone;
@@ -33,6 +34,18 @@ public class Person implements ReadOnlyPerson {
     public Person(ReadOnlyPerson source) {
         this(source.getName(), source.getPhone(), source.getEmail(), source.getAddress(), source.getTags());
     }
+
+    /**
+     * A comparator used to sort person alphabetically by name
+     */
+    public static final Comparator<Person> PersonNameComparator = new Comparator<Person>(){
+
+        @Override
+        public int compare(Person person1, Person person2) {
+            return person1.getName().fullName.compareToIgnoreCase(person2.getName().fullName);
+        }
+    };
+
 
     @Override
     public Name getName() {
