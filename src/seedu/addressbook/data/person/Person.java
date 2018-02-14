@@ -44,6 +44,7 @@ public class Person implements ReadOnlyPerson {
         return phone;
     }
 
+
     @Override
     public Email getEmail() {
         return email;

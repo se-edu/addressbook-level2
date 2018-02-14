@@ -23,6 +23,8 @@ public class AdaptedAddressBook {
     private List<AdaptedPerson> persons = new ArrayList<>();
     @XmlElement
     private List<AdaptedTag> tags = new ArrayList<>();
+    @XmlElement
+    private String reminderMessage;
 
     /**
      * No-arg constructor for JAXB use.
@@ -37,6 +39,7 @@ public class AdaptedAddressBook {
     public AdaptedAddressBook(AddressBook source) {
         persons = new ArrayList<>();
         tags = new ArrayList<>();
+        reminderMessage = source.getReminderMessage();
         for (ReadOnlyPerson person : source.getAllPersons()) {
             persons.add(new AdaptedPerson(person));
         }
@@ -82,6 +85,6 @@ public class AdaptedAddressBook {
         for (AdaptedPerson person : persons) {
             personList.add(person.toModelType());
         }
-        return new AddressBook(new UniquePersonList(personList), new UniqueTagList(tagList));
+        return new AddressBook(new UniquePersonList(personList), new UniqueTagList(tagList), reminderMessage);
     }
 }

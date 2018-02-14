@@ -4,13 +4,13 @@ import seedu.addressbook.data.exception.IllegalValueException;
 
 /**
  * Represents a Person's phone number in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidBirthday(String)}
  */
-public class Phone {
+public class Birthday {
 
-    public static final String EXAMPLE = "123456789";
+    public static final String EXAMPLE = "20000914";
     public static final String MESSAGE_PHONE_CONSTRAINTS = "Person phone numbers should only contain numbers";
-    public static final String PHONE_VALIDATION_REGEX = "\\d+";
+    public static final String BIRTHDAY_VALIDATION_REGEX = "\\d+";
 
     public final String value;
     private boolean isPrivate;
@@ -20,20 +20,20 @@ public class Phone {
      *
      * @throws IllegalValueException if given phone string is invalid.
      */
-    public Phone(String phone, boolean isPrivate) throws IllegalValueException {
+    public Birthday(String birthday, boolean isPrivate) throws IllegalValueException {
+        String trimmedBirthday = birthday.trim();
         this.isPrivate = isPrivate;
-        String trimmedPhone = phone.trim();
-        if (!isValidPhone(trimmedPhone)) {
+        if (!isValidBirthday(trimmedBirthday)) {
             throw new IllegalValueException(MESSAGE_PHONE_CONSTRAINTS);
         }
-        this.value = trimmedPhone;
+        this.value = trimmedBirthday;
     }
 
     /**
      * Returns true if the given string is a valid person phone number.
      */
-    public static boolean isValidPhone(String test) {
-        return test.matches(PHONE_VALIDATION_REGEX);
+    public static boolean isValidBirthday(String test) {
+        return test.matches(BIRTHDAY_VALIDATION_REGEX);
     }
 
     @Override
@@ -44,8 +44,8 @@ public class Phone {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Phone // instanceof handles nulls
-                && this.value.equals(((Phone) other).value)); // state check
+                || (other instanceof Birthday // instanceof handles nulls
+                && this.value.equals(((Birthday) other).value)); // state check
     }
 
     @Override
