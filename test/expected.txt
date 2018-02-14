@@ -19,6 +19,8 @@
 || Example: find alice bob charlie
 || list: Displays all persons in the address book as a list with index numbers.
 || Example: list
+|| sort: Displays all persons in the address book as a listsorted by name.
+|| Example: sort
 || view: Views the non-private details of the person identified by the index number in the last shown person listing.
 || Parameters: INDEX
 || Example: view 1
@@ -137,6 +139,51 @@
 || ===================================================
 || Enter command: || [Command entered:  add Esther Potato p/555555 e/esther@not.a.real.potato pa/555, epsilon street t/tubers t/starchy]
 || This person already exists in the address book
+|| ===================================================
+|| Enter command: || [Command entered:   add Anna Cyrus p/12345 e/anna@gmail.com a/123, jane road t/friends]
+|| New person added: Anna Cyrus Phone: 12345 Email: anna@gmail.com Address: 123, jane road Tags: [friends]
+|| ===================================================
+|| Enter command: || [Command entered:   list]
+|| 	1. Adam Brown Phone: 111111 Email: adam@gmail.com Address: 111, alpha street Tags: 
+|| 	2. Betsy Choo Tags: [secretive]
+|| 	3. Charlie Dickson Email: charlie.d@nus.edu.sg Address: 333, gamma street Tags: [school][friends]
+|| 	4. Dickson Ee Phone: 444444 Address: 444, delta street Tags: [friends]
+|| 	5. Esther Potato Phone: 555555 Email: esther@not.a.real.potato Tags: [tubers][starchy]
+|| 	6. Anna Cyrus Phone: 12345 Email: anna@gmail.com Address: 123, jane road Tags: [friends]
+|| 
+|| 6 persons listed!
+|| ===================================================
+|| Enter command: || [Command entered:   sort]
+|| 	1. Adam Brown Phone: 111111 Email: adam@gmail.com Address: 111, alpha street Tags: 
+|| 	2. Anna Cyrus Phone: 12345 Email: anna@gmail.com Address: 123, jane road Tags: [friends]
+|| 	3. Betsy Choo Tags: [secretive]
+|| 	4. Charlie Dickson Email: charlie.d@nus.edu.sg Address: 333, gamma street Tags: [school][friends]
+|| 	5. Dickson Ee Phone: 444444 Address: 444, delta street Tags: [friends]
+|| 	6. Esther Potato Phone: 555555 Email: esther@not.a.real.potato Tags: [tubers][starchy]
+|| 
+|| 6 persons listed!
+|| ===================================================
+|| Enter command: || [Command entered:   list]
+|| 	1. Adam Brown Phone: 111111 Email: adam@gmail.com Address: 111, alpha street Tags: 
+|| 	2. Betsy Choo Tags: [secretive]
+|| 	3. Charlie Dickson Email: charlie.d@nus.edu.sg Address: 333, gamma street Tags: [school][friends]
+|| 	4. Dickson Ee Phone: 444444 Address: 444, delta street Tags: [friends]
+|| 	5. Esther Potato Phone: 555555 Email: esther@not.a.real.potato Tags: [tubers][starchy]
+|| 	6. Anna Cyrus Phone: 12345 Email: anna@gmail.com Address: 123, jane road Tags: [friends]
+|| 
+|| 6 persons listed!
+|| ===================================================
+|| Enter command: || [Command entered:   delete 6]
+|| Deleted Person: Anna Cyrus Phone: 12345 Email: anna@gmail.com Address: 123, jane road Tags: [friends]
+|| ===================================================
+|| Enter command: || [Command entered:   sort]
+|| 	1. Adam Brown Phone: 111111 Email: adam@gmail.com Address: 111, alpha street Tags: 
+|| 	2. Betsy Choo Tags: [secretive]
+|| 	3. Charlie Dickson Email: charlie.d@nus.edu.sg Address: 333, gamma street Tags: [school][friends]
+|| 	4. Dickson Ee Phone: 444444 Address: 444, delta street Tags: [friends]
+|| 	5. Esther Potato Phone: 555555 Email: esther@not.a.real.potato Tags: [tubers][starchy]
+|| 
+|| 5 persons listed!
 || ===================================================
 || Enter command: || [Command entered:  view]
 || Invalid command format! 
