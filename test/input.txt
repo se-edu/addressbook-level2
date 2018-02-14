@@ -107,6 +107,39 @@
   find Charlie Betsy
 
 ##########################################################
+# test edit person command
+##########################################################
+
+  # should catch invalid args format
+  edit index wrong args wrong args
+  edit 1 Valid Name 12345 e/valid@email.butNoPhonePrefix a/valid, address
+  edit 1 Valid Name p/12345 valid@email.butNoPrefix a/valid, address
+  edit 1 Valid Name p/12345 e/valid@email.butNoAddressPrefix valid, address
+  edit 1 Valid Name p/12345 e/valid@email.butNoTagPrefix a/valid, address t/goodTag noPrefixTag
+  
+  # should catch invalid person data
+  edit noIndex []\[;] p/12345 e/valid@e.mail a/valid, address
+  edit 1 Valid Name p/not_numbers e/valid@e.mail a/valid, address
+  edit 1 Valid Name p/12345 e/notAnEmail a/valid, address
+  edit 1 Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag
+
+  # should edit correctly and list non private information
+  add Adam Brown p/111111 e/adam@gmail.com a/111, alpha street
+  list
+  edit 1 Betsy Choo pp/222222 pe/benchoo@nus.edu.sg pa/222, beta street t/secretive
+  list
+  edit 1 Charlie Dickson pp/333333 e/charlie.d@nus.edu.sg a/333, gamma street t/friends t/school
+  list
+  edit 2 Dickson Ee p/444444 pe/dickson@nus.edu.sg a/444, delta street t/friends
+  list
+  edit 3 Esther Potato p/555555 e/esther@not.a.real.potato pa/555, epsilon street t/tubers t/starchy
+  list
+
+  # should not allow editing persons not in the list
+  edit 12 Esther Potato p/555555 e/esther@not.a.real.potato pa/555, epsilon street t/tubers t/starchy
+
+
+##########################################################
 # test delete person command
 ##########################################################
 
