@@ -44,6 +44,7 @@ Format: `add NAME [p]p/PHONE_NUMBER [p]e/EMAIL [p]a/ADDRESS [t/TAG]...`
 > be seen using the `viewall` command.
 > 
 > Persons can have any number of tags (including 0)
+> Persons will sorted with name in alphabetical order after being added
 
 Examples: 
 * `add John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01`
@@ -65,6 +66,32 @@ Examples:
   Returns `John Doe` but not `john`
 * `find Betsy Tim John`<br>
   Returns Any person having names `Betsy`, `Tim`, or `John`
+
+### Editing a person : `edit`
+Edits the contact information of the specified person from the address book. Irreversible.<br>
+Format: `edit INDEX NAME [p]p/PHONE [p]e/EMAIL [p]a/ADDRESS  [t/TAG]...`
+
+> Using it's last displayed index from the address book, to update the information of the identified person
+> Words in `UPPER_CASE` are the parameters, items in `SQUARE_BRACKETS` are optional,
+> items with `...` after them can have multiple instances. Order of parameters are fixed.
+>
+> Put a `p` before the phone / email / address prefixes to mark it as `private`. `private` details can only
+> be seen using the `viewall` command.
+>
+> Persons can have any number of tags (including 0)
+> Persons will sorted with name in alphabetical order after being added
+
+Examples:
+* `edit 1 John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01`
+* `edit 2 Betsy Crowe pp/1234567 e/betsycrowe@gmail.com pa/Newgate Prison t/criminal t/friend`
+
+Examples:
+* `list`<br>
+  `delete 2`<br>
+  Deletes the 2nd person in the address book.
+* `find Betsy`<br>
+  `delete 1`<br>
+  Deletes the 1st person in the results of the `find` command.
 
 ### Deleting a person : `delete`
 Deletes the specified person from the address book. Irreversible.<br>
