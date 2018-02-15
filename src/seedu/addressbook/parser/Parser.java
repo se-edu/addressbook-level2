@@ -233,6 +233,7 @@ public class Parser {
 
     /**
      * Parses arguments in the context of the find person command.
+     * Change the input context strings into uppercase strings (to avoid case sensitive)
      *
      * @param args full command args string
      * @return the prepared command
@@ -245,7 +246,7 @@ public class Parser {
         }
 
         // keywords delimited by whitespace
-        final String[] keywords = matcher.group("keywords").split("\\s+");
+        final String[] keywords = matcher.group("keywords").toUpperCase().split("\\s+");
         final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
         return new FindCommand(keywordSet);
     }

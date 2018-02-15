@@ -11,8 +11,8 @@ import seedu.addressbook.data.exception.IllegalValueException;
  */
 public class Address {
 
-    public static final String FORMAT = "BLOCK, STREET, UNIT, POSTAL_CODE";
-    public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses has to be entered in the following format: " + FORMAT;
+    public static final String EXAMPLE = "BLOCK, STREET, UNIT, POSTAL_CODE";
+    public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses has to be entered in the following format: " + EXAMPLE;
 
     public final String value;
     private boolean isPrivate;
