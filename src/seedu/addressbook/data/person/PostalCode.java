@@ -5,11 +5,15 @@ import seedu.addressbook.data.exception.IllegalValueException;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Represents a Person's postal code in the address book.
+ */
+
 public class PostalCode {
 
     public static final String EXAMPLE = "231534";
-    public static final String MESSAGE_POSTALCODE_CONSTRAINTS = "Address unit can be in any format";
-    public static final String POSTALCODE_VALIDATION_REGEX = ".+";
+    public static final String MESSAGE_POSTALCODE_CONSTRAINTS = "Address postal code should contain only numbers";
+    public static final String POSTALCODE_VALIDATION_REGEX = "\\d+";
 
     public final String value;
     private boolean isPrivate;
@@ -35,6 +39,7 @@ public class PostalCode {
 
     @Override
     public String toString() {
+
         return value;
     }
 
@@ -47,10 +52,12 @@ public class PostalCode {
 
     @Override
     public int hashCode() {
+
         return value.hashCode();
     }
 
     public boolean isPrivate() {
+
         return isPrivate;
     }
 }

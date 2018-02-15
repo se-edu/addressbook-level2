@@ -5,6 +5,10 @@ import seedu.addressbook.data.exception.IllegalValueException;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Represents a Person's block in the address book.
+ */
+
 public class Block {
 
     public static final String EXAMPLE = "123";

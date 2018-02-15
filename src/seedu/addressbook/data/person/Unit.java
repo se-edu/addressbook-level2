@@ -5,10 +5,14 @@ import seedu.addressbook.data.exception.IllegalValueException;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Represents a Person's unit in the address book.
+ */
+
 public class Unit {
     public static final String EXAMPLE = "#12-34";
-    public static final String MESSAGE_UNIT_CONSTRAINTS = "Address unit can be in any format";
-    public static final String UNIT_VALIDATION_REGEX = ".+";
+    public static final String MESSAGE_UNIT_CONSTRAINTS = "Address unit can be in any format： #FLOOR-UNIT";
+    public static final String UNIT_VALIDATION_REGEX = "[#\\\\w\\\\.]+[-\\\\w\\\\.]+";
 
     public final String value;
     private boolean isPrivate;
@@ -34,6 +38,7 @@ public class Unit {
 
     @Override
     public String toString() {
+
         return value;
     }
 
@@ -46,10 +51,12 @@ public class Unit {
 
     @Override
     public int hashCode() {
+
         return value.hashCode();
     }
 
     public boolean isPrivate() {
+
         return isPrivate;
     }
 }

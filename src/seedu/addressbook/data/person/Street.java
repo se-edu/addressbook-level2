@@ -5,8 +5,11 @@ import seedu.addressbook.data.exception.IllegalValueException;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Represents a Person's street in the address book.
+ */
 public class Street {
-    public static final String EXAMPLE = "Clementi";
+    public static final String EXAMPLE = "Clementi Ave 3";
     public static final String MESSAGE_STREET_CONSTRAINTS = "Address street can be in any format";
     public static final String STREET_VALIDATION_REGEX = ".+";
 
@@ -29,6 +32,7 @@ public class Street {
      * Returns true if the given string is a valid person name.
      */
     public static boolean isValidStreet(String test) {
+
         return test.matches(STREET_VALIDATION_REGEX);
     }
 
@@ -46,10 +50,12 @@ public class Street {
 
     @Override
     public int hashCode() {
+
         return value.hashCode();
     }
 
     public boolean isPrivate() {
+
         return isPrivate;
     }
 }
