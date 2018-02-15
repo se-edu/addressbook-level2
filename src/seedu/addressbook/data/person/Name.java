@@ -15,6 +15,7 @@ public class Name {
     public static final String MESSAGE_NAME_CONSTRAINTS = "Person names should be spaces or alphabetic characters";
     public static final String NAME_VALIDATION_REGEX = "[\\p{Alpha} ]+";
     public final String fullName;
+    public final String lowerCaseName;
 
     /**
      * Validates given name.
@@ -27,6 +28,7 @@ public class Name {
             throw new IllegalValueException(MESSAGE_NAME_CONSTRAINTS);
         }
         this.fullName = trimmedName;
+        this.lowerCaseName = trimmedName.toLowerCase();
     }
 
     /**
@@ -41,6 +43,10 @@ public class Name {
      */
     public List<String> getWordsInName() {
         return Arrays.asList(fullName.split("\\s+"));
+    }
+
+    public List<String> getWordsInLowerCaseName() {
+        return Arrays.asList(lowerCaseName.split("\\s+"));
     }
 
     @Override

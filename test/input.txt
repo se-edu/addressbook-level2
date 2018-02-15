@@ -28,31 +28,32 @@
 
   # should catch invalid args format
   add wrong args wrong args
-  add Valid Name 12345 e/valid@email.butNoPhonePrefix a/valid, address
-  add Valid Name p/12345 valid@email.butNoPrefix a/valid, address
-  add Valid Name p/12345 e/valid@email.butNoAddressPrefix valid, address
-  add Valid Name p/12345 e/valid@email.butNoTagPrefix a/valid, address t/goodTag noPrefixTag
+  add Valid Name 12345678 e/valid@email.butNoPhonePrefix a/valid, address
+  add Valid Name p/12345678 valid@email.butNoPrefix a/valid, address
+  add Valid Name p/12345678 e/valid@email.butNoAddressPrefix valid, address
+  add Valid Name p/12345678 e/valid@email.butNoTagPrefix a/valid, address t/goodTag noPrefixTag
   
   # should catch invalid person data
-  add []\[;] p/12345 e/valid@e.mail a/valid, address
+  add []\[;] p/12345678 e/valid@e.mail a/valid, address
+  add Valid Name p/12345 e/valid@e.mail a/valid, address
   add Valid Name p/not_numbers e/valid@e.mail a/valid, address
-  add Valid Name p/12345 e/notAnEmail a/valid, address
-  add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag
+  add Valid Name p/12345678 e/notAnEmail a/valid, address
+  add Valid Name p/12345678 e/valid@e.mail a/valid, address t/invalid_-[.tag
 
   # should add correctly and list non private information
-  add Adam Brown p/111111 e/adam@gmail.com a/111, alpha street
+  add Adam Brown p/11111111 e/adam@gmail.com a/111, alpha street
   list
-  add Betsy Choo pp/222222 pe/benchoo@nus.edu.sg pa/222, beta street t/secretive
+  add Betsy Choo pp/22222222 pe/benchoo@nus.edu.sg pa/222, beta street t/secretive
   list
-  add Charlie Dickson pp/333333 e/charlie.d@nus.edu.sg a/333, gamma street t/friends t/school
+  add Charlie Dickson pp/33333333 e/charlie.d@nus.edu.sg a/333, gamma street t/friends t/school
   list
-  add Dickson Ee p/444444 pe/dickson@nus.edu.sg a/444, delta street t/friends
+  add Dickson Ee p/44444444 pe/dickson@nus.edu.sg a/444, delta street t/friends
   list
-  add Esther Potato p/555555 e/esther@not.a.real.potato pa/555, epsilon street t/tubers t/starchy
+  add Esther Potato p/55555555 e/esther@not.a.real.potato pa/555, epsilon street t/tubers t/starchy
   list
 
   # should not allow adding duplicate persons
-  add Esther Potato p/555555 e/esther@not.a.real.potato pa/555, epsilon street t/tubers t/starchy
+  add Esther Potato p/55555555 e/esther@not.a.real.potato pa/555, epsilon street t/tubers t/starchy
 
 ##########################################################
 # test view/viewall persons command
@@ -96,7 +97,7 @@
   find bet
   # does not match if none have keyword
   find 23912039120
-  # matching should be case-sensitive
+  # matching should not be case-sensitive
   find betsy
 
   # find unique keyword
