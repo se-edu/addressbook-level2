@@ -23,7 +23,7 @@
   list
 
 ##########################################################
-# test add person command, setup state for futuer tests
+# test add person command, setup state for future tests
 ##########################################################
 
   # should catch invalid args format
@@ -105,6 +105,13 @@
   find Dickson
   # find multiple with some keywords
   find Charlie Betsy
+
+##########################################################
+# test sort person command
+##########################################################
+
+    #should print sorted list of people
+    sort
 
 ##########################################################
 # test delete person command
