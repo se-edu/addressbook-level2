@@ -23,6 +23,7 @@ public class Block {
      * @throws IllegalValueException if given name string is invalid.
      */
     public Block(String block, boolean isPrivate) throws IllegalValueException {
+        this.isPrivate = isPrivate;
         String trimmedBlock = block.trim();
         if (!isValidBlock(trimmedBlock)) {
             throw new IllegalValueException(MESSAGE_BLOCK_CONSTRAINTS);

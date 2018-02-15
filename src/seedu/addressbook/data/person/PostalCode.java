@@ -23,6 +23,7 @@ public class PostalCode {
      * @throws IllegalValueException if given name string is invalid.
      */
     public PostalCode(String postalcode, boolean isPrivate) throws IllegalValueException {
+        this.isPrivate = isPrivate;
         String trimmedPostalCode = postalcode.trim();
         if (!isValidPostalCode(trimmedPostalCode)) {
             throw new IllegalValueException(MESSAGE_POSTALCODE_CONSTRAINTS);
@@ -39,7 +40,6 @@ public class PostalCode {
 
     @Override
     public String toString() {
-
         return value;
     }
 
@@ -52,12 +52,10 @@ public class PostalCode {
 
     @Override
     public int hashCode() {
-
         return value.hashCode();
     }
 
     public boolean isPrivate() {
-
         return isPrivate;
     }
 }

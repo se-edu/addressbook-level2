@@ -12,7 +12,7 @@ import java.util.List;
 public class Unit {
     public static final String EXAMPLE = "#12-34";
     public static final String MESSAGE_UNIT_CONSTRAINTS = "Address unit can be in any format： #FLOOR-UNIT";
-    public static final String UNIT_VALIDATION_REGEX = "[#\\\\w\\\\.]+[-\\\\w\\\\.]+";
+    public static final String UNIT_VALIDATION_REGEX = "[#\\w\\.]+[-\\w\\.]+";
 
     public final String value;
     private boolean isPrivate;
@@ -22,6 +22,7 @@ public class Unit {
      * @throws IllegalValueException if given name string is invalid.
      */
     public Unit(String unit, boolean isPrivate) throws IllegalValueException {
+        this.isPrivate = isPrivate;
         String trimmedUnit = unit.trim();
         if (!isValidUnit(trimmedUnit)) {
             throw new IllegalValueException(MESSAGE_UNIT_CONSTRAINTS);

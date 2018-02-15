@@ -21,6 +21,7 @@ public class Street {
      * @throws IllegalValueException if given name string is invalid.
      */
     public Street(String street, boolean isPrivate) throws IllegalValueException {
+        this.isPrivate = isPrivate;
         String trimmedStreet = street.trim();
         if (!isValidStreet(trimmedStreet)) {
             throw new IllegalValueException(MESSAGE_STREET_CONSTRAINTS);
