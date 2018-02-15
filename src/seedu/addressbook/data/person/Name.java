@@ -43,6 +43,13 @@ public class Name {
         return Arrays.asList(fullName.split("\\s+"));
     }
 
+    /**
+     * Retrieves a listing of every word in the name in upper case format, in order.
+     */
+    public List<String> getWordsInNameInUpperCase() {
+        return Arrays.asList(fullName.toUpperCase().split("\\s+"));
+    }
+
     @Override
     public String toString() {
         return fullName;

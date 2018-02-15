@@ -1,11 +1,5 @@
 package seedu.addressbook.ui;
 
-import static seedu.addressbook.common.Messages.MESSAGE_GOODBYE;
-import static seedu.addressbook.common.Messages.MESSAGE_INIT_FAILED;
-import static seedu.addressbook.common.Messages.MESSAGE_PROGRAM_LAUNCH_ARGS_USAGE;
-import static seedu.addressbook.common.Messages.MESSAGE_USING_STORAGE_FILE;
-import static seedu.addressbook.common.Messages.MESSAGE_WELCOME;
-
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -15,6 +9,8 @@ import java.util.Scanner;
 
 import seedu.addressbook.commands.CommandResult;
 import seedu.addressbook.data.person.ReadOnlyPerson;
+
+import static seedu.addressbook.common.Messages.*;
 
 /**
  * Text UI of the application.
@@ -89,6 +85,23 @@ public class TextUi {
 
         showToUser("[Command entered:" + fullInputLine + "]");
         return fullInputLine;
+    }
+
+    public void showTypeID() {
+        out.print(LINE_PREFIX + MESSAGE_LOGIN_TYPE_ID + "or exit: ");
+    }
+
+    public void showTypePassword() {
+        out.print(LINE_PREFIX + MESSAGE_LOGIN_TYPE_PASSWORD);
+    }
+
+    public void showLoginSuccessMessage(String id) {
+        String welcomeUser = String.format(MESSAGE_LOGIN_SUCCESS, id);
+        showToUser(welcomeUser, DIVIDER);
+    }
+
+    public void showFailedLoginMessage() {
+        showToUser(MESSAGE_LOGIN_FAILED);
     }
 
 

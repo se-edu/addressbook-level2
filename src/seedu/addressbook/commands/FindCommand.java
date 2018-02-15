@@ -41,7 +41,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Retrieves all persons in the address book whose names contain some of the specified keywords.
+     * Retrieves all persons in the address book whose names contain some of the specified keywords(non-case sensitive).
      *
      * @param keywords for searching
      * @return list of persons found
@@ -49,7 +49,7 @@ public class FindCommand extends Command {
     private List<ReadOnlyPerson> getPersonsWithNameContainingAnyKeyword(Set<String> keywords) {
         final List<ReadOnlyPerson> matchedPersons = new ArrayList<>();
         for (ReadOnlyPerson person : addressBook.getAllPersons()) {
-            final Set<String> wordsInName = new HashSet<>(person.getName().getWordsInName());
+            final Set<String> wordsInName = new HashSet<>(person.getName().getWordsInNameInUpperCase());
             if (!Collections.disjoint(wordsInName, keywords)) {
                 matchedPersons.add(person);
             }

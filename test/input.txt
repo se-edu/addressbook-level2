@@ -1,4 +1,14 @@
 ##########################################################
+# login
+##########################################################
+ 
+  # should recognise wrong login information
+  a 123
+  
+  # should accept correct login information
+  admin 123
+  
+##########################################################
 # invalid command
 ##########################################################
 
@@ -40,20 +50,20 @@
   add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag
 
   # should add correctly and list non private information
-  add Adam Brown p/111111 e/adam@gmail.com a/111, alpha street
+  add Adam Brown p/111111 e/adam@gmail.com a/111, alpha street, A, 13581
   list
-  add Betsy Choo pp/222222 pe/benchoo@nus.edu.sg pa/222, beta street t/secretive
+  add Betsy Choo pp/222222 pe/benchoo@nus.edu.sg pa/222, beta street, B, 13582 t/secretive
   list
-  add Charlie Dickson pp/333333 e/charlie.d@nus.edu.sg a/333, gamma street t/friends t/school
+  add Charlie Dickson pp/333333 e/charlie.d@nus.edu.sg a/333, gamma street, C, 13583 t/friends t/school
   list
-  add Dickson Ee p/444444 pe/dickson@nus.edu.sg a/444, delta street t/friends
+  add Dickson Ee p/444444 pe/dickson@nus.edu.sg a/444, delta street, D, 13584 t/friends
   list
-  add Esther Potato p/555555 e/esther@not.a.real.potato pa/555, epsilon street t/tubers t/starchy
+  add Esther Potato p/555555 e/esther@not.a.real.potato pa/555, epsilon street, E, 13585 t/tubers t/starchy
   list
-
-  # should not allow adding duplicate persons
-  add Esther Potato p/555555 e/esther@not.a.real.potato pa/555, epsilon street t/tubers t/starchy
-
+  
+   # should not allow adding duplicate persons
+  add Esther Potato p/555555 e/esther@not.a.real.potato pa/555, epsilon street, E, 13585 t/tubers t/starchy
+  
 ##########################################################
 # test view/viewall persons command
 ##########################################################
@@ -96,7 +106,7 @@
   find bet
   # does not match if none have keyword
   find 23912039120
-  # matching should be case-sensitive
+  # matching should not be case-sensitive
   find betsy
 
   # find unique keyword
@@ -139,7 +149,7 @@
   # listing indexes get updated on next request
   delete 1
   list
-
+  
 ##########################################################
 # test clear command
 ##########################################################

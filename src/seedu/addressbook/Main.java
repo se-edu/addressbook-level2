@@ -1,8 +1,11 @@
 package seedu.addressbook;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.Scanner;
 
 import seedu.addressbook.commands.Command;
 import seedu.addressbook.commands.CommandResult;
@@ -33,16 +36,56 @@ public class Main {
     private List<? extends ReadOnlyPerson> lastShownList = Collections.emptyList();
 
 
-    public static void main(String... launchArgs) {
+    public static void main(String... launchArgs) throws FileNotFoundException {
         new Main().run(launchArgs);
     }
 
-    /** Runs the program until termination.  */
-    public void run(String[] launchArgs) {
+    /** Runs the program until termination.
+     *  Firstly, the user needs to login first.
+     *  Then he or she can use the program.
+     * */
+    public void run(String[] launchArgs) throws FileNotFoundException {
         start(launchArgs);
+        Scanner fileIn = new Scanner(new File("adminInfo.txt"));
+        String ID = fileIn.next();
+        String pass = fileIn.next();
+        handelLogin(ID, pass);
         runCommandLoopUntilExitCommand();
         exit();
     }
+
+    /**
+     * Handle login matter
+     * User can exit program if he/she doesn't want to or doesn't know how to login
+     *
+     * @param ID
+     * @param pass
+     */
+    public void handelLogin(String ID, String pass) {
+        Scanner scanLogin = new Scanner(System.in);
+        while (true) {
+            ui.showTypeID();
+            String input_ID = scanLogin.next();
+            if (input_ID.equals("exit")) exit();
+            ui.showTypePassword();
+            String input_pass = scanLogin.next();
+
+            if (input_ID.equals(ID) && input_pass.equals(pass)) {
+                loginSuccess(ID);
+                break;
+            }
+            loginFail();
+        }
+    }
+
+    private void loginFail() {
+       ui.showFailedLoginMessage();
+    }
+
+    private void loginSuccess(String id) {
+        ui.showLoginSuccessMessage(id);
+    }
+
 
     /**
      * Sets up the required objects, loads up the data from the storage file, and prints the welcome message.
