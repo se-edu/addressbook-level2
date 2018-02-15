@@ -1,4 +1,14 @@
 ##########################################################
+# login
+##########################################################
+ 
+  # should recognise wrong login information
+  a 123
+  
+  # should accept correct login information
+  admin 123
+  
+##########################################################
 # invalid command
 ##########################################################
 
@@ -49,6 +59,103 @@
   add Dickson Ee p/444444 pe/dickson@nus.edu.sg a/444, delta street, D, 13584 t/friends
   list
   add Esther Potato p/555555 e/esther@not.a.real.potato pa/555, epsilon street, E, 13585 t/tubers t/starchy
+  list
+  
+   # should not allow adding duplicate persons
+  add Esther Potato p/555555 e/esther@not.a.real.potato pa/555, epsilon street, E, 13585 t/tubers t/starchy
+  
+##########################################################
+# test view/viewall persons command
+##########################################################
+
+  # should catch invalid args format
+  view
+  viewall
+  view should be only one number
+  viewall should only be one number
+
+  # should catch invalid index
+  view -1
+  view 0
+  view 6
+  viewall -1
+  viewall 0
+  viewall 6
+
+  # should show all non private for both view and viewall
+  view 1
+  viewall 1
+
+  # should show only non private details for view
+  view 3
+  view 4
+  view 5
+
+  # should show all details even private for viewall
+  viewall 3
+  viewall 4
+  viewall 5
+
+##########################################################
+# test find persons command
+##########################################################
+
+  # should consider no keywords as invalid command format
+  find
+  # should only match full words in person names
+  find bet
+  # does not match if none have keyword
+  find 23912039120
+  # matching should not be case-sensitive
+  find betsy
+
+  # find unique keyword
+  find Betsy
+  # find multiple with same keyword
+  find Dickson
+  # find multiple with some keywords
+  find Charlie Betsy
+
+##########################################################
+# test delete person command
+##########################################################
+
+# last active view: [1] betsy [2] charlie
+
+  # should catch invalid args format
+  delete
+  delete should be only one number
+
+  # should catch invalid index
+  delete -1
+  delete 0
+  delete 3
+
+  # should catch attempt to delete something already deleted
+  delete 2
+  delete 2
+
+  # should catch attempt to view something already deleted
+  view 2
+  viewall 2
+
+  # should have deleted based on last active view's index
+  list
+
+  # deletes correct person
+  delete 4
+  list
+
+  # listing indexes get updated on next request
+  delete 1
+  list
+  
+##########################################################
+# test clear command
+##########################################################
+
+  # clears all
+  clear
   list
 
 ##########################################################
