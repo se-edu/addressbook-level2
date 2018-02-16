@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * Sort the list of persons
  */
 
 public class SortCommand extends Command {
