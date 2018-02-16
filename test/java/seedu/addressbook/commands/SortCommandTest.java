@@ -2,10 +2,10 @@ package seedu.addressbook.commands;
 
 import org.junit.Test;
 import seedu.addressbook.data.AddressBook;
-import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.data.person.ReadOnlyPerson;
 import seedu.addressbook.data.person.UniquePersonList;
 import seedu.addressbook.util.TypicalPersons;
+
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -24,6 +24,10 @@ public class SortCommandTest {
         assertSortCommandBehavior();
     }
 
+    /**
+     * Executes the sort command on an unsorted list of persons
+     * @throws UniquePersonList.DuplicatePersonException
+     */
     private void assertSortCommandBehavior() throws UniquePersonList.DuplicatePersonException{
         SortCommand command = createSortCommand();
         command.addressBook.addPerson(td.dan);
@@ -35,6 +39,10 @@ public class SortCommandTest {
 
     }
 
+    /**
+     * Helper function for creating a sort command to be used for testing
+     * @return A sort command with an empty addressBook
+     */
     private SortCommand createSortCommand() {
         SortCommand command = new SortCommand();
         command.setData(addressBook, Collections.emptyList());
