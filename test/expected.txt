@@ -19,6 +19,8 @@
 || Example: find alice bob charlie
 || list: Displays all persons in the address book as a list with index numbers.
 || Example: list
+|| sort: Sorts all persons in the address book by the name of persons.
+|| Example: sort
 || view: Views the non-private details of the person identified by the index number in the last shown person listing.
 || Parameters: INDEX
 || Example: view 1
@@ -134,6 +136,15 @@
 || 	5. Esther Potato Phone: 555555 Email: esther@not.a.real.potato Tags: [tubers][starchy]
 || 
 || 5 persons listed!
+|| ===================================================
+|| Enter command: || [Command entered:  sort]
+|| 	1. Adam Brown Phone: 111111 Email: adam@gmail.com Address: 111, alpha street Tags: 
+|| 	2. Betsy Choo Tags: [secretive]
+|| 	3. Charlie Dickson Email: charlie.d@nus.edu.sg Address: 333, gamma street Tags: [school][friends]
+|| 	4. Dickson Ee Phone: 444444 Address: 444, delta street Tags: [friends]
+|| 	5. Esther Potato Phone: 555555 Email: esther@not.a.real.potato Tags: [tubers][starchy]
+|| 
+|| 5 persons have been sorted!
 || ===================================================
 || Enter command: || [Command entered:  add Esther Potato p/555555 e/esther@not.a.real.potato pa/555, epsilon street t/tubers t/starchy]
 || This person already exists in the address book
