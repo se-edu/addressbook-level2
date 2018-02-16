@@ -149,8 +149,29 @@
   list
 
 ##########################################################
+# test sort command
+##########################################################
+
+  # return nothing when Address book is empty
+  sort
+
+  # add persons out of alphabetical order
+  add David p/87120248 e/daviddalmaso@gmail.com a/6 College Ave East
+  add Bill p/12345678 e/bill@bill.com a/Bill town
+
+  # check for non alphabetical order when using list
+  list
+
+  # check for alphabetical order when using sort
+  sort
+
+
+##########################################################
 # test exit command
 ##########################################################
+
+  # clear Address book before exiting
+  clear
 
   # exits properly
   exit

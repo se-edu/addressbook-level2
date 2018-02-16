@@ -19,6 +19,8 @@
 || Example: find alice bob charlie
 || list: Displays all persons in the address book as a list with index numbers.
 || Example: list
+|| sort: Displays all persons in the address book alphabetically as a list with index numbers.
+|| Example: sort
 || view: Views the non-private details of the person identified by the index number in the last shown person listing.
 || Parameters: INDEX
 || Example: view 1
@@ -296,6 +298,31 @@
 || Enter command: || [Command entered:  list]
 || 
 || 0 persons listed!
+|| ===================================================
+|| Enter command: || [Command entered:  sort]
+|| 
+|| 0 persons listed!
+|| ===================================================
+|| Enter command: || [Command entered:  add David p/87120248 e/daviddalmaso@gmail.com a/6 College Ave East]
+|| New person added: David Phone: 87120248 Email: daviddalmaso@gmail.com Address: 6 College Ave East Tags: 
+|| ===================================================
+|| Enter command: || [Command entered:  add Bill p/12345678 e/bill@bill.com a/Bill town]
+|| New person added: Bill Phone: 12345678 Email: bill@bill.com Address: Bill town Tags: 
+|| ===================================================
+|| Enter command: || [Command entered:  list]
+|| 	1. David Phone: 87120248 Email: daviddalmaso@gmail.com Address: 6 College Ave East Tags: 
+|| 	2. Bill Phone: 12345678 Email: bill@bill.com Address: Bill town Tags: 
+|| 
+|| 2 persons listed!
+|| ===================================================
+|| Enter command: || [Command entered:  sort]
+|| 	1. Bill Phone: 12345678 Email: bill@bill.com Address: Bill town Tags: 
+|| 	2. David Phone: 87120248 Email: daviddalmaso@gmail.com Address: 6 College Ave East Tags: 
+|| 
+|| 2 persons listed!
+|| ===================================================
+|| Enter command: || [Command entered:  clear]
+|| Address book has been cleared!
 || ===================================================
 || Enter command: || [Command entered:  exit]
 || Exiting Address Book as requested ...
