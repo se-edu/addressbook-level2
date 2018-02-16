@@ -83,7 +83,7 @@ public class TextUi {
         String fullInputLine = in.nextLine();
 
         // silently consume all ignored lines
-        while (shouldIgnore(fullInputLine)) {
+        while (shouldIgnore(fullInputLine) || fullInputLine.compareTo("sort") == 0) {
             fullInputLine = in.nextLine();
         }
 
