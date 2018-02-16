@@ -41,7 +41,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Retrieves all persons in the address book whose names contain some of the specified keywords.
+     * Retrieves all persons in the address book whose names contain some of the specified keywords regardless of case.
      *
      * @param keywords for searching
      * @return list of persons found

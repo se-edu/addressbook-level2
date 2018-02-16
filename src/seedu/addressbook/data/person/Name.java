@@ -37,10 +37,10 @@ public class Name {
     }
 
     /**
-     * Retrieves a listing of every word in the name, in order.
+     * Retrieves a listing of every word in the name, in order and makes it lower case.
      */
     public List<String> getWordsInName() {
-        return Arrays.asList(fullName.split("\\s+"));
+        return Arrays.asList(fullName.toLowerCase().split("\\s+"));
     }
 
     @Override
