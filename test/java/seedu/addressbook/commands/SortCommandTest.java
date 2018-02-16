@@ -28,14 +28,17 @@ public class SortCommandTest {
      * Executes the sort command on an unsorted list of persons
      * @throws UniquePersonList.DuplicatePersonException
      */
-    private void assertSortCommandBehavior() throws UniquePersonList.DuplicatePersonException{
+    private void assertSortCommandBehavior() throws UniquePersonList.DuplicatePersonException {
         SortCommand command = createSortCommand();
         command.addressBook.addPerson(td.dan);
         command.addressBook.addPerson(td.amy);
         command.addressBook.addPerson(td.candy);
         CommandResult result = command.execute();
 
-        assertEquals(Command.getMessageForPersonListShownSummary(listWithSomeTypicalPersonsSorted), result.feedbackToUser);
+        assertEquals(
+                Command.getMessageForPersonListShownSummary(listWithSomeTypicalPersonsSorted),
+                result.feedbackToUser
+        );
 
     }
 
