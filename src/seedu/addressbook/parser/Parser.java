@@ -11,6 +11,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.addressbook.commands.SortCommand;
 import seedu.addressbook.commands.AddCommand;
 import seedu.addressbook.commands.ClearCommand;
 import seedu.addressbook.commands.Command;
@@ -74,6 +75,8 @@ public class Parser {
         final String arguments = matcher.group("arguments");
 
         switch (commandWord) {
+        case SortCommand.COMMAND_WORD:
+            return new SortCommand();
 
         case AddCommand.COMMAND_WORD:
             return prepareAdd(arguments);
