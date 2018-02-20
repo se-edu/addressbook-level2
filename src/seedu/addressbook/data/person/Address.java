@@ -11,8 +11,11 @@ public class Address {
     public static final String EXAMPLE = "123, some street";
     public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses can be in any format";
     public static final String ADDRESS_VALIDATION_REGEX = ".+";
-
-    public final String value;
+    private String block;
+    private String street;
+    private String unit;
+    private String postal_code;
+    public String value;
     private boolean isPrivate;
 
     /**
@@ -28,6 +31,26 @@ public class Address {
         }
         this.value = trimmedAddress;
     }
+    public Address(String block, String street, String unit, String postal_code){
+        this.block = block;
+        this.street = street;
+        this.unit = unit;
+        this.postal_code = postal_code;
+    }
+    //methods
+    public String getBlock(){
+        return block;
+    }
+    public String getStreet(){
+        return street;
+    }
+    public String getUnit(){
+        return unit;
+    }
+    public String getPostalCode(){
+        return postal_code;
+    }
+
 
     /**
      * Returns true if a given string is a valid person address.
