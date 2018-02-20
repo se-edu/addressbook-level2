@@ -25,6 +25,9 @@ public class SortCommand extends Command{
         return divide(newList);
     }
 
+    /**
+     * merge sort function
+     */
     public List<ReadOnlyPerson> divide(List<ReadOnlyPerson> resultList) {
         if (resultList.size() < 2){
             return resultList;
@@ -40,6 +43,9 @@ public class SortCommand extends Command{
         return resultList;
     }
 
+    /**
+     * merge function in merge sort
+     */
     public void merge( List<ReadOnlyPerson> left, List<ReadOnlyPerson> right, List<ReadOnlyPerson> result) {
         int leftIndex = 0;
         int rightIndex = 0;
