@@ -15,6 +15,9 @@ public class Person implements ReadOnlyPerson {
     private Email email;
     private Address address;
 
+    private static int nextSequenceNumber = 1;
+    private int sequenceNumber;
+
     private final UniqueTagList tags;
     /**
      * Assumption: Every field must be present and not null.
@@ -64,6 +67,34 @@ public class Person implements ReadOnlyPerson {
      */
     public void setTags(UniqueTagList replacement) {
         tags.setTags(replacement);
+    }
+
+    /*
+     * get current sequence number of this person
+     */
+    public int getSequenceNumber() {
+        return sequenceNumber;
+    }
+
+    /**
+     * get next sequence number
+     */
+    public static int getNextSequenceNumber() {
+        return nextSequenceNumber;
+    }
+
+    /*
+     * update the sequence number for current person
+     */
+    public void setSequenceNumber() {
+        this.sequenceNumber = nextSequenceNumber - 1;
+    }
+
+    /*
+     * update the new sequence number for next person
+     */
+    public static void setNextSequenceNumber() {
+        Person.nextSequenceNumber = nextSequenceNumber + 1;
     }
 
     @Override
