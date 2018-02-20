@@ -23,7 +23,7 @@
   list
 
 ##########################################################
-# test add person command, setup state for futuer tests
+# test add person command, setup state for future tests
 ##########################################################
 
   # should catch invalid args format
@@ -53,6 +53,21 @@
 
   # should not allow adding duplicate persons
   add Esther Potato p/555555 e/esther@not.a.real.potato pa/555, epsilon street t/tubers t/starchy
+
+##########################################################
+# test sort command
+##########################################################
+   # should show all persons in the address book sorted according to name
+   add Anna Cyrus p/12345 e/anna@gmail.com a/123, jane road t/friends
+   list
+   sort
+
+   # should not be showing list sorted by name
+   list
+
+   # should show sorted list of all persons in updated address book
+   delete 6
+   sort
 
 ##########################################################
 # test view/viewall persons command
