@@ -26,7 +26,7 @@ public class TypicalPersons {
             candy = new Person(new Name("Candy Destiny"), new Phone("93339333", true),
                     new Email("cd@gmail.com", false), new Address("3, Clementi Road, #3-3, 333333",true), new UniqueTagList());
             dan = new Person(new Name("Dan Smith"), new Phone("1234556", true), new Email("ss@tt.com", true),
-                    new Address("NUS, #4-4, 444444",  true), new UniqueTagList(new Tag("Test")));
+                    new Address("4, NUS, #4-4, 444444",  true), new UniqueTagList(new Tag("Test")));
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";

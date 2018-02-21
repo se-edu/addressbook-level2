@@ -28,16 +28,17 @@
 
   # should catch invalid args format
   add wrong args wrong args
-  add Valid Name 12345 e/valid@email.butNoPhonePrefix a/valid, address
-  add Valid Name p/12345 valid@email.butNoPrefix a/valid, address
-  add Valid Name p/12345 e/valid@email.butNoAddressPrefix valid, address
-  add Valid Name p/12345 e/valid@email.butNoTagPrefix a/valid, address t/goodTag noPrefixTag
-  
+  add Valid Name 12345 e/valid@email.butNoPhonePrefix a/123, valid, #12-34, address
+  add Valid Name p/12345 valid@email.butNoPrefix a/123, valid, #12-34, address
+  add Valid Name p/12345 e/valid@email.butNoAddressPrefix 123, valid, #12-34, address
+  add Valid Name p/12345 e/valid@email.butNoTagPrefix a/123, valid, #12-34, address t/goodTag noPrefixTag
+
   # should catch invalid person data
-  add []\[;] p/12345 e/valid@e.mail a/valid, address
-  add Valid Name p/not_numbers e/valid@e.mail a/valid, address
-  add Valid Name p/12345 e/notAnEmail a/valid, address
-  add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag
+  add []\[;] p/12345 e/valid@e.mail a/123, valid, #12-34, address
+  add Valid Name p/not_numbers e/valid@e.mail a/123, valid, #12-34, address
+  add Valid Name p/12345 e/notAnEmail a/123, valid, #12-34, address
+  add Valid Name p/12345 e/valid@e.mail a/in, valid, address
+  add Valid Name p/12345 e/valid@e.mail a/123, valid, #12-34, address t/invalid_-[.tag
 
   # should add correctly and list non private information
   add Adam Brown p/111111 e/adam@gmail.com a/111, alpha street, #01-01, 123456
