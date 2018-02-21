@@ -32,7 +32,7 @@ public class UtilsTest {
             assertNoNull("Tom", "Dick", "Harry");
             assertNoNull(1, 2);
             assertNoNull(1, 2, 3);
-=======
+
         //empty list
         assertNoNull();
 
@@ -52,7 +52,6 @@ public class UtilsTest {
         assertNoNull("Tom", "Dick", "Harry");
         assertNoNull(1, 2);
         assertNoNull(1, 2, 3);
->>>>>>> Stashed changes
             }
 
             private void assertThereIsNull(Object... objects) {assertTrue(Utils.isAnyNull(objects));}
