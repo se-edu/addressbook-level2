@@ -35,9 +35,29 @@
 12. Run the tests again to ensure they all pass now.
 
 ## Design
-<img src="images/mainClassDiagram.png"/>
+The class diagram is shown below.
+<img src="images/UpdatedmainClassDiagram.png"/>
 
 ## Testing
+
+**Automated Testing of CLI Apps**<br>
+
+***using input/output re-direction to semi-altomate testing***
+
+1. Store the test input in the text file input.txt.
+    Example input.txt
+   `add Valid Name p/12345 valid@email.butNoPrefix`<br>
+   `add Valid Name 12345 e/valid@email.butPhonePrefixMissing`
+2. Store the output we expect from the SUT in another text file expected.txt.
+   Example expected.txt<br>
+   `Command: || [add Valid Name p/12345 valid@email.butNoPrefix]`<br>
+   `Invalid command format: add`
+   `Command: || [add Valid Name 12345 e/valid@email.butPhonePrefixMissing]`<br>
+   `Invalid command format: add` 
+3. Run the program as given below, which will redirect the text in input.txt as the input.<br>
+     `java addressbook-level2 < input.txt > output.txt`
+4. Compare the actual output file with another file containing the expected output.<br>
+     e.g., `FC output.txt expected.txt`
 
 ### I/O tests
 

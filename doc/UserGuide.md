@@ -24,6 +24,7 @@ Please refer to the [Setting up](DeveloperGuide.md#setting-up) section to learn 
 
 #### Changes from level 1
 What's different from AddressBook-Level1:
+* Support for sorting person(sort)
 * Support for storing address (`a/`) and tags (`t/`)
 * Support for marking a contact detail as 'private' (`pa/`) (`pe/`) (`pp/`) 
 * View details of a person (`view` : shows non-private details), (`viewall` : shows all details)
@@ -52,6 +53,16 @@ Examples:
 ### Listing all persons : `list`
 Shows a list of all persons in the address book.<br>
 Format: `list`
+
+Examples:
+* `list` <br>
+  Returns `1. John Doe Phone: 98765432 Email: johnd@gmail.com Address: 311, Clementi Ave 2, #02-25 Tags: [owesMoney][friends]`
+which is all persons and their information
+
+###Sorting all persons: `sort`
+Show a sorted list of all persons in the address book.<br>
+Format: `sort`
+
 
 ### Finding all persons containing any keyword in their name: `find`
 Finds persons whose names contain any of the given keywords.<br>

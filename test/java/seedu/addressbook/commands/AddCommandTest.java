@@ -58,7 +58,7 @@ public class AddCommandTest {
 
     @Test
     public void addCommand_invalidAddress_throwsException() {
-        final String[] invalidAddresses = { "", " " };
+        final String[] invalidAddresses = { "", " ", "invalid", "in, valid", "in, valid, address" };
         for (String address : invalidAddresses) {
             assertConstructingInvalidAddCmdThrowsException(Name.EXAMPLE, Phone.EXAMPLE, true, Email.EXAMPLE,
                     true, address, true, EMPTY_STRING_LIST);
@@ -108,7 +108,7 @@ public class AddCommandTest {
         assertTrue(p.getPhone().isPrivate());
         assertEquals(Email.EXAMPLE, p.getEmail().value);
         assertFalse(p.getEmail().isPrivate());
-        assertEquals(Address.EXAMPLE, p.getAddress().value);
+        assertEquals(Address.EXAMPLE, p.getAddress().toString());
         assertTrue(p.getAddress().isPrivate());
         boolean isTagListEmpty = !p.getTags().iterator().hasNext();
         assertTrue(isTagListEmpty);
