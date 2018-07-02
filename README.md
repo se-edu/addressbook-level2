@@ -9,9 +9,9 @@
   usually write in data structure modules. 
   
 **Useful Links**
-* [User Guide](doc/UserGuide.md) 
-* [Developer Guide](doc/DeveloperGuide.md) 
-* [Learning Outcomes](doc/LearningOutcomes.md) 
+* [User Guide](docs/UserGuide.md) 
+* [Developer Guide](docs/DeveloperGuide.md) 
+* [Learning Outcomes](docs/LearningOutcomes.md) 
 
 # Contributors
 
