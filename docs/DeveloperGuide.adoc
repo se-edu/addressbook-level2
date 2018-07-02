@@ -38,6 +38,8 @@
 
 == Design
 
+image::mainClassDiagram.png[]
+
 == Testing
 
 === I/O tests

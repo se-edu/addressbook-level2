@@ -37,6 +37,8 @@ Side reading: https://sourcemaking.com/refactoring/smells/primitive-obsession[Co
 * Assume the address is entered in the following format `a/BLOCK, STREET, UNIT, POSTAL_CODE`
 e.g. `a/123, Clementi Ave 3, #12-34, 231534`
 * Split the `Address` class as follows. Note: the filled diamond symbol ◆ means an `Address` _consists of_ `Block`, `Street`, etc.
++
+image::AddressClasses.png[width=250]
 * Update the user guide and tests to match.
 
 '''''
@@ -84,6 +86,8 @@ in multiple `*Command` classes.
 === Exercise: Extract a `Contact` class
 
 * Extract commonalities from `Phone`, `Email` and `Address` classes into a parent class called `Contact`.
++
+image::ContactClassHierarchy.png[width=250]
 
 '''''
 
@@ -92,6 +96,8 @@ in multiple `*Command` classes.
 Note how the `Person` class implements the `ReadOnlyPerson` interface so that clients who don't need write access to
 `Person` objects can access `Person` objects through the `ReadOnlyPerson` interface instead.
 
+image::ReadOnlyPersonUsage.png[width=600]
+
 === References
 
 * https://se-edu.github.io/se-book/principles/interfaceSegregationPrinciple/[se-edu/se-book: Principles: Interface Segregation Principle]
@@ -99,6 +105,8 @@ Note how the `Person` class implements the `ReadOnlyPerson` interface so that cl
 === Exercise: Add a `Printable` interface
 
 * Add a `Printable` interface as follows.
++
+image::PrintableInterface.png[width=400]
 * `Override` the `getPrintableString` in classes `Name`, `Phone`, `Email`, and `Address` so that each produces a printable
 string representation of the object. e.g. `Name: John Smith`, `Phone: 12349862`
 * Add the following method in a suitable place of some other class.
@@ -201,9 +209,13 @@ e.g.
 Each `Tagging` object will represent an adding or deleting of a tag for a specific person that happened
 during that session.
 +
+image::TaggingClass.png[width=400]
++
 __________________________________________________________________________________________
 Note that if the list of `Tagging`s is kept as a class-level variable the `Tagging` class,
 the diagram would be like this:
+
+image::TaggingsInTagging.png[width=400]
 __________________________________________________________________________________________
 
 '''''
