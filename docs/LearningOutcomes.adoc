@@ -4,6 +4,9 @@
 :toclevels: 1
 :imagesDir: images
 :stylesDir: stylesheets
+ifdef::env-github[]
+:note-caption: :information_source:
+endif::[]
 :repoURL: https://github.com/se-edu/addressbook-level2/tree/master
 
 After studying this code and completing the corresponding exercises, you should be able to,
@@ -200,7 +203,7 @@ The current design does not have any association classes.
 . When the AddressBook program exits, it should print out a list of all the tags added/deleted during that session.
 e.g.
 +
-[source,sh]
+[source]
 ----
 + Jake Woo [friend]
 - Jake Woo [colleague]
@@ -212,12 +215,13 @@ during that session.
 +
 image::TaggingClass.png[width=400]
 +
-__________________________________________________________________________________________
+[NOTE]
+====
 Note that if the list of `Tagging`s is kept as a class-level variable the `Tagging` class,
 the diagram would be like this:
 
 image::TaggingsInTagging.png[width=400]
-__________________________________________________________________________________________
+====
 
 '''''
 
