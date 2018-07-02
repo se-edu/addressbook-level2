@@ -9,20 +9,20 @@ Please refer to the link:DeveloperGuide.md#setting-up[Setting up] section to lea
 
 *Using IntelliJ*
 
-1.  Find the project in the `Project Explorer` (usually located at the left side)
-1.  If the `Project Explorer` is not visible, press ALT+1 for Windows/Linux, CMD+1 for macOS to open the `Project Explorer` tab
-2.  Go to the `src` folder and locate the `Main` file
-3.  Right click the file and select `Run Main.main()`
-4.  The program now should run on the `Console` (usually located at the bottom side)
-5.  Now you can interact with the program through the `Console`
+. Find the project in the `Project Explorer` (usually located at the left side).
+.. If the `Project Explorer` is not visible, press ALT+1 for Windows/Linux, CMD+1 for macOS to open the `Project Explorer` tab.
+. Go to the `src` folder and locate the `Main` file
+. Right click the file and select `Run Main.main()`
+. The program now should run on the `Console` (usually located at the bottom side)
+. Now you can interact with the program through the `Console`
 
 *Using Command Line*
 
-1.  'Build' the project using IntelliJ
-2.  Open the `Terminal`/`Command Prompt`
-3.  `cd` into the project's `out\production\addressbook-level2` directory
-4.  Type `java seedu.addressbook.Main`, then Enter to execute
-5.  Now you can interact with the program through the CLI
+. 'Build' the project using IntelliJ
+. Open the `Terminal`/`Command Prompt`
+. `cd` into the project's `out\production\addressbook-level2` directory
+. Type `java seedu.addressbook.Main`, then Enter to execute
+. Now you can interact with the program through the CLI
 
 == Changes from level 1
 

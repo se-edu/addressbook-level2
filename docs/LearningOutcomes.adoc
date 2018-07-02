@@ -187,8 +187,8 @@ The current design does not have any association classes.
 === Exercise: Add an Association Class `Tagging`
 
 * Assume the following:
-1.  There are commands to add and remove tags to a person in the address book.
-2.  When the AddressBook program exits, it should print out a list of all the tags added/deleted during that session.
+. There are commands to add and remove tags to a person in the address book.
+. When the AddressBook program exits, it should print out a list of all the tags added/deleted during that session.
 e.g.
 +
 [source,sh]
