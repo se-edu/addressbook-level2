@@ -1,23 +1,15 @@
 = Learning Outcomes
+:toc: macro
+:toc-title:
+:toclevels: 1
 :imagesDir: images
 :stylesDir: stylesheets
 
 After studying this code and completing the corresponding exercises, you should be able to,
 
-1.  link:#apply-encapsulation-lo-encapsulation[Apply Encapsulation `[LO-Encapsulation]`]
-2.  https://github.com/se-edu/addressbook-level2/blob/master/docs/LearningOutcomes.md#implement-a-class-lo-implementclass[Implement a class `[LO-ImplementClass]`]
-3.  https://github.com/se-edu/addressbook-level2/blob/master/docs/LearningOutcomes.md#follow-the-single-responsibility-principle-lo-srp[Follow the Single Responsibility Principle `[LO-SRP]`]
-4.  link:#handle-exceptions-lo-exceptions[Handle Exceptions `[LO-Exceptions]`]
-5.  link:#use-inheritance-to-achieve-code-reuse-lo-inheritance[Use Inheritance to achieve code reuse `[LO-Inheritance]`]
-6.  link:#follow-interface-segregation-principle-lo-isp[Follow Interface Segregation Principle `[LO-ISP]`]
-7.  link:#use-class-level-members-lo-classlevel[Use class-level members `[LO-ClassLevel]`]
-8.  link:#use-composition-lo-composition[Use Composition `[LO-Composition]`]
-9.  link:#use-association-classes-lo-associationclass[Use Association Classes `[LO-AssociationClass]`]
-10. link:#use-junit-to-implement-unit-tests-lo-junit[Use JUnit to implement unit tests `[LO-JUnit]`]
-11. link:#use-tdd-lo-tdd[Use TDD `[LO-TDD]`]
-12. link:#work-in-a-2kloc-code-base-lo-2kloc[Work in a 2KLoC code base `[LO-2KLoC]`]
+toc::[]
 
-'''''
+'''
 
 == Apply Encapsulation `[LO-Encapsulation]`
 
