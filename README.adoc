@@ -12,9 +12,9 @@ usually write in data structure modules.
 
 *Useful Links*
 
-* link:docs/UserGuide.md[User Guide]
-* link:docs/DeveloperGuide.md[Developer Guide]
-* link:docs/LearningOutcomes.md[Learning Outcomes]
+* <<UserGuide#, User Guide>>
+* <<DeveloperGuide#, Developer Guide>>
+* <<LearningOutcomes#, Learning Outcomes>>
 
 == Contributors
 

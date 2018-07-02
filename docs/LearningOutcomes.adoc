@@ -231,7 +231,7 @@ Note how there are many test classes in this code base that uses JUnit to implem
 === Exercise: Write unit tests for the `Utils#isAnyNull(Object...)` method
 
 * First, make sure you know how to run JUnit tests by running existing JUnit tests.
-Instructions are in the link:DeveloperGuide.md#junit-tests[Developer Guide].
+Instructions are in the <<DeveloperGuide#junit-tests, Developer Guide>>.
 * Next, add a test to link:../test/java/seedu/addressbook/common/UtilsTest.java[`test/seedu/addressbook/common/UtilsTest.java`] to test the link:../src/seedu/addressbook/common/Utils.java[`seedu.addressbook.common.Utils#isAnyNull(Object...)`] method.
 
 '''''
