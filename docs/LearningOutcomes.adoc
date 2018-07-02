@@ -1,4 +1,6 @@
 = Learning Outcomes
+:imagesDir: images
+:stylesDir: stylesheets
 
 After studying this code and completing the corresponding exercises, you should be able to,
 

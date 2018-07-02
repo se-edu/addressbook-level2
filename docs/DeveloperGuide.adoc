@@ -1,4 +1,6 @@
 = Developer Guide
+:imagesDir: images
+:stylesDir: stylesheets
 
 == Setting up
 
