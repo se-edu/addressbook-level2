@@ -5,6 +5,7 @@
 plugins {
     id 'java'
     id 'checkstyle'
+    id 'org.asciidoctor.convert' version '1.5.6'
 }
 
 repositories {
@@ -36,4 +37,30 @@ task wrapper(type: Wrapper) {
     gradleVersion = '4.8.1'
 }
 
-defaultTasks 'clean', 'test'
+asciidoctor {
+    backends 'html5'
+    sourceDir 'docs'
+    outputDir "${buildDir}/docs"
+
+    attributes = [
+        linkcss: true,
+        stylesheet: 'gh-pages.css',
+        'source-highlighter': 'coderay',
+        icons: 'font',
+        experimental: true,
+        sectlinks: true,
+        idprefix: '',  // for compatibility with GitHub preview
+        idseparator: '-',
+    ]
+}
+
+// Copies stylesheets into the directory containing generated HTML files as
+// Asciidoctor does not copy linked CSS files to the output directory when rendering.
+// This is needed for linked stylesheets and embedded stylesheets which import other files.
+task copyStylesheets(type: Copy) {
+    from "${asciidoctor.sourceDir}/stylesheets"
+    into "${asciidoctor.outputDir}/html5/stylesheets"
+}
+asciidoctor.dependsOn copyStylesheets
+
+defaultTasks 'clean', 'test', 'asciidoctor'
