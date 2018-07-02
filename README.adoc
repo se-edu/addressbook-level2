@@ -1,3 +1,5 @@
+ifdef::env-github,env-browser[:relfileprefix: docs/]
+
 https://travis-ci.org/se-edu/addressbook-level2[image:https://travis-ci.org/se-edu/addressbook-level2.svg?branch=master[Build Status]]
 https://www.codacy.com/app/se-edu/addressbook-level2?utm_source=github.com&utm_medium=referral&utm_content=se-edu/addressbook-level2&utm_campaign=Badge_Grade[image:https://api.codacy.com/project/badge/Grade/ad7aa7caa7ba4d40aef9440b16ea68d6[Codacy Badge]]
 
