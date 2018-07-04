@@ -4,6 +4,7 @@
 :toclevels: 1
 :imagesDir: images
 :stylesDir: stylesheets
+:repoURL: https://github.com/se-edu/addressbook-level2/tree/master
 
 After studying this code and completing the corresponding exercises, you should be able to,
 
@@ -226,13 +227,13 @@ ________________________________________________________________________________
 
 * https://se-edu.github.io/se-book/junit/[se-edu/se-book: JUnit]
 
-Note how there are many test classes in this code base that uses JUnit to implement automated unit tests e.g. link:../test/java/seedu/addressbook/parser/ParserTest.java[`test/java/seedu/addressbook/parser/ParserTest.java`] class contains tests for the link:../src/seedu/addressbook/parser/Parser.java[`seedu.addressbook.parser.Parser`] class.
+Note how there are many test classes in this code base that uses JUnit to implement automated unit tests e.g. link:{repoURL}/test/java/seedu/addressbook/parser/ParserTest.java[`test/java/seedu/addressbook/parser/ParserTest.java`] class contains tests for the link:{repoURL}/src/seedu/addressbook/parser/Parser.java[`seedu.addressbook.parser.Parser`] class.
 
 === Exercise: Write unit tests for the `Utils#isAnyNull(Object...)` method
 
 * First, make sure you know how to run JUnit tests by running existing JUnit tests.
 Instructions are in the <<DeveloperGuide#junit-tests, Developer Guide>>.
-* Next, add a test to link:../test/java/seedu/addressbook/common/UtilsTest.java[`test/seedu/addressbook/common/UtilsTest.java`] to test the link:../src/seedu/addressbook/common/Utils.java[`seedu.addressbook.common.Utils#isAnyNull(Object...)`] method.
+* Next, add a test to link:{repoURL}/test/java/seedu/addressbook/common/UtilsTest.java[`test/seedu/addressbook/common/UtilsTest.java`] to test the link:{repoURL}/src/seedu/addressbook/common/Utils.java[`seedu.addressbook.common.Utils#isAnyNull(Object...)`] method.
 
 '''''
 
