@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.6.1">
+<title>Learning Outcomes</title>
+<link rel="stylesheet" href="stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css">
+</head>
+<body class="article">
+<div id="header">
+<h1>Learning Outcomes</h1>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>After studying this code and completing the corresponding exercises, you should be able to,</p>
+</div>
+<div id="toc" class="toc">
+<div id="toctitle" class="title"></div>
+<ul class="sectlevel1">
+<li><a href="#apply-encapsulation-code-lo-encapsulation-code">Apply Encapsulation <code>[LO-Encapsulation]</code></a></li>
+<li><a href="#implement-a-class-code-lo-implementclass-code">Implement a class <code>[LO-ImplementClass]</code></a></li>
+<li><a href="#follow-the-single-responsibility-principle-code-lo-srp-code">Follow the Single Responsibility Principle <code>[LO-SRP]</code></a></li>
+<li><a href="#handle-exceptions-code-lo-exceptions-code">Handle Exceptions <code>[LO-Exceptions]</code></a></li>
+<li><a href="#use-inheritance-to-achieve-code-reuse-code-lo-inheritance-code">Use Inheritance to achieve code reuse <code>[LO-Inheritance]</code></a></li>
+<li><a href="#follow-interface-segregation-principle-code-lo-isp-code">Follow Interface Segregation Principle <code>[LO-ISP]</code></a></li>
+<li><a href="#use-class-level-members-code-lo-classlevel-code">Use class-level members <code>[LO-ClassLevel]</code></a></li>
+<li><a href="#use-composition-code-lo-composition-code">Use Composition <code>[LO-Composition]</code></a></li>
+<li><a href="#use-association-classes-code-lo-associationclass-code">Use Association Classes <code>[LO-AssociationClass]</code></a></li>
+<li><a href="#use-junit-to-implement-unit-tests-code-lo-junit-code">Use JUnit to implement unit tests <code>[LO-JUnit]</code></a></li>
+<li><a href="#use-tdd-code-lo-tdd-code">Use TDD <code>[LO-TDD]</code></a></li>
+<li><a href="#work-in-a-2kloc-code-base-code-lo-2kloc-code">Work in a 2KLoC code base <code>[LO-2KLoC]</code></a></li>
+</ul>
+</div>
+<hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="apply-encapsulation-code-lo-encapsulation-code"><a class="link" href="#apply-encapsulation-code-lo-encapsulation-code">Apply Encapsulation <code>[LO-Encapsulation]</code></a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="references"><a class="link" href="#references">References</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://se-edu.github.io/se-book/oopDesign/objects/encapsulation/">se-edu/se-book: Design: OOP: Objects: Encapsulation</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="exercise-encapsulate-code-commandresult-code-class-members"><a class="link" href="#exercise-encapsulate-code-commandresult-code-class-members">Exercise: Encapsulate <code>CommandResult</code> class members</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>A member of the <code>CommandResult</code> class is not encapsulated. i.e. it is visible outside the object.
+Hide it so that it can only be accessed using methods provided.</p>
+</li>
+</ul>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="implement-a-class-code-lo-implementclass-code"><a class="link" href="#implement-a-class-code-lo-implementclass-code">Implement a class <code>[LO-ImplementClass]</code></a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="references-2"><a class="link" href="#references-2">References</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://se-edu.github.io/se-book/oopDesign/classes/">se-edu/se-book: Design: OOP: Classes</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="exercise-split-code-address-code-into-more-classes"><a class="link" href="#exercise-split-code-address-code-into-more-classes">Exercise: Split <code>Address</code> into more classes</a></h3>
+<div class="paragraph">
+<p>Side reading: <a href="https://sourcemaking.com/refactoring/smells/primitive-obsession">Code smell: Primitive Obsession</a> - A case against using primitives instead of small objects for simple tasks</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Assume the address is entered in the following format <code>a/BLOCK, STREET, UNIT, POSTAL_CODE</code>
+e.g. <code>a/123, Clementi Ave 3, #12-34, 231534</code></p>
+</li>
+<li>
+<p>Split the <code>Address</code> class as follows. Note: the filled diamond symbol ◆ means an <code>Address</code> <em>consists of</em> <code>Block</code>, <code>Street</code>, etc.</p>
+<div class="imageblock">
+<div class="content">
+<img src="images/AddressClasses.png" alt="AddressClasses" width="250">
+</div>
+</div>
+</li>
+<li>
+<p>Update the user guide and tests to match.</p>
+</li>
+</ul>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="follow-the-single-responsibility-principle-code-lo-srp-code"><a class="link" href="#follow-the-single-responsibility-principle-code-lo-srp-code">Follow the Single Responsibility Principle <code>[LO-SRP]</code></a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="references-3"><a class="link" href="#references-3">References</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://se-edu.github.io/se-book/principles/singleResponsibilityPrinciple/">se-edu/se-book: Principles: Single Responsibility Principle</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="exercise-split-code-textui-code-class"><a class="link" href="#exercise-split-code-textui-code-class">Exercise: Split <code>TextUi</code> class</a></h3>
+<div class="paragraph">
+<p>The exercise in the <code>LO-ImplementClass</code> section is somewhat related to SRP as well.
+Here&#8217;s a slightly more difficult exercise.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>TextUi</code> class has more than one responsibility.
+Try to extract out the responsibility of Formatting text for display (e.g. adding decorations) in to a
+separate class named <code>Formatter</code>.</p>
+</li>
+</ul>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="handle-exceptions-code-lo-exceptions-code"><a class="link" href="#handle-exceptions-code-lo-exceptions-code">Handle Exceptions <code>[LO-Exceptions]</code></a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="references-4"><a class="link" href="#references-4">References</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://se-edu.github.io/se-book/errorHandling/exceptions/">se-edu/se-book: Error Handling: Exceptions</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="exercise-handle-file-readonly-situation"><a class="link" href="#exercise-handle-file-readonly-situation">Exercise: Handle 'file readonly' situation</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>The current code does not handle the situation where the user accidentally makes the storage file <em>read only</em> while the AddressBook program is running. Use exceptions to handle that situation better. e.g. instead of crashing, the program can inform the user of the problem.</p>
+</li>
+</ul>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="use-inheritance-to-achieve-code-reuse-code-lo-inheritance-code"><a class="link" href="#use-inheritance-to-achieve-code-reuse-code-lo-inheritance-code">Use Inheritance to achieve code reuse <code>[LO-Inheritance]</code></a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Note how the <code>Command</code> class contains some code that is reused by some of its child classes.
+By defining <code>*Command</code> classes as child classes of <code>Command</code>, we have avoided having to duplicate those methods
+in multiple <code>*Command</code> classes.</p>
+</div>
+<div class="sect2">
+<h3 id="references-5"><a class="link" href="#references-5">References</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://se-edu.github.io/se-book/oopDesign/inheritance/">se-edu/se-book: Design: OOP: Inheritance</a></p>
+</li>
+<li>
+<p><a href="https://se-edu.github.io/se-book/oopImplementation/inheritance/">se-edu/se-book: Implementation: OOP: Inheritance</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="exercise-extract-a-code-contact-code-class"><a class="link" href="#exercise-extract-a-code-contact-code-class">Exercise: Extract a <code>Contact</code> class</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Extract commonalities from <code>Phone</code>, <code>Email</code> and <code>Address</code> classes into a parent class called <code>Contact</code>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="images/ContactClassHierarchy.png" alt="ContactClassHierarchy" width="250">
+</div>
+</div>
+</li>
+</ul>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="follow-interface-segregation-principle-code-lo-isp-code"><a class="link" href="#follow-interface-segregation-principle-code-lo-isp-code">Follow Interface Segregation Principle <code>[LO-ISP]</code></a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Note how the <code>Person</code> class implements the <code>ReadOnlyPerson</code> interface so that clients who don&#8217;t need write access to
+<code>Person</code> objects can access <code>Person</code> objects through the <code>ReadOnlyPerson</code> interface instead.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ReadOnlyPersonUsage.png" alt="ReadOnlyPersonUsage" width="600">
+</div>
+</div>
+<div class="sect2">
+<h3 id="references-6"><a class="link" href="#references-6">References</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://se-edu.github.io/se-book/principles/interfaceSegregationPrinciple/">se-edu/se-book: Principles: Interface Segregation Principle</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="exercise-add-a-code-printable-code-interface"><a class="link" href="#exercise-add-a-code-printable-code-interface">Exercise: Add a <code>Printable</code> interface</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Add a <code>Printable</code> interface as follows.</p>
+<div class="imageblock">
+<div class="content">
+<img src="images/PrintableInterface.png" alt="PrintableInterface" width="400">
+</div>
+</div>
+</li>
+<li>
+<p><code>Override</code> the <code>getPrintableString</code> in classes <code>Name</code>, <code>Phone</code>, <code>Email</code>, and <code>Address</code> so that each produces a printable
+string representation of the object. e.g. <code>Name: John Smith</code>, <code>Phone: 12349862</code></p>
+</li>
+<li>
+<p>Add the following method in a suitable place of some other class.
+Note how the method depends on the Interface.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">/**
+  * Returns a concatenated version of the printable strings of each object.
+  */</span>
+<span class="predefined-type">String</span> getPrintableString(<span class="predefined-type">Printable</span>... printables){</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The above method can be used to get a printable string representing a bunch of person details.
+For example, you should be able to call that method like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">//p is a Person object</span>
+<span class="keyword">return</span> getPrintableString(p.getPhone(), p.getEmail(), p.getAddress());</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="use-class-level-members-code-lo-classlevel-code"><a class="link" href="#use-class-level-members-code-lo-classlevel-code">Use class-level members <code>[LO-ClassLevel]</code></a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Note how some of the variables and methods are declared <code>static</code>. That means they are <em>class-level</em> members
+rather than <em>instance-level</em> members.
+e.g. <code>Main.VERSION</code>, <code>Name.EXAMPLE</code>, <code>Utils.isAnyNull(&#8230;&#8203;)</code></p>
+</div>
+<div class="sect2">
+<h3 id="references-7"><a class="link" href="#references-7">References</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://se-edu.github.io/se-book/oopDesign/classes/classLevelMembers/">se-edu/se-book: Design: OOP: Classes: Class-Level Members</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="exercise-add-class-level-members"><a class="link" href="#exercise-add-class-level-members">Exercise: Add class-level members</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Convert the <code>Parser::parseCommand(&#8230;&#8203;)</code> method (i.e. the <code>parseCommand()</code> method of the <code>Parser</code> class) to a
+class-level method. Note how this method can be either class-level or instance-level.</p>
+</li>
+<li>
+<p>Note how the <code>setTags</code> method of the <code>Person</code> class cannot be converted to a class-level method.</p>
+</li>
+<li>
+<p>Add an instance-level member <code>int sequenceNumber</code> and a class-level variable <code>int nextSequenceNumber</code>
+to the <code>Person</code> class. Using these two variables, ensure that each <code>Person</code> object has a unique sequence number
+that indicates the order in which <code>Person</code> objects were created. e.g.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Adam</code> is the first <code>Person</code> object to be created. It is assigned sequence number 1.</p>
+</li>
+<li>
+<p><code>Ben</code> and <code>Charlie</code> are created next, and assigned 2 and 3 respectively.</p>
+</li>
+<li>
+<p><code>Ben</code> is deleted.</p>
+</li>
+<li>
+<p><code>Daisy</code> is added next and is given sequence number 4.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="use-composition-code-lo-composition-code"><a class="link" href="#use-composition-code-lo-composition-code">Use Composition <code>[LO-Composition]</code></a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Note the following examples of <em>composition</em> (filled diamond):</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Whole</th>
+<th class="tableblock halign-left valign-top">Parts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>AddressBook</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>UniquePersonList</code> <code>UniqueTagList</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Person</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Name</code> <code>Phone</code> <code>Email</code> <code>Address</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Contrast with these examples of <em>aggregration</em> (empty diamond):</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Container</th>
+<th class="tableblock halign-left valign-top">Contained</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>UniquePersonList</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Person</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>UuniqueTagList</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Tag</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="references-8"><a class="link" href="#references-8">References</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://se-edu.github.io/se-book/oopDesign/associations/composition/">se-edu/se-book: Design: OOP: Associations: Composition</a></p>
+</li>
+<li>
+<p><a href="https://se-edu.github.io/se-book/oopImplementation/composition/">se-edu/se-book: Implementation: OOP: Composition</a></p>
+</li>
+</ul>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="use-association-classes-code-lo-associationclass-code"><a class="link" href="#use-association-classes-code-lo-associationclass-code">Use Association Classes <code>[LO-AssociationClass]</code></a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The current design does not have any association classes.</p>
+</div>
+<div class="sect2">
+<h3 id="references-9"><a class="link" href="#references-9">References</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://se-edu.github.io/se-book/oopDesign/associations/associationClasses/">se-edu/se-book: Design: OOP: Associations: Association Classes</a></p>
+</li>
+<li>
+<p><a href="https://se-edu.github.io/se-book/oopImplementation/associationClasses/">se-edu/se-book: Implementation: OOP: Association Classes</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="exercise-add-an-association-class-code-tagging-code"><a class="link" href="#exercise-add-an-association-class-code-tagging-code">Exercise: Add an Association Class <code>Tagging</code></a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Assume the following:</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>There are commands to add and remove tags to a person in the address book.</p>
+</li>
+<li>
+<p>When the AddressBook program exits, it should print out a list of all the tags added/deleted during that session.
+e.g.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code>+ Jake Woo [friend]
+- Jake Woo [colleague]
++ Jean Wong [client]</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>To support (ii) above, implement an Association Class called <code>Tagging</code> as given in the diagram below.
+Each <code>Tagging</code> object will represent an adding or deleting of a tag for a specific person that happened
+during that session.</p>
+<div class="imageblock">
+<div class="content">
+<img src="images/TaggingClass.png" alt="TaggingClass" width="400">
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Note that if the list of <code>Tagging</code>'s is kept as a class-level variable in the <code>Tagging</code> class,
+the diagram would be like this:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/TaggingsInTagging.png" alt="TaggingsInTagging" width="400">
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</li>
+</ul>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="use-junit-to-implement-unit-tests-code-lo-junit-code"><a class="link" href="#use-junit-to-implement-unit-tests-code-lo-junit-code">Use JUnit to implement unit tests <code>[LO-JUnit]</code></a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="references-10"><a class="link" href="#references-10">References</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://se-edu.github.io/se-book/junit/">se-edu/se-book: JUnit</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Note how there are many test classes in this code base that uses JUnit to implement automated unit tests e.g. <a href="https://github.com/se-edu/addressbook-level2/tree/master/test/java/seedu/addressbook/parser/ParserTest.java"><code>test/java/seedu/addressbook/parser/ParserTest.java</code></a> class contains tests for the <a href="https://github.com/se-edu/addressbook-level2/tree/master/src/seedu/addressbook/parser/Parser.java"><code>seedu.addressbook.parser.Parser</code></a> class.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="exercise-write-unit-tests-for-the-code-utils-isanynull-object-code-method"><a class="link" href="#exercise-write-unit-tests-for-the-code-utils-isanynull-object-code-method">Exercise: Write unit tests for the <code>Utils#isAnyNull(Object&#8230;&#8203;)</code> method</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>First, make sure you know how to run JUnit tests by running existing JUnit tests.
+Instructions are in the <a href="DeveloperGuide.html#junit-tests">Developer Guide</a>.</p>
+</li>
+<li>
+<p>Next, add a test to <a href="https://github.com/se-edu/addressbook-level2/tree/master/test/java/seedu/addressbook/common/UtilsTest.java"><code>test/seedu/addressbook/common/UtilsTest.java</code></a> to test the <a href="https://github.com/se-edu/addressbook-level2/tree/master/src/seedu/addressbook/common/Utils.java"><code>seedu.addressbook.common.Utils#isAnyNull(Object&#8230;&#8203;)</code></a> method.</p>
+</li>
+</ul>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="use-tdd-code-lo-tdd-code"><a class="link" href="#use-tdd-code-lo-tdd-code">Use TDD <code>[LO-TDD]</code></a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>It&#8217;s recommended you do <code>[LO-JUnit]</code> before attempting TDD.</p>
+</div>
+<div class="sect2">
+<h3 id="references-11"><a class="link" href="#references-11">References</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://se-edu.github.io/se-book/testing/tdd/">se-edu/se-book: Quality Assurance: Testing: TDD</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="exercise-add-a-method-in-tdd-fashion"><a class="link" href="#exercise-add-a-method-in-tdd-fashion">Exercise: Add a method in TDD fashion</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Add the following method to the <code>Name</code> class. Use the TDD technique to add the method. Commit after each step.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">/**
+  * Returns true of the other name is very similar to this name.
+  * Two names are considered similar if ...
+  */</span>
+  <span class="directive">public</span> <span class="type">boolean</span> isSimilar(<span class="predefined-type">Name</span> other) { ... }</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>You may define 'similar' as you see fit.
+Make sure the definition covers scenarios where other name is <code>null</code>, in a different case, in a different order,
+is a subset/superset, etc.
+e.g. <code>John K Smith</code> <code>John K SMITh</code> <code>John Smith</code> <code>Smith, John K</code></p>
+</li>
+<li>
+<p>Don&#8217;t forget to refactor the method to improve its code quality at the end.</p>
+</li>
+</ul>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="work-in-a-2kloc-code-base-code-lo-2kloc-code"><a class="link" href="#work-in-a-2kloc-code-base-code-lo-2kloc-code">Work in a 2KLoC code base <code>[LO-2KLoC]</code></a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="exercise-enhance-addressbook"><a class="link" href="#exercise-enhance-addressbook">Exercise: Enhance AddressBook</a></h3>
+<div class="paragraph">
+<p>Add a feature to AddressBook. Here are some suggestions.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>An Edit command</p>
+</li>
+<li>
+<p>A Sort command</p>
+</li>
+<li>
+<p>List all persons automatically after an add or delete command</p>
+</li>
+<li>
+<p>Any other enhancement that you might see fit</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2018-07-04 04:07:36 UTC
+</div>
+</div>
+</body>
+</html>

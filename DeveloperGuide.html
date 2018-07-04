@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.6.1">
+<title>Developer Guide</title>
+<link rel="stylesheet" href="stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css">
+</head>
+<body class="article">
+<div id="header">
+<h1>Developer Guide</h1>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="setting-up"><a class="link" href="#setting-up">Setting up</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Prerequisites</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>JDK 8 or later</p>
+</li>
+<li>
+<p>IntelliJ IDE</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Importing the project into IntelliJ</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Fork this repo, and clone the fork to your computer</p>
+</li>
+<li>
+<p>Open IntelliJ (if you are not in the welcome screen, click <code>File</code> &gt; <code>Close Project</code> to close the existing project dialog first)</p>
+</li>
+<li>
+<p>Set up the correct JDK version</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Click <code>Configure</code> &gt; <code>Project Defaults</code> &gt; <code>Project Structure</code></p>
+</li>
+<li>
+<p>If JDK 8 is listed in the drop down, select it. If it is not, click <code>New&#8230;&#8203;</code> and select the directory where you installed JDK 8.</p>
+</li>
+<li>
+<p>Click <code>OK</code>.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Click <code>Import Project</code></p>
+</li>
+<li>
+<p>Locate the project directory and click <code>OK</code></p>
+</li>
+<li>
+<p>Select <code>Create project from existing sources</code> and click <code>Next</code></p>
+</li>
+<li>
+<p>Rename the project if you want. Click <code>Next</code></p>
+</li>
+<li>
+<p>Ensure that your <code>\src</code> and <code>\test\java</code> folders are checked. Keep clicking <code>Next</code></p>
+</li>
+<li>
+<p>Click <code>Finish</code></p>
+</li>
+<li>
+<p>Add JUnit 4 to classpath</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Open any test file in <code>\test\java</code> and place your cursor over any <code>@Test</code> highlighted in red</p>
+</li>
+<li>
+<p>Press ALT+ENTER and select <code>Add 'JUnit4' to classpath</code></p>
+</li>
+<li>
+<p>Select <code>Use 'JUnit4' from IntelliJ IDEA distribution</code> and click <code>OK</code></p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Run all the tests (right-click the <code>test</code> folder, and click <code>Run 'All Tests'</code>)</p>
+</li>
+<li>
+<p>Observe how some tests fail. That is because they try to access the test data from the wrong directory (the working directory is expected to be the root directory, but IntelliJ runs the test with <code>test\</code> as the working directory by default). To fix this issue:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Go to <code>Run</code> &#8594; <code>Edit Configurations&#8230;&#8203;</code></p>
+</li>
+<li>
+<p>On the list at the left, expand <code>JUnit</code>, and remove all the test configurations (e.g. <code>All in test</code>) by selecting it and clicking on the '-' icon at the top of the list</p>
+</li>
+<li>
+<p>Expand <code>Defaults</code>, and ensure that <code>JUnit</code> is selected</p>
+</li>
+<li>
+<p>Under <code>Configuration</code>, change the <code>Working directory</code> to the <code>addressbook-level2</code> folder</p>
+</li>
+<li>
+<p>Click <code>OK</code></p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Run the tests again to ensure they all pass now.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="design"><a class="link" href="#design">Design</a></h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="images/mainClassDiagram.png" alt="mainClassDiagram">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="testing"><a class="link" href="#testing">Testing</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="i-o-tests"><a class="link" href="#i-o-tests">I/O tests</a></h3>
+<div class="paragraph">
+<p><strong>Windows</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Open a DOS window in the <code>test</code> folder</p>
+</li>
+<li>
+<p>Run the <code>runtests.bat</code> script</p>
+</li>
+<li>
+<p>If the script reports that there is no difference between <code>actual.txt</code> and <code>expected.txt</code>,
+the test has passed.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Mac/Unix/Linux</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Open a terminal window in the <code>test</code> folder</p>
+</li>
+<li>
+<p>Run the <code>runtests.sh</code> script</p>
+</li>
+<li>
+<p>If the script reports that there is no difference between <code>actual.txt</code> and <code>expected.txt</code>,
+the test has passed.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="junit-tests"><a class="link" href="#junit-tests">JUnit tests</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>In IntelliJ, right-click on the <code>test</code> folder and choose <code>Run 'All Tests'</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="troubleshooting-test-failures"><a class="link" href="#troubleshooting-test-failures">Troubleshooting test failures</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Problem: How do I examine the exact differences between <code>actual.txt</code> and <code>expected.txt</code>?<br>
+Solution: You can use a diff/merge tool with a GUI e.g. WinMerge (on Windows)</p>
+</li>
+<li>
+<p>Problem: The two files look exactly the same, but the test script reports they are different.<br>
+Solution: This can happen because the line endings used by Windows is different from Unix-based
+OSes. Convert the actual.txt to the format used by your OS using some <a href="https://kb.iu.edu/d/acux">utility</a>.</p>
+</li>
+<li>
+<p>Problem: Test fails during the very first time.<br>
+Solution: The output of the very first test run could be slightly different because the program
+creates a new storage file. Tests should pass from the 2nd run onwards.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2018-07-04 04:07:36 UTC
+</div>
+</div>
+</body>
+</html>

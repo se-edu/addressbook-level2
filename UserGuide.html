@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.6.1">
+<title>User Guide</title>
+<link rel="stylesheet" href="stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css">
+</head>
+<body class="article">
+<div id="header">
+<h1>User Guide</h1>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>This product is not meant for end-users and therefore there is no user-friendly installer.
+Please refer to the <a href="DeveloperGuide.html#setting-up">Setting up</a> section to learn how to set up the project.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="starting-the-program"><a class="link" href="#starting-the-program">Starting the program</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Using IntelliJ</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Find the project in the <code>Project Explorer</code> (usually located at the left side).</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>If the <code>Project Explorer</code> is not visible, press ALT+1 for Windows/Linux, CMD+1 for macOS to open the <code>Project Explorer</code> tab.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Go to the <code>src</code> folder and locate the <code>Main</code> file</p>
+</li>
+<li>
+<p>Right click the file and select <code>Run Main.main()</code></p>
+</li>
+<li>
+<p>The program now should run on the <code>Console</code> (usually located at the bottom side)</p>
+</li>
+<li>
+<p>Now you can interact with the program through the <code>Console</code></p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Using Command Line</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>'Build' the project using IntelliJ</p>
+</li>
+<li>
+<p>Open the <code>Terminal</code>/<code>Command Prompt</code></p>
+</li>
+<li>
+<p><code>cd</code> into the project&#8217;s <code>out\production\addressbook-level2</code> directory</p>
+</li>
+<li>
+<p>Type <code>java seedu.addressbook.Main</code>, then Enter to execute</p>
+</li>
+<li>
+<p>Now you can interact with the program through the CLI</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="changes-from-level-1"><a class="link" href="#changes-from-level-1">Changes from level 1</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>What&#8217;s different from AddressBook-Level1:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Support for storing address (<code>a/</code>) and tags (<code>t/</code>)</p>
+</li>
+<li>
+<p>Support for marking a contact detail as 'private' (<code>pa/</code>) (<code>pe/</code>) (<code>pp/</code>)</p>
+</li>
+<li>
+<p>View details of a person (<code>view</code> : shows non-private details), (<code>viewall</code> : shows all details)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">Viewing help : <code>help</code></a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Format: <code>help</code></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Help is also shown if you enter an incorrect command e.g. <code>abcd</code></p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="adding-a-person-code-add-code"><a class="link" href="#adding-a-person-code-add-code">Adding a person: <code>add</code></a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Adds a person to the address book.<br>
+Format: <code>add NAME [p]p/PHONE_NUMBER [p]e/EMAIL [p]a/ADDRESS [t/TAG]&#8230;&#8203;</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>Words in <code>UPPER_CASE</code> are the parameters, items in <code>SQUARE_BRACKETS</code> are optional,
+items with <code>&#8230;&#8203;</code> after them can have multiple instances. Order of parameters are fixed.</p>
+</div>
+<div class="paragraph">
+<p>Put a <code>p</code> before the phone / email / address prefixes to mark it as <code>private</code>. <code>private</code> details can only
+be seen using the <code>viewall</code> command.</p>
+</div>
+<div class="paragraph">
+<p>Persons can have any number of tags (including 0)</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>add John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01</code></p>
+</li>
+<li>
+<p><code>add Betsy Crowe pp/1234567 e/betsycrowe@gmail.com pa/Newgate Prison t/criminal t/friend</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="listing-all-persons-code-list-code"><a class="link" href="#listing-all-persons-code-list-code">Listing all persons : <code>list</code></a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Shows a list of all persons in the address book.<br>
+Format: <code>list</code></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="finding-all-persons-containing-any-keyword-in-their-name-code-find-code"><a class="link" href="#finding-all-persons-containing-any-keyword-in-their-name-code-find-code">Finding all persons containing any keyword in their name: <code>find</code></a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Finds persons whose names contain any of the given keywords.<br>
+Format: <code>find KEYWORD [MORE_KEYWORDS]</code></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The search is case sensitive, the order of the keywords does not matter, only the name is searched,
+and persons matching at least one keyword will be returned (i.e. <code>OR</code> search).</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>find John</code><br>
+Returns <code>John Doe</code> but not <code>john</code>.</p>
+</li>
+<li>
+<p><code>find Betsy Tim John</code><br>
+Returns Any person having names <code>Betsy</code>, <code>Tim</code>, or <code>John</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="deleting-a-person-code-delete-code"><a class="link" href="#deleting-a-person-code-delete-code">Deleting a person : <code>delete</code></a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Deletes the specified person from the address book. Irreversible.<br>
+Format: <code>delete INDEX</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>Deletes the person at the specified <code>INDEX</code>.
+The index refers to the index number shown in the most recent listing.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>list</code><br>
+<code>delete 2</code><br>
+Deletes the 2nd person in the address book.</p>
+</li>
+<li>
+<p><code>find Betsy</code><br>
+<code>delete 1</code><br>
+Deletes the 1st person in the results of the <code>find</code> command.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="view-non-private-details-of-a-person-code-view-code"><a class="link" href="#view-non-private-details-of-a-person-code-view-code">View non-private details of a person : <code>view</code></a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Displays the non-private details of the specified person.<br>
+Format: <code>view INDEX</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>Views the person at the specified <code>INDEX</code>.
+The index refers to the index number shown in the most recent listing.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>list</code><br>
+<code>view 2</code><br>
+Views the 2nd person in the address book.</p>
+</li>
+<li>
+<p><code>find Betsy</code><br>
+<code>view 1</code><br>
+Views the 1st person in the results of the <code>find</code> command.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="view-all-details-of-a-person-code-viewall-code"><a class="link" href="#view-all-details-of-a-person-code-viewall-code">View all details of a person : <code>viewall</code></a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Displays all details (including private details) of the specified person.<br>
+Format: <code>viewall INDEX</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="paragraph">
+<p>Views all details of the person at the specified <code>INDEX</code>.
+The index refers to the index number shown in the most recent listing.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>list</code><br>
+<code>viewall 2</code><br>
+Views all details of the 2nd person in the address book.</p>
+</li>
+<li>
+<p><code>find Betsy</code><br>
+<code>viewall 1</code><br>
+Views all details of the 1st person in the results of the <code>find</code> command.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">Clearing all entries : <code>clear</code></a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Clears all entries from the address book.<br>
+Format: <code>clear</code></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">Exiting the program : <code>exit</code></a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Exits the program.<br>
+Format: <code>exit</code></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="saving-the-data"><a class="link" href="#saving-the-data">Saving the data</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Address book data are saved in the hard disk automatically after any command that changes the data.</p>
+</div>
+<div class="paragraph">
+<p>There is no need to save manually.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="changing-the-save-location"><a class="link" href="#changing-the-save-location">Changing the save location</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Address book data are saved in a file called <code>addressbook.xml</code> in the project root folder.
+You can change the location by specifying the file path as a program argument.</p>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>java seedu.addressbook.Main mydata.xml</code></p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The file name must end in <code>.xml</code> for it to be acceptable to the program.</p>
+</div>
+<div class="paragraph">
+<p>When running the program inside IntelliJ, you can set command line parameters
+before running the program.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2018-07-04 04:07:36 UTC
+</div>
+</div>
+</body>
+</html>
