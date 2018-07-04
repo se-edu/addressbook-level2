@@ -1,0 +1,76 @@
+= Developer Guide
+:imagesDir: images
+:stylesDir: stylesheets
+
+== Setting up
+
+*Prerequisites*
+
+* JDK 8 or later
+* IntelliJ IDE
+
+*Importing the project into IntelliJ*
+
+. Fork this repo, and clone the fork to your computer
+. Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
+. Set up the correct JDK version
+.. Click `Configure` > `Project Defaults` > `Project Structure`
+.. If JDK 8 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 8.
+.. Click `OK`.
+. Click `Import Project`
+. Locate the project directory and click `OK`
+. Select `Create project from existing sources` and click `Next`
+. Rename the project if you want. Click `Next`
+. Ensure that your `\src` and `\test\java` folders are checked. Keep clicking `Next`
+. Click `Finish`
+. Add JUnit 4 to classpath
+.. Open any test file in `\test\java` and place your cursor over any `@Test` highlighted in red
+.. Press ALT+ENTER and select `Add 'JUnit4' to classpath`
+.. Select `Use 'JUnit4' from IntelliJ IDEA distribution` and click `OK`
+. Run all the tests (right-click the `test` folder, and click `Run 'All Tests'`)
+. Observe how some tests fail. That is because they try to access the test data from the wrong directory (the working directory is expected to be the root directory, but IntelliJ runs the test with `test\` as the working directory by default). To fix this issue:
+.. Go to `Run` -> `Edit Configurations...`
+.. On the list at the left, expand `JUnit`, and remove all the test configurations (e.g. `All in test`) by selecting it and clicking on the '-' icon at the top of the list
+.. Expand `Defaults`, and ensure that `JUnit` is selected
+.. Under `Configuration`, change the `Working directory` to the `addressbook-level2` folder
+.. Click `OK`
+. Run the tests again to ensure they all pass now.
+
+== Design
+
+image::mainClassDiagram.png[]
+
+== Testing
+
+=== I/O tests
+
+*Windows*
+
+. Open a DOS window in the `test` folder
+. Run the `runtests.bat` script
+. If the script reports that there is no difference between `actual.txt` and `expected.txt`,
+the test has passed.
+
+*Mac/Unix/Linux*
+
+. Open a terminal window in the `test` folder
+. Run the `runtests.sh` script
+. If the script reports that there is no difference between `actual.txt` and `expected.txt`,
+the test has passed.
+
+=== JUnit tests
+
+* In IntelliJ, right-click on the `test` folder and choose `Run 'All Tests'`
+
+=== Troubleshooting test failures
+
+* Problem: How do I examine the exact differences between `actual.txt` and `expected.txt`? +
+Solution: You can use a diff/merge tool with a GUI e.g. WinMerge (on Windows)
+
+* Problem: The two files look exactly the same, but the test script reports they are different. +
+Solution: This can happen because the line endings used by Windows is different from Unix-based
+OSes. Convert the actual.txt to the format used by your OS using some https://kb.iu.edu/d/acux[utility].
+
+* Problem: Test fails during the very first time. +
+Solution: The output of the very first test run could be slightly different because the program
+creates a new storage file. Tests should pass from the 2nd run onwards.

@@ -1,38 +1,66 @@
-allprojects {
-    apply plugin: 'java'
-    apply plugin: 'checkstyle'
+// Gradle Configuration File
+// For more details take a look at the Java Quickstart chapter in the Gradle
+// user guide available at http://gradle.org/docs/4.8.1/userguide/tutorial_java_projects.html
 
-    repositories {
-        jcenter()
-        mavenCentral()
-    }
+plugins {
+    id 'java'
+    id 'checkstyle'
+    id 'org.asciidoctor.convert' version '1.5.6'
+}
 
-    project.ext {
-        checkstyleVersion = '7.1.2'
-    }
+repositories {
+    mavenCentral()
+}
 
-    checkstyle {
-        toolVersion = "$checkstyleVersion"
-    }
+checkstyle {
+    toolVersion = '7.1.2'
+}
 
-    sourceSets {
-        main {
-            java {
-                srcDirs = ['src']
-            }
-        }
-        test {
-            java {
-                srcDirs = ['test/java']
-            }
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src']
         }
     }
-
-    dependencies {
-        testCompile 'junit:junit:4.12'
+    test {
+        java {
+            srcDirs = ['test/java']
+        }
     }
+}
+
+dependencies {
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.12'
+    gradleVersion = '4.8.1'
 }
+
+asciidoctor {
+    backends 'html5'
+    sourceDir 'docs'
+    outputDir "${buildDir}/docs"
+
+    attributes = [
+        linkcss: true,
+        stylesheet: 'gh-pages.css',
+        'source-highlighter': 'coderay',
+        icons: 'font',
+        experimental: true,
+        sectlinks: true,
+        idprefix: '',  // for compatibility with GitHub preview
+        idseparator: '-',
+    ]
+}
+
+// Copies stylesheets into the directory containing generated HTML files as
+// Asciidoctor does not copy linked CSS files to the output directory when rendering.
+// This is needed for linked stylesheets and embedded stylesheets which import other files.
+task copyStylesheets(type: Copy) {
+    from "${asciidoctor.sourceDir}/stylesheets"
+    into "${asciidoctor.outputDir}/html5/stylesheets"
+}
+asciidoctor.dependsOn copyStylesheets
+
+defaultTasks 'clean', 'test', 'asciidoctor'

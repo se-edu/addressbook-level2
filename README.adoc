@@ -1,0 +1,27 @@
+= AddressBook (Level 2)
+ifdef::env-github,env-browser[:relfileprefix: docs/]
+
+https://travis-ci.org/se-edu/addressbook-level2[image:https://travis-ci.org/se-edu/addressbook-level2.svg?branch=master[Build Status]]
+https://www.codacy.com/app/se-edu/addressbook-level2?utm_source=github.com&utm_medium=referral&utm_content=se-edu/addressbook-level2&utm_campaign=Badge_Grade[image:https://api.codacy.com/project/badge/Grade/ad7aa7caa7ba4d40aef9440b16ea68d6[Codacy Badge]]
+
+* This is a CLI (Command Line Interface) Address Book application *written in OOP fashion*.
+* It is a Java sample application intended for students learning Software Engineering while using Java as
+the main programming language.
+* It provides a *reasonably well-written* code example that is *significantly bigger* than what students
+usually write in data structure modules.
+
+*Useful Links*
+
+* <<UserGuide#, User Guide>>
+* <<DeveloperGuide#, Developer Guide>>
+* <<LearningOutcomes#, Learning Outcomes>>
+
+== Contributors
+
+The full list of contributors for se-edu can be found https://se-edu.github.io/Team.html[here].
+
+== Contact Us
+
+* *Bug reports, Suggestions* : Post in our https://github.com/se-edu/addressbook-level2/issues[issue tracker]
+if you noticed bugs or have suggestions on how to improve.
+* *Contributing* : We welcome pull requests. Follow the process described https://github.com/oss-generic/process[here]

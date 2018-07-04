@@ -6,6 +6,14 @@ matrix:
 script:
   - (cd test && ./runtests.sh) # I/O tests
   - (./gradlew clean test) # JUnit tests
+  - ./gradlew asciidoctor # Documentation
+
+deploy:
+  skip_cleanup: true
+  provider: script
+  script: ./config/travis/deploy_github_pages.sh
+  on:
+    branch: master
 
 addons:
   apt:
