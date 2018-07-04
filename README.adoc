@@ -18,7 +18,7 @@ usually write in data structure modules.
 
 == Contributors
 
-The full list of contributors for se-edu can be found https://se-edu.github.io/docs/Team.html[here].
+The full list of contributors for se-edu can be found https://se-edu.github.io/Team.html[here].
 
 == Contact Us
 
