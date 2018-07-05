@@ -42,6 +42,10 @@ asciidoctor {
     sourceDir 'docs'
     outputDir "${buildDir}/docs"
 
+    options = [
+        template_dirs: [file("${sourceDir}/templates")],
+    ]
+
     attributes = [
         linkcss: true,
         stylesheet: 'gh-pages.css',
@@ -51,7 +55,15 @@ asciidoctor {
         sectlinks: true,
         idprefix: '',  // for compatibility with GitHub preview
         idseparator: '-',
+        'site-root': "${sourceDir}",  // must be the same as sourceDir, do not modify
+        'site-name': 'AddressBook-Level4',
+        'site-githuburl': 'https://github.com/se-edu/addressbook-level4',
+        'site-seedu': true,  // delete this line if your project is not a fork (not a SE-EDU project)
     ]
+
+    options['template_dirs'].each {
+        inputs.files fileTree(it)
+    }
 }
 
 // Copies stylesheets into the directory containing generated HTML files as
