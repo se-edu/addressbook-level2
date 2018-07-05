@@ -1,4 +1,5 @@
 = User Guide
+:site-section: UserGuide
 :imagesDir: images
 :stylesDir: stylesheets
 ifdef::env-github[]
