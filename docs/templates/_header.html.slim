@@ -9,11 +9,11 @@
           li.nav-item
             a.nav-link href='https://se-edu.github.io/addressbook-level1' AB-1
           li.nav-item
-            a.nav-link href='https://se-edu.github.io/addressbook-level2' AB-2
+            a.nav-link.active href=(site_url 'index.html') AB-2
           li.nav-item
             a.nav-link href='https://se-edu.github.io/addressbook-level3' AB-3
           li.nav-item
-            a.nav-link.active href=(site_url 'index.html') AB-4
+            a.nav-link href='https://se-edu.github.io/addressbook-level4' AB-4
           li.nav-item
             a.nav-link href='https://se-edu.github.io/collate' Collate
           li.nav-item
@@ -35,10 +35,6 @@
           - if attr? 'site-seedu'
             li.nav-item
               =nav_link('LearningOutcomes', 'LearningOutcomes.html', 'LOs')
-          li.nav-item
-            =nav_link('AboutUs', 'AboutUs.html', 'About Us')
-          li.nav-item
-            =nav_link('ContactUs', 'ContactUs.html', 'Contact Us')
           - if attr? 'site-githuburl'
             li.navitem
               a.nav-link href=(attr 'site-githuburl')
