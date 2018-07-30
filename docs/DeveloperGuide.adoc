@@ -30,7 +30,7 @@
 .. Press ALT+ENTER and select `--add-modules=java.xml.bind to module compiler options`
 .. Go to `Run` -> `Edit Configurations...`
 .. Under `Configuration`, add `--add-modules java.xml.bind` into `VM options`
-. Run the application again to ensure it compiles and runs without any errors.
+. Run the application again to ensure it compiles and runs without any errors
 . Add JUnit 4 to classpath
 .. Open any test file in `\test\java` and place your cursor over any `@Test` highlighted in red
 .. Press ALT+ENTER and select `Add 'JUnit4' to classpath`
