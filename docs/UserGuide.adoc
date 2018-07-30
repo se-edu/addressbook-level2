@@ -26,7 +26,7 @@ Please refer to the <<DeveloperGuide#setting-up, Setting up>> section to learn h
 . 'Build' the project using IntelliJ
 . Open the `Terminal`/`Command Prompt`
 . `cd` into the project's `out\production\addressbook-level2` directory
-. Type `java seedu.addressbook.Main`, then Enter to execute
+. Type `java --add-modules java.xml.bind seedu.addressbook.Main`, then Enter to execute
 . Now you can interact with the program through the CLI
 
 == Changes from level 1
