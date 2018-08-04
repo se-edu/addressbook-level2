@@ -23,7 +23,7 @@
   list
 
 ##########################################################
-# test add person command, setup state for futuer tests
+# test add person command, setup state for further tests
 ##########################################################
 
   # should catch invalid args format
