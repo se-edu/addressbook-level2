@@ -76,24 +76,6 @@ public class AddressBookTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void addPerson_emptyAddressBook() throws Exception {
-        emptyAddressBook.addPerson(bobChaplin);
-        emptyAddressBook.addPerson(charlieDouglas);
-
-        assertTrue(isTagObjectInAddressBookList(tagMathematician, emptyAddressBook));
-        assertTrue(isTagObjectInAddressBookList(tagScientist, emptyAddressBook));
-    }
-
-    @Test
-    public void addPerson_someTagsNotInTagList() throws Exception {
-        assertFalse(isTagObjectInAddressBookList(tagEconomist, defaultAddressBook));
-        assertFalse(isTagObjectInAddressBookList(tagPrizeWinner, defaultAddressBook));
-        defaultAddressBook.addPerson(davidElliot);
-        assertTrue(isTagObjectInAddressBookList(tagEconomist, defaultAddressBook));
-        assertTrue(isTagObjectInAddressBookList(tagPrizeWinner, defaultAddressBook));
-    }
-
-    @Test
     public void addPerson_personAlreadyInList_throwsDuplicatePersonException() throws Exception {
         thrown.expect(DuplicatePersonException.class);
         defaultAddressBook.addPerson(aliceBetsy);
@@ -137,11 +119,10 @@ public class AddressBookTest {
     }
 
     @Test
-    public void clear() throws Exception {
+    public void clear() {
         defaultAddressBook.clear();
 
         assertTrue(isEmpty(defaultAddressBook.getAllPersons()));
-        assertTrue(isEmpty(defaultAddressBook.getAllTags()));
     }
 
     @Test
@@ -150,24 +131,5 @@ public class AddressBookTest {
         UniquePersonList personsToCheck = new UniquePersonList(aliceBetsy, bobChaplin);
 
         assertTrue(isIdentical(allPersons, personsToCheck));
-    }
-
-    @Test
-    public void getAllTags() throws Exception {
-        UniqueTagList allTags = defaultAddressBook.getAllTags();
-
-        assertTrue(allTags.contains(tagMathematician));
-    }
-
-    /**
-     * Returns true if the given Tag object is found in the tag list of the given AddressBook.
-     */
-    private boolean isTagObjectInAddressBookList(Tag tagToCheck, AddressBook addressBook) {
-        for (Tag tag : addressBook.getAllTags()) {
-            if (tag == tagToCheck) {
-                return true;
-            }
-        }
-        return false;
     }
 }
