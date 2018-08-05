@@ -73,18 +73,6 @@ public class AddressBook {
         return new UniquePersonList(allPersons);
     }
 
-    /**
-     * Returns a new UniqueTagList of all tags in all persons in the address book at the time of the call.
-     */
-    public UniqueTagList getAllTags() {
-        Set<Tag> tagSet = new HashSet<>();
-        for (Person person : allPersons) {
-            tagSet.addAll(person.getTags().toSet());
-        }
-
-        return new UniqueTagList(tagSet);
-    }
-
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
