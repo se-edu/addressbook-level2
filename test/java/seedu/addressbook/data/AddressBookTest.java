@@ -69,8 +69,7 @@ public class AddressBookTest {
                                     new UniqueTagList(tagEconomist, tagPrizeWinner));
 
         emptyAddressBook = new AddressBook();
-        defaultAddressBook = new AddressBook(new UniquePersonList(aliceBetsy, bobChaplin),
-                                             new UniqueTagList(tagMathematician, tagScientist));
+        defaultAddressBook = new AddressBook(new UniquePersonList(aliceBetsy, bobChaplin));
     }
 
     @Rule
@@ -81,12 +80,8 @@ public class AddressBookTest {
         emptyAddressBook.addPerson(bobChaplin);
         emptyAddressBook.addPerson(charlieDouglas);
 
-        UniqueTagList expectedTagList = new UniqueTagList(tagMathematician, tagScientist);
-        assertTrue(isIdentical(expectedTagList, emptyAddressBook.getAllTags()));
-
         assertTrue(isTagObjectInAddressBookList(tagMathematician, emptyAddressBook));
         assertTrue(isTagObjectInAddressBookList(tagScientist, emptyAddressBook));
-
     }
 
     @Test
@@ -102,19 +97,6 @@ public class AddressBookTest {
     public void addPerson_personAlreadyInList_throwsDuplicatePersonException() throws Exception {
         thrown.expect(DuplicatePersonException.class);
         defaultAddressBook.addPerson(aliceBetsy);
-    }
-
-    @Test
-    public void addPerson_personAlreadyInListButHasTagNotInList_tagNotAdded() throws Exception {
-        aliceBetsy.setTags(new UniqueTagList(tagMathematician, tagPrizeWinner));
-
-        try {
-            defaultAddressBook.addPerson(aliceBetsy);
-        } catch (DuplicatePersonException e) {
-            // ignore expected exception
-        }
-
-        assertFalse(isTagObjectInAddressBookList(tagPrizeWinner, defaultAddressBook));
     }
 
     @Test
@@ -173,9 +155,8 @@ public class AddressBookTest {
     @Test
     public void getAllTags() throws Exception {
         UniqueTagList allTags = defaultAddressBook.getAllTags();
-        UniqueTagList tagsToCheck = new UniqueTagList(tagMathematician, tagScientist);
 
-        assertTrue(isIdentical(allTags, tagsToCheck));
+        assertTrue(allTags.contains(tagMathematician));
     }
 
     /**
