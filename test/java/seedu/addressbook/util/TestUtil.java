@@ -64,7 +64,7 @@ public class TestUtil {
      * of Persons and Tags. The Persons and Tags are not cloned.
      */
     public static AddressBook clone(AddressBook addressBook) {
-        return new AddressBook(addressBook.getAllPersons(), addressBook.getAllTags());
+        return new AddressBook(addressBook.getAllPersons());
     }
 
     /**
@@ -116,18 +116,6 @@ public class TestUtil {
             fail("test person data should be valid by definition");
             return null;
         }
-    }
-
-    public static UniqueTagList getAllTags(UniquePersonList persons) {
-        Set<Tag> combinedTagList = new HashSet<Tag>();
-
-        for (Person person : persons) {
-            for (Tag tag : person.getTags()) {
-                combinedTagList.add(tag);
-            }
-        }
-
-        return new UniqueTagList(combinedTagList);
     }
 
     /**
