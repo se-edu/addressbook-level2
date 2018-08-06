@@ -1,11 +1,8 @@
 package seedu.addressbook.data.person;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-
-import seedu.addressbook.data.tag.Tag;
 
 /**
  * Represents a Person in the address book.
@@ -18,7 +15,7 @@ public class Person implements ReadOnlyPerson {
     private Email email;
     private Address address;
 
-    private final Set<Tag> tags;
+    private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Assumption: Every field must be present and not null.
@@ -28,14 +25,7 @@ public class Person implements ReadOnlyPerson {
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.tags = tags;
-    }
-
-    /**
-     * Constructs a Person with duplicate tags removed.
-     */
-    public Person(Name name, Phone phone, Email email, Address address, Tag... tags) {
-        this(name, phone, email, address, new HashSet<>(Arrays.asList(tags)));
+        this.tags.addAll(tags);
     }
 
     /**

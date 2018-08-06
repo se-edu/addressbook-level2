@@ -26,14 +26,14 @@ import seedu.addressbook.util.TestUtil;
 
 public class AddCommandTest {
     private static final List<ReadOnlyPerson> EMPTY_PERSON_LIST = Collections.emptyList();
-    private static final Set<String> EMPTY_STRING_LIST = new HashSet<>();
+    private static final Set<String> EMPTY_STRING_SET = Collections.emptySet();
 
     @Test
     public void addCommand_invalidName_throwsException() {
         final String[] invalidNames = { "", " ", "[]\\[;]" };
         for (String name : invalidNames) {
             assertConstructingInvalidAddCmdThrowsException(name, Phone.EXAMPLE, true, Email.EXAMPLE, false,
-                    Address.EXAMPLE, true, EMPTY_STRING_LIST);
+                    Address.EXAMPLE, true, EMPTY_STRING_SET);
         }
     }
 
@@ -42,7 +42,7 @@ public class AddCommandTest {
         final String[] invalidNumbers = { "", " ", "1234-5678", "[]\\[;]", "abc", "a123", "+651234" };
         for (String number : invalidNumbers) {
             assertConstructingInvalidAddCmdThrowsException(Name.EXAMPLE, number, false, Email.EXAMPLE, true,
-                    Address.EXAMPLE, false, EMPTY_STRING_LIST);
+                    Address.EXAMPLE, false, EMPTY_STRING_SET);
         }
     }
 
@@ -52,7 +52,7 @@ public class AddCommandTest {
                                          "@invalid@email", "invalid@email!", "!invalid@email" };
         for (String email : invalidEmails) {
             assertConstructingInvalidAddCmdThrowsException(Name.EXAMPLE, Phone.EXAMPLE, false, email, false,
-                    Address.EXAMPLE, false, EMPTY_STRING_LIST);
+                    Address.EXAMPLE, false, EMPTY_STRING_SET);
         }
     }
 
@@ -61,7 +61,7 @@ public class AddCommandTest {
         final String[] invalidAddresses = { "", " " };
         for (String address : invalidAddresses) {
             assertConstructingInvalidAddCmdThrowsException(Name.EXAMPLE, Phone.EXAMPLE, true, Email.EXAMPLE,
-                    true, address, true, EMPTY_STRING_LIST);
+                    true, address, true, EMPTY_STRING_SET);
         }
     }
 
@@ -98,7 +98,7 @@ public class AddCommandTest {
     @Test
     public void addCommand_validData_correctlyConstructed() throws Exception {
         AddCommand command = new AddCommand(Name.EXAMPLE, Phone.EXAMPLE, true, Email.EXAMPLE, false,
-                Address.EXAMPLE, true, EMPTY_STRING_LIST);
+                Address.EXAMPLE, true, EMPTY_STRING_SET);
         ReadOnlyPerson p = command.getPerson();
 
         // TODO: add comparison of tags to person.equals and equality methods to

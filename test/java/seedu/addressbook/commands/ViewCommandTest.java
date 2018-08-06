@@ -5,7 +5,6 @@ import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,7 +49,7 @@ public class ViewCommandTest {
                                              new Phone("123", true),
                                              new Email("some@hey.go", true),
                                              new Address("nus", false),
-                                             new HashSet<>());
+                                             Collections.emptySet());
         List<ReadOnlyPerson> listWithExtraPerson
                 = new ArrayList<ReadOnlyPerson>(listWithAllTypicalPersons);
         listWithExtraPerson.add(stranger);

@@ -6,6 +6,10 @@ import static seedu.addressbook.util.TestUtil.getSize;
 import static seedu.addressbook.util.TestUtil.isEmpty;
 import static seedu.addressbook.util.TestUtil.isIdentical;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -19,7 +23,7 @@ import seedu.addressbook.data.person.Phone;
 import seedu.addressbook.data.person.UniquePersonList;
 import seedu.addressbook.data.person.UniquePersonList.DuplicatePersonException;
 import seedu.addressbook.data.person.UniquePersonList.PersonNotFoundException;
-import seedu.addressbook.data.tag.Tag;
+import seedu.addressbook.data.person.Tag;
 
 public class AddressBookTest {
     private Tag tagPrizeWinner;
@@ -47,25 +51,25 @@ public class AddressBookTest {
                                     new Phone("91235468", false),
                                     new Email("alice@nushackers.org", false),
                                     new Address("8 Computing Drive, Singapore", false),
-                                    tagMathematician);
+                                    Collections.singleton(tagMathematician));
 
         bobChaplin     = new Person(new Name("Bob Chaplin"),
                                     new Phone("94321500", false),
                                     new Email("bob@nusgreyhats.org", false),
                                     new Address("9 Computing Drive", false),
-                                    tagMathematician);
+                                    Collections.singleton(tagMathematician));
 
         charlieDouglas = new Person(new Name("Charlie Douglas"),
                                     new Phone("98751365", false),
                                     new Email("charlie@nusgdg.org", false),
                                     new Address("10 Science Drive", false),
-                                    tagScientist);
+                                    Collections.singleton(tagScientist));
 
         davidElliot    = new Person(new Name("David Elliot"),
                                     new Phone("84512575", false),
                                     new Email("douglas@nuscomputing.com", false),
                                     new Address("11 Arts Link", false),
-                                    tagEconomist, tagPrizeWinner);
+                                    new HashSet<>(Arrays.asList(tagEconomist, tagPrizeWinner)));
 
         emptyAddressBook = new AddressBook();
         defaultAddressBook = new AddressBook(new UniquePersonList(aliceBetsy, bobChaplin));

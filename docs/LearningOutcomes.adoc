@@ -169,7 +169,7 @@ Note the following examples of _composition_ (filled diamond):
 |=================================================
 |Whole |Parts
 |`AddressBook` |`UniquePersonList`
-|`Person` |`Name` `Phone` `Email` `Address`
+|`Person` |`Name` `Phone` `Email` `Address` `Tag`
 |=================================================
 
 Contrast with these examples of _aggregration_ (empty diamond):
