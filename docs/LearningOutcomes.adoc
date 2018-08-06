@@ -168,8 +168,8 @@ Note the following examples of _composition_ (filled diamond):
 [cols="<,<",options="header",]
 |=================================================
 |Whole |Parts
-|`AddressBook` |`UniquePersonList` `UniqueTagList`
-|`Person` |`Name` `Phone` `Email` `Address`
+|`AddressBook` |`UniquePersonList`
+|`Person` |`Name` `Phone` `Email` `Address` `Tag`
 |=================================================
 
 Contrast with these examples of _aggregration_ (empty diamond):
@@ -178,7 +178,6 @@ Contrast with these examples of _aggregration_ (empty diamond):
 |============================
 |Container |Contained
 |`UniquePersonList` |`Person`
-|`UuniqueTagList` |`Tag`
 |============================
 
 === References
