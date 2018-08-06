@@ -19,7 +19,7 @@ import seedu.addressbook.data.person.Email;
 import seedu.addressbook.data.person.Name;
 import seedu.addressbook.data.person.Person;
 import seedu.addressbook.data.person.Phone;
-import seedu.addressbook.data.person.Tag;
+import seedu.addressbook.data.tag.Tag;
 import seedu.addressbook.storage.StorageFile.StorageOperationException;
 import static seedu.addressbook.util.TestUtil.assertTextFilesEqual;
 import static seedu.addressbook.util.TestUtil.assertFileDoesNotExist;
