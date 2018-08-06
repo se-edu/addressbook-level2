@@ -150,7 +150,7 @@ e.g. `Main.VERSION`, `Name.EXAMPLE`, `Utils.isAnyNull(...)`
 
 * Convert the `Parser::parseCommand(...)` method (i.e. the `parseCommand()` method of the `Parser` class) to a
 class-level method. Note how this method can be either class-level or instance-level.
-* Note how the `setTags` method of the `Person` class cannot be converted to a class-level method.
+* Note how some instance-level methods, such as the `setTags` method of the `Person` class, cannot be converted to a class-level method.
 * Add an instance-level member `int sequenceNumber` and a class-level variable `int nextSequenceNumber`
 to the `Person` class. Using these two variables, ensure that each `Person` object has a unique sequence number
 that indicates the order in which `Person` objects were created. e.g.
@@ -168,8 +168,8 @@ Note the following examples of _composition_ (filled diamond):
 [cols="<,<",options="header",]
 |=================================================
 |Whole |Parts
-|`AddressBook` |`UniquePersonList` `UniqueTagList`
-|`Person` |`Name` `Phone` `Email` `Address`
+|`AddressBook` |`UniquePersonList`
+|`Person` |`Name` `Phone` `Email` `Address` `Tag`
 |=================================================
 
 Contrast with these examples of _aggregration_ (empty diamond):
@@ -178,7 +178,6 @@ Contrast with these examples of _aggregration_ (empty diamond):
 |============================
 |Container |Contained
 |`UniquePersonList` |`Person`
-|`UuniqueTagList` |`Tag`
 |============================
 
 === References
