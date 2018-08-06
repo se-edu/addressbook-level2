@@ -1,8 +1,11 @@
 package seedu.addressbook.data.person;
 
-import seedu.addressbook.data.tag.UniqueTagList;
-
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
+
+import seedu.addressbook.data.tag.Tag;
 
 /**
  * Represents a Person in the address book.
@@ -15,16 +18,24 @@ public class Person implements ReadOnlyPerson {
     private Email email;
     private Address address;
 
-    private final UniqueTagList tags;
+    private final Set<Tag> tags;
+
     /**
      * Assumption: Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, UniqueTagList tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this.tags = tags;
+    }
+
+    /**
+     * Constructs a Person with duplicate tags removed.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Tag... tags) {
+        this(name, phone, email, address, new HashSet<>(Arrays.asList(tags)));
     }
 
     /**
@@ -55,15 +66,16 @@ public class Person implements ReadOnlyPerson {
     }
 
     @Override
-    public UniqueTagList getTags() {
-        return new UniqueTagList(tags);
+    public Set<Tag> getTags() {
+        return new HashSet<>(tags);
     }
 
     /**
-     * Replaces this person's tags with the tags in the argument tag list.
+     * Replaces this person's tags with the tags in the argument tag set.
      */
-    public void setTags(UniqueTagList replacement) {
-        tags.setTags(replacement);
+    public void setTags(Set<Tag> replacement) {
+        tags.clear();
+        tags.addAll(replacement);
     }
 
     @Override

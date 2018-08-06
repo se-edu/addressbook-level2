@@ -26,7 +26,7 @@ import seedu.addressbook.util.TestUtil;
 
 public class AddCommandTest {
     private static final List<ReadOnlyPerson> EMPTY_PERSON_LIST = Collections.emptyList();
-    private static final Set<String> EMPTY_STRING_LIST = Collections.emptySet();
+    private static final Set<String> EMPTY_STRING_LIST = new HashSet<>();
 
     @Test
     public void addCommand_invalidName_throwsException() {

@@ -3,7 +3,7 @@ package seedu.addressbook.storage;
 import static org.junit.Assert.assertEquals;
 
 import java.nio.file.Paths;
-import java.util.Collections;
+import java.util.HashSet;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -18,7 +18,6 @@ import seedu.addressbook.data.person.Name;
 import seedu.addressbook.data.person.Person;
 import seedu.addressbook.data.person.Phone;
 import seedu.addressbook.data.tag.Tag;
-import seedu.addressbook.data.tag.UniqueTagList;
 import seedu.addressbook.storage.StorageFile.StorageOperationException;
 import static seedu.addressbook.util.TestUtil.assertTextFilesEqual;
 import static seedu.addressbook.util.TestUtil.assertFileDoesNotExist;
@@ -113,12 +112,12 @@ public class StorageFileTest {
                                 new Phone("98765432", false),
                                 new Email("johnd@gmail.com", false),
                                 new Address("John street, block 123, #01-01", false),
-                                new UniqueTagList(Collections.emptySet())));
+                                new HashSet<>()));
         ab.addPerson(new Person(new Name("Betsy Crowe"),
                                 new Phone("1234567", true),
                                 new Email("betsycrowe@gmail.com", false),
                                 new Address("Newgate Prison", true),
-                                new UniqueTagList(new Tag("friend"), new Tag("criminal"))));
+                                new Tag("friend"), new Tag("criminal")));
         return ab;
     }
 }
