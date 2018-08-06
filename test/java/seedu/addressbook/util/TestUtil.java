@@ -26,7 +26,6 @@ import seedu.addressbook.data.person.ReadOnlyPerson;
 import seedu.addressbook.data.person.UniquePersonList;
 import seedu.addressbook.data.person.UniquePersonList.DuplicatePersonException;
 import seedu.addressbook.data.tag.Tag;
-import seedu.addressbook.data.tag.UniqueTagList;
 
 public class TestUtil {
     /**
@@ -111,14 +110,14 @@ public class TestUtil {
     public static Person generateTestPerson() {
         try {
             return new Person(new Name(Name.EXAMPLE), new Phone(Phone.EXAMPLE, false),
-                    new Email(Email.EXAMPLE, true), new Address(Address.EXAMPLE, false), new UniqueTagList());
+                    new Email(Email.EXAMPLE, true), new Address(Address.EXAMPLE, false), new HashSet<>());
         } catch (IllegalValueException e) {
             fail("test person data should be valid by definition");
             return null;
         }
     }
 
-    public static UniqueTagList getAllTags(UniquePersonList persons) {
+    public static Set<Tag> getAllTags(UniquePersonList persons) {
         Set<Tag> combinedTagList = new HashSet<Tag>();
 
         for (Person person : persons) {
@@ -127,7 +126,7 @@ public class TestUtil {
             }
         }
 
-        return new UniqueTagList(combinedTagList);
+        return combinedTagList;
     }
 
     /**
