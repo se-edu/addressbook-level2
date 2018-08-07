@@ -23,7 +23,7 @@ import seedu.addressbook.data.person.Phone;
 import seedu.addressbook.data.person.UniquePersonList;
 import seedu.addressbook.data.person.UniquePersonList.DuplicatePersonException;
 import seedu.addressbook.data.person.UniquePersonList.PersonNotFoundException;
-import seedu.addressbook.data.tag.Tag;
+import seedu.addressbook.data.person.Tag;
 
 public class AddressBookTest {
     private Tag tagPrizeWinner;
