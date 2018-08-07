@@ -1,25 +1,15 @@
 package seedu.addressbook.storage;
 
-import seedu.addressbook.data.AddressBook;
-import seedu.addressbook.data.exception.IllegalValueException;
-import seedu.addressbook.storage.jaxb.AdaptedAddressBook;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Reader;
-import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+
+import seedu.addressbook.data.AddressBook;
+import seedu.addressbook.data.exception.IllegalValueException;
 
 /**
  * Represents the file used to store address book data.
@@ -27,7 +17,7 @@ import java.nio.file.Paths;
 public class StorageFile {
 
     /** Default file path used if the user doesn't provide the file name. */
-    public static final String DEFAULT_STORAGE_FILEPATH = "addressbook.xml";
+    public static final String DEFAULT_STORAGE_FILEPATH = "addressbook.txt";
 
     /* Note: Note the use of nested classes below.
      * More info https://docs.oracle.com/javase/tutorial/java/javaOO/nested.html
@@ -52,8 +42,6 @@ public class StorageFile {
         }
     }
 
-    private final JAXBContext jaxbContext;
-
     public final Path path;
 
     /**
@@ -67,24 +55,18 @@ public class StorageFile {
      * @throws InvalidStorageFilePathException if the given file path is invalid
      */
     public StorageFile(String filePath) throws InvalidStorageFilePathException {
-        try {
-            jaxbContext = JAXBContext.newInstance(AdaptedAddressBook.class);
-        } catch (JAXBException jaxbe) {
-            throw new RuntimeException("jaxb initialisation error");
-        }
-
         path = Paths.get(filePath);
         if (!isValidPath(path)) {
-            throw new InvalidStorageFilePathException("Storage file should end with '.xml'");
+            throw new InvalidStorageFilePathException("Storage file should end with '.txt'");
         }
     }
 
     /**
      * Returns true if the given path is acceptable as a storage file.
-     * The file path is considered acceptable if it ends with '.xml'
+     * The file path is considered acceptable if it ends with '.txt'
      */
     private static boolean isValidPath(Path filePath) {
-        return filePath.toString().endsWith(".xml");
+        return filePath.toString().endsWith(".txt");
     }
 
     /**
@@ -97,18 +79,11 @@ public class StorageFile {
         /* Note: Note the 'try with resource' statement below.
          * More info: https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html
          */
-        try (final Writer fileWriter =
-                     new BufferedWriter(new FileWriter(path.toFile()))) {
-
-            final AdaptedAddressBook toSave = new AdaptedAddressBook(addressBook);
-            final Marshaller marshaller = jaxbContext.createMarshaller();
-            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            marshaller.marshal(toSave, fileWriter);
-
+        try {
+            List<String> encodedAddressBook = AddressBookEncoder.encodeAddressBook(addressBook);
+            Files.write(path, encodedAddressBook);
         } catch (IOException ioe) {
             throw new StorageOperationException("Error writing to file: " + path);
-        } catch (JAXBException jaxbe) {
-            throw new StorageOperationException("Error converting address book into storage format");
         }
     }
 
@@ -125,27 +100,25 @@ public class StorageFile {
             return new AddressBook();
         }
 
-        try (final Reader fileReader =
-                     new BufferedReader(new FileReader(path.toFile()))) {
-
-            final Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-            final AdaptedAddressBook loaded = (AdaptedAddressBook) unmarshaller.unmarshal(fileReader);
-            // manual check for missing elements
-            if (loaded.isAnyRequiredFieldMissing()) {
-                throw new StorageOperationException("File data missing some elements");
-            }
-            return loaded.toModelType();
-
+        try {
+            return AddressBookDecoder.decodeAddressBook(getLinesInFile(path));
         } catch (FileNotFoundException fnfe) {
             throw new AssertionError("A non-existent file scenario is already handled earlier.");
         // other errors
         } catch (IOException ioe) {
             throw new StorageOperationException("Error writing to file: " + path);
-        } catch (JAXBException jaxbe) {
-            throw new StorageOperationException("Error parsing file data format");
         } catch (IllegalValueException ive) {
             throw new StorageOperationException("File contains illegal data values; data type constraints not met");
         }
+    }
+
+    /**
+     * Gets all lines from the file as a list of strings. Line separators are removed.
+     *
+     * @throws IOException if there is an error reading the file.
+     */
+    private static List<String> getLinesInFile(Path dataFilePath) throws IOException {
+        return new ArrayList<>(Files.readAllLines(dataFilePath));
     }
 
     public String getPath() {
