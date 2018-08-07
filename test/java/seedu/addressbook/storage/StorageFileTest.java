@@ -26,7 +26,7 @@ import static seedu.addressbook.util.TestUtil.assertFileDoesNotExist;
 
 public class StorageFileTest {
     private static final String TEST_DATA_FOLDER = "test/data/StorageFileTest";
-    private static final String NON_EXISTANT_FILE_NAME = "ThisFileDoesNotExist.xml";
+    private static final String NON_EXISTANT_FILE_NAME = "ThisFileDoesNotExist.txt";
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -48,15 +48,15 @@ public class StorageFileTest {
 
     @Test
     public void load_invalidFormat_exceptionThrown() throws Exception {
-        // The file contains valid xml data, but does not match the AddressBook class
-        StorageFile storage = getStorage("InvalidData.xml");
+        // The file contains valid txt data, but does not match the Person format
+        StorageFile storage = getStorage("InvalidData.txt");
         thrown.expect(StorageOperationException.class);
         storage.load();
     }
 
     @Test
     public void load_validFormat() throws Exception {
-        AddressBook actualAB = getStorage("ValidData.xml").load();
+        AddressBook actualAB = getStorage("ValidData.txt").load();
         AddressBook expectedAB = getTestAddressBook();
 
         // ensure loaded AddressBook is properly constructed with test data
@@ -88,7 +88,7 @@ public class StorageFileTest {
         StorageFile storage = getTempStorage();
         storage.save(ab);
 
-        assertStorageFilesEqual(storage, getStorage("ValidData.xml"));
+        assertStorageFilesEqual(storage, getStorage("ValidData.txt"));
     }
 
     // getPath() method in StorageFile class is trivial so it is not tested
@@ -105,7 +105,7 @@ public class StorageFileTest {
     }
 
     private StorageFile getTempStorage() throws Exception {
-        return new StorageFile(testFolder.getRoot().getPath() + "/" + "temp.xml");
+        return new StorageFile(testFolder.getRoot().getPath() + "/" + "temp.txt");
     }
 
     private AddressBook getTestAddressBook() throws Exception {
