@@ -2,7 +2,7 @@ package seedu.addressbook.storage.jaxb;
 
 import seedu.addressbook.common.Utils;
 import seedu.addressbook.data.exception.IllegalValueException;
-import seedu.addressbook.data.tag.Tag;
+import seedu.addressbook.data.person.Tag;
 
 import javax.xml.bind.annotation.XmlValue;
 
