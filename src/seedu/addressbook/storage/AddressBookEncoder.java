@@ -19,9 +19,8 @@ public class AddressBookEncoder {
      *
      * @param toSave AddressBook to encode.
      * @return encoded strings.
-     * @throws IOException if there is an error saving to file.
      */
-    public static List<String> encodeAddressBook(AddressBook toSave) throws IOException {
+    public static List<String> encodeAddressBook(AddressBook toSave) {
         return encodePersonsToStrings(toSave.getAllPersons());
     }
 

@@ -2,9 +2,6 @@ package seedu.addressbook.storage;
 
 import static seedu.addressbook.parser.Parser.PERSON_DATA_ARGS_FORMAT;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -31,25 +28,15 @@ public class AddressBookDecoder {
     /**
      * Decodes the AddressBook in the storage data file.
      *
-     * @param dataFilePath file which contains the AddressBook to decode.
+     * @param encodedAddressBook strings to be decoded.
      * @return decoded AddressBook.
      * @throws IllegalValueException if any field is invalid.
      * @throws StorageOperationException if cannot decode any.
-     * @throws IOException if there is an error reading the file.
      */
-    public static AddressBook decodeAddressBook(Path dataFilePath)
-            throws IOException, IllegalValueException, StorageOperationException {
-        final List<Person> successfullyDecodedPersons = decodePersonsFromStrings(getLinesInFile(dataFilePath));
+    public static AddressBook decodeAddressBook(List<String> encodedAddressBook)
+            throws IllegalValueException, StorageOperationException {
+        final List<Person> successfullyDecodedPersons = decodePersonsFromStrings(encodedAddressBook);
         return new AddressBook(new UniquePersonList(successfullyDecodedPersons));
-    }
-
-    /**
-     * Gets all lines from the file as a list of strings. Line separators are removed.
-     *
-     * @throws IOException if there is an error reading the file.
-     */
-    private static List<String> getLinesInFile(Path dataFilePath) throws IOException {
-        return new ArrayList<>(Files.readAllLines(dataFilePath));
     }
 
     /**

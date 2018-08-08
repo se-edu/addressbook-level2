@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 import seedu.addressbook.data.AddressBook;
@@ -100,7 +101,7 @@ public class StorageFile {
         }
 
         try {
-            return AddressBookDecoder.decodeAddressBook(path);
+            return AddressBookDecoder.decodeAddressBook(getLinesInFile(path));
         } catch (FileNotFoundException fnfe) {
             throw new AssertionError("A non-existent file scenario is already handled earlier.");
         // other errors
@@ -109,6 +110,15 @@ public class StorageFile {
         } catch (IllegalValueException ive) {
             throw new StorageOperationException("File contains illegal data values; data type constraints not met");
         }
+    }
+
+    /**
+     * Gets all lines from the file as a list of strings. Line separators are removed.
+     *
+     * @throws IOException if there is an error reading the file.
+     */
+    private static List<String> getLinesInFile(Path dataFilePath) throws IOException {
+        return new ArrayList<>(Files.readAllLines(dataFilePath));
     }
 
     public String getPath() {
