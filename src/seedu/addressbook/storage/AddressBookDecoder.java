@@ -21,53 +21,34 @@ import seedu.addressbook.data.tag.Tag;
 import seedu.addressbook.storage.StorageFile.StorageOperationException;
 
 /**
- * Decodes the storage data file into an AddressBook object.
+ * Decodes the storage data file into an {@code AddressBook} object.
  */
 public class AddressBookDecoder {
 
     /**
-     * Decodes the AddressBook in the storage data file.
+     * Decodes {@code encodedAddressBook} into an {@code AddressBook} containing the decoded persons.
      *
-     * @param encodedAddressBook strings to be decoded.
-     * @return decoded AddressBook.
-     * @throws IllegalValueException if any field is invalid.
-     * @throws StorageOperationException if cannot decode any.
+     * @throws IllegalValueException if any of the fields in any encoded person string is invalid.
+     * @throws StorageOperationException if the {@code encodedAddressBook} cannot be decoded.
      */
     public static AddressBook decodeAddressBook(List<String> encodedAddressBook)
             throws IllegalValueException, StorageOperationException {
-        final List<Person> successfullyDecodedPersons = decodePersonsFromStrings(encodedAddressBook);
-        return new AddressBook(new UniquePersonList(successfullyDecodedPersons));
-    }
-
-    /**
-     * Decodes persons from a list of string representations.
-     *
-     * @param encodedPersons strings to be decoded.
-     * @return List containing all decoded persons.
-     * @throws IllegalValueException if any field is invalid.
-     * @throws StorageOperationException if cannot decode any.
-     */
-    private static List<Person> decodePersonsFromStrings(List<String> encodedPersons)
-            throws IllegalValueException, StorageOperationException {
         final List<Person> decodedPersons = new ArrayList<>();
-        for (String encodedPerson : encodedPersons) {
+        for (String encodedPerson : encodedAddressBook) {
             decodedPersons.add(decodePersonFromString(encodedPerson));
         }
-        return decodedPersons;
+        return new AddressBook(new UniquePersonList(decodedPersons));
     }
 
     /**
-     * Decodes a person from it's supposed string representation.
+     * Decodes {@code encodedPerson} into a {@code Person}.
      *
-     * @param encodedPerson string to be decoded.
-     * @return decoded person.
-     * @throws IllegalValueException if any field is invalid.
-     * @throws StorageOperationException if encodedPerson cannot be decoded.
+     * @throws IllegalValueException if any field in the {@code encodedPerson} is invalid.
+     * @throws StorageOperationException if {@code encodedPerson} cannot be decoded.
      */
     private static Person decodePersonFromString(String encodedPerson)
             throws IllegalValueException, StorageOperationException {
         final Matcher matcher = PERSON_DATA_ARGS_FORMAT.matcher(encodedPerson);
-        // Validate encodedPerson string format
         if (!matcher.matches()) {
             throw new StorageOperationException("Encoded person in invalid format. Unable to decode.");
         }
@@ -82,18 +63,17 @@ public class AddressBookDecoder {
     }
 
     /**
-     * Returns true if the private prefix is present for a contact detail in the encoded person's string.
+     * Returns true if {@code matchPrefix} is equal to the private prefix for contact details.
      */
     private static boolean isPrivatePrefixPresent(String matchedPrefix) {
         return matchedPrefix.equals("p");
     }
 
     /**
-     * Extracts the person's tags from the encoded person's tag arguments string.
+     * Extracts the {@code Tag}s from the {@code tagArguments} string.
      * Merges duplicate tag strings.
      */
     private static Set<Tag> getTagsFromEncodedPerson(String tagArguments) throws IllegalValueException {
-        // no tags
         if (tagArguments.isEmpty()) {
             return Collections.emptySet();
         }

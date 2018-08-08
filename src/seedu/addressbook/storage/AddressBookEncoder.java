@@ -1,48 +1,28 @@
 package seedu.addressbook.storage;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.person.Person;
-import seedu.addressbook.data.person.UniquePersonList;
-import seedu.addressbook.data.tag.Tag;
 
 /**
- * Encodes the AddressBook object into a data file for storage.
+ * Encodes the {@code AddressBook} object into a data file for storage.
  */
 public class AddressBookEncoder {
 
     /**
-     * Encodes all the Persons in the AddressBook to the data file for storage.
-     *
-     * @param toSave AddressBook to encode.
-     * @return encoded strings.
+     * Encodes all the {@code Person} in the {@code toSave} into a list of decodable and readable string presentation
+     * for storage.
      */
     public static List<String> encodeAddressBook(AddressBook toSave) {
-        return encodePersonsToStrings(toSave.getAllPersons());
-    }
-
-    /**
-     * Encodes persons into list of decodable and readable string representations.
-     *
-     * @param persons to be encoded.
-     * @return encoded strings.
-     */
-    private static List<String> encodePersonsToStrings(UniquePersonList persons) {
         final List<String> encodedPersons = new ArrayList<>();
-        for (Person person : persons) {
-            encodedPersons.add(encodePersonToString(person));
-        }
+        toSave.getAllPersons().forEach(person -> encodedPersons.add(encodePersonToString(person)));
         return encodedPersons;
     }
 
     /**
-     * Encodes a person into a decodable and readable string representation.
-     *
-     * @param person to be encoded.
-     * @return encoded string.
+     * Encodes the {@code person} into a decodable and readable string representation.
      */
     private static String encodePersonToString(Person person) {
         final StringBuilder encodedPersonBuilder = new StringBuilder();
@@ -58,9 +38,7 @@ public class AddressBookEncoder {
         encodedPersonBuilder.append(person.getAddress().isPrivate() ? " p" : " ");
         encodedPersonBuilder.append("a/").append(person.getAddress().value);
 
-        for (Tag tag : person.getTags()) {
-            encodedPersonBuilder.append(" t/").append(tag.tagName);
-        }
+        person.getTags().forEach(tag -> encodedPersonBuilder.append(" t/").append(tag.tagName));
 
         return encodedPersonBuilder.toString();
     }
