@@ -29,7 +29,7 @@ public class AddressBookDecoder {
      * Decodes {@code encodedAddressBook} into an {@code AddressBook} containing the decoded persons.
      *
      * @throws IllegalValueException if any of the fields in any encoded person string is invalid.
-     * @throws StorageOperationException if the {@code encodedAddressBook} is not in an invalid format.
+     * @throws StorageOperationException if the {@code encodedAddressBook} is in an invalid format.
      */
     public static AddressBook decodeAddressBook(List<String> encodedAddressBook)
             throws IllegalValueException, StorageOperationException {
@@ -44,7 +44,7 @@ public class AddressBookDecoder {
      * Decodes {@code encodedPerson} into a {@code Person}.
      *
      * @throws IllegalValueException if any field in the {@code encodedPerson} is invalid.
-     * @throws StorageOperationException if {@code encodedPerson} cannot be in an invalid format.
+     * @throws StorageOperationException if {@code encodedPerson} is in an invalid format.
      */
     private static Person decodePersonFromString(String encodedPerson)
             throws IllegalValueException, StorageOperationException {
@@ -66,7 +66,7 @@ public class AddressBookDecoder {
      * Returns true if {@code matchedPrefix} is equal to the private prefix for contact details.
      */
     private static boolean isPrivatePrefixPresent(String matchedPrefix) {
-        return matchedPrefix.equals("p");
+        return "p".equals(matchedPrefix);
     }
 
     /**
