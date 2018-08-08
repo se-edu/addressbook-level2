@@ -1,8 +1,6 @@
 package seedu.addressbook.storage;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,19 +17,19 @@ public class AddressBookEncoder {
     /**
      * Encodes all the Persons in the AddressBook to the data file for storage.
      *
-     * @param storageFilePath file for saving
+     * @param toSave AddressBook to encode.
+     * @return encoded strings.
      * @throws IOException if there is an error saving to file.
      */
-    public static void encodeAddressBookToFile(AddressBook toSave, Path storageFilePath) throws IOException {
-        final List<String> linesToWrite = encodePersonsToStrings(toSave.getAllPersons());
-        Files.write(storageFilePath, linesToWrite);
+    public static List<String> encodeAddressBook(AddressBook toSave) throws IOException {
+        return encodePersonsToStrings(toSave.getAllPersons());
     }
 
     /**
      * Encodes persons into list of decodable and readable string representations.
      *
-     * @param persons to be encoded
-     * @return encoded strings
+     * @param persons to be encoded.
+     * @return encoded strings.
      */
     private static List<String> encodePersonsToStrings(UniquePersonList persons) {
         final List<String> encodedPersons = new ArrayList<>();
@@ -44,8 +42,8 @@ public class AddressBookEncoder {
     /**
      * Encodes a person into a decodable and readable string representation.
      *
-     * @param person to be encoded
-     * @return encoded string
+     * @param person to be encoded.
+     * @return encoded string.
      */
     private static String encodePersonToString(Person person) {
         final StringBuilder encodedPersonBuilder = new StringBuilder();

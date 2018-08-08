@@ -26,9 +26,18 @@ import seedu.addressbook.storage.StorageFile.StorageOperationException;
 /**
  * Decodes the storage data file into an AddressBook object.
  */
-public class FileDecoder {
+public class AddressBookDecoder {
 
-    public static AddressBook decodeFileToAddressBook(Path dataFilePath)
+    /**
+     * Decodes the AddressBook in the storage data file.
+     *
+     * @param dataFilePath file which contains the AddressBook to decode.
+     * @return decoded AddressBook.
+     * @throws IllegalValueException if any field is invalid.
+     * @throws StorageOperationException if cannot decode any.
+     * @throws IOException if there is an error reading the file.
+     */
+    public static AddressBook decodeAddressBook(Path dataFilePath)
             throws IOException, IllegalValueException, StorageOperationException {
         final List<Person> successfullyDecodedPersons = decodePersonsFromStrings(getLinesInFile(dataFilePath));
         return new AddressBook(new UniquePersonList(successfullyDecodedPersons));
@@ -36,6 +45,8 @@ public class FileDecoder {
 
     /**
      * Gets all lines from the file as a list of strings. Line separators are removed.
+     *
+     * @throws IOException if there is an error reading the file.
      */
     private static List<String> getLinesInFile(Path dataFilePath) throws IOException {
         return new ArrayList<>(Files.readAllLines(dataFilePath));
@@ -44,10 +55,10 @@ public class FileDecoder {
     /**
      * Decodes persons from a list of string representations.
      *
-     * @param encodedPersons strings to be decoded
-     * @return List containing all decoded persons
-     * @throws IllegalValueException if any field is invalid
-     * @throws StorageOperationException if cannot decode any
+     * @param encodedPersons strings to be decoded.
+     * @return List containing all decoded persons.
+     * @throws IllegalValueException if any field is invalid.
+     * @throws StorageOperationException if cannot decode any.
      */
     private static List<Person> decodePersonsFromStrings(List<String> encodedPersons)
             throws IllegalValueException, StorageOperationException {
@@ -61,10 +72,10 @@ public class FileDecoder {
     /**
      * Decodes a person from it's supposed string representation.
      *
-     * @param encodedPerson string to be decoded
-     * @return decoded person
-     * @throws IllegalValueException if any field is invalid
-     * @throws StorageOperationException if encodedPerson cannot be decoded
+     * @param encodedPerson string to be decoded.
+     * @return decoded person.
+     * @throws IllegalValueException if any field is invalid.
+     * @throws StorageOperationException if encodedPerson cannot be decoded.
      */
     private static Person decodePersonFromString(String encodedPerson)
             throws IllegalValueException, StorageOperationException {
@@ -76,13 +87,9 @@ public class FileDecoder {
 
         return new Person(
                 new Name(matcher.group("name")),
-
                 new Phone(matcher.group("phone"), isPrivatePrefixPresent(matcher.group("isPhonePrivate"))),
-
                 new Email(matcher.group("email"), isPrivatePrefixPresent(matcher.group("isEmailPrivate"))),
-
                 new Address(matcher.group("address"), isPrivatePrefixPresent(matcher.group("isAddressPrivate"))),
-
                 getTagsFromEncodedPerson(matcher.group("tagArguments"))
         );
     }

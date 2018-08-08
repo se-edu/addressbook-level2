@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.exception.IllegalValueException;
@@ -78,7 +79,8 @@ public class StorageFile {
          * More info: https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html
          */
         try {
-            AddressBookEncoder.encodeAddressBookToFile(addressBook, path);
+            List<String> encodedAddressBook = AddressBookEncoder.encodeAddressBook(addressBook);
+            Files.write(path, encodedAddressBook);
         } catch (IOException ioe) {
             throw new StorageOperationException("Error writing to file: " + path);
         }
@@ -98,7 +100,7 @@ public class StorageFile {
         }
 
         try {
-            return FileDecoder.decodeFileToAddressBook(path);
+            return AddressBookDecoder.decodeAddressBook(path);
         } catch (FileNotFoundException fnfe) {
             throw new AssertionError("A non-existent file scenario is already handled earlier.");
         // other errors
