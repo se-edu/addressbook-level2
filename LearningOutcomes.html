@@ -283,7 +283,7 @@ e.g. <code>Main.VERSION</code>, <code>Name.EXAMPLE</code>, <code>Utils.isAnyNull
 class-level method. Note how this method can be either class-level or instance-level.</p>
 </li>
 <li>
-<p>Note how the <code>setTags</code> method of the <code>Person</code> class cannot be converted to a class-level method.</p>
+<p>Note how some instance-level methods, such as the <code>setTags</code> method of the <code>Person</code> class, cannot be converted to a class-level method.</p>
 </li>
 <li>
 <p>Add an instance-level member <code>int sequenceNumber</code> and a class-level variable <code>int nextSequenceNumber</code>
@@ -332,11 +332,11 @@ that indicates the order in which <code>Person</code> objects were created. e.g.
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>AddressBook</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>UniquePersonList</code> <code>UniqueTagList</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>UniquePersonList</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Person</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Name</code> <code>Phone</code> <code>Email</code> <code>Address</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Name</code> <code>Phone</code> <code>Email</code> <code>Address</code> <code>Tag</code></p></td>
 </tr>
 </tbody>
 </table>
@@ -358,10 +358,6 @@ that indicates the order in which <code>Person</code> objects were created. e.g.
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>UniquePersonList</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Person</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>UuniqueTagList</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Tag</code></p></td>
 </tr>
 </tbody>
 </table>
@@ -567,4 +563,4 @@ e.g. <code>John K Smith</code> <code>John K SMITh</code> <code>John Smith</code>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-08-04 16:10:55 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-08-08 12:03:27 UTC</div></div></div></body></html>
