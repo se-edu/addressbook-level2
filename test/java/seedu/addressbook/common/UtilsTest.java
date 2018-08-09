@@ -30,8 +30,8 @@ public class UtilsTest {
         assertNotUnique("abc", "abc");
         assertNotUnique("abc", "", "abc", "ABC");
         assertNotUnique("", "abc", "a", "abc");
-        assertNotUnique(1, new Integer(1));
-        assertNotUnique(null, 1, new Integer(1));
+        assertNotUnique(1, Integer.valueOf(1));
+        assertNotUnique(null, 1, Integer.valueOf(1));
         assertNotUnique(null, null);
         assertNotUnique(null, "a", "b", null);
     }

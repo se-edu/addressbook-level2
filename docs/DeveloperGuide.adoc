@@ -24,23 +24,16 @@
 . Rename the project if you want. Click `Next`
 . Ensure that your `\src` and `\test\java` folders are checked. Keep clicking `Next`
 . Click `Finish`
-. Try running the application (right-click the `Main` class under the `src` folder, and click `Run 'Main.main()'`)
-. Observe how the application fails to compile. This is because the `JAXB` APIs is no longer contained under the default classpath from Java 9 onwards. To fix this issue, the `JAXB` module needs to be added to the classpath:
-.. Open any of the files which has the compilation error (e.g `StorageFile.java`), and place your cursor over any `javax.xml.bind` in the imports highlighted in red
-.. Press ALT+ENTER and select `--add-modules=java.xml.bind to module compiler options`
-.. Go to `Run` -> `Edit Configurations...`
-.. Under `Configuration`, add `--add-modules java.xml.bind` into `VM options`
-. Run the application again to ensure it compiles and runs without any errors
 . Add JUnit 4 to classpath
 .. Open any test file in `\test\java` and place your cursor over any `@Test` highlighted in red
 .. Press ALT+ENTER and select `Add 'JUnit4' to classpath`
 .. Select `Use 'JUnit4' from IntelliJ IDEA distribution` and click `OK`
 . Run all the tests (right-click the `test` folder, and click `Run 'All Tests'`)
-. Observe how some tests fail. That is because they try to access the test data from the wrong directory (the working directory is expected to be the root directory, but IntelliJ runs the test with `test\` as the working directory by default). Some test classes also uses `JAXB` APIs. To fix these issues:
+. Observe how some tests fail. That is because they try to access the test data from the wrong directory (the working directory is expected to be the root directory, but IntelliJ runs the test with `test\` as the working directory by default). To fix this issue:
 .. Go to `Run` -> `Edit Configurations...`
 .. On the list at the left, expand `JUnit`, and remove all the test configurations (e.g. `All in test`) by selecting it and clicking on the '-' icon at the top of the list
 .. Expand `Defaults`, and ensure that `JUnit` is selected
-.. Under `Configuration`, change the `Working directory` to the `addressbook-level2` folder, and add `--add-modules java.xml.bind` into `VM options` 
+.. Under `Configuration`, change the `Working directory` to the `addressbook-level2` folder
 .. Click `OK`
 . Run the tests again to ensure they all pass now.
 
