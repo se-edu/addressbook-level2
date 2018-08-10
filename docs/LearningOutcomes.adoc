@@ -20,7 +20,7 @@ toc::[]
 
 === References
 
-* https://se-edu.github.io/se-book/oop/objects/encapsulation/[se-edu/se-book: Design: OOP: Objects: Encapsulation]
+* https://se-edu.github.io/se-book/oop/objects/encapsulation/[se-edu/se-book: Paradigms: OOP: Objects: Encapsulation]
 
 === Exercise: Encapsulate `CommandResult` class members
 
@@ -33,7 +33,7 @@ Hide it so that it can only be accessed using methods provided.
 
 === References
 
-* https://se-edu.github.io/se-book/oop/classes/[se-edu/se-book: Design: OOP: Classes]
+* https://se-edu.github.io/se-book/oop/classes/[se-edu/se-book: Paradigms: OOP: Classes]
 
 === Exercise: Split `Address` into more classes
 
@@ -70,6 +70,7 @@ separate class named `Formatter`.
 === References
 
 * https://se-edu.github.io/se-book/errorHandling/exceptions/[se-edu/se-book: Error Handling: Exceptions]
+* https://se-edu.github.io/se-book/cppToJava/exceptions/[se-edu/se-book: cppToJava: Exceptions]
 
 === Exercise: Handle 'file readonly' situation
 
@@ -85,7 +86,8 @@ in multiple `*Command` classes.
 
 === References
 
-* https://se-edu.github.io/se-book/oop/inheritance/[se-edu/se-book: Design: OOP: Inheritance]
+* https://se-edu.github.io/se-book/oop/inheritance/[se-edu/se-book: Paradigms: OOP: Inheritance]
+* https://se-edu.github.io/se-book/cppToJava/inheritance/[se-edu/se-book: cppToJava: Inheritance]
 
 === Exercise: Extract a `Contact` class
 
@@ -143,7 +145,8 @@ e.g. `Main.VERSION`, `Name.EXAMPLE`, `Utils.isAnyNull(...)`
 
 === References
 
-* https://se-edu.github.io/se-book/oop/classes/classLevelMembers/[se-edu/se-book: Design: OOP: Classes: Class-Level Members]
+* https://se-edu.github.io/se-book/oop/classes/classLevelMembers/[se-edu/se-book: Paradigms: OOP: Classes: Class-Level Members]
+* https://se-edu.github.io/se-book/cppToJava/classes/classLevelMembers/[se-edu/se-book: cppToJava: Classes: Class-Level Members]
 
 === Exercise: Add class-level members
 
@@ -181,7 +184,7 @@ Contrast with these examples of _aggregration_ (empty diamond):
 
 === References
 
-* https://se-edu.github.io/se-book/oop/associations/composition/[se-edu/se-book: Design: OOP: Associations: Composition]
+* https://se-edu.github.io/se-book/oop/associations/composition/[se-edu/se-book: Paradigms: OOP: Associations: Composition]
 
 '''''
 
@@ -191,7 +194,7 @@ The current design does not have any association classes.
 
 === References
 
-* https://se-edu.github.io/se-book/oop/associations/associationClasses/[se-edu/se-book: Design: OOP: Associations: Association Classes]
+* https://se-edu.github.io/se-book/oop/associations/associationClasses/[se-edu/se-book: Paradigms: OOP: Associations: Association Classes]
 
 === Exercise: Add an Association Class `Tagging`
 
