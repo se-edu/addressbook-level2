@@ -70,7 +70,7 @@ separate class named `Formatter`.
 === References
 
 * https://se-edu.github.io/se-book/errorHandling/exceptions/[se-edu/se-book: Error Handling: Exceptions]
-* https://se-edu.github.io/se-book/cppToJava/exceptions/[se-edu/se-book: cppToJava: Exceptions]
+* https://se-edu.github.io/se-book/cppToJava/exceptions/[se-edu/se-book: C++ to Java: Exceptions]
 
 === Exercise: Handle 'file readonly' situation
 
@@ -87,7 +87,7 @@ in multiple `*Command` classes.
 === References
 
 * https://se-edu.github.io/se-book/oop/inheritance/[se-edu/se-book: Paradigms: OOP: Inheritance]
-* https://se-edu.github.io/se-book/cppToJava/inheritance/[se-edu/se-book: cppToJava: Inheritance]
+* https://se-edu.github.io/se-book/cppToJava/inheritance/[se-edu/se-book: C++ to Java: Inheritance]
 
 === Exercise: Extract a `Contact` class
 
@@ -146,7 +146,7 @@ e.g. `Main.VERSION`, `Name.EXAMPLE`, `Utils.isAnyNull(...)`
 === References
 
 * https://se-edu.github.io/se-book/oop/classes/classLevelMembers/[se-edu/se-book: Paradigms: OOP: Classes: Class-Level Members]
-* https://se-edu.github.io/se-book/cppToJava/classes/classLevelMembers/[se-edu/se-book: cppToJava: Classes: Class-Level Members]
+* https://se-edu.github.io/se-book/cppToJava/classes/classLevelMembers/[se-edu/se-book: C++ to Java: Classes: Class-Level Members]
 
 === Exercise: Add class-level members
 
