@@ -20,7 +20,7 @@ toc::[]
 
 === References
 
-* https://se-edu.github.io/se-book/oopDesign/objects/encapsulation/[se-edu/se-book: Design: OOP: Objects: Encapsulation]
+* https://se-edu.github.io/se-book/oop/objects/encapsulation/[se-edu/se-book: Paradigms: OOP: Objects: Encapsulation]
 
 === Exercise: Encapsulate `CommandResult` class members
 
@@ -33,7 +33,7 @@ Hide it so that it can only be accessed using methods provided.
 
 === References
 
-* https://se-edu.github.io/se-book/oopDesign/classes/[se-edu/se-book: Design: OOP: Classes]
+* https://se-edu.github.io/se-book/oop/classes/[se-edu/se-book: Paradigms: OOP: Classes]
 
 === Exercise: Split `Address` into more classes
 
@@ -70,6 +70,7 @@ separate class named `Formatter`.
 === References
 
 * https://se-edu.github.io/se-book/errorHandling/exceptions/[se-edu/se-book: Error Handling: Exceptions]
+* https://se-edu.github.io/se-book/cppToJava/exceptions/[se-edu/se-book: C++ to Java: Exceptions]
 
 === Exercise: Handle 'file readonly' situation
 
@@ -85,8 +86,8 @@ in multiple `*Command` classes.
 
 === References
 
-* https://se-edu.github.io/se-book/oopDesign/inheritance/[se-edu/se-book: Design: OOP: Inheritance]
-* https://se-edu.github.io/se-book/oopImplementation/inheritance/[se-edu/se-book: Implementation: OOP: Inheritance]
+* https://se-edu.github.io/se-book/oop/inheritance/[se-edu/se-book: Paradigms: OOP: Inheritance]
+* https://se-edu.github.io/se-book/cppToJava/inheritance/[se-edu/se-book: C++ to Java: Inheritance]
 
 === Exercise: Extract a `Contact` class
 
@@ -144,7 +145,8 @@ e.g. `Main.VERSION`, `Name.EXAMPLE`, `Utils.isAnyNull(...)`
 
 === References
 
-* https://se-edu.github.io/se-book/oopDesign/classes/classLevelMembers/[se-edu/se-book: Design: OOP: Classes: Class-Level Members]
+* https://se-edu.github.io/se-book/oop/classes/classLevelMembers/[se-edu/se-book: Paradigms: OOP: Classes: Class-Level Members]
+* https://se-edu.github.io/se-book/cppToJava/classes/classLevelMembers/[se-edu/se-book: C++ to Java: Classes: Class-Level Members]
 
 === Exercise: Add class-level members
 
@@ -182,8 +184,7 @@ Contrast with these examples of _aggregration_ (empty diamond):
 
 === References
 
-* https://se-edu.github.io/se-book/oopDesign/associations/composition/[se-edu/se-book: Design: OOP: Associations: Composition]
-* https://se-edu.github.io/se-book/oopImplementation/composition/[se-edu/se-book: Implementation: OOP: Composition]
+* https://se-edu.github.io/se-book/oop/associations/composition/[se-edu/se-book: Paradigms: OOP: Associations: Composition]
 
 '''''
 
@@ -193,8 +194,7 @@ The current design does not have any association classes.
 
 === References
 
-* https://se-edu.github.io/se-book/oopDesign/associations/associationClasses/[se-edu/se-book: Design: OOP: Associations: Association Classes]
-* https://se-edu.github.io/se-book/oopImplementation/associationClasses/[se-edu/se-book: Implementation: OOP: Association Classes]
+* https://se-edu.github.io/se-book/oop/associations/associationClasses/[se-edu/se-book: Paradigms: OOP: Associations: Association Classes]
 
 === Exercise: Add an Association Class `Tagging`
 
@@ -237,7 +237,7 @@ Note how there are many test classes in this code base that uses JUnit to implem
 
 * First, make sure you know how to run JUnit tests by running existing JUnit tests.
 Instructions are in the <<DeveloperGuide#junit-tests, Developer Guide>>.
-* Next, add a test to link:{repoURL}/test/java/seedu/addressbook/common/UtilsTest.java[`test/seedu/addressbook/common/UtilsTest.java`] to test the link:{repoURL}/src/seedu/addressbook/common/Utils.java[`seedu.addressbook.common.Utils#isAnyNull(Object...)`] method.
+* Next, add a test to link:{repoURL}/test/java/seedu/addressbook/common/UtilsTest.java[`test/seedu/addressbook/common/UtilsTest.java`] to test the link:{repoURL}/src/seedu/addressbook/common/Utils.java#L15[`seedu.addressbook.common.Utils#isAnyNull(Object...)`] method.
 
 '''''
 
@@ -256,7 +256,7 @@ It's recommended you do `[LO-JUnit]` before attempting TDD.
 [source,java]
 ----
 /**
-  * Returns true of the other name is very similar to this name.
+  * Returns true if the other name is very similar to this name.
   * Two names are considered similar if ...
   */
   public boolean isSimilar(Name other) { ... }
