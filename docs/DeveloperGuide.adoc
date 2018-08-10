@@ -2,6 +2,7 @@
 :site-section: DeveloperGuide
 :imagesDir: images
 :stylesDir: stylesheets
+:experimental:
 
 == Setting up
 
@@ -16,8 +17,8 @@
 . Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
 . Set up the correct JDK version
 .. Click `Configure` > `Project Defaults` > `Project Structure`
-.. If JDK 9 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 9.
-.. Click `OK`.
+.. If JDK 9 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 9
+.. Click `OK`
 . Click `Import Project`
 . Locate the project directory and click `OK`
 . Select `Create project from existing sources` and click `Next`
@@ -26,8 +27,8 @@
 . Click `Finish`
 . Add JUnit 4 to classpath
 .. Open any test file in `\test\java` and place your cursor over any `@Test` highlighted in red
-.. Press ALT+ENTER and select `Add 'JUnit4' to classpath`
-.. Select `Use 'JUnit4' from IntelliJ IDEA distribution` and click `OK`
+.. Press kbd:[ALT + ENTER] and select `Add 'JUnit4' to classpath`
+.. Select `junit:junit:4.12` and click `OK` (if `4.12` is not available, choose any `4.x` that is later than `4.12`)
 . Run all the tests (right-click the `test` folder, and click `Run 'All Tests'`)
 . Observe how some tests fail. That is because they try to access the test data from the wrong directory (the working directory is expected to be the root directory, but IntelliJ runs the test with `test\` as the working directory by default). To fix this issue:
 .. Go to `Run` -> `Edit Configurations...`
@@ -35,7 +36,7 @@
 .. Expand `Defaults`, and ensure that `JUnit` is selected
 .. Under `Configuration`, change the `Working directory` to the `addressbook-level2` folder
 .. Click `OK`
-. Run the tests again to ensure they all pass now.
+. Run the tests again to ensure they all pass now
 
 == Design
 
@@ -50,14 +51,14 @@ image::mainClassDiagram.png[]
 . Open a DOS window in the `test` folder
 . Run the `runtests.bat` script
 . If the script reports that there is no difference between `actual.txt` and `expected.txt`,
-the test has passed.
+the test has passed
 
 *Mac/Unix/Linux*
 
 . Open a terminal window in the `test` folder
 . Run the `runtests.sh` script
 . If the script reports that there is no difference between `actual.txt` and `expected.txt`,
-the test has passed.
+the test has passed
 
 === JUnit tests
 
@@ -66,7 +67,7 @@ the test has passed.
 === Troubleshooting test failures
 
 * Problem: How do I examine the exact differences between `actual.txt` and `expected.txt`? +
-Solution: You can use a diff/merge tool with a GUI e.g. WinMerge (on Windows)
+Solution: You can use a diff/merge tool with a GUI e.g. WinMerge (on Windows).
 
 * Problem: The two files look exactly the same, but the test script reports they are different. +
 Solution: This can happen because the line endings used by Windows is different from Unix-based

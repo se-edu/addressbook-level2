@@ -6,6 +6,7 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
+:experimental:
 
 This product is not meant for end-users and therefore there is no user-friendly installer.
 Please refer to the <<DeveloperGuide#setting-up, Setting up>> section to learn how to set up the project.
@@ -14,8 +15,8 @@ Please refer to the <<DeveloperGuide#setting-up, Setting up>> section to learn h
 
 *Using IntelliJ*
 
-. Find the project in the `Project Explorer` (usually located at the left side).
-.. If the `Project Explorer` is not visible, press ALT+1 for Windows/Linux, CMD+1 for macOS to open the `Project Explorer` tab.
+. Find the project in the `Project Explorer` (usually located at the left side)
+.. If the `Project Explorer` is not visible, press kbd:[ALT+1] for Windows/Linux, kbd:[CMD+1] for macOS to open the `Project Explorer` tab
 . Go to the `src` folder and locate the `Main` file
 . Right click the file and select `Run Main.main()`
 . The program now should run on the `Console` (usually located at the bottom side)
@@ -58,7 +59,7 @@ items with `...` after them can have multiple instances. Order of parameters are
 Put a `p` before the phone / email / address prefixes to mark it as `private`. `private` details can only
 be seen using the `viewall` command.
 
-Persons can have any number of tags (including 0)
+Persons can have any number of tags (including 0).
 ****
 
 Examples:
@@ -68,7 +69,7 @@ Examples:
 
 == Listing all persons : `list`
 
-Shows a list of all persons in the address book. +
+Shows a list of all persons, along with their non-private details, in the address book. +
 Format: `list`
 
 == Finding all persons containing any keyword in their name: `find`
@@ -168,16 +169,16 @@ There is no need to save manually.
 
 == Changing the save location
 
-Address book data are saved in a file called `addressbook.xml` in the project root folder.
+Address book data are saved in a file called `addressbook.txt` in the project root folder.
 You can change the location by specifying the file path as a program argument.
 
 Example:
 
-* `java seedu.addressbook.Main mydata.xml`
+* `java seedu.addressbook.Main mydata.txt`
 
 [NOTE]
 ====
-The file name must end in `.xml` for it to be acceptable to the program.
+The file name must end in `.txt` for it to be acceptable to the program.
 
 When running the program inside IntelliJ, you can set command line parameters
 before running the program.
