@@ -33,7 +33,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://se-edu.github.io/se-book/oopDesign/objects/encapsulation/">se-edu/se-book: Design: OOP: Objects: Encapsulation</a></p>
+<p><a href="https://se-edu.github.io/se-book/oop/objects/encapsulation/">se-edu/se-book: Paradigms: OOP: Objects: Encapsulation</a></p>
 </li>
 </ul>
 </div>
@@ -60,7 +60,7 @@ Hide it so that it can only be accessed using methods provided.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://se-edu.github.io/se-book/oopDesign/classes/">se-edu/se-book: Design: OOP: Classes</a></p>
+<p><a href="https://se-edu.github.io/se-book/oop/classes/">se-edu/se-book: Paradigms: OOP: Classes</a></p>
 </li>
 </ul>
 </div>
@@ -135,6 +135,9 @@ separate class named <code>Formatter</code>.</p>
 <li>
 <p><a href="https://se-edu.github.io/se-book/errorHandling/exceptions/">se-edu/se-book: Error Handling: Exceptions</a></p>
 </li>
+<li>
+<p><a href="https://se-edu.github.io/se-book/cppToJava/exceptions/">se-edu/se-book: C++ to Java: Exceptions</a></p>
+</li>
 </ul>
 </div>
 </div>
@@ -164,10 +167,10 @@ in multiple <code>*Command</code> classes.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://se-edu.github.io/se-book/oopDesign/inheritance/">se-edu/se-book: Design: OOP: Inheritance</a></p>
+<p><a href="https://se-edu.github.io/se-book/oop/inheritance/">se-edu/se-book: Paradigms: OOP: Inheritance</a></p>
 </li>
 <li>
-<p><a href="https://se-edu.github.io/se-book/oopImplementation/inheritance/">se-edu/se-book: Implementation: OOP: Inheritance</a></p>
+<p><a href="https://se-edu.github.io/se-book/cppToJava/inheritance/">se-edu/se-book: C++ to Java: Inheritance</a></p>
 </li>
 </ul>
 </div>
@@ -269,7 +272,10 @@ e.g. <code>Main.VERSION</code>, <code>Name.EXAMPLE</code>, <code>Utils.isAnyNull
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://se-edu.github.io/se-book/oopDesign/classes/classLevelMembers/">se-edu/se-book: Design: OOP: Classes: Class-Level Members</a></p>
+<p><a href="https://se-edu.github.io/se-book/oop/classes/classLevelMembers/">se-edu/se-book: Paradigms: OOP: Classes: Class-Level Members</a></p>
+</li>
+<li>
+<p><a href="https://se-edu.github.io/se-book/cppToJava/classes/classLevelMembers/">se-edu/se-book: C++ to Java: Classes: Class-Level Members</a></p>
 </li>
 </ul>
 </div>
@@ -366,10 +372,7 @@ that indicates the order in which <code>Person</code> objects were created. e.g.
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://se-edu.github.io/se-book/oopDesign/associations/composition/">se-edu/se-book: Design: OOP: Associations: Composition</a></p>
-</li>
-<li>
-<p><a href="https://se-edu.github.io/se-book/oopImplementation/composition/">se-edu/se-book: Implementation: OOP: Composition</a></p>
+<p><a href="https://se-edu.github.io/se-book/oop/associations/composition/">se-edu/se-book: Paradigms: OOP: Associations: Composition</a></p>
 </li>
 </ul>
 </div>
@@ -388,10 +391,7 @@ that indicates the order in which <code>Person</code> objects were created. e.g.
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://se-edu.github.io/se-book/oopDesign/associations/associationClasses/">se-edu/se-book: Design: OOP: Associations: Association Classes</a></p>
-</li>
-<li>
-<p><a href="https://se-edu.github.io/se-book/oopImplementation/associationClasses/">se-edu/se-book: Implementation: OOP: Association Classes</a></p>
+<p><a href="https://se-edu.github.io/se-book/oop/associations/associationClasses/">se-edu/se-book: Paradigms: OOP: Associations: Association Classes</a></p>
 </li>
 </ul>
 </div>
@@ -482,7 +482,7 @@ the diagram would be like this:</p>
 Instructions are in the <a href="DeveloperGuide.html#junit-tests">Developer Guide</a>.</p>
 </li>
 <li>
-<p>Next, add a test to <a href="https://github.com/se-edu/addressbook-level2/tree/master/test/java/seedu/addressbook/common/UtilsTest.java"><code>test/seedu/addressbook/common/UtilsTest.java</code></a> to test the <a href="https://github.com/se-edu/addressbook-level2/tree/master/src/seedu/addressbook/common/Utils.java"><code>seedu.addressbook.common.Utils#isAnyNull(Object&#8230;&#8203;)</code></a> method.</p>
+<p>Next, add a test to <a href="https://github.com/se-edu/addressbook-level2/tree/master/test/java/seedu/addressbook/common/UtilsTest.java"><code>test/seedu/addressbook/common/UtilsTest.java</code></a> to test the <a href="https://github.com/se-edu/addressbook-level2/tree/master/src/seedu/addressbook/common/Utils.java#L15"><code>seedu.addressbook.common.Utils#isAnyNull(Object&#8230;&#8203;)</code></a> method.</p>
 </li>
 </ul>
 </div>
@@ -515,7 +515,7 @@ Instructions are in the <a href="DeveloperGuide.html#junit-tests">Developer Guid
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java"><span class="comment">/**
-  * Returns true of the other name is very similar to this name.
+  * Returns true if the other name is very similar to this name.
   * Two names are considered similar if ...
   */</span>
   <span class="directive">public</span> <span class="type">boolean</span> isSimilar(<span class="predefined-type">Name</span> other) { ... }</code></pre>
@@ -563,4 +563,4 @@ e.g. <code>John K Smith</code> <code>John K SMITh</code> <code>John Smith</code>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-08-11 06:15:17 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-08-14 03:28:38 UTC</div></div></div></body></html>
