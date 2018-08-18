@@ -11,8 +11,6 @@ public class HelpCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"
             + "Example: " + COMMAND_WORD;
 
-    public HelpCommand() {}
-
     @Override
     public CommandResult execute() {
         return new CommandResult(

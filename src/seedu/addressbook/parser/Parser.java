@@ -56,8 +56,6 @@ public class Parser {
      */
     public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
-    public Parser() {}
-
     /**
      * Parses user input into command for execution.
      *
