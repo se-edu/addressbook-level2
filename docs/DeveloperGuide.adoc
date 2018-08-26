@@ -64,7 +64,7 @@ the test has passed
 
 * In IntelliJ, right-click on the `test` folder and choose `Run 'All Tests'`
 
-=== Troubleshooting test failures
+=== Troubleshooting
 
 * Problem: How do I examine the exact differences between `actual.txt` and `expected.txt`? +
 Solution: You can use a diff/merge tool with a GUI e.g. WinMerge (on Windows).
@@ -76,3 +76,8 @@ OSes. Convert the actual.txt to the format used by your OS using some https://kb
 * Problem: Test fails during the very first time. +
 Solution: The output of the very first test run could be slightly different because the program
 creates a new storage file. Tests should pass from the 2nd run onwards.
+
+* Problem: `AddressBook` cannot be run, and `src/` is treated as a normal folder instead of as a `Sources Root`. +
+Solution: This can happen if you've accidentally imported the project as a Gradle project.
+First, disable `"Use auto-import"` in `Settings (Preferences)` > `Build...` > `Build Tools` > `Gradle`.
+Finally, right click on `src/` > `Mark Directory as` > `Sources Root`.
