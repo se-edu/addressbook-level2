@@ -87,7 +87,6 @@ public class Main {
             CommandResult result = executeCommand(command);
             recordResult(result);
             ui.showResultToUser(result);
-
         } while (!ExitCommand.isExit(command));
     }
 
@@ -105,12 +104,16 @@ public class Main {
      * @param command user command
      * @return result of the command
      */
-    private CommandResult executeCommand(Command command)  {
+    private CommandResult executeCommand(Command command) {
         try {
             command.setData(addressBook, lastShownList);
             CommandResult result = command.execute();
             storage.save(addressBook);
             return result;
+        } catch (StorageOperationException soe) {
+            ui.showToUser(soe.getMessage());
+            return new CommandResult("Error! The file cannot be overwritten. Please change the permissions\n"
+                    + "of the file and try again!\n");
         } catch (Exception e) {
             ui.showToUser(e.getMessage());
             throw new RuntimeException(e);
