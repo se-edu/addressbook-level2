@@ -38,25 +38,30 @@ public class UtilsTest {
 
     @Test
     public void isAnyNull() throws Exception {
-        // null value
-        assertAnyNull(null);
+        // empty
+        assertNotNull();
 
         // only one object
-        assertAnyNull(1);
-        assertAnyNull("");
-        assertAnyNull("abc");
+        assertNull((Object) null);
+        assertNotNull(1);
+        assertNotNull("");
+        assertNotNull("abc");
 
         // all null
-        assertAnyNull(null, null, null);
+        assertNull(null, null, null);
 
         // some null
-        assertAnyNull(1, null);
-        assertAnyNull("abc", null, "");
-        assertAnyNull(null, Integer.valueOf(1));
+        assertNull(1, null);
+        assertNull("abc", null, "");
+        assertNull(null, Integer.valueOf(1));
     }
 
-    private void assertAnyNull(Object... objects) {
+    private void assertNull(Object... objects) {
         assertTrue(Utils.isAnyNull(objects));
+    }
+
+    private void assertNotNull(Object... objects) {
+        assertFalse(Utils.isAnyNull(objects));
     }
 
     private void assertAreUnique(Object... objects) {
