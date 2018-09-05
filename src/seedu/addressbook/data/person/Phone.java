@@ -4,16 +4,13 @@ import seedu.addressbook.data.exception.IllegalValueException;
 
 /**
  * Represents a Person's phone number in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidContact(String)}
  */
-public class Phone {
+public class Phone extends Contact implements Printable{
 
     public static final String EXAMPLE = "123456789";
-    public static final String MESSAGE_PHONE_CONSTRAINTS = "Person phone numbers should only contain numbers";
-    public static final String PHONE_VALIDATION_REGEX = "\\d+";
-
-    public final String value;
-    private boolean isPrivate;
+    public static String MESSAGE_PHONE_CONSTRAINTS = "Person phone numbers should only contain numbers";
+    public static String PHONE_VALIDATION_REGEX = "\\d+";
 
     /**
      * Validates given phone number.
@@ -21,24 +18,18 @@ public class Phone {
      * @throws IllegalValueException if given phone string is invalid.
      */
     public Phone(String phone, boolean isPrivate) throws IllegalValueException {
-        this.isPrivate = isPrivate;
-        String trimmedPhone = phone.trim();
-        if (!isValidPhone(trimmedPhone)) {
+        super(phone, isPrivate);
+        if (!isValidContact(value)) {
             throw new IllegalValueException(MESSAGE_PHONE_CONSTRAINTS);
         }
-        this.value = trimmedPhone;
     }
 
     /**
      * Returns true if the given string is a valid person phone number.
      */
-    public static boolean isValidPhone(String test) {
-        return test.matches(PHONE_VALIDATION_REGEX);
-    }
-
     @Override
-    public String toString() {
-        return value;
+    public boolean isValidContact(String test) {
+        return test.matches(PHONE_VALIDATION_REGEX);
     }
 
     @Override
@@ -49,11 +40,7 @@ public class Phone {
     }
 
     @Override
-    public int hashCode() {
-        return value.hashCode();
-    }
-
-    public boolean isPrivate() {
-        return isPrivate;
+    public String getPrintableString() {
+        return "Phone: " + value;
     }
 }

@@ -9,7 +9,7 @@ import java.util.List;
  * Represents a Person's name in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
-public class Name {
+public class Name implements Printable{
 
     public static final String EXAMPLE = "John Doe";
     public static final String MESSAGE_NAME_CONSTRAINTS = "Person names should be spaces or alphabetic characters";
@@ -60,4 +60,20 @@ public class Name {
         return fullName.hashCode();
     }
 
+    @Override
+    public String getPrintableString() {
+        return "Name: " + fullName;
+    }
+
+    /**
+     * Returns true if the other name is very similar to this name.
+     * Two names are considered similar if ...  one name is a substring of the other name
+     */
+    public boolean isSimilar(Name other) {
+        if (other == null) {
+            return false;
+        }
+        return fullName.toLowerCase().contains(other.toString().toLowerCase()) ||
+                other.toString().toLowerCase().contains(fullName.toLowerCase());
+    }
 }

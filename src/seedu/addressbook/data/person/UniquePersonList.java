@@ -110,6 +110,9 @@ public class UniquePersonList implements Iterable<Person> {
         internalList.add(toAdd);
     }
 
+    public void sort() {
+        Collections.sort(internalList);
+    }
     /**
      * Removes the equivalent person from the list.
      *
@@ -140,4 +143,5 @@ public class UniquePersonList implements Iterable<Person> {
                 || (other instanceof UniquePersonList // instanceof handles nulls
                         && this.internalList.equals(((UniquePersonList) other).internalList));
     }
+
 }
