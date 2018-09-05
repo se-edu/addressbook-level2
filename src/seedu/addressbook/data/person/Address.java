@@ -2,11 +2,19 @@ package seedu.addressbook.data.person;
 
 import seedu.addressbook.data.exception.IllegalValueException;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Represents a Person's address in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
  */
 public class Address {
+
+    public Block block;
+    public PostalCode postalCode;
+    public Street street;
+    public Unit unit;
 
     public static final String EXAMPLE = "123, some street";
     public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses can be in any format";
@@ -22,6 +30,11 @@ public class Address {
      */
     public Address(String address, boolean isPrivate) throws IllegalValueException {
         String trimmedAddress = address.trim();
+        String[] addressParts = trimmedAddress.split(",\\s*");
+        block = new Block(addressParts[0]);
+        street = new Street(addressParts[1]);
+        unit = new Unit(addressParts[2]);
+        postalCode = new PostalCode(addressParts[3]);
         this.isPrivate = isPrivate;
         if (!isValidAddress(trimmedAddress)) {
             throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
@@ -56,4 +69,5 @@ public class Address {
     public boolean isPrivate() {
         return isPrivate;
     }
+
 }
