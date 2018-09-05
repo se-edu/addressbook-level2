@@ -60,4 +60,17 @@ public class Name {
         return fullName.hashCode();
     }
 
+    /**
+     * Returns true if the other name is very similar to this name.
+     * Two names are considered similar if ...
+     */
+    public boolean isSimilar(Name other) {
+        if(other == null) {
+            return false;
+        }
+
+        assert other.fullName.toLowerCase() != this.fullName.toLowerCase() : "Not similar";
+
+        return false;
+    }
 }

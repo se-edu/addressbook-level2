@@ -18,7 +18,7 @@ import seedu.addressbook.data.person.Person;
 import seedu.addressbook.data.person.Phone;
 import seedu.addressbook.data.person.ReadOnlyPerson;
 import seedu.addressbook.data.person.UniquePersonList.PersonNotFoundException;
-import seedu.addressbook.ui.TextUi;
+import seedu.addressbook.ui.Formatter;
 import seedu.addressbook.util.TestUtil;
 
 public class DeleteCommandTest {
@@ -109,7 +109,7 @@ public class DeleteCommandTest {
 
         CommandResult result = deleteCommand.execute();
 
-        assertEquals(expectedMessage, result.feedbackToUser);
+        assertEquals(expectedMessage, result.getFeedbackToUser());
         assertEquals(expectedAddressBook.getAllPersons(), actualAddressBook.getAllPersons());
     }
 
@@ -148,7 +148,7 @@ public class DeleteCommandTest {
     private void assertDeletionSuccessful(int targetVisibleIndex, AddressBook addressBook,
                                           List<ReadOnlyPerson> displayList) throws PersonNotFoundException {
 
-        ReadOnlyPerson targetPerson = displayList.get(targetVisibleIndex - TextUi.DISPLAYED_INDEX_OFFSET);
+        ReadOnlyPerson targetPerson = displayList.get(targetVisibleIndex - Formatter.DISPLAYED_INDEX_OFFSET);
 
         AddressBook expectedAddressBook = TestUtil.clone(addressBook);
         expectedAddressBook.removePerson(targetPerson);
