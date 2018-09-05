@@ -3,6 +3,9 @@ matrix:
   include:
     - jdk: oraclejdk9
 
+install:
+  - ./config/travis/download_gradle_wrapper.sh
+
 script:
   - (cd test && ./runtests.sh) # I/O tests
   - (./gradlew clean test) # JUnit tests
