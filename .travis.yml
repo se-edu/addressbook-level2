@@ -8,8 +8,8 @@ install:
 
 script:
   - (cd test && ./runtests.sh) # I/O tests
-  - (./gradlew clean test) # JUnit tests
-  - ./gradlew asciidoctor # Documentation
+  - ./gradlew -b build.gradle.txt clean test # JUnit tests
+  - ./gradlew -b build.gradle.txt asciidoctor # Documentation
 
 deploy:
   skip_cleanup: true

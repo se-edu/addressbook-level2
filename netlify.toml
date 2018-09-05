@@ -3,4 +3,4 @@
 
 [build]
   publish = "build/docs/html5"
-  command = "./config/travis/download_gradle_wrapper.sh && ./gradlew asciidoctor"
+  command = "./config/travis/download_gradle_wrapper.sh && ./gradlew -b build.gradle.txt asciidoctor"
