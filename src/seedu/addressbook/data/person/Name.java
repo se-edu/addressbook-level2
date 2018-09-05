@@ -64,4 +64,16 @@ public class Name implements Printable{
     public String getPrintableString() {
         return "Name: " + fullName;
     }
+
+    /**
+     * Returns true if the other name is very similar to this name.
+     * Two names are considered similar if ...  one name is a substring of the other name
+     */
+    public boolean isSimilar(Name other) {
+        if (other == null) {
+            return false;
+        }
+        return fullName.toLowerCase().contains(other.toString().toLowerCase()) ||
+                other.toString().toLowerCase().contains(fullName.toLowerCase());
+    }
 }
