@@ -1,0 +1,2 @@
+package seedu.addressbook.ui;public class Formatter{/** Format of a comment input line. Comment lines are silently consumed when reading user input. */
+    private static final java.lang.String COMMENT_LINE_FORMAT_REGEX = "#.*";}
