@@ -68,9 +68,9 @@ public class Name {
         if(other == null) {
             return false;
         }
-        if(other.fullName.toLowerCase() == this.fullName.toLowerCase()) {
-            return true;
-        }
+
+        assert other.fullName.toLowerCase() != this.fullName.toLowerCase() : "Not similar";
+
         return false;
     }
 }
