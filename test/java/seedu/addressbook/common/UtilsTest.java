@@ -10,6 +10,20 @@ import org.junit.Test;
 
 public class UtilsTest {
 
+    @Test
+    public void isAnyNull() throws Exception {
+        //empty list
+        assertNoNull();
+
+        //have objects
+        assertNoNull(1, 2);
+        assertNoNull("a", "ab", "abc");
+
+        //has null here and there
+        assertHasNull((Object) null);
+        assertHasNull(1, null, 3);
+        assertHasNull("a", "abc", null);
+    }
 
     @Test
     public void elementsAreUnique() throws Exception {
@@ -42,5 +56,13 @@ public class UtilsTest {
 
     private void assertNotUnique(Object... objects) {
         assertFalse(Utils.elementsAreUnique(Arrays.asList(objects)));
+    }
+
+    private void assertNoNull(Object... objects) {
+        assertFalse(Utils.isAnyNull(objects));
+    }
+
+    private void assertHasNull(Object... objects) {
+        assertTrue(Utils.isAnyNull(objects));
     }
 }
