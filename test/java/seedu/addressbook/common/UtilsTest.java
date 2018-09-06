@@ -10,11 +10,18 @@ import org.junit.Test;
 
 public class UtilsTest {
 
+    //test for PR
+    @Test
+    public void isAnyNull() throws Exception {
+        
+    }
 
     @Test
     public void elementsAreUnique() throws Exception {
         // empty list
         assertAreUnique();
+
+
 
         // only one object
         assertAreUnique((Object) null);
