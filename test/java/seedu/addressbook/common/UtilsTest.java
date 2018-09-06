@@ -2,6 +2,7 @@ package seedu.addressbook.common;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.junit.Assert.assertFalse;
@@ -50,5 +51,6 @@ public class UtilsTest {
         assertFalse(Utils.isAnyNull(1,2,3,4));
         assertTrue(Utils.isAnyNull(new int[3], null));
         assertTrue(Utils.isAnyNull(a));
+        assertFalse(Utils.isAnyNull(0, false, new ArrayList<>()));
     }
 }
