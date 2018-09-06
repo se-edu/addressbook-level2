@@ -9,14 +9,12 @@ public class ClearCommand extends Command {
     public static final String MESSAGE_USAGE = "Clears address book permanently.\n"
             + "Example: " + COMMAND_WORD;
 
-    public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
+    public static final String MESSAGE_CONFIRM = "Are you sure you want to clear the Address book? Enter yes or no.";
 
     public ClearCommand() {}
 
-
     @Override
     public CommandResult execute() {
-        addressBook.clear();
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_CONFIRM);
     }
 }
