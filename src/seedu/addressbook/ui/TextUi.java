@@ -41,6 +41,7 @@ public class TextUi {
 
     private final Scanner in;
     private final PrintStream out;
+    private final Formatter formatter = new Formatter();
 
     public TextUi() {
         this(System.in, System.out);
@@ -79,7 +80,8 @@ public class TextUi {
      * @return command (full line) entered by the user
      */
     public String getUserCommand() {
-        out.print(LINE_PREFIX + "Enter command: ");
+
+        out.print(formatter.formatEnterCommandPrompt("Enter command: "));
         String fullInputLine = in.nextLine();
 
         // silently consume all ignored lines
@@ -87,21 +89,14 @@ public class TextUi {
             fullInputLine = in.nextLine();
         }
 
-        showToUser("[Command entered:" + fullInputLine + "]");
+        showToUser(formatter.formatEnterCommandResponse(fullInputLine));
         return fullInputLine;
     }
 
 
     public void showWelcomeMessage(String version, String storageFilePath) {
         String storageFileInfo = String.format(MESSAGE_USING_STORAGE_FILE, storageFilePath);
-        showToUser(
-                DIVIDER,
-                DIVIDER,
-                MESSAGE_WELCOME,
-                version,
-                MESSAGE_PROGRAM_LAUNCH_ARGS_USAGE,
-                storageFileInfo,
-                DIVIDER);
+        showToUser(formatter.formatWelcomeMessage(version, storageFileInfo));
     }
 
     public void showGoodbyeMessage() {
@@ -115,10 +110,11 @@ public class TextUi {
 
     /** Shows message(s) to the user */
     public void showToUser(String... message) {
-        for (String m : message) {
-            out.println(LINE_PREFIX + m.replace("\n", LS + LINE_PREFIX));
-        }
+        final String stringChain = formatter.formatFragments(message);
+        showToUser(stringChain);
     }
+    /** Shows message to the user */
+    public void showToUser(String message) { out.print(message); }
 
     /**
      * Shows the result of a command execution to the user. Includes additional formatting to demarcate different
