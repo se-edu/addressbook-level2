@@ -2,10 +2,6 @@ package seedu.addressbook.ui;
 
 import java.util.List;
 
-import static seedu.addressbook.common.Messages.MESSAGE_GOODBYE;
-import static seedu.addressbook.common.Messages.MESSAGE_PROGRAM_LAUNCH_ARGS_USAGE;
-import static seedu.addressbook.common.Messages.MESSAGE_WELCOME;
-
 public class Formatter {
     /** A decorative prefix added to the beginning of lines printed by AddressBook */
     private static final String LINE_PREFIX = "|| ";
@@ -18,8 +14,6 @@ public class Formatter {
     /** Format of indexed list item */
     private static final String MESSAGE_INDEXED_LIST_ITEM = "\t%1$d. %2$s";
 
-    /** Offset required to convert between 1-indexing and 0-indexing.  */
-    public static final int DISPLAYED_INDEX_OFFSET = 1;
 
     public String formatFragments(String... message) {
         String stringChain = "";
@@ -38,13 +32,16 @@ public class Formatter {
         return enteredCommandResponse;
     }
 
-    public String formatWelcomeMessage(String version, String storageFileInfo) {
+    public String formatWelcomeMessage(String welcomeMessage,
+                                       String version,
+                                       String storageFileInfo,
+                                       String launchArgumentMessage) {
         return formatFragments(
                 DIVIDER,
                 DIVIDER,
-                MESSAGE_WELCOME,
+                welcomeMessage,
                 version,
-                MESSAGE_PROGRAM_LAUNCH_ARGS_USAGE,
+                launchArgumentMessage,
                 storageFileInfo,
                 DIVIDER);
     }
@@ -61,7 +58,7 @@ public class Formatter {
     /** Formats a list of strings as a viewable indexed list. */
     public static String formatIndexList(List<String> listItems) {
         final StringBuilder formatted = new StringBuilder();
-        int displayIndex = 0 + DISPLAYED_INDEX_OFFSET;
+        int displayIndex = 0 + TextUi.DISPLAYED_INDEX_OFFSET;
         for (String listItem : listItems) {
             formatted.append(getIndexedListItem(displayIndex, listItem)).append("\n");
             displayIndex++;
@@ -76,5 +73,9 @@ public class Formatter {
      */
     public static String getIndexedListItem(int visibleIndex, String listItem) {
         return String.format(MESSAGE_INDEXED_LIST_ITEM, visibleIndex, listItem);
+    }
+
+    public String formatInitFailed(String message) {
+        return formatFragments(message, DIVIDER, DIVIDER);
     }
 }
