@@ -46,9 +46,21 @@ public class UtilsTest {
 
     @Test
     public void isAnyNull() {
-        assertNoNull(1, Integer.valueOf(1));
+        // empty list
+        assertNoNull();
+
+        // 1 object
+        assertIsAnyNull((Object) null);
+        assertNoNull(1);
+        assertNoNull("");
+        assertNoNull("abc");
+
+        // multiple objects
+        assertNoNull("abc", "abc");
+        assertNoNull("abc", "", 1.214, 64);
         assertIsAnyNull(null, 1, Integer.valueOf(1));
-        assertIsAnyNull(null, "a", "b", null);
+        assertIsAnyNull(null, null);
+        assertIsAnyNull(null, "a", 1.53, null);
     }
 
     private void assertIsAnyNull(Object... objects) {
