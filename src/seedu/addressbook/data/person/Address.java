@@ -18,18 +18,6 @@ public class Address extends Contact{
      * @throws IllegalValueException if given address string is invalid.
      */
     public Address(String address, boolean isPrivate) throws IllegalValueException {
-        String trimmedAddress = address.trim();
-        if (!isValidAddress(trimmedAddress)) {
-            throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
-        }
-        setProperties(trimmedAddress, isPrivate);
+        super(address, isPrivate, ADDRESS_VALIDATION_REGEX, MESSAGE_ADDRESS_CONSTRAINTS);
     }
-
-    /**
-     * Returns true if a given string is a valid person address.
-     */
-    public static boolean isValidAddress(String test) {
-        return test.matches(ADDRESS_VALIDATION_REGEX);
-    }
-
 }

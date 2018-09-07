@@ -13,22 +13,11 @@ public class Phone extends Contact{
     public static final String PHONE_VALIDATION_REGEX = "\\d+";
 
     /**
-     * Validates given phone number.
+     * Validates given email.
      *
      * @throws IllegalValueException if given phone string is invalid.
      */
     public Phone(String phone, boolean isPrivate) throws IllegalValueException {
-        String trimmedPhone = phone.trim();
-        if (!isValidPhone(trimmedPhone)) {
-            throw new IllegalValueException(MESSAGE_PHONE_CONSTRAINTS);
-        }
-        setProperties(trimmedPhone, isPrivate);
-    }
-
-    /**
-     * Returns true if the given string is a valid person phone number.
-     */
-    public static boolean isValidPhone(String test) {
-        return test.matches(PHONE_VALIDATION_REGEX);
+        super(phone, isPrivate, PHONE_VALIDATION_REGEX, MESSAGE_PHONE_CONSTRAINTS);
     }
 }
