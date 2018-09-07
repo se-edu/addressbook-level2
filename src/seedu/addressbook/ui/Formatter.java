@@ -47,4 +47,8 @@ public class Formatter {
     public String formatGoodbyeMessage(String message) {
         return formatFragments(message, DIVIDER, DIVIDER);
     }
+
+    public String formatResult(String feedbackToUser) {
+        return formatFragments(feedbackToUser, DIVIDER);
+    }
 }
