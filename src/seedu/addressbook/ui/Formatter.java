@@ -47,8 +47,7 @@ public class Formatter {
     }
 
     public String formatEnterCommandResponse(String enteredCommandResponse){
-        enteredCommandResponse = "[Command entered:" + enteredCommandResponse + "]" + LS;
-        return enteredCommandResponse;
+        return enteredCommandResponse + "[Command entered:" + enteredCommandResponse + "]" + LS;;
     }
 
     public String formatResult(String feedbackToUser) {
