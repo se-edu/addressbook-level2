@@ -9,6 +9,7 @@ public class Formatter {
     /** A platform independent line separator. */
     private static final String LS = System.lineSeparator();
 
+    /** A decorative divider to divide lines of output*/
     private static final String DIVIDER = "===================================================";
 
     /** Format of indexed list item */
@@ -23,13 +24,8 @@ public class Formatter {
         return stringChain;
     }
 
-    public String formatEnterCommandPrompt(String enterCommandPrompt) {
-        return LINE_PREFIX + enterCommandPrompt;
-    }
-
-    public String formatEnterCommandResponse(String enteredCommandResponse){
-        enteredCommandResponse = "[Command entered:" + enteredCommandResponse + "]" + LS;
-        return enteredCommandResponse;
+    public String formatInitFailed(String message) {
+        return formatFragments(message, DIVIDER, DIVIDER);
     }
 
     public String formatWelcomeMessage(String welcomeMessage,
@@ -46,14 +42,22 @@ public class Formatter {
                 DIVIDER);
     }
 
-    public String formatGoodbyeMessage(String message) {
-        return formatFragments(message, DIVIDER, DIVIDER);
+    public String formatEnterCommandPrompt(String enterCommandPrompt) {
+        return LINE_PREFIX + enterCommandPrompt;
+    }
+
+    public String formatEnterCommandResponse(String enteredCommandResponse){
+        enteredCommandResponse = "[Command entered:" + enteredCommandResponse + "]" + LS;
+        return enteredCommandResponse;
     }
 
     public String formatResult(String feedbackToUser) {
         return formatFragments(feedbackToUser, DIVIDER);
     }
 
+    public String formatGoodbyeMessage(String message) {
+        return formatFragments(message, DIVIDER, DIVIDER);
+    }
 
     /** Formats a list of strings as a viewable indexed list. */
     public static String formatIndexList(List<String> listItems) {
@@ -73,9 +77,5 @@ public class Formatter {
      */
     public static String getIndexedListItem(int visibleIndex, String listItem) {
         return String.format(MESSAGE_INDEXED_LIST_ITEM, visibleIndex, listItem);
-    }
-
-    public String formatInitFailed(String message) {
-        return formatFragments(message, DIVIDER, DIVIDER);
     }
 }

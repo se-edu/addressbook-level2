@@ -98,12 +98,7 @@ public class TextUi {
     public void showInitFailedMessage() {
         showToUser(formatter.formatInitFailed(MESSAGE_INIT_FAILED));
     }
-
-    /** Shows message(s) to the user */
-    public void showToUser(String... message) {
-        final String stringChain = formatter.formatFragments(message);
-        showToUser(stringChain);
-    }
+    
     /** Shows message to the user */
     public void showToUser(String message) { out.print(message); }
 
