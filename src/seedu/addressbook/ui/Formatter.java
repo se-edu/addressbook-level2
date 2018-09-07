@@ -1,5 +1,6 @@
 package seedu.addressbook.ui;
 
+import static seedu.addressbook.common.Messages.MESSAGE_GOODBYE;
 import static seedu.addressbook.common.Messages.MESSAGE_PROGRAM_LAUNCH_ARGS_USAGE;
 import static seedu.addressbook.common.Messages.MESSAGE_WELCOME;
 
@@ -41,5 +42,9 @@ public class Formatter {
                 MESSAGE_PROGRAM_LAUNCH_ARGS_USAGE,
                 storageFileInfo,
                 DIVIDER);
+    }
+
+    public String formatGoodbyeMessage(String message) {
+        return formatFragments(message, DIVIDER, DIVIDER);
     }
 }
