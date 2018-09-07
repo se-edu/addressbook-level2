@@ -33,7 +33,7 @@
 . Observe how some tests fail. That is because they try to access the test data from the wrong directory (the working directory is expected to be the root directory, but IntelliJ runs the test with `test\` as the working directory by default). To fix this issue:
 .. Go to `Run` -> `Edit Configurations...`
 .. On the list at the left, expand `JUnit`, and remove all the test configurations (e.g. `All in test`) by selecting it and clicking on the '-' icon at the top of the list
-.. Expand `Templates` or ('Defaults' for version before 2018.2), and ensure that `JUnit` is selected
+.. Expand `Templates` or (` Defaults`  for version before 2018.2), and ensure that `JUnit` is selected
 .. Under `Configuration`, change the `Working directory` to the `addressbook-level2` folder
 .. Click `OK`
 . Run the tests again to ensure they all pass now
