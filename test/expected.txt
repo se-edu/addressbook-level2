@@ -9,6 +9,9 @@
 || add: Adds a person to the address book. Contact details can be marked private by prepending 'p' to the prefix.
 || Parameters: NAME [p]p/PHONE [p]e/EMAIL [p]a/ADDRESS  [t/TAG]...
 || Example: add John Doe p/98765432 e/johnd@gmail.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney
+|| edit: Edits the person identified by the index number used in the last person listing.
+|| Parameters: INDEX NAME [p]p/PHONE [p]e/EMAIL [p]a/ADDRESS [t/TAG]...
+|| Example: edit 1 n/Kristo p/1231818 e/kristo@mail.com a/Singapore t/friends
 || delete: Deletes the person identified by the index number used in the last person listing.
 || Parameters: INDEX
 || Example: delete 1
@@ -289,6 +292,90 @@
 || 	2. Dickson Ee Phone: 444444 Address: 444, delta street Tags: [friends]
 || 
 || 2 persons listed!
+|| ===================================================
+|| Enter command: || [Command entered:  edit wrong args wrong args]
+|| Invalid command format! 
+|| edit: Edits the person identified by the index number used in the last person listing.
+|| Parameters: INDEX NAME [p]p/PHONE [p]e/EMAIL [p]a/ADDRESS [t/TAG]...
+|| Example: edit 1 n/Kristo p/1231818 e/kristo@mail.com a/Singapore t/friends
+|| ===================================================
+|| Enter command: || [Command entered:  edit Invalid Name p/12345 e/valid@email.butNoPhonePrefix a/valid, address]
+|| Invalid command format! 
+|| edit: Edits the person identified by the index number used in the last person listing.
+|| Parameters: INDEX NAME [p]p/PHONE [p]e/EMAIL [p]a/ADDRESS [t/TAG]...
+|| Example: edit 1 n/Kristo p/1231818 e/kristo@mail.com a/Singapore t/friends
+|| ===================================================
+|| Enter command: || [Command entered:  edit n/Valid Name 12345 e/valid@email.butNoPhonePrefix a/valid, address]
+|| Invalid command format! 
+|| edit: Edits the person identified by the index number used in the last person listing.
+|| Parameters: INDEX NAME [p]p/PHONE [p]e/EMAIL [p]a/ADDRESS [t/TAG]...
+|| Example: edit 1 n/Kristo p/1231818 e/kristo@mail.com a/Singapore t/friends
+|| ===================================================
+|| Enter command: || [Command entered:  edit n/Valid Name p/12345 valid@email.butNoPrefix a/valid, address]
+|| Invalid command format! 
+|| edit: Edits the person identified by the index number used in the last person listing.
+|| Parameters: INDEX NAME [p]p/PHONE [p]e/EMAIL [p]a/ADDRESS [t/TAG]...
+|| Example: edit 1 n/Kristo p/1231818 e/kristo@mail.com a/Singapore t/friends
+|| ===================================================
+|| Enter command: || [Command entered:  edit n/Valid Name p/12345 e/valid@email.butNoAddressPrefix valid, address]
+|| Invalid command format! 
+|| edit: Edits the person identified by the index number used in the last person listing.
+|| Parameters: INDEX NAME [p]p/PHONE [p]e/EMAIL [p]a/ADDRESS [t/TAG]...
+|| Example: edit 1 n/Kristo p/1231818 e/kristo@mail.com a/Singapore t/friends
+|| ===================================================
+|| Enter command: || [Command entered:  edit n/Valid Name p/12345 e/valid@email.butNoTagPrefix a/valid, address t/goodTag noPrefixTag]
+|| Invalid command format! 
+|| edit: Edits the person identified by the index number used in the last person listing.
+|| Parameters: INDEX NAME [p]p/PHONE [p]e/EMAIL [p]a/ADDRESS [t/TAG]...
+|| Example: edit 1 n/Kristo p/1231818 e/kristo@mail.com a/Singapore t/friends
+|| ===================================================
+|| Enter command: || [Command entered:  edit -1 n/Valid Name p/12345 e/valid@email.com a/valid, address t/goodTag]
+|| The person index provided is invalid
+|| ===================================================
+|| Enter command: || [Command entered:  edit 0 n/Valid Name p/12345 e/valid@email.com a/valid, address t/goodTag]
+|| The person index provided is invalid
+|| ===================================================
+|| Enter command: || [Command entered:  edit 3 n/Valid Name p/12345 e/valid@email.com a/valid, address t/goodTag]
+|| The person index provided is invalid
+|| ===================================================
+|| Enter command: || [Command entered:  edit 1 n/Betsy Choo p/333333 e/benchoochoo@nus.edu.sg a/333, omega street t/secretive t/foes]
+|| Edited Person: Betsy Choo Phone: 333333 Email: benchoochoo@nus.edu.sg Address: 333, omega street Tags: [secretive][foes]
+|| ===================================================
+|| Enter command: || [Command entered:  list]
+|| 	1. Dickson Ee Phone: 444444 Address: 444, delta street Tags: [friends]
+|| 	2. Betsy Choo Phone: 333333 Email: benchoochoo@nus.edu.sg Address: 333, omega street Tags: [secretive][foes]
+|| 
+|| 2 persons listed!
+|| ===================================================
+|| Enter command: || [Command entered:  edit 2 n/Betsy Choo pp/333333 e/benchoochoo@nus.edu.sg a/333, omega street t/secretive t/foes]
+|| Edited Person: Betsy Choo Phone: (private) 333333 Email: benchoochoo@nus.edu.sg Address: 333, omega street Tags: [secretive][foes]
+|| ===================================================
+|| Enter command: || [Command entered:  list]
+|| 	1. Dickson Ee Phone: 444444 Address: 444, delta street Tags: [friends]
+|| 	2. Betsy Choo Email: benchoochoo@nus.edu.sg Address: 333, omega street Tags: [secretive][foes]
+|| 
+|| 2 persons listed!
+|| ===================================================
+|| Enter command: || [Command entered:  edit 2 n/Betsy Choo p/333333 pe/benchoochoo@nus.edu.sg a/333, omega street t/secretive t/foes]
+|| Edited Person: Betsy Choo Phone: 333333 Email: (private) benchoochoo@nus.edu.sg Address: 333, omega street Tags: [secretive][foes]
+|| ===================================================
+|| Enter command: || [Command entered:  list]
+|| 	1. Dickson Ee Phone: 444444 Address: 444, delta street Tags: [friends]
+|| 	2. Betsy Choo Phone: 333333 Address: 333, omega street Tags: [secretive][foes]
+|| 
+|| 2 persons listed!
+|| ===================================================
+|| Enter command: || [Command entered:  edit 2 n/Betsy Choo p/333333 e/benchoochoo@nus.edu.sg pa/333, omega street t/secretive t/foes]
+|| Edited Person: Betsy Choo Phone: 333333 Email: benchoochoo@nus.edu.sg Address: (private) 333, omega street Tags: [secretive][foes]
+|| ===================================================
+|| Enter command: || [Command entered:  list]
+|| 	1. Dickson Ee Phone: 444444 Address: 444, delta street Tags: [friends]
+|| 	2. Betsy Choo Phone: 333333 Email: benchoochoo@nus.edu.sg Tags: [secretive][foes]
+|| 
+|| 2 persons listed!
+|| ===================================================
+|| Enter command: || [Command entered:  edit 1 n/Betsy Choo p/333333 e/benchoochoo@nus.edu.sg pa/333, omega street t/secretive t/foes]
+|| This person already exists in the address book
 || ===================================================
 || Enter command: || [Command entered:  clear]
 || Address book has been cleared!
