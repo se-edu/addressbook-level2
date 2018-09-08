@@ -18,7 +18,6 @@ public class SortCommandTest {
     private AddressBook addressBook;
 
     private List<ReadOnlyPerson> unsortedListWithEveryone;
-    private List<ReadOnlyPerson> listWithSurnameDoe;
 
     @Before
     public void setUp() throws Exception {
@@ -50,7 +49,7 @@ public class SortCommandTest {
                                                       List<ReadOnlyPerson> unsortedListWithEveryone) throws UniquePersonList.DuplicatePersonException {
 
         SortCommand command = createSortCommand(addressBook, unsortedListWithEveryone);
-        assertCommandBehaviour(command, sortedAddressBook, addressBook);
+        assertCommandBehaviour(command, sortedAddressBook);
     }
 
     /**
@@ -65,12 +64,11 @@ public class SortCommandTest {
         return command;
     }
 
-
     /**
      * Executes the command, and checks that the execution was what we had expected.
      */
     private void assertCommandBehaviour(SortCommand sortCommand,
-                                        AddressBook expectedAddressBook, AddressBook actualAddressBook) throws UniquePersonList.DuplicatePersonException {
+                                        AddressBook expectedAddressBook) throws UniquePersonList.DuplicatePersonException {
 
         CommandResult result = sortCommand.execute();
         assertEquals(Optional.of(expectedAddressBook.getAllPersons().immutableListView()), result.getRelevantPersons());
