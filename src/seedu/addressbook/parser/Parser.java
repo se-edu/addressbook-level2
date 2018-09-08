@@ -43,7 +43,8 @@ public class Parser {
                     + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
 
     public static final Pattern PERSON_DATA_EDIT_ARGS_FORMAT =
-            Pattern.compile("(?<targetIndex>.+)"
+            Pattern.compile("(?<targetVisibleIndex>.+)"
+                    + " (?<name>[^/]+)"
                     + " (?<isPhonePrivate>p?)p/(?<phone>[^/]+)"
                     + " (?<isEmailPrivate>p?)e/(?<email>[^/]+)"
                     + " (?<isAddressPrivate>p?)a/(?<address>[^/]+)"
@@ -186,7 +187,7 @@ public class Parser {
             return new EditCommand(
                     matcher.group("targetVisibleIndex"),
 
-                    matcher.group("index"),
+                    matcher.group("name"),
 
                     matcher.group("phone"),
                     isPrivatePrefixPresent(matcher.group("isPhonePrivate")),

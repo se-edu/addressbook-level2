@@ -27,3 +27,6 @@ test/localrun.bat
 # Gradle build files
 .gradle/
 build/
+
+# out folder
+.out/
