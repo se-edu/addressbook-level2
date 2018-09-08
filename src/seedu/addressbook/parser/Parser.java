@@ -42,6 +42,13 @@ public class Parser {
                     + " (?<isAddressPrivate>p?)a/(?<address>[^/]+)"
                     + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
 
+    public static final Pattern PERSON_DATA_EDIT_ARGS_FORMAT =
+            Pattern.compile("(?<targetIndex>.+)"
+                    + " (?<isPhonePrivate>p?)p/(?<phone>[^/]+)"
+                    + " (?<isEmailPrivate>p?)e/(?<email>[^/]+)"
+                    + " (?<isAddressPrivate>p?)a/(?<address>[^/]+)"
+                    + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
+
 
     /**
      * Signals that the user input could not be parsed.
@@ -170,14 +177,16 @@ public class Parser {
      */
     private Command prepareEdit(String args) {
 
-        final Matcher matcher = PERSON_DATA_ARGS_FORMAT.matcher(args.trim());
+        final Matcher matcher = PERSON_DATA_EDIT_ARGS_FORMAT.matcher(args.trim());
         // Validate arg string format
         if (!matcher.matches()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
         try {
             return new EditCommand(
-                    matcher.group("name"),
+                    matcher.group("targetVisibleIndex"),
+
+                    matcher.group("index"),
 
                     matcher.group("phone"),
                     isPrivatePrefixPresent(matcher.group("isPhonePrivate")),
