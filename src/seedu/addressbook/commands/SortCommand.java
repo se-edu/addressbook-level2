@@ -18,7 +18,8 @@ public class SortCommand extends Command{
             + "Example: " + COMMAND_WORD;
 
 
-    public CommandResult execute() throws UniquePersonList.DuplicatePersonException {
+   public CommandResult execute() throws UniquePersonList.DuplicatePersonException {
+
         UniquePersonList allPersons = addressBook.getAllPersons();
         List<Person> everyPerson = allPersons.getInternalList();
 
@@ -30,7 +31,6 @@ public class SortCommand extends Command{
             }
 
         });
-
         //Create a new UniquePersonList from the List<Person> collection
         //Then convert the UniquePersonList into List<ReadOnlyPerson>
         UniquePersonList newPersons = new UniquePersonList(everyPerson);

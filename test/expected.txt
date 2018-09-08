@@ -29,6 +29,8 @@
 || Example: help
 || exit: Exits the program.
 || Example: exit
+|| Sort: Displays all persons in the address book as a sorted list with index numbers.
+|| Example: sort
 || ===================================================
 || Enter command: || [Command entered:  delete 1]
 || The person index provided is invalid
@@ -43,7 +45,7 @@
 || Address book has been cleared!
 || ===================================================
 || Enter command: || [Command entered:  list]
-|| 
+||
 || 0 persons listed!
 || ===================================================
 || Enter command: || [Command entered:  add wrong args wrong args]
