@@ -83,7 +83,7 @@ public class Main {
         Command command;
         do {
             String userCommandText = ui.getUserCommand();
-            command = new Parser().parseCommand(userCommandText);
+            command = new Parser().parseCommand(userCommandText); //After parse, create commands object
             CommandResult result = executeCommand(command);
             recordResult(result);
             ui.showResultToUser(result);
@@ -108,7 +108,7 @@ public class Main {
     private CommandResult executeCommand(Command command)  {
         try {
             command.setData(addressBook, lastShownList);
-            CommandResult result = command.execute();
+            CommandResult result = command.execute(); //start work
             storage.save(addressBook);
             return result;
 
