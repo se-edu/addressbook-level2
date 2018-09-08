@@ -1,9 +1,5 @@
 package seedu.addressbook;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-
 import seedu.addressbook.commands.Command;
 import seedu.addressbook.commands.CommandResult;
 import seedu.addressbook.commands.ExitCommand;
@@ -14,6 +10,10 @@ import seedu.addressbook.storage.StorageFile;
 import seedu.addressbook.storage.StorageFile.InvalidStorageFilePathException;
 import seedu.addressbook.storage.StorageFile.StorageOperationException;
 import seedu.addressbook.ui.TextUi;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
 
 /**
@@ -83,7 +83,7 @@ public class Main {
         Command command;
         do {
             String userCommandText = ui.getUserCommand();
-            command = new Parser().parseCommand(userCommandText);
+            command = new Parser().parseCommand(userCommandText); //After parse, create commands object
             CommandResult result = executeCommand(command);
             recordResult(result);
             ui.showResultToUser(result);
@@ -108,10 +108,17 @@ public class Main {
     private CommandResult executeCommand(Command command)  {
         try {
             command.setData(addressBook, lastShownList);
-            CommandResult result = command.execute();
+            CommandResult result = command.execute(); //start work
             storage.save(addressBook);
             return result;
-        } catch (Exception e) {
+
+        //Added this to print a error message where the user accidentally makes the storage file read only
+        //Remember to change the AddressBook.txt from file explorer to read-only in order
+        //to test for this message.
+        }catch (StorageOperationException e) {
+            ui.showToUser(e.getMessage());
+            return new CommandResult("The file is in readonly mode. Please change it!\n");
+        }catch (Exception e) {
             ui.showToUser(e.getMessage());
             throw new RuntimeException(e);
         }

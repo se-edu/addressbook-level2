@@ -161,6 +161,11 @@ Format: `clear`
 Exits the program. +
 Format: `exit`
 
+== Sorting the program : `sort`
+
+sorts the addressbook and display the sorted addressbook. +
+Format: `sort`
+
 == Saving the data
 
 Address book data are saved in the hard disk automatically after any command that changes the data.
