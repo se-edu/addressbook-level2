@@ -88,9 +88,7 @@ public class Parser {
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
-        //added this to test the limit list
-        case LimitListCommand.COMMAND_WORD:
-            return new LimitListCommand();
+
 
         case HelpCommand.COMMAND_WORD: // Fallthrough
         default:
