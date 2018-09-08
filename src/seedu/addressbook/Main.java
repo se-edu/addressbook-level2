@@ -62,8 +62,6 @@ public class Main {
             }
         }
     }
-
-
     /**
      * Sets up the required objects, loads up the data from the storage file, and prints the welcome message.
      *
