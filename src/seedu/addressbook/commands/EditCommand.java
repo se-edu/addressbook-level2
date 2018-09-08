@@ -19,7 +19,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Edits the person identified by the index number used in the last person listing.\n"
             + "Parameters: INDEX NAME [p]p/PHONE [p]e/EMAIL [p]a/ADDRESS [t/TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 Kristo p/123456";
+            + "Example: " + COMMAND_WORD + " 1 n/Kristo p/1231818 e/kristo@mail.com a/Singapore t/friends";
 
     private static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     private static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
