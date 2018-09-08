@@ -3,7 +3,7 @@ package seedu.addressbook.data.person;
 import seedu.addressbook.data.exception.IllegalValueException;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * Represents a Person's name in the address book.
@@ -37,10 +37,10 @@ public class Name {
     }
 
     /**
-     * Retrieves a listing of every word in the name, in order.
+     * Retrieves a listing of every word in the name, in order, in lower case.
      */
     public List<String> getWordsInName() {
-        return Arrays.asList(fullName.split("\\s+"));
+        return Arrays.asList(fullName.toLowerCase().split("\\s+"));
     }
 
     @Override
