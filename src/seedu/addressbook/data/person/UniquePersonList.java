@@ -1,14 +1,9 @@
 package seedu.addressbook.data.person;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-
 import seedu.addressbook.common.Utils;
 import seedu.addressbook.data.exception.DuplicateDataException;
+
+import java.util.*;
 
 
 
@@ -127,6 +122,13 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public void clear() {
         internalList.clear();
+    }
+
+    /*
+     * Gets the internalList. Added for wk 5 LOA
+     */
+    public List<Person> getInternalList(){
+        return this.internalList;
     }
 
     @Override
