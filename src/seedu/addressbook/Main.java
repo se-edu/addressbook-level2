@@ -29,9 +29,6 @@ public class Main {
     private StorageFile storage;
     private AddressBook addressBook;
 
-    //created a new test variable
-    int a=1;
-    int b=2;
     /** The list of person shown to the user most recently.  */
     private List<? extends ReadOnlyPerson> lastShownList = Collections.emptyList();
 
