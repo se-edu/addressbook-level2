@@ -1,8 +1,5 @@
 package seedu.addressbook.commands;
 
-import seedu.addressbook.data.exception.IllegalValueException;
-import seedu.addressbook.data.person.*;
-
 public class SortCommand extends Command {
   public static final String COMMAND_WORD = "sort";
 
