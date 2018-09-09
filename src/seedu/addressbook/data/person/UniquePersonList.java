@@ -10,6 +10,7 @@ import java.util.List;
 import seedu.addressbook.common.Utils;
 import seedu.addressbook.data.exception.DuplicateDataException;
 
+import static seedu.addressbook.ui.TextUi.DISPLAYED_INDEX_OFFSET;
 
 
 /**
@@ -118,7 +119,7 @@ public class UniquePersonList implements Iterable<Person> {
      * @throws IndexOutOfBoundsException if the index invalid according to the bounds
      * */
     public void set(int index, Person toSet) throws IndexOutOfBoundsException {
-        internalList.set(index, toSet);
+        internalList.set(index - DISPLAYED_INDEX_OFFSET, toSet);
     }
 
     /**

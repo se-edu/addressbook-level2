@@ -6,6 +6,8 @@ import seedu.addressbook.data.person.UniquePersonList;
 import seedu.addressbook.data.person.UniquePersonList.DuplicatePersonException;
 import seedu.addressbook.data.person.UniquePersonList.PersonNotFoundException;
 
+import static seedu.addressbook.ui.TextUi.DISPLAYED_INDEX_OFFSET;
+
 /**
  * Represents the entire address book. Contains the data of the address book.
  */
@@ -46,7 +48,7 @@ public class AddressBook {
      * @throws IndexOutOfBoundsException if the index invalid according to the bounds
      * */
     public void setPerson(int index, Person toSet) throws IndexOutOfBoundsException {
-        allPersons.set(index, toSet);
+        allPersons.set(index - DISPLAYED_INDEX_OFFSET, toSet);
     }
 
     /**
