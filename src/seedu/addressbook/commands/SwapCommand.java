@@ -28,10 +28,10 @@ public class SwapCommand extends Command{
      *
      * */
     public void swap(){
-        ReadOnlyPerson person1 = getTargetPerson(targetIndex1);
-        ReadOnlyPerson person2 = getTargetPerson(targetIndex2);
-        addressBook.setPerson(targetIndex1, (Person) person2);
-        addressBook.setPerson(targetIndex2, (Person) person1);
+        Person person1 = addressBook.getPerson(targetIndex1);
+        Person person2 = addressBook.getPerson(targetIndex2);
+        addressBook.setPerson(targetIndex1, person2);
+        addressBook.setPerson(targetIndex2, person1);
     }
 
     @Override

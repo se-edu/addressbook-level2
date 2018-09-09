@@ -111,6 +111,10 @@ public class UniquePersonList implements Iterable<Person> {
         internalList.add(toAdd);
     }
 
+    public Person get(int index){
+        return internalList.get(index - DISPLAYED_INDEX_OFFSET);
+    }
+
     /**
      * Set the index to another person.
      *

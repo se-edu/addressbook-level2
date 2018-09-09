@@ -40,6 +40,10 @@ public class AddressBook {
         allPersons.add(toAdd);
     }
 
+    public Person getPerson(int index) throws IndexOutOfBoundsException {
+        return allPersons.get(index);
+    }
+
     /**
      * Set the index to another person.
      *
@@ -48,7 +52,7 @@ public class AddressBook {
      * @throws IndexOutOfBoundsException if the index invalid according to the bounds
      * */
     public void setPerson(int index, Person toSet) throws IndexOutOfBoundsException {
-        allPersons.set(index - DISPLAYED_INDEX_OFFSET, toSet);
+        allPersons.set(index, toSet);
     }
 
     /**
@@ -66,6 +70,7 @@ public class AddressBook {
     public void removePerson(ReadOnlyPerson toRemove) throws PersonNotFoundException {
         allPersons.remove(toRemove);
     }
+
 
     /**
      * Clears all persons and tags from the address book.

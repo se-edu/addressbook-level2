@@ -61,15 +61,6 @@ public class Command {
         return relevantPersons.get(getTargetIndex() - DISPLAYED_INDEX_OFFSET);
     }
 
-    /**
-     * Extracts the the target person in the last shown list from the given arguments.
-     *
-     * @param index the index of the person
-     * @throws IndexOutOfBoundsException if the target index is out of bounds of the last viewed listing
-     */
-    protected ReadOnlyPerson getTargetPerson(int index) throws IndexOutOfBoundsException {
-        return relevantPersons.get(index - DISPLAYED_INDEX_OFFSET);
-    }
 
     public int getTargetIndex() {
         return targetIndex;
