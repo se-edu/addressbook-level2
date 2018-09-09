@@ -183,3 +183,10 @@ The file name must end in `.txt` for it to be acceptable to the program.
 When running the program inside IntelliJ, you can set command line parameters
 before running the program.
 ====
+
+== Sorting the addressbook: `sort`
+
+Sort the addressbook according the starting alphabet of all persons' name. +
+Then shows a list of all persons, along with their non-private details, in the address book. +
+Format: `sort`
+
