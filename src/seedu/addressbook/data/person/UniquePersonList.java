@@ -73,7 +73,6 @@ public class UniquePersonList implements Iterable<Person> {
      * Any changes to the internal list/elements are immediately visible in the returned list.
      */
     public List<ReadOnlyPerson> immutableListView() {
-        System.out.println(internalList);
         return Collections.unmodifiableList(internalList);
     }
 
