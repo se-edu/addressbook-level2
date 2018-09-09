@@ -3,25 +3,11 @@ package seedu.addressbook.parser;
 import static seedu.addressbook.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.addressbook.common.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.addressbook.commands.AddCommand;
-import seedu.addressbook.commands.ClearCommand;
-import seedu.addressbook.commands.Command;
-import seedu.addressbook.commands.DeleteCommand;
-import seedu.addressbook.commands.ExitCommand;
-import seedu.addressbook.commands.FindCommand;
-import seedu.addressbook.commands.HelpCommand;
-import seedu.addressbook.commands.IncorrectCommand;
-import seedu.addressbook.commands.ListCommand;
-import seedu.addressbook.commands.ViewAllCommand;
-import seedu.addressbook.commands.ViewCommand;
+import seedu.addressbook.commands.*;
 import seedu.addressbook.data.exception.IllegalValueException;
 
 /**
@@ -30,6 +16,8 @@ import seedu.addressbook.data.exception.IllegalValueException;
 public class Parser {
 
     public static final Pattern PERSON_INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
+
+    public static final Pattern SWAP_INDEX_ARGS_FORMAT = Pattern.compile("(\\d+),((\\s+)?(\\d+))");
 
     public static final Pattern KEYWORDS_ARGS_FORMAT =
             Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one or more keywords separated by whitespace
@@ -248,5 +236,22 @@ public class Parser {
         return new FindCommand(keywordSet);
     }
 
+    /**
+     * Parse the input to call SwapCommand.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     * */
+    private Command prepareSwap(String args) {
+        final Matcher matcher = SWAP_INDEX_ARGS_FORMAT.matcher(args.trim());
+        if (!matcher.matches()) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    SwapCommand.MESSAGE_USAGE));
+        }
+        List<String> listOfIndex = Arrays.asList(args.split(","));
+        final int index1 = Integer.parseInt(listOfIndex.get(0).trim());
+        final int index2 = Integer.parseInt(listOfIndex.get(1).trim());
+        return new SwapCommand(index1, index2);
+    }
 
 }
