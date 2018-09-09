@@ -72,6 +72,16 @@ Examples:
 Shows a list of all persons, along with their non-private details, in the address book. +
 Format: `list`
 
+== Swap two persons : swap
+
+Swap the positions of two persons on the address book.
+Format: swap INDEX,INDEX
+The index refers to the index number shown in the most recent listing.
+
+Examples:
+swap 2,3
+Swap the persons in 2 and 3 in the address book.
+
 == Finding all persons containing any keyword in their name: `find`
 
 Finds persons whose names contain any of the given keywords. +
