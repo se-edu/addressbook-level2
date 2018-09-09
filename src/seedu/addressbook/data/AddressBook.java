@@ -39,6 +39,17 @@ public class AddressBook {
     }
 
     /**
+     * Set the index to another person.
+     *
+     * @param index the index to be set
+     * @param toSet the new person
+     * @throws IndexOutOfBoundsException if the index invalid according to the bounds
+     * */
+    public void setPerson(int index, Person toSet) throws IndexOutOfBoundsException {
+        allPersons.set(index, toSet);
+    }
+
+    /**
      * Returns true if an equivalent person exists in the address book.
      */
     public boolean containsPerson(ReadOnlyPerson key) {
