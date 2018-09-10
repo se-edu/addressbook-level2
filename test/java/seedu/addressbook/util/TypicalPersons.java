@@ -16,7 +16,7 @@ import seedu.addressbook.data.tag.Tag;
  */
 public class TypicalPersons {
 
-    public Person amy, bill, candy, dan;
+    public Person candy, amy, bill, dan;
 
     public TypicalPersons() {
         try {
@@ -34,9 +34,9 @@ public class TypicalPersons {
         }
     }
 
-    private void loadAddressBookWithSampleData(AddressBook ab) {
+    private void loadAddressBookWithSampleData(AddressBook ab, Person[] persons) {
         try {
-            for (Person p : this.getTypicalPersons()) {
+            for (Person p : persons) {
                 ab.addPerson(new Person(p));
             }
         } catch (IllegalValueException e) {
@@ -45,13 +45,20 @@ public class TypicalPersons {
     }
 
     public Person[] getTypicalPersons() {
-        return new Person[]{amy, bill, candy, dan};
+        return new Person[]{candy, bill, amy, dan};
     }
+
+    public Person[] getSortedPersons() { return new Person[]{amy, bill, candy, dan};}
 
     public AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
-        loadAddressBookWithSampleData(ab);
+        loadAddressBookWithSampleData(ab, this.getTypicalPersons());
         return ab;
     }
 
+    public AddressBook getSortedAddressBook() {
+        AddressBook ab = new AddressBook();
+        loadAddressBookWithSampleData(ab, this.getSortedPersons());
+        return ab;
+    }
 }
