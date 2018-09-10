@@ -1,13 +1,12 @@
 package seedu.addressbook.storage;
 
-import static seedu.addressbook.parser.Parser.PERSON_DATA_ARGS_FORMAT;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.exception.IllegalValueException;
@@ -24,6 +23,13 @@ import seedu.addressbook.storage.StorageFile.StorageOperationException;
  * Decodes the storage data file into an {@code AddressBook} object.
  */
 public class AddressBookDecoder {
+
+    public static final Pattern PERSON_DATA_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
+            Pattern.compile("(?<name>[^/]+)"
+                    + " (?<isPhonePrivate>p?)p/(?<phone>[^/]+)"
+                    + " (?<isEmailPrivate>p?)e/(?<email>[^/]+)"
+                    + " (?<isAddressPrivate>p?)a/(?<address>[^/]+)"
+                    + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
 
     /**
      * Decodes {@code encodedAddressBook} into an {@code AddressBook} containing the decoded persons.

@@ -8,7 +8,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.regex.Matcher;
 import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
@@ -30,13 +29,10 @@ import seedu.addressbook.data.exception.IllegalValueException;
  */
 public class Parser {
 
-    public static final Pattern PERSON_DATA_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
-            Pattern.compile("(?<name>[^/]+)"
-                    + " (?<isPhonePrivate>p?)p/(?<phone>[^/]+)"
-                    + " (?<isEmailPrivate>p?)e/(?<email>[^/]+)"
-                    + " (?<isAddressPrivate>p?)a/(?<address>[^/]+)"
-                    + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
-
+    public static final String INVALID_ITEM = "Invalid Item";
+    private static boolean isPhonePrivate;
+    private static boolean isEmailPrivate;
+    private static boolean isAddressPrivate;
 
     /**
      * Signals that the user input could not be parsed.
@@ -110,25 +106,34 @@ public class Parser {
      * @return the prepared command
      */
     private Command prepareAdd(String args) {
-        final Matcher matcher = PERSON_DATA_ARGS_FORMAT.matcher(args.trim());
-        // Validate arg string format
-        if (!matcher.matches()) {
+        String[] tokenList = args.trim().split(" ");
+
+        //Extract argument items
+        String name = extractName(tokenList);
+        String phone = extractPhone(tokenList);
+        String email = extractEmail(tokenList);
+        String address = extractAddress(tokenList);
+        String tags = extractTags(tokenList);
+
+        //Check if any of the argument item is invalid
+        if (name.equals(INVALID_ITEM) || phone.equals(INVALID_ITEM) || email.equals(INVALID_ITEM) || address.equals(INVALID_ITEM)) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
+
         try {
             return new AddCommand(
-                    matcher.group("name"),
+                    name,
 
-                    matcher.group("phone"),
-                    isPrivatePrefixPresent(matcher.group("isPhonePrivate")),
+                    phone,
+                    getPhonePrivate(),
 
-                    matcher.group("email"),
-                    isPrivatePrefixPresent(matcher.group("isEmailPrivate")),
+                    email,
+                    getEmailPrivate(),
 
-                    matcher.group("address"),
-                    isPrivatePrefixPresent(matcher.group("isAddressPrivate")),
+                    address,
+                    getAddressPrivate(),
 
-                    getTagsFromArgs(matcher.group("tagArguments"))
+                    getTagsFromArgs(tags)
             );
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
@@ -136,10 +141,179 @@ public class Parser {
     }
 
     /**
-     * Returns true if the private prefix is present for a contact detail in the add command's arguments string.
+     * Extracts name from argument.
+     * @param tokenList
+     * @return valid name
      */
-    private static boolean isPrivatePrefixPresent(String matchedPrefix) {
-        return matchedPrefix.equals("p");
+    private static String extractName(String[] tokenList) {
+        StringBuilder sb = new StringBuilder();
+        for (String token : tokenList) {
+            if (!token.contains("/") && !token.isEmpty()) {
+                sb.append(token + " ");
+            } else {
+                break;
+            }
+        }
+        String name = sb.toString();
+
+        if (!checkValidity(name)) {
+            name = INVALID_ITEM;
+        }
+
+        return name.trim();
+    }
+
+    /**
+     * Extract phone number from argument.
+     * @param tokenList
+     * @return valid phone number
+     */
+    private String extractPhone(String[] tokenList) {
+        String phone = "";
+        int numOccurrence = 0;
+        for (String token : tokenList) {
+            if (token.contains("pp/")) {
+                String[] subTokenList = token.split("/");
+                phone = subTokenList[1];
+                numOccurrence++;
+                setPhonePrivate(true);
+            } else if (token.contains("p/")) {
+                String[] subTokenList = token.split("/");
+                phone = subTokenList[1];
+                numOccurrence++;
+                setPhonePrivate(false);
+            } else {
+                continue;
+            }
+        }
+
+        if(!checkValidity(phone) || numOccurrence > 1) {
+            phone = INVALID_ITEM;
+        }
+
+        return phone.trim();
+    }
+
+    /**
+     * Extract email address from argument.
+     * @param tokenList
+     * @return valid email address
+     */
+    private String extractEmail(String[] tokenList) {
+        String email = "";
+        int numOccurrence = 0;
+        for (String token : tokenList) {
+            if (token.contains("pe/")) {
+                String[] subTokenList = token.split("/");
+                email = subTokenList[1];
+                numOccurrence++;
+                setEmailPrivate(true);
+            } else if (token.contains("e/")) {
+                String[] subTokenList = token.split("/");
+                email = subTokenList[1];
+                numOccurrence++;
+                setEmailPrivate(false);
+            } else {
+                continue;
+            }
+        }
+
+        if(!checkValidity(email) || numOccurrence > 1) {
+            email = INVALID_ITEM;
+        }
+
+        return email.trim();
+    }
+
+    /**
+     * Extract address.
+     * @param tokenList
+     * @return valid address
+     */
+    private String extractAddress(String[] tokenList) {
+        StringBuilder sb = new StringBuilder();
+        boolean addressFound =  false;
+        for (String token : tokenList) {
+            if (token.contains("pa/")) {
+                String[] subTokenList = token.split("/");
+                sb.append(subTokenList[1] + " ");
+                setAddressPrivate(true);
+                addressFound = true;
+            } else if (token.contains("a/")) {
+                String[] subTokenList = token.split("/");
+                sb.append(subTokenList[1] + " ");
+                setAddressPrivate(false);
+                addressFound = true;
+            } else if (addressFound && checkValidity(token)) {
+                sb.append(token + " ");
+            } else {
+                continue;
+            }
+        }
+
+        String address = sb.toString();
+
+        if(!checkValidity(address)) {
+            address = INVALID_ITEM;
+        }
+
+        return address.trim();
+    }
+
+    /**
+     * Extract tags.
+     * @param tokenList
+     * @return valid tag
+     */
+    private String extractTags(String[] tokenList) {
+        StringBuilder sb = new StringBuilder();
+        for (String token : tokenList) {
+            if (token.contains("t/")) {
+                sb.append(token + " ");
+            } else {
+                continue;
+            }
+        }
+
+        String tags = sb.toString();
+
+        return tags.trim();
+    }
+
+    public boolean getPhonePrivate() {
+        return this.isPhonePrivate;
+    }
+
+    public void setPhonePrivate(boolean val) {
+        this.isPhonePrivate = val;
+    }
+
+    public boolean getEmailPrivate() {
+        return this.isEmailPrivate;
+    }
+
+    public void setEmailPrivate(boolean val) {
+        this.isEmailPrivate = val;
+    }
+
+    public boolean getAddressPrivate() {
+        return this.isAddressPrivate;
+    }
+
+    public void setAddressPrivate(boolean val) {
+        this.isAddressPrivate = val;
+    }
+
+    /**
+     * Checks the validity of an argument item.
+     * @param item
+     * @return true if item is valid, false otherwise.
+     */
+    private static boolean checkValidity (String item) {
+        if (item.isEmpty() || item.contains("/")) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -152,7 +326,7 @@ public class Parser {
             return Collections.emptySet();
         }
         // replace first delimiter prefix, then split
-        final Collection<String> tagStrings = Arrays.asList(tagArguments.replaceFirst(" t/", "").split(" t/"));
+        final Collection<String> tagStrings = Arrays.asList(tagArguments.replaceFirst("t/", "").split(" t/"));
         return new HashSet<>(tagStrings);
     }
 
