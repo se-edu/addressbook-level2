@@ -38,6 +38,14 @@ What's different from AddressBook-Level1:
 * Support for marking a contact detail as 'private' (`pa/`) (`pe/`) (`pp/`)
 * View details of a person (`view` : shows non-private details), (`viewall` : shows all details)
 
+== Password to login
+Tentaively, I(Gerald) have commented out the login because the .bat file doesn't seem to work with the password but everything is fine when compile.
+Examples:
+
+* `What's the password?` will show up
+* You have to key in `password` to allow access to the `Commands:` part of the code
+* If you typed the wrong password, `Wrong Password, try again` will show up and you are prompted to type in the password again
+
 == Viewing help : `help`
 
 Format: `help`
