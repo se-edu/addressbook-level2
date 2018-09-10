@@ -12,17 +12,7 @@ import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
 
-import seedu.addressbook.commands.AddCommand;
-import seedu.addressbook.commands.ClearCommand;
-import seedu.addressbook.commands.Command;
-import seedu.addressbook.commands.DeleteCommand;
-import seedu.addressbook.commands.ExitCommand;
-import seedu.addressbook.commands.FindCommand;
-import seedu.addressbook.commands.HelpCommand;
-import seedu.addressbook.commands.IncorrectCommand;
-import seedu.addressbook.commands.ListCommand;
-import seedu.addressbook.commands.ViewAllCommand;
-import seedu.addressbook.commands.ViewCommand;
+import seedu.addressbook.commands.*;
 import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.data.person.Address;
 import seedu.addressbook.data.person.Email;
@@ -196,6 +186,35 @@ public class ParserTest {
                 parseAndAssertCommandType(input, FindCommand.class);
         assertEquals(keySet, result.getKeywords());
     }
+
+    /*
+     * Tests for find person by phone number prefix command ======================================================
+     */
+    @Test
+    public void parse_phonePrefixCommandInvalidArgs_errorMessage() {
+        // no keywords
+        final String[] inputs = {
+                "prefix",
+                "prefix ",
+                "prefix a",
+                "prefix a1",
+                "prefix 9z",
+                "prefix 1 2"
+        };
+        final String resultMessage =
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, PhonePrefixCommand.MESSAGE_USAGE);
+        parseAndAssertIncorrectWithMessage(resultMessage, inputs);
+    }
+
+    @Test
+    public void parse_phonePrefixCommandValidArgs_parsedCorrectly() {
+        final String prefix = "65";
+        final String input = "prefix " + prefix;
+        final PhonePrefixCommand result =
+                parseAndAssertCommandType(input, PhonePrefixCommand.class);
+        assertEquals(prefix, result.getPrefix());
+    }
+
 
     /*
      * Tests for add person command ==============================================================================
