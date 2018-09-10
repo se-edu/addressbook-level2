@@ -41,7 +41,7 @@ public class Main {
     /** Runs the program until termination.  */
     public void run(String[] launchArgs) {
         start(launchArgs);
-        login();
+        //login(); commented out first
         runCommandLoopUntilExitCommand();
         exit();
     }
@@ -52,13 +52,13 @@ public class Main {
     public void login() {
         Scanner SCANNER= new Scanner(System.in);
         while(true){
-            System.out.println("What is the Password?");
+            System.out.println("|| What is the Password?");
             if(SCANNER.nextLine().equals("password")){
-                System.out.println("Password is correct, you have gained access to the addressbook");
+                System.out.println("|| Password is correct, you have gained access to the addressbook");
                 break;
             }
             else{
-                System.out.println("Password is incorrect try again!");
+                System.out.println("|| Password is incorrect try again!");
             }
         }
     }

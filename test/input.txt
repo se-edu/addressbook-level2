@@ -1,23 +1,10 @@
 ##########################################################
-# invalid login
-##########################################################
-
-  # should fail login and have to try again
-  notthepassword
-
-##########################################################
-# valid login
-##########################################################
-
-  # should login to use commands
-  password
-
-##########################################################
 # invalid command
 ##########################################################
 
   # should recognise invalid command
-  sfdfd
+  password
+  # sfdfd
 
 ##########################################################
 # commands using list index before any listing created
