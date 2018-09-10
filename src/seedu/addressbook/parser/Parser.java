@@ -267,8 +267,12 @@ public class Parser {
      */
     private String extractTags(String[] tokenList) {
         StringBuilder sb = new StringBuilder();
+        boolean tokenFound = false;
         for (String token : tokenList) {
             if (token.contains("t/")) {
+                sb.append(token + " ");
+                tokenFound = true;
+            } else if (tokenFound && !token.contains("t/")) {
                 sb.append(token + " ");
             } else {
                 continue;
@@ -310,10 +314,7 @@ public class Parser {
      * @return true if item is valid, false otherwise.
      */
     private static boolean checkValidity (String item) {
-        if (item.isEmpty() || item.contains("/")) {
-            return false;
-        }
-        return true;
+        return (!item.isEmpty() && !item.contains("/"));
     }
 
     /**
@@ -416,7 +417,7 @@ public class Parser {
         }
 
         // keywords delimited by whitespace
-        final String[] keywords = args.trim().split(" ");;
+        final String[] keywords = args.trim().split(" ");
         final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
         return new FindCommand(keywordSet);
     }
