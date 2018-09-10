@@ -29,9 +29,7 @@ import seedu.addressbook.data.exception.IllegalValueException;
  * Parses user input.
  */
 public class Parser {
-
-    public static final Pattern PERSON_INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
-
+    
     public static final Pattern KEYWORDS_ARGS_FORMAT =
             Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one or more keywords separated by whitespace
 
@@ -226,11 +224,11 @@ public class Parser {
      * @throws NumberFormatException the args string region is not a valid number
      */
     private int parseArgsAsDisplayedIndex(String args) throws ParseException, NumberFormatException {
-        final Matcher matcher = PERSON_INDEX_ARGS_FORMAT.matcher(args.trim());
-        if (!matcher.matches()) {
+        if (args.trim().isEmpty()) {
             throw new ParseException("Could not find index number to parse");
+        } else {
+            return Integer.parseInt(args.trim());
         }
-        return Integer.parseInt(matcher.group("targetIndex"));
     }
 
 
