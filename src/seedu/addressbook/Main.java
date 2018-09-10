@@ -41,7 +41,7 @@ public class Main {
     /** Runs the program until termination.  */
     public void run(String[] launchArgs) {
         start(launchArgs);
-        //login(); commented out first
+        //login(); //commented out first
         runCommandLoopUntilExitCommand();
         exit();
     }
@@ -50,10 +50,9 @@ public class Main {
     Password feature to allow users to log in
      */
     public void login() {
-        Scanner SCANNER= new Scanner(System.in);
         while(true){
             System.out.println("|| What is the Password?");
-            if(SCANNER.nextLine().equals("password")){
+            if(checkPassword()){
                 System.out.println("|| Password is correct, you have gained access to the addressbook");
                 break;
             }
@@ -62,6 +61,12 @@ public class Main {
             }
         }
     }
+    public boolean checkPassword(){
+        Scanner SCANNER= new Scanner(System.in);
+        if(SCANNER.nextLine().equals("password")) return true;
+        else return false;
+    }
+
     /**
      * Sets up the required objects, loads up the data from the storage file, and prints the welcome message.
      *

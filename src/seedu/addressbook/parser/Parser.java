@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 
 import seedu.addressbook.commands.*;
 import seedu.addressbook.commands.AddCommand;
-import seedu.addressbook.commands.EditCommand;
+//import seedu.addressbook.commands.EditCommand;
 import seedu.addressbook.commands.ClearCommand;
 import seedu.addressbook.commands.Command;
 import seedu.addressbook.commands.DeleteCommand;
