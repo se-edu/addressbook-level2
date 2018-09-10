@@ -16,6 +16,9 @@ public class CommandResult {
     /** The list of persons that was produced by the command */
     private final List<? extends ReadOnlyPerson> relevantPersons;
 
+    /** The size of the address book */
+    private int size;
+
     public CommandResult(String feedbackToUser) {
         this.feedbackToUser = feedbackToUser;
         relevantPersons = null;
@@ -24,6 +27,12 @@ public class CommandResult {
     public CommandResult(String feedbackToUser, List<? extends ReadOnlyPerson> relevantPersons) {
         this.feedbackToUser = feedbackToUser;
         this.relevantPersons = relevantPersons;
+    }
+
+    public CommandResult(String feedbackToUser, int size) {
+        this.feedbackToUser = feedbackToUser;
+        relevantPersons = null;
+        this.size = size;
     }
 
     /**

@@ -68,6 +68,13 @@ public class AddressBook {
         return new UniquePersonList(allPersons);
     }
 
+    /**
+     * Returns the number of persons currently in the address book
+     */
+    public int size() {
+        return allPersons.size();
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
