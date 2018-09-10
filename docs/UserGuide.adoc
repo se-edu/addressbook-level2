@@ -91,6 +91,23 @@ Returns `John Doe` but not `john`.
 * `find Betsy Tim John` +
 Returns Any person having names `Betsy`, `Tim`, or `John`.
 
+== Finding all persons whose phone numbers start with a prefix: `prefix`
+
+Finds persons whose phone numbers start with the given prefix. +
+Format: `prefix PREFIX`
+
+[NOTE]
+====
+The search will only search for the prefix in phone numbers, not any of their other information.
+The search will only match phone numbers that start with the prefix, not end with or contain it in the middle.
+Only accepts a single numerical prefix.
+====
+
+Examples:
+
+* `prefix 91` +
+Returns a person with phone number `91111111` but not `92222291`.
+
 == Deleting a person : `delete`
 
 Deletes the specified person from the address book. Irreversible. +
