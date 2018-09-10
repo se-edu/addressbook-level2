@@ -149,6 +149,18 @@
   list
 
 ##########################################################
+# test sort command
+##########################################################
+
+  # add 4 names in random order, then sort alphabetically
+  add Charlie Dickson pp/333333 e/charlie.d@nus.edu.sg a/333, gamma street t/friends t/school
+  add Esther Potato p/555555 e/esther@not.a.real.potato pa/555, epsilon street t/tubers t/starchy
+  add Dickson Ee p/444444 pe/dickson@nus.edu.sg a/444, delta street t/friends
+  add Betsy Choo pp/222222 pe/benchoo@nus.edu.sg pa/222, beta street t/secretive
+  sort
+  clear
+
+##########################################################
 # test exit command
 ##########################################################
 
