@@ -267,8 +267,12 @@ public class Parser {
      */
     private String extractTags(String[] tokenList) {
         StringBuilder sb = new StringBuilder();
+        boolean tokenFound = false;
         for (String token : tokenList) {
             if (token.contains("t/")) {
+                sb.append(token + " ");
+                tokenFound = true;
+            } else if (tokenFound && !token.contains("t/")) {
                 sb.append(token + " ");
             } else {
                 continue;
