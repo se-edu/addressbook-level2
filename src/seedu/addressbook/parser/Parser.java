@@ -11,17 +11,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.addressbook.commands.AddCommand;
-import seedu.addressbook.commands.ClearCommand;
-import seedu.addressbook.commands.Command;
-import seedu.addressbook.commands.DeleteCommand;
-import seedu.addressbook.commands.ExitCommand;
-import seedu.addressbook.commands.FindCommand;
-import seedu.addressbook.commands.HelpCommand;
-import seedu.addressbook.commands.IncorrectCommand;
-import seedu.addressbook.commands.ListCommand;
-import seedu.addressbook.commands.ViewAllCommand;
-import seedu.addressbook.commands.ViewCommand;
+import seedu.addressbook.commands.*;
 import seedu.addressbook.data.exception.IllegalValueException;
 
 /**
@@ -33,6 +23,9 @@ public class Parser {
 
     public static final Pattern KEYWORDS_ARGS_FORMAT =
             Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one or more keywords separated by whitespace
+
+    public static final Pattern SINGLE_NUMBER_ARGS_FORMAT =
+            Pattern.compile("^\\d+$");
 
     public static final Pattern PERSON_DATA_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
             Pattern.compile("(?<name>[^/]+)"
@@ -84,6 +77,9 @@ public class Parser {
 
         case FindCommand.COMMAND_WORD:
             return prepareFind(arguments);
+
+        case PhonePrefixCommand.COMMAND_WORD:
+            return preparePhonePrefix(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
@@ -249,4 +245,19 @@ public class Parser {
     }
 
 
+    /**
+     * Parses arguments in the context of the find person by phone number prefix command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private Command preparePhonePrefix(String args) {
+        final Matcher matcher = SINGLE_NUMBER_ARGS_FORMAT.matcher(args.trim());
+        if (!matcher.matches()) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    PhonePrefixCommand.MESSAGE_USAGE));
+        }
+
+        return new PhonePrefixCommand(args.trim());
+    }
 }
