@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
+import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
 import seedu.addressbook.commands.AddCommand;
@@ -50,12 +51,7 @@ public class Parser {
             super(message);
         }
     }
-
-    /**
-     * Used for initial separation of command word and args.
-     */
-    public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
-
+    
     /**
      * Parses user input into command for execution.
      *
@@ -63,13 +59,22 @@ public class Parser {
      * @return the command based on the user input
      */
     public Command parseCommand(String userInput) {
-        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
-        if (!matcher.matches()) {
+        StringTokenizer st = new StringTokenizer(userInput.trim());
+
+        //Retrieve command word
+        String commandWord;
+        if (st.hasMoreElements()) {
+            commandWord = st.nextToken();
+        } else {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
-        final String commandWord = matcher.group("commandWord");
-        final String arguments = matcher.group("arguments");
+        //Retrieve arguments
+        StringBuilder sb = new StringBuilder();
+        while (st.hasMoreElements()) {
+            sb.append(st.nextToken() + " ");
+        }
+        String arguments = sb.toString();
 
         switch (commandWord) {
 
