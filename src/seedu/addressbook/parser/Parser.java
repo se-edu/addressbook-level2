@@ -42,6 +42,10 @@ public class Parser {
                     + " (?<isAddressPrivate>p?)a/(?<address>[^/]+)"
                     + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
 
+    public static final Pattern SORT_ARGS_FORMAT =
+            Pattern.compile("(?<property>[^/]+)"
+                    + " (?<order>[^/]+)");
+
 
     /**
      * Signals that the user input could not be parsed.
@@ -146,7 +150,18 @@ public class Parser {
      * @return the prepared Sort command
      */
     private Command prepareSort(String args) {
-        return new SortCommand("",1);
+        final Matcher matcher = SORT_ARGS_FORMAT.matcher(args.trim());
+        // Validate arg string format
+        if (!matcher.matches()) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+        }
+
+        if (!isInteger(matcher.group("order"))) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+        }
+
+        return new SortCommand(matcher.group("property"),
+                matcher.group("order"));
     }
 
     /**
@@ -168,6 +183,21 @@ public class Parser {
         // replace first delimiter prefix, then split
         final Collection<String> tagStrings = Arrays.asList(tagArguments.replaceFirst(" t/", "").split(" t/"));
         return new HashSet<>(tagStrings);
+    }
+
+    //TO-DO: Move to Utils
+    /**
+     * Checks if a given string is a valid integer.
+     * @param strNum
+     * @return true if given string can be parsed as an integer.
+     */
+    public static boolean isInteger(String strNum) {
+        try {
+            Integer num = Integer.parseInt(strNum);
+        } catch (NumberFormatException | NullPointerException nfe) {
+            return false;
+        }
+        return true;
     }
 
 
