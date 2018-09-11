@@ -141,6 +141,17 @@
   list
 
 ##########################################################
+# test sort persons command
+##########################################################
+  
+  add Goddamn Brown p/111111 e/addsaam@gmail.com a/111, alpha street
+  add Adolf Ham Black p/111111 e/addsaam@gmail.com a/111, alpha street
+  add Abraam Blue p/111111 e/addsaam@gmail.com a/111, alpha street
+  add Ziagon Brack p/111111 e/addsaam@gmail.com a/111, alpha street
+  add Saigon Barack p/111111 e/addsaam@gmail.com a/111, alpha street
+  sort
+
+##########################################################
 # test clear command
 ##########################################################
 
