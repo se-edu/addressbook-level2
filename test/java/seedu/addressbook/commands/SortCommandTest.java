@@ -13,12 +13,8 @@ import static org.junit.Assert.*;
 
 public class SortCommandTest {
 
-    private AddressBook emptyAddressBook;
     private AddressBook addressBook;
-    private AddressBook sortedAddressBook;
 
-    private List<ReadOnlyPerson> emptyDisplayList;
-    private List<ReadOnlyPerson> listWithEveryone;
     private List<ReadOnlyPerson> sortedList;
 
     @Before
@@ -33,13 +29,8 @@ public class SortCommandTest {
                 new Email("david@grant.com", false), new Address("44H Define Road", false),
                 Collections.emptySet());
 
-        emptyAddressBook = TestUtil.createAddressBook();
         addressBook = TestUtil.createAddressBook(johnDoe, janeDoe, davidGrant, samDoe);
-        sortedAddressBook = TestUtil.createAddressBook(davidGrant, janeDoe, johnDoe, samDoe);
 
-        emptyDisplayList = TestUtil.createList();
-
-        listWithEveryone = TestUtil.createList(johnDoe, janeDoe, davidGrant, samDoe);
         sortedList = TestUtil.createList(davidGrant, janeDoe, johnDoe, samDoe);
 
     }
