@@ -81,6 +81,10 @@ public class UniquePersonList implements Iterable<Person> {
         return Collections.unmodifiableList(internalList);
     }
 
+    public List<ReadOnlyPerson> clonedListView() {
+        return new ArrayList<ReadOnlyPerson>(internalList);
+    }
+
 
     /**
      * Checks if the list contains an equivalent person as the given argument.
@@ -139,5 +143,9 @@ public class UniquePersonList implements Iterable<Person> {
         return other == this // short circuit if same object
                 || (other instanceof UniquePersonList // instanceof handles nulls
                         && this.internalList.equals(((UniquePersonList) other).internalList));
+    }
+
+    public void sortByProperty(String propertyName, boolean ascending) {
+
     }
 }
