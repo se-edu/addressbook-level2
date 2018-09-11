@@ -85,11 +85,12 @@ and persons matching at least one keyword will be returned (i.e. `OR` search).
 
 Examples:
 
-* `find John` +
+* `find john` +
 Returns `John Doe` and/or `john`.
 
-* `find Betsy Tim John` +
-Returns Any person having names `Betsy`, `Tim`, or `John`.
+* `find betsy tim john` +
+Returns Any person having names `Betsy`, `Tim`, or `John` and \ or Returns Any person having names `betsy`, `tim`, or `john`
+
 
 == Deleting a person : `delete`
 
