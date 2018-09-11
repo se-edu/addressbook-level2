@@ -141,6 +141,20 @@
   list
 
 ##########################################################
+# test delete person command
+##########################################################
+
+  # add person to show unsorted order of list
+  add Adam Brown p/111111 e/adam@gmail.com a/111, alpha street
+  list
+
+  # sort all persons and displays sorted list
+  sort
+  
+  # check if address book is updated with sorted list
+  list
+
+##########################################################
 # test clear command
 ##########################################################
 
