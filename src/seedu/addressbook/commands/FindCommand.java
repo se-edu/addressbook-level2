@@ -50,9 +50,20 @@ public class FindCommand extends Command {
         final List<ReadOnlyPerson> matchedPersons = new ArrayList<>();
         for (ReadOnlyPerson person : addressBook.getAllPersons()) {
             final Set<String> wordsInName = new HashSet<>(person.getName().getWordsInName());
+
+            // Case Insensitive
+            for (String matchName : wordsInName) { // converts sets into strings for comparison using equalsIgnoreCase
+                for (String keyword : keywords) {
+                    if (matchName.equalsIgnoreCase(keyword)) { //this compares name to keyword while ignoring case
+                        matchedPersons.add(person);
+                    }
+                }
+            }
+            /*
             if (!Collections.disjoint(wordsInName, keywords)) {
                 matchedPersons.add(person);
             }
+            */
         }
         return matchedPersons;
     }
