@@ -81,6 +81,11 @@ public class UniquePersonList implements Iterable<Person> {
         return Collections.unmodifiableList(internalList);
     }
 
+    /**
+     * Returns a clone of the internal list of {@link ReadOnlyPerson}s.
+     * For use with other methods/libraries.
+     * Any changes to the internal list/elements are immediately visible in the returned list.
+     */
     public List<ReadOnlyPerson> clonedListView() {
         return new ArrayList<ReadOnlyPerson>(internalList);
     }
