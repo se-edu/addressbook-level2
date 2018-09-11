@@ -11,9 +11,11 @@ public class SortCommand extends Command {
             + ": Sorts all persons in address book. \n"
             + "Example: " + COMMAND_WORD;
 
+    public static final String MESSAGE_SORTED = "Address book has been sorted";
+
     @Override
     public CommandResult execute() {
         addressBook.sort();
-        return new CommandResult("Address book has been sorted");
+        return new CommandResult(MESSAGE_SORTED);
     }
 }
