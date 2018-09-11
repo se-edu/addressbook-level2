@@ -72,6 +72,16 @@ Examples:
 Shows a list of all persons, along with their non-private details, in the address book. +
 Format: `list`
 
+== Sort the current list of people: `sort`
+
+Sorts the current list of all people, according to a given property, and with a stated order (ascending vs descending)
+Format: `sort` PROPERTY ORDER
+
+Examples:
+
+* `sort name 1`
+* `sort email -1`
+
 == Finding all persons containing any keyword in their name: `find`
 
 Finds persons whose names contain any of the given keywords. +
