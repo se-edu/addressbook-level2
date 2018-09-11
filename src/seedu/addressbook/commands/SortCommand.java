@@ -8,7 +8,7 @@ public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + "Sorts all persons in address book. \n"
+            + " all persons in address book. \n"
             + "Example: " + COMMAND_WORD;
 
     @Override
