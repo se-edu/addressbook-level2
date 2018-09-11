@@ -107,6 +107,20 @@
   find Charlie Betsy
 
 ##########################################################
+# test sort person command
+##########################################################
+
+   # normal usage
+   sort name 1
+   sort email -1
+   sort address 99999
+
+   # invalid arguments
+   sort asldjadjsdf 1
+   sort name 8x321231
+   sort address _2_5
+
+##########################################################
 # test delete person command
 ##########################################################
 

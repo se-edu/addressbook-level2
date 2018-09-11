@@ -12,6 +12,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.addressbook.commands.AddCommand;
+import seedu.addressbook.commands.SortCommand;
 import seedu.addressbook.commands.ClearCommand;
 import seedu.addressbook.commands.Command;
 import seedu.addressbook.commands.DeleteCommand;
@@ -40,6 +41,10 @@ public class Parser {
                     + " (?<isEmailPrivate>p?)e/(?<email>[^/]+)"
                     + " (?<isAddressPrivate>p?)a/(?<address>[^/]+)"
                     + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
+
+    public static final Pattern SORT_ARGS_FORMAT =
+            Pattern.compile("(?<property>[^/]+)"
+                    + " (?<order>[^/]+)");
 
 
     /**
@@ -94,6 +99,9 @@ public class Parser {
         case ViewAllCommand.COMMAND_WORD:
             return prepareViewAll(arguments);
 
+        case SortCommand.COMMAND_WORD:
+            return prepareSort(arguments);
+
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
@@ -136,6 +144,27 @@ public class Parser {
     }
 
     /**
+     * Parses arguments in the context of the sort person command.
+     *
+     * @param args full command args string
+     * @return the prepared Sort command
+     */
+    private Command prepareSort(String args) {
+        final Matcher matcher = SORT_ARGS_FORMAT.matcher(args.trim());
+        // Validate arg string format
+        if (!matcher.matches()) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+        }
+
+        if (!isInteger(matcher.group("order"))) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+        }
+
+        return new SortCommand(matcher.group("property"),
+                matcher.group("order"));
+    }
+
+    /**
      * Returns true if the private prefix is present for a contact detail in the add command's arguments string.
      */
     private static boolean isPrivatePrefixPresent(String matchedPrefix) {
@@ -154,6 +183,21 @@ public class Parser {
         // replace first delimiter prefix, then split
         final Collection<String> tagStrings = Arrays.asList(tagArguments.replaceFirst(" t/", "").split(" t/"));
         return new HashSet<>(tagStrings);
+    }
+
+    //TO-DO: Move to Utils
+    /**
+     * Checks if a given string is a valid integer.
+     * @param strNum
+     * @return true if given string can be parsed as an integer.
+     */
+    public static boolean isInteger(String strNum) {
+        try {
+            Integer num = Integer.parseInt(strNum);
+        } catch (NumberFormatException | NullPointerException nfe) {
+            return false;
+        }
+        return true;
     }
 
 
