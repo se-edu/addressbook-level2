@@ -50,9 +50,22 @@ public class FindCommand extends Command {
         final List<ReadOnlyPerson> matchedPersons = new ArrayList<>();
         for (ReadOnlyPerson person : addressBook.getAllPersons()) {
             final Set<String> wordsInName = new HashSet<>(person.getName().getWordsInName());
-            if (!Collections.disjoint(wordsInName, keywords)) {
-                matchedPersons.add(person);
+
+            //case-insensitive FindCommand
+            for(String nameWords : wordsInName){
+                for(String keyword : keywords){
+                    if(nameWords.equalsIgnoreCase(keyword)){
+                        matchedPersons.add(person);
+                    }
+                }
             }
+
+            //To do: Implement code to allow the user to decide whether he wants the
+            //find function to be case sensitive or not
+            //case sensitive FindCommand
+            //if (!Collections.disjoint(wordsInName, keywords)) {
+            //    matchedPersons.add(person);
+            //}
         }
         return matchedPersons;
     }
