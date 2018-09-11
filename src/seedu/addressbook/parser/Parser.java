@@ -12,6 +12,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.addressbook.commands.AddCommand;
+import seedu.addressbook.commands.SortCommand;
 import seedu.addressbook.commands.ClearCommand;
 import seedu.addressbook.commands.Command;
 import seedu.addressbook.commands.DeleteCommand;
@@ -94,6 +95,9 @@ public class Parser {
         case ViewAllCommand.COMMAND_WORD:
             return prepareViewAll(arguments);
 
+        case SortCommand.COMMAND_WORD:
+            return prepareSort(arguments);
+
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
@@ -133,6 +137,16 @@ public class Parser {
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
+    }
+
+    /**
+     * Parses arguments in the context of the sort person command.
+     *
+     * @param args full command args string
+     * @return the prepared Sort command
+     */
+    private Command prepareSort(String args) {
+        return new SortCommand("",1);
     }
 
     /**
