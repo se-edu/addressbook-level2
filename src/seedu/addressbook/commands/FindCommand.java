@@ -60,6 +60,8 @@ public class FindCommand extends Command {
                 }
             }
 
+            //To do: Implement code to allow the user to decide whether he wants the
+            //find function to be case sensitive or not
             //case sensitive FindCommand
             //if (!Collections.disjoint(wordsInName, keywords)) {
             //    matchedPersons.add(person);
