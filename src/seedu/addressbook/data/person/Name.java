@@ -43,6 +43,16 @@ public class Name {
         return Arrays.asList(fullName.split("\\s+"));
     }
 
+    /**
+     * Compares two strings and determines which is lexographically larger.
+     *
+     * @return 1, 0 or -1 if this fullName is larger, equal, or smaller than other fullName, respectively.
+     */
+    public int compareTo(Name other){
+        return this.fullName.compareTo(other.fullName);
+    }
+
+
     @Override
     public String toString() {
         return fullName;

@@ -156,6 +156,12 @@ Views all details of the 1st person in the results of the `find` command.
 Clears all entries from the address book. +
 Format: `clear`
 
+
+== Sorting entries : `sort`
+
+Sorts the entries lexographically based on name +
+Format: `sort`
+
 == Exiting the program : `exit`
 
 Exits the program. +
