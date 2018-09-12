@@ -86,10 +86,10 @@ and persons matching at least one keyword will be returned (i.e. `OR` search).
 Examples:
 
 * `find John` +
-Returns `John Doe` but not `john`.
+Returns `John Doe` and `john`.
 
 * `find Betsy Tim John` +
-Returns Any person having names `Betsy`, `Tim`, or `John`.
+Returns Any person having names `Betsy`, `betsy`, `Tim`, `tim`, `John` and `john`.
 
 == Deleting a person : `delete`
 
