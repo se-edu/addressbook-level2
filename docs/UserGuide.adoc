@@ -38,6 +38,14 @@ What's different from AddressBook-Level1:
 * Support for marking a contact detail as 'private' (`pa/`) (`pe/`) (`pp/`)
 * View details of a person (`view` : shows non-private details), (`viewall` : shows all details)
 
+== Password to login
+Tentaively, I(Gerald) have commented out the login because the .bat file doesn't seem to work with the password but everything is fine when compile.
+Examples:
+
+* `What's the password?` will show up
+* You have to key in `password` to allow access to the `Commands:` part of the code
+* If you typed the wrong password, `Wrong Password, try again` will show up and you are prompted to type in the password again
+
 == Viewing help : `help`
 
 Format: `help`
@@ -90,6 +98,27 @@ Returns `John Doe` but not `john`.
 
 * `find Betsy Tim John` +
 Returns Any person having names `Betsy`, `Tim`, or `John`.
+
+== Editing a person : `edit`
+
+Edits the specified person from the address book. Irreversible. +
+Format: `edit INDEX n/NAME [p]p/PHONE_NUMBER [p]e/EMAIL [p]a/ADDRESS [t/TAG]...`
+
+****
+Words in `UPPER_CASE` are the parameters, items in `SQUARE_BRACKETS` are optional,
+items with `...` after them can have multiple instances. Order of parameters are fixed.
+
+Put a `p` before the phone / email / address prefixes to mark it as `private`. `private` details can only
+be seen using the `viewall` command.
+
+Persons can have any number of tags (including 0).
+****
+
+Examples:
+
+* `list` +
+`edit 2 n/Dickson p/123456 e/valid@email.ok a/Address, Singapore t/wow` +
+Edits the 2nd person in the address book with the arguments given
 
 == Deleting a person : `delete`
 

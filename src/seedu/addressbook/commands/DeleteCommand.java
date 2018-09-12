@@ -24,7 +24,6 @@ public class DeleteCommand extends Command {
         super(targetVisibleIndex);
     }
 
-
     @Override
     public CommandResult execute() {
         try {
