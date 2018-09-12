@@ -10,6 +10,17 @@ import org.junit.Test;
 
 public class UtilsTest {
 
+    @Test
+    public void elementsContainNull() throws Exception {
+        // contain null objects
+        assertTrue(Utils.isAnyNull((Object) null));
+        assertTrue(Utils.isAnyNull(null, null));
+
+        // does not contain null objects
+        assertFalse(Utils.isAnyNull("abc", "ab"));
+        assertFalse(Utils.isAnyNull(1, 2));
+        assertFalse(Utils.isAnyNull("abc", 1, 2));
+    }
 
     @Test
     public void elementsAreUnique() throws Exception {
