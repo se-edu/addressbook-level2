@@ -22,6 +22,7 @@ import seedu.addressbook.commands.IncorrectCommand;
 import seedu.addressbook.commands.ListCommand;
 import seedu.addressbook.commands.ViewAllCommand;
 import seedu.addressbook.commands.ViewCommand;
+import seedu.addressbook.commands.SortCommand;
 import seedu.addressbook.data.exception.IllegalValueException;
 
 /**
@@ -94,6 +95,9 @@ public class Parser {
         case ViewAllCommand.COMMAND_WORD:
             return prepareViewAll(arguments);
 
+        case SortCommand.COMMAND_WORD:
+            return prepareSort();
+
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
@@ -156,6 +160,20 @@ public class Parser {
         return new HashSet<>(tagStrings);
     }
 
+    /**
+     * Parses arguments in the context of the sort address book command.
+     *
+     * @return the prepared command
+     */
+    private Command prepareSort() {
+        try {
+            return new SortCommand();
+        } catch (ParseException pe) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+        } catch (Exception e) {
+            return new IncorrectCommand("Error: Parser/prepareSort");
+        }
+    }
 
     /**
      * Parses arguments in the context of the delete person command.
