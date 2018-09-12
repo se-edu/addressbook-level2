@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-
+import java.util.Comparator;
 import seedu.addressbook.common.Utils;
 import seedu.addressbook.data.exception.DuplicateDataException;
 
@@ -34,6 +34,15 @@ public class UniquePersonList implements Iterable<Person> {
      * there is no such matching person in the list.
      */
     public static class PersonNotFoundException extends Exception {}
+
+    /**
+     * Class used to sort internalList according to Persons names
+     */
+    public static class SortByName implements Comparator<Person> {
+        public int compare(Person a, Person b) {
+            return String.CASE_INSENSITIVE_ORDER.compare(a.getName().toString(), b.getName().toString());
+        }
+    }
 
     private final List<Person> internalList = new ArrayList<>();
 
@@ -122,6 +131,10 @@ public class UniquePersonList implements Iterable<Person> {
         }
     }
 
+    public void sort() {
+        Collections.sort(internalList, new SortByName());
+    }
+
     /**
      * Clears all persons in list.
      */
@@ -140,4 +153,5 @@ public class UniquePersonList implements Iterable<Person> {
                 || (other instanceof UniquePersonList // instanceof handles nulls
                         && this.internalList.equals(((UniquePersonList) other).internalList));
     }
+
 }
