@@ -79,17 +79,17 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 [NOTE]
 ====
-The search is case sensitive, the order of the keywords does not matter, only the name is searched,
+The search is NOT case sensitive, the order of the keywords does not matter, only the name is searched,
 and persons matching at least one keyword will be returned (i.e. `OR` search).
 ====
 
 Examples:
 
 * `find John` +
-Returns `John Doe` but not `john`.
+Returns `John Doe` or `john`.
 
 * `find Betsy Tim John` +
-Returns Any person having names `Betsy`, `Tim`, or `John`.
+Returns Any person having names `Betsy`, `betsy`, `Tim`, `tim`, `John` or `john`.
 
 == Deleting a person : `delete`
 
@@ -176,6 +176,15 @@ Example:
 
 * `java seedu.addressbook.Main mydata.txt`
 
+== ENHANCEMENT
+The 'find' function is not case sensitive!
+
+Examples:
+
+* `find john` +
+Returns `John Doe` or `john doe`.
+
+
 [NOTE]
 ====
 The file name must end in `.txt` for it to be acceptable to the program.
@@ -183,3 +192,4 @@ The file name must end in `.txt` for it to be acceptable to the program.
 When running the program inside IntelliJ, you can set command line parameters
 before running the program.
 ====
+
