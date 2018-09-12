@@ -68,6 +68,9 @@ public class AddressBook {
         return new UniquePersonList(allPersons);
     }
 
+    /**
+     * Sorts the
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
