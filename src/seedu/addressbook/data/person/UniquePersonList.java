@@ -75,8 +75,7 @@ public class UniquePersonList implements Iterable<Person> {
     /**
      * Returns a shallow sorted copy of the list.
      */
-    public UniquePersonList sort(UniquePersonList source) {
-        internalList.addAll(source.internalList);
+    public UniquePersonList sort() {
         Collections.sort(internalList);
         return this;
     }
