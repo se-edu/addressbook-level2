@@ -138,9 +138,9 @@ public class AddressBookTest {
 
     @Test
     public void count() {
-        assertTrue(getSize(defaultAddressBook.getAllPersons()) == 2);
+        assertTrue(defaultAddressBook.getTotalPersons() == 2);
 
         defaultAddressBook.clear();
-        assertTrue(getSize(defaultAddressBook.getAllPersons()) == 0);
+        assertTrue(defaultAddressBook.getTotalPersons()) == 0;
     }
 }

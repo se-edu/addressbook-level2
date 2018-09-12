@@ -12,7 +12,7 @@ import seedu.addressbook.data.person.UniquePersonList.PersonNotFoundException;
 public class AddressBook {
 
     private final UniquePersonList allPersons;
-    private final int totalPersons = 0;
+    private int totalPersons = 0;
 
     /**
      * Creates an empty address book.
