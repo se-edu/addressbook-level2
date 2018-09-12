@@ -1,2 +1,3 @@
 John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01
 Betsy Crowe pp/1234567 e/betsycrowe@gmail.com pa/Newgate Prison t/friend t/criminal
+Ziggy woe p/98765432 e/ziggyw@gmail.com a/Ziggy street, block 23, #03-01

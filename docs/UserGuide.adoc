@@ -72,6 +72,11 @@ Examples:
 Shows a list of all persons, along with their non-private details, in the address book. +
 Format: `list`
 
+== Listing all persons : `sort`
+
+Shows a list of all persons by alphabetic order, along with their non-private details, in the address book. +
+Format: `sort`
+
 == Finding all persons containing any keyword in their name: `find`
 
 Finds persons whose names contain any of the given keywords. +

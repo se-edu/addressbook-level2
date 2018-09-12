@@ -6,6 +6,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Comparator;
+
 
 import seedu.addressbook.common.Utils;
 import seedu.addressbook.data.exception.DuplicateDataException;
@@ -139,5 +141,11 @@ public class UniquePersonList implements Iterable<Person> {
         return other == this // short circuit if same object
                 || (other instanceof UniquePersonList // instanceof handles nulls
                         && this.internalList.equals(((UniquePersonList) other).internalList));
+    }
+
+    public List<ReadOnlyPerson> sortedImmutableListView(Comparator<? super ReadOnlyPerson> comparator) {
+        internalList.sort(comparator);
+        
+        return Collections.unmodifiableList(internalList);
     }
 }
