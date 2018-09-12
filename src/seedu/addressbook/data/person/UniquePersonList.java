@@ -145,6 +145,7 @@ public class UniquePersonList implements Iterable<Person> {
 
     public List<ReadOnlyPerson> sortedImmutableListView(Comparator<? super ReadOnlyPerson> comparator) {
         internalList.sort(comparator);
+        
         return Collections.unmodifiableList(internalList);
     }
 }
