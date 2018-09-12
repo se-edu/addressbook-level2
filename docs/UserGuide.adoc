@@ -156,6 +156,11 @@ Views all details of the 1st person in the results of the `find` command.
 Clears all entries from the address book. +
 Format: `clear`
 
+== Counting total number of persons in the address book : `count`
+
+Counts total number of persons in the address book.
+Format: `count`
+
 == Exiting the program : `exit`
 
 Exits the program. +
