@@ -19,6 +19,9 @@
 || Example: find alice bob charlie
 || list: Displays all persons in the address book as a list with index numbers.
 || Example: list
+|| swap: Swap the positions of two persons identified by indices in address book.
+|| Parameters: INDEX,INDEX
+|| Example: swap 1,2
 || view: Views the non-private details of the person identified by the index number in the last shown person listing.
 || Parameters: INDEX
 || Example: view 1
@@ -287,6 +290,15 @@
 || Enter command: || [Command entered:  list]
 || 	1. Betsy Choo Tags: [secretive]
 || 	2. Dickson Ee Phone: 444444 Address: 444, delta street Tags: [friends]
+|| 
+|| 2 persons listed!
+|| ===================================================
+|| Enter command: || [Command entered:  swap 1,2]
+|| Swap successfully.
+|| ===================================================
+|| Enter command: || [Command entered:  list]
+|| 	1. Dickson Ee Phone: 444444 Address: 444, delta street Tags: [friends]
+|| 	2. Betsy Choo Tags: [secretive]
 || 
 || 2 persons listed!
 || ===================================================

@@ -139,6 +139,13 @@
   # listing indexes get updated on next request
   delete 1
   list
+##########################################################
+# test swap command
+##########################################################
+
+  # swap 1 and 2
+  swap 1,2
+  list
 
 ##########################################################
 # test clear command

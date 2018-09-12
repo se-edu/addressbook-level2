@@ -6,6 +6,8 @@ import seedu.addressbook.data.person.UniquePersonList;
 import seedu.addressbook.data.person.UniquePersonList.DuplicatePersonException;
 import seedu.addressbook.data.person.UniquePersonList.PersonNotFoundException;
 
+import static seedu.addressbook.ui.TextUi.DISPLAYED_INDEX_OFFSET;
+
 /**
  * Represents the entire address book. Contains the data of the address book.
  */
@@ -38,6 +40,21 @@ public class AddressBook {
         allPersons.add(toAdd);
     }
 
+    public Person getPerson(int index) throws IndexOutOfBoundsException {
+        return allPersons.get(index);
+    }
+
+    /**
+     * Set the index to another person.
+     *
+     * @param index the index to be set
+     * @param toSet the new person
+     * @throws IndexOutOfBoundsException if the index invalid according to the bounds
+     * */
+    public void setPerson(int index, Person toSet) throws IndexOutOfBoundsException {
+        allPersons.set(index, toSet);
+    }
+
     /**
      * Returns true if an equivalent person exists in the address book.
      */
@@ -53,6 +70,7 @@ public class AddressBook {
     public void removePerson(ReadOnlyPerson toRemove) throws PersonNotFoundException {
         allPersons.remove(toRemove);
     }
+
 
     /**
      * Clears all persons and tags from the address book.

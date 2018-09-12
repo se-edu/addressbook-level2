@@ -1,13 +1,17 @@
 package seedu.addressbook.parser;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.addressbook.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.addressbook.common.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -320,4 +324,31 @@ public class ParserTest {
         assertTrue(result.getClass().isAssignableFrom(expectedCommandClass));
         return (T) result;
     }
+
+    /*
+     * Tests for swap person command ==============================================================================
+     */
+
+    @Test
+    public void testFormatOfArgs(){
+        String format = "(\\d+),((\\s+)?\\d+)";
+        Pattern testPattern = Pattern.compile(format);
+
+        //Test for no space
+        Matcher m1 = testPattern.matcher("7,8");
+        assertTrue(m1.matches());
+
+        //Test for one space
+        Matcher m2 = testPattern.matcher("11, 8");
+        assertTrue(m2.matches());
+    }
+
+    @Test
+    public void testParseIndexForSwap(){
+        String args = "1, 2";
+        List<String> listOfIndex = Arrays.asList(args.split(","));
+        assertEquals(Integer.parseInt(listOfIndex.get(0).trim()), 1);
+        assertEquals(Integer.parseInt(listOfIndex.get(1).trim()), 2);
+    }
+
 }
