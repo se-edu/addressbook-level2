@@ -14,15 +14,16 @@ public class HelpCommand extends Command {
     @Override
     public CommandResult execute() {
         return new CommandResult(
-                AddCommand.MESSAGE_USAGE
-                + "\n" + DeleteCommand.MESSAGE_USAGE
-                + "\n" + ClearCommand.MESSAGE_USAGE
-                + "\n" + FindCommand.MESSAGE_USAGE
-                + "\n" + ListCommand.MESSAGE_USAGE
-                + "\n" + ViewCommand.MESSAGE_USAGE
-                + "\n" + ViewAllCommand.MESSAGE_USAGE
-                + "\n" + HelpCommand.MESSAGE_USAGE
-                + "\n" + ExitCommand.MESSAGE_USAGE
+                " > " + AddCommand.MESSAGE_USAGE
+                + "\n > " + DeleteCommand.MESSAGE_USAGE
+                + "\n > " + ClearCommand.MESSAGE_USAGE
+                + "\n > " + FindCommand.MESSAGE_USAGE
+                + "\n > " + ListCommand.MESSAGE_USAGE
+                + "\n > " + ViewCommand.MESSAGE_USAGE
+                + "\n > " + ViewAllCommand.MESSAGE_USAGE
+                + "\n > " + SortCommand.MESSAGE_USAGE
+                + "\n > " + HelpCommand.MESSAGE_USAGE
+                + "\n > " + ExitCommand.MESSAGE_USAGE
         );
     }
 }
