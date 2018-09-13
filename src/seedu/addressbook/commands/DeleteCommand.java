@@ -22,7 +22,7 @@ public class DeleteCommand extends Command {
             + "Parameters: INDEX\n"
             + "Example: " + COMMAND_WORD + " 1 2 3";
 
-    public static final String MESSAGE_DELETE_PEOPLE_SUCCESS = "Deleted Person(s):";
+    public static final String MESSAGE_DELETE_PEOPLE_SUCCESS = "Deleted Person(s): ";
     private final List<Integer> targetVisibleIndices;
 
 
