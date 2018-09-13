@@ -139,6 +139,24 @@ public class Parser {
     private static boolean isPrivatePrefixPresent(String matchedPrefix) {
         return matchedPrefix.equals("p");
     }
+    
+    /**
+     * Extracts integer indices from the delete command's indices arguments string.
+     * Merges duplicate index strings.
+     */
+    private static Set<Integer> getIndicesFromArgs(String indexArguments) {
+        // no tags
+        if (indexArguments.isEmpty()) {
+            return Collections.emptySet();
+        }
+        // replace first delimiter prefix, then split
+        final List<String> indexStrings = Arrays.asList(indexArguments.replaceFirst(" t/", "").split(" t/"));
+        final Set<Integer> indices = new HashSet<>();
+        for (String indexString : indexStrings) {
+            indices.add(Integer.parseInt(indexString));
+        }
+        return indices;
+    }
 
     /**
      * Extracts the new person's tags from the add command's tag arguments string.
