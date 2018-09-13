@@ -37,11 +37,13 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute() {
         try {
+            List<ReadOnlyPerson> people = new ArrayList<ReadOnlyPerson>();
             for (Integer targetIndex : targetVisibleIndices) {
               setTargetIndex(targetIndex);
               final ReadOnlyPerson target = getTargetPerson();
-              addressBook.removePerson(target);
+              people.add(target);
             }
+            addressBook.removePeople(people);
             String commandResultString = MESSAGE_DELETE_PEOPLE_SUCCESS + Arrays.toString(targetVisibleIndices.toArray());
             commandResultString = commandResultString.replaceAll("[\\[\\]]","");
             return new CommandResult(commandResultString);
