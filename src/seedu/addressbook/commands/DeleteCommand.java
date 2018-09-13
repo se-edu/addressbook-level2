@@ -5,6 +5,7 @@ import seedu.addressbook.data.person.ReadOnlyPerson;
 import seedu.addressbook.data.person.UniquePersonList.PersonNotFoundException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -21,7 +22,7 @@ public class DeleteCommand extends Command {
             + "Parameters: INDEX\n"
             + "Example: " + COMMAND_WORD + " 1 2 3";
 
-    public static final String MESSAGE_DELETE_PEOPLE_SUCCESS = "Deleted Person(s): %1$s %2$s %3$s";
+    public static final String MESSAGE_DELETE_PEOPLE_SUCCESS = "Deleted Person(s):";
     private final List<Integer> targetVisibleIndices;
 
 
@@ -36,10 +37,14 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute() {
         try {
-            final ReadOnlyPerson target = getTargetPerson();
-            addressBook.removePerson(target);
-            return new CommandResult(String.format(MESSAGE_DELETE_PEOPLE_SUCCESS, target));
-
+            for (Integer targetIndex : targetVisibleIndices) {
+              setTargetIndex(targetIndex);
+              final ReadOnlyPerson target = getTargetPerson();
+              addressBook.removePerson(target);
+            }
+            String commandResultString = MESSAGE_DELETE_PEOPLE_SUCCESS + Arrays.toString(targetVisibleIndices.toArray());
+            commandResultString = commandResultString.replaceAll("[\\[\\]]","");
+            return new CommandResult(commandResultString);
         } catch (IndexOutOfBoundsException ie) {
             return new CommandResult(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         } catch (PersonNotFoundException pnfe) {
