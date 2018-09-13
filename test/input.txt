@@ -140,6 +140,28 @@
   delete 1
   list
 
+##############################################################
+# test if command can be entered in both lower and upper case
+##############################################################
+
+  # check help
+  HeLp
+
+  # check add
+  ADD Alice Tay p/95730274 e/alicet@gmail.com pa/Tampines Street 12
+
+  # check list
+  LISt
+
+  # check view
+  VieW 1
+
+  # check viewall
+  viEWaLl 1
+
+  # check delete
+  deLEte 1
+
 ##########################################################
 # test clear command
 ##########################################################
