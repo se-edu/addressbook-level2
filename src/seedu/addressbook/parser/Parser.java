@@ -180,11 +180,12 @@ public class Parser {
      * @return the prepared command
      */
     private Command prepareDelete(String args) {
-        try {
-            final int targetIndex = parseArgsAsDisplayedIndex(args);
-            return new DeleteCommand(targetIndex);
-        } catch (ParseException pe) {
+        final Matcher matcher = PERSON_INDICES_ARGS_FORMAT.matcher(args.trim());
+        if (!matcher.matches()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        }
+        try {
+            return new DeleteCommand(getIndicesFromArgs(matcher.group("targetIndices")));
         } catch (NumberFormatException nfe) {
             return new IncorrectCommand(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
