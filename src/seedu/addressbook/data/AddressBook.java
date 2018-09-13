@@ -55,6 +55,17 @@ public class AddressBook {
     }
 
     /**
+     * Removes the equivalent people from the address book.
+     *
+     * @throws PersonNotFoundException if no such Person could be found.
+     */
+    public void removePeople(List<ReadOnlyPerson> peopleToRemove) throws PersonNotFoundException {
+        for (ReadOnlyPerson person : peopleToRemove) {
+          removePerson(person);
+        }
+    }
+
+    /**
      * Clears all persons and tags from the address book.
      */
     public void clear() {
