@@ -22,6 +22,8 @@ import seedu.addressbook.ui.TextUi;
  */
 public class Main {
 
+    public static boolean isUserInputHelp;
+
     /** Version info of the program. */
     public static final String VERSION = "AddressBook Level 2 - Version 1.0";
 
@@ -84,6 +86,9 @@ public class Main {
         do {
             String userCommandText = ui.getUserCommand();
             command = new Parser().parseCommand(userCommandText);
+            if(userCommandText.equals("help")) {
+                isUserInputHelp = true;
+            }
             CommandResult result = executeCommand(command);
             recordResult(result);
             ui.showResultToUser(result);

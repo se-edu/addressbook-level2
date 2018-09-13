@@ -1,6 +1,8 @@
 package seedu.addressbook.commands;
 
 
+import seedu.addressbook.Main;
+
 /**
  * Shows help instructions.
  */
@@ -15,16 +17,21 @@ public class HelpCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        return new CommandResult(
-                AddCommand.MESSAGE_USAGE
-                + "\n" + DeleteCommand.MESSAGE_USAGE
-                + "\n" + ClearCommand.MESSAGE_USAGE
-                + "\n" + FindCommand.MESSAGE_USAGE
-                + "\n" + ListCommand.MESSAGE_USAGE
-                + "\n" + ViewCommand.MESSAGE_USAGE
-                + "\n" + ViewAllCommand.MESSAGE_USAGE
-                + "\n" + HelpCommand.MESSAGE_USAGE
-                + "\n" + ExitCommand.MESSAGE_USAGE
-        );
+        if(!Main.isUserInputHelp) {
+            System.out.println("Command not found, for more help, please enter 'help' to the CLI");
+        } else {
+            return new CommandResult(
+                    "\n" + AddCommand.MESSAGE_USAGE
+                            + "\n\n" + DeleteCommand.MESSAGE_USAGE
+                            + "\n\n" + ClearCommand.MESSAGE_USAGE
+                            + "\n\n" + FindCommand.MESSAGE_USAGE
+                            + "\n\n" + ListCommand.MESSAGE_USAGE
+                            + "\n\n" + ViewCommand.MESSAGE_USAGE
+                            + "\n\n" + ViewAllCommand.MESSAGE_USAGE
+                            + "\n\n" + HelpCommand.MESSAGE_USAGE
+                            + "\n\n" + ExitCommand.MESSAGE_USAGE
+            );
+        }
+        return new CommandResult(HelpCommand.MESSAGE_USAGE);
     }
 }
