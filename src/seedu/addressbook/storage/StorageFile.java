@@ -2,9 +2,7 @@ package seedu.addressbook.storage;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.*;
 import java.util.List;
 
 import seedu.addressbook.data.AddressBook;
@@ -90,20 +88,22 @@ public class StorageFile {
      */
     public AddressBook load() throws StorageOperationException {
 
-        if (!Files.exists(path) || !Files.isRegularFile(path)) {
+        if (path.getFileSystem().isReadOnly() || !Files.exists(path) || !Files.isRegularFile(path)) {
             return new AddressBook();
         }
 
         try {
             return AddressBookDecoder.decodeAddressBook(Files.readAllLines(path));
-        } catch (FileNotFoundException fnfe) {
+        } catch (ReadOnlyFileSystemException rofse) {
+            throw new StorageOperationException("File system is set to read only");
+        }catch (FileNotFoundException fnfe) {
             throw new AssertionError("A non-existent file scenario is already handled earlier.");
         // other errors
         } catch (IOException ioe) {
             throw new StorageOperationException("Error writing to file: " + path);
         } catch (IllegalValueException ive) {
             throw new StorageOperationException("File contains illegal data values; data type constraints not met");
-        }
+        } 
     }
 
     public String getPath() {
