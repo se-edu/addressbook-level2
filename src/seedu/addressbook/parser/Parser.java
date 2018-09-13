@@ -3,11 +3,7 @@ package seedu.addressbook.parser;
 import static seedu.addressbook.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.addressbook.common.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -31,6 +27,9 @@ public class Parser {
 
     public static final Pattern PERSON_INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
 
+    public static final Pattern PERSON_INDICES_ARGS_FORMAT =
+            Pattern.compile("(?<targetIndices>\\d+(?:\\s+\\d+)*)"); // one or more keywords separated by whitespace
+
     public static final Pattern KEYWORDS_ARGS_FORMAT =
             Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one or more keywords separated by whitespace
 
@@ -40,7 +39,6 @@ public class Parser {
                     + " (?<isEmailPrivate>p?)e/(?<email>[^/]+)"
                     + " (?<isAddressPrivate>p?)a/(?<address>[^/]+)"
                     + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
-
 
     /**
      * Signals that the user input could not be parsed.
@@ -141,6 +139,24 @@ public class Parser {
     private static boolean isPrivatePrefixPresent(String matchedPrefix) {
         return matchedPrefix.equals("p");
     }
+    
+    /**
+     * Extracts integer indices from the delete command's indices arguments string.
+     * Merges duplicate index strings.
+     */
+    private static Set<Integer> getIndicesFromArgs(String indexArguments) {
+        // no tags
+        if (indexArguments.isEmpty()) {
+            return Collections.emptySet();
+        }
+        // replace first delimiter prefix, then split
+        final List<String> indexStrings = Arrays.asList(indexArguments.split(" "));
+        final Set<Integer> indices = new HashSet<>();
+        for (String indexString : indexStrings) {
+            indices.add(Integer.parseInt(indexString));
+        }
+        return indices;
+    }
 
     /**
      * Extracts the new person's tags from the add command's tag arguments string.
@@ -164,11 +180,12 @@ public class Parser {
      * @return the prepared command
      */
     private Command prepareDelete(String args) {
-        try {
-            final int targetIndex = parseArgsAsDisplayedIndex(args);
-            return new DeleteCommand(targetIndex);
-        } catch (ParseException pe) {
+        final Matcher matcher = PERSON_INDICES_ARGS_FORMAT.matcher(args.trim());
+        if (!matcher.matches()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        }
+        try {
+            return new DeleteCommand(getIndicesFromArgs(matcher.group("targetIndices")));
         } catch (NumberFormatException nfe) {
             return new IncorrectCommand(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
