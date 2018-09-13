@@ -150,7 +150,7 @@ public class Parser {
             return Collections.emptySet();
         }
         // replace first delimiter prefix, then split
-        final List<String> indexStrings = Arrays.asList(indexArguments.replaceFirst(" t/", "").split(" t/"));
+        final List<String> indexStrings = Arrays.asList(indexArguments.split(" "));
         final Set<Integer> indices = new HashSet<>();
         for (String indexString : indexStrings) {
             indices.add(Integer.parseInt(indexString));
