@@ -17,7 +17,7 @@ public class DeleteCommand extends Command {
             + "Parameters: INDEX\n"
             + "Example: " + COMMAND_WORD + " 1 2 3";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person(s): %1$s %2$s %3$s";
+    public static final String MESSAGE_DELETE_PEOPLE_SUCCESS = "Deleted Person(s): %1$s %2$s %3$s";
 
 
     public DeleteCommand(int targetVisibleIndex) {
@@ -30,7 +30,7 @@ public class DeleteCommand extends Command {
         try {
             final ReadOnlyPerson target = getTargetPerson();
             addressBook.removePerson(target);
-            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, target));
+            return new CommandResult(String.format(MESSAGE_DELETE_PEOPLE_SUCCESS, target));
 
         } catch (IndexOutOfBoundsException ie) {
             return new CommandResult(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
