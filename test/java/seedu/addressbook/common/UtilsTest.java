@@ -37,12 +37,15 @@ public class UtilsTest {
     }
     
     @Test
-    public void isAnyNull() throws Exception {
+    public void isAnyNull() {
         // no items
         assertFalse(Utils.isAnyNull());
         
-        // null item
+        // varargs array that is null
         assertFalse(Utils.isAnyNull(null));
+        
+        // one item which is null
+        assertTrue(Utils.isAnyNull((Object) null));
         
         // at least one item, none of which are null
         assertFalse(Utils.isAnyNull("A"));
