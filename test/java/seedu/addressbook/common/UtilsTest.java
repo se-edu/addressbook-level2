@@ -35,26 +35,26 @@ public class UtilsTest {
         assertNotUnique(null, null);
         assertNotUnique(null, "a", "b", null);
     }
-    
+
     @Test
     public void isAnyNull() {
         // no items
         assertFalse(Utils.isAnyNull());
-        
-        // varargs array that is null
-        assertFalse(Utils.isAnyNull(null));
-        
-        // one item which is null
+
+        // varargs array that is null (i.e. no array)
+        assertFalse(Utils.isAnyNull((Object[]) null));
+
+        // one item which is null (i.e. an array with one null item)
         assertTrue(Utils.isAnyNull((Object) null));
-        
+
         // at least one item, none of which are null
         assertFalse(Utils.isAnyNull("A"));
         assertFalse(Utils.isAnyNull("A", ""));
         assertFalse(Utils.isAnyNull(1, 2, "C"));
-        
+
         // at least one item, some of which are null
         assertTrue(Utils.isAnyNull(null, 1));
-        assertTrue(Utils.isAnyNull("A", null, "C"));   
+        assertTrue(Utils.isAnyNull("A", null, "C"));
     }
 
     private void assertAreUnique(Object... objects) {
