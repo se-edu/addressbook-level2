@@ -13,6 +13,9 @@ public class Utils {
      * Returns true if any of the given items are null.
      */
     public static boolean isAnyNull(Object... items) {
+        if (items == null) {
+            return false;
+        }
         for (Object item : items) {
             if (item == null) {
                 return true;
