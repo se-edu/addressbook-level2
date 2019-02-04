@@ -13,6 +13,8 @@ public class PersonSorter implements Comparator<Person> {
 
     @Override
     public int compare(Person p1, Person p2) {
-        return p1.getName().fullName.compareTo(p2.getName().fullName);
+        return p1.getName().fullName.toLowerCase().compareTo(
+                p2.getName().fullName.toLowerCase()
+        );
     }
 }
