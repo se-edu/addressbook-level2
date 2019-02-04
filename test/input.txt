@@ -149,6 +149,18 @@
   list
 
 ##########################################################
+# test sort command
+##########################################################
+
+  # sort records alphabetically
+  add Charlie Chan p/444444 e/cc@gmail.com a/3 airport road
+  add alice ang p/111111 e/aa@gmail.com a/1 airport road
+  add Betty Bee p/333333 e/bb@gmail.com a/3 airport road
+  add Barry Boo p/222222 e/bo@gmail.com a/2 airport road
+
+  sort
+
+##########################################################
 # test exit command
 ##########################################################
 

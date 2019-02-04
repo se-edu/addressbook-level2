@@ -297,6 +297,26 @@
 || 
 || 0 persons listed!
 || ===================================================
+|| Enter command: || [Command entered:  add Charlie Chan p/444444 e/cc@gmail.com a/3 airport road]
+|| New person added: Charlie Chan Phone: 444444 Email: cc@gmail.com Address: 3 airport road Tags: 
+|| ===================================================
+|| Enter command: || [Command entered:  add alice ang p/111111 e/aa@gmail.com a/1 airport road]
+|| New person added: alice ang Phone: 111111 Email: aa@gmail.com Address: 1 airport road Tags: 
+|| ===================================================
+|| Enter command: || [Command entered:  add Betty Bee p/333333 e/bb@gmail.com a/3 airport road]
+|| New person added: Betty Bee Phone: 333333 Email: bb@gmail.com Address: 3 airport road Tags: 
+|| ===================================================
+|| Enter command: || [Command entered:  add Barry Boo p/222222 e/bo@gmail.com a/2 airport road]
+|| New person added: Barry Boo Phone: 222222 Email: bo@gmail.com Address: 2 airport road Tags: 
+|| ===================================================
+|| Enter command: || [Command entered:  sort]
+|| 	1. alice ang Phone: 111111 Email: aa@gmail.com Address: 1 airport road Tags: 
+|| 	2. Barry Boo Phone: 222222 Email: bo@gmail.com Address: 2 airport road Tags: 
+|| 	3. Betty Bee Phone: 333333 Email: bb@gmail.com Address: 3 airport road Tags: 
+|| 	4. Charlie Chan Phone: 444444 Email: cc@gmail.com Address: 3 airport road Tags: 
+|| 
+|| 4 persons listed!
+|| ===================================================
 || Enter command: || [Command entered:  exit]
 || Exiting Address Book as requested ...
 || ===================================================
