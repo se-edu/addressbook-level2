@@ -6,6 +6,8 @@ import seedu.addressbook.data.person.UniquePersonList;
 import seedu.addressbook.data.person.UniquePersonList.DuplicatePersonException;
 import seedu.addressbook.data.person.UniquePersonList.PersonNotFoundException;
 
+import java.util.List;
+
 /**
  * Represents the entire address book. Contains the data of the address book.
  */
@@ -52,6 +54,13 @@ public class AddressBook {
      */
     public void removePerson(ReadOnlyPerson toRemove) throws PersonNotFoundException {
         allPersons.remove(toRemove);
+    }
+
+    /**
+     * Reconstructs the addressbook with the given data
+     */
+    public void reconstructList(List<Person> persons) {
+        this.allPersons.reconstruct(persons);
     }
 
     /**

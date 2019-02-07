@@ -43,6 +43,14 @@ public class Name {
         return Arrays.asList(fullName.split("\\s+"));
     }
 
+    /**
+     * Used by SortCommand to sort
+     * @return the first character of the Persons name
+     */
+    public Character getFirstLetter(){
+        return fullName.charAt(0);
+    }
+
     @Override
     public String toString() {
         return fullName;

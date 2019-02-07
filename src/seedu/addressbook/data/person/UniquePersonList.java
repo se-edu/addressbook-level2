@@ -81,6 +81,22 @@ public class UniquePersonList implements Iterable<Person> {
         return Collections.unmodifiableList(internalList);
     }
 
+    /**
+     * Returns a modifiable List view
+     * For use with SortCommand
+     * @return
+     */
+    public List<Person> listView(){
+        return new ArrayList<>(internalList);
+    }
+
+    /**
+     * Reconstructs persons list with the given data
+     */
+    public void reconstruct(List<Person> persons) {
+        internalList.clear();
+        internalList.addAll(persons);
+    }
 
     /**
      * Checks if the list contains an equivalent person as the given argument.
