@@ -141,6 +141,21 @@
   list
 
 ##########################################################
+# test sort command
+##########################################################
+
+   # should add and list correctly
+  add C  pp/111111 e/ccccccc.d@nus.edu.sg a/111, ccc street t/friends
+  add D p/111112 pe/dddddddd@nus.edu.sg a/222, ddd street t/friends
+  add E p/111113 e/eeeeee@nus.edu pa/333, eee street t/school
+  add F  pp/111114 e/ffffffff@nus.edu.sg pa/444, fff street
+  add G p/111115 e/adam@gmail.com a/555, ggg street
+  list
+
+   # should sort and list out sorted list
+  sort
+
+##########################################################
 # test clear command
 ##########################################################
 
