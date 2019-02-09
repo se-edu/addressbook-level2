@@ -151,6 +151,11 @@ Views all details of the 2nd person in the address book.
 `viewall 1` +
 Views all details of the 1st person in the results of the `find` command.
 
+== Sorting the list of persons : `sort`
+
+Sorts lexicographically and lists all persons, along with their non-private details, in the address book. +
+Format: `sort`
+
 == Clearing all entries : `clear`
 
 Clears all entries from the address book. +
