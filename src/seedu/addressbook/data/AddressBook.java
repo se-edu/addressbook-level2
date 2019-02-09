@@ -1,11 +1,13 @@
 package seedu.addressbook.data;
 
 import seedu.addressbook.data.person.Person;
+import seedu.addressbook.data.person.SortPeople;
 import seedu.addressbook.data.person.ReadOnlyPerson;
 import seedu.addressbook.data.person.UniquePersonList;
 import seedu.addressbook.data.person.UniquePersonList.DuplicatePersonException;
 import seedu.addressbook.data.person.UniquePersonList.PersonNotFoundException;
 
+import java.util.Collections;
 /**
  * Represents the entire address book. Contains the data of the address book.
  */
@@ -66,6 +68,15 @@ public class AddressBook {
      */
     public UniquePersonList getAllPersons() {
         return new UniquePersonList(allPersons);
+    }
+
+    /**
+     * Sort the list of Persons using their names
+     * alphabetically
+     */
+    public void sort()
+    {
+        allPersons.sort();
     }
 
     @Override
