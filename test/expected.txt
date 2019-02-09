@@ -297,6 +297,18 @@
 || 
 || 0 persons listed!
 || ===================================================
+|| Enter command: || [Command entered:  add Peter Quill p/123 e/Peter@gmail.com a/Star road]
+|| New person added: Peter Quill Phone: 123 Email: Peter@gmail.com Address: Star road Tags:
+|| ===================================================
+|| Enter command: || [Command entered:  add Andy Tan p/123 e/Andy@gmail.com a/Kent Ridge Drive]
+|| New person added: Andy Tan Phone: 123 Email: Andy@gmail.com Address: Kent Ridge Drive Tags:
+|| ===================================================
+|| Enter command: || [Command entered:  sort]
+|| 	1. Andy Tan Phone: 123 Email: Andy@gmail.com Address: Kent Ridge Drive Tags:
+|| 	2. Peter Quill Phone: 123 Email: Peter@gmail.com Address: Star Road Tags:
+||
+|| 2 persons listed!
+|| ===================================================
 || Enter command: || [Command entered:  exit]
 || Exiting Address Book as requested ...
 || ===================================================
