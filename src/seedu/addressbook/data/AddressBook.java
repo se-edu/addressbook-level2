@@ -6,6 +6,9 @@ import seedu.addressbook.data.person.UniquePersonList;
 import seedu.addressbook.data.person.UniquePersonList.DuplicatePersonException;
 import seedu.addressbook.data.person.UniquePersonList.PersonNotFoundException;
 
+import java.util.Collections;
+import java.util.Comparator;
+
 /**
  * Represents the entire address book. Contains the data of the address book.
  */
@@ -66,6 +69,13 @@ public class AddressBook {
      */
     public UniquePersonList getAllPersons() {
         return new UniquePersonList(allPersons);
+    }
+
+    /**
+     * Sorts all persons in the address book and returns a new UniquePersonList of all persons
+     */
+    public void sortPersons() {
+        allPersons.sort();
     }
 
     @Override
