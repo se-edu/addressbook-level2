@@ -107,6 +107,22 @@
   find Charlie Betsy
 
 ##########################################################
+# test filter command
+##########################################################
+
+  # should consider no keyword as invalid command format
+  filter
+  # should only accept one character
+  filter AB
+  # should not accept any numbers
+  filter 3
+
+  # find people beginning with C
+  filter C
+  # find people beginning with D
+  filter D
+
+##########################################################
 # test delete person command
 ##########################################################
 

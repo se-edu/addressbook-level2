@@ -91,6 +91,21 @@ Returns `John Doe` but not `john`.
 * `find Betsy Tim John` +
 Returns Any person having names `Betsy`, `Tim`, or `John`.
 
+== Finding all people starting with letter: `filter`
+
+Finds all people starting with the letter specified. +
+Format: `find LETTER`
+
+[NOTE]
+===
+LETTER is case sensitive, and only allows for a single alphabet.
+===
+
+Examples:
+
+* `filter A` +
+Returns all persons starting with A.
+
 == Deleting a person : `delete`
 
 Deletes the specified person from the address book. Irreversible. +
