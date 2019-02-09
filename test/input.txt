@@ -149,6 +149,16 @@
   list
 
 ##########################################################
+# test sort command
+##########################################################
+
+  # sort records alphabetically
+  add Peter Quill p/123 e/Peter@gmail.com a/Star Road
+  add Andy Tan p/123 e/Andy@gmail.com a/Kent Ridge Drive
+
+  sort
+
+##########################################################
 # test exit command
 ##########################################################
 
