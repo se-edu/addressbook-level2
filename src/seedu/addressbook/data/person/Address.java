@@ -56,4 +56,8 @@ public class Address {
     public boolean isPrivate() {
         return isPrivate;
     }
+
+    public static void comparedAddressBook(Address address){
+
+    }
 }
