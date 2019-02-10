@@ -22,7 +22,6 @@ public class AddMultipleCommand extends Command {
      */
     public AddMultipleCommand(int numOfPersons) {
         this.numOfPersons = numOfPersons;
-        System.out.println(this.numOfPersons);
     }
 
 }
