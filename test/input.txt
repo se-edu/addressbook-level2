@@ -11,6 +11,7 @@
 
   # should show appropriate message when no listing has happened yet
   delete 1
+  favourite 1
   view 1
   viewall 1
 
@@ -105,6 +106,22 @@
   find Dickson
   # find multiple with some keywords
   find Charlie Betsy
+
+##########################################################
+# test favourite person command
+##########################################################
+
+# last active view: [1] betsy [2] charlie
+
+  # should catch invalid args format
+  favourite
+  favourite should be only one number
+
+  # should catch invalid index
+  favourite -1
+  favourite 0
+  favourite 3
+  favourite 2
 
 ##########################################################
 # test delete person command

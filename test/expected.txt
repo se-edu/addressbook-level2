@@ -33,6 +33,9 @@
 || Enter command: || [Command entered:  delete 1]
 || The person index provided is invalid
 || ===================================================
+|| Enter command: || [Command entered:  favourite 1]
+|| The person index provided is invalid
+|| ===================================================
 || Enter command: || [Command entered:  view 1]
 || The person index provided is invalid
 || ===================================================
@@ -232,6 +235,27 @@
 || 	2. Charlie Dickson Email: charlie.d@nus.edu.sg Address: 333, gamma street Tags: [school][friends]
 || 
 || 2 persons listed!
+|| ===================================================
+|| Enter command: || [Command entered:  favourite]
+|| Invalid command format! 
+|| favourite: Favourites the person identified by the index number used in the last person listing.
+|| Parameters: INDEX
+|| Example: favourite 1
+|| ===================================================
+|| Enter command: || [Command entered:  favourite should be only one number]
+|| The person index provided is invalid
+|| ===================================================
+|| Enter command: || [Command entered:  favourite -1]
+|| The person index provided is invalid
+|| ===================================================
+|| Enter command: || [Command entered:  favourite 0]
+|| The person index provided is invalid
+|| ===================================================
+|| Enter command: || [Command entered:  favourite 3]
+|| The person index provided is invalid
+|| ===================================================
+|| Enter command: || [Command entered:  favourite 2]
+|| Favourited Charlie Dickson Phone: (private) 333333 Email: charlie.d@nus.edu.sg Address: 333, gamma street Tags: [school][friends]
 || ===================================================
 || Enter command: || [Command entered:  delete]
 || Invalid command format! 
