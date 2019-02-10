@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import seedu.addressbook.data.person.Person;
 import seedu.addressbook.data.person.ReadOnlyPerson;
 
 /**
@@ -41,20 +42,26 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Retrieves all persons in the address book whose names contain some of the specified keywords.
+     * Retrieves all persons in the address book whose names contain some of the specified keywords in sorted order.
      *
      * @param keywords for searching
      * @return list of persons found
      */
     private List<ReadOnlyPerson> getPersonsWithNameContainingAnyKeyword(Set<String> keywords) {
-        final List<ReadOnlyPerson> matchedPersons = new ArrayList<>();
-        for (ReadOnlyPerson person : addressBook.getAllPersons()) {
+        final List<Person> matchedPersons = new ArrayList<>();
+        for (Person person : addressBook.getAllPersons()) {
             final Set<String> wordsInName = new HashSet<>(person.getName().getWordsInName());
             if (!Collections.disjoint(wordsInName, keywords)) {
                 matchedPersons.add(person);
             }
         }
-        return matchedPersons;
+        Collections.sort(matchedPersons);
+        List<ReadOnlyPerson> sortedMatchedPersons = new ArrayList<>();
+        for (Person person : matchedPersons) {
+            sortedMatchedPersons.add(person);
+        }
+        return sortedMatchedPersons;
     }
+
 
 }
