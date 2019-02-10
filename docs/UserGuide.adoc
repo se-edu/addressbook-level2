@@ -111,6 +111,26 @@ Deletes the 2nd person in the address book.
 `delete 1` +
 Deletes the 1st person in the results of the `find` command.
 
+== Favouriting a person : `favourite`
+
+Favourites the specified person from the address book. Irreversible. +
+Format: `favourite INDEX`
+
+****
+Favourites the person at the specified `INDEX`.
+The index refers to the index number shown in the most recent listing.
+****
+
+Examples:
+
+* `list` +
+`favourite 2` +
+Favourites the 2nd person in the address book.
+
+* `find Betsy` +
+`favourite 1` +
+Favourites the 1st person in the results of the `find` command.
+
 == View non-private details of a person : `view`
 
 Displays the non-private details of the specified person. +
