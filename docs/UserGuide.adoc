@@ -70,8 +70,9 @@ Examples:
 == Adding multiple people: `addx`
 
 Adds multiple people to the address book. +
-Format: `addx n`
-Subsequent formats for the next `n` lines: `NAME [p]p/PHONE_NUMBER [p]e/EMAIL [p]a/ADDRESS [t/TAG]...`
+Format: `addx n` +
+Subsequent formats for the next `n` lines: +
+`NAME [p]p/PHONE_NUMBER [p]e/EMAIL [p]a/ADDRESS [t/TAG]...`
 
 ****
 `n` refers to the number of people you want to add to the addressbook.
@@ -84,11 +85,11 @@ be seen using the `viewall` command.
 Each person can have any number of tags (including 0).
 ****
 
-Examples:
+An example to add `2` people to the addressbook:
 
-* `addx 2`
-* `John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01`
-* `Betsy Crowe pp/1234567 e/betsycrowe@gmail.com pa/Newgate Prison t/criminal t/friend`
+`addx 2` +
+`John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01` +
+`Betsy Crowe pp/1234567 e/betsycrowe@gmail.com pa/Newgate Prison t/criminal t/friend`
 
 == Listing all persons : `list`
 
