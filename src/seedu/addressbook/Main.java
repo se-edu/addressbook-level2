@@ -1,9 +1,6 @@
 package seedu.addressbook;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-
+import seedu.addressbook.commands.AddMultipleCommand;
 import seedu.addressbook.commands.Command;
 import seedu.addressbook.commands.CommandResult;
 import seedu.addressbook.commands.ExitCommand;
@@ -14,6 +11,10 @@ import seedu.addressbook.storage.StorageFile;
 import seedu.addressbook.storage.StorageFile.InvalidStorageFilePathException;
 import seedu.addressbook.storage.StorageFile.StorageOperationException;
 import seedu.addressbook.ui.TextUi;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
 
 /**
@@ -78,16 +79,30 @@ public class Main {
         System.exit(0);
     }
 
-    /** Reads the user command and executes it, until the user issues the exit command.  */
+    /**
+     * Reads the user command and executes it, until the user issues the exit command.
+     */
     private void runCommandLoopUntilExitCommand() {
         Command command;
         do {
             String userCommandText = ui.getUserCommand();
             command = new Parser().parseCommand(userCommandText);
-            CommandResult result = executeCommand(command);
-            recordResult(result);
-            ui.showResultToUser(result);
 
+            if (command instanceof AddMultipleCommand) {
+                int num = ((AddMultipleCommand) command).numOfPersons;
+                for (int i = 0; i < num; i++) {
+                    userCommandText = ui.getUserCommand();
+                    userCommandText = "add " + userCommandText;
+                    command = new Parser().parseCommand(userCommandText);
+                    CommandResult result = executeCommand(command);
+                    recordResult(result);
+                    ui.showResultToUser(result);
+                }
+            } else {
+                CommandResult result = executeCommand(command);
+                recordResult(result);
+                ui.showResultToUser(result);
+            }
         } while (!ExitCommand.isExit(command));
     }
 
