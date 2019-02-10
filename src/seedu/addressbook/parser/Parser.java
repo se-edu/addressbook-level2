@@ -17,6 +17,7 @@ import seedu.addressbook.commands.Command;
 import seedu.addressbook.commands.DeleteCommand;
 import seedu.addressbook.commands.ExitCommand;
 import seedu.addressbook.commands.FindCommand;
+import seedu.addressbook.commands.FavouriteCommand;
 import seedu.addressbook.commands.HelpCommand;
 import seedu.addressbook.commands.IncorrectCommand;
 import seedu.addressbook.commands.ListCommand;
@@ -84,6 +85,9 @@ public class Parser {
 
         case FindCommand.COMMAND_WORD:
             return prepareFind(arguments);
+
+        case FavouriteCommand.COMMAND_WORD:
+            return prepareFavourite(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
@@ -169,6 +173,23 @@ public class Parser {
             return new DeleteCommand(targetIndex);
         } catch (ParseException pe) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        } catch (NumberFormatException nfe) {
+            return new IncorrectCommand(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+    }
+
+    /**
+     * Parses arguments in the context of the delete person command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private Command prepareFavourite(String args) {
+        try {
+            final int targetIndex = parseArgsAsDisplayedIndex(args);
+            return new FavouriteCommand(targetIndex);
+        } catch (ParseException pe) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FavouriteCommand.MESSAGE_USAGE));
         } catch (NumberFormatException nfe) {
             return new IncorrectCommand(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }

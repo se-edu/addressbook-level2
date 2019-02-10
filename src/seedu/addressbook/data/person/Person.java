@@ -16,7 +16,7 @@ public class Person implements ReadOnlyPerson {
     private Phone phone;
     private Email email;
     private Address address;
-
+    private boolean favourite = false;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -60,6 +60,13 @@ public class Person implements ReadOnlyPerson {
     @Override
     public Set<Tag> getTags() {
         return new HashSet<>(tags);
+    }
+
+    //public boolean isFavourite() { return favourite; }
+
+    public boolean setFavourite() {
+        this.favourite = true;
+        return true;
     }
 
     /**

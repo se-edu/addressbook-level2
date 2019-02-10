@@ -54,6 +54,10 @@ public class AddressBook {
         allPersons.remove(toRemove);
     }
 
+    public void favouritePerson(ReadOnlyPerson toFavourite) throws PersonNotFoundException {
+        allPersons.favourite(toFavourite);
+    }
+
     /**
      * Clears all persons and tags from the address book.
      */

@@ -123,6 +123,18 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Favourites the equivalent person from the list.
+     *
+     * @throws PersonNotFoundException if no such person could be found in the list.
+     */
+    public void favourite(ReadOnlyPerson toFavourite) throws PersonNotFoundException {
+        final boolean personFoundAndFavourited = internalList.get(internalList.indexOf(toFavourite)).setFavourite();
+        if (!personFoundAndFavourited) {
+            throw new PersonNotFoundException();
+        }
+    }
+
+    /**
      * Clears all persons in list.
      */
     public void clear() {
