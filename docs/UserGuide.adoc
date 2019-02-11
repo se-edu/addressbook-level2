@@ -156,6 +156,11 @@ Views all details of the 1st person in the results of the `find` command.
 Clears all entries from the address book. +
 Format: `clear`
 
+== Say hi to the user : `hi`
+
+Says hi to the user. +
+Format: `hi`
+
 == Exiting the program : `exit`
 
 Exits the program. +

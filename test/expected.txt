@@ -297,6 +297,9 @@
 || 
 || 0 persons listed!
 || ===================================================
+|| Enter command: || [Command entered:  hi]
+|| Hi!
+|| ===================================================
 || Enter command: || [Command entered:  exit]
 || Exiting Address Book as requested ...
 || ===================================================
