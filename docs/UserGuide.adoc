@@ -111,6 +111,11 @@ Deletes the 2nd person in the address book.
 `delete 1` +
 Deletes the 1st person in the results of the `find` command.
 
+== Count number of contacts : `count`
+
+Shows the count of how many contacts are in the address book +
+Format: `count`
+
 == View non-private details of a person : `view`
 
 Displays the non-private details of the specified person. +
