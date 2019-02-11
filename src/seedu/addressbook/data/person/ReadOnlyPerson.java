@@ -1,5 +1,8 @@
 package seedu.addressbook.data.person;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 import seedu.addressbook.data.tag.Tag;
@@ -68,9 +71,8 @@ public interface ReadOnlyPerson {
         }
         builder.append(getAddress())
                 .append(" || Tags: ");
-        for (Tag tag : getTags()) {
-            builder.append(tag);
-        }
+        addTagsToText(builder);
+
         return builder.toString();
     }
 
@@ -90,9 +92,18 @@ public interface ReadOnlyPerson {
             builder.append(" || Address: ").append(getAddress());
         }
         builder.append(" || Tags: ");
-        for (Tag tag : getTags()) {
-            builder.append(tag);
-        }
+        addTagsToText(builder);
+
         return builder.toString();
     }
+
+    default void addTagsToText(StringBuilder builder) {
+        List<Tag> list = new ArrayList<Tag> (getTags());
+        Collections.sort(list);
+        for (Tag tag : list) {
+            builder.append(tag);
+        }
+    }
 }
+
+
