@@ -20,6 +20,9 @@ import seedu.addressbook.ui.TextUi;
  * Entry point of the Address Book application.
  * Initializes the application and starts the interaction with the user.
  */
+
+//Modification for week 5
+
 public class Main {
 
     /** Version info of the program. */
