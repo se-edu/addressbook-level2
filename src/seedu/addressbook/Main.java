@@ -29,6 +29,10 @@ public class Main {
     private StorageFile storage;
     private AddressBook addressBook;
 
+    private long startTime;
+    private long endTime;
+    private int numCommands;
+
     /** The list of person shown to the user most recently.  */
     private List<? extends ReadOnlyPerson> lastShownList = Collections.emptyList();
 
@@ -52,6 +56,8 @@ public class Main {
      */
     private void start(String[] launchArgs) {
         try {
+            this.numCommands = 0;
+            this.startTime = System.currentTimeMillis();
             this.ui = new TextUi();
             this.storage = initializeStorage(launchArgs);
             this.addressBook = storage.load();
@@ -74,7 +80,11 @@ public class Main {
 
     /** Prints the Goodbye message and exits. */
     private void exit() {
-        ui.showGoodbyeMessage();
+        this.endTime = System.currentTimeMillis();
+        long elapsedSeconds = (this.endTime-this.startTime) / 1000;
+        long seconds = elapsedSeconds % 60;
+        long minutes = elapsedSeconds / 60;
+        ui.showGoodbyeMessage(minutes, seconds, this.numCommands);
         System.exit(0);
     }
 
@@ -86,6 +96,7 @@ public class Main {
             command = new Parser().parseCommand(userCommandText);
             CommandResult result = executeCommand(command);
             recordResult(result);
+            this.numCommands += 1;
             ui.showResultToUser(result);
 
         } while (!ExitCommand.isExit(command));

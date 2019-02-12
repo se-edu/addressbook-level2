@@ -39,6 +39,9 @@ public class TextUi {
     /** Format of a comment input line. Comment lines are silently consumed when reading user input. */
     private static final String COMMENT_LINE_FORMAT_REGEX = "#.*";
 
+    /** Display the session time and the number of commands used **/
+    private static final String SESS_INFO = "You spent %d minutes and %d seconds on our platform and performed %d commands.";
+
     private final Scanner in;
     private final PrintStream out;
 
@@ -104,7 +107,8 @@ public class TextUi {
                 DIVIDER);
     }
 
-    public void showGoodbyeMessage() {
+    public void showGoodbyeMessage(long minutes, long seconds, int numCommands) {
+        showToUser(DIVIDER, String.format(SESS_INFO, minutes, seconds, numCommands));
         showToUser(MESSAGE_GOODBYE, DIVIDER, DIVIDER);
     }
 

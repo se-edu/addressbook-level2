@@ -161,6 +161,8 @@ Format: `clear`
 Exits the program. +
 Format: `exit`
 
+It will also display total session time and the number of commands entered during the session.
+
 == Saving the data
 
 Address book data are saved in the hard disk automatically after any command that changes the data.
@@ -183,3 +185,5 @@ The file name must end in `.txt` for it to be acceptable to the program.
 When running the program inside IntelliJ, you can set command line parameters
 before running the program.
 ====
+
+
