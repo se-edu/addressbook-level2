@@ -50,6 +50,8 @@
   list
   add Esther Potato p/555555 e/esther@not.a.real.potato pa/555, epsilon street t/tubers t/starchy
   list
+  add James Tang p/666666 e/james@tang.com a/666 no where
+  list
 
   # should not allow adding duplicate persons
   add Esther Potato p/555555 e/esther@not.a.real.potato pa/555, epsilon street t/tubers t/starchy
@@ -105,6 +107,24 @@
   find Dickson
   # find multiple with some keywords
   find Charlie Betsy
+
+##########################################################
+# test view/viewall persons command
+##########################################################
+ # add a tag
+ find James
+ revise 1 t/test
+ find James
+
+ # revise a tag
+ find James
+ revise 1 t/anothertest
+ find James
+
+ # remove a tag
+ find James
+ revise 1
+ find James
 
 ##########################################################
 # test delete person command
