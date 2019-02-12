@@ -50,14 +50,14 @@ image::mainClassDiagram.png[]
 
 . Open a DOS window in the `test` folder
 . Run the `runtests.bat` script
-. If the script reports that there is no difference between `actual.txt` and `expected.txt`,
+. If the script reports that there is no difference between `ACTUAL.TXT` and `EXPECTED.TXT`,
 the test has passed
 
 *Mac/Unix/Linux*
 
 . Open a terminal window in the `test` folder
 . Run the `runtests.sh` script
-. If the script reports that there is no difference between `actual.txt` and `expected.txt`,
+. If the script reports that there is no difference between `ACTUAL.TXT` and `EXPECTED.TXT`,
 the test has passed
 
 === JUnit tests
@@ -66,12 +66,12 @@ the test has passed
 
 === Troubleshooting test failures
 
-* Problem: How do I examine the exact differences between `actual.txt` and `expected.txt`? +
+* Problem: How do I examine the exact differences between `ACTUAL.TXT` and `EXPECTED.TXT`? +
 Solution: You can use a diff/merge tool with a GUI e.g. WinMerge (on Windows).
 
 * Problem: The two files look exactly the same, but the test script reports they are different. +
 Solution: This can happen because the line endings used by Windows is different from Unix-based
-OSes. Convert the actual.txt to the format used by your OS using some https://kb.iu.edu/d/acux[utility].
+OSes. Convert the ACTUAL.TXT to the format used by your OS using some https://kb.iu.edu/d/acux[utility].
 
 * Problem: Test fails during the very first time. +
 Solution: The output of the very first test run could be slightly different because the program
