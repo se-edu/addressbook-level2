@@ -3,6 +3,8 @@ package seedu.addressbook.commands;
 import seedu.addressbook.common.Messages;
 import seedu.addressbook.data.person.ReadOnlyPerson;
 
+import java.util.Set;
+
 
 /**
  * Shows details of the person identified using the last displayed index.
@@ -12,15 +14,16 @@ public class ReviseCommand extends Command {
 
     public static final String COMMAND_WORD = "revise";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views the non-private details of the person "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Revise details of the person "
             + "identified by the index number in the last shown person listing.\n"
             + "Parameters: INDEX\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_VIEW_PERSON_DETAILS = "Viewing person: %1$s";
+    public static final String MESSAGE_VIEW_PERSON_DETAILS = "Revised person: %1$s";
 
 
-    public ReviseCommand(int targetVisibleIndex) {
+    public ReviseCommand(int targetVisibleIndex,
+                         Set<String> tags) {
         super(targetVisibleIndex);
     }
 

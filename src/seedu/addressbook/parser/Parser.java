@@ -31,7 +31,9 @@ public class Parser {
                     + " (?<isAddressPrivate>p?)a/(?<address>[^/]+)"
                     + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
 
-
+    public static final Pattern REVISION_DATA_ARGS_FORMAT =
+            Pattern.compile("(?<index>[^/])"
+                    + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
     /**
      * Signals that the user input could not be parsed.
      */
@@ -88,7 +90,7 @@ public class Parser {
             return new ExitCommand();
 
         case ReviseCommand.COMMAND_WORD:
-            return  prepareView(arguments);
+            return  prepareRevise(arguments);
 
         case HelpCommand.COMMAND_WORD: // Fallthrough
         default:
@@ -239,6 +241,30 @@ public class Parser {
         final String[] keywords = matcher.group("keywords").split("\\s+");
         final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
         return new FindCommand(keywordSet);
+    }
+
+    /**
+     * Parses arguments in the context of the revise person command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private Command prepareRevise(String args) {
+        final Matcher matcher = REVISION_DATA_ARGS_FORMAT.matcher(args.trim());
+        // Validate arg string format
+        if (!matcher.matches()) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ReviseCommand.MESSAGE_USAGE));
+        }
+        try {
+            return new ReviseCommand(
+                    Integer.parseInt(
+                        matcher.group("index")),
+
+                    getTagsFromArgs(matcher.group("tagArguments"))
+            );
+        } catch (IllegalValueException ive) {
+            return new IncorrectCommand(ive.getMessage());
+        }
     }
 
 
