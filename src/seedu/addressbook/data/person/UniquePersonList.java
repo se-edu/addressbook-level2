@@ -129,6 +129,14 @@ public class UniquePersonList implements Iterable<Person> {
         internalList.clear();
     }
 
+    /**
+     * Clears all persons in list.
+     */
+    public void sort() {
+        Collections.sort(internalList);
+    }
+
+
     @Override
     public Iterator<Person> iterator() {
         return internalList.iterator();

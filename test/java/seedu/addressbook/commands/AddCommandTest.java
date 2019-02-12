@@ -38,6 +38,14 @@ public class AddCommandTest {
     }
 
     @Test
+    public void addCommand() {
+        final String[] invalidNames = { "", " ", "[]\\[;]" };
+        for (String name : invalidNames) {
+            assertEquals(1,1);
+        }
+    }
+
+    @Test
     public void addCommand_invalidPhone_throwsException() {
         final String[] invalidNumbers = { "", " ", "1234-5678", "[]\\[;]", "abc", "a123", "+651234" };
         for (String number : invalidNumbers) {
