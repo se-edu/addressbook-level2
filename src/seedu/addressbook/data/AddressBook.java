@@ -38,6 +38,15 @@ public class AddressBook {
         allPersons.add(toAdd);
     }
 
+    /*prints out name if duplicate is found*/
+
+    public void nameOfDuplicate  (ReadOnlyPerson key) {
+        if (containsPerson(key)==true){
+            String duplicate = "This user is already in the system";
+            System.out.println(duplicate);
+        }
+    }
+
     /**
      * Returns true if an equivalent person exists in the address book.
      */
