@@ -85,6 +85,9 @@ public class Parser {
         case FindCommand.COMMAND_WORD:
             return prepareFind(arguments);
 
+        case FindNonPrivatePhonesCommand.COMMAND_WORD:
+            return new FindNonPrivatePhonesCommand();
+
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 

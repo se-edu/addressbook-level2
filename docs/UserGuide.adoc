@@ -91,6 +91,11 @@ Returns `John Doe` but not `john`.
 * `find Betsy Tim John` +
 Returns Any person having names `Betsy`, `Tim`, or `John`.
 
+== Find all persons with non-private phone numbers: 'findnpphones'
+
+Finds and displays all persons whose phone numbers are not private. +
+Format: 'findnpphones'
+
 == Deleting a person : `delete`
 
 Deletes the specified person from the address book. Irreversible. +
