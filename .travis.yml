@@ -1,7 +1,7 @@
 language: java
 matrix:
   include:
-    - jdk: oraclejdk9
+    - jdk: oraclejdk8
 
 install:
   - ./config/travis/download_gradle_wrapper.sh
@@ -21,4 +21,4 @@ deploy:
 addons:
   apt:
     packages:
-      - oracle-java9-installer
+      - oracle-java8-installer
