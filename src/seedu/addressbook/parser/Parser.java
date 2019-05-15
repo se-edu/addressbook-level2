@@ -43,15 +43,6 @@ public class Parser {
 
 
     /**
-     * Signals that the user input could not be parsed.
-     */
-    public static class ParseException extends Exception {
-        ParseException(String message) {
-            super(message);
-        }
-    }
-
-    /**
      * Used for initial separation of command word and args.
      */
     public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
@@ -248,5 +239,13 @@ public class Parser {
         return new FindCommand(keywordSet);
     }
 
+    /**
+     * Signals that the user input could not be parsed.
+     */
+    public static class ParseException extends Exception {
+        ParseException(String message) {
+            super(message);
+        }
+    }
 
 }

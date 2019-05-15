@@ -20,20 +20,7 @@ import seedu.addressbook.data.exception.DuplicateDataException;
  */
 public class UniquePersonList implements Iterable<Person> {
 
-    /**
-     * Signals that an operation would have violated the 'no duplicates' property of the list.
-     */
-    public static class DuplicatePersonException extends DuplicateDataException {
-        protected DuplicatePersonException() {
-            super("Operation would result in duplicate persons");
-        }
-    }
 
-    /**
-     * Signals that an operation targeting a specified person in the list would fail because
-     * there is no such matching person in the list.
-     */
-    public static class PersonNotFoundException extends Exception {}
 
     private final List<Person> internalList = new ArrayList<>();
 
@@ -140,4 +127,19 @@ public class UniquePersonList implements Iterable<Person> {
                 || (other instanceof UniquePersonList // instanceof handles nulls
                         && this.internalList.equals(((UniquePersonList) other).internalList));
     }
+
+    /**
+     * Signals that an operation would have violated the 'no duplicates' property of the list.
+     */
+    public static class DuplicatePersonException extends DuplicateDataException {
+        protected DuplicatePersonException() {
+            super("Operation would result in duplicate persons");
+        }
+    }
+
+    /**
+     * Signals that an operation targeting a specified person in the list would fail because
+     * there is no such matching person in the list.
+     */
+    public static class PersonNotFoundException extends Exception {}
 }
