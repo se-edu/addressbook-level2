@@ -1,7 +1,7 @@
 package seedu.addressbook.parser;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.addressbook.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.addressbook.common.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 
@@ -9,8 +9,8 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import seedu.addressbook.commands.AddCommand;
 import seedu.addressbook.commands.ClearCommand;
@@ -36,7 +36,7 @@ public class ParserTest {
 
     private Parser parser;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         parser = new Parser();
     }

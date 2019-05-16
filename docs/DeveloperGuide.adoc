@@ -25,10 +25,14 @@
 . Rename the project if you want. Click `Next`
 . Ensure that your `\src` and `\test\java` folders are checked. Keep clicking `Next`
 . Click `Finish`
-. Add JUnit 4 to classpath
+. Add JUnit 5 to classpath
 .. Open any test file in `\test\java` and place your cursor over any `@Test` highlighted in red
-.. Press kbd:[ALT + ENTER] and select `Add 'JUnit4' to classpath`
-.. Select `junit:junit:4.12` and click `OK` (if `4.12` is not available, choose any `4.x` that is later than `4.12`)
+.. Press kbd:[ALT + ENTER] and select `Add 'JUnit5.3' to classpath` (if `5.3` is not available, any `5.x` will suffice)
++
+image::AltEnterSelectJunit53.png[]
+.. Select `org.junit.jupiter:junit-jupiter-api:5.40` from the dropdown and click `OK` (if `5.40` is not available, choose any `5.4x` that is later than `5.40`)
++
+image::SelectJUnitVersion.png[]
 . Run all the tests (right-click the `test` folder, and click `Run 'All Tests'`)
 . Observe how some tests fail. That is because they try to access the test data from the wrong directory (the working directory is expected to be the root directory, but IntelliJ runs the test with `test\` as the working directory by default). To fix this issue:
 .. Go to `Run` -> `Edit Configurations...`
