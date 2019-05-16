@@ -8,8 +8,8 @@
 
 *Prerequisites*
 
-* JDK 8
-* IntelliJ IDE
+* JDK 11
+* IntelliJ IDEA
 
 *Importing the project into IntelliJ*
 
@@ -17,7 +17,7 @@
 . Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
 . Set up the correct JDK version
 .. Click `Configure` > `Project Defaults` > `Project Structure`
-.. If JDK 8 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 8
+.. If JDK 11 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 11
 .. Click `OK`
 . Click `Import Project`
 . Locate the project directory and click `OK`
