@@ -1,7 +1,8 @@
 package seedu.addressbook.data;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.addressbook.util.TestUtil.getSize;
 import static seedu.addressbook.util.TestUtil.isEmpty;
 import static seedu.addressbook.util.TestUtil.isIdentical;
@@ -10,10 +11,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 
 import seedu.addressbook.data.person.Address;
 import seedu.addressbook.data.person.Email;
@@ -25,6 +25,7 @@ import seedu.addressbook.data.person.UniquePersonList.DuplicatePersonException;
 import seedu.addressbook.data.person.UniquePersonList.PersonNotFoundException;
 import seedu.addressbook.data.tag.Tag;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class AddressBookTest {
     private Tag tagPrizeWinner;
     private Tag tagScientist;
@@ -40,7 +41,7 @@ public class AddressBookTest {
     private AddressBook emptyAddressBook;
 
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         tagPrizeWinner   = new Tag("prizewinner");
         tagScientist     = new Tag("scientist");
@@ -75,13 +76,9 @@ public class AddressBookTest {
         defaultAddressBook = new AddressBook(new UniquePersonList(aliceBetsy, bobChaplin));
     }
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
-
     @Test
-    public void addPerson_personAlreadyInList_throwsDuplicatePersonException() throws Exception {
-        thrown.expect(DuplicatePersonException.class);
-        defaultAddressBook.addPerson(aliceBetsy);
+    public void addPerson_personAlreadyInList_throwsDuplicatePersonException() {
+        assertThrows(DuplicatePersonException.class, () -> defaultAddressBook.addPerson(aliceBetsy));
     }
 
     @Test
@@ -116,9 +113,8 @@ public class AddressBookTest {
     }
 
     @Test
-    public void removePerson_personNotExists_throwsPersonNotFoundException() throws Exception {
-        thrown.expect(PersonNotFoundException.class);
-        defaultAddressBook.removePerson(charlieDouglas);
+    public void removePerson_personNotExists_throwsPersonNotFoundException() {
+        assertThrows(PersonNotFoundException.class, () -> defaultAddressBook.removePerson(charlieDouglas));
     }
 
     @Test

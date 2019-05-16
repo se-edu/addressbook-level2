@@ -1,12 +1,13 @@
 package seedu.addressbook.commands;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Collections;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 
 import seedu.addressbook.common.Messages;
 import seedu.addressbook.data.AddressBook;
@@ -21,6 +22,7 @@ import seedu.addressbook.data.person.UniquePersonList.PersonNotFoundException;
 import seedu.addressbook.ui.TextUi;
 import seedu.addressbook.util.TestUtil;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class DeleteCommandTest {
 
     private AddressBook emptyAddressBook;
@@ -30,7 +32,7 @@ public class DeleteCommandTest {
     private List<ReadOnlyPerson> listWithEveryone;
     private List<ReadOnlyPerson> listWithSurnameDoe;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         Person johnDoe = new Person(new Name("John Doe"), new Phone("61234567", false),
                 new Email("john@doe.com", false), new Address("395C Ben Road", false), Collections.emptySet());
