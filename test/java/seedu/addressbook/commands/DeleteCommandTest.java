@@ -7,7 +7,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 
 import seedu.addressbook.common.Messages;
 import seedu.addressbook.data.AddressBook;
@@ -22,7 +21,6 @@ import seedu.addressbook.data.person.UniquePersonList.PersonNotFoundException;
 import seedu.addressbook.ui.TextUi;
 import seedu.addressbook.util.TestUtil;
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class DeleteCommandTest {
 
     private AddressBook emptyAddressBook;

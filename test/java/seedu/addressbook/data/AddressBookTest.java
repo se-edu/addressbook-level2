@@ -13,7 +13,6 @@ import java.util.HashSet;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 
 import seedu.addressbook.data.person.Address;
 import seedu.addressbook.data.person.Email;
@@ -25,7 +24,6 @@ import seedu.addressbook.data.person.UniquePersonList.DuplicatePersonException;
 import seedu.addressbook.data.person.UniquePersonList.PersonNotFoundException;
 import seedu.addressbook.data.tag.Tag;
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class AddressBookTest {
     private Tag tagPrizeWinner;
     private Tag tagScientist;
