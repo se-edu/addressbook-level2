@@ -29,7 +29,7 @@
 .. Open any test file in `\test\java` and place your cursor over any `@Test` highlighted in red
 .. Press kbd:[ALT + ENTER] and select `Add 'JUnit5.3' to classpath` (if `5.3` is not available, any `5.x` will suffice)
 +
-image::HelpfulIDEA.png[]
+image::AltEnterSelectJunit53.png[]
 .. Select `org.junit.jupiter:junit-jupiter-api:5.40` from the dropdown and click `OK` (if `5.40` is not available, choose any `5.4x` that is later than `5.40`)
 +
 image::SelectJUnitVersion.png[]
