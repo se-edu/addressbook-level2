@@ -1,16 +1,15 @@
 package seedu.addressbook.storage;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-import org.junit.rules.TemporaryFolder;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.exception.IllegalValueException;
@@ -21,6 +20,8 @@ import seedu.addressbook.data.person.Person;
 import seedu.addressbook.data.person.Phone;
 import seedu.addressbook.data.tag.Tag;
 import seedu.addressbook.storage.StorageFile.StorageOperationException;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.addressbook.util.TestUtil.assertTextFilesEqual;
 import static seedu.addressbook.util.TestUtil.assertFileDoesNotExist;
 
@@ -28,30 +29,25 @@ public class StorageFileTest {
     private static final String TEST_DATA_FOLDER = "test/data/StorageFileTest";
     private static final String NON_EXISTANT_FILE_NAME = "ThisFileDoesNotExist.txt";
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
-
-    @Rule
-    public TemporaryFolder testFolder = new TemporaryFolder();
+    @TempDir
+    public static Path testFolder;
 
     @Test
     public void constructor_nullFilePath_exceptionThrown() throws Exception {
-        thrown.expect(NullPointerException.class);
-        new StorageFile(null);
+        assertThrows(NullPointerException.class, () -> new StorageFile(null));
     }
 
     @Test
     public void constructor_noTxtExtension_exceptionThrown() throws Exception {
-        thrown.expect(IllegalValueException.class);
-        new StorageFile(TEST_DATA_FOLDER + "/" + "InvalidfileName");
+        assertThrows(IllegalValueException.class, () ->
+                new StorageFile(TEST_DATA_FOLDER + "/" + "InvalidfileName"));
     }
 
     @Test
     public void load_invalidFormat_exceptionThrown() throws Exception {
         // The file contains valid txt data, but does not match the Person format
         StorageFile storage = getStorage("InvalidData.txt");
-        thrown.expect(StorageOperationException.class);
-        storage.load();
+        assertThrows(StorageOperationException.class, () -> storage.load());
     }
 
     @Test
@@ -78,8 +74,7 @@ public class StorageFileTest {
     @Test
     public void save_nullAddressBook_exceptionThrown() throws Exception {
         StorageFile storage = getTempStorage();
-        thrown.expect(NullPointerException.class);
-        storage.save(null);
+        assertThrows(NullPointerException.class, () -> storage.save(null));
     }
 
     @Test
@@ -105,7 +100,7 @@ public class StorageFileTest {
     }
 
     private StorageFile getTempStorage() throws Exception {
-        return new StorageFile(testFolder.getRoot().getPath() + "/" + "temp.txt");
+        return new StorageFile(testFolder.resolve("temp.txt").toString());
     }
 
     private AddressBook getTestAddressBook() throws Exception {
