@@ -9,7 +9,7 @@
 *Prerequisites*
 
 * JDK 11
-* IntelliJ IDEA
+* IntelliJ IDE
 
 *Importing the project into IntelliJ*
 
