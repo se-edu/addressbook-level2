@@ -28,7 +28,7 @@ public class ViewCommandTest {
     private AddressBook emptyAddressBook = TestUtil.createAddressBook();
     private List<ReadOnlyPerson> emptyPersonList = Collections.emptyList();
     private List<ReadOnlyPerson> listWithAllTypicalPersons = Arrays.asList(td.getTypicalPersons());
-    private List<ReadOnlyPerson> listWithSomeTypicalPersons = Arrays.asList(td.amy, td.candy, td.dan);
+    private List<ReadOnlyPerson> listWithSomeTypicalPersons = Arrays.asList(td.getAmy(), td.getCandy(), td.getDan());
 
     @Test
     public void execute_invalidIndex_returnsInvalidIndexMessage() {
@@ -50,8 +50,7 @@ public class ViewCommandTest {
                                              new Email("some@hey.go", true),
                                              new Address("nus", false),
                                              Collections.emptySet());
-        List<ReadOnlyPerson> listWithExtraPerson
-                = new ArrayList<ReadOnlyPerson>(listWithAllTypicalPersons);
+        List<ReadOnlyPerson> listWithExtraPerson = new ArrayList<ReadOnlyPerson>(listWithAllTypicalPersons);
         listWithExtraPerson.add(stranger);
 
         // empty addressbook
