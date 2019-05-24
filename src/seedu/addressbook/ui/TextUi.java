@@ -21,6 +21,9 @@ import seedu.addressbook.data.person.ReadOnlyPerson;
  */
 public class TextUi {
 
+    /** Offset required to convert between 1-indexing and 0-indexing.  */
+    public static final int DISPLAYED_INDEX_OFFSET = 1;
+
     /** A decorative prefix added to the beginning of lines printed by AddressBook */
     private static final String LINE_PREFIX = "|| ";
 
@@ -31,10 +34,6 @@ public class TextUi {
 
     /** Format of indexed list item */
     private static final String MESSAGE_INDEXED_LIST_ITEM = "\t%1$d. %2$s";
-
-
-    /** Offset required to convert between 1-indexing and 0-indexing.  */
-    public static final int DISPLAYED_INDEX_OFFSET = 1;
 
     /** Format of a comment input line. Comment lines are silently consumed when reading user input. */
     private static final String COMMENT_LINE_FORMAT_REGEX = "#.*";
@@ -91,7 +90,12 @@ public class TextUi {
         return fullInputLine;
     }
 
-
+    /**
+     * Helper method to generate and print the welcome message upon the start of
+     * the application.
+     * @param version current version of the application.
+     * @param storageFilePath path to the storage file being used.
+     */
     public void showWelcomeMessage(String version, String storageFilePath) {
         String storageFileInfo = String.format(MESSAGE_USING_STORAGE_FILE, storageFilePath);
         showToUser(
