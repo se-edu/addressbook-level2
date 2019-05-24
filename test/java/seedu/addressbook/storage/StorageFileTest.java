@@ -1,6 +1,9 @@
 package seedu.addressbook.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static seedu.addressbook.util.TestUtil.assertFileDoesNotExist;
+import static seedu.addressbook.util.TestUtil.assertTextFilesEqual;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -21,16 +24,12 @@ import seedu.addressbook.data.person.Phone;
 import seedu.addressbook.data.tag.Tag;
 import seedu.addressbook.storage.StorageFile.StorageOperationException;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static seedu.addressbook.util.TestUtil.assertTextFilesEqual;
-import static seedu.addressbook.util.TestUtil.assertFileDoesNotExist;
-
 public class StorageFileTest {
-    private static final String TEST_DATA_FOLDER = "test/data/StorageFileTest";
-    private static final String NON_EXISTANT_FILE_NAME = "ThisFileDoesNotExist.txt";
-
     @TempDir
     public static Path testFolder;
+
+    private static final String TEST_DATA_FOLDER = "test/data/StorageFileTest";
+    private static final String NON_EXISTANT_FILE_NAME = "ThisFileDoesNotExist.txt";
 
     @Test
     public void constructor_nullFilePath_exceptionThrown() throws Exception {
@@ -52,20 +51,20 @@ public class StorageFileTest {
 
     @Test
     public void load_validFormat() throws Exception {
-        AddressBook actualAB = getStorage("ValidData.txt").load();
-        AddressBook expectedAB = getTestAddressBook();
+        AddressBook actualAb = getStorage("ValidData.txt").load();
+        AddressBook expectedAb = getTestAddressBook();
 
         // ensure loaded AddressBook is properly constructed with test data
         // TODO: overwrite equals method in AddressBook class and replace with equals method below
-        assertEquals(actualAB.getAllPersons(), expectedAB.getAllPersons());
+        assertEquals(actualAb.getAllPersons(), expectedAb.getAllPersons());
     }
 
     @Test
     public void load_nonExistantFile_returnsEmptyAddressBook() throws Exception {
-        AddressBook actualAB = getStorage(NON_EXISTANT_FILE_NAME).load();
-        AddressBook expectedAB = new AddressBook();
+        AddressBook actualAb = getStorage(NON_EXISTANT_FILE_NAME).load();
+        AddressBook expectedAb = new AddressBook();
 
-        assertEquals(actualAB, expectedAB);
+        assertEquals(actualAb, expectedAb);
 
         // verify that loading does not result in the file being created
         assertFileDoesNotExist(TEST_DATA_FOLDER + "/" + NON_EXISTANT_FILE_NAME);
