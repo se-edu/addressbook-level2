@@ -1,12 +1,12 @@
 package seedu.addressbook.commands;
 
-import seedu.addressbook.common.Messages;
-import seedu.addressbook.data.AddressBook;
-import seedu.addressbook.data.person.ReadOnlyPerson;
+import static seedu.addressbook.ui.TextUi.DISPLAYED_INDEX_OFFSET;
 
 import java.util.List;
 
-import static seedu.addressbook.ui.TextUi.DISPLAYED_INDEX_OFFSET;
+import seedu.addressbook.common.Messages;
+import seedu.addressbook.data.AddressBook;
+import seedu.addressbook.data.person.ReadOnlyPerson;
 
 /**
  * Represents an executable command.
@@ -39,7 +39,7 @@ public class Command {
     /**
      * Executes the command and returns the result.
      */
-    public CommandResult execute(){
+    public CommandResult execute() {
         throw new UnsupportedOperationException("This method is to be implemented by child classes");
     };
 
