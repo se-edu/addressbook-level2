@@ -256,7 +256,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_addCommandDuplicateTags_merged() throws IllegalValueException {
+    public void parse_addCommandDuplicateTags_merged() {
         final Person testPerson = generateTestPerson();
         String input = convertPersonToAddCommandString(testPerson);
         for (Tag tag : testPerson.getTags()) {
@@ -268,6 +268,10 @@ public class ParserTest {
         assertEquals(result.getPerson(), testPerson);
     }
 
+    /**
+     * Generates an instance of a {@code Person} from valid test data.
+     * @return an instance of a {@code Person}.
+     */
     private static Person generateTestPerson() {
         try {
             return new Person(
@@ -282,6 +286,11 @@ public class ParserTest {
         }
     }
 
+    /**
+     * Generates an add command from a {@code ReadOnlyPerson}.
+     * @param person whose data will be filled into the string.
+     * @return a string describing an {@code AddCommand}.
+     */
     private static String convertPersonToAddCommandString(ReadOnlyPerson person) {
         String addCommand = "add "
                 + person.getName().fullName
