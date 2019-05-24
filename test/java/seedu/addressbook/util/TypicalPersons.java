@@ -16,7 +16,10 @@ import seedu.addressbook.data.tag.Tag;
  */
 public class TypicalPersons {
 
-    public Person amy, bill, candy, dan;
+    private Person amy;
+    private Person bill;
+    private Person candy;
+    private Person dan;
 
     public TypicalPersons() {
         try {
@@ -34,6 +37,10 @@ public class TypicalPersons {
         }
     }
 
+    /**
+     * Inserts predefined {@code Person} objects into a given instance of {@code AddressBook}
+     * @param ab AddressBook in which {@code Person} objects will be added.
+     */
     private void loadAddressBookWithSampleData(AddressBook ab) {
         try {
             for (Person p : this.getTypicalPersons()) {
@@ -54,4 +61,19 @@ public class TypicalPersons {
         return ab;
     }
 
+    public Person getAmy() {
+        return amy;
+    }
+
+    public Person getBill() {
+        return bill;
+    }
+
+    public Person getCandy() {
+        return candy;
+    }
+
+    public Person getDan() {
+        return dan;
+    }
 }

@@ -25,6 +25,7 @@ import seedu.addressbook.data.person.UniquePersonList.PersonNotFoundException;
 import seedu.addressbook.data.tag.Tag;
 
 public class AddressBookTest {
+
     private Tag tagPrizeWinner;
     private Tag tagScientist;
     private Tag tagMathematician;
@@ -41,22 +42,22 @@ public class AddressBookTest {
 
     @BeforeEach
     public void setUp() throws Exception {
-        tagPrizeWinner   = new Tag("prizewinner");
-        tagScientist     = new Tag("scientist");
+        tagPrizeWinner = new Tag("prizewinner");
+        tagScientist = new Tag("scientist");
         tagMathematician = new Tag("mathematician");
-        tagEconomist     = new Tag("economist");
+        tagEconomist = new Tag("economist");
 
-        aliceBetsy     = new Person(new Name("Alice Betsy"),
-                                    new Phone("91235468", false),
-                                    new Email("alice@nushackers.org", false),
-                                    new Address("8 Computing Drive, Singapore", false),
-                                    Collections.singleton(tagMathematician));
+        aliceBetsy = new Person(new Name("Alice Betsy"),
+                                new Phone("91235468", false),
+                                new Email("alice@nushackers.org", false),
+                                new Address("8 Computing Drive, Singapore", false),
+                                Collections.singleton(tagMathematician));
 
-        bobChaplin     = new Person(new Name("Bob Chaplin"),
-                                    new Phone("94321500", false),
-                                    new Email("bob@nusgreyhats.org", false),
-                                    new Address("9 Computing Drive", false),
-                                    Collections.singleton(tagMathematician));
+        bobChaplin = new Person(new Name("Bob Chaplin"),
+                                new Phone("94321500", false),
+                                new Email("bob@nusgreyhats.org", false),
+                                new Address("9 Computing Drive", false),
+                                Collections.singleton(tagMathematician));
 
         charlieDouglas = new Person(new Name("Charlie Douglas"),
                                     new Phone("98751365", false),
@@ -64,11 +65,11 @@ public class AddressBookTest {
                                     new Address("10 Science Drive", false),
                                     Collections.singleton(tagScientist));
 
-        davidElliot    = new Person(new Name("David Elliot"),
-                                    new Phone("84512575", false),
-                                    new Email("douglas@nuscomputing.com", false),
-                                    new Address("11 Arts Link", false),
-                                    new HashSet<>(Arrays.asList(tagEconomist, tagPrizeWinner)));
+        davidElliot = new Person(new Name("David Elliot"),
+                                 new Phone("84512575", false),
+                                 new Email("douglas@nuscomputing.com", false),
+                                 new Address("11 Arts Link", false),
+                                 new HashSet<>(Arrays.asList(tagEconomist, tagPrizeWinner)));
 
         emptyAddressBook = new AddressBook();
         defaultAddressBook = new AddressBook(new UniquePersonList(aliceBetsy, bobChaplin));
