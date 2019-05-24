@@ -38,8 +38,7 @@ public class TypicalPersons {
     }
 
     /**
-     * Inserts predefined {@code Person} objects in to a given instance of
-     * {@code AddressBook}
+     * Inserts predefined {@code Person} objects into a given instance of {@code AddressBook}
      * @param ab AddressBook in which {@code Person} objects will be added.
      */
     private void loadAddressBookWithSampleData(AddressBook ab) {

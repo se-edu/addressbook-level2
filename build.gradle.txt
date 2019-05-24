@@ -13,7 +13,7 @@ repositories {
 }
 
 checkstyle {
-    toolVersion = '7.1.2'
+    toolVersion = '8.1'
 }
 
 sourceSets {

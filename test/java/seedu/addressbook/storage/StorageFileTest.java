@@ -1,6 +1,7 @@
 package seedu.addressbook.storage;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.addressbook.util.TestUtil.assertFileDoesNotExist;
 import static seedu.addressbook.util.TestUtil.assertTextFilesEqual;
 
@@ -23,13 +24,12 @@ import seedu.addressbook.data.person.Phone;
 import seedu.addressbook.data.tag.Tag;
 import seedu.addressbook.storage.StorageFile.StorageOperationException;
 
-
 public class StorageFileTest {
-    private static final String TEST_DATA_FOLDER = "test/data/StorageFileTest";
-    private static final String NON_EXISTANT_FILE_NAME = "ThisFileDoesNotExist.txt";
-
     @TempDir
     public static Path testFolder;
+
+    private static final String TEST_DATA_FOLDER = "test/data/StorageFileTest";
+    private static final String NON_EXISTANT_FILE_NAME = "ThisFileDoesNotExist.txt";
 
     @Test
     public void constructor_nullFilePath_exceptionThrown() throws Exception {

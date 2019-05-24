@@ -26,9 +26,6 @@ import seedu.addressbook.data.tag.Tag;
 
 public class AddressBookTest {
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
-
     private Tag tagPrizeWinner;
     private Tag tagScientist;
     private Tag tagMathematician;

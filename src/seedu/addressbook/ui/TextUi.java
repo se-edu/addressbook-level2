@@ -91,8 +91,7 @@ public class TextUi {
     }
 
     /**
-     * Helper method to generate and print the welcome message upon the start of
-     * the application.
+     * Generates and prints the welcome message upon the start of the application.
      * @param version current version of the application.
      * @param storageFilePath path to the storage file being used.
      */

@@ -229,8 +229,7 @@
     <module name="VisibilityModifier">
       <property name="protectedAllowed" value="true"/>
       <property name="allowPublicFinalFields" value="true"/>
-      <property name="ignoreAnnotationCanonicalNames" value="RegisterExtension, TempDir, Rule"/>
-      <!-- TODO: Remove Rule after upgrade to JUnit5 -->
+      <property name="ignoreAnnotationCanonicalNames" value="RegisterExtension, TempDir"/>
     </module>
 
     <!--
