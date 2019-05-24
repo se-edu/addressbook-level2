@@ -1,9 +1,8 @@
 package seedu.addressbook.commands;
 
-import seedu.addressbook.data.person.ReadOnlyPerson;
-
 import java.util.List;
 
+import seedu.addressbook.data.person.ReadOnlyPerson;
 
 /**
  * Lists all persons in the address book to the user.

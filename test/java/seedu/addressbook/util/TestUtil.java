@@ -24,6 +24,9 @@ import seedu.addressbook.data.person.Phone;
 import seedu.addressbook.data.person.ReadOnlyPerson;
 import seedu.addressbook.data.person.UniquePersonList.DuplicatePersonException;
 
+/**
+ * Utility methods for testing.
+ */
 public class TestUtil {
     /**
      * Creates an address book containing the given persons.
@@ -104,6 +107,10 @@ public class TestUtil {
         return numberOfElementsSeen;
     }
 
+    /**
+     * Generates an instance of a {@code Person} from valid test data.
+     * @return an instance of a {@code Person}.
+     */
     public static Person generateTestPerson() {
         try {
             return new Person(new Name(Name.EXAMPLE), new Phone(Phone.EXAMPLE, false),

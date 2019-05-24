@@ -23,7 +23,7 @@ public class FindCommandTest {
     @Test
     public void execute() throws IllegalValueException {
         //same word, same case: matched
-        assertFindCommandBehavior(new String[]{"Amy"}, Arrays.asList(td.amy));
+        assertFindCommandBehavior(new String[]{"Amy"}, Arrays.asList(td.getAmy()));
 
         //same word, different case: not matched
         assertFindCommandBehavior(new String[]{"aMy"}, Collections.emptyList());
@@ -33,10 +33,10 @@ public class FindCommandTest {
 
         //multiple words: matched
         assertFindCommandBehavior(new String[]{"Amy", "Bill", "Candy", "Destiny"},
-                Arrays.asList(td.amy, td.bill, td.candy));
+                Arrays.asList(td.getAmy(), td.getBill(), td.getCandy()));
 
         //repeated keywords: matched
-        assertFindCommandBehavior(new String[]{"Amy", "Amy"}, Arrays.asList(td.amy));
+        assertFindCommandBehavior(new String[]{"Amy", "Amy"}, Arrays.asList(td.getAmy()));
 
         //Keyword matching a word in address: not matched
         assertFindCommandBehavior(new String[]{"Clementi"}, Collections.emptyList());
@@ -53,6 +53,11 @@ public class FindCommandTest {
         assertEquals(Command.getMessageForPersonListShownSummary(expectedPersonList), result.feedbackToUser);
     }
 
+    /**
+     * Factory method that creates and returns a {@code FindCommand}.
+     * @param keywords list of keywords to search for.
+     * @return an instance of {@FindCommand} that searches the test AddressBook.
+     */
     private FindCommand createFindCommand(String[] keywords) {
         final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
         FindCommand command = new FindCommand(keywordSet);
