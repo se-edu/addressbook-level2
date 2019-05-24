@@ -75,4 +75,4 @@ task copyStylesheets(type: Copy) {
 }
 asciidoctor.dependsOn copyStylesheets
 
-defaultTasks 'clean', 'test', 'asciidoctor'
+defaultTasks 'clean', 'test', 'asciidoctor', 'checkstyleMain', 'checkstyleTest'
