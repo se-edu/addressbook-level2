@@ -1,7 +1,7 @@
 language: java
 matrix:
   include:
-    - jdk: oraclejdk11
+    - jdk: openjdk11
 
 install:
   - ./config/travis/download_gradle_wrapper.sh
