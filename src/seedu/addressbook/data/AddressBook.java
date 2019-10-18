@@ -1,10 +1,13 @@
-package seedu.addressbook.data;
+package java.seedu.addressbook.data;
 
-import seedu.addressbook.data.person.Person;
-import seedu.addressbook.data.person.ReadOnlyPerson;
-import seedu.addressbook.data.person.UniquePersonList;
-import seedu.addressbook.data.person.UniquePersonList.DuplicatePersonException;
-import seedu.addressbook.data.person.UniquePersonList.PersonNotFoundException;
+import java.util.List;
+
+import java.seedu.addressbook.data.person.Person;
+import java.seedu.addressbook.data.person.ReadOnlyPerson;
+import java.seedu.addressbook.data.person.UniquePersonList;
+import java.seedu.addressbook.data.person.UniquePersonList.DuplicatePersonException;
+import java.seedu.addressbook.data.person.UniquePersonList.PersonNotFoundException;
+import java.seedu.addressbook.data.tag.Tagging;
 
 /**
  * Represents the entire address book. Contains the data of the address book.
@@ -12,6 +15,7 @@ import seedu.addressbook.data.person.UniquePersonList.PersonNotFoundException;
 public class AddressBook {
 
     private final UniquePersonList allPersons;
+    private List<Tagging> taggings;
 
     /**
      * Creates an empty address book.

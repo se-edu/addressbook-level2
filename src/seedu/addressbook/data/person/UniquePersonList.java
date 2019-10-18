@@ -7,8 +7,8 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import seedu.addressbook.common.Utils;
-import seedu.addressbook.data.exception.DuplicateDataException;
+import java.seedu.addressbook.common.Utils;
+import java.seedu.addressbook.data.exception.DuplicateDataException;
 
 
 
