@@ -60,4 +60,51 @@ public class Name {
         return fullName.hashCode();
     }
 
+    /**
+      * Returns true if the other name is very similar to this name.
+      * Two names are considered similar if ...
+      */
+    public boolean isSimilar(Name other) {
+        if (other == null) {
+            return false;
+        }
+
+        // different case
+        // different order
+        // superset
+        // subset
+            
+        List<String> tokensOriginal = this.getWordsInName();
+        List<String> tokensOther = this.getWordsInName();
+
+        // First lowercase every token
+        
+        tokensOriginal.replaceAll(String::toLowerCase);
+        tokensOther.replaceAll(String::toLowerCase);
+
+        int matchedOriginal = 0;
+        int matchedOther = 0;
+
+
+        for (int i = 0; i < tokensOriginal.size(); i++) {
+            if (tokensOther.contains(tokensOriginal.get(i))) {
+                ++matchedOriginal;
+            }
+        }
+
+        for (int i = 0; i < tokensOther.size(); i++) {
+            if (tokensOriginal.contains(tokensOther.get(i))) {
+                ++matchedOther;
+            }
+        }
+        
+        double matched = ((matchedOriginal / tokensOriginal.size()) 
+                + (matchedOther / tokensOther.size())) / 2.0;
+
+        if (matched >= 0.4)
+            return true;
+        else
+            return false;
+    }
+
 }
