@@ -27,6 +27,9 @@ public class TextUi {
     /** A decorative prefix added to the beginning of lines printed by AddressBook */
     private static final String LINE_PREFIX = "|| ";
 
+    /** Same as LINE_PREFIX but no space */
+    private static final String LINE_PREFIX_NO_SPACE = "||";
+
     /** A platform independent line separator. */
     private static final String LS = System.lineSeparator();
 
@@ -118,8 +121,16 @@ public class TextUi {
 
     /** Shows message(s) to the user */
     public void showToUser(String... message) {
-        for (String m : message) {
-            out.println(LINE_PREFIX + m.replace("\n", LS + LINE_PREFIX));
+        int noOfMessages = message.length;
+        for (int i = 0; i < noOfMessages; i++) {
+            String m = message[i];
+            String finalPrefix;
+            if (i == noOfMessages - DISPLAYED_INDEX_OFFSET) {
+                finalPrefix = LINE_PREFIX_NO_SPACE;
+            } else {
+                finalPrefix = LINE_PREFIX;
+            }
+            out.println(LINE_PREFIX + m.replace("\n", LS + finalPrefix));
         }
     }
 
