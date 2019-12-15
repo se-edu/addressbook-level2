@@ -68,8 +68,13 @@ public interface ReadOnlyPerson {
         }
         builder.append(getAddress())
                 .append(" Tags: ");
+        boolean hasTags = false;
         for (Tag tag : getTags()) {
             builder.append(tag);
+            hasTags = true;
+        }
+        if (hasTags == false) {
+            builder.append("[NONE]");
         }
         return builder.toString();
     }
@@ -90,8 +95,13 @@ public interface ReadOnlyPerson {
             builder.append(" Address: ").append(getAddress());
         }
         builder.append(" Tags: ");
+        boolean hasTags = false;
         for (Tag tag : getTags()) {
             builder.append(tag);
+            hasTags = true;
+        }
+        if (hasTags == false) {
+            builder.append("[NONE]");
         }
         return builder.toString();
     }
